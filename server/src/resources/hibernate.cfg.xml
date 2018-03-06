@@ -34,6 +34,9 @@
 
         <!-- List of mapped entities -->
         <mapping class="ChildCareTech.Person"/>
-
+        <mapping class="ChildCareTech.Adult"/>
+        <mapping class="ChildCareTech.Pediatrist"/>
+        <mapping class="ChildCareTech.Supplier"/>
+        <mapping class="ChildCareTech.Staff"/>
     </session-factory>
 </hibernate-configuration>
