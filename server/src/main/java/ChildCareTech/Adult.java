@@ -1,7 +1,5 @@
 package ChildCareTech;
 
-import org.hibernate.annotations.DiscriminatorFormula;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,4 +19,28 @@ public class Adult implements Serializable{
 
     @Column(name = "role", nullable = false)
     private int role;
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    private void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    private void setRole(int role) {
+        this.role = role;
+    }
 }
