@@ -11,10 +11,14 @@ public abstract class AbstractCRUDTest extends TestCase {
 
     protected abstract void createObject();
     protected abstract void readObject();
+    protected abstract void updateObject();
+    protected abstract void destroyObject();
 
     public void testCRUD(){
         createObject();
         readObject();
+        updateObject();
+        destroyObject();
     }
 
     @Override
