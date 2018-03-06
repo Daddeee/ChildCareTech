@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,8 +12,10 @@ import java.sql.Date;
 public class Meal
 {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private int id;
+
 
     @Column(name = "canteen_id") //nullable?
     private int canteen_id;
