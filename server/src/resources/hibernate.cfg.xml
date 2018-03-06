@@ -32,6 +32,8 @@
             root
         </property>
 
-        <!-- List of XML mapping files -->
+        <!-- List of mapped entities -->
+        <mapping class="ChildCareTech.Person"/>
+
     </session-factory>
 </hibernate-configuration>
