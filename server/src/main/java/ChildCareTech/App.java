@@ -15,6 +15,7 @@ public class App
             factory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Failed to create sessionFactory object." + ex);
+            ex.printStackTrace();
             throw new ExceptionInInitializerError(ex);
         }
     }
