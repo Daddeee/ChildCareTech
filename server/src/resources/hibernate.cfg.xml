@@ -38,5 +38,6 @@
         <mapping class="ChildCareTech.Pediatrist"/>
         <mapping class="ChildCareTech.Supplier"/>
         <mapping class="ChildCareTech.Staff"/>
+        <mapping class="ChildCareTech.Kid"/>
     </session-factory>
 </hibernate-configuration>
