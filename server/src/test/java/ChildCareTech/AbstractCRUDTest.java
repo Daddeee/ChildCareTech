@@ -5,9 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public abstract class AbstractCRUDTest extends TestCase {
+public abstract class AbstractCRUDTest<T> extends TestCase {
     protected SessionFactory sessionFactory;
     protected Session session = null;
+    protected T obj;
 
     protected abstract void createObject();
     protected abstract void readObject();

@@ -5,8 +5,7 @@ import org.hibernate.Transaction;
 
 import java.sql.Date;
 
-public class PersonTest extends AbstractCRUDTest {
-    private Person obj;
+public class PersonTest extends AbstractCRUDTest<Person> {
 
     @Override
     protected void createObject() {
