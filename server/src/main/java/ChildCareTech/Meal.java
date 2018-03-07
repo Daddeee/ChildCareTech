@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "meal",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "meal_num", "date"})
+@Table(name = "meals",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "date"})
 )
 public class Meal
 {
@@ -16,18 +16,20 @@ public class Meal
     private int id;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Canteen canteen;
 
+    @Column(nullable = false)
     private Date date;
 
-    private int meal_num;
+    private int mealNum;
 
 
     public Meal() {}
 
-    public Meal(Canteen canteen, int meal_num, Date date) {
+    public Meal(Canteen canteen, int mealNum, Date date) {
         this.canteen = canteen;
-        this.meal_num = meal_num;
+        this.mealNum = mealNum;
         this.date = date;
     }
 
@@ -39,9 +41,9 @@ public class Meal
 
     private void setCanteen_id(Canteen canteen_id) { this.canteen = canteen; }
 
-    public int getMeal_num() { return meal_num; }
+    public int getMealNum() { return mealNum; }
 
-    private void setMeal_num(int meal_num) { this.meal_num = meal_num; }
+    private void setMealNum(int meal_num) { this.mealNum = mealNum; }
 
     public int getId() { return id; }
 

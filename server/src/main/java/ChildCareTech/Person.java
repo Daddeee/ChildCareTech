@@ -12,27 +12,26 @@ import java.text.SimpleDateFormat;
 public class Person
 {
     @Id
-    @Column(name="fiscal_code", length=16)
+    @Column(length=16)
     private String fiscalCode;
 
-    @Column(name="first_name", nullable = false)
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(name="last_name", nullable = false)
+    @Column(nullable = false)
     private String lastName;
 
-    @Column(name="birth_date", nullable = false)
+    @Column(nullable = false)
     @Type(type="date")
     private Date birthDate;
 
-    @Column(name="sex", nullable = false)
+    @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private Sex sex;
 
-    @Column(name="address", nullable = false)
+    @Column(nullable = false)
     private String address;
-
-    @Column(name="phone_number")
+    
     private String phoneNumber;
 
     public Person(){}
