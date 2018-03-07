@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -7,22 +8,19 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "meal",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen", "meal_num", "date"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "meal_num", "date"})
 )
 public class Meal
 {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "canteen") //nullable?
+    @ManyToOne
     private Canteen canteen;
 
-    @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name = "meal_num", nullable = false)
     private int meal_num;
 
 
