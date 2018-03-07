@@ -1,6 +1,8 @@
 package ChildCareTech;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="kids")
@@ -21,6 +23,10 @@ public class Kid {
 
     @ManyToOne
     private Pediatrist pediatrist;
+
+    @ManyToMany
+    @JoinTable(name="contacts")
+    private Set<Adult> contacts = new HashSet<>();
 
     public Kid(){}
     public Kid(Person person, Adult firstTutor, Adult secondTutor, Pediatrist pediatrist){
@@ -68,6 +74,14 @@ public class Kid {
 
     private void setPediatrist(Pediatrist pediatrist) {
         this.pediatrist = pediatrist;
+    }
+
+    public Set<Adult> getContacts() {
+        return new HashSet<>(contacts);
+    }
+
+    private void setContacts(Set<Adult> contacts) {
+        this.contacts = contacts;
     }
 }
 
