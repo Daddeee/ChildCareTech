@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 public class Canteen {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private int id;
 
     @OneToMany(mappedBy="canteen")
@@ -20,7 +22,7 @@ public class Canteen {
 
     private void setId(int id) { this.id = id; }
 
-    public Set<Meal> getMeals() { return meals; }
+    public Set<Meal> getMeals() { return new HashSet<>(meals); }
 
     private void setMeals(Set<Meal> meals) { this.meals = meals; }
 

@@ -1,6 +1,5 @@
 package ChildCareTech;
 
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
