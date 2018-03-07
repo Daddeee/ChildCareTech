@@ -9,7 +9,7 @@ import java.util.Set;
 public class Pediatrist extends Adult {
 
     @OneToMany(mappedBy = "pediatrist")
-    private Set<Kid> kids;
+    private Set<Kid> kids = new HashSet<>();
 
     public Pediatrist() { super(); }
     public Pediatrist(Person person, Set<Kid> kids) { super(person); this.kids = kids; }
