@@ -22,19 +22,15 @@ public class Meal
     @Column(nullable = false)
     private Date date;
 
-    @ManyToOne(targetEntity = Menu.class)
-    private Menu menu;
-
     private int mealNum;
 
 
     public Meal() {}
 
-    public Meal(Canteen canteen, int mealNum, Date date, Menu menu) {
+    public Meal(Canteen canteen, int mealNum, Date date) {
         this.canteen = canteen;
         this.mealNum = mealNum;
         this.date = date;
-        this.menu = menu;
     }
 
     public Date getDate() { return date; }
@@ -43,17 +39,13 @@ public class Meal
 
     public Canteen getCanteen() { return canteen; }
 
-    private void setCanteen(Canteen canteen) { this.canteen = canteen; }
+    private void setCanteen_id(Canteen canteen_id) { this.canteen = canteen; }
 
     public int getMealNum() { return mealNum; }
 
-    private void setMealNum(int mealNum) { this.mealNum = mealNum; }
+    private void setMealNum(int meal_num) { this.mealNum = mealNum; }
 
     public int getId() { return id; }
 
     private void setDate(Date date) { this.date = date; }
-
-    public Menu getMenu() { return menu; }
-
-    private void setMenu(Menu menu) { this.menu = menu; }
 }
