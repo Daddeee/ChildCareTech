@@ -10,19 +10,16 @@ public class Kid {
     private int id;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "fiscal_code", unique = true)
+    @JoinColumn(unique = true, nullable = false)
     private Person person;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "first_tutor_code")
     private Adult firstTutor;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "second_tutor_code")
     private Adult secondTutor;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pediatrist_code")
+    @ManyToOne
     private Pediatrist pediatrist;
 
     public Kid(){}
