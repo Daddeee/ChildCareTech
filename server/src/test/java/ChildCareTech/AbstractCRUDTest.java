@@ -25,15 +25,7 @@ public abstract class AbstractCRUDTest<T> extends TestCase {
     @Override
     protected void setUp() throws Exception {
         // setup the session factory
-
-        Configuration configuration = new Configuration()
-                .addAnnotatedClass(Person.class);
-
-        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
-        configuration.setProperty("hibernate.connection.driver_class", "org.mariadb.jdbc.Driver");
-        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/test?createDatabaseIfNotExist=true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-
+        Configuration configuration = new Configuration().configure();
         sessionFactory = configuration.buildSessionFactory();
     }
 

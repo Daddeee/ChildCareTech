@@ -13,11 +13,7 @@
         </property>
 
         <property name = "hibernate.connection.url">
-            jdbc:mysql://localhost/childcaretech?createDatabaseIfNotExist=true
-        </property>
-
-        <property name="hibernate.hbm2ddl.auto">
-            create
+            jdbc:mysql://localhost/test?createDatabaseIfNotExist=true
         </property>
 
         <property name="hibernate.hbm2ddl.auto">
