@@ -39,7 +39,7 @@
         <mapping class="ChildCareTech.Supplier"/>
         <mapping class="ChildCareTech.Staff"/>
         <mapping class="ChildCareTech.Kid"/>
-        <!--mapping class="ChildCareTech.Canteen"/-->
+        <mapping class="ChildCareTech.Canteen"/>
         <mapping class="ChildCareTech.Meal"/>
     </session-factory>
 </hibernate-configuration>
