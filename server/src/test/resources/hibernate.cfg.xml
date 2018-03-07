@@ -1,0 +1,49 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name = "hibernate.dialect">
+            org.hibernate.dialect.MariaDBDialect
+        </property>
+
+        <property name = "hibernate.connection.driver_class">
+            org.mariadb.jdbc.Driver
+        </property>
+
+        <property name = "hibernate.connection.url">
+            jdbc:mysql://localhost/childcaretech?createDatabaseIfNotExist=true
+        </property>
+
+        <property name="hibernate.hbm2ddl.auto">
+            create
+        </property>
+
+        <property name="hibernate.hbm2ddl.auto">
+            update
+        </property>
+
+        <property name = "hibernate.connection.username">
+            root
+        </property>
+
+        <property name = "hibernate.connection.password">
+            root
+        </property>
+
+        <property name="connection.autocommit">
+            true
+        </property>
+
+        <!-- List of mapped entities -->
+        <mapping class="ChildCareTech.Person"/>
+        <mapping class="ChildCareTech.Adult"/>
+        <mapping class="ChildCareTech.Pediatrist"/>
+        <mapping class="ChildCareTech.Supplier"/>
+        <mapping class="ChildCareTech.Staff"/>
+        <mapping class="ChildCareTech.Kid"/>
+        <mapping class="ChildCareTech.Canteen"/>
+        <mapping class="ChildCareTech.Meal"/>
+    </session-factory>
+</hibernate-configuration>
