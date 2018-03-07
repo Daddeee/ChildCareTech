@@ -13,7 +13,7 @@ public class Adult {
     private int id;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "fiscal_code", nullable = false)
+    @JoinColumn(nullable = false, unique = true)
     private Person person;
 
     public Adult() {
