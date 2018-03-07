@@ -32,6 +32,10 @@
             root
         </property>
 
+        <property name="connection.autocommit">
+            true
+        </property>
+
         <!-- List of mapped entities -->
         <mapping class="ChildCareTech.Person"/>
         <mapping class="ChildCareTech.Adult"/>

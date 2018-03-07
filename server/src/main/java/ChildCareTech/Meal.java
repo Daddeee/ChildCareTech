@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "meal",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "meal_num", "date"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen", "meal_num", "date"})
 )
 public class Meal
 {
@@ -16,9 +16,8 @@ public class Meal
     @Column(name = "id", nullable = false)
     private int id;
 
-
-    @Column(name = "canteen_id") //nullable?
-    private int canteen_id;
+    @Column(name = "canteen") //nullable?
+    private Canteen canteen;
 
     @Column(name = "date", nullable = false)
     private Date date;
@@ -29,8 +28,8 @@ public class Meal
 
     public Meal() {}
 
-    public Meal(int canteen_id, int meal_num, Date date) {
-        this.canteen_id = canteen_id;
+    public Meal(Canteen canteen, int meal_num, Date date) {
+        this.canteen = canteen;
         this.meal_num = meal_num;
         this.date = date;
     }
@@ -39,9 +38,9 @@ public class Meal
 
     private void setId(int id) { this.id = id; }
 
-    public int getCanteen_id() { return canteen_id; }
+    public Canteen getCanteen() { return canteen; }
 
-    private void setCanteen_id(int canteen_id) { this.canteen_id = canteen_id; }
+    private void setCanteen_id(Canteen canteen_id) { this.canteen = canteen; }
 
     public int getMeal_num() { return meal_num; }
 
