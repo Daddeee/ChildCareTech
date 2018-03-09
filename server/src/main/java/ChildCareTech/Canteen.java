@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "canteens")
-public class Canteen implements DAOEntity<Integer> {
+public class Canteen {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -17,11 +17,6 @@ public class Canteen implements DAOEntity<Integer> {
 
     public Canteen() {}
     public Canteen(Set<Meal> meals) { this.meals = meals; }
-
-    @Override
-    public Integer getPrimaryKey() {
-        return id;
-    }
 
     public int getId() { return id; }
 

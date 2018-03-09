@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name="persons")
-public class Person implements DAOEntity<String> {
+public class Person
+{
     @Id
     @Column(length=16)
     private String fiscalCode;
@@ -48,11 +49,6 @@ public class Person implements DAOEntity<String> {
     public enum Sex
     {
         MALE, FEMALE
-    }
-
-    @Override
-    public String getPrimaryKey() {
-        return fiscalCode;
     }
 
     public String getFiscalCode()

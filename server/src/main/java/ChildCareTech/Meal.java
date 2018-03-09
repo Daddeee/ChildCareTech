@@ -1,5 +1,7 @@
 package ChildCareTech;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -7,7 +9,8 @@ import java.sql.Date;
 @Table(name = "meals",
         uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "date"})
 )
-public class Meal implements DAOEntity<Integer>{
+public class Meal
+{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
@@ -28,11 +31,6 @@ public class Meal implements DAOEntity<Integer>{
         this.canteen = canteen;
         this.mealNum = mealNum;
         this.date = date;
-    }
-
-    @Override
-    public Integer getPrimaryKey() {
-        return id;
     }
 
     public Date getDate() { return date; }
