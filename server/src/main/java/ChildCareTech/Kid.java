@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name="kids")
 @Check(constraints = "firstTutor_id IS NOT NULL or secondTutor_id IS NOT NULL")
-public class Kid {
+public class Kid implements DAOEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -37,6 +37,11 @@ public class Kid {
         this.firstTutor = firstTutor;
         this.secondTutor = secondTutor;
         this.pediatrist = pediatrist;
+    }
+
+    @Override
+    public Integer getPrimaryKey() {
+        return id;
     }
 
     public int getId() {
