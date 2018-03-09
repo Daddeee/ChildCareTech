@@ -1,35 +1,34 @@
 package ChildCareTech;
 
-import org.hibernate.JDBCException;
 import org.hibernate.Transaction;
-import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 
-import javax.persistence.PersistenceException;
 import java.sql.Date;
 
-public class KidTest extends AbstractCRUDTest<Kid> {
+public class KidTest extends AbstractEntityTest<Kid> {
     @Override
-    protected void createObject() {
+    public void testCRUD() {
+        Person bp = new Person("test1",
+                "bambino",
+                "bambino",
+                new Date(System.currentTimeMillis()),
+                Person.Sex.MALE,
+                "addr",
+                "333");
+        Person tp = new Person("test2",
+                "tutore",
+                "tutore",
+                new Date(System.currentTimeMillis()),
+                Person.Sex.MALE,
+                "addr",
+                "333");
 
+        Adult ta = new Adult(tp);
+        Kid k = new Kid(bp, ta, null, null);
+        Kid ku = new Kid(bp, null, ta, null);
     }
 
-    @Override
-    protected void readObject() {
-
-    }
-
-    @Override
-    protected void updateObject() {
-
-    }
-
-    @Override
-    protected void destroyObject() {
-
-    }
-
-    @Test(expected = PersistenceException.class)
+    @Test(expected = javax.persistence.PersistenceException.class)
     public void testCheckConstraint(){
         session = sessionFactory.openSession();
         Person p = new Person("test",
