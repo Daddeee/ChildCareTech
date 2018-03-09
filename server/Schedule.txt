@@ -1,0 +1,19 @@
+Entities:           Implemented:       Tested:
+
+    Person
+    Adult
+    Kid
+    Pediatrist
+    Supplier
+    Staff
+
+    Food
+    Dish
+    Drink
+    Meal
+    Canteen
+
+    Trip
+    Bus
+    Partecipation
+

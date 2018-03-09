@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "foods",
         uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Food {
+public class Food implements DAOEntity<Integer>{
 
     @Id
     private int id;
@@ -21,5 +21,8 @@ public class Food {
     private void setName(String name) { this.name = name; }
 
     public String getName() { return name; }
+
+    @Override
+    public Integer getPrimaryKey() { return id; }
 
 }
