@@ -1,4 +1,7 @@
 package ChildCareTech;
 
-public interface DAOEntity {
+import java.io.Serializable;
+
+public interface DAOEntity<K extends Serializable> {
+    K getPrimaryKey();
 }

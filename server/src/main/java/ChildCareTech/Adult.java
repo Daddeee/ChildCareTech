@@ -9,7 +9,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("not null")
-public class Adult {
+public class Adult implements DAOEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -27,6 +27,11 @@ public class Adult {
 
     public Adult(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public Integer getPrimaryKey() {
+        return id;
     }
 
     public int getId() {
