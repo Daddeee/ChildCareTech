@@ -1,8 +1,10 @@
 package ChildCareTech;
 
-import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
+
+import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("2")

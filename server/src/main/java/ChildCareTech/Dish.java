@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "disces")
-public class Dish implements DAOEntity<Integer>{
+public class Dish implements Entity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

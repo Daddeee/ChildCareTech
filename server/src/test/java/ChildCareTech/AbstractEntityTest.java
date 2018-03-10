@@ -14,10 +14,9 @@ import java.io.Serializable;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public abstract class AbstractEntityTest<T extends DAOEntity> {
+public abstract class AbstractEntityTest<T extends Entity> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
-    protected GenericDAO<T> dao = null;
 
     @Test
     public abstract void testCRUD();
@@ -27,29 +26,11 @@ public abstract class AbstractEntityTest<T extends DAOEntity> {
         Transaction tx = null;
         T t = null;
 
-        dao.setSession(session);
 
         try{
             tx = session.beginTransaction();
-            dao.create(o);
+
             tx.commit();
-
-            t = dao.read(o.getPrimaryKey());
-            assertTrue(t.equals(o));
-
-            tx = session.beginTransaction();
-            dao.update(ou);
-            tx.commit();
-
-            t = dao.read(ou.getPrimaryKey());
-            assertTrue(t.equals(ou));
-
-            tx = session.beginTransaction();
-            session.delete(t);
-            tx.commit();
-
-            t = dao.read(ou.getPrimaryKey());
-            assertTrue(t == null);
         } catch(HibernateException e){
             if (tx!=null)
                 tx.rollback();

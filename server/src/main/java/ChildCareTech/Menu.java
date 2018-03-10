@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "menus")
-public class Menu implements DAOEntity<Integer>{
+public class Menu implements Entity<Integer> {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

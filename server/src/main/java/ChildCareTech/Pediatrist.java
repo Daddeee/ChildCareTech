@@ -1,6 +1,8 @@
 package ChildCareTech;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+
 import java.util.HashSet;
 import java.util.Set;
 

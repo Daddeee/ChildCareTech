@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 @Table(name = "supplies")
-public class Supply implements DAOEntity<Integer>{
+public class Supply implements Entity<Integer>{
     @Id
     private int id;
 

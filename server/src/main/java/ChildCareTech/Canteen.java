@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "canteens")
-public class Canteen implements DAOEntity<Integer> {
+public class Canteen implements Entity<Integer> {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
