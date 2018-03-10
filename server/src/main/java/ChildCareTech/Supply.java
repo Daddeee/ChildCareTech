@@ -4,26 +4,26 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 
+@Entity
 @Table(name = "supplies")
 public class Supply implements DAOEntity<Integer>{
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne(targetEntity = Supplier.class)
-    @JoinColumn(nullable = false)
     private Supplier supplier;
 
-    @ManyToMany(targetEntity = Food.class)
-    @JoinColumn(nullable = false)
-    private Set<Food> foods;
+    @ManyToOne(targetEntity = Food.class)
+    private Food food;
 
     public Supplier getSupplier() { return supplier; }
 
     private void setSupplier(Supplier supplier) { this.supplier = supplier; }
 
-    public Set<Food> getFoods() { return new HashSet<>(foods); }
+    public Food getFoods() { return food; }
 
-    private void setFoods(Set<Food> foods) { this.foods = foods; }
+    private void setFoods(Food food) { this.food = food; }
 
     @Override
     public Integer getPrimaryKey() { return id; }

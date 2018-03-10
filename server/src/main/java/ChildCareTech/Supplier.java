@@ -11,7 +11,6 @@ public class Supplier extends Adult {
     public Supplier(Person person) { super(person); }
 
     @ManyToMany(targetEntity = Supply.class, mappedBy = "supplier")
-    @JoinColumn(nullable = false)
     private Set<Supply> supplies;
 
     public Set<Supply> getSupplies() { return new HashSet<>(supplies); }
