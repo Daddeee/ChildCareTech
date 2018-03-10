@@ -3,11 +3,11 @@ package ChildCareTech;
 import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "meals",
         uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "date"})
 )
-public class Meal implements DAOEntity<Integer>{
+public class Meal implements Entity<Integer> {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;

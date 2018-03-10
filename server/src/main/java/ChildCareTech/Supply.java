@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "supplies")
-public class Supply implements DAOEntity<Integer>{
+public class Supply implements Entity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "adults")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
-@DiscriminatorValue("not null")
-public class Adult implements DAOEntity<Integer>{
+@DiscriminatorValue("0")
+public class Adult implements Entity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

@@ -3,10 +3,10 @@ package ChildCareTech;
 
 import javax.persistence.*;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "foods",
         uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Food implements DAOEntity<Integer>{
+public class Food implements Entity<Integer> {
 
     @Id
     private int id;

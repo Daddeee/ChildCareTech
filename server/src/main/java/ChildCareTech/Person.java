@@ -7,9 +7,9 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 
-@Entity
+@javax.persistence.Entity
 @Table(name="persons")
-public class Person implements DAOEntity<String> {
+public class Person implements Entity<String> {
     @Id
     @Column(length=16)
     private String fiscalCode;

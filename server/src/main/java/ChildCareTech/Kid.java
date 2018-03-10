@@ -1,27 +1,24 @@
 package ChildCareTech;
 
-import org.hibernate.annotations.Check;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@javax.persistence.Entity
 @Table(name="kids")
-@Check(constraints = "firstTutor_id IS NOT NULL or secondTutor_id IS NOT NULL")
-public class Kid implements DAOEntity<Integer>{
+public class Kid implements Entity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(unique = true, nullable = false)
     private Person person;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Adult firstTutor;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Adult secondTutor;
 
     @ManyToOne

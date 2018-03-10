@@ -14,10 +14,10 @@ import java.io.Serializable;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public abstract class AbstractEntityTest<T extends DAOEntity> {
+public abstract class AbstractEntityTest<T extends Entity> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
-    protected GenericDAO<T> dao = null;
+    protected Class<T> clazz;
 
     @Test
     public abstract void testCRUD();
@@ -27,28 +27,38 @@ public abstract class AbstractEntityTest<T extends DAOEntity> {
         Transaction tx = null;
         T t = null;
 
-        dao.setSession(session);
 
         try{
+            /* creating */
             tx = session.beginTransaction();
-            dao.create(o);
+            session.save(o);
             tx.commit();
 
-            t = dao.read(o.getPrimaryKey());
+            /* reading */
+            t = session.get(clazz, o.getPrimaryKey());
+
+            /* TEST */
             assertTrue(t.equals(o));
 
+            /* updating */
             tx = session.beginTransaction();
-            dao.update(ou);
+            session.merge(ou);
             tx.commit();
 
-            t = dao.read(ou.getPrimaryKey());
-            assertTrue(t.equals(ou));
+            /* reading */
+            t = session.get(clazz, o.getPrimaryKey());
 
+            /* TEST */
+            assertTrue(t.equals(o));
+
+            /* deleting */
             tx = session.beginTransaction();
-            session.delete(t);
+            session.delete(o);
             tx.commit();
 
-            t = dao.read(ou.getPrimaryKey());
+            /* reading */
+            t = session.get(clazz, o.getPrimaryKey());
+
             assertTrue(t == null);
         } catch(HibernateException e){
             if (tx!=null)

@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "drinks",
     uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Drink implements DAOEntity<Integer>{
+public class Drink implements Entity<Integer> {
 
     @Id
     private int id;
