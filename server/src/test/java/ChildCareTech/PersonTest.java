@@ -4,6 +4,12 @@ import java.sql.Date;
 
 public class PersonTest extends AbstractEntityTest<Person> {
     @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        clazz = Person.class;
+    }
+
+    @Override
     public void testCRUD() {
         Person o = new Person("fisccodetest",
                 "name",

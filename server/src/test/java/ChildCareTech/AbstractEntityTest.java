@@ -17,6 +17,7 @@ import static org.junit.Assert.fail;
 public abstract class AbstractEntityTest<T extends Entity> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
+    protected Class<T> clazz;
 
     @Test
     public abstract void testCRUD();
@@ -28,9 +29,37 @@ public abstract class AbstractEntityTest<T extends Entity> {
 
 
         try{
+            /* creating */
             tx = session.beginTransaction();
-
+            session.save(o);
             tx.commit();
+
+            /* reading */
+            t = session.get(clazz, o.getPrimaryKey());
+
+            /* TEST */
+            assertTrue(t.equals(o));
+
+            /* updating */
+            tx = session.beginTransaction();
+            session.merge(ou);
+            tx.commit();
+
+            /* reading */
+            t = session.get(clazz, o.getPrimaryKey());
+
+            /* TEST */
+            assertTrue(t.equals(o));
+
+            /* deleting */
+            tx = session.beginTransaction();
+            session.delete(o);
+            tx.commit();
+
+            /* reading */
+            t = session.get(clazz, o.getPrimaryKey());
+
+            assertTrue(t == null);
         } catch(HibernateException e){
             if (tx!=null)
                 tx.rollback();
