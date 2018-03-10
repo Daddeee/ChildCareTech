@@ -16,8 +16,8 @@ public class Dish implements iEntity<Integer> {
     @JoinColumn(nullable = false)
     private Menu menu;
 
-    @ManyToOne(targetEntity = Food.class)
-    @JoinColumn(nullable = false)
+    @ManyToMany(targetEntity = Food.class)
+    @JoinTable(name="ingredients")
     private Set<Food> foods;
 
     public Dish() { }

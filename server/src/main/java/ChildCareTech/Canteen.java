@@ -3,7 +3,6 @@ package ChildCareTech;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.persistence.Entity;
 
 @Entity
 @Table(name = "canteens")

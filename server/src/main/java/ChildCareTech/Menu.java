@@ -8,7 +8,6 @@ import java.util.Set;
 @Table(name = "menus")
 public class Menu implements iEntity<Integer> {
     @Id
-    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
