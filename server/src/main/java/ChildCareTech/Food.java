@@ -1,6 +1,8 @@
 package ChildCareTech;
 
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,9 +18,16 @@ public class Food implements iEntity<Integer> {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int residualQuantity;
+
     @ManyToMany(targetEntity = Dish.class)
     @JoinTable(name="ingredients")
-    private Set<Food> dishes;
+    private Set<Dish> dishes;
+
+    @OneToMany(mappedBy = "food")
+    private Set<Supply> supplies;
 
     public Food() {}
 
@@ -28,9 +37,9 @@ public class Food implements iEntity<Integer> {
 
     public String getName() { return name; }
 
-    public Set<Food> getDishes() { return new HashSet<>(dishes); }
+    public Set<Dish> getDishes() { return new HashSet<>(dishes); }
 
-    private void setDishes(Set<Food> dishes) { this.dishes = dishes; }
+    private void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
 
     @Override
     public Integer getPrimaryKey() { return id; }

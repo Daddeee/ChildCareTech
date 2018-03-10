@@ -45,5 +45,11 @@
         <mapping class="ChildCareTech.Kid"/>
         <mapping class="ChildCareTech.Canteen"/>
         <mapping class="ChildCareTech.Meal"/>
+        <mapping class="ChildCareTech.Dish"/>
+        <mapping class="ChildCareTech.Drink"/>
+        <mapping class="ChildCareTech.Food"/>
+        <mapping class="ChildCareTech.Menu"/>
+        <mapping class="ChildCareTech.Supply"/>
+
     </session-factory>
 </hibernate-configuration>

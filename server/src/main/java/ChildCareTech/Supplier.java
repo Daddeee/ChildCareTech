@@ -12,7 +12,7 @@ public class Supplier extends Adult {
     public Supplier() { super(); }
     public Supplier(Person person) { super(person); }
 
-    @ManyToMany(targetEntity = Supply.class, mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier")
     private Set<Supply> supplies;
 
     public Set<Supply> getSupplies() { return new HashSet<>(supplies); }

@@ -1,21 +1,26 @@
 package ChildCareTech;
 
 import javax.persistence.*;
-import java.util.Set;
-import java.util.HashSet;
+import java.sql.Date;
 
 @Entity
 @Table(name = "supplies")
-public class Supply implements Entity<Integer>{
+public class Supply implements iEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(targetEntity = Supplier.class)
+    @ManyToOne
     private Supplier supplier;
 
-    @ManyToOne(targetEntity = Food.class)
+    @ManyToOne
     private Food food;
+
+    @Column(nullable = false)
+    private int quantity;
+
+    @Column(nullable = false)
+    private Date date;
 
     public Supplier getSupplier() { return supplier; }
 
@@ -24,6 +29,10 @@ public class Supply implements Entity<Integer>{
     public Food getFoods() { return food; }
 
     private void setFoods(Food food) { this.food = food; }
+
+    public int getQuantity() { return quantity; }
+
+    private void setQuantity(int quantity) { this.quantity = quantity; }
 
     @Override
     public Integer getPrimaryKey() { return id; }
