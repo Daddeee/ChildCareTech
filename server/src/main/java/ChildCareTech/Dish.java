@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "disces")
-public class Dish {
+public class Dish implements DAOEntity<Integer>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +25,11 @@ public class Dish {
     public Dish(Menu menu, Set<Food> foods) {
         this.menu = menu;
         this.foods = foods;
+    }
+
+    @Override
+    public Integer getPrimaryKey() {
+        return id;
     }
 
     private void setMenu(Menu menu) { this.menu = menu; }

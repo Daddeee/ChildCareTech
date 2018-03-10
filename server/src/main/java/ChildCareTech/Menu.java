@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "menus")
-public class Menu {
+public class Menu implements DAOEntity<Integer>{
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +24,11 @@ public class Menu {
     public Menu(Set<Dish> dishes, Drink drink) {
         this.dishes = dishes;
         this.drink = drink;
+    }
+
+    @Override
+    public Integer getPrimaryKey() {
+        return id;
     }
 
     private void setDisces(Set<Dish> dishes) { this.dishes = dishes; }
