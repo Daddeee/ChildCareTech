@@ -7,7 +7,7 @@ import java.util.HashSet;
 @javax.persistence.Entity
 @Table(name = "drinks",
     uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Drink implements Entity<Integer> {
+public class Drink implements iEntity<Integer> {
 
     @Id
     private int id;

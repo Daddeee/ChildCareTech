@@ -6,12 +6,12 @@ import javax.persistence.*;
 @javax.persistence.Entity
 @Table(name = "foods",
         uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Food implements Entity<Integer> {
+public class Food implements iEntity<Integer> {
 
     @Id
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     public Food() { }

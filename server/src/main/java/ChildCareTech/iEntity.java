@@ -2,6 +2,6 @@ package ChildCareTech;
 
 import java.io.Serializable;
 
-public interface Entity<K extends Serializable> {
+public interface iEntity<K extends Serializable> {
     K getPrimaryKey();
 }

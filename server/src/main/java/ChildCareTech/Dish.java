@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 @javax.persistence.Entity
 @Table(name = "disces")
-public class Dish implements Entity<Integer> {
+public class Dish implements iEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

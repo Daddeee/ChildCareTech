@@ -9,7 +9,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
-public class Adult implements Entity<Integer> {
+public class Adult implements iEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

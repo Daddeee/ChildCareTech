@@ -3,10 +3,11 @@ package ChildCareTech;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.persistence.Entity;
 
-@javax.persistence.Entity
+@Entity
 @Table(name = "canteens")
-public class Canteen implements Entity<Integer> {
+public class Canteen implements iEntity<Integer> {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)

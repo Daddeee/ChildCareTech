@@ -9,12 +9,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.Serializable;
-
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public abstract class AbstractEntityTest<T extends Entity> {
+public abstract class AbstractEntityTest<T extends iEntity> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
     protected Class<T> clazz;

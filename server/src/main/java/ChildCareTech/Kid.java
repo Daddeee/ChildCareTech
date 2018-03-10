@@ -6,7 +6,7 @@ import java.util.Set;
 
 @javax.persistence.Entity
 @Table(name="kids")
-public class Kid implements Entity<Integer> {
+public class Kid implements iEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
