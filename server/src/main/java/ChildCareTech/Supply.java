@@ -11,9 +11,11 @@ public class Supply implements iEntity<Supply, Integer>{
     private int id;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Supplier supplier;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Food food;
 
     @Column(nullable = false)
@@ -21,6 +23,14 @@ public class Supply implements iEntity<Supply, Integer>{
 
     @Column(nullable = false)
     private Date date;
+
+    public Supply(){}
+    public Supply(Supplier supplier, Food food, int quantity, Date date){
+        this.supplier = supplier;
+        this.food = food;
+        this.quantity = quantity;
+        this.date = date;
+    }
 
     public Supplier getSupplier() { return supplier; }
 
