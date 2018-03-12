@@ -88,7 +88,7 @@ public class Kid implements iEntity<Kid, Integer> {
         return new HashSet<>(contacts);
     }
 
-    private void setContacts(Set<Adult> contacts) {
+    public void setContacts(Set<Adult> contacts) {
         this.contacts = contacts;
     }
 }

@@ -38,8 +38,8 @@ public class Dish implements iEntity<Dish, Integer> {
 
     public Menu getMenu() { return menu; }
 
-    private void setFoods(Set<Food> foods) { this.foods = foods; }
-
     public Set<Food> getFoods() { return new HashSet<>(foods); }
+
+    public void setFoods(Set<Food> foods) { this.foods = foods; }
 
 }

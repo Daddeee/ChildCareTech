@@ -39,7 +39,7 @@ public class Food implements iEntity<Food, Integer> {
 
     public Set<Dish> getDishes() { return new HashSet<>(dishes); }
 
-    private void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
+    public void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
 
     @Override
     public Integer getPrimaryKey() { return id; }
