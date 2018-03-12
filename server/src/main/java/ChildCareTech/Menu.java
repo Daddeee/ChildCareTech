@@ -14,7 +14,7 @@ public class Menu implements iEntity<Menu, Integer> {
     @OneToMany(mappedBy = "menu", targetEntity = Dish.class)
     private Set<Dish> dishes;
 
-    @OneToOne(targetEntity = Drink.class)
+    @OneToOne
     private Drink drink;
 
     public Menu() { }

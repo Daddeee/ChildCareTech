@@ -14,15 +14,22 @@ public class Drink implements iEntity<Drink, Integer> {
 
     private String name;
 
+    @OneToOne
+    private Menu menu;
+
     @OneToMany
     @JoinColumn(nullable = false)
     private Set<Food> foods;
 
     public Drink() { }
-
-    public Drink(String name, Set<Food> foods) {
-        this.foods = foods;
+    public Drink(String name, Menu menu){
         this.name = name;
+        this.menu = menu;
+    }
+    public Drink(String name, Menu menu, Set<Food> foods) {
+        this.name = name;
+        this.menu = menu;
+        this.foods = foods;
     }
 
     @Override
@@ -35,6 +42,10 @@ public class Drink implements iEntity<Drink, Integer> {
     private void setName(String name) { this.name = name; }
 
     public String getName() { return name; }
+
+    public Menu getMenu() { return menu; }
+
+    private void setMenu(Menu menu) { this.menu = menu; }
 
     private void setFoods(Set<Food> foods) { this.foods = foods; }
 
