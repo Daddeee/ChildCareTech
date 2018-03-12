@@ -1,6 +1,7 @@
 package ChildCareTech.entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class SupplierTest extends AbstractEntityTest<Supplier> {
     @Override
@@ -14,7 +15,7 @@ public class SupplierTest extends AbstractEntityTest<Supplier> {
         Person o1 = new Person("generic1",
                 "generic1",
                 "generic1",
-                new Date(System.currentTimeMillis()),
+                LocalDate.now(),
                 Person.Sex.MALE,
                 "",
                 "");
@@ -22,7 +23,7 @@ public class SupplierTest extends AbstractEntityTest<Supplier> {
         Person o2 = new Person("generic2",
                 "generic2",
                 "generic2",
-                new Date(System.currentTimeMillis()),
+                LocalDate.now(),
                 Person.Sex.MALE,
                 "",
                 "");

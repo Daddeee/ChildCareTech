@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 

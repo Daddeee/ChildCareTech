@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
@@ -19,7 +20,7 @@ public class SupplyTest extends AbstractEntityTest<Supply> {
         Person p = new Person("supplcode",
                 "name",
                 "lastname",
-                new Date(System.currentTimeMillis()),
+                LocalDate.now(),
                 Person.Sex.MALE,
                 "addr",
                 "phone");
@@ -41,8 +42,8 @@ public class SupplyTest extends AbstractEntityTest<Supply> {
             session.close();
         }
 
-        Supply s = new Supply(suppl, f, 0, new Date(System.currentTimeMillis()));
-        Supply su = new Supply(suppl, f, 1, new Date(System.currentTimeMillis()));
+        Supply s = new Supply(suppl, f, 0, LocalDate.now());
+        Supply su = new Supply(suppl, f, 1, LocalDate.now());
 
         testCRUDImpl(s, su);
     }

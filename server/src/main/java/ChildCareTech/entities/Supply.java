@@ -2,6 +2,7 @@ package ChildCareTech.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "supplies")
@@ -22,10 +23,10 @@ public class Supply implements iEntity<Supply, Integer>{
     private int quantity;
 
     @Column(nullable = false)
-    private Date date;
+    private LocalDate date;
 
     public Supply(){}
-    public Supply(Supplier supplier, Food food, int quantity, Date date){
+    public Supply(Supplier supplier, Food food, int quantity, LocalDate date){
         this.supplier = supplier;
         this.food = food;
         this.quantity = quantity;
@@ -43,6 +44,14 @@ public class Supply implements iEntity<Supply, Integer>{
     public int getQuantity() { return quantity; }
 
     private void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    private void setDate(LocalDate date) {
+        this.date = date;
+    }
 
     @Override
     public Integer getPrimaryKey() { return id; }

@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
@@ -19,14 +20,14 @@ public class KidTest extends AbstractEntityTest<Kid>{
         Person o = new Person("kidtest",
                 "kid",
                 "kid",
-                new Date(System.currentTimeMillis()),
+                LocalDate.now(),
                 Person.Sex.MALE,
                 "addr",
                 "numb");
         Person p = new Person("parenttest",
                 "parent",
                 "parent",
-                new Date(System.currentTimeMillis()),
+                LocalDate.now(),
                 Person.Sex.MALE,
                 "addr",
                 "numb");

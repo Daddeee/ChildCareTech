@@ -3,8 +3,7 @@ package ChildCareTech.entities;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 
 @javax.persistence.Entity
@@ -21,8 +20,7 @@ public class Person implements iEntity<Person, String> {
     private String lastName;
 
     @Column(nullable = false)
-    @Type(type="date")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
@@ -34,7 +32,7 @@ public class Person implements iEntity<Person, String> {
     private String phoneNumber;
 
     public Person(){}
-    public Person(String fiscalCode, String firstName, String lastName, Date birthDate, Sex sex, String address, String phoneNumber)
+    public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber)
     {
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
@@ -86,12 +84,12 @@ public class Person implements iEntity<Person, String> {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate()
+    public LocalDate getBirthDate()
     {
         return birthDate;
     }
 
-    private void setBirthDate(Date birthDate)
+    private void setBirthDate(LocalDate birthDate)
     {
         this.birthDate = birthDate;
     }
@@ -124,22 +122,5 @@ public class Person implements iEntity<Person, String> {
     private void setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        if (o == null) return false;
-        if (o == this) return true;
-        if (!(o instanceof Person))return false;
-
-        Person p = (Person) o;
-        return fiscalCode.equals(p.getFiscalCode()) &&
-                firstName.equals(p.getFirstName()) &&
-                lastName.equals(p.getLastName()) &&
-                sdf.format(birthDate).equals(sdf.format(p.getBirthDate())) &&
-                sex == p.getSex() &&
-                address.equals(p.getAddress()) &&
-                phoneNumber.equals(p.getPhoneNumber());
     }
 }
