@@ -20,6 +20,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
     @Test
     public abstract void testCRUD();
 
+    @SuppressWarnings("unchecked")
     protected void testCRUDImpl(T o, T ou) throws IllegalArgumentException{
         session = sessionFactory.openSession();
         Transaction tx = null;
@@ -40,6 +41,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
 
             /* updating */
             tx = session.beginTransaction();
+            ou.setPrimaryKey(o);
             session.merge(ou);
             tx.commit();
 
