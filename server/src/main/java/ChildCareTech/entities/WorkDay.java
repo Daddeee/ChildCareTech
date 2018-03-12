@@ -2,7 +2,6 @@ package ChildCareTech.entities;
 
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
