@@ -18,7 +18,10 @@ public class Food implements iEntity<Food, Integer> {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @ColumnDefault("0")
+    private boolean isDrink;
+
+    @Column
     @ColumnDefault("0")
     private int residualQuantity;
 
@@ -30,12 +33,39 @@ public class Food implements iEntity<Food, Integer> {
     private Set<Supply> supplies;
 
     public Food() {}
-
-    public Food(String name) { this.name = name; }
+    public Food(String name, boolean isDrink) { this.name = name; this.isDrink = isDrink; }
+    public Food(String name, boolean isDrink, int residualQuantity){
+        this.name = name;
+        this.isDrink = isDrink;
+        this.residualQuantity = residualQuantity;
+    }
+    public Food(String name, boolean isDrink, int residualQuantity, Set<Dish> dishes, Set<Supply> supplies) {
+        this.name = name;
+        this.isDrink = isDrink;
+        this.residualQuantity = residualQuantity;
+        this.dishes = dishes;
+        this.supplies = supplies;
+    }
 
     private void setName(String name) { this.name = name; }
 
     public String getName() { return name; }
+
+    public int getResidualQuantity() {
+        return residualQuantity;
+    }
+
+    private void setResidualQuantity(int residualQuantity) {
+        this.residualQuantity = residualQuantity;
+    }
+
+    public Set<Supply> getSupplies() {
+        return supplies;
+    }
+
+    private void setSupplies(Set<Supply> supplies) {
+        this.supplies = supplies;
+    }
 
     public Set<Dish> getDishes() { return new HashSet<>(dishes); }
 

@@ -17,7 +17,7 @@ public class Dish implements iEntity<Dish, Integer> {
     private Menu menu;
 
     @ManyToMany(targetEntity = Food.class)
-    @JoinTable(name="ingredients")
+    @JoinTable(name="dish_ingredients")
     private Set<Food> foods;
 
     public Dish() { }

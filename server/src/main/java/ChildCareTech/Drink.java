@@ -17,8 +17,8 @@ public class Drink implements iEntity<Drink, Integer> {
     @OneToOne
     private Menu menu;
 
-    @OneToMany
-    @JoinColumn(nullable = false)
+    @ManyToMany(targetEntity = Food.class)
+    @JoinTable(name="drink_ingredients")
     private Set<Food> foods;
 
     public Drink() { }
