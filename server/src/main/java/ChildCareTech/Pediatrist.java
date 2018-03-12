@@ -14,6 +14,7 @@ public class Pediatrist extends Adult {
     private Set<Kid> kids = new HashSet<>();
 
     public Pediatrist() { super(); }
+    public Pediatrist(Person person) { super(person); }
     public Pediatrist(Person person, Set<Kid> kids) { super(person); this.kids = kids; }
 
     public Set<Kid> getKids() {
