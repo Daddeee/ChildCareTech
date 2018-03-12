@@ -37,19 +37,19 @@
         </property>
 
         <!-- List of mapped entities -->
-        <mapping class="ChildCareTech.Person"/>
-        <mapping class="ChildCareTech.Adult"/>
-        <mapping class="ChildCareTech.Pediatrist"/>
-        <mapping class="ChildCareTech.Supplier"/>
-        <mapping class="ChildCareTech.Staff"/>
-        <mapping class="ChildCareTech.Kid"/>
-        <mapping class="ChildCareTech.Canteen"/>
-        <mapping class="ChildCareTech.Meal"/>
-        <mapping class="ChildCareTech.Dish"/>
-        <mapping class="ChildCareTech.Drink"/>
-        <mapping class="ChildCareTech.Food"/>
-        <mapping class="ChildCareTech.Menu"/>
-        <mapping class="ChildCareTech.Supply"/>
+        <mapping class="ChildCareTech.entities.Person"/>
+        <mapping class="ChildCareTech.entities.Adult"/>
+        <mapping class="ChildCareTech.entities.Pediatrist"/>
+        <mapping class="ChildCareTech.entities.Supplier"/>
+        <mapping class="ChildCareTech.entities.Staff"/>
+        <mapping class="ChildCareTech.entities.Kid"/>
+        <mapping class="ChildCareTech.entities.Canteen"/>
+        <mapping class="ChildCareTech.entities.Meal"/>
+        <mapping class="ChildCareTech.entities.Dish"/>
+        <mapping class="ChildCareTech.entities.Drink"/>
+        <mapping class="ChildCareTech.entities.Food"/>
+        <mapping class="ChildCareTech.entities.Menu"/>
+        <mapping class="ChildCareTech.entities.Supply"/>
 
     </session-factory>
 </hibernate-configuration>

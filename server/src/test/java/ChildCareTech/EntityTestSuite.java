@@ -5,19 +5,19 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ChildCareTech.entity.AdultTest.class,
-        ChildCareTech.entity.CanteenTest.class,
-        ChildCareTech.entity.DishTest.class,
-        ChildCareTech.entity.DrinkTest.class,
-        ChildCareTech.entity.FoodTest.class,
-        ChildCareTech.entity.KidTest.class,
-        ChildCareTech.entity.MealTest.class,
-        ChildCareTech.entity.MenuTest.class,
-        ChildCareTech.entity.PediatristTest.class,
-        ChildCareTech.entity.PersonTest.class,
-        ChildCareTech.entity.StaffTest.class,
-        ChildCareTech.entity.SupplierTest.class,
-        ChildCareTech.entity.SupplyTest.class
+        ChildCareTech.entities.AdultTest.class,
+        ChildCareTech.entities.CanteenTest.class,
+        ChildCareTech.entities.DishTest.class,
+        ChildCareTech.entities.DrinkTest.class,
+        ChildCareTech.entities.FoodTest.class,
+        ChildCareTech.entities.KidTest.class,
+        ChildCareTech.entities.MealTest.class,
+        ChildCareTech.entities.MenuTest.class,
+        ChildCareTech.entities.PediatristTest.class,
+        ChildCareTech.entities.PersonTest.class,
+        ChildCareTech.entities.StaffTest.class,
+        ChildCareTech.entities.SupplierTest.class,
+        ChildCareTech.entities.SupplyTest.class
 })
 
 public class EntityTestSuite {
