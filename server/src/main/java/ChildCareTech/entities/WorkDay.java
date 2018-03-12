@@ -16,7 +16,6 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
     @Column(unique = true)
     private LocalDate date;
 
-
     @OneToMany(mappedBy = "workDay")
     private Set<Meal> meals;
 
@@ -33,7 +32,7 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
 
     @Override
     public void setPrimaryKey(WorkDay workDay) {
-        this.date = workDay.getDate();
+        this.id = getPrimaryKey();
     }
 
     public LocalDate getDate() {
