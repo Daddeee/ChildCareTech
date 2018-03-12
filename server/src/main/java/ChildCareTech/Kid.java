@@ -6,7 +6,7 @@ import java.util.Set;
 
 @javax.persistence.Entity
 @Table(name="kids")
-public class Kid implements iEntity<Integer> {
+public class Kid implements iEntity<Kid, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -40,6 +40,9 @@ public class Kid implements iEntity<Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+
+    @Override
+    public void setPrimaryKey(Kid a) { this.id = a.getPrimaryKey(); }
 
     public int getId() {
         return id;

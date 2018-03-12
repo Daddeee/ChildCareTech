@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 
 @javax.persistence.Entity
 @Table(name="persons")
-public class Person implements iEntity<String> {
+public class Person implements iEntity<Person, String> {
     @Id
     @Column(length=16)
     private String fiscalCode;
@@ -54,13 +54,15 @@ public class Person implements iEntity<String> {
     public String getPrimaryKey() {
         return fiscalCode;
     }
+    @Override
+    public void setPrimaryKey(Person a) { setFiscalCode(a.getFiscalCode()); }
 
     public String getFiscalCode()
     {
         return fiscalCode;
     }
 
-    public void setFiscalCode(String fiscalCode)
+    private void setFiscalCode(String fiscalCode)
     {
         this.fiscalCode = fiscalCode;
     }

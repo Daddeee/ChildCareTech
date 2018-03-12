@@ -6,7 +6,7 @@ import java.util.Set;
 
 @javax.persistence.Entity
 @Table(name = "menus")
-public class Menu implements iEntity<Integer> {
+public class Menu implements iEntity<Menu, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -27,6 +27,8 @@ public class Menu implements iEntity<Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+    @Override
+    public void setPrimaryKey(Menu a) { this.id = a.getPrimaryKey(); }
 
     private void setDisces(Set<Dish> dishes) { this.dishes = dishes; }
 

@@ -7,7 +7,7 @@ import java.util.HashSet;
 @javax.persistence.Entity
 @Table(name = "drinks",
     uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Drink implements iEntity<Integer> {
+public class Drink implements iEntity<Drink, Integer> {
 
     @Id
     private int id;
@@ -29,6 +29,8 @@ public class Drink implements iEntity<Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+    @Override
+    public void setPrimaryKey(Drink a) { this.id = a.getPrimaryKey(); }
 
     private void setName(String name) { this.name = name; }
 

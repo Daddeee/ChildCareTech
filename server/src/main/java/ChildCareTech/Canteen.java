@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "canteens")
-public class Canteen implements iEntity<Integer> {
+public class Canteen implements iEntity<Canteen, Integer> {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -22,6 +22,8 @@ public class Canteen implements iEntity<Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+    @Override
+    public void setPrimaryKey(Canteen a) { this.id = a.getPrimaryKey(); }
 
     public int getId() { return id; }
 

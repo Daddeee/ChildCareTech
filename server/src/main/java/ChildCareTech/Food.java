@@ -10,7 +10,7 @@ import java.util.Set;
 @javax.persistence.Entity
 @Table(name = "foods",
         uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Food implements iEntity<Integer> {
+public class Food implements iEntity<Food, Integer> {
 
     @Id
     private int id;
@@ -43,5 +43,7 @@ public class Food implements iEntity<Integer> {
 
     @Override
     public Integer getPrimaryKey() { return id; }
+    @Override
+    public void setPrimaryKey(Food a) { this.id = a.getPrimaryKey(); }
 
 }

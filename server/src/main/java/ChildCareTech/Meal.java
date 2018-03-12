@@ -7,7 +7,7 @@ import java.sql.Date;
 @Table(name = "meals",
         uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "date"})
 )
-public class Meal implements iEntity<Integer> {
+public class Meal implements iEntity<Meal, Integer> {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
@@ -34,6 +34,8 @@ public class Meal implements iEntity<Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+    @Override
+    public void setPrimaryKey(Meal a) { this.id = a.getPrimaryKey(); }
 
     public Date getDate() { return date; }
 

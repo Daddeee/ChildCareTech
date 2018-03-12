@@ -5,7 +5,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "supplies")
-public class Supply implements iEntity<Integer>{
+public class Supply implements iEntity<Supply, Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -36,5 +36,7 @@ public class Supply implements iEntity<Integer>{
 
     @Override
     public Integer getPrimaryKey() { return id; }
+    @Override
+    public void setPrimaryKey(Supply a) { this.id = a.getPrimaryKey(); }
 }
 

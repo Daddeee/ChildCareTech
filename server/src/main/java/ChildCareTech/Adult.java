@@ -9,7 +9,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
-public class Adult implements iEntity<Integer> {
+public class Adult implements iEntity<Adult, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -33,6 +33,9 @@ public class Adult implements iEntity<Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+
+    @Override
+    public void setPrimaryKey(Adult a) { this.id = a.getPrimaryKey(); }
 
     public int getId() {
         return id;
