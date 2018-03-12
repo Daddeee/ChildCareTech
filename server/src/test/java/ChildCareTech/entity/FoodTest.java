@@ -1,4 +1,6 @@
-package ChildCareTech;
+package ChildCareTech.entity;
+
+import ChildCareTech.Food;
 
 public class FoodTest extends AbstractEntityTest<Food> {
     @Override

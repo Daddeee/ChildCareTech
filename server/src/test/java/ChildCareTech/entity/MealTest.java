@@ -1,5 +1,7 @@
-package ChildCareTech;
+package ChildCareTech.entity;
 
+import ChildCareTech.Canteen;
+import ChildCareTech.Meal;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 

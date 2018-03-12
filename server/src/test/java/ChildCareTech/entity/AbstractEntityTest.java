@@ -1,5 +1,6 @@
-package ChildCareTech;
+package ChildCareTech.entity;
 
+import ChildCareTech.iEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

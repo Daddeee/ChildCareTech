@@ -1,12 +1,15 @@
-package ChildCareTech;
+package ChildCareTech.entity;
+
+import ChildCareTech.Person;
+import ChildCareTech.Staff;
 
 import java.sql.Date;
 
-public class PediatristTest extends AbstractEntityTest<Pediatrist> {
+public class StaffTest extends AbstractEntityTest<Staff> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Pediatrist.class;
+        clazz = Staff.class;
     }
 
     @Override
@@ -27,8 +30,8 @@ public class PediatristTest extends AbstractEntityTest<Pediatrist> {
                 "",
                 "");
 
-        Pediatrist p = new Pediatrist(o1);
-        Pediatrist pu = new Pediatrist(o2);
+        Staff p = new Staff(o1);
+        Staff pu = new Staff(o2);
 
         testCRUDImpl(p, pu);
     }

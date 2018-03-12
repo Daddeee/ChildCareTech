@@ -1,4 +1,6 @@
-package ChildCareTech;
+package ChildCareTech.entity;
+
+import ChildCareTech.Person;
 
 import java.sql.Date;
 

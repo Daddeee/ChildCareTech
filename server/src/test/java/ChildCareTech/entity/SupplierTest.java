@@ -1,12 +1,15 @@
-package ChildCareTech;
+package ChildCareTech.entity;
+
+import ChildCareTech.Person;
+import ChildCareTech.Supplier;
 
 import java.sql.Date;
 
-public class AdultTest extends AbstractEntityTest<Adult> {
+public class SupplierTest extends AbstractEntityTest<Supplier> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Adult.class;
+        clazz = Supplier.class;
     }
 
     @Override
@@ -27,9 +30,9 @@ public class AdultTest extends AbstractEntityTest<Adult> {
                 "",
                 "");
 
-        Adult a = new Adult(o1);
-        Adult au = new Adult(o2);
+        Supplier p = new Supplier(o1);
+        Supplier pu = new Supplier(o2);
 
-        testCRUDImpl(a, au);
+        testCRUDImpl(p, pu);
     }
 }

@@ -1,44 +1,43 @@
-package ChildCareTech;
+package ChildCareTech.entity;
 
+import ChildCareTech.Drink;
+import ChildCareTech.Menu;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import java.sql.Date;
-
 import static org.junit.Assert.fail;
 
-public class DishTest extends AbstractEntityTest<Dish> {
+public class MenuTest extends AbstractEntityTest<Menu> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Dish.class;
+        clazz = Menu.class;
     }
 
     @Override
     public void testCRUD() {
-        Menu o1 = new Menu();
-        Menu o2 = new Menu();
+        Drink d = new Drink("test1", null);
+        Drink d1 = new Drink("test2", null);
 
         session = sessionFactory.openSession();
         Transaction tx = null;
+
         try{
-            /* creating */
             tx = session.beginTransaction();
-            session.save(o1);
-            session.save(o2);
+            session.save(d);
+            session.save(d1);
             tx.commit();
         } catch(HibernateException e){
-            if (tx!=null)
-                tx.rollback();
+            if(tx!=null)tx.rollback();
             e.printStackTrace();
-            fail("[!] SETUP ERROR: "+ e.getMessage());
-        } finally{
+            fail(e.getMessage());
+        } finally {
             session.close();
         }
 
-        Dish o = new Dish(o1);
-        Dish ou = new Dish(o2);
+        Menu m = new Menu(null, d);
+        Menu mu = new Menu(null, d1);
 
-        testCRUDImpl(o, ou);
+        testCRUDImpl(m, mu);
     }
 }

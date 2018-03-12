@@ -1,6 +1,6 @@
-package ChildCareTech;
+package ChildCareTech.entity;
 
-import java.sql.Date;
+import ChildCareTech.Canteen;
 
 public class CanteenTest extends AbstractEntityTest<Canteen> {
     @Override
