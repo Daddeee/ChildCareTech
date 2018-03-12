@@ -10,6 +10,7 @@ import java.util.HashSet;
 public class Drink implements iEntity<Drink, Integer> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String name;
