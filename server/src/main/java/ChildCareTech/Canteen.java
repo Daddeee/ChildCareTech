@@ -12,22 +12,33 @@ public class Canteen implements iEntity<Canteen, Integer> {
     @Column(name = "id", nullable = false)
     private int id;
 
+    private String name;
+
     @OneToMany(mappedBy="canteen")
     private Set<Meal> meals;
 
     public Canteen() {}
-    public Canteen(Set<Meal> meals) { this.meals = meals; }
+    public Canteen(String name) { this.name = name; }
+    public Canteen(String name, Set<Meal> meals) { this.name = name; this.meals = meals; }
 
     @Override
     public Integer getPrimaryKey() {
         return id;
     }
     @Override
-    public void setPrimaryKey(Canteen a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Canteen a) { setId(a.getPrimaryKey()); }
 
     public int getId() { return id; }
 
     private void setId(int id) { this.id = id; }
+
+    public String getName() {
+        return name;
+    }
+
+    private void setName(String name) {
+        this.name = name;
+    }
 
     public Set<Meal> getMeals() { return new HashSet<>(meals); }
 
