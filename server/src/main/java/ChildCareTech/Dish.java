@@ -21,7 +21,7 @@ public class Dish implements iEntity<Dish, Integer> {
     private Set<Food> foods;
 
     public Dish() { }
-
+    public Dish(Menu menu) { this.menu = menu; }
     public Dish(Menu menu, Set<Food> foods) {
         this.menu = menu;
         this.foods = foods;
