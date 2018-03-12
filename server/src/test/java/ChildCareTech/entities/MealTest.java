@@ -3,7 +3,6 @@ package ChildCareTech.entities;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
@@ -18,12 +17,13 @@ public class MealTest extends AbstractEntityTest<Meal> {
     @Override
     public void testCRUD() {
         Canteen c = new Canteen();
-
+        WorkDay workDay = new WorkDay(LocalDate.now());
         session = sessionFactory.openSession();
         Transaction tx = null;
 
         try{
             tx = session.beginTransaction();
+            session.save(workDay);
             session.save(c);
             tx.commit();
         } catch(HibernateException e){
@@ -34,8 +34,8 @@ public class MealTest extends AbstractEntityTest<Meal> {
             session.close();
         }
 
-        Meal m = new Meal(c, 0, new Date(System.currentTimeMillis()));
-        Meal mu = new Meal(c, 1, new Date(System.currentTimeMillis()));
+        Meal m = new Meal(c, 0, workDay);
+        Meal mu = new Meal(c, 1, workDay);
 
         testCRUDImpl(m, mu);
     }

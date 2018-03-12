@@ -1,11 +1,11 @@
 package ChildCareTech.entities;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @javax.persistence.Entity
 @Table(name = "meals",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "date"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "workDay_id"})
 )
 public class Meal implements iEntity<Meal, Integer> {
     @Id
@@ -16,18 +16,19 @@ public class Meal implements iEntity<Meal, Integer> {
     @JoinColumn(nullable = false)
     private Canteen canteen;
 
-    @Column(nullable = false)
-    private Date date;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private WorkDay workDay;
 
     private int mealNum;
 
 
     public Meal() {}
 
-    public Meal(Canteen canteen, int mealNum, Date date) {
+    public Meal(Canteen canteen, int mealNum, WorkDay workDay) {
         this.canteen = canteen;
         this.mealNum = mealNum;
-        this.date = date;
+        this.workDay = workDay;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class Meal implements iEntity<Meal, Integer> {
     @Override
     public void setPrimaryKey(Meal a) { this.id = a.getPrimaryKey(); }
 
-    public Date getDate() { return date; }
+    public LocalDate getDate() { return workDay.getDate(); }
 
     private void setId(int id) { this.id = id; }
 
@@ -51,5 +52,5 @@ public class Meal implements iEntity<Meal, Integer> {
 
     public int getId() { return id; }
 
-    private void setDate(Date date) { this.date = date; }
+    private void setWorkDay(WorkDay workDay) { this.workDay = workDay; }
 }
