@@ -40,6 +40,11 @@
             true
         </property>
 
+        <property name="hibernate.hbm2ddl.import_files">
+            /import.sql
+            <!-- , other file paths -->
+        </property>
+
         <!-- List of mapped entities -->
         <mapping class="ChildCareTech.entities.Person"/>
         <mapping class="ChildCareTech.entities.Adult"/>
