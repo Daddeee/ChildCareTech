@@ -18,6 +18,7 @@ import org.junit.runners.Suite;
         ChildCareTech.entities.PediatristTest.class,
         ChildCareTech.entities.PersonTest.class,
         ChildCareTech.entities.StaffTest.class,
+        ChildCareTech.entities.StopTest.class,
         ChildCareTech.entities.SupplierTest.class,
         ChildCareTech.entities.SupplyTest.class,
         ChildCareTech.entities.TripTest.class,
