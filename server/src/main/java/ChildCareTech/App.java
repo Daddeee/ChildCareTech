@@ -12,7 +12,7 @@ public class App
 
     public static void main(String[] args)
     {
-        String confPath = "./src/resources/config.xml";
+        final String confPath = "./src/resources/config.xml";
         try {
             properties = Config.getProperties(confPath);
         } catch (Exception ex) {
