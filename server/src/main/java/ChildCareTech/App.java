@@ -3,6 +3,7 @@ package ChildCareTech;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import java.util.Properties;
+import ChildCareTech.utils.Config;
 
 public class App
 {
@@ -13,7 +14,7 @@ public class App
     {
         String confPath = "/";
         try {
-            //properties = Config.getProperties(confPath);
+            properties = Config.getProperties(confPath);
             sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Failed to create sessionFactory object." + ex);
