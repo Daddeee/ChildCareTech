@@ -17,7 +17,7 @@ public class Config {
         try
         {
             in = new FileInputStream(filePath);
-            properties.load(in);
+            properties.loadFromXML(in);
             in.close();
         }
         catch (FileNotFoundException fnfEx)
