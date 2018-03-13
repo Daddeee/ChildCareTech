@@ -37,25 +37,25 @@
         </property>
 
         <!-- List of mapped entities -->
-        <mapping class="ChildCareTech.entities.Person"/>
-        <mapping class="ChildCareTech.entities.Adult"/>
-        <mapping class="ChildCareTech.entities.Pediatrist"/>
-        <mapping class="ChildCareTech.entities.Supplier"/>
-        <mapping class="ChildCareTech.entities.Staff"/>
-        <mapping class="ChildCareTech.entities.Kid"/>
-        <mapping class="ChildCareTech.entities.Canteen"/>
-        <mapping class="ChildCareTech.entities.Meal"/>
-        <mapping class="ChildCareTech.entities.Dish"/>
-        <mapping class="ChildCareTech.entities.Drink"/>
-        <mapping class="ChildCareTech.entities.Food"/>
-        <mapping class="ChildCareTech.entities.Menu"/>
-        <mapping class="ChildCareTech.entities.Supply"/>
-        <mapping class="ChildCareTech.entities.WorkDay"/>
-        <mapping class="ChildCareTech.entities.Event"/>
-        <mapping class="ChildCareTech.entities.Trip"/>
-        <mapping class="ChildCareTech.entities.Bus"/>
-        <mapping class="ChildCareTech.entities.Stop"/>
-        <mapping class="ChildCareTech.entities.TripPartecipation"/>
+        <mapping class="ChildCareTech.model.Person"/>
+        <mapping class="ChildCareTech.model.Adult"/>
+        <mapping class="ChildCareTech.model.Pediatrist"/>
+        <mapping class="ChildCareTech.model.Supplier"/>
+        <mapping class="ChildCareTech.model.Staff"/>
+        <mapping class="ChildCareTech.model.Kid"/>
+        <mapping class="ChildCareTech.model.Canteen"/>
+        <mapping class="ChildCareTech.model.Meal"/>
+        <mapping class="ChildCareTech.model.Dish"/>
+        <mapping class="ChildCareTech.model.Drink"/>
+        <mapping class="ChildCareTech.model.Food"/>
+        <mapping class="ChildCareTech.model.Menu"/>
+        <mapping class="ChildCareTech.model.Supply"/>
+        <mapping class="ChildCareTech.model.WorkDay"/>
+        <mapping class="ChildCareTech.model.Event"/>
+        <mapping class="ChildCareTech.model.Trip"/>
+        <mapping class="ChildCareTech.model.Bus"/>
+        <mapping class="ChildCareTech.model.Stop"/>
+        <mapping class="ChildCareTech.model.TripPartecipation"/>
 
     </session-factory>
 </hibernate-configuration>

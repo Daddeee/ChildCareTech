@@ -20,8 +20,6 @@ public class App
             ex.printStackTrace();
             throw new ExceptionInInitializerError(ex);
         }
-
-
     }
 
 }

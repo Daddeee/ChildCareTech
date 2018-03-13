@@ -5,25 +5,25 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ChildCareTech.entities.AdultTest.class,
-        ChildCareTech.entities.BusTest.class,
-        ChildCareTech.entities.CanteenTest.class,
-        ChildCareTech.entities.DishTest.class,
-        ChildCareTech.entities.DrinkTest.class,
-        ChildCareTech.entities.EventTest.class,
-        ChildCareTech.entities.FoodTest.class,
-        ChildCareTech.entities.KidTest.class,
-        ChildCareTech.entities.MealTest.class,
-        ChildCareTech.entities.MenuTest.class,
-        ChildCareTech.entities.PediatristTest.class,
-        ChildCareTech.entities.PersonTest.class,
-        ChildCareTech.entities.StaffTest.class,
-        ChildCareTech.entities.StopTest.class,
-        ChildCareTech.entities.SupplierTest.class,
-        ChildCareTech.entities.SupplyTest.class,
-        ChildCareTech.entities.TripPartecipationTest.class,
-        ChildCareTech.entities.TripTest.class,
-        ChildCareTech.entities.WorkDayTest.class
+        ChildCareTech.model.AdultTest.class,
+        ChildCareTech.model.BusTest.class,
+        ChildCareTech.model.CanteenTest.class,
+        ChildCareTech.model.DishTest.class,
+        ChildCareTech.model.DrinkTest.class,
+        ChildCareTech.model.EventTest.class,
+        ChildCareTech.model.FoodTest.class,
+        ChildCareTech.model.KidTest.class,
+        ChildCareTech.model.MealTest.class,
+        ChildCareTech.model.MenuTest.class,
+        ChildCareTech.model.PediatristTest.class,
+        ChildCareTech.model.PersonTest.class,
+        ChildCareTech.model.StaffTest.class,
+        ChildCareTech.model.StopTest.class,
+        ChildCareTech.model.SupplierTest.class,
+        ChildCareTech.model.SupplyTest.class,
+        ChildCareTech.model.TripPartecipationTest.class,
+        ChildCareTech.model.TripTest.class,
+        ChildCareTech.model.WorkDayTest.class
 })
 
 public class EntityTestSuite {
