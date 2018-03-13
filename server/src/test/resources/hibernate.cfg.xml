@@ -51,6 +51,7 @@
         <mapping class="ChildCareTech.entities.Menu"/>
         <mapping class="ChildCareTech.entities.Supply"/>
         <mapping class="ChildCareTech.entities.WorkDay"/>
+        <mapping class="ChildCareTech.entities.Event"/>
 
     </session-factory>
 </hibernate-configuration>

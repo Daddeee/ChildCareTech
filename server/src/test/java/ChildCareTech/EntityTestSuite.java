@@ -9,6 +9,7 @@ import org.junit.runners.Suite;
         ChildCareTech.entities.CanteenTest.class,
         ChildCareTech.entities.DishTest.class,
         ChildCareTech.entities.DrinkTest.class,
+        ChildCareTech.entities.EventTest.class,
         ChildCareTech.entities.FoodTest.class,
         ChildCareTech.entities.KidTest.class,
         ChildCareTech.entities.MealTest.class,
