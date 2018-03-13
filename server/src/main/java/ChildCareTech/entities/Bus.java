@@ -1,6 +1,8 @@
 package ChildCareTech.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="buses")
@@ -11,6 +13,9 @@ public class Bus implements iEntity<Bus, Integer> {
 
     @Column(nullable = false, unique = true)
     private String licensePlate;
+
+    @OneToMany
+    private Set<TripPartecipation> tripPartecipations;
 
     public Bus(){}
     public Bus(String licensePlate) { this.licensePlate = licensePlate; }
@@ -29,6 +34,14 @@ public class Bus implements iEntity<Bus, Integer> {
 
     private void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
+    }
+
+    public Set<TripPartecipation> getTripPartecipations() {
+        return new HashSet<>(tripPartecipations);
+    }
+
+    public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
+        this.tripPartecipations = tripPartecipations;
     }
 
     @Override

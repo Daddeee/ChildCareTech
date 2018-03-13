@@ -22,6 +22,9 @@ public class Trip implements iEntity<Trip, Integer> {
     @OneToMany(mappedBy = "trip")
     private Set<Stop> stops;
 
+    @OneToMany(mappedBy = "trip")
+    private Set<TripPartecipation> tripPartecipations;
+
     public Trip(){}
     public Trip(String meta){ this.meta = meta; }
     public Trip(String meta, String note){
@@ -59,6 +62,14 @@ public class Trip implements iEntity<Trip, Integer> {
 
     public void setStops(Set<Stop> stops) {
         this.stops = stops;
+    }
+
+    public Set<TripPartecipation> getTripPartecipations() {
+        return new HashSet<>(tripPartecipations);
+    }
+
+    public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
+        this.tripPartecipations = tripPartecipations;
     }
 
     @Override

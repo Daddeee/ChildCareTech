@@ -36,6 +36,9 @@ public class Person implements iEntity<Person, String> {
     @OneToMany(mappedBy = "person")
     private Set<Event> events;
 
+    @OneToMany(mappedBy = "person")
+    private Set<TripPartecipation> tripPartecipations;
+
     public Person(){}
     public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber)
     {
@@ -135,5 +138,13 @@ public class Person implements iEntity<Person, String> {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
+    }
+
+    public Set<TripPartecipation> getTripPartecipations() {
+        return new HashSet<>(tripPartecipations);
+    }
+
+    public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
+        this.tripPartecipations = tripPartecipations;
     }
 }
