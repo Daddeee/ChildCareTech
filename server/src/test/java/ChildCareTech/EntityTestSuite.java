@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ChildCareTech.entities.AdultTest.class,
+        ChildCareTech.entities.BusTest.class,
         ChildCareTech.entities.CanteenTest.class,
         ChildCareTech.entities.DishTest.class,
         ChildCareTech.entities.DrinkTest.class,
