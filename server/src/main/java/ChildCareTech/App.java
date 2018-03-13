@@ -12,9 +12,15 @@ public class App
 
     public static void main(String[] args)
     {
-        String confPath = "/";
+        String confPath = "./src/resources/config.xml";
         try {
             properties = Config.getProperties(confPath);
+        } catch (Exception ex) {
+            System.err.println("Failed to load configuration file" + ex);
+            ex.printStackTrace();
+            throw new ExceptionInInitializerError(ex);
+        }
+        try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Failed to create sessionFactory object." + ex);

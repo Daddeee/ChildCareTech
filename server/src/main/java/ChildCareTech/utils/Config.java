@@ -13,20 +13,23 @@ public class Config {
     public static Properties getProperties(String filePath) throws Exception{
 
         Properties properties = new Properties();
+        FileInputStream in;
         try
         {
-            final FileInputStream in = new FileInputStream(filePath);
+            in = new FileInputStream(filePath);
             properties.load(in);
             in.close();
         }
         catch (FileNotFoundException fnfEx)
         {
             System.err.println("Could not read properties from file " + filePath);
+            throw new FileNotFoundException();
         }
         catch (IOException ioEx)
         {
             System.err.println(
                     "IOException encountered while reading from " + filePath);
+            throw new IOException();
         }
         return properties;
 
