@@ -4,6 +4,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @javax.persistence.Entity
@@ -30,6 +32,9 @@ public class Person implements iEntity<Person, String> {
     private String address;
     
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "person")
+    private Set<Event> events;
 
     public Person(){}
     public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber)
@@ -122,5 +127,13 @@ public class Person implements iEntity<Person, String> {
     private void setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Event> getEvents() {
+        return new HashSet<>(events);
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 }

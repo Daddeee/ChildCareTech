@@ -3,6 +3,7 @@ package ChildCareTech.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,6 +18,9 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
 
     @OneToMany(mappedBy = "workDay")
     private Set<Meal> meals;
+
+    @OneToMany(mappedBy = "workDay")
+    private Set<Event> events;
 
     public WorkDay() { }
 
@@ -51,10 +55,18 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
     }
 
     public Set<Meal> getMeals() {
-        return meals;
+        return new HashSet<>(meals);
     }
 
     public void setMeals(Set<Meal> meals) {
         this.meals = meals;
+    }
+
+    public Set<Event> getEvents() {
+        return new HashSet<>(events);
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 }
