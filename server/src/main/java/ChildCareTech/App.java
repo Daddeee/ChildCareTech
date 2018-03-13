@@ -19,6 +19,7 @@ public class App
             throw new ExceptionInInitializerError(ex);
         }
 
+
     }
 
 }
