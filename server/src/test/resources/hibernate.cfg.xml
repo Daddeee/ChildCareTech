@@ -55,6 +55,7 @@
         <mapping class="ChildCareTech.entities.Trip"/>
         <mapping class="ChildCareTech.entities.Bus"/>
         <mapping class="ChildCareTech.entities.Stop"/>
+        <mapping class="ChildCareTech.entities.TripPartecipation"/>
 
     </session-factory>
 </hibernate-configuration>
