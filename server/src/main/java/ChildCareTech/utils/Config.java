@@ -5,24 +5,12 @@ import java.io.IOException;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 
-public class ConfigSingleton {
+public class Config {
 
-    private static ConfigSingleton instance;
-    private static Properties properties;
-    private static String filePath;
+    private Config() { }
 
-    static {
-        instance = new ConfigSingleton();
-        properties = new Properties();
-    }
-
-    private ConfigSingleton() { }
-
-    public ConfigSingleton getInstance() { return instance; }
-
-    private static Properties getProperties(String filePath) throws Exception{
+    public static Properties getProperties(String filePath) throws Exception{
 
         Properties properties = new Properties();
         try
@@ -44,7 +32,7 @@ public class ConfigSingleton {
 
     }
 
-    private static void storeProperties(Properties properties, String filePath) {
+    public static void storeProperties(Properties properties, String filePath) {
         try
         {
             FileOutputStream fos = new FileOutputStream((filePath));
@@ -57,5 +45,7 @@ public class ConfigSingleton {
         }
     }
 
+    public static void setProperties(Properties properties) {
 
+    }
 }
