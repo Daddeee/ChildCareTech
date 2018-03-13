@@ -19,6 +19,7 @@ import org.junit.runners.Suite;
         ChildCareTech.entities.StaffTest.class,
         ChildCareTech.entities.SupplierTest.class,
         ChildCareTech.entities.SupplyTest.class,
+        ChildCareTech.entities.TripTest.class,
         ChildCareTech.entities.WorkDayTest.class
 })
 
