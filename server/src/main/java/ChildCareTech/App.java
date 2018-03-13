@@ -1,14 +1,16 @@
 package ChildCareTech;
 
+import ChildCareTech.utils.Config;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class App
 {
     private static SessionFactory sessionFactory;
+    
     public static void main(String[] args)
     {
-
+        Config.workDayInit();
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
