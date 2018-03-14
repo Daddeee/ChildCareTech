@@ -1,7 +1,6 @@
 package ChildCareTech.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalTime;
 
 @Entity
@@ -31,7 +30,7 @@ public class Event implements iEntity<Event, Integer> {
     public Event(WorkDay workDay, Person person, LocalTime time, boolean isIn){
         this.workDay = workDay;
         this.person = person;
-        this.time = time;
+        this.time = time.minusNanos(time.getNano());
         this.isIn = isIn;
     }
 
@@ -64,7 +63,7 @@ public class Event implements iEntity<Event, Integer> {
     }
 
     private void setTime(LocalTime time) {
-        this.time = time;
+        this.time = time.minusNanos(time.getNano());
     }
 
     public boolean isIn() {
