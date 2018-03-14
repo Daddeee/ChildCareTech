@@ -64,7 +64,7 @@ public class Dish implements iEntity<Dish, Integer> {
 
     @Override
     public int hashCode() {
-        return (name + menu.getPrimaryKey()).hashCode();
+        return (name + menu.hashCode()).hashCode();
     }
 
     @Override
