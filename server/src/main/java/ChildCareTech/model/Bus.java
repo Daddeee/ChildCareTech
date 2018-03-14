@@ -53,4 +53,16 @@ public class Bus implements iEntity<Bus, Integer> {
     public void setPrimaryKey(Bus o) {
         setId(o.getPrimaryKey());
     }
+
+    @Override
+    public int hashCode() {
+        return licensePlate.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if(this == other) return true;
+        if(!(other instanceof Bus)) return false;
+        return this.licensePlate.equals(((Bus) other).licensePlate);
+    }
 }
