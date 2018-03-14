@@ -29,7 +29,7 @@ public class Food implements iEntity<Food, Integer> {
     @JoinTable(name="ingredients")
     private Set<Dish> dishes;
 
-    @OneToMany(mappedBy = "food")
+    @OneToMany(mappedBy = "food", fetch = FetchType.EAGER)
     private Set<Supply> supplies;
 
     public Food() {}

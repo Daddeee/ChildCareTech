@@ -19,6 +19,7 @@ public class BusTest extends AbstractEntityTest<Bus> {
     @Override
     public void testRelations() {
         Transaction tx = null;
+
         Bus b = new Bus("plate");
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
         Person p1 = new Person("fisc1", "fn1", "ln1", LocalDate.now(), Person.Sex.MALE, "", "");
