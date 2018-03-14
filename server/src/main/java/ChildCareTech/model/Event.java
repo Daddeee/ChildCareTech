@@ -1,6 +1,7 @@
 package ChildCareTech.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalTime;
 
 @Entity
@@ -86,7 +87,7 @@ public class Event implements iEntity<Event, Integer> {
 
     @Override
     public int hashCode() {
-        return (person.getPrimaryKey() + workDay.getPrimaryKey() + time).hashCode();
+        return (Integer.toString(person.hashCode()) + workDay.hashCode() + time).hashCode();
     }
 
     @Override
