@@ -9,9 +9,10 @@ import javax.persistence.*;
 public class Canteen implements iEntity<Canteen, Integer> {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private int id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy="canteen")
@@ -44,4 +45,15 @@ public class Canteen implements iEntity<Canteen, Integer> {
 
     private void setMeals(Set<Meal> meals) { this.meals = meals; }
 
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Canteen)) return false;
+        return this.name.equals(((Canteen) o).name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
