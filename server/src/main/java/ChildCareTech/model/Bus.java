@@ -14,7 +14,7 @@ public class Bus implements iEntity<Bus, Integer> {
     @Column(nullable = false, unique = true)
     private String licensePlate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "bus")
     private Set<TripPartecipation> tripPartecipations;
 
     public Bus(){}

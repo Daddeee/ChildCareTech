@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Function;
@@ -28,7 +29,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
     @Test
     public abstract void testCRUD();
 
-    protected <K> void testOneToMany(T ent1, Set<K> ent2, Function<T, Set<K>> getRelationSet) throws IllegalArgumentException{
+    protected <K> void testOneToMany(T ent1, Set<K> ent2, Function<T , Set<K>> getRelationSet) throws IllegalArgumentException{
         session = sessionFactory.openSession();
         Transaction tx = null;
         Iterator<K> ent2Iter = ent2.iterator();
@@ -40,6 +41,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
                 session.save(ent2Iter.next());
             }
 
+            session.flush();
             tx.commit();
         } catch(HibernateException e){
             if (tx!=null)
@@ -51,7 +53,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
         }
 
         T read = null;
-        Set<K> set = null;
+        Set<K> set = new HashSet<>();
         session = sessionFactory.openSession();
         tx = null;
         try{
