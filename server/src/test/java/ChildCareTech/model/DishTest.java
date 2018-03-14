@@ -3,6 +3,8 @@ package ChildCareTech.model;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.fail;
 
 public class DishTest extends AbstractEntityTest<Dish> {
@@ -14,28 +16,31 @@ public class DishTest extends AbstractEntityTest<Dish> {
 
     @Override
     public void testCRUD() {
-        Menu o1 = new Menu();
-        Menu o2 = new Menu();
+        Canteen c = new Canteen("mensa");
+        WorkDay w = new WorkDay(LocalDate.now());
+        Meal ml = new Meal(c, 0, w);
+        Menu m = new Menu(ml, 0, null, null);
 
         session = sessionFactory.openSession();
         Transaction tx = null;
+
         try{
-            /* creating */
             tx = session.beginTransaction();
-            session.save(o1);
-            session.save(o2);
+            session.save(c);
+            session.save(w);
+            session.save(ml);
+            session.save(m);
             tx.commit();
         } catch(HibernateException e){
-            if (tx!=null)
-                tx.rollback();
+            if(tx!=null)tx.rollback();
             e.printStackTrace();
-            fail("[!] SETUP ERROR: "+ e.getMessage());
-        } finally{
+            fail(e.getMessage());
+        } finally {
             session.close();
         }
 
-        Dish o = new Dish(o1);
-        Dish ou = new Dish(o2);
+        Dish o = new Dish("nome", m);
+        Dish ou = new Dish("nomeu", m);
 
         testCRUDImpl(o, ou);
     }

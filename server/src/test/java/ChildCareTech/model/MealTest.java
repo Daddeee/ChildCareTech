@@ -16,7 +16,7 @@ public class MealTest extends AbstractEntityTest<Meal> {
 
     @Override
     public void testCRUD() {
-        Canteen c = new Canteen();
+        Canteen c = new Canteen("mensa");
         WorkDay workDay = new WorkDay(LocalDate.now());
         session = sessionFactory.openSession();
         Transaction tx = null;
