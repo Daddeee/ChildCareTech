@@ -3,6 +3,7 @@ package ChildCareTech.model;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"person_fiscalCode", "trip_id"}))
 public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,5 +68,18 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @Override
     public void setPrimaryKey(TripPartecipation o) {
         setId(o.getId());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof TripPartecipation)) return false;
+        return this.person.equals(((TripPartecipation) o).person) &&
+                this.trip.equals(((TripPartecipation) o).trip);
+    }
+
+    @Override
+    public int hashCode() {
+        return (Integer.toString(person.hashCode()) + trip.hashCode()).hashCode();
     }
 }
