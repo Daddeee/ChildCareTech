@@ -57,4 +57,17 @@ public class Stop implements iEntity<Stop, Integer> {
     public void setPrimaryKey(Stop o) {
         setId(o.getPrimaryKey());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Stop)) return false;
+        return this.trip.equals(((Stop) o).trip) &&
+                this.stopNumber == ((Stop) o).stopNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return (Integer.toString(stopNumber) + trip.hashCode()).hashCode();
+    }
 }
