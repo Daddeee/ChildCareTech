@@ -21,7 +21,8 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @JoinColumn(nullable = false)
     private Bus bus;
 
-    public TripPartecipation(){}
+    public TripPartecipation() { }
+
     public TripPartecipation(Person person, Trip trip, Bus bus){
         this.person = person;
         this.trip = trip;

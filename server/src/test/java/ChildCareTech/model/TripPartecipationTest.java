@@ -24,7 +24,7 @@ public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation>
                 "phone"
         );
 
-        Trip t = new Trip("meta");
+        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
         Bus b = new Bus("targa");
         Bus bu = new Bus("targaU");
 
