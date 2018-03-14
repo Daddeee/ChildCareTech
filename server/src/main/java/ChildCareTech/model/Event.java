@@ -83,4 +83,20 @@ public class Event implements iEntity<Event, Integer> {
     public void setPrimaryKey(Event o) {
         setId(o.getPrimaryKey());
     }
+
+    @Override
+    public int hashCode() {
+        return (person.getPrimaryKey() + workDay.getPrimaryKey() + time).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Event)) return false;
+
+        Event e = (Event) o;
+        return this.workDay.equals(e.workDay) &&
+                this.time.equals(e.time) &&
+                this.person.equals(e.person);
+    }
 }
