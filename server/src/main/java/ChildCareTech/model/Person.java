@@ -147,4 +147,10 @@ public class Person implements iEntity<Person, String> {
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
     }
+
+    @Override
+    public int hashCode() {
+        return fiscalCode.hashCode();
+    }
+
 }
