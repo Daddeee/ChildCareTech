@@ -91,5 +91,17 @@ public class Kid implements iEntity<Kid, Integer> {
     public void setContacts(Set<Adult> contacts) {
         this.contacts = contacts;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Kid)) return false;
+        return this.person.equals(((Kid) o).person);
+    }
+
+    @Override
+    public int hashCode() {
+        return person.hashCode();
+    }
 }
 
