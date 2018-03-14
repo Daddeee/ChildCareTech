@@ -6,13 +6,14 @@ import java.util.HashSet;
 
 @javax.persistence.Entity
 @Table(name = "drinks",
-    uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+    uniqueConstraints = @UniqueConstraint(columnNames = {"name", "menu_id"}))
 public class Drink implements iEntity<Drink, Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false)
     private String name;
 
     @OneToOne
@@ -51,5 +52,18 @@ public class Drink implements iEntity<Drink, Integer> {
     private void setFoods(Set<Food> foods) { this.foods = foods; }
 
     public Set<Food> getFoods() {return new HashSet<>(foods); }
+
+    @Override
+    public int hashCode() {
+        return (name+menu.hashCode()).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Drink)) return false;
+        return this.name.equals(((Drink) o).name) &&
+                    this.menu.equals(((Drink) o).menu);
+    }
 
 }
