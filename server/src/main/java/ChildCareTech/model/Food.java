@@ -76,4 +76,15 @@ public class Food implements iEntity<Food, Integer> {
     @Override
     public void setPrimaryKey(Food a) { this.id = a.getPrimaryKey(); }
 
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Food)) return false;
+        return this.name.equals(((Food) o).name);
+    }
 }
