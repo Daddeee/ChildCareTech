@@ -20,6 +20,7 @@ public class Meal implements iEntity<Meal, Integer> {
     @JoinColumn(nullable = false)
     private WorkDay workDay;
 
+    @Column(nullable = false)
     private int mealNum;
 
 
