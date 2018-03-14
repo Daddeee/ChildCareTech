@@ -147,4 +147,11 @@ public class Person implements iEntity<Person, String> {
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Person)) return false;
+        return this.fiscalCode.equals(((Person) o).fiscalCode);
+    }
 }
