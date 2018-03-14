@@ -69,4 +69,16 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
     public void setEvents(Set<Event> events) {
         this.events = events;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof WorkDay)) return false;
+        return this.date.equals(((WorkDay) o).date);
+    }
+
+    @Override
+    public int hashCode() {
+        return date.hashCode();
+    }
 }
