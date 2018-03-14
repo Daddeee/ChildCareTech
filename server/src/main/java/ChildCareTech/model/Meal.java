@@ -53,4 +53,18 @@ public class Meal implements iEntity<Meal, Integer> {
     public int getId() { return id; }
 
     private void setWorkDay(WorkDay workDay) { this.workDay = workDay; }
+
+    @Override
+    public int hashCode() {
+        return (Integer.toString(mealNum) + canteen.hashCode() + workDay.hashCode()).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Meal)) return false;
+        return this.canteen.equals(((Meal) o).canteen) &&
+                this.workDay.equals(((Meal) o).workDay) &&
+                mealNum == ((Meal) o).mealNum;
+    }
 }
