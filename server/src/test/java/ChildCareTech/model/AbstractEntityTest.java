@@ -5,6 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.function.Function;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +23,52 @@ public abstract class AbstractEntityTest<T extends iEntity> {
     protected Class<T> clazz;
 
     @Test
+    public void testRelations(){}
+
+    @Test
     public abstract void testCRUD();
+
+    protected <K> void testOneToMany(T ent1, Set<K> ent2, Function<T, Set<K>> getRelationSet) throws IllegalArgumentException{
+        session = sessionFactory.openSession();
+        Transaction tx = null;
+        Iterator<K> ent2Iter = ent2.iterator();
+        try {
+            tx = session.beginTransaction();
+
+            session.save(ent1);
+            while(ent2Iter.hasNext()) {
+                session.save(ent2Iter.next());
+            }
+
+            tx.commit();
+        } catch(HibernateException e){
+            if (tx!=null)
+                tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally{
+            session.close();
+        }
+
+        T read = null;
+        Set<K> set = null;
+        session = sessionFactory.openSession();
+        tx = null;
+        try{
+            tx = session.beginTransaction();
+            read = session.get(clazz, ent1.getPrimaryKey());
+            set = getRelationSet.apply(read);
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        }finally{
+            session.close();
+        }
+
+        assertTrue(ent2.equals(set));
+    }
 
     @SuppressWarnings("unchecked")
     protected void testCRUDImpl(T o, T ou) throws IllegalArgumentException{

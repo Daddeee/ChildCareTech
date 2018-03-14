@@ -11,7 +11,7 @@ public class Kid implements iEntity<Kid, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToOne(cascade = CascadeType.MERGE, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(unique = true, nullable = false)
     private Person person;
 

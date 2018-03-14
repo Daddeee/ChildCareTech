@@ -1,13 +1,43 @@
 package ChildCareTech.model;
 
-import java.sql.Date;
+import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
+import java.util.HashSet;
+
+import static org.junit.Assert.fail;
 
 public class PediatristTest extends AbstractEntityTest<Pediatrist> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
         clazz = Pediatrist.class;
+    }
+
+    @Override
+    public void testRelations() {
+        Person o1 = new Person("generic3",
+                "generic1",
+                "generic1",
+                LocalDate.now(),
+                Person.Sex.MALE,
+                "",
+                "");
+
+        Pediatrist p = new Pediatrist(o1);
+
+        Person kp1 = new Person("bimbo1", "n", "c", LocalDate.now(), Person.Sex.MALE, "", "");
+        Person kp2 = new Person("bimbo2", "n", "c", LocalDate.now(), Person.Sex.MALE, "", "");
+
+        Kid k1 = new Kid(kp1, null, null, p);
+        Kid k2 = new Kid(kp2, null, null, p);
+
+        HashSet<Kid> set = new HashSet<>();
+        set.add(k1);
+        set.add(k2);
+
+        testOneToMany(p, set, Pediatrist::getKids);
     }
 
     @Override

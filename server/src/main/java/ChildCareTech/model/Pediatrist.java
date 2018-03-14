@@ -24,4 +24,6 @@ public class Pediatrist extends Adult {
     private void setKids (Set<Kid> kids) {
         this.kids = kids;
     }
+
+    
 }

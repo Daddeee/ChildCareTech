@@ -1,6 +1,5 @@
 package ChildCareTech.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class AdultTest extends AbstractEntityTest<Adult> {

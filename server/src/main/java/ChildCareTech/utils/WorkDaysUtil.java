@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class WorkDaysUtil {
 
-    public static void init(LocalDate lastDate) throws Exception{
+    public static void init(LocalDate lastDate) throws IllegalArgumentException{
 
         LocalDate curDate = LocalDate.now();
 
         if(lastDate.isBefore(curDate)) {
             System.err.println("Argument date is invalid");
-            throw new Exception();
+            throw new IllegalArgumentException();
         }
 
         while(curDate.isBefore(lastDate) || curDate.isEqual(lastDate)) {
