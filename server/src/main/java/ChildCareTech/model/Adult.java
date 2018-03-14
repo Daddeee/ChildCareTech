@@ -60,4 +60,16 @@ public class Adult implements iEntity<Adult, Integer> {
     public void setContacts(Set<Kid> contacts) {
         this.contacts = contacts;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Adult)) return false;
+        return this.person.equals(((Adult) o).person);
+    }
+
+    @Override
+    public int hashCode() {
+        return person.hashCode();
+    }
 }
