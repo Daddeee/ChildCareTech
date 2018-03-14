@@ -5,7 +5,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "supplies")
+@Table(name = "supplies",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"supplier_id", "food_id", "date"})
+)
 public class Supply implements iEntity<Supply, Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,5 +59,20 @@ public class Supply implements iEntity<Supply, Integer>{
     public Integer getPrimaryKey() { return id; }
     @Override
     public void setPrimaryKey(Supply a) { this.id = a.getPrimaryKey(); }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Supply)) return false;
+        return this.food.equals(((Supply) o).food) &&
+                this.supplier.equals(((Supply) o).supplier) &&
+                this.date.equals(((Supply) o).date);
+    }
+
+    @Override
+    public int hashCode() {
+        return (date.toString() + supplier.hashCode() + food.hashCode()).hashCode();
+    }
+    
 }
 
