@@ -49,7 +49,7 @@ public class Menu implements iEntity<Menu, Integer> {
 
     private void setDisces(Set<Dish> dishes) { this.dishes = dishes; }
 
-    public Set<Dish> getDisces() { return new HashSet<>(dishes); }
+    public Set<Dish> getDishes() { return new HashSet<>(dishes); }
 
     private void setDrink(Drink drink) { this.drink = drink; }
 

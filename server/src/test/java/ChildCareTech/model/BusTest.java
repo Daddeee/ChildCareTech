@@ -50,9 +50,7 @@ public class BusTest extends AbstractEntityTest<Bus> {
         set.add(tp1);
         set.add(tp2);
 
-
         testOneToMany(b, set, Bus::getTripPartecipations);
-
     }
 
     @Override

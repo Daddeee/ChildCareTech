@@ -52,6 +52,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
             session.close();
         }
 
+
         T read = null;
         Set<K> set = new HashSet<>();
         session = sessionFactory.openSession();
@@ -59,6 +60,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
         try{
             tx = session.beginTransaction();
             read = session.get(clazz, ent1.getPrimaryKey());
+            getRelationSet.apply(read).size();
             set = getRelationSet.apply(read);
             tx.commit();
         }catch(HibernateException e){

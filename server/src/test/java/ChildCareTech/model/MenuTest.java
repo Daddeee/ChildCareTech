@@ -1,10 +1,11 @@
 package ChildCareTech.model;
 
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
+import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
@@ -14,6 +15,46 @@ public class MenuTest extends AbstractEntityTest<Menu> {
         super.setUp();
         clazz = Menu.class;
     }
+
+    @Override
+    public void testRelations() {
+        Transaction tx = null;
+
+        Canteen c = new Canteen("canteen");
+        WorkDay wd = new WorkDay(LocalDate.now());
+        Meal meal = new Meal(c, 1, wd);
+        Menu m = new Menu(meal, 1);
+        Dish d1 = new Dish("d1", m);
+        Dish d12 = new Dish("d2", m);
+
+        session = HibernateSessionFactoryUtil.getInstance().openSession();
+        try {
+            tx = session.beginTransaction();
+
+            session.save(wd);
+            session.save(c);
+            session.save(meal);
+
+            session.flush();
+            tx.commit();
+        } catch(HibernateException e) {
+            if(tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        HashSet<Dish> set = new HashSet<>();
+        set.add(d1);
+        set.add(d1);
+
+
+        testOneToMany(m, set, Menu::getDishes);
+
+    }
+
 
     @Override
     public void testCRUD() {
