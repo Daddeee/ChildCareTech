@@ -55,7 +55,7 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
     }
 
     public Set<Meal> getMeals() {
-        return new HashSet<>(meals);
+        return meals;
     }
 
     public void setMeals(Set<Meal> meals) {
@@ -63,7 +63,7 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
     }
 
     public Set<Event> getEvents() {
-        return new HashSet<>(events);
+        return events;
     }
 
     public void setEvents(Set<Event> events) {

@@ -37,7 +37,7 @@ public class Bus implements iEntity<Bus, Integer> {
     }
 
     public Set<TripPartecipation> getTripPartecipations() {
-        return new HashSet<>(tripPartecipations);
+        return tripPartecipations;
     }
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {

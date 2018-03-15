@@ -54,7 +54,7 @@ public class Adult implements iEntity<Adult, Integer> {
     }
 
     public Set<Kid> getContacts() {
-        return new HashSet<>(contacts);
+        return contacts;
     }
 
     public void setContacts(Set<Kid> contacts) {

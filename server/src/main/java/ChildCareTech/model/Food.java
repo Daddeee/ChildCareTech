@@ -67,7 +67,7 @@ public class Food implements iEntity<Food, Integer> {
         this.supplies = supplies;
     }
 
-    public Set<Dish> getDishes() { return new HashSet<>(dishes); }
+    public Set<Dish> getDishes() { return dishes; }
 
     public void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
 

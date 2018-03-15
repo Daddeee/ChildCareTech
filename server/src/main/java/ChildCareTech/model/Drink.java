@@ -51,7 +51,7 @@ public class Drink implements iEntity<Drink, Integer> {
 
     private void setFoods(Set<Food> foods) { this.foods = foods; }
 
-    public Set<Food> getFoods() {return new HashSet<>(foods); }
+    public Set<Food> getFoods() {return foods; }
 
     @Override
     public int hashCode() {

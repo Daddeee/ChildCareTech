@@ -50,7 +50,7 @@ public class Dish implements iEntity<Dish, Integer> {
 
     public Menu getMenu() { return menu; }
 
-    public Set<Food> getFoods() { return new HashSet<>(foods); }
+    public Set<Food> getFoods() { return foods; }
 
     public void setFoods(Set<Food> foods) { this.foods = foods; }
 

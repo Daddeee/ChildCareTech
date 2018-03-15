@@ -15,7 +15,7 @@ public class Supplier extends Adult {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "supplier")
     private Set<Supply> supplies;
 
-    public Set<Supply> getSupplies() { return new HashSet<>(supplies); }
+    public Set<Supply> getSupplies() { return supplies; }
 
     private void setSupplies(Set<Supply> supplies) { this.supplies = supplies; }
 

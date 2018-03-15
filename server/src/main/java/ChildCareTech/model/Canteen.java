@@ -41,7 +41,7 @@ public class Canteen implements iEntity<Canteen, Integer> {
         this.name = name;
     }
 
-    public Set<Meal> getMeals() { return new HashSet<>(meals); }
+    public Set<Meal> getMeals() { return meals; }
 
     private void setMeals(Set<Meal> meals) { this.meals = meals; }
 

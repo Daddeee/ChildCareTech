@@ -141,7 +141,7 @@ public class Person implements iEntity<Person, String> {
     }
 
     public Set<TripPartecipation> getTripPartecipations() {
-        return new HashSet<>(tripPartecipations);
+        return tripPartecipations;
     }
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {

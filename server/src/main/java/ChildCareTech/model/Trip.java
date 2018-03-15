@@ -71,7 +71,7 @@ public class Trip implements iEntity<Trip, Integer> {
     }
 
     public Set<Stop> getStops() {
-        return new HashSet<>(stops);
+        return stops;
     }
 
     public void setStops(Set<Stop> stops) {
@@ -79,7 +79,7 @@ public class Trip implements iEntity<Trip, Integer> {
     }
 
     public Set<TripPartecipation> getTripPartecipations() {
-        return new HashSet<>(tripPartecipations);
+        return tripPartecipations;
     }
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
