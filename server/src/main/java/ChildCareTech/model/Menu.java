@@ -22,7 +22,7 @@ public class Menu implements iEntity<Menu, Integer> {
     @Column(nullable = false)
     private int numMenu;
 
-    @OneToMany(mappedBy = "menu", targetEntity = Dish.class)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "menu", targetEntity = Dish.class)
     private Set<Dish> dishes;
 
     @OneToOne

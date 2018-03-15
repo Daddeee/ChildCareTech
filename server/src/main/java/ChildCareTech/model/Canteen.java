@@ -15,7 +15,7 @@ public class Canteen implements iEntity<Canteen, Integer> {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy="canteen")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="canteen")
     private Set<Meal> meals;
 
     public Canteen() {}

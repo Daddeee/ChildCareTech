@@ -27,10 +27,10 @@ public class Trip implements iEntity<Trip, Integer> {
     @Column(nullable = false)
     private LocalDate arrDate;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<Stop> stops;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<TripPartecipation> tripPartecipations;
 
     public Trip(){}

@@ -16,10 +16,10 @@ public class WorkDay implements iEntity<WorkDay, Integer>{
     @Column(unique = true)
     private LocalDate date;
 
-    @OneToMany(mappedBy = "workDay")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workDay")
     private Set<Meal> meals;
 
-    @OneToMany(mappedBy = "workDay")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workDay")
     private Set<Event> events;
 
     public WorkDay() { }

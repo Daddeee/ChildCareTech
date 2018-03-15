@@ -12,7 +12,7 @@ public class Supplier extends Adult {
     public Supplier() { super(); }
     public Supplier(Person person) { super(person); }
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "supplier")
     private Set<Supply> supplies;
 
     public Set<Supply> getSupplies() { return new HashSet<>(supplies); }

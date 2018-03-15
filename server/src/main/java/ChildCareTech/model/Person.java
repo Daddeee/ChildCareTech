@@ -31,7 +31,6 @@ public class Person implements iEntity<Person, String> {
 
     @Column(nullable = false)
     private String address;
-    
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
