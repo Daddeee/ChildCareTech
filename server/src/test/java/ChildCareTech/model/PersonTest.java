@@ -59,8 +59,12 @@ public class PersonTest extends AbstractEntityTest<Person> {
         try {
             tx = session.beginTransaction();
             //Person pt = session.get(Person.class, p.getPrimaryKey());
-            session.delete(e1);
-            session.delete(e2);
+            session.load(p, p.getPrimaryKey());
+            p.getEvents().remove(e1);
+            p.getEvents().remove(e2);
+            tx.commit();
+
+            tx = session.beginTransaction();
             session.delete(p);
 
             session.save(t1);
