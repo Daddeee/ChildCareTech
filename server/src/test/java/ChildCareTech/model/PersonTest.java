@@ -26,6 +26,11 @@ public class PersonTest extends AbstractEntityTest<Person> {
         Person p = new Person("cf", "fn", "ln", LocalDate.now(), Person.Sex.MALE, "", "");
         Event e1 = new Event(wd, p, LocalTime.now(), false);
         Event e2 = new Event(wd2, p, LocalTime.now().plusHours(1), false);
+        Trip t1 = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
+        Trip t2 = new Trip("meta1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3));
+        Bus b = new Bus("plate");
+        TripPartecipation tp1 = new TripPartecipation(p, t1, b);
+        TripPartecipation tp2 = new TripPartecipation(p, t2, b);
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
         try {
@@ -34,7 +39,6 @@ public class PersonTest extends AbstractEntityTest<Person> {
             session.save(wd);
             session.save(wd2);
 
-            session.flush();
             tx.commit();
         } catch(HibernateException e) {
             if(tx != null)
@@ -50,6 +54,34 @@ public class PersonTest extends AbstractEntityTest<Person> {
         set.add(e2);
 
         testOneToMany(p, set, Person::getEvents);
+
+        session = HibernateSessionFactoryUtil.getInstance().openSession();
+        try {
+            tx = session.beginTransaction();
+            //Person pt = session.get(Person.class, p.getPrimaryKey());
+            session.delete(e1);
+            session.delete(e2);
+            session.delete(p);
+
+            session.save(t1);
+            session.save(t2);
+            session.save(b);
+
+            tx.commit();
+        } catch(HibernateException e) {
+            if(tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        HashSet<TripPartecipation> set1 = new HashSet<>();
+        set1.add(tp1);
+        set1.add(tp2);
+
+        testOneToMany(p, set1, Person::getTripPartecipations);
     }
 
 

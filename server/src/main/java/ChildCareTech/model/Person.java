@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -33,11 +34,11 @@ public class Person implements iEntity<Person, String> {
     
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "person")
-    private Set<Event> events;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private Set<Event> events = new HashSet<>();
 
-    @OneToMany(mappedBy = "person")
-    private Set<TripPartecipation> tripPartecipations;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private Set<TripPartecipation> tripPartecipations = new HashSet<>();
 
     public Person(){}
     public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber)
@@ -133,7 +134,7 @@ public class Person implements iEntity<Person, String> {
     }
 
     public Set<Event> getEvents() {
-        return new HashSet<>(events);
+        return events;
     }
 
     public void setEvents(Set<Event> events) {
