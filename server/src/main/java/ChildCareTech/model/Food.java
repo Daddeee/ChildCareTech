@@ -13,6 +13,7 @@ import java.util.Set;
 public class Food implements iEntity<Food, Integer> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(nullable = false)
