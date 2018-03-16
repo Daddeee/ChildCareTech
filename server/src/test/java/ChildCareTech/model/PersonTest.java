@@ -58,7 +58,6 @@ public class PersonTest extends AbstractEntityTest<Person> {
         session = HibernateSessionFactoryUtil.getInstance().openSession();
         try {
             tx = session.beginTransaction();
-            //Person pt = session.get(Person.class, p.getPrimaryKey());
             session.load(p, p.getPrimaryKey());
             p.getEvents().remove(e1);
             p.getEvents().remove(e2);
@@ -87,7 +86,6 @@ public class PersonTest extends AbstractEntityTest<Person> {
 
         testOneToMany(p, set1, Person::getTripPartecipations);
     }
-
 
     @Override
     public void testCRUD() {
