@@ -3,12 +3,12 @@
 
 <properties>
 
-    <entry key="firstLaunch">
-        true
-    </entry>
+    <entry key="firstLaunch">true</entry>
 
-    <entry key="dayGeneration.number">
-        84 <!-- 12 weeks -->
-    </entry>
+    <entry key="dayGeneration.number">84<!-- 12 weeks --></entry>
+
+    <entry key="port.rmi">1099</entry>
+
+    <entry key="port.socket">1100</entry>
 
 </properties>
