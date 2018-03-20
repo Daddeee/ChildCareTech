@@ -1,12 +1,17 @@
 package ChildCareTech.network.RMI;
 
-import ChildCareTech.common.Session;
+import ChildCareTech.common.UserSession;
+import ChildCareTech.model.User;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMISession extends UnicastRemoteObject implements Session {
-    public RMISession() throws RemoteException {}
+public class RMISession extends UnicastRemoteObject implements UserSession {
+    private User user;
+
+    public RMISession(User user) throws RemoteException {
+        this.user = user;
+    }
 
     @Override
     public void greetWorld() throws RemoteException{

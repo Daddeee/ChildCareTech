@@ -60,6 +60,7 @@
         <mapping class="ChildCareTech.model.Bus"/>
         <mapping class="ChildCareTech.model.Stop"/>
         <mapping class="ChildCareTech.model.TripPartecipation"/>
+        <mapping class="ChildCareTech.model.User"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -1,7 +1,7 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.Session;
-import ChildCareTech.common.SessionFactory;
+import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.util.LoginUtil;
 
 import javafx.event.ActionEvent;
@@ -21,8 +21,8 @@ public class Login {
 
     private Stage primaryStage;
     private Parent root;
-    SessionFactory sessionFactory = null;
-    Session session = null;
+    UserSessionFactory sessionFactory = null;
+    UserSession session = null;
 
     @FXML
     private TextField userNameField;

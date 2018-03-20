@@ -4,8 +4,6 @@ import ChildCareTech.network.RMI.RMIServer;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
 
-import java.rmi.RemoteException;
-
 public class Server
 {
     private int rmiPort;
