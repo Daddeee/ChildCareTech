@@ -1,7 +1,7 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.Session;
-import ChildCareTech.common.SessionFactory;
+import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -25,15 +25,15 @@ public class LoginController {
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
-        SessionFactory sessionFactory = null;
-        Session session = null;
+        UserSessionFactory userSessionFactory = null;
+        UserSession userSession = null;
 
         try{
-            sessionFactory = (SessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
+            userSessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
 
-            session = sessionFactory.login(userNameField.getText(), passwordField.getText());
+            userSession = userSessionFactory.login(userNameField.getText(), passwordField.getText());
 
-            actionTarget.setText(Boolean.toString(!(session == null)));
+            actionTarget.setText(Boolean.toString(!(userSession == null)));
         } catch (MalformedURLException e) {
 
             System.out.println(e.getMessage());
