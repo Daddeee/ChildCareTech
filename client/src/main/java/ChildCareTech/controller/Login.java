@@ -1,28 +1,21 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.UserSession;
 import ChildCareTech.common.UserSessionFactory;
-import ChildCareTech.util.LoginUtil;
+import ChildCareTech.services.SceneManager;
+import ChildCareTech.services.SessionService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Login {
 
-    private Stage primaryStage;
-    private Parent root;
     UserSessionFactory sessionFactory = null;
-    UserSession session = null;
 
     @FXML
     private TextField userNameField;
@@ -34,18 +27,9 @@ public class Login {
     private Label alertBox;
 
     @FXML
-    private Button logintButton;
+    private Button loginButton;
 
     public Login() { }
-
-    public void render(Stage primaryStage) throws IOException {
-        this.primaryStage = primaryStage;
-        root = FXMLLoader.load(getClass().getResource("/view/loginWindow.fxml"));
-        primaryStage.setTitle("ChildCareTech");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-    }
 
     @FXML
     protected void loginButtonAction(ActionEvent event) {
@@ -56,8 +40,20 @@ public class Login {
             return;
         }
 
-        session = LoginUtil.loginAttempt(sessionFactory, userNameField.getText(), passwordField.getText());
+        SessionService.loginAttempt(sessionFactory, userNameField.getText(), passwordField.getText());
 
-        alertBox.setText("Login: " + Boolean.toString(!(session == null)));
+        if(true) {   //!SessionService.isNull()
+            try{
+                SceneManager.loadHome();
+            } catch(IOException ex) {
+                System.err.println("Can't render home window");
+                ex.printStackTrace();
+                alertBox.setText("Can't load Home");
+            }
+
+        }
+        else {
+            alertBox.setText("Wrong username/password combination");
+        }
     }
 }

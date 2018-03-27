@@ -1,24 +1,21 @@
-package ChildCareTech.util;
+package ChildCareTech.services;
 
 
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.UserSessionFactory;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.text.Text;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class LoginUtil {
+public class SessionService {
 
     private static UserSession session = null;
 
-    private LoginUtil() { }
+    private SessionService() { }
 
-    public static UserSession loginAttempt(UserSessionFactory sessionFactory, String userName, String password) {
+    public static void loginAttempt(UserSessionFactory sessionFactory, String userName, String password) {
         try {
             sessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
 
@@ -36,7 +33,13 @@ public class LoginUtil {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
 
+    public static UserSession getSession() {
         return session;
+    }
+
+    public static boolean isNull(){
+        return session == null;
     }
 }
