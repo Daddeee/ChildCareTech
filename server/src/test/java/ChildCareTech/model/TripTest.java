@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -10,11 +11,11 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
-public class TripTest extends AbstractEntityTest<Trip>{
+public class TripTest extends AbstractEntityTest<Trip, Integer>{
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Trip.class;
+        dao = new GenericDao<>(Trip.class);
     }
 
     @Override

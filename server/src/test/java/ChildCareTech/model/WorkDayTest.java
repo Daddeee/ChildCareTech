@@ -1,20 +1,22 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
-public class WorkDayTest extends AbstractEntityTest<WorkDay> {
+public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = WorkDay.class;
+        dao = new GenericDao<>(WorkDay.class);
     }
 
     @Override

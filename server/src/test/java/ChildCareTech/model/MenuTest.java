@@ -1,19 +1,21 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
-public class MenuTest extends AbstractEntityTest<Menu> {
+public class MenuTest extends AbstractEntityTest<Menu, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Menu.class;
+        dao = new GenericDao<>(Menu.class);
     }
 
     @Override

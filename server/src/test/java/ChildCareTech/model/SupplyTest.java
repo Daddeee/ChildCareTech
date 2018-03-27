@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
@@ -7,11 +8,11 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
-public class SupplyTest extends AbstractEntityTest<Supply> {
+public class SupplyTest extends AbstractEntityTest<Supply, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Supply.class;
+        dao = new GenericDao<>(Supply.class);
     }
 
     @Override

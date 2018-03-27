@@ -1,12 +1,14 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
+
 import java.time.LocalDate;
 
-public class StaffTest extends AbstractEntityTest<Staff> {
+public class StaffTest extends AbstractEntityTest<Staff, String> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Staff.class;
+        dao = new GenericDao<>(Staff.class);
     }
 
     @Override

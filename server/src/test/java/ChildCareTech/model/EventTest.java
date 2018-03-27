@@ -1,18 +1,20 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
-public class EventTest extends AbstractEntityTest<Event>{
+public class EventTest extends AbstractEntityTest<Event, Integer>{
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clazz = Event.class;
+        dao = new GenericDao<>(Event.class);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package ChildCareTech.model;
 
+import ChildCareTech.utils.GenericDao;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -18,10 +20,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public abstract class AbstractEntityTest<T extends iEntity> {
+public abstract class AbstractEntityTest<T extends iEntity, K extends Serializable> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
-    protected Class<T> clazz;
+    protected GenericDao<T, K> dao = null;
 
     @Test
     public void testRelations(){}
@@ -29,14 +31,15 @@ public abstract class AbstractEntityTest<T extends iEntity> {
     @Test
     public abstract void testCRUD();
 
-    protected <K> void testOneToMany(T ent1, Set<K> ent2, Function<T , Set<K>> getRelationSet) throws IllegalArgumentException{
+    protected <T2> void testOneToMany(T ent1, Set<T2> ent2, Function<T , Set<T2>> getRelationSet) throws IllegalArgumentException{
         session = sessionFactory.openSession();
+        dao.setSession(session);
         Transaction tx = null;
-        Iterator<K> ent2Iter = ent2.iterator();
+        Iterator<T2> ent2Iter = ent2.iterator();
         try {
             tx = session.beginTransaction();
 
-            session.save(ent1);
+            dao.create(ent1);
             while(ent2Iter.hasNext()) {
                 session.save(ent2Iter.next());
             }
@@ -54,12 +57,13 @@ public abstract class AbstractEntityTest<T extends iEntity> {
 
 
         T read = null;
-        Set<K> set = new HashSet<>();
+        Set<T2> set = new HashSet<>();
         session = sessionFactory.openSession();
+        dao.setSession(session);
         tx = null;
         try{
             tx = session.beginTransaction();
-            read = session.get(clazz, ent1.getPrimaryKey());
+            read = dao.read(ent1);
             getRelationSet.apply(read).size();
             set = getRelationSet.apply(read);
             tx.commit();
@@ -77,6 +81,7 @@ public abstract class AbstractEntityTest<T extends iEntity> {
     @SuppressWarnings("unchecked")
     protected void testCRUDImpl(T o, T ou) throws IllegalArgumentException{
         session = sessionFactory.openSession();
+        dao.setSession(session);
         Transaction tx = null;
         T t = null;
 
@@ -84,34 +89,33 @@ public abstract class AbstractEntityTest<T extends iEntity> {
         try{
             /* creating */
             tx = session.beginTransaction();
-            session.save(o);
+            dao.create(o);
             tx.commit();
 
             /* reading */
-            t = session.get(clazz, o.getPrimaryKey());
+            t = dao.read(o);
 
             /* TEST */
             assertTrue(t.equals(o));
 
             /* updating */
             tx = session.beginTransaction();
-            ou.setPrimaryKey(o);
-            session.merge(ou);
+            dao.update(o, ou);
             tx.commit();
 
             /* reading */
-            t = session.get(clazz, o.getPrimaryKey());
+            t = dao.read((K) o.getPrimaryKey());
 
             /* TEST */
             assertTrue(t.equals(o));
 
             /* deleting */
             tx = session.beginTransaction();
-            session.delete(o);
+            dao.delete(o);
             tx.commit();
 
             /* reading */
-            t = session.get(clazz, o.getPrimaryKey());
+            t = dao.read((K) o.getPrimaryKey());
 
             assertTrue(t == null);
         } catch(HibernateException e){
