@@ -1,8 +1,8 @@
 package ChildCareTech;
 
-import ChildCareTech.controller.Login;
-import ChildCareTech.services.SceneManager;
-import ChildCareTech.services.StageService;
+import ChildCareTech.services.AccessorStageService;
+import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.MainStageService;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,13 +12,19 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        StageService.setStage(primaryStage);
-        StageService.setTitle("ChildCareTech");
-        StageService.setResizable(false);
+        MainStageService.setStage(primaryStage);
+
         try {
-            SceneManager.loadLogin();
+            MainStageService.setTitle("ChildCareTech");
+            MainStageService.setResizable(false);
+            AccessorStageService.init();
+
+            MainSceneManager.loadLogin();
         } catch(IOException ex) {
             System.err.println("Can't render login window");
+            ex.printStackTrace();
+        } catch (NoSuchFieldException ex) {
+            System.err.println("Main stage not initialized");
             ex.printStackTrace();
         }
     }

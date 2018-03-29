@@ -1,7 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.UserSessionFactory;
-import ChildCareTech.services.SceneManager;
+import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 
 import javafx.event.ActionEvent;
@@ -44,7 +44,7 @@ public class Login {
 
         if(true) {   //!SessionService.isNull()
             try{
-                SceneManager.loadHome();
+                MainSceneManager.loadHome();
             } catch(IOException ex) {
                 System.err.println("Can't render home window");
                 ex.printStackTrace();
