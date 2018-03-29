@@ -21,8 +21,8 @@ public class FoodTest extends AbstractEntityTest<Food, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        Person p = new Person("cf", "fn", "ln", LocalDate.now(), Person.Sex.MALE, "", "");
-        Person p2 = new Person("cf2", "fn", "ln", LocalDate.now(), Person.Sex.MALE, "", "");
+        Person p = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
+        Person p2 = new Person("cf2", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Food f = new Food("food", false);
         Supplier s = new Supplier(p);
         Supplier ss = new Supplier(p2);

@@ -17,7 +17,7 @@ public class StaffTest extends AbstractEntityTest<Staff, String> {
                 "generic1",
                 "generic1",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 
@@ -25,7 +25,7 @@ public class StaffTest extends AbstractEntityTest<Staff, String> {
                 "generic2",
                 "generic2",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 

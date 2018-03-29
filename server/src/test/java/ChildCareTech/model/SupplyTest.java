@@ -21,7 +21,7 @@ public class SupplyTest extends AbstractEntityTest<Supply, Integer> {
                 "name",
                 "lastname",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "phone");
         Supplier suppl = new Supplier(p);

@@ -24,7 +24,7 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
 
         WorkDay wd = new WorkDay(LocalDate.now());
         WorkDay wd2 = new WorkDay(LocalDate.now().plusDays(1));
-        Person p = new Person("cf", "fn", "ln", LocalDate.now(), Person.Sex.MALE, "", "");
+        Person p = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Event e1 = new Event(wd, p, LocalTime.now(), false);
         Event e2 = new Event(wd2, p, LocalTime.now().plusHours(1), false);
         Trip t1 = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
@@ -94,7 +94,7 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
                 "name",
                 "surname",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "numb");
 
@@ -102,7 +102,7 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
                 "name_updated",
                 "surname",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "numb");
 

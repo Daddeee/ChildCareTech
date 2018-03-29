@@ -23,8 +23,8 @@ public class BusTest extends AbstractEntityTest<Bus, Integer> {
 
         Bus b = new Bus("plate");
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
-        Person p1 = new Person("fisc1", "fn1", "ln1", LocalDate.now(), Person.Sex.MALE, "", "");
-        Person p2 = new Person("fisc2", "fn2", "ln2", LocalDate.now(), Person.Sex.MALE, "", "");
+        Person p1 = new Person("fisc1", "fn1", "ln1", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
+        Person p2 = new Person("fisc2", "fn2", "ln2", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         TripPartecipation tp1 = new TripPartecipation(p1, t, b);
         TripPartecipation tp2 = new TripPartecipation(p2, t, b);
 

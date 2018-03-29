@@ -24,7 +24,7 @@ public class EventTest extends AbstractEntityTest<Event, Integer>{
                 "nome",
                 "cognome",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "phone"
         );

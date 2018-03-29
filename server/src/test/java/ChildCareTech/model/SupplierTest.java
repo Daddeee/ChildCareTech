@@ -25,7 +25,7 @@ public class SupplierTest extends AbstractEntityTest<Supplier, String> {
                 "generic1",
                 "generic1",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 
@@ -67,7 +67,7 @@ public class SupplierTest extends AbstractEntityTest<Supplier, String> {
                 "generic1",
                 "generic1",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 
@@ -75,7 +75,7 @@ public class SupplierTest extends AbstractEntityTest<Supplier, String> {
                 "generic2",
                 "generic2",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 

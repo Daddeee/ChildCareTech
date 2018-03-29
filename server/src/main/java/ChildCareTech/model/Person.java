@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import ChildCareTech.common.Sex;
 
 
 @javax.persistence.Entity
@@ -49,11 +50,6 @@ public class Person implements iEntity<Person, String> {
         this.sex = sex;
         this.address = address;
         this.phoneNumber = phoneNumber;
-    }
-
-    public enum Sex
-    {
-        MALE, FEMALE
     }
 
     @Override

@@ -32,14 +32,14 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
                 "generic1",
                 "generic1",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
         Person p2 = new Person("generic2",
                 "generic2",
                 "generic2",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
         Event e1 = new Event(wd, p1, LocalTime.now(), false);

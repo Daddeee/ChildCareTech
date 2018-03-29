@@ -30,5 +30,6 @@ public class Anagraphic {
     @FXML
     public void addButtonAction(ActionEvent event) {
 
+
     }
 }

@@ -21,14 +21,14 @@ public class KidTest extends AbstractEntityTest<Kid, String>{
                 "kid",
                 "kid",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "numb");
         Person p = new Person("parenttest",
                 "parent",
                 "parent",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "numb");
 

@@ -20,7 +20,7 @@ public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation,
                 "nome",
                 "cognome",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "addr",
                 "phone"
         );

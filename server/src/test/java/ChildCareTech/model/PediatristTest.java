@@ -22,14 +22,14 @@ public class PediatristTest extends AbstractEntityTest<Pediatrist, String> {
                 "generic1",
                 "generic1",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 
         Pediatrist p = new Pediatrist(o1);
 
-        Person kp1 = new Person("bimbo1", "n", "c", LocalDate.now(), Person.Sex.MALE, "", "");
-        Person kp2 = new Person("bimbo2", "n", "c", LocalDate.now(), Person.Sex.MALE, "", "");
+        Person kp1 = new Person("bimbo1", "n", "c", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
+        Person kp2 = new Person("bimbo2", "n", "c", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
 
         Kid k1 = new Kid(kp1, null, null, p);
         Kid k2 = new Kid(kp2, null, null, p);
@@ -47,7 +47,7 @@ public class PediatristTest extends AbstractEntityTest<Pediatrist, String> {
                 "generic1",
                 "generic1",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 
@@ -55,7 +55,7 @@ public class PediatristTest extends AbstractEntityTest<Pediatrist, String> {
                 "generic2",
                 "generic2",
                 LocalDate.now(),
-                Person.Sex.MALE,
+                ChildCareTech.common.Sex.MALE,
                 "",
                 "");
 
