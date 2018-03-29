@@ -51,8 +51,11 @@ public class Anagraphic {
             ex.printStackTrace();
         }
         Iterator<PersonDTO> it = items.iterator();
+
+        System.out.println("start person list");
         while(it.hasNext())
             System.out.println(it.next().getFiscalCode());
+        System.out.println("end person list");
     }
 
     @FXML

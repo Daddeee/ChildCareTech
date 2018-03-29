@@ -5,6 +5,10 @@ import ChildCareTech.common.UserSession;
 import ChildCareTech.model.Person;
 import ChildCareTech.model.User;
 import ChildCareTech.utils.GenericDao;
+import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -19,8 +23,24 @@ public class RMISession extends UnicastRemoteObject implements UserSession {
     }
 
     public List<PersonDTO> getAllPeople() throws RemoteException {
-        List<Person> personList = new GenericDao<Person, String>(Person.class).readAll();
+        GenericDao<Person, String> dao = new GenericDao<Person, String>(Person.class);
+        List<Person> personList;
         List<PersonDTO> dtoList = new ArrayList<>();
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        dao.setSession(session);
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            personList = dao.readAll();
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            personList = new ArrayList<>();
+        }finally{
+            session.close();
+        }
 
         for (Person p: personList) {
             dtoList.add(p.buildDTO());
