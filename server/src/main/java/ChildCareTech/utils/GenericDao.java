@@ -4,6 +4,7 @@ import ChildCareTech.model.iEntity;
 import org.hibernate.Session;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class GenericDao<T extends iEntity, K extends Serializable> {
 
@@ -42,4 +43,7 @@ public class GenericDao<T extends iEntity, K extends Serializable> {
     }
 
     public void delete(T obj){ session.delete(obj); }
+
+    @SuppressWarnings("unchecked")
+    public List<T> readAll() { return session.createQuery("from " + persistentClass.getName()).list(); }
 }
