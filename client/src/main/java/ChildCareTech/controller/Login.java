@@ -42,7 +42,7 @@ public class Login {
 
         SessionService.loginAttempt(sessionFactory, userNameField.getText(), passwordField.getText());
 
-        if(true) {   //!SessionService.isNull()
+        if(!SessionService.isNull()) {
             try{
                 MainSceneManager.loadHome();
             } catch(IOException ex) {
