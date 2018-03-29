@@ -1,5 +1,7 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.PersonDTO;
+import ChildCareTech.network.DTO.PersonDTOImpl;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
@@ -32,6 +34,7 @@ public class Person implements iEntity<Person, String> {
 
     @Column(nullable = false)
     private String address;
+
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
@@ -154,5 +157,17 @@ public class Person implements iEntity<Person, String> {
         if(this == o) return true;
         if(!(o instanceof Person)) return false;
         return this.fiscalCode.equals(((Person) o).fiscalCode);
+    }
+
+    public PersonDTOImpl buildDTO(){
+        PersonDTOImpl p = new PersonDTOImpl();
+        p.setFirstName(firstName);
+        p.setLastName(lastName);
+        p.setFiscalCode(fiscalCode);
+        p.setBirthDate(birthDate);
+        p.setSex(sex);
+        p.setAddress(address);
+        p.setPhoneNumber(phoneNumber);
+        return p;
     }
 }
