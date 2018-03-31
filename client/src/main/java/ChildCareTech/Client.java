@@ -3,6 +3,7 @@ package ChildCareTech;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.MainStageService;
+import ChildCareTech.services.SessionService;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -27,6 +28,11 @@ public class Client extends Application {
             System.err.println("Main stage not initialized");
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        SessionService.logoutAttempt();
     }
 
     public static void main(String[] args) {

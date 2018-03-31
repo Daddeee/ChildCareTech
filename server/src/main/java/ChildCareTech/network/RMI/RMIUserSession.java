@@ -2,6 +2,7 @@ package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.PersonDTO;
 import ChildCareTech.common.UserSession;
+import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.Person;
 import ChildCareTech.model.User;
 import ChildCareTech.utils.GenericDao;
@@ -15,10 +16,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RMISession extends UnicastRemoteObject implements UserSession {
+public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private User user;
 
-    public RMISession(User user) throws RemoteException {
+    public RMIUserSession(User user) throws RemoteException {
         this.user = user;
     }
 
@@ -56,6 +57,7 @@ public class RMISession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void logout() throws RemoteException{
+        SessionController.removeSession(user.getUserName());
         UnicastRemoteObject.unexportObject(this, true);
     }
 }

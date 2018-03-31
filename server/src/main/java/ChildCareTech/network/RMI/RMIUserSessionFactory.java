@@ -2,7 +2,8 @@ package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.UserSessionFactory;
-import ChildCareTech.controller.LoginController;
+import ChildCareTech.common.exceptions.LoginFailedException;
+import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.User;
 
 import java.rmi.RemoteException;
@@ -19,10 +20,10 @@ public class RMIUserSessionFactory extends UnicastRemoteObject implements UserSe
     private RMIUserSessionFactory() throws RemoteException {}
 
     @Override
-    public UserSession login(String userName, String password) throws RemoteException{
-        User u = LoginController.login(userName, password);
-
-        if(u != null) return new RMISession(u);
-        return null;
+    public RMIUserSession login(String userName, String password) throws LoginFailedException, RemoteException{
+        User u = SessionController.getUser(userName, password);
+        RMIUserSession session = new RMIUserSession(u);
+        SessionController.storeSession(session, userName);
+        return session;
     }
 }
