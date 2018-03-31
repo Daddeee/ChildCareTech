@@ -4,7 +4,9 @@ import ChildCareTech.model.iEntity;
 import org.hibernate.Session;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GenericDao<T extends iEntity, K extends Serializable> {
 
@@ -37,13 +39,30 @@ public class GenericDao<T extends iEntity, K extends Serializable> {
     public T read(T obj){ return read((K) obj.getPrimaryKey()); }
 
     @SuppressWarnings("unchecked")
+    public List<T> read(Map<String, String> params){
+        StringBuilder query = new StringBuilder("from " + persistentClass.getName() + " where ");
+
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            query.append(entry.getKey() + " = '" + entry.getValue() + "' and ");
+        }
+
+        query.append("1=1");
+        return  session.createQuery(query.toString()).list();
+    }
+
+    public List<T> read(String paramName, String paramValue){
+        HashMap<String, String> map = new HashMap<>();
+        map.put(paramName, paramValue);
+        return read(map);
+    }
+
+    public List<T> readAll() { return read(new HashMap<>()); }
+
+    @SuppressWarnings("unchecked")
     public void update(T baseObj, T updatedObj){
         updatedObj.setPrimaryKey(baseObj);
         session.merge(updatedObj);
     }
 
     public void delete(T obj){ session.delete(obj); }
-
-    @SuppressWarnings("unchecked")
-    public List<T> readAll() { return session.createQuery("from " + persistentClass.getName()).list(); }
 }
