@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class Anagraphic {
+public class AnagraphicController {
 
     //@FXML
     //private ListView anagList;
@@ -33,7 +33,7 @@ public class Anagraphic {
     private List<PersonDTO> items = new ArrayList<>();
 
 
-    public Anagraphic() {
+    public AnagraphicController() {
 
     }
 
