@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class Login {
+public class LoginController {
 
     UserSessionFactory sessionFactory = null;
 
@@ -29,7 +29,7 @@ public class Login {
     @FXML
     private Button loginButton;
 
-    public Login() { }
+    public LoginController() { }
 
     @FXML
     protected void loginButtonAction(ActionEvent event) {
@@ -42,18 +42,12 @@ public class Login {
 
         SessionService.loginAttempt(sessionFactory, userNameField.getText(), passwordField.getText());
 
-        if(!SessionService.isNull()) {
-            try{
-                MainSceneManager.loadHome();
-            } catch(IOException ex) {
-                System.err.println("Can't render home window");
-                ex.printStackTrace();
-                alertBox.setText("Can't load Home");
-            }
-
-        }
-        else {
-            alertBox.setText("Wrong username/password combination");
+        try {
+            if(!SessionService.isNull()) MainSceneManager.loadHome();
+            else alertBox.setText(SessionService.getLoginErrorMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            alertBox.setText(e.getMessage());
         }
     }
 }

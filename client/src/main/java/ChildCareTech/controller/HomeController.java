@@ -1,18 +1,19 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class Home {
+public class HomeController {
 
     @FXML
     private Button anagraphicsButton;
 
-    public Home() {
+    public HomeController() {
 
     }
 
@@ -21,7 +22,18 @@ public class Home {
         try{
             MainSceneManager.loadAnagraphics();
         } catch(IOException ex) {
-            System.err.println("Can't render anagraphics window");
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void logoutButtonAction(ActionEvent action){
+        SessionService.logoutAttempt();
+        try{
+            MainSceneManager.loadLogin();
+        } catch(IOException ex) {
+            System.err.println(ex.getMessage());
             ex.printStackTrace();
         }
     }
