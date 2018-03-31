@@ -11,13 +11,13 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class SessionService {
-
+    private static UserSessionFactory sessionFactory = null;
     private static UserSession session = null;
     private static String loginErrorMessage = null;
 
     private SessionService() { }
 
-    public static void loginAttempt(UserSessionFactory sessionFactory, String userName, String password) {
+    public static void loginAttempt(String userName, String password) {
         try {
             sessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
 

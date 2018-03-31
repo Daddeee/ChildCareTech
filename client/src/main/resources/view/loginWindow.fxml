@@ -43,6 +43,11 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+                <Button fx:id="registerButton" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="27.0" prefWidth="282.0" text="Register">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
                 <Label fx:id="alertBox" textFill="#ff1a1a" />
             </children>
             <BorderPane.margin>

@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.LoginFailedException;
+import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.model.User;
 import ChildCareTech.utils.GenericDao;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,15 +21,19 @@ public class SessionController {
     public static User getUser(String username, String password) throws LoginFailedException{
         List<User> user;
         Session session;
-        GenericDao<User, String> dao;
+        GenericDao<User, Integer> dao;
         Transaction tx = null;
+        HashMap<String, String> queryMap = new HashMap<>();
+
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
         dao = new GenericDao<>(User.class);
         dao.setSession(session);
         try{
             tx = session.beginTransaction();
-            user = dao.read("userName", username);
+            queryMap.put("userName", username);
+            queryMap.put("password", password);
+            user = dao.read(queryMap);
             tx.commit();
         } catch(HibernateException e){
             e.printStackTrace();
@@ -35,8 +41,34 @@ public class SessionController {
             return null;
         }
 
-        if(user == null || user.size() == 0) throw new LoginFailedException("User not found");
+        if(user == null || user.size() == 0) throw new LoginFailedException("Invalid credentials");
         return user.get(0);
+    }
+
+    public static boolean registerUser(String userName, String password) throws RegistrationFailedException{
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        GenericDao<User, Integer> dao = new GenericDao<>(User.class);
+        dao.setSession(session);
+        Transaction tx = null;
+        User u = null;
+        List<User> userList= null;
+
+        try{
+            tx = session.beginTransaction();
+
+            userList = dao.read("userName", userName);
+            if(userList != null && userList.size() > 0) throw new RegistrationFailedException("Username not available");
+            u = new User(userName, password);
+            dao.create(u);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+            throw new RegistrationFailedException("Registration failed.");
+        }
+
+        return true;
     }
 
     public static synchronized void storeSession(UserSession session, String sessionKey) throws LoginFailedException{

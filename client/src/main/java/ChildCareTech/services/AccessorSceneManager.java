@@ -12,4 +12,12 @@ public class AccessorSceneManager {
             ex.printStackTrace();
         }
     }
+
+    public static void loadRegisterUser() throws IOException {
+        try {
+            AccessorStageService.changeScene("/view/registerUserWindow.fxml", "style/registerUserWindow.css");
+        } catch(NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

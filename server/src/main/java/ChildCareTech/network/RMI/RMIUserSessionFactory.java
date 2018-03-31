@@ -3,6 +3,7 @@ package ChildCareTech.network.RMI;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.LoginFailedException;
+import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.User;
 
@@ -25,5 +26,10 @@ public class RMIUserSessionFactory extends UnicastRemoteObject implements UserSe
         RMIUserSession session = new RMIUserSession(u);
         SessionController.storeSession(session, userName);
         return session;
+    }
+
+    @Override
+    public boolean register(String userName, String password) throws RegistrationFailedException, RemoteException {
+        return SessionController.registerUser(userName, password);
     }
 }
