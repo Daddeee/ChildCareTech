@@ -49,7 +49,7 @@ public class Menu implements iEntity<Menu, Integer> {
     @Override
     public void setPrimaryKey(Menu a) { this.id = a.getPrimaryKey(); }
 
-    private void setDisces(Set<Dish> dishes) { this.dishes = dishes; }
+    private void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
 
     public Set<Dish> getDishes() { return dishes; }
 

@@ -42,9 +42,9 @@ public class Supply implements iEntity<Supply, Integer> {
 
     private void setSupplier(Supplier supplier) { this.supplier = supplier; }
 
-    public Food getFoods() { return food; }
+    public Food getFood() { return food; }
 
-    private void setFoods(Food food) { this.food = food; }
+    private void setFood(Food food) { this.food = food; }
 
     public int getQuantity() { return quantity; }
 
