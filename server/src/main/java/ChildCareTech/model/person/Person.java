@@ -157,16 +157,4 @@ public class Person implements iEntity<Person, String> {
         if(!(o instanceof Person)) return false;
         return this.fiscalCode.equals(((Person) o).fiscalCode);
     }
-
-    public PersonDTOImpl buildDTO(){
-        PersonDTOImpl p = new PersonDTOImpl();
-        p.setFirstName(firstName);
-        p.setLastName(lastName);
-        p.setFiscalCode(fiscalCode);
-        p.setBirthDate(birthDate);
-        p.setSex(sex);
-        p.setAddress(address);
-        p.setPhoneNumber(phoneNumber);
-        return p;
-    }
 }
