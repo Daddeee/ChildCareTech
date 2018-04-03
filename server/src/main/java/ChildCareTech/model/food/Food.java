@@ -54,6 +54,14 @@ public class Food implements iEntity<Food, Integer> {
 
     public String getName() { return name; }
 
+    public boolean isDrink() {
+        return isDrink;
+    }
+
+    private void setIsDrink(boolean isDrink) {
+        this.isDrink = isDrink;
+    }
+
     public int getResidualQuantity() {
         return residualQuantity;
     }

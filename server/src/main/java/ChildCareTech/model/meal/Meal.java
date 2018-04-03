@@ -59,6 +59,8 @@ public class Meal implements iEntity<Meal, Integer> {
 
     private void setWorkDay(WorkDay workDay) { this.workDay = workDay; }
 
+    public WorkDay getWorkDay() { return workDay; }
+
     @Override
     public int hashCode() {
         return (Integer.toString(mealNum) + canteen.hashCode() + workDay.hashCode()).hashCode();
