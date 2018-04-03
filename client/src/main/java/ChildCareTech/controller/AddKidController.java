@@ -6,9 +6,12 @@ import ChildCareTech.common.Sex;
 import ChildCareTech.network.DTO.KidDTOImpl;
 import ChildCareTech.network.DTO.PersonDTOImpl;
 import ChildCareTech.services.AccessorStageService;
+import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.rmi.RemoteException;
 
 public class AddKidController {
 
@@ -45,11 +48,12 @@ public class AddKidController {
 
     @FXML
     public void saveButtonAction(ActionEvent event) {
+        alertLabel.setText("");
         if(fiscalCodeField.getText().length()!=16 ||
                 firstNameField.getText().equals("") ||
                 lastNameField.getText().equals("") ||
-                addressField.getText().equals("") ||
-                (!maleButton.isArmed() && !femaleButton.isArmed())) {
+                addressField.getText().equals("")
+                /*|| (!maleButton.isArmed() && !femaleButton.isArmed())*/) {
             alertLabel.setText("invalid input");
             return;
         }
@@ -60,6 +64,12 @@ public class AddKidController {
             sex = Sex.FEMALE;
         person = new PersonDTOImpl(firstNameField.getText(), lastNameField.getText(),fiscalCodeField.getText() ,birthDatePicker.getValue(), sex, addressField.getText(), null);
         kid = new KidDTOImpl(person, null, null, null);
+        try {
+            SessionService.getSession().saveKid(kid);
+        } catch(RemoteException ex) {
+            System.err.println("error remote");
+            ex.printStackTrace();
+        }
     }
     @FXML
     public void cancelButtonAction(ActionEvent event) {
