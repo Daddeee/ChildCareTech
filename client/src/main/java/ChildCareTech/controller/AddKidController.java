@@ -49,33 +49,34 @@ public class AddKidController {
     @FXML
     public void saveButtonAction(ActionEvent event) {
         alertLabel.setText("");
-        if(fiscalCodeField.getText().length()!=16 ||
+        if (fiscalCodeField.getText().length() != 16 ||
                 firstNameField.getText().equals("") ||
                 lastNameField.getText().equals("") ||
                 addressField.getText().equals("")
-                /*|| (!maleButton.isArmed() && !femaleButton.isArmed())*/) {
+            /*|| (!maleButton.isArmed() && !femaleButton.isArmed())*/) {
             alertLabel.setText("invalid input");
             return;
         }
         Sex sex;
-        if(maleButton.isArmed())
+        if (maleButton.isArmed())
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTOImpl(firstNameField.getText(), lastNameField.getText(),fiscalCodeField.getText() ,birthDatePicker.getValue(), sex, addressField.getText(), null);
+        person = new PersonDTOImpl(firstNameField.getText(), lastNameField.getText(), fiscalCodeField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
         kid = new KidDTOImpl(person, null, null, null);
         try {
             SessionService.getSession().saveKid(kid);
-        } catch(RemoteException ex) {
+        } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
         }
     }
+
     @FXML
     public void cancelButtonAction(ActionEvent event) {
         try {
             AccessorStageService.close();
-        } catch(NoSuchFieldException ex) {
+        } catch (NoSuchFieldException ex) {
             System.err.println("Stage not initialized");
             ex.printStackTrace();
         }

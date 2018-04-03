@@ -12,7 +12,7 @@ import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
-public class EventTest extends AbstractEntityTest<Event, Integer>{
+public class EventTest extends AbstractEntityTest<Event, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -35,13 +35,13 @@ public class EventTest extends AbstractEntityTest<Event, Integer>{
         session = sessionFactory.openSession();
         Transaction tx = null;
 
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(w);
             session.save(p);
             tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
         } finally {

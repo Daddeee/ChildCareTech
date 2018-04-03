@@ -3,7 +3,6 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.MainStageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,7 +37,6 @@ public class KidAnagraphicController {
     private TableColumn<PersonDTO, String> addressColumn;
 
 
-
     private List<PersonDTO> items = new ArrayList<>();
 
 
@@ -55,7 +53,7 @@ public class KidAnagraphicController {
     public void addButtonAction(ActionEvent event) {
         try {
             AccessorSceneManager.loadAddPerson();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();
         }
@@ -65,7 +63,7 @@ public class KidAnagraphicController {
     public void backButtonAction(ActionEvent event) {
         try {
             MainSceneManager.loadHome();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();
         }

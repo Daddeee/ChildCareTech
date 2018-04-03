@@ -1,14 +1,14 @@
 package ChildCareTech.model.bus;
 
-import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.trippartecipation.TripPartecipation;
 
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Table(name="buses")
+@Table(name = "buses")
 public class Bus implements iEntity<Bus, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,8 +20,12 @@ public class Bus implements iEntity<Bus, Integer> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "bus")
     private Set<TripPartecipation> tripPartecipations;
 
-    public Bus(){}
-    public Bus(String licensePlate) { this.licensePlate = licensePlate; }
+    public Bus() {
+    }
+
+    public Bus(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
 
     public int getId() {
         return id;
@@ -64,8 +68,8 @@ public class Bus implements iEntity<Bus, Integer> {
 
     @Override
     public boolean equals(Object other) {
-        if(this == other) return true;
-        if(!(other instanceof Bus)) return false;
+        if (this == other) return true;
+        if (!(other instanceof Bus)) return false;
         return this.licensePlate.equals(((Bus) other).licensePlate);
     }
 }

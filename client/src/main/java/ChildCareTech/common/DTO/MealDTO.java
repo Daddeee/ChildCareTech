@@ -6,7 +6,10 @@ import java.time.LocalDate;
 
 public interface MealDTO extends Serializable, Remote {
     public LocalDate getDate();
+
     public CanteenDTO getCanteen();
+
     int getMealNum();
+
     WorkDayDTO getWorkDay();
 }

@@ -12,7 +12,7 @@ public class RegistrationService {
     private static UserSessionFactory sessionFactory = null;
     private static String registrationErrorMessage = null;
 
-    public static boolean registerAttempt(String userName, String password){
+    public static boolean registerAttempt(String userName, String password) {
         boolean status = false;
         try {
             sessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
@@ -26,7 +26,7 @@ public class RegistrationService {
         return status;
     }
 
-    public static String getRegistrationErrorMessage(){
+    public static String getRegistrationErrorMessage() {
         return registrationErrorMessage;
     }
 }

@@ -15,5 +15,7 @@ public class PediatristDTOImpl extends AdultDTOImpl implements PediatristDTO {
     }
 
     @Override
-    public Set<KidDTO> getKids() { return kids; }
+    public Set<KidDTO> getKids() {
+        return kids;
+    }
 }

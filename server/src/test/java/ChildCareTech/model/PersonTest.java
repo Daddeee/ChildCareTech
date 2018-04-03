@@ -47,8 +47,8 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
             session.save(wd2);
 
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
@@ -78,8 +78,8 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
             session.save(b);
 
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());

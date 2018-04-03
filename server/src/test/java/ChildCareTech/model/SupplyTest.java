@@ -33,13 +33,13 @@ public class SupplyTest extends AbstractEntityTest<Supply, Integer> {
 
         session = sessionFactory.openSession();
         Transaction tx = null;
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(suppl);
             session.save(f);
             tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null) tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
         } finally {

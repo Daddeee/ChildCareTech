@@ -5,9 +5,6 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.model.adult.Adult;
-import ChildCareTech.model.adult.AdultDTOImpl;
-import ChildCareTech.model.pediatrist.PediatristDTOImpl;
-import ChildCareTech.model.person.PersonDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
@@ -26,7 +23,7 @@ public class KidDTOImpl implements KidDTO {
         secondTutor = DTOFactory.getDTO(kid.getSecondTutor());
         pediatrist = DTOFactory.getDTO(kid.getPediatrist());
         contacts = new HashSet<>();
-        for(Adult a : kid.getContacts())
+        for (Adult a : kid.getContacts())
             contacts.add(DTOFactory.getDTO(a));
     }
 

@@ -1,17 +1,17 @@
 package ChildCareTech.model.trip;
 
-import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.model.iEntity;
 import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.trippartecipation.TripPartecipation;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
-import java.time.LocalDate;
 
 @Entity
-@Table(name="trips",
+@Table(name = "trips",
         uniqueConstraints = @UniqueConstraint(columnNames = {"meta", "depDate", "arrDate"}))
 public class Trip implements iEntity<Trip, Integer> {
     @Id
@@ -36,13 +36,16 @@ public class Trip implements iEntity<Trip, Integer> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<TripPartecipation> tripPartecipations;
 
-    public Trip(){}
+    public Trip() {
+    }
+
     public Trip(String meta, LocalDate depDate, LocalDate arrDate) {
         this.meta = meta;
         this.depDate = depDate;
         this.arrDate = arrDate;
     }
-    public Trip(String meta, LocalDate depDate, LocalDate arrDate, String note){
+
+    public Trip(String meta, LocalDate depDate, LocalDate arrDate, String note) {
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;
@@ -97,9 +100,13 @@ public class Trip implements iEntity<Trip, Integer> {
         return depDate;
     }
 
-    private void setDepDate(LocalDate depDate) { this.depDate = depDate; }
+    private void setDepDate(LocalDate depDate) {
+        this.depDate = depDate;
+    }
 
-    private void setArrDate(LocalDate arrDate) { this.arrDate = arrDate; }
+    private void setArrDate(LocalDate arrDate) {
+        this.arrDate = arrDate;
+    }
 
     @Override
     public Integer getPrimaryKey() {
@@ -113,13 +120,13 @@ public class Trip implements iEntity<Trip, Integer> {
 
     @Override
     public int hashCode() {
-        return (""+ meta + depDate + arrDate).hashCode();
+        return ("" + meta + depDate + arrDate).hashCode();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if(!(o instanceof Trip)) return false;
+        if (!(o instanceof Trip)) return false;
         return this.meta.equals(((Trip) o).getMeta()) &&
                 this.arrDate.equals(((Trip) o).getArrDate()) &&
                 this.depDate.equals(((Trip) o).getDepDate());

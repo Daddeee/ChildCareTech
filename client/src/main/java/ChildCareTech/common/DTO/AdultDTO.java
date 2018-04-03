@@ -6,5 +6,6 @@ import java.util.Set;
 
 public interface AdultDTO extends Serializable, Remote {
     PersonDTO getPerson();
+
     Set<KidDTO> getContacts();
 }

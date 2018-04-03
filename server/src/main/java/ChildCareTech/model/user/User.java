@@ -17,8 +17,10 @@ public class User implements iEntity<User, Integer> {
     @Column(nullable = false)
     private String password;
 
-    public User(){}
-    public User(String userName, String password){
+    public User() {
+    }
+
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
@@ -59,8 +61,8 @@ public class User implements iEntity<User, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(o == this) return true;
-        if(!(o instanceof User)) return false;
+        if (o == this) return true;
+        if (!(o instanceof User)) return false;
         return this.userName.equals(((User) o).userName);
     }
 }

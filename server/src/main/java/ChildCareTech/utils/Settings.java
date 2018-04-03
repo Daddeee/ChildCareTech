@@ -1,10 +1,9 @@
 package ChildCareTech.utils;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class Settings {
     private static final String confPath = "./src/resources/config.xml";
@@ -13,27 +12,23 @@ public class Settings {
     static {
         properties = new Properties();
         FileInputStream in;
-        try
-        {
+        try {
             in = new FileInputStream(confPath);
             properties.loadFromXML(in);
             in.close();
-        }
-        catch (FileNotFoundException fnfEx)
-        {
+        } catch (FileNotFoundException fnfEx) {
             System.err.println("Could not read properties from file " + confPath);
             fnfEx.printStackTrace();
             System.exit(1);
-        }
-        catch (IOException ioEx)
-        {
+        } catch (IOException ioEx) {
             System.err.println("IOException encountered while reading from " + confPath);
             ioEx.printStackTrace();
             System.exit(1);
         }
     }
 
-    private Settings() {}
+    private Settings() {
+    }
 
     public static String getProperty(String property) {
         return properties.getProperty(property);

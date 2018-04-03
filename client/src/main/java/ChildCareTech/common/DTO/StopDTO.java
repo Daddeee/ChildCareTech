@@ -5,5 +5,6 @@ import java.rmi.Remote;
 
 public interface StopDTO extends Serializable, Remote {
     TripDTO getTrip();
+
     int getStopNumber();
 }

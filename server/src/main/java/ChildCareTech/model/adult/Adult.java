@@ -1,11 +1,10 @@
 package ChildCareTech.model.adult;
 
+import ChildCareTech.model.iEntity;
 import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.person.Person;
-import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
@@ -24,7 +23,7 @@ public class Adult implements iEntity<Adult, Integer> {
     private Person person;
 
     @ManyToMany
-    @JoinTable(name="contacts")
+    @JoinTable(name = "contacts")
     private Set<Kid> contacts;
 
     public Adult() {
@@ -40,7 +39,9 @@ public class Adult implements iEntity<Adult, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Adult a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Adult a) {
+        this.id = a.getPrimaryKey();
+    }
 
     public int getId() {
         return id;
@@ -58,7 +59,9 @@ public class Adult implements iEntity<Adult, Integer> {
         this.person = person;
     }
 
-    public Set<Kid> getContacts() { return contacts == null ? Collections.EMPTY_SET : contacts; }
+    public Set<Kid> getContacts() {
+        return contacts == null ? Collections.EMPTY_SET : contacts;
+    }
 
     public void setContacts(Set<Kid> contacts) {
         this.contacts = contacts;
@@ -66,8 +69,8 @@ public class Adult implements iEntity<Adult, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Adult)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Adult)) return false;
         return this.person.equals(((Adult) o).person);
     }
 

@@ -1,8 +1,8 @@
 package ChildCareTech.model.drink;
 
 import ChildCareTech.model.food.Food;
-import ChildCareTech.model.menu.Menu;
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.menu.Menu;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @javax.persistence.Entity
 @Table(name = "drinks",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"name", "menu_id"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "menu_id"}))
 public class Drink implements iEntity<Drink, Integer> {
 
     @Id
@@ -24,14 +24,17 @@ public class Drink implements iEntity<Drink, Integer> {
     private Menu menu;
 
     @ManyToMany(targetEntity = Food.class)
-    @JoinTable(name="drink_ingredients")
+    @JoinTable(name = "drink_ingredients")
     private Set<Food> foods;
 
-    public Drink() { }
-    public Drink(String name, Menu menu){
+    public Drink() {
+    }
+
+    public Drink(String name, Menu menu) {
         this.name = name;
         this.menu = menu;
     }
+
     public Drink(String name, Menu menu, Set<Food> foods) {
         this.name = name;
         this.menu = menu;
@@ -42,32 +45,47 @@ public class Drink implements iEntity<Drink, Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+
     @Override
-    public void setPrimaryKey(Drink a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Drink a) {
+        this.id = a.getPrimaryKey();
+    }
 
-    private void setName(String name) { this.name = name; }
+    private void setName(String name) {
+        this.name = name;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public Menu getMenu() { return menu; }
+    public Menu getMenu() {
+        return menu;
+    }
 
-    private void setMenu(Menu menu) { this.menu = menu; }
+    private void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
-    private void setFoods(Set<Food> foods) { this.foods = foods; }
+    private void setFoods(Set<Food> foods) {
+        this.foods = foods;
+    }
 
-    public Set<Food> getFoods() {return foods == null ? Collections.EMPTY_SET : foods; }
+    public Set<Food> getFoods() {
+        return foods == null ? Collections.EMPTY_SET : foods;
+    }
 
     @Override
     public int hashCode() {
-        return (name+menu.hashCode()).hashCode();
+        return (name + menu.hashCode()).hashCode();
     }
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Drink)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Drink)) return false;
         return this.name.equals(((Drink) o).name) &&
-                    this.menu.equals(((Drink) o).menu);
+                this.menu.equals(((Drink) o).menu);
     }
 
 }

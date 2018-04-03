@@ -7,7 +7,9 @@ import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
+
 import java.time.LocalDate;
+
 import static org.junit.Assert.fail;
 
 public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation, Integer> {
@@ -36,15 +38,15 @@ public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation,
         session = sessionFactory.openSession();
         Transaction tx = null;
 
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(p);
             session.save(t);
             session.save(b);
             session.save(bu);
             tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null) tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
         } finally {

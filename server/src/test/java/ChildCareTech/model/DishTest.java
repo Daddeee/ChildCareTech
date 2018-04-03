@@ -30,15 +30,15 @@ public class DishTest extends AbstractEntityTest<Dish, Integer> {
         session = sessionFactory.openSession();
         Transaction tx = null;
 
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(c);
             session.save(w);
             session.save(ml);
             session.save(m);
             tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
         } finally {

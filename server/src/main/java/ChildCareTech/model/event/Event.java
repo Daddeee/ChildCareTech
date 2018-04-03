@@ -1,14 +1,14 @@
 package ChildCareTech.model.event;
 
+import ChildCareTech.model.iEntity;
 import ChildCareTech.model.person.Person;
 import ChildCareTech.model.workday.WorkDay;
-import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
-@Table(name="events",
+@Table(name = "events",
         uniqueConstraints = @UniqueConstraint(columnNames = {"workDay_id", "person_fiscalCode", "time"})
 )
 public class Event implements iEntity<Event, Integer> {
@@ -30,8 +30,10 @@ public class Event implements iEntity<Event, Integer> {
     @Column(nullable = false)
     private boolean isIn;
 
-    public Event(){}
-    public Event(WorkDay workDay, Person person, LocalTime time, boolean isIn){
+    public Event() {
+    }
+
+    public Event(WorkDay workDay, Person person, LocalTime time, boolean isIn) {
         this.workDay = workDay;
         this.person = person;
         this.time = time.minusNanos(time.getNano());
@@ -95,8 +97,8 @@ public class Event implements iEntity<Event, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Event)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
 
         Event e = (Event) o;
         return this.workDay.equals(e.workDay) &&

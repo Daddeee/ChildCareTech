@@ -1,21 +1,21 @@
 package ChildCareTech.model.person;
 
-import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.common.Sex;
 import ChildCareTech.model.event.Event;
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.trippartecipation.TripPartecipation;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import ChildCareTech.common.Sex;
 
 
 @javax.persistence.Entity
-@Table(name="persons")
+@Table(name = "persons")
 public class Person implements iEntity<Person, String> {
     @Id
-    @Column(length=16)
+    @Column(length = 16)
     private String fiscalCode;
 
     @Column(nullable = false)
@@ -42,9 +42,10 @@ public class Person implements iEntity<Person, String> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
     private Set<TripPartecipation> tripPartecipations = new HashSet<>();
 
-    public Person(){}
-    public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber)
-    {
+    public Person() {
+    }
+
+    public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,16 +59,17 @@ public class Person implements iEntity<Person, String> {
     public String getPrimaryKey() {
         return fiscalCode;
     }
-    @Override
-    public void setPrimaryKey(Person a) { setFiscalCode(a.getFiscalCode()); }
 
-    public String getFiscalCode()
-    {
+    @Override
+    public void setPrimaryKey(Person a) {
+        setFiscalCode(a.getFiscalCode());
+    }
+
+    public String getFiscalCode() {
         return fiscalCode;
     }
 
-    private void setFiscalCode(String fiscalCode)
-    {
+    private void setFiscalCode(String fiscalCode) {
         this.fiscalCode = fiscalCode;
     }
 
@@ -75,58 +77,47 @@ public class Person implements iEntity<Person, String> {
         return firstName;
     }
 
-    private void setFirstName(String firstName)
-    {
+    private void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName()
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    private void setLastName(String lastName)
-    {
+    private void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthDate()
-    {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    private void setBirthDate(LocalDate birthDate)
-    {
+    private void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Sex getSex()
-    {
+    public Sex getSex() {
         return sex;
     }
 
-    private void setSex(Sex sex)
-    {
+    private void setSex(Sex sex) {
         this.sex = sex;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    private void setAddress(String address)
-    {
+    private void setAddress(String address) {
         this.address = address;
     }
 
-    public String getPhoneNumber()
-    {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    private void setPhoneNumber(String phoneNumber)
-    {
+    private void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -153,8 +144,8 @@ public class Person implements iEntity<Person, String> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Person)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
         return this.fiscalCode.equals(((Person) o).fiscalCode);
     }
 }

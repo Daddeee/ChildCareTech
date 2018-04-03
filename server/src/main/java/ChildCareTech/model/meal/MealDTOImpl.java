@@ -3,8 +3,6 @@ package ChildCareTech.model.meal;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.canteen.CanteenDTOImpl;
-import ChildCareTech.model.workday.WorkDayDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 public class MealDTOImpl implements MealDTO {

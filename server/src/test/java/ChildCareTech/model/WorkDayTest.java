@@ -58,8 +58,8 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
             session.save(c2);
 
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
@@ -88,8 +88,8 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
             session.save(p2);
 
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());

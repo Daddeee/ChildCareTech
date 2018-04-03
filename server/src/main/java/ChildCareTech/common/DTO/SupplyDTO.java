@@ -6,7 +6,10 @@ import java.time.LocalDate;
 
 public interface SupplyDTO extends Serializable, Remote {
     SupplierDTO getSupplier();
+
     FoodDTO getFood();
+
     int getQuantity();
+
     LocalDate getDate();
 }

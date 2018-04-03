@@ -31,15 +31,21 @@ public class GenericDAO<T extends iEntity, K extends Serializable> {
         return persistentClass;
     }
 
-    public void create(T obj){ session.save(obj); }
+    public void create(T obj) {
+        session.save(obj);
+    }
 
-    public T read(K key){ return session.get(persistentClass, key); }
+    public T read(K key) {
+        return session.get(persistentClass, key);
+    }
 
     @SuppressWarnings("unchecked")
-    public T read(T obj){ return read((K) obj.getPrimaryKey()); }
+    public T read(T obj) {
+        return read((K) obj.getPrimaryKey());
+    }
 
     @SuppressWarnings("unchecked")
-    public List<T> read(Map<String, String> params){
+    public List<T> read(Map<String, String> params) {
         StringBuilder query = new StringBuilder("from " + persistentClass.getName() + " where ");
 
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -47,22 +53,26 @@ public class GenericDAO<T extends iEntity, K extends Serializable> {
         }
 
         query.append("1=1");
-        return  session.createQuery(query.toString()).list();
+        return session.createQuery(query.toString()).list();
     }
 
-    public List<T> read(String paramName, String paramValue){
+    public List<T> read(String paramName, String paramValue) {
         HashMap<String, String> map = new HashMap<>();
         map.put(paramName, paramValue);
         return read(map);
     }
 
-    public List<T> readAll() { return read(new HashMap<>()); }
+    public List<T> readAll() {
+        return read(new HashMap<>());
+    }
 
     @SuppressWarnings("unchecked")
-    public void update(T baseObj, T updatedObj){
+    public void update(T baseObj, T updatedObj) {
         updatedObj.setPrimaryKey(baseObj);
         session.merge(updatedObj);
     }
 
-    public void delete(T obj){ session.delete(obj); }
+    public void delete(T obj) {
+        session.delete(obj);
+    }
 }

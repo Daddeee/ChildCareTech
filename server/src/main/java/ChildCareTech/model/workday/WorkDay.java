@@ -26,7 +26,8 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workDay")
     private Set<Event> events;
 
-    public WorkDay() { }
+    public WorkDay() {
+    }
 
     public WorkDay(LocalDate date) {
         this.date = date;
@@ -76,8 +77,8 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof WorkDay)) return false;
+        if (this == o) return true;
+        if (!(o instanceof WorkDay)) return false;
         return this.date.equals(((WorkDay) o).date);
     }
 

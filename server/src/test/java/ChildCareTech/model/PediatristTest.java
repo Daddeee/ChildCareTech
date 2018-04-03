@@ -8,8 +8,6 @@ import ChildCareTech.utils.GenericDAO;
 import java.time.LocalDate;
 import java.util.HashSet;
 
-import static org.junit.Assert.fail;
-
 public class PediatristTest extends AbstractEntityTest<Pediatrist, String> {
     @Override
     public void setUp() throws Exception {

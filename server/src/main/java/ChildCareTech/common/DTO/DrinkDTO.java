@@ -6,6 +6,8 @@ import java.util.Set;
 
 public interface DrinkDTO extends Serializable, Remote {
     String getName();
+
     MenuDTO getMenu();
+
     Set<FoodDTO> getFoods();
 }

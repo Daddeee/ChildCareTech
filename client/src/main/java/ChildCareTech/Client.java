@@ -21,7 +21,7 @@ public class Client extends Application {
             AccessorStageService.init();
 
             MainSceneManager.loadLogin();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             System.err.println("Can't render login window");
             ex.printStackTrace();
         } catch (NoSuchFieldException ex) {

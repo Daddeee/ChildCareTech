@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
 <VBox maxHeight="-Infinity"
       maxWidth="-Infinity"
       minHeight="-Infinity"
@@ -14,71 +13,84 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="ChildCareTech.controller.LoginController"
 >
-<children>
-    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
-        <children>
-            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Username:">
-                <HBox.margin>
-                    <Insets left="40.0" />
-                </HBox.margin>
-            </Label>
-            <TextField fx:id="addUserNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
-                <HBox.margin>
-                    <Insets left="20.0" />
-                </HBox.margin>
-            </TextField>
-        </children>
-        <VBox.margin>
-            <Insets top="30.0" />
-        </VBox.margin>
-    </HBox>
-    <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
-        <children>
-            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Password:">
-                <HBox.margin>
-                    <Insets left="40.0" />
-                </HBox.margin>
-            </Label>
-            <PasswordField fx:id="addPasswordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
-                <HBox.margin>
-                    <Insets left="20.0" />
-                </HBox.margin>
-            </PasswordField>
-        </children>
-        <VBox.margin>
-            <Insets top="10.0" />
-        </VBox.margin>
-    </HBox>
-    <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
-        <children>
-            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Conferma password:">
-                <HBox.margin>
-                    <Insets left="40.0" />
-                </HBox.margin>
-            </Label>
-            <PasswordField fx:id="confirmPasswordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
-                <HBox.margin>
-                    <Insets left="20.0" />
-                </HBox.margin>
-            </PasswordField>
-        </children>
-        <VBox.margin>
-            <Insets top="10.0" />
-        </VBox.margin>
-    </HBox>
-    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
-        <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancel">
-                <HBox.margin>
-                    <Insets left="100.0" />
-                </HBox.margin>
-            </Button>
-            <Button fx:id="registerButton" onAction="#doRegisterButtonAction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Registra utenre" />
-        </children>
-        <VBox.margin>
-            <Insets top="20.0" />
-        </VBox.margin>
-    </HBox>
-    <Label fx:id="registrationAlertBox" textFill="#ff1a1a" />
-</children>
+    <children>
+        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+              prefWidth="400.0">
+            <children>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="25.0" prefWidth="80.0" text="Username:">
+                    <HBox.margin>
+                        <Insets left="40.0"/>
+                    </HBox.margin>
+                </Label>
+                <TextField fx:id="addUserNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                           minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                    <HBox.margin>
+                        <Insets left="20.0"/>
+                    </HBox.margin>
+                </TextField>
+            </children>
+            <VBox.margin>
+                <Insets top="30.0"/>
+            </VBox.margin>
+        </HBox>
+        <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
+            <children>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="25.0" prefWidth="80.0" text="Password:">
+                    <HBox.margin>
+                        <Insets left="40.0"/>
+                    </HBox.margin>
+                </Label>
+                <PasswordField fx:id="addPasswordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                               minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                    <HBox.margin>
+                        <Insets left="20.0"/>
+                    </HBox.margin>
+                </PasswordField>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+        </HBox>
+        <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
+            <children>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="25.0" prefWidth="80.0" text="Conferma password:">
+                    <HBox.margin>
+                        <Insets left="40.0"/>
+                    </HBox.margin>
+                </Label>
+                <PasswordField fx:id="confirmPasswordField" maxHeight="-Infinity" maxWidth="-Infinity"
+                               minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                    <HBox.margin>
+                        <Insets left="20.0"/>
+                    </HBox.margin>
+                </PasswordField>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+        </HBox>
+        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+              prefWidth="400.0">
+            <children>
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                        mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancel">
+                    <HBox.margin>
+                        <Insets left="100.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="registerButton" onAction="#doRegisterButtonAction" maxHeight="-Infinity"
+                        maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                        prefHeight="25.0" prefWidth="120.0" text="Registra utenre"/>
+            </children>
+            <VBox.margin>
+                <Insets top="20.0"/>
+            </VBox.margin>
+        </HBox>
+        <Label fx:id="registrationAlertBox" textFill="#ff1a1a"/>
+    </children>
 </VBox>

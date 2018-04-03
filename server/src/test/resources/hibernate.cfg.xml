@@ -4,15 +4,15 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name = "hibernate.dialect">
+        <property name="hibernate.dialect">
             org.hibernate.dialect.MariaDBDialect
         </property>
 
-        <property name = "hibernate.connection.driver_class">
+        <property name="hibernate.connection.driver_class">
             org.mariadb.jdbc.Driver
         </property>
 
-        <property name = "hibernate.connection.url">
+        <property name="hibernate.connection.url">
             jdbc:mysql://localhost/test?createDatabaseIfNotExist=true
         </property>
 
@@ -20,11 +20,11 @@
             update
         </property>
 
-        <property name = "hibernate.connection.username">
+        <property name="hibernate.connection.username">
             root
         </property>
 
-        <property name = "hibernate.connection.password">
+        <property name="hibernate.connection.password">
             root
         </property>
 

@@ -15,7 +15,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
-public class TripTest extends AbstractEntityTest<Trip, Integer>{
+public class TripTest extends AbstractEntityTest<Trip, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -46,8 +46,8 @@ public class TripTest extends AbstractEntityTest<Trip, Integer>{
             session.save(b2);
 
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
@@ -73,8 +73,8 @@ public class TripTest extends AbstractEntityTest<Trip, Integer>{
             session.delete(t);
 
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());

@@ -15,7 +15,8 @@ public class SessionService {
     private static UserSession session = null;
     private static String loginErrorMessage = null;
 
-    private SessionService() { }
+    private SessionService() {
+    }
 
     public static void loginAttempt(String userName, String password) {
         try {
@@ -28,9 +29,9 @@ public class SessionService {
         }
     }
 
-    public static void logoutAttempt(){
+    public static void logoutAttempt() {
         try {
-            if(session != null) session.logout();
+            if (session != null) session.logout();
         } catch (RemoteException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -43,7 +44,7 @@ public class SessionService {
         return session;
     }
 
-    public static boolean isNull(){
+    public static boolean isNull() {
         return session == null;
     }
 

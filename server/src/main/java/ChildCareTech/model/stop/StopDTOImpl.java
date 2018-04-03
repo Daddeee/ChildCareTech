@@ -2,14 +2,13 @@ package ChildCareTech.model.stop;
 
 import ChildCareTech.common.DTO.StopDTO;
 import ChildCareTech.common.DTO.TripDTO;
-import ChildCareTech.model.trip.TripDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 public class StopDTOImpl implements StopDTO {
     private TripDTO trip;
     private int stopNumber;
 
-    public StopDTOImpl(Stop stop){
+    public StopDTOImpl(Stop stop) {
         trip = DTOFactory.getDTO(stop.getTrip());
         stopNumber = stop.getStopNumber();
     }

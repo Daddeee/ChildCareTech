@@ -6,16 +6,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Function;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -26,12 +25,13 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
     protected GenericDAO<T, K> dao = null;
 
     @Test
-    public void testRelations(){}
+    public void testRelations() {
+    }
 
     @Test
     public abstract void testCRUD();
 
-    protected <T2> void testOneToMany(T ent1, Set<T2> ent2, Function<T , Set<T2>> getRelationSet) throws IllegalArgumentException{
+    protected <T2> void testOneToMany(T ent1, Set<T2> ent2, Function<T, Set<T2>> getRelationSet) throws IllegalArgumentException {
         session = sessionFactory.openSession();
         dao.setSession(session);
         Transaction tx = null;
@@ -40,18 +40,18 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
             tx = session.beginTransaction();
 
             dao.create(ent1);
-            while(ent2Iter.hasNext()) {
+            while (ent2Iter.hasNext()) {
                 session.save(ent2Iter.next());
             }
 
             session.flush();
             tx.commit();
-        } catch(HibernateException e){
-            if (tx!=null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
-        } finally{
+        } finally {
             session.close();
         }
 
@@ -61,17 +61,17 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
         session = sessionFactory.openSession();
         dao.setSession(session);
         tx = null;
-        try{
+        try {
             tx = session.beginTransaction();
             read = dao.read(ent1);
             getRelationSet.apply(read).size();
             set = getRelationSet.apply(read);
             tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null) tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
-        }finally{
+        } finally {
             session.close();
         }
 
@@ -79,14 +79,14 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
     }
 
     @SuppressWarnings("unchecked")
-    protected void testCRUDImpl(T o, T ou) throws IllegalArgumentException{
+    protected void testCRUDImpl(T o, T ou) throws IllegalArgumentException {
         session = sessionFactory.openSession();
         dao.setSession(session);
         Transaction tx = null;
         T t = null;
 
 
-        try{
+        try {
             /* creating */
             tx = session.beginTransaction();
             dao.create(o);
@@ -118,12 +118,12 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
             t = dao.read((K) o.getPrimaryKey());
 
             assertTrue(t == null);
-        } catch(HibernateException e){
-            if (tx!=null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
-        } finally{
+        } finally {
             session.close();
         }
     }

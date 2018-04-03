@@ -4,9 +4,7 @@ import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.dish.Dish;
-import ChildCareTech.model.dish.DishDTOImpl;
 import ChildCareTech.model.supply.Supply;
-import ChildCareTech.model.supply.SupplyDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
@@ -25,11 +23,11 @@ public class FoodDTOImpl implements FoodDTO {
         residualQuantity = food.getResidualQuantity();
 
         dishes = new HashSet<>();
-        for(Dish d : food.getDishes())
+        for (Dish d : food.getDishes())
             dishes.add(DTOFactory.getDTO(d));
 
         supplies = new HashSet<>();
-        for(Supply s : food.getSupplies())
+        for (Supply s : food.getSupplies())
             supplies.add(DTOFactory.getDTO(s));
     }
 

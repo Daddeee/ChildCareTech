@@ -13,14 +13,15 @@ public class RMIUserSessionFactory extends UnicastRemoteObject implements UserSe
     private static RMIUserSessionFactory sessionFactory = null;
 
     public static RMIUserSessionFactory getSessionFactory() throws RemoteException {
-        if(sessionFactory==null) sessionFactory = new RMIUserSessionFactory();
+        if (sessionFactory == null) sessionFactory = new RMIUserSessionFactory();
         return sessionFactory;
     }
 
-    private RMIUserSessionFactory() throws RemoteException {}
+    private RMIUserSessionFactory() throws RemoteException {
+    }
 
     @Override
-    public RMIUserSession login(String userName, String password) throws LoginFailedException, RemoteException{
+    public RMIUserSession login(String userName, String password) throws LoginFailedException, RemoteException {
         User u = SessionController.getUser(userName, password);
         RMIUserSession session = new RMIUserSession(u);
         SessionController.storeSession(session, userName);

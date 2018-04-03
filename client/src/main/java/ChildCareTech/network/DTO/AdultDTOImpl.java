@@ -4,7 +4,6 @@ import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class AdultDTOImpl implements AdultDTO {
@@ -17,8 +16,12 @@ public class AdultDTOImpl implements AdultDTO {
     }
 
     @Override
-    public PersonDTO getPerson() { return person; }
+    public PersonDTO getPerson() {
+        return person;
+    }
 
     @Override
-    public Set<KidDTO> getContacts() { return contacts; }
+    public Set<KidDTO> getContacts() {
+        return contacts;
+    }
 }

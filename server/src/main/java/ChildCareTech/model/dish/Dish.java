@@ -1,9 +1,8 @@
 package ChildCareTech.model.dish;
 
 import ChildCareTech.model.food.Food;
-import ChildCareTech.model.menu.Menu;
 import ChildCareTech.model.iEntity;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import ChildCareTech.model.menu.Menu;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -27,10 +26,12 @@ public class Dish implements iEntity<Dish, Integer> {
     private Menu menu;
 
     @ManyToMany(targetEntity = Food.class)
-    @JoinTable(name="dish_ingredients")
+    @JoinTable(name = "dish_ingredients")
     private Set<Food> foods;
 
-    public Dish() { }
+    public Dish() {
+    }
+
     public Dish(String name, Menu menu) {
         this.name = name;
         this.menu = menu;
@@ -46,16 +47,27 @@ public class Dish implements iEntity<Dish, Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+
     @Override
-    public void setPrimaryKey(Dish a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Dish a) {
+        this.id = a.getPrimaryKey();
+    }
 
-    private void setMenu(Menu menu) { this.menu = menu; }
+    private void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
-    public Menu getMenu() { return menu; }
+    public Menu getMenu() {
+        return menu;
+    }
 
-    public Set<Food> getFoods() { return foods == null ? Collections.EMPTY_SET : foods; }
+    public Set<Food> getFoods() {
+        return foods == null ? Collections.EMPTY_SET : foods;
+    }
 
-    public void setFoods(Set<Food> foods) { this.foods = foods; }
+    public void setFoods(Set<Food> foods) {
+        this.foods = foods;
+    }
 
     public String getName() {
         return name;
@@ -72,8 +84,8 @@ public class Dish implements iEntity<Dish, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Dish)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Dish)) return false;
         return this.name.equals(((Dish) o).name) &&
                 this.menu.equals(((Dish) o).menu);
     }

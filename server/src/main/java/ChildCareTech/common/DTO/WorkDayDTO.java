@@ -7,6 +7,8 @@ import java.util.Set;
 
 public interface WorkDayDTO extends Serializable, Remote {
     LocalDate getDate();
+
     Set<MealDTO> getMeals();
+
     Set<EventDTO> getEvents();
 }

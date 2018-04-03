@@ -42,8 +42,8 @@ public class BusTest extends AbstractEntityTest<Bus, Integer> {
 
             session.flush();
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());

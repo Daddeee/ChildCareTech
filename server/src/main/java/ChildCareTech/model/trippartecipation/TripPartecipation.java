@@ -27,9 +27,10 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @JoinColumn(nullable = false)
     private Bus bus;
 
-    public TripPartecipation() { }
+    public TripPartecipation() {
+    }
 
-    public TripPartecipation(Person person, Trip trip, Bus bus){
+    public TripPartecipation(Person person, Trip trip, Bus bus) {
         this.person = person;
         this.trip = trip;
         this.bus = bus;
@@ -79,8 +80,8 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof TripPartecipation)) return false;
+        if (this == o) return true;
+        if (!(o instanceof TripPartecipation)) return false;
         return this.person.equals(((TripPartecipation) o).person) &&
                 this.trip.equals(((TripPartecipation) o).trip);
     }

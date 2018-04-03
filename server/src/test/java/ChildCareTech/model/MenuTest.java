@@ -43,8 +43,8 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
 
             session.flush();
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
@@ -71,14 +71,14 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
         session = sessionFactory.openSession();
         Transaction tx = null;
 
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(c);
             session.save(w);
             session.save(ml);
             tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());
         } finally {

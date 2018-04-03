@@ -8,15 +8,15 @@ import java.rmi.registry.Registry;
 public class RMIServer {
     private int rmiPort;
 
-    public RMIServer(int rmiPort){
+    public RMIServer(int rmiPort) {
         this.rmiPort = rmiPort;
     }
 
-    public void start(){
+    public void start() {
         try {
             Registry registry = LocateRegistry.createRegistry(rmiPort);
             registry.bind("session_factory", RMIUserSessionFactory.getSessionFactory());
-        } catch (RemoteException | AlreadyBoundException e){
+        } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
             return;

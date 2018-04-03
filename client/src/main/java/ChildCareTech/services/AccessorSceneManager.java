@@ -21,12 +21,13 @@ public class AccessorSceneManager {
         registerUserScene = sceneInit(registerUserLoader, "style/registerUserWindow.css");
     }
 
-    private AccessorSceneManager() { }
+    private AccessorSceneManager() {
+    }
 
     public static void loadAddPerson() throws IOException {
         try {
             AccessorStageService.changeScene(addKidScene);
-        } catch(NoSuchFieldException ex) {
+        } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
     }
@@ -39,17 +40,17 @@ public class AccessorSceneManager {
     public static void loadRegisterUser() throws IOException {
         try {
             AccessorStageService.changeScene(registerUserScene);
-        } catch(NoSuchFieldException ex) {
+        } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }
     }
 
-    private static Scene sceneInit(FXMLLoader loader, String cssPath){
+    private static Scene sceneInit(FXMLLoader loader, String cssPath) {
         Scene scene = null;
         try {
             scene = new Scene(loader.load());
             scene.getStylesheets().add(cssPath);
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             System.err.println("Can't find fxml/css file");
             ex.printStackTrace();
             return errScene();

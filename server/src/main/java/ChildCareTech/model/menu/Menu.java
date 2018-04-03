@@ -31,12 +31,15 @@ public class Menu implements iEntity<Menu, Integer> {
     @OneToOne
     private Drink drink;
 
-    public Menu() { }
-    public Menu(Meal meal, int numMenu){
+    public Menu() {
+    }
+
+    public Menu(Meal meal, int numMenu) {
         this.meal = meal;
         this.numMenu = numMenu;
     }
-    public Menu(Meal meal, int numMenu, Set<Dish> dishes, Drink drink){
+
+    public Menu(Meal meal, int numMenu, Set<Dish> dishes, Drink drink) {
         this.meal = meal;
         this.numMenu = numMenu;
         this.dishes = dishes;
@@ -47,16 +50,27 @@ public class Menu implements iEntity<Menu, Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+
     @Override
-    public void setPrimaryKey(Menu a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Menu a) {
+        this.id = a.getPrimaryKey();
+    }
 
-    private void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
+    private void setDishes(Set<Dish> dishes) {
+        this.dishes = dishes;
+    }
 
-    public Set<Dish> getDishes() { return dishes == null ? Collections.EMPTY_SET : dishes; }
+    public Set<Dish> getDishes() {
+        return dishes == null ? Collections.EMPTY_SET : dishes;
+    }
 
-    private void setDrink(Drink drink) { this.drink = drink; }
+    private void setDrink(Drink drink) {
+        this.drink = drink;
+    }
 
-    public Drink getDrink() { return drink; }
+    public Drink getDrink() {
+        return drink;
+    }
 
     public Meal getMeal() {
         return meal;
@@ -70,14 +84,14 @@ public class Menu implements iEntity<Menu, Integer> {
         return numMenu;
     }
 
-    private void setNumMenu(int numMenu){
+    private void setNumMenu(int numMenu) {
         this.numMenu = numMenu;
     }
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Menu)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Menu)) return false;
         return this.meal.equals(((Menu) o).meal) &&
                 this.numMenu == ((Menu) o).numMenu;
     }

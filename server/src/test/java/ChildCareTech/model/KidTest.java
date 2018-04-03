@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
-public class KidTest extends AbstractEntityTest<Kid, String>{
+public class KidTest extends AbstractEntityTest<Kid, String> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -37,18 +37,18 @@ public class KidTest extends AbstractEntityTest<Kid, String>{
 
         session = sessionFactory.openSession();
         Transaction tx = null;
-        try{
+        try {
             /* creating */
             tx = session.beginTransaction();
             session.save(o);
             session.save(p);
             tx.commit();
-        } catch(HibernateException e){
-            if (tx!=null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
-            fail("[!] SETUP ERROR: "+ e.getMessage());
-        } finally{
+            fail("[!] SETUP ERROR: " + e.getMessage());
+        } finally {
             session.close();
         }
 
@@ -56,17 +56,17 @@ public class KidTest extends AbstractEntityTest<Kid, String>{
 
         session = sessionFactory.openSession();
         tx = null;
-        try{
+        try {
             /* creating */
             tx = session.beginTransaction();
             session.save(a);
             tx.commit();
-        } catch(HibernateException e){
-            if (tx!=null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
-            fail("[!] SETUP ERROR: "+ e.getMessage());
-        } finally{
+            fail("[!] SETUP ERROR: " + e.getMessage());
+        } finally {
             session.close();
         }
 

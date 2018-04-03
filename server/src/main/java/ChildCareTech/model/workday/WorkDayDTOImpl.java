@@ -4,9 +4,7 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.event.Event;
-import ChildCareTech.model.event.EventDTOImpl;
 import ChildCareTech.model.meal.Meal;
-import ChildCareTech.model.meal.MealDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 import java.time.LocalDate;
@@ -18,15 +16,15 @@ public class WorkDayDTOImpl implements WorkDayDTO {
     private Set<MealDTO> meals;
     private Set<EventDTO> events;
 
-    public WorkDayDTOImpl(WorkDay workDay){
+    public WorkDayDTOImpl(WorkDay workDay) {
         date = workDay.getDate();
 
         meals = new HashSet<>();
-        for(Meal m : workDay.getMeals())
+        for (Meal m : workDay.getMeals())
             meals.add(DTOFactory.getDTO(m));
 
         events = new HashSet<>();
-        for(Event e : workDay.getEvents())
+        for (Event e : workDay.getEvents())
             events.add(DTOFactory.getDTO(e));
     }
 

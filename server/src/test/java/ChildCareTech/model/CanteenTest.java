@@ -22,7 +22,7 @@ public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
     }
 
     @Override
-    public void testRelations(){
+    public void testRelations() {
         Transaction tx = null;
 
         Canteen c = new Canteen("canteen");
@@ -41,8 +41,8 @@ public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
 
             session.flush();
             tx.commit();
-        } catch(HibernateException e) {
-            if(tx != null)
+        } catch (HibernateException e) {
+            if (tx != null)
                 tx.rollback();
             e.printStackTrace();
             fail(e.getMessage());

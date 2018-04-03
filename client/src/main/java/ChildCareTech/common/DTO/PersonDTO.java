@@ -10,11 +10,17 @@ import java.time.LocalDate;
 
 public interface PersonDTO extends Serializable, Remote {
     String getFirstName();
+
     String getLastName();
+
     String getFiscalCode();
+
     LocalDate getBirthDate();
+
     Sex getSex();
+
     String getAddress();
+
     String getPhoneNumber();
 }
 

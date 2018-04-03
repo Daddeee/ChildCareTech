@@ -19,20 +19,20 @@ public class HomeController {
 
     @FXML
     protected void anagraphicsButtonAction(ActionEvent action) {
-        try{
+        try {
             MainSceneManager.loadAnagraphics();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
         }
     }
 
     @FXML
-    protected void logoutButtonAction(ActionEvent action){
+    protected void logoutButtonAction(ActionEvent action) {
         SessionService.logoutAttempt();
-        try{
+        try {
             MainSceneManager.loadLogin();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
         }

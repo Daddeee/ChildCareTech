@@ -4,9 +4,6 @@ import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.bus.BusDTOImpl;
-import ChildCareTech.model.person.PersonDTOImpl;
-import ChildCareTech.model.trip.TripDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 public class TripPartecipationDTOImpl implements TripPartecipationDTO {
@@ -14,7 +11,7 @@ public class TripPartecipationDTOImpl implements TripPartecipationDTO {
     private TripDTO trip;
     private BusDTO bus;
 
-    public TripPartecipationDTOImpl(TripPartecipation tripPartecipation){
+    public TripPartecipationDTOImpl(TripPartecipation tripPartecipation) {
         person = DTOFactory.getDTO(tripPartecipation.getPerson());
         trip = DTOFactory.getDTO(tripPartecipation.getTrip());
         bus = DTOFactory.getDTO(tripPartecipation.getBus());

@@ -6,5 +6,6 @@ import java.util.Set;
 
 public interface BusDTO extends Serializable, Remote {
     String getLicensePlate();
+
     Set<TripPartecipationDTO> getTripPartecipations();
 }

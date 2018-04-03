@@ -1,8 +1,8 @@
 package ChildCareTech.model.meal;
 
-import ChildCareTech.model.workday.WorkDay;
 import ChildCareTech.model.canteen.Canteen;
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.workday.WorkDay;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 )
 public class Meal implements iEntity<Meal, Integer> {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne
@@ -28,7 +28,8 @@ public class Meal implements iEntity<Meal, Integer> {
     private int mealNum;
 
 
-    public Meal() {}
+    public Meal() {
+    }
 
     public Meal(Canteen canteen, int mealNum, WorkDay workDay) {
         this.canteen = canteen;
@@ -40,26 +41,47 @@ public class Meal implements iEntity<Meal, Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
+
     @Override
-    public void setPrimaryKey(Meal a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Meal a) {
+        this.id = a.getPrimaryKey();
+    }
 
-    public LocalDate getDate() { return workDay.getDate(); }
+    public LocalDate getDate() {
+        return workDay.getDate();
+    }
 
-    private void setId(int id) { this.id = id; }
+    private void setId(int id) {
+        this.id = id;
+    }
 
-    public Canteen getCanteen() { return canteen; }
+    public Canteen getCanteen() {
+        return canteen;
+    }
 
-    private void setCanteen_id(Canteen canteen_id) { this.canteen = canteen; }
+    private void setCanteen_id(Canteen canteen_id) {
+        this.canteen = canteen;
+    }
 
-    public int getMealNum() { return mealNum; }
+    public int getMealNum() {
+        return mealNum;
+    }
 
-    private void setMealNum(int meal_num) { this.mealNum = mealNum; }
+    private void setMealNum(int meal_num) {
+        this.mealNum = mealNum;
+    }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    private void setWorkDay(WorkDay workDay) { this.workDay = workDay; }
+    private void setWorkDay(WorkDay workDay) {
+        this.workDay = workDay;
+    }
 
-    public WorkDay getWorkDay() { return workDay; }
+    public WorkDay getWorkDay() {
+        return workDay;
+    }
 
     @Override
     public int hashCode() {
@@ -68,8 +90,8 @@ public class Meal implements iEntity<Meal, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Meal)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Meal)) return false;
         return this.canteen.equals(((Meal) o).canteen) &&
                 this.workDay.equals(((Meal) o).workDay) &&
                 mealNum == ((Meal) o).mealNum;

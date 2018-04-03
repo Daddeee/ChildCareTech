@@ -1,17 +1,16 @@
 package ChildCareTech.model.kid;
 
-import ChildCareTech.model.pediatrist.Pediatrist;
-import ChildCareTech.model.person.Person;
 import ChildCareTech.model.adult.Adult;
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.pediatrist.Pediatrist;
+import ChildCareTech.model.person.Person;
 
 import javax.persistence.*;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 @javax.persistence.Entity
-@Table(name="kids")
+@Table(name = "kids")
 public class Kid implements iEntity<Kid, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,11 +30,13 @@ public class Kid implements iEntity<Kid, Integer> {
     private Pediatrist pediatrist;
 
     @ManyToMany
-    @JoinTable(name="contacts")
+    @JoinTable(name = "contacts")
     private Set<Adult> contacts;
 
-    public Kid(){}
-    public Kid(Person person, Adult firstTutor, Adult secondTutor, Pediatrist pediatrist){
+    public Kid() {
+    }
+
+    public Kid(Person person, Adult firstTutor, Adult secondTutor, Pediatrist pediatrist) {
         this.person = person;
         this.firstTutor = firstTutor;
         this.secondTutor = secondTutor;
@@ -48,7 +49,9 @@ public class Kid implements iEntity<Kid, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Kid a) { this.id = a.getPrimaryKey(); }
+    public void setPrimaryKey(Kid a) {
+        this.id = a.getPrimaryKey();
+    }
 
     public int getId() {
         return id;
@@ -100,8 +103,8 @@ public class Kid implements iEntity<Kid, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Kid)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Kid)) return false;
         return this.person.equals(((Kid) o).person);
     }
 

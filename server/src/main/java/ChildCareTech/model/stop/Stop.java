@@ -1,12 +1,12 @@
 package ChildCareTech.model.stop;
 
-import ChildCareTech.model.trip.Trip;
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.trip.Trip;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="stops",
+@Table(name = "stops",
         uniqueConstraints = @UniqueConstraint(columnNames = {"trip_id", "stopNumber"})
 )
 public class Stop implements iEntity<Stop, Integer> {
@@ -21,8 +21,10 @@ public class Stop implements iEntity<Stop, Integer> {
     @Column(nullable = false)
     private int stopNumber;
 
-    public Stop(){}
-    public Stop(Trip trip, int stopNumber){
+    public Stop() {
+    }
+
+    public Stop(Trip trip, int stopNumber) {
         this.trip = trip;
         this.stopNumber = stopNumber;
     }
@@ -63,8 +65,8 @@ public class Stop implements iEntity<Stop, Integer> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(!(o instanceof Stop)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Stop)) return false;
         return this.trip.equals(((Stop) o).trip) &&
                 this.stopNumber == ((Stop) o).stopNumber;
     }

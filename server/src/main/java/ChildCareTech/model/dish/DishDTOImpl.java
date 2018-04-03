@@ -4,8 +4,6 @@ import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.model.food.Food;
-import ChildCareTech.model.food.FoodDTOImpl;
-import ChildCareTech.model.menu.MenuDTOImpl;
 import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
@@ -16,11 +14,11 @@ public class DishDTOImpl implements DishDTO {
     private MenuDTO menu;
     private Set<FoodDTO> foods;
 
-    public DishDTOImpl(Dish dish){
+    public DishDTOImpl(Dish dish) {
         name = dish.getName();
         menu = DTOFactory.getDTO(dish.getMenu());
         foods = new HashSet<>();
-        for(Food f : dish.getFoods())
+        for (Food f : dish.getFoods())
             foods.add(DTOFactory.getDTO(f));
     }
 
