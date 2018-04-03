@@ -1,12 +1,13 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.drink.Drink;
+import ChildCareTech.utils.GenericDAO;
 
 public class DrinkTest extends AbstractEntityTest<Drink, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Drink.class);
+        dao = new GenericDAO<>(Drink.class);
     }
 
     @Override

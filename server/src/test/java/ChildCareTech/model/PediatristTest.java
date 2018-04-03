@@ -1,8 +1,9 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
-import org.hibernate.HibernateException;
-import org.hibernate.Transaction;
+import ChildCareTech.model.kid.Kid;
+import ChildCareTech.model.pediatrist.Pediatrist;
+import ChildCareTech.model.person.Person;
+import ChildCareTech.utils.GenericDAO;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ public class PediatristTest extends AbstractEntityTest<Pediatrist, String> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Pediatrist.class);
+        dao = new GenericDAO<>(Pediatrist.class);
     }
 
     @Override

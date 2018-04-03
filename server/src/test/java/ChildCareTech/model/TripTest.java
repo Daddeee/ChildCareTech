@@ -1,12 +1,16 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.bus.Bus;
+import ChildCareTech.model.person.Person;
+import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.trip.Trip;
+import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.utils.GenericDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;
@@ -15,7 +19,7 @@ public class TripTest extends AbstractEntityTest<Trip, Integer>{
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Trip.class);
+        dao = new GenericDAO<>(Trip.class);
     }
 
     @Override

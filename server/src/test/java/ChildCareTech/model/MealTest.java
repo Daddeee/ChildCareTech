@@ -1,6 +1,9 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.canteen.Canteen;
+import ChildCareTech.model.meal.Meal;
+import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
@@ -12,7 +15,7 @@ public class MealTest extends AbstractEntityTest<Meal, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Meal.class);
+        dao = new GenericDAO<>(Meal.class);
     }
 
     @Override

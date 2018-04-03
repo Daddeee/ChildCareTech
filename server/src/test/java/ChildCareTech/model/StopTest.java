@@ -1,6 +1,8 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.trip.Trip;
+import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
@@ -12,7 +14,7 @@ public class StopTest extends AbstractEntityTest<Stop, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Stop.class);
+        dao = new GenericDAO<>(Stop.class);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,7 +23,7 @@ import static org.junit.Assert.fail;
 public abstract class AbstractEntityTest<T extends iEntity, K extends Serializable> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
-    protected GenericDao<T, K> dao = null;
+    protected GenericDAO<T, K> dao = null;
 
     @Test
     public void testRelations(){}

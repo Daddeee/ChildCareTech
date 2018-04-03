@@ -1,6 +1,8 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.person.Person;
+import ChildCareTech.model.staff.Staff;
+import ChildCareTech.utils.GenericDAO;
 
 import java.time.LocalDate;
 
@@ -8,7 +10,7 @@ public class StaffTest extends AbstractEntityTest<Staff, String> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Staff.class);
+        dao = new GenericDAO<>(Staff.class);
     }
 
     @Override

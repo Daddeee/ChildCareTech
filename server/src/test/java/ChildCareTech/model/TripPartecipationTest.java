@@ -1,6 +1,10 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.bus.Bus;
+import ChildCareTech.model.person.Person;
+import ChildCareTech.model.trip.Trip;
+import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import java.time.LocalDate;
@@ -10,7 +14,7 @@ public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation,
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(TripPartecipation.class);
+        dao = new GenericDAO<>(TripPartecipation.class);
     }
 
     @Override

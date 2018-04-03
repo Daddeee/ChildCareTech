@@ -1,10 +1,14 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.canteen.Canteen;
+import ChildCareTech.model.dish.Dish;
+import ChildCareTech.model.meal.Meal;
+import ChildCareTech.model.menu.Menu;
+import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
@@ -13,7 +17,7 @@ public class DishTest extends AbstractEntityTest<Dish, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(Dish.class);
+        dao = new GenericDAO<>(Dish.class);
     }
 
     @Override

@@ -1,11 +1,11 @@
 package ChildCareTech.network.RMI;
 
-import ChildCareTech.common.PersonDTO;
+import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.controller.SessionController;
-import ChildCareTech.model.Person;
-import ChildCareTech.model.User;
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.person.Person;
+import ChildCareTech.model.user.User;
+import ChildCareTech.utils.GenericDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -24,7 +24,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     public List<PersonDTO> getAllPeople() throws RemoteException {
-        GenericDao<Person, String> dao = new GenericDao<Person, String>(Person.class);
+        GenericDAO<Person, String> dao = new GenericDAO<Person, String>(Person.class);
         List<Person> personList;
         List<PersonDTO> dtoList = new ArrayList<>();
 

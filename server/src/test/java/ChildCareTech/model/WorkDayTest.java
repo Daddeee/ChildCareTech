@@ -1,11 +1,15 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.GenericDao;
+import ChildCareTech.model.canteen.Canteen;
+import ChildCareTech.model.event.Event;
+import ChildCareTech.model.meal.Meal;
+import ChildCareTech.model.person.Person;
+import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.utils.GenericDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -16,7 +20,7 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDao<>(WorkDay.class);
+        dao = new GenericDAO<>(WorkDay.class);
     }
 
     @Override
