@@ -22,11 +22,7 @@ public class PersonDTOImpl implements PersonDTO {
         this.birthDate = birthDate;
         this.sex = sex;
     }
-
-    public PersonDTOImpl(String firstName, String lastName, String fiscalCode, LocalDate birthDate, Sex sex, String address) {
-        this(firstName, lastName, fiscalCode, birthDate, sex, address, null);
-    }
-
+    
     @Override
     public String getFirstName() {
         return firstName;

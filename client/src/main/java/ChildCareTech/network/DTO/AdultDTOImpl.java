@@ -16,10 +16,6 @@ public class AdultDTOImpl implements AdultDTO {
         this.person = person;
     }
 
-    public AdultDTOImpl(PersonDTO person) {
-        this(person, new HashSet<>());
-    }
-
     @Override
     public PersonDTO getPerson() { return person; }
 

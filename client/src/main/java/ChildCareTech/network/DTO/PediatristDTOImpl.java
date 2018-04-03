@@ -6,21 +6,13 @@ import ChildCareTech.common.DTO.PersonDTO;
 
 import java.util.Set;
 
-public class PediatristDTOImpl implements PediatristDTO {
-    private PersonDTO person;
+public class PediatristDTOImpl extends AdultDTOImpl implements PediatristDTO {
     private Set<KidDTO> kids;
 
-    public PediatristDTOImpl(PersonDTO person, Set<KidDTO> kids) {
-        this.person = person;
+    public PediatristDTOImpl(PersonDTO person, Set<KidDTO> contacts, Set<KidDTO> kids) {
+        super(person, contacts);
         this.kids = kids;
     }
-
-    public PediatristDTOImpl(PersonDTO person) {
-        this(person, null);
-    }
-
-    @Override
-    public PersonDTO getPerson() { return person; }
 
     @Override
     public Set<KidDTO> getKids() { return kids; }
