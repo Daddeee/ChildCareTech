@@ -14,25 +14,24 @@ public class KidDTOImpl implements KidDTO {
     private PediatristDTO pediatrist;
     private Set<AdultDTO> contacts;
 
-    public KidDTOImpl() { }
+    public KidDTOImpl(PersonDTO person, AdultDTO tutorOne, AdultDTO tutorTwo, PediatristDTO pediatrist, Set<AdultDTO> contacts) {
+        this.person = person;
+        this.tutorOne = tutorOne;
+        this.tutorTwo = tutorTwo;
+        this.pediatrist = pediatrist;
+        this.contacts = contacts;
+    }
+    public KidDTOImpl(PersonDTO person, AdultDTO tutorOne, PediatristDTO pediatrist, Set<AdultDTO> contacts) {
+        this(person, tutorOne, null, pediatrist, contacts);
+    }
 
     public PersonDTO getPerson() { return person; }
 
-    public void setPerson(PersonDTO person) { this.person = person; }
+    public AdultDTO getFirstTutor() { return tutorOne; }
 
-    public AdultDTO getTutorOne() { return tutorOne; }
-
-    public void setTutorOne(AdultDTO tutorOne) { this.tutorOne = tutorOne; }
-
-    public AdultDTO getTutorTwo() { return tutorTwo; }
-
-    public void setTutorTwo(AdultDTO tutorTwo) { this.tutorTwo = tutorTwo; }
+    public AdultDTO getSecondTutor() { return tutorTwo; }
 
     public PediatristDTO getPediatrist() { return pediatrist; }
 
-    public void setPediatrist(PediatristDTO pediatrist) { this.pediatrist =pediatrist; }
-
     public Set<AdultDTO> getContacts() { return contacts; }
-
-    public void setContacts(Set<AdultDTO> contacts) { this.contacts = contacts; }
 }

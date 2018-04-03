@@ -2,6 +2,7 @@ package ChildCareTech.network.DTO;
 
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.Sex;
+import ChildCareTech.services.SessionService;
 
 import java.time.LocalDate;
 
@@ -14,16 +15,21 @@ public class PersonDTOImpl implements PersonDTO {
     private String address;
     private String phoneNumber;
 
-    public PersonDTOImpl() {}
+    public PersonDTOImpl(String firstName, String lastName, String fiscalCode, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fiscalCode = fiscalCode;
+        this.birthDate = birthDate;
+        this.sex = sex;
+    }
+
+    public PersonDTOImpl(String firstName, String lastName, String fiscalCode, LocalDate birthDate, Sex sex, String address) {
+        this(firstName, lastName, fiscalCode, birthDate, sex, address, null);
+    }
 
     @Override
     public String getFirstName() {
         return firstName;
-    }
-
-    @Override
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     @Override
@@ -32,18 +38,8 @@ public class PersonDTOImpl implements PersonDTO {
     }
 
     @Override
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
     public String getFiscalCode() {
         return fiscalCode;
-    }
-
-    @Override
-    public void setFiscalCode(String fiscalCode) {
-        this.fiscalCode = fiscalCode;
     }
 
     @Override
@@ -52,18 +48,8 @@ public class PersonDTOImpl implements PersonDTO {
     }
 
     @Override
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    @Override
     public Sex getSex() {
         return sex;
-    }
-
-    @Override
-    public void setSex(Sex sex) {
-        this.sex = sex;
     }
 
     @Override
@@ -72,17 +58,7 @@ public class PersonDTOImpl implements PersonDTO {
     }
 
     @Override
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    @Override
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }

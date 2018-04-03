@@ -8,6 +8,7 @@ import java.io.IOException;
 public class AccessorSceneManager {
 
     private static FXMLLoader loginLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
+    private static FXMLLoader registerUserLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/registerUserWindow.fxml"));
 
     private AccessorSceneManager() { }
 
@@ -25,11 +26,12 @@ public class AccessorSceneManager {
         System.err.println("accessory stage not initialized");
         ex.printStackTrace();
     }
-}
 
     public static void loadRegisterUser() throws IOException {
+    Scene scene = new Scene(registerUserLoader.load());
+    scene.getStylesheets().add("style/registerUserWindow.css");
         try {
-            AccessorStageService.changeScene("/view/registerUserWindow.fxml", "style/registerUserWindow.css");
+            AccessorStageService.changeScene(scene);
         } catch(NoSuchFieldException ex) {
             ex.printStackTrace();
         }

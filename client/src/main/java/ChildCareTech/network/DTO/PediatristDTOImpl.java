@@ -10,16 +10,14 @@ public class PediatristDTOImpl implements PediatristDTO {
     private PersonDTO person;
     private Set<KidDTO> kids;
 
+    public PediatristDTOImpl(PersonDTO person, Set<KidDTO> kids) {
+        this.person = person;
+        this.kids = kids;
+    }
+
     @Override
     public PersonDTO getPerson() { return person; }
 
     @Override
-    public void setPerson(PersonDTO person) { this.person = person; }
-
-    @Override
     public Set<KidDTO> getKids() { return kids; }
-
-    @Override
-    public void setKids(Set<KidDTO> kids) { this.kids = kids; }
-
 }

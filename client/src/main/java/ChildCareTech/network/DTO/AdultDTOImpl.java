@@ -4,23 +4,25 @@ import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class AdultDTOImpl implements AdultDTO {
     private PersonDTO person;
     private Set<KidDTO> contacts;
 
-    public AdultDTOImpl() { }
+    public AdultDTOImpl(PersonDTO person, Set<KidDTO> contacts) {
+        this.contacts = contacts;
+        this.person = person;
+    }
+
+    public AdultDTOImpl(PersonDTO person) {
+        this(person, new HashSet<>());
+    }
 
     @Override
     public PersonDTO getPerson() { return person; }
 
     @Override
-    public void setPerson(PersonDTO person) { this.person = person; }
-
-    @Override
     public Set<KidDTO> getContacts() { return contacts; }
-
-    @Override
-    public void setContacts(Set<KidDTO> contacts) { this.contacts = contacts; }
 }
