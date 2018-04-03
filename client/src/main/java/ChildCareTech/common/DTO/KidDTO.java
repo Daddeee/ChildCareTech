@@ -4,15 +4,8 @@ import java.util.Set;
 
 public interface KidDTO {
     PersonDTO getPerson();
-    AdultDTO getTutorOne();
-    AdultDTO getTutorTwo();
+    AdultDTO getFirstTutor();
+    AdultDTO getSecondTutor();
     PediatristDTO getPediatrist();
     Set<AdultDTO> getContacts();
-
-    void setPerson(PersonDTO person);
-    void setTutorOne(AdultDTO tutorOne);
-    void setTutorTwo(AdultDTO tutorTwo);
-    void setPediatrist(PediatristDTO pediatrist);
-    void setContacts(Set<AdultDTO> contacts);
-
 }
