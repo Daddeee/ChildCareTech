@@ -11,7 +11,7 @@
    <children>
       <VBox layoutX="50.0" layoutY="87.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="900.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="anagraphicsButton" onAction="#anagraphicsButtonAction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="ANAGRAFICA">
+            <Button fx:id="anagraphicsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#anagraphicsButtonAction" prefHeight="80.0" prefWidth="80.0" text="ANAGRAFICA">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -19,9 +19,9 @@
                   <Font size="9.0" />
                </font>
             </Button>
-            <Button fx:id="logoutButton" onAction="#logoutButtonAction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="LOGOUT">
+            <Button fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logoutButtonAction" prefHeight="80.0" prefWidth="80.0" text="LOGOUT">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
                <font>
                   <Font size="9.0" />

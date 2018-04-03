@@ -1,6 +1,6 @@
 package ChildCareTech.network.DTO;
 
-import ChildCareTech.common.PersonDTO;
+import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.Sex;
 
 import java.time.LocalDate;

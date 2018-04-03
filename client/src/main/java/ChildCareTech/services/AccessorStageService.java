@@ -86,13 +86,4 @@ public class AccessorStageService {
         AccessorStageService.setScene(scene);
         AccessorStageService.show();
     }
-
-    public static void changeScene(String fxmlPath, String cssPath) throws IOException, NoSuchFieldException {
-        if(accessorStage == null)
-            throw new NoSuchFieldException("Stage not initialized");
-        Parent root = FXMLLoader.load(AccessorStageService.class.getResource(fxmlPath));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(cssPath);
-        AccessorStageService.changeScene(scene);
-    }
 }

@@ -10,4 +10,5 @@ public interface UserSession extends Remote{
     List<PersonDTO> getAllPeople() throws RemoteException;
     void greetWorld() throws RemoteException;
     void logout() throws RemoteException;
+    void savePerson(PersonDTO person) throws RemoteException;
 }

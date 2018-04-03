@@ -1,5 +1,7 @@
-package ChildCareTech.common;
+package ChildCareTech.common.DTO;
 
+
+import ChildCareTech.common.Sex;
 
 import java.io.Serializable;
 import java.time.LocalDate;

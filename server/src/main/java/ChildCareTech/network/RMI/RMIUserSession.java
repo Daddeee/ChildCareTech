@@ -60,4 +60,9 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         SessionController.removeSession(user.getUserName());
         UnicastRemoteObject.unexportObject(this, true);
     }
+
+    @Override
+    public void savePerson(PersonDTO person) throws RemoteException{
+
+    }
 }
