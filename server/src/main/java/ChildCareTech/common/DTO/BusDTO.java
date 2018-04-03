@@ -6,5 +6,4 @@ import java.util.Set;
 public interface BusDTO extends Serializable {
     String getLicensePlate();
     Set<TripPartecipationDTO> getTripPartecipations();
-
 }
