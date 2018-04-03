@@ -5,6 +5,7 @@ import ChildCareTech.model.menu.Menu;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
@@ -54,7 +55,7 @@ public class Drink implements iEntity<Drink, Integer> {
 
     private void setFoods(Set<Food> foods) { this.foods = foods; }
 
-    public Set<Food> getFoods() {return foods; }
+    public Set<Food> getFoods() {return foods == null ? Collections.EMPTY_SET : foods; }
 
     @Override
     public int hashCode() {

@@ -6,6 +6,7 @@ import ChildCareTech.model.iEntity;
 import ChildCareTech.model.meal.Meal;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
@@ -51,7 +52,7 @@ public class Menu implements iEntity<Menu, Integer> {
 
     private void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
 
-    public Set<Dish> getDishes() { return dishes; }
+    public Set<Dish> getDishes() { return dishes == null ? Collections.EMPTY_SET : dishes; }
 
     private void setDrink(Drink drink) { this.drink = drink; }
 

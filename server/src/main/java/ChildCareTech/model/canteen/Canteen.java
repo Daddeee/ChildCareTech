@@ -3,6 +3,7 @@ package ChildCareTech.model.canteen;
 import ChildCareTech.model.meal.Meal;
 import ChildCareTech.model.iEntity;
 
+import java.util.Collections;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -43,7 +44,7 @@ public class Canteen implements iEntity<Canteen, Integer> {
         this.name = name;
     }
 
-    public Set<Meal> getMeals() { return meals; }
+    public Set<Meal> getMeals() { return meals == null ? Collections.EMPTY_SET : meals; }
 
     private void setMeals(Set<Meal> meals) { this.meals = meals; }
 

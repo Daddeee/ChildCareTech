@@ -7,6 +7,7 @@ import ChildCareTech.model.meal.Meal;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
 
 @Entity
@@ -58,7 +59,7 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
     }
 
     public Set<Meal> getMeals() {
-        return meals;
+        return meals == null ? Collections.EMPTY_SET : meals;
     }
 
     public void setMeals(Set<Meal> meals) {
@@ -66,7 +67,7 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
     }
 
     public Set<Event> getEvents() {
-        return events;
+        return events == null ? Collections.EMPTY_SET : events;
     }
 
     public void setEvents(Set<Event> events) {
