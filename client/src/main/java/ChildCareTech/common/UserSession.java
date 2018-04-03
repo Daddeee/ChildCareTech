@@ -1,5 +1,6 @@
 package ChildCareTech.common;
 
+import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 
 import java.rmi.Remote;

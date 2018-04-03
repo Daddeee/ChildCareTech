@@ -2,6 +2,8 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.services.AccessorSceneManager;
+import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.MainStageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,6 +55,16 @@ public class KidAnagraphicController {
     public void addButtonAction(ActionEvent event) {
         try {
             AccessorSceneManager.loadAddPerson();
+        } catch(IOException ex) {
+            System.err.println("Can't load addKid window");
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void backButtonAction(ActionEvent event) {
+        try {
+            MainSceneManager.loadHome();
         } catch(IOException ex) {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();

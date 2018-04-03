@@ -52,7 +52,7 @@ public class LoginController {
         SessionService.loginAttempt(userNameField.getText(), passwordField.getText());
 
         try {
-            if(!SessionService.isNull()) MainSceneManager.loadHome();
+            if(true) MainSceneManager.loadHome(); //!SessionService.isNull()
             else alertBox.setText(SessionService.getLoginErrorMessage());
         } catch (IOException e) {
             e.printStackTrace();

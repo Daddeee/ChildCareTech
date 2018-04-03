@@ -22,7 +22,7 @@ public class PersonDTOImpl implements PersonDTO {
         this.birthDate = birthDate;
         this.sex = sex;
     }
-    
+
     @Override
     public String getFirstName() {
         return firstName;

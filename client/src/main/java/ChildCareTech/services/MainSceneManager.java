@@ -21,7 +21,7 @@ public class MainSceneManager {
     }
     public static void loadAnagraphics() throws IOException{
         try{
-            MainStageService.changeScene("/view/anagraphicsWindow.fxml", "/style/anagraphicsWindow.css");
+            MainStageService.changeScene("/view/kidAnagraphicsWindow.fxml", "/style/anagraphicsWindow.css");
         } catch(NoSuchFieldException ex) {
             ex.printStackTrace();
         }

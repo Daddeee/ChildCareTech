@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.Sex;
 import ChildCareTech.network.DTO.KidDTOImpl;
 import ChildCareTech.network.DTO.PersonDTOImpl;
 import ChildCareTech.services.AccessorStageService;
@@ -20,6 +21,8 @@ public class AddKidController {
     @FXML
     private DatePicker birthDatePicker;
     @FXML
+    private TextField addressField;
+    @FXML
     private RadioButton maleButton;
     @FXML
     private RadioButton femaleButton;
@@ -35,14 +38,28 @@ public class AddKidController {
     private KidDTO kid;
 
     @FXML
+    public void initialize() {
+        maleButton.setToggleGroup(group);
+        femaleButton.setToggleGroup(group);
+    }
+
+    @FXML
     public void saveButtonAction(ActionEvent event) {
         if(fiscalCodeField.getText().length()!=16 ||
                 firstNameField.getText().equals("") ||
                 lastNameField.getText().equals("") ||
+                addressField.getText().equals("") ||
                 (!maleButton.isArmed() && !femaleButton.isArmed())) {
             alertLabel.setText("invalid input");
+            return;
         }
-
+        Sex sex;
+        if(maleButton.isArmed())
+            sex = Sex.MALE;
+        else
+            sex = Sex.FEMALE;
+        person = new PersonDTOImpl(firstNameField.getText(), lastNameField.getText(),fiscalCodeField.getText() ,birthDatePicker.getValue(), sex, addressField.getText(), null);
+        kid = new KidDTOImpl(person, null, null, null);
     }
     @FXML
     public void cancelButtonAction(ActionEvent event) {
