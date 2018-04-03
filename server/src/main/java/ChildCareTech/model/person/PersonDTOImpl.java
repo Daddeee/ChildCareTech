@@ -14,16 +14,19 @@ public class PersonDTOImpl implements PersonDTO {
     private String address;
     private String phoneNumber;
 
-    public PersonDTOImpl() {}
+    public PersonDTOImpl(Person person) {
+        firstName = person.getFirstName();
+        lastName = person.getLastName();
+        fiscalCode = person.getFiscalCode();
+        birthDate = person.getBirthDate();
+        sex = person.getSex();
+        address = person.getAddress();
+        phoneNumber = person.getPhoneNumber();
+    }
 
     @Override
     public String getFirstName() {
         return firstName;
-    }
-
-    @Override
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     @Override
@@ -32,18 +35,8 @@ public class PersonDTOImpl implements PersonDTO {
     }
 
     @Override
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
     public String getFiscalCode() {
         return fiscalCode;
-    }
-
-    @Override
-    public void setFiscalCode(String fiscalCode) {
-        this.fiscalCode = fiscalCode;
     }
 
     @Override
@@ -52,18 +45,8 @@ public class PersonDTOImpl implements PersonDTO {
     }
 
     @Override
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    @Override
     public Sex getSex() {
         return sex;
-    }
-
-    @Override
-    public void setSex(Sex sex) {
-        this.sex = sex;
     }
 
     @Override
@@ -72,17 +55,7 @@ public class PersonDTOImpl implements PersonDTO {
     }
 
     @Override
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    @Override
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }

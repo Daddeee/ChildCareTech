@@ -13,12 +13,4 @@ public interface PersonDTO extends Serializable {
     Sex getSex();
     String getAddress();
     String getPhoneNumber();
-
-    void setFirstName(String firstName);
-    void setLastName(String lastName);
-    void setFiscalCode(String fiscalCode);
-    void setBirthDate(LocalDate birthDate);
-    void setSex(Sex sex);
-    void setAddress(String address);
-    void setPhoneNumber(String phoneNumber);
 }
