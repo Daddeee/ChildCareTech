@@ -7,6 +7,7 @@ import ChildCareTech.model.iEntity;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
@@ -71,14 +72,14 @@ public class Food implements iEntity<Food, Integer> {
     }
 
     public Set<Supply> getSupplies() {
-        return supplies;
+        return supplies == null ? Collections.EMPTY_SET : supplies;
     }
 
     private void setSupplies(Set<Supply> supplies) {
         this.supplies = supplies;
     }
 
-    public Set<Dish> getDishes() { return dishes; }
+    public Set<Dish> getDishes() { return dishes == null ? Collections.EMPTY_SET : dishes; }
 
     public void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
 

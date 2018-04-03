@@ -4,6 +4,7 @@ import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 
 @Entity
@@ -39,7 +40,7 @@ public class Bus implements iEntity<Bus, Integer> {
     }
 
     public Set<TripPartecipation> getTripPartecipations() {
-        return tripPartecipations;
+        return tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
     }
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {

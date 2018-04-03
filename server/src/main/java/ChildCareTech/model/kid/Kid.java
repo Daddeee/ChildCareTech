@@ -6,6 +6,7 @@ import ChildCareTech.model.adult.Adult;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +32,7 @@ public class Kid implements iEntity<Kid, Integer> {
 
     @ManyToMany
     @JoinTable(name="contacts")
-    private Set<Adult> contacts = new HashSet<>();
+    private Set<Adult> contacts;
 
     public Kid(){}
     public Kid(Person person, Adult firstTutor, Adult secondTutor, Pediatrist pediatrist){
@@ -90,7 +91,7 @@ public class Kid implements iEntity<Kid, Integer> {
     }
 
     public Set<Adult> getContacts() {
-        return contacts;
+        return contacts == null ? Collections.EMPTY_SET : contacts;
     }
 
     public void setContacts(Set<Adult> contacts) {

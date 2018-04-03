@@ -3,8 +3,10 @@ package ChildCareTech.model.dish;
 import ChildCareTech.model.food.Food;
 import ChildCareTech.model.menu.Menu;
 import ChildCareTech.model.iEntity;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
@@ -51,7 +53,7 @@ public class Dish implements iEntity<Dish, Integer> {
 
     public Menu getMenu() { return menu; }
 
-    public Set<Food> getFoods() { return foods; }
+    public Set<Food> getFoods() { return foods == null ? Collections.EMPTY_SET : foods; }
 
     public void setFoods(Set<Food> foods) { this.foods = foods; }
 

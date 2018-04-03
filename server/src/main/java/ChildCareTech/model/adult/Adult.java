@@ -5,6 +5,8 @@ import ChildCareTech.model.person.Person;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
@@ -56,9 +58,7 @@ public class Adult implements iEntity<Adult, Integer> {
         this.person = person;
     }
 
-    public Set<Kid> getContacts() {
-        return contacts;
-    }
+    public Set<Kid> getContacts() { return contacts == null ? Collections.EMPTY_SET : contacts; }
 
     public void setContacts(Set<Kid> contacts) {
         this.contacts = contacts;

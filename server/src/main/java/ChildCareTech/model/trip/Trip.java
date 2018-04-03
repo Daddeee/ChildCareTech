@@ -6,6 +6,7 @@ import ChildCareTech.model.stop.Stop;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 import java.time.LocalDate;
 
@@ -73,7 +74,7 @@ public class Trip implements iEntity<Trip, Integer> {
     }
 
     public Set<Stop> getStops() {
-        return stops;
+        return stops == null ? Collections.EMPTY_SET : stops;
     }
 
     public void setStops(Set<Stop> stops) {
@@ -81,7 +82,7 @@ public class Trip implements iEntity<Trip, Integer> {
     }
 
     public Set<TripPartecipation> getTripPartecipations() {
-        return tripPartecipations;
+        return tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
     }
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {

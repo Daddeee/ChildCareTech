@@ -7,6 +7,7 @@ import ChildCareTech.model.kid.Kid;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class Pediatrist extends Adult {
     public Pediatrist(Person person, Set<Kid> kids) { super(person); this.kids = kids; }
 
     public Set<Kid> getKids() {
-        return kids;
+        return kids == null ? Collections.EMPTY_SET : kids;
     }
 
     private void setKids (Set<Kid> kids) {
