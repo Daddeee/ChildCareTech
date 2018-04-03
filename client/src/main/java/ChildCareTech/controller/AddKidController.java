@@ -31,7 +31,8 @@ public class AddKidController {
     private Label alertLabel;
 
     private ToggleGroup group = new ToggleGroup();
-
+    private PersonDTO person;
+    private KidDTO kid;
 
     @FXML
     public void saveButtonAction(ActionEvent event) {

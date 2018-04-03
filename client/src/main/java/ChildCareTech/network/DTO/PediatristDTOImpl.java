@@ -15,6 +15,10 @@ public class PediatristDTOImpl implements PediatristDTO {
         this.kids = kids;
     }
 
+    public PediatristDTOImpl(PersonDTO person) {
+        this(person, null);
+    }
+
     @Override
     public PersonDTO getPerson() { return person; }
 
