@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.model.meal.Meal;
 import ChildCareTech.model.meal.MealDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class CanteenDTOImpl implements CanteenDTO {
         name = canteen.getName();
         meals = new HashSet<>();
         for(Meal m : canteen.getMeals())
-            meals.add(new MealDTOImpl(m));
+            meals.add(DTOFactory.getDTO(m));
     }
 
     @Override

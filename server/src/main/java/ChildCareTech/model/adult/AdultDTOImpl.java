@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.kid.KidDTOImpl;
 import ChildCareTech.model.person.PersonDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,10 +16,10 @@ public class AdultDTOImpl implements AdultDTO {
     private Set<KidDTO> contacts;
 
     public AdultDTOImpl(Adult adult){
-        person = new PersonDTOImpl(adult.getPerson());
+        person = DTOFactory.getDTO(adult.getPerson());
         contacts = new HashSet<>();
         for(Kid k : adult.getContacts())
-            contacts.add(new KidDTOImpl(k));
+            contacts.add(DTOFactory.getDTO(k));
     }
 
     @Override

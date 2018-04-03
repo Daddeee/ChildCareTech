@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.model.trippartecipation.TripPartecipationDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class BusDTOImpl implements BusDTO {
         licensePlate = bus.getLicensePlate();
         tripPartecipations = new HashSet<>();
         for(TripPartecipation t : bus.getTripPartecipations())
-            tripPartecipations.add(new TripPartecipationDTOImpl(t));
+            tripPartecipations.add(DTOFactory.getDTO(t));
     }
 
     @Override

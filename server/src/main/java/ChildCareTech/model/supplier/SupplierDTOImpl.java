@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.adult.AdultDTOImpl;
 import ChildCareTech.model.supply.Supply;
 import ChildCareTech.model.supply.SupplyDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class SupplierDTOImpl extends AdultDTOImpl implements SupplierDTO {
         super(supplier);
         supplies = new HashSet<>();
         for(Supply s : supplier.getSupplies())
-            supplies.add(new SupplyDTOImpl(s));
+            supplies.add(DTOFactory.getDTO(s));
     }
 
     @Override

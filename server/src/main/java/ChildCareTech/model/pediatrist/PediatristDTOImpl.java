@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.model.adult.AdultDTOImpl;
 import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.kid.KidDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class PediatristDTOImpl extends AdultDTOImpl implements PediatristDTO {
         super(pediatrist);
         kids = new HashSet<>();
         for(Kid k : pediatrist.getKids())
-            kids.add(new KidDTOImpl(k));
+            kids.add(DTOFactory.getDTO(k));
     }
 
     @Override

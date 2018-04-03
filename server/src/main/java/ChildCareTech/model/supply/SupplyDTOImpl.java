@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.SupplierDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.food.FoodDTOImpl;
 import ChildCareTech.model.supplier.SupplierDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.time.LocalDate;
 
@@ -15,8 +16,8 @@ public class SupplyDTOImpl implements SupplyDTO {
     private LocalDate date;
 
     public SupplyDTOImpl(Supply supply){
-        supplier = new SupplierDTOImpl(supply.getSupplier());
-        food = new FoodDTOImpl(supply.getFood());
+        supplier = DTOFactory.getDTO(supply.getSupplier());
+        food = DTOFactory.getDTO(supply.getFood());
         quantity = supply.getQuantity();
         date = supply.getDate();
     }

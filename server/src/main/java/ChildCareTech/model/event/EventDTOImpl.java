@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.person.Person;
 import ChildCareTech.model.person.PersonDTOImpl;
 import ChildCareTech.model.workday.WorkDayDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.time.LocalTime;
 
@@ -16,8 +17,8 @@ public class EventDTOImpl implements EventDTO {
     private boolean isIn;
 
     public EventDTOImpl(Event event){
-        workDay = new WorkDayDTOImpl(event.getWorkDay());
-        person = new PersonDTOImpl(event.getPerson());
+        workDay = DTOFactory.getDTO(event.getWorkDay());
+        person = DTOFactory.getDTO(event.getPerson());
         time = event.getTime();
         isIn = event.isIn();
     }

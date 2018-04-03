@@ -7,6 +7,7 @@ import ChildCareTech.model.stop.Stop;
 import ChildCareTech.model.stop.StopDTOImpl;
 import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.model.trippartecipation.TripPartecipationDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -28,11 +29,11 @@ public class TripDTOImpl implements TripDTO {
 
         stops = new HashSet<>();
         for(Stop s : trip.getStops())
-            stops.add(new StopDTOImpl(s));
+            stops.add(DTOFactory.getDTO(s));
 
         tripPartecipations = new HashSet<>();
         for(TripPartecipation t : trip.getTripPartecipations())
-            tripPartecipations.add(new TripPartecipationDTOImpl(t));
+            tripPartecipations.add(DTOFactory.getDTO(t));
     }
 
     @Override

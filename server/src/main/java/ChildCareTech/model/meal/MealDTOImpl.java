@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.canteen.CanteenDTOImpl;
 import ChildCareTech.model.workday.WorkDayDTOImpl;
+import ChildCareTech.utils.DTOFactory;
 
 public class MealDTOImpl implements MealDTO {
     private CanteenDTO canteen;
@@ -12,8 +13,8 @@ public class MealDTOImpl implements MealDTO {
     private int mealNum;
 
     public MealDTOImpl(Meal meal) {
-        canteen = new CanteenDTOImpl(meal.getCanteen());
-        workDay = new WorkDayDTOImpl(meal.getWorkDay());
+        canteen = DTOFactory.getDTO(meal.getCanteen());
+        workDay = DTOFactory.getDTO(meal.getWorkDay());
         mealNum = meal.getMealNum();
     }
 

@@ -6,6 +6,7 @@ import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.person.Person;
 import ChildCareTech.model.person.PersonDTOImpl;
 import ChildCareTech.model.user.User;
+import ChildCareTech.utils.DTOFactory;
 import ChildCareTech.utils.GenericDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
@@ -45,7 +46,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         }
 
         for (Person p: personList) {
-            dtoList.add(new PersonDTOImpl(p));
+            dtoList.add(DTOFactory.getDTO(p));
         }
 
         return dtoList;
