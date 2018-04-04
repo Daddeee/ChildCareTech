@@ -30,4 +30,12 @@ public class MainSceneManager {
             ex.printStackTrace();
         }
     }
+
+    public static void loadTrips() throws IOException {
+        try {
+            MainStageService.changeScene("/view/tripsWindow.fxml", "/style/tripsWindow.css");
+        } catch (NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

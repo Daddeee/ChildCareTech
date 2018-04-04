@@ -24,8 +24,8 @@
                     </font>
                 </Button>
                 <Button fx:id="tripButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                        minWidth="-Infinity" mnemonicParsing="false" onAction="#anagraphicsButtonAction"
-                        prefHeight="80.0" prefWidth="80.0" text="ANAGRAFICA">
+                        minWidth="-Infinity" mnemonicParsing="false" onAction="#tripButtonAction"
+                        prefHeight="80.0" prefWidth="80.0" text="GITE">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </VBox.margin>
