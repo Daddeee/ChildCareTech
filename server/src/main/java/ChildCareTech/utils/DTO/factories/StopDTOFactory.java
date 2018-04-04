@@ -13,8 +13,9 @@ public class StopDTOFactory implements AbstractDTOFactory<Stop, StopDTO> {
 
         TripDTO trip = DTOFactory.getDTO(entity.getTrip());
         int stopNumber = entity.getStopNumber();
+        String stopLocation = entity.getStopLocation();
 
-        return new StopDTO(trip, stopNumber);
+        return new StopDTO(trip, stopNumber, stopLocation);
     }
 }
 

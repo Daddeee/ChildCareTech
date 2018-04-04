@@ -21,6 +21,9 @@ public class Stop implements iEntity<Stop, Integer> {
     @Column(nullable = false)
     private int stopNumber;
 
+    @Column(nullable = false)
+    private String stopLocation;
+
     public Stop() {
     }
 
@@ -51,6 +54,14 @@ public class Stop implements iEntity<Stop, Integer> {
 
     private void setStopNumber(int stopNumber) {
         this.stopNumber = stopNumber;
+    }
+
+    public String getStopLocation() {
+        return stopLocation;
+    }
+
+    private void setStopLocation(String stopLocation) {
+        this.stopLocation = stopLocation;
     }
 
     @Override
