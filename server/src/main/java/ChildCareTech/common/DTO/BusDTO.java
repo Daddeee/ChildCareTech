@@ -1,11 +1,27 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.bus.Bus;
+import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
+import java.util.HashSet;
 import java.util.Set;
 
-public interface BusDTO extends Serializable, Remote {
-    String getLicensePlate();
+public class BusDTO implements Serializable {
+    private String licensePlate;
+    private Set<TripPartecipationDTO> tripPartecipations;
 
-    Set<TripPartecipationDTO> getTripPartecipations();
+    public BusDTO(String licensePlate, Set<TripPartecipationDTO> tripPartecipations){
+        this.licensePlate = licensePlate;
+        this.tripPartecipations = tripPartecipations;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public Set<TripPartecipationDTO> getTripPartecipations() {
+        return tripPartecipations;
+    }
 }

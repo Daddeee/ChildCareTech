@@ -1,12 +1,30 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.meal.Meal;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
 
-public interface MealDTO extends Serializable, Remote {
-    CanteenDTO getCanteen();
+public class MealDTO implements Serializable {
+    private CanteenDTO canteen;
+    private WorkDayDTO workDay;
+    private int mealNum;
 
-    int getMealNum();
+    public MealDTO(CanteenDTO canteen, WorkDayDTO workDay, int mealNum){
+        this.canteen = canteen;
+        this.workDay = workDay;
+        this.mealNum = mealNum;
+    }
 
-    WorkDayDTO getWorkDay();
+    public CanteenDTO getCanteen() {
+        return canteen;
+    }
+
+    public WorkDayDTO getWorkDay() {
+        return workDay;
+    }
+
+    public int getMealNum() {
+        return mealNum;
+    }
 }

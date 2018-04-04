@@ -1,15 +1,37 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.supply.Supply;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.time.LocalDate;
 
-public interface SupplyDTO extends Serializable, Remote {
-    SupplierDTO getSupplier();
+public class SupplyDTO implements Serializable {
+    private SupplierDTO supplier;
+    private FoodDTO food;
+    private int quantity;
+    private LocalDate date;
 
-    FoodDTO getFood();
+    public SupplyDTO(SupplierDTO supplier, FoodDTO food, int quantity, LocalDate date){
+        this.supplier = supplier;
+        this.food = food;
+        this.quantity = quantity;
+        this.date = date;
+    }
 
-    int getQuantity();
+    public SupplierDTO getSupplier() {
+        return supplier;
+    }
 
-    LocalDate getDate();
+    public FoodDTO getFood() {
+        return food;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

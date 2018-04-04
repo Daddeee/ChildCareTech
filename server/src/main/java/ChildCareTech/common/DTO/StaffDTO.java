@@ -1,7 +1,12 @@
 package ChildCareTech.common.DTO;
 
-import java.io.Serializable;
-import java.rmi.Remote;
+import ChildCareTech.model.staff.Staff;
 
-public interface StaffDTO extends Serializable, AdultDTO, Remote {
+import java.io.Serializable;
+import java.util.Set;
+
+public class StaffDTO extends AdultDTO implements Serializable {
+    public StaffDTO(PersonDTO person, Set<KidDTO> contacts){
+        super(person, contacts);
+    }
 }

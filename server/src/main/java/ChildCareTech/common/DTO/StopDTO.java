@@ -1,10 +1,24 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.stop.Stop;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
 
-public interface StopDTO extends Serializable, Remote {
-    TripDTO getTrip();
+public class StopDTO implements Serializable {
+    private TripDTO trip;
+    private int stopNumber;
 
-    int getStopNumber();
+    public StopDTO(TripDTO trip, int stopNumber){
+        this.trip = trip;
+        this.stopNumber = stopNumber;
+    }
+
+    public TripDTO getTrip() {
+        return trip;
+    }
+
+    public int getStopNumber() {
+        return stopNumber;
+    }
 }

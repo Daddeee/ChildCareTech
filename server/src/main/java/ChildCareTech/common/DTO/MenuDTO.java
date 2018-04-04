@@ -1,15 +1,39 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.dish.Dish;
+import ChildCareTech.model.menu.Menu;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
+import java.util.HashSet;
 import java.util.Set;
 
-public interface MenuDTO extends Serializable, Remote {
-    MealDTO getMeal();
+public class MenuDTO implements Serializable {
+    private MealDTO meal;
+    private int numMenu;
+    private Set<DishDTO> dishes;
+    private DrinkDTO drink;
 
-    int getNumMenu();
+    public MenuDTO(MealDTO meal, int numMenu, Set<DishDTO> dishes, DrinkDTO drink){
+        this.meal = meal;
+        this.numMenu = numMenu;
+        this.dishes = dishes;
+        this.drink = drink;
+    }
 
-    Set<DishDTO> getDishes();
+    public MealDTO getMeal() {
+        return meal;
+    }
 
-    DrinkDTO getDrink();
+    public int getNumMenu() {
+        return numMenu;
+    }
+
+    public Set<DishDTO> getDishes() {
+        return dishes;
+    }
+
+    public DrinkDTO getDrink() {
+        return drink;
+    }
 }

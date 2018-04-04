@@ -1,17 +1,45 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.adult.Adult;
+import ChildCareTech.model.kid.Kid;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
+import java.util.HashSet;
 import java.util.Set;
 
-public interface KidDTO extends Serializable, Remote {
-    PersonDTO getPerson();
+public class KidDTO implements Serializable {
+    private PersonDTO person;
+    private AdultDTO firstTutor;
+    private AdultDTO secondTutor;
+    private PediatristDTO pediatrist;
+    private Set<AdultDTO> contacts;
 
-    AdultDTO getFirstTutor();
+    public KidDTO(PersonDTO person, AdultDTO firstTutor, AdultDTO secondTutor, PediatristDTO pediatrist, Set<AdultDTO> contacts){
+        this.person = person;
+        this.firstTutor = firstTutor;
+        this.secondTutor = secondTutor;
+        this.pediatrist = pediatrist;
+        this.contacts = contacts;
+    }
 
-    AdultDTO getSecondTutor();
+    public PersonDTO getPerson() {
+        return person;
+    }
 
-    PediatristDTO getPediatrist();
+    public AdultDTO getFirstTutor() {
+        return firstTutor;
+    }
 
-    Set<AdultDTO> getContacts();
+    public AdultDTO getSecondTutor() {
+        return secondTutor;
+    }
+
+    public PediatristDTO getPediatrist() {
+        return pediatrist;
+    }
+
+    public Set<AdultDTO> getContacts() {
+        return contacts;
+    }
 }

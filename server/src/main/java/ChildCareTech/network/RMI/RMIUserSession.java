@@ -1,7 +1,10 @@
 package ChildCareTech.network.RMI;
 
+import ChildCareTech.common.DTO.KidDTO;
+import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.controller.SessionController;
+import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.user.User;
 
 import java.rmi.RemoteException;
@@ -21,7 +24,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public void savePerson(PersonDTO person) throws RemoteException {
+    public void saveKid(KidDTO kidDTO) throws RemoteException {
 
     }
 }

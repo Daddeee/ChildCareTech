@@ -1,12 +1,30 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.utils.DTO.DTOFactory;
+
 import java.io.Serializable;
-import java.rmi.Remote;
 
-public interface TripPartecipationDTO extends Serializable, Remote {
-    PersonDTO getPerson();
+public class TripPartecipationDTO implements Serializable{
+    private PersonDTO person;
+    private TripDTO trip;
+    private BusDTO bus;
 
-    TripDTO getTrip();
+    public TripPartecipationDTO(PersonDTO person, TripDTO trip, BusDTO bus){
+        this.person = person;
+        this.trip = trip;
+        this.bus = bus;
+    }
 
-    BusDTO getBus();
+    public PersonDTO getPerson() {
+        return person;
+    }
+
+    public TripDTO getTrip() {
+        return trip;
+    }
+
+    public BusDTO getBus() {
+        return bus;
+    }
 }
