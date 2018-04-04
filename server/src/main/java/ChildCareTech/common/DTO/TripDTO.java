@@ -9,10 +9,10 @@ public class TripDTO implements Serializable {
     private String note;
     private LocalDate depDate;
     private LocalDate arrDate;
-    private Set<StopDTO> stops;
+    private Set<RouteDTO> stops;
     private Set<TripPartecipationDTO> tripPartecipations;
 
-    public TripDTO(String meta, String note, LocalDate depDate, LocalDate arrDate, Set<StopDTO> stops, Set<TripPartecipationDTO> tripPartecipations) {
+    public TripDTO(String meta, String note, LocalDate depDate, LocalDate arrDate, Set<RouteDTO> stops, Set<TripPartecipationDTO> tripPartecipations) {
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;
@@ -37,7 +37,7 @@ public class TripDTO implements Serializable {
         return arrDate;
     }
 
-    public Set<StopDTO> getStops() {
+    public Set<RouteDTO> getStops() {
         return stops;
     }
 

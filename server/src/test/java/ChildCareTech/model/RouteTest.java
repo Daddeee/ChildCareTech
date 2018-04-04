@@ -1,20 +1,21 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.route.Route;
 import ChildCareTech.model.trip.Trip;
 import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.fail;
 
-public class StopTest extends AbstractEntityTest<Stop, Integer> {
+public class RouteTest extends AbstractEntityTest<Route, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDAO<>(Stop.class);
+        dao = new GenericDAO<>(Route.class);
     }
 
     @Override
@@ -36,8 +37,8 @@ public class StopTest extends AbstractEntityTest<Stop, Integer> {
             session.close();
         }
 
-        Stop s = new Stop(t, 0);
-        Stop su = new Stop(t, 1);
+        Route s = new Route(t, 0, "a", LocalDateTime.now(), "b", LocalDateTime.now().plusHours(1));
+        Route su = new Route(t, 1, "b", LocalDateTime.now().plusHours(2), "a", LocalDateTime.now().plusHours(3));
 
         testCRUDImpl(s, su);
     }

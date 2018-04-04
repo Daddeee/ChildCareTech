@@ -2,7 +2,7 @@ package ChildCareTech.model;
 
 import ChildCareTech.model.bus.Bus;
 import ChildCareTech.model.person.Person;
-import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.route.Route;
 import ChildCareTech.model.trip.Trip;
 import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.utils.GenericDAO;
@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;
@@ -33,8 +34,9 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
         Bus b2 = new Bus("plate2");
         TripPartecipation tp1 = new TripPartecipation(p1, t, b1);
         TripPartecipation tp2 = new TripPartecipation(p2, t, b2);
-        Stop s1 = new Stop(t, 1);
-        Stop s2 = new Stop(t, 2);
+        Route s1 = new Route(t, 0, "a", LocalDateTime.now(), "b", LocalDateTime.now().plusHours(1));
+        Route s2 = new Route(t, 1, "b", LocalDateTime.now().plusHours(2), "a", LocalDateTime.now().plusHours(3));
+
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
         try {
@@ -82,11 +84,11 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
             session.close();
         }
 
-        HashSet<Stop> set1 = new HashSet<>();
+        HashSet<Route> set1 = new HashSet<>();
         set1.add(s1);
         set1.add(s2);
 
-        testOneToMany(t, set1, Trip::getStops);
+        testOneToMany(t, set1, Trip::getRoutes);
     }
 
 

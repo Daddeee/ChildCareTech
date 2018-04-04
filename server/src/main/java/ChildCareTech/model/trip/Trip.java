@@ -1,7 +1,7 @@
 package ChildCareTech.model.trip;
 
 import ChildCareTech.model.iEntity;
-import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.route.Route;
 import ChildCareTech.model.trippartecipation.TripPartecipation;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -31,7 +31,7 @@ public class Trip implements iEntity<Trip, Integer> {
     private LocalDate arrDate;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
-    private Set<Stop> stops;
+    private Set<Route> routes;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<TripPartecipation> tripPartecipations;
@@ -76,12 +76,12 @@ public class Trip implements iEntity<Trip, Integer> {
         this.note = note;
     }
 
-    public Set<Stop> getStops() {
-        return stops == null ? Collections.EMPTY_SET : stops;
+    public Set<Route> getRoutes() {
+        return routes == null ? Collections.EMPTY_SET : routes;
     }
 
-    public void setStops(Set<Stop> stops) {
-        this.stops = stops;
+    public void setRoutes(Set<Route> routes) {
+        this.routes = routes;
     }
 
     public Set<TripPartecipation> getTripPartecipations() {

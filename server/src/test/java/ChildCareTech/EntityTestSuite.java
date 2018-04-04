@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import ChildCareTech.model.RouteTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -18,7 +19,7 @@ import org.junit.runners.Suite;
         ChildCareTech.model.PediatristTest.class,
         ChildCareTech.model.PersonTest.class,
         ChildCareTech.model.StaffTest.class,
-        ChildCareTech.model.StopTest.class,
+        RouteTest.class,
         ChildCareTech.model.SupplierTest.class,
         ChildCareTech.model.SupplyTest.class,
         ChildCareTech.model.TripPartecipationTest.class,

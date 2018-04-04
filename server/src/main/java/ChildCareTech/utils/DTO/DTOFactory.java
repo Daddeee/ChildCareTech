@@ -13,8 +13,8 @@ import ChildCareTech.model.meal.Meal;
 import ChildCareTech.model.menu.Menu;
 import ChildCareTech.model.pediatrist.Pediatrist;
 import ChildCareTech.model.person.Person;
+import ChildCareTech.model.route.Route;
 import ChildCareTech.model.staff.Staff;
-import ChildCareTech.model.stop.Stop;
 import ChildCareTech.model.supplier.Supplier;
 import ChildCareTech.model.supply.Supply;
 import ChildCareTech.model.trip.Trip;
@@ -43,9 +43,9 @@ public class DTOFactory {
         return factory.getDTO(food);
     }
 
-    public static StopDTO getDTO(Stop stop) {
-        StopDTOFactory factory = new StopDTOFactory();
-        return factory.getDTO(stop);
+    public static RouteDTO getDTO(Route route) {
+        RouteDTOFactory factory = new RouteDTOFactory();
+        return factory.getDTO(route);
     }
 
     public static CanteenDTO getDTO(Canteen canteen) {

@@ -54,7 +54,7 @@
         <mapping class="ChildCareTech.model.event.Event"/>
         <mapping class="ChildCareTech.model.trip.Trip"/>
         <mapping class="ChildCareTech.model.bus.Bus"/>
-        <mapping class="ChildCareTech.model.stop.Stop"/>
+        <mapping class="ChildCareTech.model.route.Route"/>
         <mapping class="ChildCareTech.model.trippartecipation.TripPartecipation"/>
         <mapping class="ChildCareTech.model.user.User"/>
 

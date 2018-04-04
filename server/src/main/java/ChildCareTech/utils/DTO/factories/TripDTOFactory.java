@@ -1,9 +1,9 @@
 package ChildCareTech.utils.DTO.factories;
 
-import ChildCareTech.common.DTO.StopDTO;
+import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.stop.Stop;
+import ChildCareTech.model.route.Route;
 import ChildCareTech.model.trip.Trip;
 import ChildCareTech.model.trippartecipation.TripPartecipation;
 import ChildCareTech.utils.DTO.DTOFactory;
@@ -23,8 +23,8 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
         LocalDate depDate = entity.getDepDate();
         LocalDate arrDate = entity.getArrDate();
 
-        Set<StopDTO> stops = new HashSet<>();
-        for (Stop s : entity.getStops())
+        Set<RouteDTO> stops = new HashSet<>();
+        for (Route s : entity.getRoutes())
             stops.add(DTOFactory.getDTO(s));
 
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
