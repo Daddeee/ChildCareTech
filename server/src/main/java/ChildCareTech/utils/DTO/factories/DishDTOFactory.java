@@ -13,14 +13,14 @@ import java.util.Set;
 public class DishDTOFactory implements AbstractDTOFactory<Dish, DishDTO> {
     @Override
     public DishDTO getDTO(Dish entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         String name = entity.getName();
         MenuDTO menu = DTOFactory.getDTO(entity.getMenu());
 
         Set<FoodDTO> foods = new HashSet<>();
-        for(Food f : entity.getFoods())
+        for (Food f : entity.getFoods())
             foods.add(DTOFactory.getDTO(f));
 
         return new DishDTO(name, menu, foods);

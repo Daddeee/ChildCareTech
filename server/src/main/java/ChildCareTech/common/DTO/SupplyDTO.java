@@ -1,8 +1,5 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.supply.Supply;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -12,7 +9,7 @@ public class SupplyDTO implements Serializable {
     private int quantity;
     private LocalDate date;
 
-    public SupplyDTO(SupplierDTO supplier, FoodDTO food, int quantity, LocalDate date){
+    public SupplyDTO(SupplierDTO supplier, FoodDTO food, int quantity, LocalDate date) {
         this.supplier = supplier;
         this.food = food;
         this.quantity = quantity;

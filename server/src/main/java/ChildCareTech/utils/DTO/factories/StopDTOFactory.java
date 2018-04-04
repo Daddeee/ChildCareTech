@@ -8,7 +8,7 @@ import ChildCareTech.utils.DTO.DTOFactory;
 public class StopDTOFactory implements AbstractDTOFactory<Stop, StopDTO> {
     @Override
     public StopDTO getDTO(Stop entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         TripDTO trip = DTOFactory.getDTO(entity.getTrip());

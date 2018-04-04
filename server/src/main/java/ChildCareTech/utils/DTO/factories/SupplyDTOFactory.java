@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class SupplyDTOFactory implements AbstractDTOFactory<Supply, SupplyDTO> {
     @Override
     public SupplyDTO getDTO(Supply entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         SupplierDTO supplier = DTOFactory.getDTO(entity.getSupplier());

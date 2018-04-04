@@ -14,7 +14,7 @@ import java.util.Set;
 public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
     @Override
     public KidDTO getDTO(Kid entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         PersonDTO person = DTOFactory.getDTO(entity.getPerson());
@@ -23,7 +23,7 @@ public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
         PediatristDTO pediatrist = DTOFactory.getDTO(entity.getPediatrist());
 
         Set<AdultDTO> contacts = new HashSet<>();
-        for(Adult a : entity.getContacts())
+        for (Adult a : entity.getContacts())
             contacts.add(DTOFactory.getDTO(a));
 
         return new KidDTO(person, firstTutor, secondTutor, pediatrist, contacts);

@@ -1,11 +1,6 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.adult.Adult;
-import ChildCareTech.model.kid.Kid;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 public class KidDTO implements Serializable {
@@ -15,7 +10,7 @@ public class KidDTO implements Serializable {
     private PediatristDTO pediatrist;
     private Set<AdultDTO> contacts;
 
-    public KidDTO(PersonDTO person, AdultDTO firstTutor, AdultDTO secondTutor, PediatristDTO pediatrist, Set<AdultDTO> contacts){
+    public KidDTO(PersonDTO person, AdultDTO firstTutor, AdultDTO secondTutor, PediatristDTO pediatrist, Set<AdultDTO> contacts) {
         this.person = person;
         this.firstTutor = firstTutor;
         this.secondTutor = secondTutor;

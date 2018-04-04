@@ -1,8 +1,6 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.Sex;
-import ChildCareTech.model.person.Person;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,7 +14,7 @@ public class PersonDTO implements Serializable {
     private String address;
     private String phoneNumber;
 
-    public PersonDTO(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber){
+    public PersonDTO(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
         this.lastName = lastName;

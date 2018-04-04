@@ -11,7 +11,7 @@ import java.time.LocalTime;
 public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
     @Override
     public EventDTO getDTO(Event entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         WorkDayDTO workDay = DTOFactory.getDTO(entity.getWorkDay());

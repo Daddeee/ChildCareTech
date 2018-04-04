@@ -1,8 +1,5 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.meal.Meal;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
 
 public class MealDTO implements Serializable {
@@ -10,7 +7,7 @@ public class MealDTO implements Serializable {
     private WorkDayDTO workDay;
     private int mealNum;
 
-    public MealDTO(CanteenDTO canteen, WorkDayDTO workDay, int mealNum){
+    public MealDTO(CanteenDTO canteen, WorkDayDTO workDay, int mealNum) {
         this.canteen = canteen;
         this.workDay = workDay;
         this.mealNum = mealNum;

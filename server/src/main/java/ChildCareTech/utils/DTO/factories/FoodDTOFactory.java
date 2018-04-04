@@ -14,7 +14,7 @@ import java.util.Set;
 public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
     @Override
     public FoodDTO getDTO(Food entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         String name = entity.getName();
@@ -22,11 +22,11 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
         int residualQuantity = entity.getResidualQuantity();
 
         Set<DishDTO> dishes = new HashSet<>();
-        for(Dish d : entity.getDishes())
+        for (Dish d : entity.getDishes())
             dishes.add(DTOFactory.getDTO(d));
 
         Set<SupplyDTO> supplies = new HashSet<>();
-        for(Supply s : entity.getSupplies())
+        for (Supply s : entity.getSupplies())
             supplies.add(DTOFactory.getDTO(s));
 
         return new FoodDTO(name, isDrink, residualQuantity, dishes, supplies);

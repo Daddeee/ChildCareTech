@@ -13,13 +13,13 @@ import java.util.Set;
 public class AdultDTOFactory implements AbstractDTOFactory<Adult, AdultDTO> {
     @Override
     public AdultDTO getDTO(Adult entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         PersonDTO person = DTOFactory.getDTO(entity.getPerson());
 
         Set<KidDTO> contacts = new HashSet<>();
-        for(Kid k : entity.getContacts())
+        for (Kid k : entity.getContacts())
             contacts.add(DTOFactory.getDTO(k));
 
         return new AdultDTO(person, contacts);

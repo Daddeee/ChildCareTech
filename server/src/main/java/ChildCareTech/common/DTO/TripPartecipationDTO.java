@@ -1,16 +1,13 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.trippartecipation.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
 
-public class TripPartecipationDTO implements Serializable{
+public class TripPartecipationDTO implements Serializable {
     private PersonDTO person;
     private TripDTO trip;
     private BusDTO bus;
 
-    public TripPartecipationDTO(PersonDTO person, TripDTO trip, BusDTO bus){
+    public TripPartecipationDTO(PersonDTO person, TripDTO trip, BusDTO bus) {
         this.person = person;
         this.trip = trip;
         this.bus = bus;

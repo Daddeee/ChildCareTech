@@ -10,7 +10,7 @@ import ChildCareTech.utils.DTO.DTOFactory;
 public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripPartecipation, TripPartecipationDTO> {
     @Override
     public TripPartecipationDTO getDTO(TripPartecipation entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         PersonDTO person = DTOFactory.getDTO(entity.getPerson());

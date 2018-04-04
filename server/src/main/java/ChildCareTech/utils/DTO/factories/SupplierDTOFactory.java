@@ -15,17 +15,17 @@ import java.util.Set;
 public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, SupplierDTO> {
     @Override
     public SupplierDTO getDTO(Supplier entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         PersonDTO person = DTOFactory.getDTO(entity.getPerson());
 
         Set<KidDTO> contacts = new HashSet<>();
-        for(Kid k : entity.getContacts())
+        for (Kid k : entity.getContacts())
             contacts.add(DTOFactory.getDTO(k));
 
         Set<SupplyDTO> supplies = new HashSet<>();
-        for(Supply s : entity.getSupplies())
+        for (Supply s : entity.getSupplies())
             supplies.add(DTOFactory.getDTO(s));
 
         return new SupplierDTO(person, contacts, supplies);

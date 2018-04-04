@@ -1,8 +1,5 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.event.Event;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
 import java.time.LocalTime;
 
@@ -12,7 +9,7 @@ public class EventDTO implements Serializable {
     private LocalTime time;
     private boolean isIn;
 
-    public EventDTO(WorkDayDTO workDay, PersonDTO person, LocalTime time, boolean isIn){
+    public EventDTO(WorkDayDTO workDay, PersonDTO person, LocalTime time, boolean isIn) {
         this.workDay = workDay;
         this.person = person;
         this.time = time;

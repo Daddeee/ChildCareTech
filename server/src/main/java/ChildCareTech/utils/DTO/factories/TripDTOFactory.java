@@ -15,7 +15,7 @@ import java.util.Set;
 public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
     @Override
     public TripDTO getDTO(Trip entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         String meta = entity.getMeta();
@@ -24,11 +24,11 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
         LocalDate arrDate = entity.getArrDate();
 
         Set<StopDTO> stops = new HashSet<>();
-        for(Stop s  : entity.getStops())
+        for (Stop s : entity.getStops())
             stops.add(DTOFactory.getDTO(s));
 
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
-        for(TripPartecipation t : entity.getTripPartecipations())
+        for (TripPartecipation t : entity.getTripPartecipations())
             tripPartecipations.add(DTOFactory.getDTO(t));
 
         return new TripDTO(meta, note, depDate, arrDate, stops, tripPartecipations);

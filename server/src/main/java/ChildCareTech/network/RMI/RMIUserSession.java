@@ -1,10 +1,8 @@
 package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.KidDTO;
-import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.controller.SessionController;
-import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.user.User;
 
 import java.rmi.RemoteException;

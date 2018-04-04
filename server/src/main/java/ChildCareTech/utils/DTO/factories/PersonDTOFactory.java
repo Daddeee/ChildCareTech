@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class PersonDTOFactory implements AbstractDTOFactory<Person, PersonDTO> {
     @Override
     public PersonDTO getDTO(Person entity) {
-        if(entity == null)
+        if (entity == null)
             return null;
 
         String fiscalCode = entity.getFiscalCode();

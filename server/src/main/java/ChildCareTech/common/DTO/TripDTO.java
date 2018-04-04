@@ -1,16 +1,10 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.stop.Stop;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
-public class TripDTO implements Serializable{
+public class TripDTO implements Serializable {
     private String meta;
     private String note;
     private LocalDate depDate;
@@ -18,7 +12,7 @@ public class TripDTO implements Serializable{
     private Set<StopDTO> stops;
     private Set<TripPartecipationDTO> tripPartecipations;
 
-    public TripDTO(String meta, String note, LocalDate depDate, LocalDate arrDate, Set<StopDTO> stops, Set<TripPartecipationDTO> tripPartecipations){
+    public TripDTO(String meta, String note, LocalDate depDate, LocalDate arrDate, Set<StopDTO> stops, Set<TripPartecipationDTO> tripPartecipations) {
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;

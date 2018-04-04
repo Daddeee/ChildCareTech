@@ -1,11 +1,6 @@
 package ChildCareTech.common.DTO;
 
-import ChildCareTech.model.dish.Dish;
-import ChildCareTech.model.food.Food;
-import ChildCareTech.utils.DTO.DTOFactory;
-
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 public class DishDTO implements Serializable {
@@ -13,7 +8,7 @@ public class DishDTO implements Serializable {
     private MenuDTO menu;
     private Set<FoodDTO> foods;
 
-    public DishDTO(String name, MenuDTO menu, Set<FoodDTO> foods){
+    public DishDTO(String name, MenuDTO menu, Set<FoodDTO> foods) {
         this.name = name;
         this.menu = menu;
         this.foods = foods;
