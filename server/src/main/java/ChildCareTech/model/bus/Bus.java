@@ -20,6 +20,9 @@ public class Bus implements iEntity<Bus, Integer> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "bus")
     private Set<TripPartecipation> tripPartecipations;
 
+    @Column(nullable = false)
+    private int capacity;
+
     public Bus() {
     }
 
@@ -49,6 +52,14 @@ public class Bus implements iEntity<Bus, Integer> {
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    private void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     @Override

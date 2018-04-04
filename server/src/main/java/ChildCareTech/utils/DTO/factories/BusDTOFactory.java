@@ -16,12 +16,13 @@ public class BusDTOFactory implements AbstractDTOFactory<Bus, BusDTO> {
             return null;
 
         String licensePlate = entity.getLicensePlate();
+        int capacity = entity.getCapacity();
 
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
         for (TripPartecipation t : entity.getTripPartecipations())
             tripPartecipations.add(DTOFactory.getDTO(t));
 
-        return new BusDTO(licensePlate, tripPartecipations);
+        return new BusDTO(licensePlate, tripPartecipations, capacity);
     }
 }
 
