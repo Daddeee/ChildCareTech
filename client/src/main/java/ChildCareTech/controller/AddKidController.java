@@ -3,8 +3,6 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.Sex;
-import ChildCareTech.network.DTO.KidDTOImpl;
-import ChildCareTech.network.DTO.PersonDTOImpl;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
@@ -62,8 +60,8 @@ public class AddKidController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTOImpl(firstNameField.getText(), lastNameField.getText(), fiscalCodeField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
-        kid = new KidDTOImpl(person, null, null, null);
+        person = new PersonDTO(firstNameField.getText(), lastNameField.getText(), fiscalCodeField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
+        kid = new KidDTO(person, null, null, null, null);
         try {
             SessionService.getSession().saveKid(kid);
         } catch (RemoteException ex) {

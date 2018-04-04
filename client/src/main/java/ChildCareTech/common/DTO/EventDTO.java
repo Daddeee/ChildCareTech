@@ -1,15 +1,34 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.time.LocalTime;
 
-public interface EventDTO extends Serializable, Remote {
-    PersonDTO getPerson();
+public class EventDTO implements Serializable {
+    private WorkDayDTO workDay;
+    private PersonDTO person;
+    private LocalTime time;
+    private boolean isIn;
 
-    WorkDayDTO getWorkDay();
+    public EventDTO(WorkDayDTO workDay, PersonDTO person, LocalTime time, boolean isIn) {
+        this.workDay = workDay;
+        this.person = person;
+        this.time = time;
+        this.isIn = isIn;
+    }
 
-    LocalTime getTime();
+    public WorkDayDTO getWorkDay() {
+        return workDay;
+    }
 
-    boolean isIn();
+    public PersonDTO getPerson() {
+        return person;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public boolean isIn() {
+        return isIn;
+    }
 }

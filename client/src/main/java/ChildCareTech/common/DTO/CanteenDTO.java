@@ -1,11 +1,22 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.util.Set;
 
-public interface CanteenDTO extends Serializable, Remote {
-    String getName();
+public class CanteenDTO implements Serializable {
+    private String name;
+    private Set<MealDTO> meals;
 
-    Set<MealDTO> getMeals();
+    public CanteenDTO(String name, Set<MealDTO> meals) {
+        this.name = name;
+        this.meals = meals;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Set<MealDTO> getMeals() {
+        return meals;
+    }
 }

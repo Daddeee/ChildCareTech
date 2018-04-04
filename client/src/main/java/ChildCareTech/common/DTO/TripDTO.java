@@ -1,20 +1,47 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.time.LocalDate;
 import java.util.Set;
 
-public interface TripDTO extends Serializable, Remote {
-    String getMeta();
+public class TripDTO implements Serializable {
+    private String meta;
+    private String note;
+    private LocalDate depDate;
+    private LocalDate arrDate;
+    private Set<StopDTO> stops;
+    private Set<TripPartecipationDTO> tripPartecipations;
 
-    String getNote();
+    public TripDTO(String meta, String note, LocalDate depDate, LocalDate arrDate, Set<StopDTO> stops, Set<TripPartecipationDTO> tripPartecipations) {
+        this.meta = meta;
+        this.note = note;
+        this.depDate = depDate;
+        this.arrDate = arrDate;
+        this.stops = stops;
+        this.tripPartecipations = tripPartecipations;
+    }
 
-    LocalDate getDepDate();
+    public String getMeta() {
+        return meta;
+    }
 
-    LocalDate getArrDate();
+    public String getNote() {
+        return note;
+    }
 
-    Set<StopDTO> getStops();
+    public LocalDate getDepDate() {
+        return depDate;
+    }
 
-    Set<TripPartecipationDTO> getTripPartecipations();
+    public LocalDate getArrDate() {
+        return arrDate;
+    }
+
+    public Set<StopDTO> getStops() {
+        return stops;
+    }
+
+    public Set<TripPartecipationDTO> getTripPartecipations() {
+        return tripPartecipations;
+    }
 }
