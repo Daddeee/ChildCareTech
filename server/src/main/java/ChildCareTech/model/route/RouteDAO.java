@@ -1,8 +1,8 @@
 package ChildCareTech.model.route;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class RouteDAO extends GenericDAO<Route, Integer> {
+public class RouteDAO extends AbstractGenericDAO<Route, Integer> {
     public RouteDAO() {
         super(Route.class);
     }

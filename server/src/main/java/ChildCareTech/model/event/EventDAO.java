@@ -1,8 +1,8 @@
 package ChildCareTech.model.event;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class EventDAO extends GenericDAO<Event, Integer> {
+public class EventDAO extends AbstractGenericDAO<Event, Integer> {
     public EventDAO() {
         super(Event.class);
     }

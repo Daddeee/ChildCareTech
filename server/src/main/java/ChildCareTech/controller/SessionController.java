@@ -4,7 +4,7 @@ import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.model.user.User;
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.model.user.UserDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -20,13 +20,13 @@ public class SessionController {
     public static User getUser(String username, String password) throws LoginFailedException {
         List<User> user;
         Session session;
-        GenericDAO<User, Integer> dao;
+        UserDAO dao;
         Transaction tx = null;
         HashMap<String, String> queryMap = new HashMap<>();
 
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
-        dao = new GenericDAO<>(User.class);
+        dao = new UserDAO();
         dao.setSession(session);
         try {
             tx = session.beginTransaction();
@@ -46,7 +46,7 @@ public class SessionController {
 
     public static boolean registerUser(String userName, String password) throws RegistrationFailedException {
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        GenericDAO<User, Integer> dao = new GenericDAO<>(User.class);
+        UserDAO dao = new UserDAO();
         dao.setSession(session);
         Transaction tx = null;
         User u = null;

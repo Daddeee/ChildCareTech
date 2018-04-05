@@ -1,8 +1,8 @@
 package ChildCareTech.model.menu;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class MenuDAO extends GenericDAO<Menu, Integer> {
+public class MenuDAO extends AbstractGenericDAO<Menu, Integer> {
     public MenuDAO() {
         super(Menu.class);
     }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "stops",
+@Table(name = "routes",
         uniqueConstraints = @UniqueConstraint(columnNames = {"trip_id", "routeNumber"})
 )
 public class Route implements iEntity<Route, Integer> {

@@ -1,8 +1,8 @@
 package ChildCareTech.model.trippartecipation;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class TripPartecipationDAO extends GenericDAO<TripPartecipation, Integer> {
+public class TripPartecipationDAO extends AbstractGenericDAO<TripPartecipation, Integer> {
     public TripPartecipationDAO() {
         super(TripPartecipation.class);
     }

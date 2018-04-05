@@ -1,9 +1,9 @@
 package ChildCareTech.model;
 
 import ChildCareTech.model.event.Event;
+import ChildCareTech.model.event.EventDAO;
 import ChildCareTech.model.person.Person;
 import ChildCareTech.model.workday.WorkDay;
-import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
@@ -16,7 +16,7 @@ public class EventTest extends AbstractEntityTest<Event, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDAO<>(Event.class);
+        dao = new EventDAO();
     }
 
     @Override

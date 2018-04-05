@@ -1,8 +1,8 @@
 package ChildCareTech.model.canteen;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class CanteenDAO extends GenericDAO<Canteen, Integer> {
+public class CanteenDAO extends AbstractGenericDAO<Canteen, Integer> {
     public CanteenDAO() {
         super(Canteen.class);
     }

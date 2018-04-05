@@ -1,8 +1,8 @@
 package ChildCareTech.model.adult;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class AdultDAO extends GenericDAO<Adult, Integer> {
+public class AdultDAO extends AbstractGenericDAO<Adult, Integer> {
     public AdultDAO() {
         super(Adult.class);
     }

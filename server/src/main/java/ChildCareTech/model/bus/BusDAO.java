@@ -1,8 +1,8 @@
 package ChildCareTech.model.bus;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class BusDAO extends GenericDAO<Bus, Integer> {
+public class BusDAO extends AbstractGenericDAO<Bus, Integer> {
     public BusDAO() {
         super(Bus.class);
     }

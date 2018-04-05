@@ -1,8 +1,8 @@
 package ChildCareTech.model.dish;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class DishDAO extends GenericDAO<Dish, Integer> {
+public class DishDAO extends AbstractGenericDAO<Dish, Integer> {
     public DishDAO() {
         super(Dish.class);
     }

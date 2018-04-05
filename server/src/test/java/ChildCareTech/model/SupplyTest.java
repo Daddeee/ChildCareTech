@@ -4,7 +4,7 @@ import ChildCareTech.model.food.Food;
 import ChildCareTech.model.person.Person;
 import ChildCareTech.model.supplier.Supplier;
 import ChildCareTech.model.supply.Supply;
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.model.supply.SupplyDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
@@ -16,7 +16,7 @@ public class SupplyTest extends AbstractEntityTest<Supply, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDAO<>(Supply.class);
+        dao = new SupplyDAO();
     }
 
     @Override

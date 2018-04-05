@@ -1,8 +1,8 @@
 package ChildCareTech.model.drink;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class DrinkDAO extends GenericDAO<Drink, Integer> {
+public class DrinkDAO extends AbstractGenericDAO<Drink, Integer> {
     public DrinkDAO() {
         super(Drink.class);
     }

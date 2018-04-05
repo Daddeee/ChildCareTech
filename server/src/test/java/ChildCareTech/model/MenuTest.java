@@ -4,8 +4,8 @@ import ChildCareTech.model.canteen.Canteen;
 import ChildCareTech.model.dish.Dish;
 import ChildCareTech.model.meal.Meal;
 import ChildCareTech.model.menu.Menu;
+import ChildCareTech.model.menu.MenuDAO;
 import ChildCareTech.model.workday.WorkDay;
-import ChildCareTech.utils.GenericDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -19,7 +19,7 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDAO<>(Menu.class);
+        dao = new MenuDAO();
     }
 
     @Override

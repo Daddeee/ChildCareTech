@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GenericDAO<T extends iEntity, K extends Serializable> {
+public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializable> {
 
     private Class<T> persistentClass;
     private Session session;
 
-    public GenericDAO(Class<T> clazz) {
+    public AbstractGenericDAO(Class<T> clazz) {
         this.persistentClass = clazz;
     }
 
@@ -75,4 +75,6 @@ public class GenericDAO<T extends iEntity, K extends Serializable> {
     public void delete(T obj) {
         session.delete(obj);
     }
+
+    //public abstract void initializeLazyRelations(T obj);
 }

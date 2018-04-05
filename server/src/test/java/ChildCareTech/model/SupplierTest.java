@@ -3,8 +3,8 @@ package ChildCareTech.model;
 import ChildCareTech.model.food.Food;
 import ChildCareTech.model.person.Person;
 import ChildCareTech.model.supplier.Supplier;
+import ChildCareTech.model.supplier.SupplierDAO;
 import ChildCareTech.model.supply.Supply;
-import ChildCareTech.utils.GenericDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -14,11 +14,11 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
-public class SupplierTest extends AbstractEntityTest<Supplier, String> {
+public class SupplierTest extends AbstractEntityTest<Supplier, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDAO<>(Supplier.class);
+        dao = new SupplierDAO();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package ChildCareTech.model;
 
 import ChildCareTech.model.route.Route;
+import ChildCareTech.model.route.RouteDAO;
 import ChildCareTech.model.trip.Trip;
-import ChildCareTech.utils.GenericDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
@@ -15,7 +15,7 @@ public class RouteTest extends AbstractEntityTest<Route, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new GenericDAO<>(Route.class);
+        dao = new RouteDAO();
     }
 
     @Override
