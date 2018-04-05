@@ -6,4 +6,7 @@ public class TripPartecipationDAO extends AbstractGenericDAO<TripPartecipation, 
     public TripPartecipationDAO() {
         super(TripPartecipation.class);
     }
+
+    @Override
+    public void initializeLazyRelations(TripPartecipation tripPartecipation) {}
 }

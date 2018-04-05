@@ -76,5 +76,5 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
         session.delete(obj);
     }
 
-    //public abstract void initializeLazyRelations(T obj);
+    public abstract void initializeLazyRelations(T obj);
 }

@@ -6,4 +6,9 @@ public class MealDAO extends AbstractGenericDAO<Meal, Integer> {
     public MealDAO() {
         super(Meal.class);
     }
+
+    @Override
+    public void initializeLazyRelations(Meal obj) {
+
+    }
 }
