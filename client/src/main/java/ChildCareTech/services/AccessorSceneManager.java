@@ -9,19 +9,31 @@ import java.io.IOException;
 
 public class AccessorSceneManager {
 
-    private static FXMLLoader loginLoader;
+    private static FXMLLoader addKidLoader;
     private static FXMLLoader registerUserLoader;
+    private static FXMLLoader addTripLoader;
     private static Scene addKidScene;
     private static Scene registerUserScene;
+    private static Scene addTripScene;
 
     static {
-        loginLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
+        addKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
         registerUserLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/registerUserWindow.fxml"));
-        addKidScene = sceneInit(loginLoader, "/style/addKidWindow.css");
+        addKidScene = sceneInit(addKidLoader, "/style/addKidWindow.css");
         registerUserScene = sceneInit(registerUserLoader, "style/registerUserWindow.css");
+        addTripLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addTripWindow.fxml"));
+        addTripScene = sceneInit(addTripLoader, "/style/addTripWindow.css");
     }
 
     private AccessorSceneManager() {
+    }
+
+    public static void loadAddTrip() throws IOException {
+        try {
+            AccessorStageService.changeScene(addTripScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
     }
 
     public static void loadAddPerson() throws IOException {

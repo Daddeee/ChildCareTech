@@ -1,19 +1,19 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +42,18 @@ public class TripsController {
     public TripsController() {}
 
     @FXML
-    public void initialize() {
-        tripsTable.setItems(items);
+    public void initialize(){
         populateTable();
     }
 
     @FXML
     public void addButtonAction(ActionEvent event) {
-
+        try {
+            AccessorSceneManager.loadAddTrip();
+        } catch (IOException ex) {
+            System.err.println("Can't load addTrip window");
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -63,7 +67,14 @@ public class TripsController {
     }
 
     private void populateTable(){
-        items.add(new TripDTO("meta1", "note1", LocalDate.now(), LocalDate.now(), null, null));
-        items.add(new TripDTO("meta2", "note2", LocalDate.now(), LocalDate.now(), null, null));
+        List<TripDTO> tripsDTOList = new ArrayList<>();
+
+        try {
+            tripsDTOList = SessionService.getSession().getAllTrips();
+        } catch(RemoteException e){
+            e.printStackTrace();
+        }
+
+        tripsTable.getItems().addAll(tripsDTOList);
     }
 }

@@ -45,11 +45,6 @@
                     <cellValueFactory><PropertyValueFactory property="arrDate" /></cellValueFactory>
                 </TableColumn>
             </columns>
-
-            <items>
-                <FXCollections fx:factory="observableArrayList"/>
-            </items>
-
             <HBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </HBox.margin>
