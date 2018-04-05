@@ -9,15 +9,15 @@ import java.io.IOException;
 
 public class AccessorSceneManager {
 
-    private static FXMLLoader loginLoader;
+    private static FXMLLoader addKidLoader;
     private static FXMLLoader registerUserLoader;
     private static Scene addKidScene;
     private static Scene registerUserScene;
 
     static {
-        loginLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
+        addKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
         registerUserLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/registerUserWindow.fxml"));
-        addKidScene = sceneInit(loginLoader, "/style/addKidWindow.css");
+        addKidScene = sceneInit(addKidLoader, "/style/addKidWindow.css");
         registerUserScene = sceneInit(registerUserLoader, "style/registerUserWindow.css");
     }
 
@@ -32,17 +32,17 @@ public class AccessorSceneManager {
         }
     }
 
-    private static void stageError(NoSuchFieldException ex) {
-        System.err.println("accessory stage not initialized");
-        ex.printStackTrace();
-    }
-
     public static void loadRegisterUser() throws IOException {
         try {
             AccessorStageService.changeScene(registerUserScene);
         } catch (NoSuchFieldException ex) {
-            ex.printStackTrace();
+            AccessorSceneManager.stageError(ex);
         }
+    }
+
+    private static void stageError(NoSuchFieldException ex) {
+        System.err.println("accessory stage not initialized");
+        ex.printStackTrace();
     }
 
     private static Scene sceneInit(FXMLLoader loader, String cssPath) {
