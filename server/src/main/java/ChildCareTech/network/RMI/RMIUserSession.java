@@ -1,6 +1,7 @@
 package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.KidDTO;
+import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.controller.SessionController;
@@ -16,7 +17,6 @@ import org.hibernate.Transaction;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RMIUserSession extends UnicastRemoteObject implements UserSession {
@@ -34,6 +34,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void saveKid(KidDTO kidDTO) {
+
+    }
+
+    @Override
+    public void saveTrip(TripDTO tripDTO) {
 
     }
 
