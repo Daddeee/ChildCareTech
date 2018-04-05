@@ -3,9 +3,14 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.model.event.Event;
 
-public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event, EventDTO> {
+public class EventDTOEntityAssembler extends AbstractDTOEntityAssembler<Event, EventDTO> {
     @Override
-    public Event assemble(EventDTO dto) {
+    public Event assembleWithoutRelations(EventDTO dto) {
         return null;
+    }
+
+    @Override
+    public void assembleRelations(Event entity, EventDTO dto) {
+
     }
 }
