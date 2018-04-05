@@ -1,13 +1,19 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.Sex;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.ObservableDTOs.ObservableKid;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -24,29 +30,42 @@ public class KidAnagraphicController {
     @FXML
     private Button logOutButton;
     @FXML
-    private TableView<PersonDTO> personTable;
+    private TableView<ObservableKid> personTable;
     @FXML
-    private TableColumn<PersonDTO, String> firstNameColumn;
+    private TableColumn<ObservableKid, String> firstNameColumn;
     @FXML
-    private TableColumn<PersonDTO, String> lastNameColumn;
+    private TableColumn<ObservableKid, String> lastNameColumn;
     @FXML
-    private TableColumn<PersonDTO, String> fiscalCodeNameColumn;
+    private TableColumn<ObservableKid, String> fiscalCodeColumn;
     @FXML
-    private TableColumn<PersonDTO, LocalDate> bDateColumn;
+    private TableColumn<ObservableKid, LocalDate> bDateColumn;
     @FXML
-    private TableColumn<PersonDTO, String> addressColumn;
+    private TableColumn<ObservableKid, String> addressColumn;
+    @FXML
+    private TableColumn<ObservableKid, String> firstTutorFCColumn;
+    @FXML
+    private TableColumn<ObservableKid, String> secondTutorFCColumn;
+    @FXML
+    private TableColumn<ObservableKid, String> pediatristFCColumn;
 
 
-    private List<PersonDTO> items = new ArrayList<>();
+    private ObservableList<ObservableKid> list = FXCollections.observableArrayList();
 
 
-    public KidAnagraphicController() {
-
-    }
+    public KidAnagraphicController() { }
 
     @FXML
     public void initialize() {
-        //anagList.setItems(items);
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("lastName"));
+        fiscalCodeColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("fiscalCode"));
+        bDateColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, LocalDate>("birthDate"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("address"));
+        firstTutorFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("firstTutorFC"));
+        secondTutorFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("secondTutorFC"));
+        pediatristFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("pediatristFC"));
+        personTable.setItems(list);
+        populateTable();
     }
 
     @FXML
@@ -67,5 +86,9 @@ public class KidAnagraphicController {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();
         }
+    }
+
+    private void populateTable() {
+
     }
 }

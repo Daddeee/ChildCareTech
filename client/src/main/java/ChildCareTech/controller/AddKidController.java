@@ -42,6 +42,7 @@ public class AddKidController {
     public void initialize() {
         maleButton.setToggleGroup(group);
         femaleButton.setToggleGroup(group);
+        maleButton.arm();
     }
 
     @FXML
@@ -50,8 +51,7 @@ public class AddKidController {
         if (fiscalCodeField.getText().length() != 16 ||
                 firstNameField.getText().equals("") ||
                 lastNameField.getText().equals("") ||
-                addressField.getText().equals("")
-            /*|| (!maleButton.isArmed() && !femaleButton.isArmed())*/) {
+                addressField.getText().equals("")) {
             alertLabel.setText("invalid input");
             return;
         }
