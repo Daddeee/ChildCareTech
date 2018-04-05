@@ -1,17 +1,17 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class RouteDTO implements Serializable {
     private TripDTO trip;
     private int routeNumber;
     private String departureLocation;
-    private LocalTime departureTime;
+    private LocalDateTime departureTime;
     private String arrivalLocation;
-    private LocalTime arrivalTime;
+    private LocalDateTime arrivalTime;
 
-    public RouteDTO(TripDTO trip, int routeNumber, String departureLocation, LocalTime departureTime, String arrivalLocation, LocalTime arrivalTime) {
+    public RouteDTO(TripDTO trip, int routeNumber, String departureLocation, LocalDateTime departureTime, String arrivalLocation, LocalDateTime arrivalTime) {
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
@@ -32,7 +32,7 @@ public class RouteDTO implements Serializable {
         return departureLocation;
     }
 
-    public LocalTime getDepartureTime() {
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
@@ -40,7 +40,7 @@ public class RouteDTO implements Serializable {
         return arrivalLocation;
     }
 
-    public LocalTime getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 }

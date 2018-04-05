@@ -1,6 +1,7 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Set;
 
 public class BusDTO implements Serializable {
@@ -10,7 +11,7 @@ public class BusDTO implements Serializable {
 
     public BusDTO(String licensePlate, Set<TripPartecipationDTO> tripPartecipations, int capacity) {
         this.licensePlate = licensePlate;
-        this.tripPartecipations = tripPartecipations;
+        this.tripPartecipations = tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
         this.capacity = capacity;
     }
 
