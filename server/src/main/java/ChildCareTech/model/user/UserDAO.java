@@ -1,8 +1,8 @@
 package ChildCareTech.model.user;
 
-import ChildCareTech.utils.GenericDAO;
+import ChildCareTech.utils.AbstractGenericDAO;
 
-public class UserDAO extends GenericDAO<User, Integer> {
+public class UserDAO extends AbstractGenericDAO<User, Integer> {
     public UserDAO() {
         super(User.class);
     }
