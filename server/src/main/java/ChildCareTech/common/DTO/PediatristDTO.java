@@ -1,6 +1,7 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Set;
 
 public class PediatristDTO extends AdultDTO implements Serializable {
@@ -8,7 +9,7 @@ public class PediatristDTO extends AdultDTO implements Serializable {
 
     public PediatristDTO(PersonDTO person, Set<KidDTO> contacts, Set<KidDTO> kids) {
         super(person, contacts);
-        this.kids = kids;
+        this.kids = kids == null ? Collections.EMPTY_SET : kids;
     }
 
     public Set<KidDTO> getKids() {

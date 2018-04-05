@@ -2,6 +2,7 @@ package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
 
 public class TripDTO implements Serializable {
@@ -17,8 +18,8 @@ public class TripDTO implements Serializable {
         this.note = note;
         this.depDate = depDate;
         this.arrDate = arrDate;
-        this.routes = routes;
-        this.tripPartecipations = tripPartecipations;
+        this.routes = routes == null ? Collections.EMPTY_SET : routes;
+        this.tripPartecipations = tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
     }
 
     public String getMeta() {
