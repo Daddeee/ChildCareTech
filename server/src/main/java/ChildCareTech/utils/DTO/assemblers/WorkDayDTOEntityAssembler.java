@@ -3,14 +3,9 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.workday.WorkDay;
 
-public class WorkDayDTOEntityAssembler extends AbstractDTOEntityAssembler<WorkDay, WorkDayDTO> {
+public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<WorkDay, WorkDayDTO> {
     @Override
-    public WorkDay assembleWithoutRelations(WorkDayDTO dto) {
+    public WorkDay assemble(WorkDayDTO dto) {
         return null;
-    }
-
-    @Override
-    public void assembleRelations(WorkDay entity, WorkDayDTO dto) {
-
     }
 }

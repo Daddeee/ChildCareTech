@@ -3,14 +3,9 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.model.person.Person;
 
-public class PersonDTOEntityAssembler extends AbstractDTOEntityAssembler<Person, PersonDTO> {
+public class PersonDTOEntityAssembler implements AbstractDTOEntityAssembler<Person, PersonDTO> {
     @Override
-    public Person assembleWithoutRelations(PersonDTO dto) {
+    public Person assemble(PersonDTO dto) {
         return null;
-    }
-
-    @Override
-    public void assembleRelations(Person entity, PersonDTO dto) {
-
     }
 }

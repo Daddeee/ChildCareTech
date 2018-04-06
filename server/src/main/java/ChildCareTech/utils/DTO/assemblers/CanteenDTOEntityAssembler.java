@@ -3,14 +3,9 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.model.canteen.Canteen;
 
-public class CanteenDTOEntityAssembler extends AbstractDTOEntityAssembler<Canteen, CanteenDTO> {
+public class CanteenDTOEntityAssembler implements AbstractDTOEntityAssembler<Canteen, CanteenDTO> {
     @Override
-    public Canteen assembleWithoutRelations(CanteenDTO dto) {
+    public Canteen assemble(CanteenDTO dto) {
         return null;
-    }
-
-    @Override
-    public void assembleRelations(Canteen entity, CanteenDTO dto) {
-
     }
 }
