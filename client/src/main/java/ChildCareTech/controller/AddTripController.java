@@ -1,21 +1,22 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class AddTripController {
@@ -28,18 +29,20 @@ public class AddTripController {
     @FXML
     private DatePicker arrDateField;
     @FXML
-    private Button cancelButton;
-    @FXML
-    private Button saveButton;
-    @FXML
     private Label alertLabel;
-    @FXML
-    private VBox mainBox;
 
     @FXML
-    public void addRouteButtonAction(ActionEvent e) throws IOException, NoSuchFieldException{
-        Parent newRouteNode = new FXMLLoader(AccessorSceneManager.class.getResource("/view/templates/addRouteTemplate.fxml")).load();
-        mainBox.getChildren().add(newRouteNode);
+    private TableView<RouteDTO> routesTable;
+    @FXML
+    private TableColumn<RouteDTO, String> departureLocationColumn;
+    @FXML
+    private TableColumn<RouteDTO, String> arrivalLocationColumn;
+
+    private ObservableList<TripDTO> routes = FXCollections.observableArrayList();
+
+    @FXML
+    public void addRouteButtonAction(ActionEvent e) throws IOException{
+
     }
 
     @FXML

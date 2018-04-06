@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ChildCareTech.controller.AddTripController"
@@ -105,20 +106,38 @@
             </Button>
             <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                     minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0"
-                    prefWidth="120.0" text="Salva"/>
+                    prefWidth="120.0" text="Salva">
+                <HBox.margin>
+                    <Insets left="100.0"/>
+                </HBox.margin>
+            </Button>
         </children>
         <VBox.margin>
             <Insets top="20.0"/>
         </VBox.margin>
     </HBox>
 
-    <children>
-
-    </children>
-
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
           prefWidth="800.0">
         <children>
+            <TextField fx:id="arrivalLocationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" promptText="Luogo di arrivo">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
+            <DatePicker fx:id="arrivalDateField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Data di arrivo">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </DatePicker>
+            <TextField fx:id="arrivalTimeField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Orario di arrivo">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
             <Button fx:id="addRouteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                     minWidth="-Infinity" mnemonicParsing="false" onAction="#addRouteButtonAction" prefHeight="25.0"
                     prefWidth="80.0" text="Aggiungi tratta">
@@ -131,6 +150,21 @@
             <Insets top="20.0"/>
         </VBox.margin>
     </HBox>
+
+    <TableView fx:id="routesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
+               prefHeight="200.0" prefWidth="780.0">
+        <columns>
+            <TableColumn fx:id="departureLocationColumn" prefWidth="220.0" text="Luogo di partenza">
+                <cellValueFactory><PropertyValueFactory property="departureLocation" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="arrivalLocationColumn" prefWidth="220.0" text="Luogo di arrivo">
+                <cellValueFactory><PropertyValueFactory property="arrivalLocation" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+        <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </HBox.margin>
+    </TableView>
 
     <Label fx:id="alertLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
            minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" textFill="#ff4444">

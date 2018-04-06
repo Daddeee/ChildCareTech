@@ -25,24 +25,17 @@ public class Route implements iEntity<Route, Integer> {
     @Column(nullable = false)
     private String departureLocation;
 
-    private LocalDateTime departureTime;
-
-
     @Column(nullable = false)
     private String arrivalLocation;
-
-    private LocalDateTime arrivalTime;
 
     public Route() {
     }
 
-    public Route(Trip trip, int routeNumber, String departureLocation, LocalDateTime departureTime, String arrivalLocation, LocalDateTime arrivalTime) {
+    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
-        this.departureTime = departureTime;
         this.arrivalLocation = arrivalLocation;
-        this.arrivalTime = arrivalTime;
     }
 
     public int getId() {
@@ -83,22 +76,6 @@ public class Route implements iEntity<Route, Integer> {
 
     private void setArrivalLocation(String arrivalLocation) {
         this.arrivalLocation = arrivalLocation;
-    }
-
-    public LocalDateTime getDepartureTime() {
-        return departureTime;
-    }
-
-    private void setDepartureTime(LocalDateTime departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public LocalDateTime getArrivalTime() {
-        return arrivalTime;
-    }
-
-    private void setArrivalTime(LocalDateTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
     }
 
     @Override

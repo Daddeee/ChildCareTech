@@ -16,11 +16,9 @@ public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
         TripDTO trip = DTOFactory.getDTO(entity.getTrip());
         int routeNumber = entity.getRouteNumber();
         String departureLocationLocation = entity.getDepartureLocation();
-        LocalDateTime departureTime = entity.getDepartureTime();
         String arrivalLocation = entity.getArrivalLocation();
-        LocalDateTime arrivalTime = entity.getArrivalTime();
 
-        return new RouteDTO(trip, routeNumber, departureLocationLocation, departureTime, arrivalLocation, arrivalTime);
+        return new RouteDTO(trip, routeNumber, departureLocationLocation, arrivalLocation);
     }
 }
 

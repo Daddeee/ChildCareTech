@@ -7,17 +7,13 @@ public class RouteDTO implements Serializable {
     private TripDTO trip;
     private int routeNumber;
     private String departureLocation;
-    private LocalDateTime departureTime;
     private String arrivalLocation;
-    private LocalDateTime arrivalTime;
 
-    public RouteDTO(TripDTO trip, int routeNumber, String departureLocation, LocalDateTime departureTime, String arrivalLocation, LocalDateTime arrivalTime) {
+    public RouteDTO(TripDTO trip, int routeNumber, String departureLocation, String arrivalLocation) {
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
-        this.departureTime = departureTime;
         this.arrivalLocation = arrivalLocation;
-        this.arrivalTime = arrivalTime;
     }
 
     public TripDTO getTrip() {
@@ -32,15 +28,7 @@ public class RouteDTO implements Serializable {
         return departureLocation;
     }
 
-    public LocalDateTime getDepartureTime() {
-        return departureTime;
-    }
-
     public String getArrivalLocation() {
         return arrivalLocation;
-    }
-
-    public LocalDateTime getArrivalTime() {
-        return arrivalTime;
     }
 }
