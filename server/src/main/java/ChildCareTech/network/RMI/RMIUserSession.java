@@ -41,9 +41,27 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public List<KidDTO> getAllKids() throws RemoteException {
         KidDAO kidDAO = new KidDAO();
-        //kidDAO.setSession(HibernateSessionFactoryUtil.getInstance().openSession());
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         List<KidDTO> kidDTOList = new ArrayList<>();
-        List<Kid> kidList = kidDAO.readAll();
+        List<Kid> kidList = new ArrayList<>();
+        Transaction tx = null;
+        kidDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            kidList = kidDAO.readAll();
+            for(Kid kid : kidList)
+                kidDAO.initializeLazyRelations(kid);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
         for(Kid kid : kidList) {
             kidDTOList.add(DTOFactory.getDTO(kid));
         }

@@ -68,7 +68,6 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
     }
 
     public List<T> readAll() {
-        session = HibernateSessionFactoryUtil.getInstance().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(persistentClass);
         Root<T> root = criteria.from(persistentClass);
