@@ -78,13 +78,4 @@ public class MainStageService {
         MainStageService.setScene(scene);
         MainStageService.show();
     }
-
-    public static void changeScene(String fxmlPath, String cssPath) throws IOException, NoSuchFieldException {
-        if (mainStage == null)
-            throw new NoSuchFieldException("Stage not initialized");
-        Parent root = FXMLLoader.load(MainStageService.class.getResource(fxmlPath));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(cssPath);
-        MainStageService.changeScene(scene);
-    }
 }

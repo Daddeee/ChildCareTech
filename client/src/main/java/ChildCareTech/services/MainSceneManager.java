@@ -1,5 +1,10 @@
 package ChildCareTech.services;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+
 import java.io.IOException;
 
 public class MainSceneManager {
@@ -19,7 +24,7 @@ public class MainSceneManager {
         loginLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/loginWindow.fxml"));
         loginScene = sceneInit(loginLoader, "style/loginWindow.css");
         try {
-            MainStageService.changeScene("/view/loginWindow.fxml", "/style/loginWindow.css");
+            MainStageService.changeScene(loginScene);
         } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }
@@ -29,7 +34,7 @@ public class MainSceneManager {
         homeLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/homeWindow.fxml"));
         homeScene = sceneInit(homeLoader, "/style/homeWindow.css");
         try {
-            MainStageService.changeScene("/view/homeWindow.fxml", "/style/homeWindow.css");
+            MainStageService.changeScene(homeScene);
         } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }
@@ -40,7 +45,7 @@ public class MainSceneManager {
         kidAnagraphicsLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/kidAnagraphicsWindow.fxml"));
         kidAnagraphicsScene = sceneInit(kidAnagraphicsLoader, "/style/anagraphicsWindow.css");
         try {
-            MainStageService.changeScene("/view/kidAnagraphicsWindow.fxml", "/style/anagraphicsWindow.css");
+            MainStageService.changeScene(kidAnagraphicsScene);
         } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }
@@ -50,9 +55,29 @@ public class MainSceneManager {
         tripListLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/tripsWindow.fxml"));
         tripListScene = sceneInit(tripListLoader, "/style/tripsWindow.css");
         try {
-            MainStageService.changeScene("/view/tripsWindow.fxml", "/style/tripsWindow.css");
+            MainStageService.changeScene(tripListScene);
         } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private static Scene sceneInit(FXMLLoader loader, String cssPath) {
+        Scene scene;
+        try {
+            scene = new Scene(loader.load());
+            scene.getStylesheets().add(cssPath);
+        } catch (IOException ex) {
+            System.err.println("Can't find fxml/css file");
+            ex.printStackTrace();
+            return errScene();
+        }
+        return scene;
+    }
+
+    private static Scene errScene() {
+        AnchorPane pane = new AnchorPane();
+        Label label = new Label("fxml/css not loaded");
+        pane.getChildren().add(label);
+        return new Scene(pane, 200, 200);
     }
 }

@@ -24,7 +24,7 @@ public class AccessorSceneManager {
         addKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
         addKidScene = sceneInit(addKidLoader, "/style/addKidWindow.css");
         try {
-            AccessorStageService.changeScene(addTripScene);
+            AccessorStageService.changeScene(addKidScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
@@ -34,7 +34,17 @@ public class AccessorSceneManager {
         registerUserLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/registerUserWindow.fxml"));
         registerUserScene = sceneInit(registerUserLoader, "style/registerUserWindow.css");
         try {
-            AccessorStageService.changeScene(addKidScene);
+            AccessorStageService.changeScene(registerUserScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAddTrip() throws IOException {
+        addTripLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addTripWindow.fxml"));
+        addTripScene = sceneInit(addTripLoader, "/style/addTripWindow.css");
+        try {
+            AccessorStageService.changeScene(addTripScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
@@ -45,16 +55,8 @@ public class AccessorSceneManager {
         ex.printStackTrace();
     }
 
-    public static void loadRegisterUser() throws IOException {
-        try {
-            AccessorStageService.changeScene(registerUserScene);
-        } catch (NoSuchFieldException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     private static Scene sceneInit(FXMLLoader loader, String cssPath) {
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(loader.load());
             scene.getStylesheets().add(cssPath);
@@ -68,7 +70,7 @@ public class AccessorSceneManager {
 
     private static Scene errScene() {
         AnchorPane pane = new AnchorPane();
-        Label label = new Label("fxml/css not found");
+        Label label = new Label("fxml/css not loaded");
         pane.getChildren().add(label);
         return new Scene(pane, 200, 200);
     }

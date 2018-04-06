@@ -4,6 +4,8 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.controller.SessionController;
+import ChildCareTech.model.kid.Kid;
+import ChildCareTech.model.kid.KidDAO;
 import ChildCareTech.model.trip.Trip;
 import ChildCareTech.model.trip.TripDAO;
 import ChildCareTech.model.user.User;
@@ -16,7 +18,6 @@ import org.hibernate.Transaction;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RMIUserSession extends UnicastRemoteObject implements UserSession {
@@ -40,12 +41,18 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public List<KidDTO> getAllKids() throws RemoteException {
         KidDAO kidDAO = new KidDAO();
+        //kidDAO.setSession(HibernateSessionFactoryUtil.getInstance().openSession());
         List<KidDTO> kidDTOList = new ArrayList<>();
         List<Kid> kidList = kidDAO.readAll();
         for(Kid kid : kidList) {
             kidDTOList.add(DTOFactory.getDTO(kid));
         }
         return kidDTOList;
+    }
+
+    @Override
+    public void saveTrip(TripDTO tripDTO) {
+
     }
 
     public List<TripDTO> getAllTrips() {

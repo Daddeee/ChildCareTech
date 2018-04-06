@@ -43,7 +43,8 @@ public class TripsController {
 
     @FXML
     public void initialize(){
-        populateTable();
+        refreshTable();
+        tripsTable.setItems(items);
     }
 
     @FXML
@@ -66,7 +67,7 @@ public class TripsController {
         }
     }
 
-    private void populateTable(){
+    private void refreshTable(){
         List<TripDTO> tripsDTOList = new ArrayList<>();
 
         try {
@@ -75,6 +76,6 @@ public class TripsController {
             e.printStackTrace();
         }
 
-        tripsTable.getItems().addAll(tripsDTOList);
+        items.addAll(tripsDTOList);
     }
 }

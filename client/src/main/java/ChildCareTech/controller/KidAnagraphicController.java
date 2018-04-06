@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class KidAnagraphicController {
     private TableColumn<ObservableKid, String> pediatristFCColumn;
 
 
-    private ObservableList<ObservableKid> list = FXCollections.observableArrayList();
+    private ObservableList<ObservableKid> items = FXCollections.observableArrayList();
 
 
     public KidAnagraphicController() { }
@@ -63,8 +64,8 @@ public class KidAnagraphicController {
         firstTutorFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("firstTutorFC"));
         secondTutorFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("secondTutorFC"));
         pediatristFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("pediatristFC"));
-        personTable.setItems(list);
-        populateTable();
+        refreshTable();
+        personTable.setItems(items);
     }
 
     @FXML
@@ -92,7 +93,16 @@ public class KidAnagraphicController {
         }
     }
 
-    private void populateTable() {
+    private void refreshTable() {
+        List<KidDTO> kidDTOList = new ArrayList<>();
+        try {
+            kidDTOList = SessionService.getSession().getAllKids();
+        } catch(RemoteException e){
+            e.printStackTrace();
+        }
 
+        for(KidDTO kid : kidDTOList) {
+            items.add(new ObservableKid(kid));
+        }
     }
 }

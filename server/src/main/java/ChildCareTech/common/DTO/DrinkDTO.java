@@ -1,6 +1,7 @@
 package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Set;
 
 public class DrinkDTO implements Serializable {
@@ -11,7 +12,7 @@ public class DrinkDTO implements Serializable {
     public DrinkDTO(String name, MenuDTO menu, Set<FoodDTO> foods) {
         this.name = name;
         this.menu = menu;
-        this.foods = foods;
+        this.foods = foods == null ? Collections.EMPTY_SET : foods;
     }
 
     public String getName() {
