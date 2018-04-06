@@ -2,15 +2,16 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.model.staff.Staff;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class StaffDTOEntityAssembler extends AbstractDTOEntityAssembler<Staff, StaffDTO> {
+public class StaffDTOEntityAssembler implements AbstractDTOEntityAssembler<Staff, StaffDTO> {
     @Override
-    public Staff assembleWithoutRelations(StaffDTO dto) {
-        return null;
-    }
+    public Staff assemble(StaffDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Staff entity, StaffDTO dto) {
-
+        return new Staff(
+                DTOEntityAssembler.getEntity(dto.getPerson())
+        );
     }
 }

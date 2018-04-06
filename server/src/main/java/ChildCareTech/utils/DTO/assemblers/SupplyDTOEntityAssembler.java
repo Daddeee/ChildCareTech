@@ -2,15 +2,19 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.supply.Supply;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class SupplyDTOEntityAssembler extends AbstractDTOEntityAssembler<Supply, SupplyDTO> {
+public class SupplyDTOEntityAssembler implements AbstractDTOEntityAssembler<Supply, SupplyDTO> {
     @Override
-    public Supply assembleWithoutRelations(SupplyDTO dto) {
-        return null;
-    }
+    public Supply assemble(SupplyDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Supply entity, SupplyDTO dto) {
-
+        return new Supply(
+                DTOEntityAssembler.getEntity(dto.getSupplier()),
+                DTOEntityAssembler.getEntity(dto.getFood()),
+                dto.getQuantity(),
+                dto.getDate()
+        );
     }
 }

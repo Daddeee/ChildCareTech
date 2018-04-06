@@ -35,9 +35,7 @@ public class Pediatrist extends Adult {
         return kids == null ? Collections.EMPTY_SET : kids;
     }
 
-    private void setKids(Set<Kid> kids) {
+    public void setKids(Set<Kid> kids) {
         this.kids = kids;
     }
-
-
 }

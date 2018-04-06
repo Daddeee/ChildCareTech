@@ -30,8 +30,8 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
         Person p1 = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Person p2 = new Person("cf2", "fn2", "ln2", LocalDate.now().plusDays(1), ChildCareTech.common.Sex.MALE, "", "");
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
-        Bus b1 = new Bus("plate");
-        Bus b2 = new Bus("plate2");
+        Bus b1 = new Bus("plate", 10);
+        Bus b2 = new Bus("plate2", 11);
         TripPartecipation tp1 = new TripPartecipation(p1, t, b1);
         TripPartecipation tp2 = new TripPartecipation(p2, t, b2);
         Route s1 = new Route(t, 0, "a", LocalDateTime.now(), "b", LocalDateTime.now().plusHours(1));
@@ -95,7 +95,7 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
     @Override
     public void testCRUD() {
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(2));
-        Trip tu = new Trip("meta", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3), "note");
+        Trip tu = new Trip("meta",  "note", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3));
 
         testCRUDImpl(t, tu);
     }

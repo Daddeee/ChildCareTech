@@ -45,7 +45,7 @@ public class Trip implements iEntity<Trip, Integer> {
         this.arrDate = arrDate;
     }
 
-    public Trip(String meta, LocalDate depDate, LocalDate arrDate, String note) {
+    public Trip(String meta, String note,LocalDate depDate, LocalDate arrDate) {
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;

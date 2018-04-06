@@ -29,7 +29,7 @@ public class Supplier extends Adult {
         return supplies == null ? Collections.EMPTY_SET : supplies;
     }
 
-    private void setSupplies(Set<Supply> supplies) {
+    public void setSupplies(Set<Supply> supplies) {
         this.supplies = supplies;
     }
 

@@ -59,97 +59,97 @@ import ChildCareTech.model.staff.Staff;
 import ChildCareTech.utils.DTO.assemblers.StaffDTOEntityAssembler;
 
 public class DTOEntityAssembler {
-    public Meal getEntity(MealDTO dto) {
+    public static Meal getEntity(MealDTO dto) {
         MealDTOEntityAssembler mealDTOEntityAssembler = new MealDTOEntityAssembler();
         return mealDTOEntityAssembler.assemble(dto);
     }
 
-    public Trip getEntity(TripDTO dto) {
+    public static Trip getEntity(TripDTO dto) {
         TripDTOEntityAssembler tripDTOEntityAssembler = new TripDTOEntityAssembler();
         return tripDTOEntityAssembler.assemble(dto);
     }
 
-    public Kid getEntity(KidDTO dto) {
+    public static Kid getEntity(KidDTO dto) {
         KidDTOEntityAssembler kidDTOEntityAssembler = new KidDTOEntityAssembler();
         return kidDTOEntityAssembler.assemble(dto);
     }
 
-    public Food getEntity(FoodDTO dto) {
+    public static Food getEntity(FoodDTO dto) {
         FoodDTOEntityAssembler foodDTOEntityAssembler = new FoodDTOEntityAssembler();
         return foodDTOEntityAssembler.assemble(dto);
     }
 
-    public Canteen getEntity(CanteenDTO dto) {
+    public static Canteen getEntity(CanteenDTO dto) {
         CanteenDTOEntityAssembler canteenDTOEntityAssembler = new CanteenDTOEntityAssembler();
         return canteenDTOEntityAssembler.assemble(dto);
     }
 
-    public Event getEntity(EventDTO dto) {
+    public static Event getEntity(EventDTO dto) {
         EventDTOEntityAssembler eventDTOEntityAssembler = new EventDTOEntityAssembler();
         return eventDTOEntityAssembler.assemble(dto);
     }
 
-    public Adult getEntity(AdultDTO dto) {
+    public static Adult getEntity(AdultDTO dto) {
         AdultDTOEntityAssembler adultDTOEntityAssembler = new AdultDTOEntityAssembler();
         return adultDTOEntityAssembler.assemble(dto);
     }
 
-    public TripPartecipation getEntity(TripPartecipationDTO dto) {
+    public static TripPartecipation getEntity(TripPartecipationDTO dto) {
         TripPartecipationDTOEntityAssembler trippartecipationDTOEntityAssembler = new TripPartecipationDTOEntityAssembler();
         return trippartecipationDTOEntityAssembler.assemble(dto);
     }
 
-    public Drink getEntity(DrinkDTO dto) {
+    public static Drink getEntity(DrinkDTO dto) {
         DrinkDTOEntityAssembler drinkDTOEntityAssembler = new DrinkDTOEntityAssembler();
         return drinkDTOEntityAssembler.assemble(dto);
     }
 
-    public WorkDay getEntity(WorkDayDTO dto) {
+    public static WorkDay getEntity(WorkDayDTO dto) {
         WorkDayDTOEntityAssembler workdayDTOEntityAssembler = new WorkDayDTOEntityAssembler();
         return workdayDTOEntityAssembler.assemble(dto);
     }
 
-    public Route getEntity(RouteDTO dto) {
+    public static Route getEntity(RouteDTO dto) {
         RouteDTOEntityAssembler routeDTOEntityAssembler = new RouteDTOEntityAssembler();
         return routeDTOEntityAssembler.assemble(dto);
     }
 
-    public Person getEntity(PersonDTO dto) {
+    public static Person getEntity(PersonDTO dto) {
         PersonDTOEntityAssembler personDTOEntityAssembler = new PersonDTOEntityAssembler();
         return personDTOEntityAssembler.assemble(dto);
     }
 
-    public Menu getEntity(MenuDTO dto) {
+    public static Menu getEntity(MenuDTO dto) {
         MenuDTOEntityAssembler menuDTOEntityAssembler = new MenuDTOEntityAssembler();
         return menuDTOEntityAssembler.assemble(dto);
     }
 
-    public Pediatrist getEntity(PediatristDTO dto) {
+    public static Pediatrist getEntity(PediatristDTO dto) {
         PediatristDTOEntityAssembler pediatristDTOEntityAssembler = new PediatristDTOEntityAssembler();
         return pediatristDTOEntityAssembler.assemble(dto);
     }
 
-    public Bus getEntity(BusDTO dto) {
+    public static Bus getEntity(BusDTO dto) {
         BusDTOEntityAssembler busDTOEntityAssembler = new BusDTOEntityAssembler();
         return busDTOEntityAssembler.assemble(dto);
     }
 
-    public Supply getEntity(SupplyDTO dto) {
+    public static Supply getEntity(SupplyDTO dto) {
         SupplyDTOEntityAssembler supplyDTOEntityAssembler = new SupplyDTOEntityAssembler();
         return supplyDTOEntityAssembler.assemble(dto);
     }
 
-    public Supplier getEntity(SupplierDTO dto) {
+    public static Supplier getEntity(SupplierDTO dto) {
         SupplierDTOEntityAssembler supplierDTOEntityAssembler = new SupplierDTOEntityAssembler();
         return supplierDTOEntityAssembler.assemble(dto);
     }
 
-    public Dish getEntity(DishDTO dto) {
+    public static Dish getEntity(DishDTO dto) {
         DishDTOEntityAssembler dishDTOEntityAssembler = new DishDTOEntityAssembler();
         return dishDTOEntityAssembler.assemble(dto);
     }
 
-    public Staff getEntity(StaffDTO dto) {
+    public static Staff getEntity(StaffDTO dto) {
         StaffDTOEntityAssembler staffDTOEntityAssembler = new StaffDTOEntityAssembler();
         return staffDTOEntityAssembler.assemble(dto);
     }

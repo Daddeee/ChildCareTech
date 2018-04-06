@@ -2,15 +2,18 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class TripPartecipationDTOEntityAssembler extends AbstractDTOEntityAssembler<TripPartecipation, TripPartecipationDTO> {
+public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAssembler<TripPartecipation, TripPartecipationDTO> {
     @Override
-    public TripPartecipation assembleWithoutRelations(TripPartecipationDTO dto) {
-        return null;
-    }
+    public TripPartecipation assemble(TripPartecipationDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(TripPartecipation entity, TripPartecipationDTO dto) {
-
+        return new TripPartecipation(
+                DTOEntityAssembler.getEntity(dto.getPerson()),
+                DTOEntityAssembler.getEntity(dto.getTrip()),
+                DTOEntityAssembler.getEntity(dto.getBus())
+        );
     }
 }

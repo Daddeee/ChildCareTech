@@ -2,15 +2,19 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.model.event.Event;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class EventDTOEntityAssembler extends AbstractDTOEntityAssembler<Event, EventDTO> {
+public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event, EventDTO> {
     @Override
-    public Event assembleWithoutRelations(EventDTO dto) {
-        return null;
-    }
+    public Event assemble(EventDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Event entity, EventDTO dto) {
-
+        return new Event(
+                DTOEntityAssembler.getEntity(dto.getWorkDay()),
+                DTOEntityAssembler.getEntity(dto.getPerson()),
+                dto.getTime(),
+                dto.isIn()
+        );
     }
 }

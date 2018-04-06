@@ -67,7 +67,7 @@ public class Drink implements iEntity<Drink, Integer> {
         this.menu = menu;
     }
 
-    private void setFoods(Set<Food> foods) {
+    public void setFoods(Set<Food> foods) {
         this.foods = foods;
     }
 

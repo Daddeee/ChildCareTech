@@ -2,15 +2,18 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.model.meal.Meal;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class MealDTOEntityAssembler extends AbstractDTOEntityAssembler<Meal, MealDTO> {
+public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, MealDTO> {
     @Override
-    public Meal assembleWithoutRelations(MealDTO dto) {
-        return null;
-    }
+    public Meal assemble(MealDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Meal entity, MealDTO dto) {
-
+        return new Meal(
+                DTOEntityAssembler.getEntity(dto.getCanteen()),
+                dto.getMealNum(),
+                DTOEntityAssembler.getEntity(dto.getWorkDay())
+        );
     }
 }

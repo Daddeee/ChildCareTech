@@ -1,16 +1,30 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.DrinkDTO;
+import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.model.drink.Drink;
+import ChildCareTech.model.food.Food;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class DrinkDTOEntityAssembler extends AbstractDTOEntityAssembler<Drink, DrinkDTO> {
+import java.util.HashSet;
+import java.util.Set;
+
+public class DrinkDTOEntityAssembler implements AbstractDTOEntityAssembler<Drink, DrinkDTO> {
     @Override
-    public Drink assembleWithoutRelations(DrinkDTO dto) {
-        return null;
-    }
+    public Drink assemble(DrinkDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Drink entity, DrinkDTO dto) {
+        Drink entity = new Drink(
+                dto.getName(),
+                DTOEntityAssembler.getEntity(dto.getMenu())
+        );
 
+        Set<Food> foods = new HashSet<>();
+        for(FoodDTO f : dto.getFoods())
+            foods.add(DTOEntityAssembler.getEntity(f));
+        entity.setFoods(foods);
+
+        return entity;
     }
 }

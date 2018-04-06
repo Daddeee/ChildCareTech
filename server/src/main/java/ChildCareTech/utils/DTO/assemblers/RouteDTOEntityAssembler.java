@@ -2,15 +2,21 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.model.route.Route;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class RouteDTOEntityAssembler extends AbstractDTOEntityAssembler<Route, RouteDTO> {
+public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route, RouteDTO> {
     @Override
-    public Route assembleWithoutRelations(RouteDTO dto) {
-        return null;
-    }
+    public Route assemble(RouteDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Route entity, RouteDTO dto) {
-
+        return new Route(
+                DTOEntityAssembler.getEntity(dto.getTrip()),
+                dto.getRouteNumber(),
+                dto.getDepartureLocation(),
+                dto.getDepartureTime(),
+                dto.getArrivalLocation(),
+                dto.getArrivalTime()
+        );
     }
 }

@@ -63,7 +63,7 @@ public class Canteen implements iEntity<Canteen, Integer> {
         return meals == null ? Collections.EMPTY_SET : meals;
     }
 
-    private void setMeals(Set<Meal> meals) {
+    public void setMeals(Set<Meal> meals) {
         this.meals = meals;
     }
 

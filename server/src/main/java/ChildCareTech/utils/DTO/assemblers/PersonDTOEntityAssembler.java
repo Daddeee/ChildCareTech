@@ -1,16 +1,27 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.model.event.Event;
 import ChildCareTech.model.person.Person;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
-public class PersonDTOEntityAssembler extends AbstractDTOEntityAssembler<Person, PersonDTO> {
+import java.util.HashSet;
+import java.util.Set;
+
+public class PersonDTOEntityAssembler implements AbstractDTOEntityAssembler<Person, PersonDTO> {
     @Override
-    public Person assembleWithoutRelations(PersonDTO dto) {
-        return null;
-    }
+    public Person assemble(PersonDTO dto) {
+        if(dto == null)
+            return null;
 
-    @Override
-    public void assembleRelations(Person entity, PersonDTO dto) {
-
+        return new Person(
+                dto.getFiscalCode(),
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getBirthDate(),
+                dto.getSex(),
+                dto.getAddress(),
+                dto.getPhoneNumber()
+        );
     }
 }
