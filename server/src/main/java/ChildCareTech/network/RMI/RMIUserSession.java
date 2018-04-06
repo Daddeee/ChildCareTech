@@ -33,8 +33,19 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public void saveKid(KidDTO kidDTO) {
+    public void saveKid(KidDTO kid) throws RemoteException {
+        //
+    }
 
+    @Override
+    public List<KidDTO> getAllKids() throws RemoteException {
+        KidDAO kidDAO = new KidDAO();
+        List<KidDTO> kidDTOList = new ArrayList<>();
+        List<Kid> kidList = kidDAO.readAll();
+        for(Kid kid : kidList) {
+            kidDTOList.add(DTOFactory.getDTO(kid));
+        }
+        return kidDTOList;
     }
 
     public List<TripDTO> getAllTrips() {

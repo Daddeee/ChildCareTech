@@ -1,11 +1,10 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.KidDTO;
-import ChildCareTech.common.DTO.PersonDTO;
-import ChildCareTech.common.Sex;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
+import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -71,10 +70,15 @@ public class KidAnagraphicController {
     @FXML
     public void addButtonAction(ActionEvent event) {
         try {
-            AccessorSceneManager.loadAddPerson();
+            AccessorSceneManager.loadAddKid();
         } catch (IOException ex) {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();
+        }
+        try {
+            List<KidDTO> list = SessionService.getSession().getAllKids();
+        } catch(RemoteException ex) {
+            System.err.println("remote error");
         }
     }
 

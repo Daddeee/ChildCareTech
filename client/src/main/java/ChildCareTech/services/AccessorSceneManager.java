@@ -16,19 +16,13 @@ public class AccessorSceneManager {
     private static Scene registerUserScene;
     private static Scene addTripScene;
 
-    static {
-        addKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
-        registerUserLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/registerUserWindow.fxml"));
-        addKidScene = sceneInit(addKidLoader, "/style/addKidWindow.css");
-        registerUserScene = sceneInit(registerUserLoader, "style/registerUserWindow.css");
-        addTripLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addTripWindow.fxml"));
-        addTripScene = sceneInit(addTripLoader, "/style/addTripWindow.css");
-    }
 
     private AccessorSceneManager() {
     }
 
-    public static void loadAddTrip() throws IOException {
+    public static void loadAddKid() throws IOException {
+        addKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
+        addKidScene = sceneInit(addKidLoader, "/style/addKidWindow.css");
         try {
             AccessorStageService.changeScene(addTripScene);
         } catch (NoSuchFieldException ex) {
@@ -36,7 +30,9 @@ public class AccessorSceneManager {
         }
     }
 
-    public static void loadAddPerson() throws IOException {
+    public static void loadRegisterUser() throws IOException {
+        registerUserLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/registerUserWindow.fxml"));
+        registerUserScene = sceneInit(registerUserLoader, "style/registerUserWindow.css");
         try {
             AccessorStageService.changeScene(addKidScene);
         } catch (NoSuchFieldException ex) {

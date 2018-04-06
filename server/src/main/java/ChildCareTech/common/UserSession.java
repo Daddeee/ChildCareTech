@@ -13,4 +13,5 @@ public interface UserSession extends Remote {
     List<TripDTO> getAllTrips() throws RemoteException;
 
     void saveKid(KidDTO kid) throws RemoteException;
+    List<KidDTO> getAllKids() throws RemoteException;
 }

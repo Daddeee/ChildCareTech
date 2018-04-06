@@ -1,8 +1,11 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.kid.Kid;
 import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +66,11 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
     }
 
     public List<T> readAll() {
-        return read(new HashMap<>());
+        //return read(new HashMap<>());
+        session = HibernateSessionFactoryUtil.getInstance().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(persistentClass);
+        return session.createQuery(criteria).getResultList();
     }
 
     @SuppressWarnings("unchecked")
