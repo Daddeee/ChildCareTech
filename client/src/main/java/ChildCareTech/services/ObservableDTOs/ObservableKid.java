@@ -2,35 +2,39 @@ package ChildCareTech.services.ObservableDTOs;
 
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ObservableKid extends KidDTO {
     public ObservableKid(KidDTO kidDTO) {
         super(kidDTO.getPerson(), kidDTO.getFirstTutor(), kidDTO.getSecondTutor(), kidDTO.getPediatrist(), kidDTO.getContacts());
     }
-    public String firstNameProperty() {
-        return getPerson().getFirstName();
+    public StringProperty firstNameProperty() {
+        return new SimpleStringProperty(getPerson().getFirstName());
     }
-    public String lastNameProperty() {
-        return getPerson().getLastName();
+    public StringProperty lastNameProperty() {
+        return new SimpleStringProperty(getPerson().getLastName());
     }
-    public String fiscalCodeProperty() {
-        return getPerson().getFiscalCode();
+    public StringProperty fiscalCodeProperty() {
+        return new SimpleStringProperty(getPerson().getFiscalCode());
     }
-    public LocalDate birthDateProperty() {
-        return getPerson().getBirthDate();
+    public StringProperty birthDateProperty() {
+        DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return new SimpleStringProperty(getPerson().getBirthDate().format(myDateFormatter));
     }
-    public String addressProperty() {
-        return getPerson().getAddress();
+    public StringProperty addressProperty() {
+        return new SimpleStringProperty(getPerson().getAddress());
     }
-    public String firstTutorFCProperty() {
-        return getFirstTutor().getPerson().getFiscalCode();
+    public StringProperty firstTutorFCProperty() {
+        return new SimpleStringProperty(getFirstTutor().getPerson().getFiscalCode());
     }
-    public String secondTutorFCProperty() {
-        return getSecondTutor().getPerson().getFiscalCode();
+    public StringProperty secondTutorFCProperty() {
+        return new SimpleStringProperty(getSecondTutor().getPerson().getFiscalCode());
     }
-    public String pediatristFCProperty() {
-        return getPediatrist().getPerson().getFiscalCode();
+    public StringProperty pediatristFCProperty() {
+        return new SimpleStringProperty(getPediatrist().getPerson().getFiscalCode());
     }
 }

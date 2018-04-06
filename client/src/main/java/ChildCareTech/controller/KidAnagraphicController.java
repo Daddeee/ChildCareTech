@@ -1,6 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
+import ChildCareTech.common.DTO.PediatristDTO;
+import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.Sex;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
@@ -18,6 +22,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -104,5 +109,10 @@ public class KidAnagraphicController {
         for(KidDTO kid : kidDTOList) {
             items.add(new ObservableKid(kid));
         }
+
+        //debug
+        //PersonDTO person = new PersonDTO("fisc", "nome", "cognome", LocalDate.now(), Sex.MALE, "addr", "");
+        //items.add(new ObservableKid(new KidDTO(person, new AdultDTO(person, new HashSet<KidDTO>()), new AdultDTO(person, new HashSet<KidDTO>()), new PediatristDTO(person, new HashSet<KidDTO>(), new HashSet<KidDTO>()), new HashSet<>())));
+
     }
 }
