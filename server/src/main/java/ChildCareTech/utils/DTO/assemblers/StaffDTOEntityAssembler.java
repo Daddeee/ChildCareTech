@@ -2,10 +2,16 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.model.staff.Staff;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 public class StaffDTOEntityAssembler implements AbstractDTOEntityAssembler<Staff, StaffDTO> {
     @Override
     public Staff assemble(StaffDTO dto) {
-        return null;
+        if(dto == null)
+            return null;
+
+        return new Staff(
+                DTOEntityAssembler.getEntity(dto.getPerson())
+        );
     }
 }

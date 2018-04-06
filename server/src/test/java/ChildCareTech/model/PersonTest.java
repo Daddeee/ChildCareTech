@@ -35,7 +35,7 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
         Event e2 = new Event(wd2, p, LocalTime.now().plusHours(1), false);
         Trip t1 = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
         Trip t2 = new Trip("meta1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3));
-        Bus b = new Bus("plate");
+        Bus b = new Bus("plate", 10);
         TripPartecipation tp1 = new TripPartecipation(p, t1, b);
         TripPartecipation tp2 = new TripPartecipation(p, t2, b);
 

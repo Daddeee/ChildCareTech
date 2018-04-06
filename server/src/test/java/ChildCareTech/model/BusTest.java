@@ -25,7 +25,7 @@ public class BusTest extends AbstractEntityTest<Bus, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        Bus b = new Bus("plate");
+        Bus b = new Bus("plate", 10);
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
         Person p1 = new Person("fisc1", "fn1", "ln1", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Person p2 = new Person("fisc2", "fn2", "ln2", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
@@ -60,8 +60,8 @@ public class BusTest extends AbstractEntityTest<Bus, Integer> {
 
     @Override
     public void testCRUD() {
-        Bus b = new Bus("targa1");
-        Bus bu = new Bus("targa1u");
+        Bus b = new Bus("targa1", 10);
+        Bus bu = new Bus("targa1u", 11);
 
         testCRUDImpl(b, bu);
     }

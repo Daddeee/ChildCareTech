@@ -56,7 +56,7 @@ public class Menu implements iEntity<Menu, Integer> {
         this.id = a.getPrimaryKey();
     }
 
-    private void setDishes(Set<Dish> dishes) {
+    public void setDishes(Set<Dish> dishes) {
         this.dishes = dishes;
     }
 
@@ -64,7 +64,7 @@ public class Menu implements iEntity<Menu, Integer> {
         return dishes == null ? Collections.EMPTY_SET : dishes;
     }
 
-    private void setDrink(Drink drink) {
+    public void setDrink(Drink drink) {
         this.drink = drink;
     }
 

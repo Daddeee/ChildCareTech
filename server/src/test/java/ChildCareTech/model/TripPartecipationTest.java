@@ -32,8 +32,8 @@ public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation,
         );
 
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
-        Bus b = new Bus("targa");
-        Bus bu = new Bus("targaU");
+        Bus b = new Bus("targa", 10);
+        Bus bu = new Bus("targaU", 11);
 
         session = sessionFactory.openSession();
         Transaction tx = null;
