@@ -1,6 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.MainStageService;
@@ -57,6 +58,9 @@ public class AddTripController {
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
+        } catch (AddFailedException ex) {
+            alertLabel.setText("Salvataggio non riuscito: " + ex.getMessage());
+            return;
         }
 
         try {

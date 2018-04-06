@@ -3,6 +3,7 @@ package ChildCareTech.network.RMI;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.UserSession;
+import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.kid.KidDAO;
@@ -71,7 +72,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public void saveTrip(TripDTO tripDTO) {
+    public void saveTrip(TripDTO tripDTO) throws AddFailedException{
         TripDAO tripDAO = new TripDAO();
         Trip trip = DTOEntityAssembler.getEntity(tripDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -88,11 +89,14 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
             if(tripDAO.read(paramMap).isEmpty())
                 tripDAO.create(trip);
+            else
+                throw new AddFailedException("Una gita per la stessa meta e con stesse date è già presente");
 
             tx.commit();
-        } catch(HibernateException e){
+        } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
         }
     }
 
