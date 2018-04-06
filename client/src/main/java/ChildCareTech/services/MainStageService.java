@@ -74,7 +74,6 @@ public class MainStageService {
     public static void changeScene(Scene scene) throws NoSuchFieldException {
         if (mainStage == null)
             throw new NoSuchFieldException("Stage not initialized");
-        MainStageService.hide();
         MainStageService.setScene(scene);
         MainStageService.show();
     }
