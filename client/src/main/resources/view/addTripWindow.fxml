@@ -7,7 +7,8 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ChildCareTech.controller.AddTripController"
-      prefHeight="400.0" prefWidth="600.0">
+      fx:id="mainBox"
+      prefHeight="600.0" prefWidth="800.0">
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
           prefWidth="400.0">
         <children>
@@ -30,7 +31,7 @@
     </HBox>
 
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
-          prefWidth="400.0">
+          prefWidth="800.0">
         <children>
             <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                    prefHeight="25.0" prefWidth="80.0" text="Note:">
@@ -51,7 +52,7 @@
     </HBox>
 
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
-          prefWidth="400.0">
+          prefWidth="800.0">
         <children>
             <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                    prefHeight="25.0" prefWidth="80.0" text="Data di partenza:">
@@ -72,7 +73,7 @@
     </HBox>
 
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
-          prefWidth="400.0">
+          prefWidth="800.0">
         <children>
             <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                    prefHeight="25.0" prefWidth="80.0" text="Data di arrivo:">
@@ -93,7 +94,7 @@
     </HBox>
 
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
-          prefWidth="400.0">
+          prefWidth="800.0">
         <children>
             <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                     minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0"
@@ -110,6 +111,27 @@
             <Insets top="20.0"/>
         </VBox.margin>
     </HBox>
+
+    <children>
+
+    </children>
+
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="800.0">
+        <children>
+            <Button fx:id="addRouteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#addRouteButtonAction" prefHeight="25.0"
+                    prefWidth="80.0" text="Aggiungi tratta">
+                <HBox.margin>
+                    <Insets left="100.0"/>
+                </HBox.margin>
+            </Button>
+        </children>
+        <VBox.margin>
+            <Insets top="20.0"/>
+        </VBox.margin>
+    </HBox>
+
     <Label fx:id="alertLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
            minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" textFill="#ff4444">
         <VBox.margin>

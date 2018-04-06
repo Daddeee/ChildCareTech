@@ -31,10 +31,10 @@ public class Route implements iEntity<Route, Integer> {
     @Column(nullable = false)
     private String arrivalLocation;
 
+    private LocalDateTime arrivalTime;
+
     public Route() {
     }
-
-    private LocalDateTime arrivalTime;
 
     public Route(Trip trip, int routeNumber, String departureLocation, LocalDateTime departureTime, String arrivalLocation, LocalDateTime arrivalTime) {
         this.trip = trip;

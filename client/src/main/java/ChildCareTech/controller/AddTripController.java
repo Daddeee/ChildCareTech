@@ -2,16 +2,16 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.MainStageService;
-import ChildCareTech.services.SessionService;
+import ChildCareTech.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -33,6 +33,14 @@ public class AddTripController {
     private Button saveButton;
     @FXML
     private Label alertLabel;
+    @FXML
+    private VBox mainBox;
+
+    @FXML
+    public void addRouteButtonAction(ActionEvent e) throws IOException, NoSuchFieldException{
+        Parent newRouteNode = new FXMLLoader(AccessorSceneManager.class.getResource("/view/templates/addRouteTemplate.fxml")).load();
+        mainBox.getChildren().add(newRouteNode);
+    }
 
     @FXML
     public void cancelButtonAction(ActionEvent e){
