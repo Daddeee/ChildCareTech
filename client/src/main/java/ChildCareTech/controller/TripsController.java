@@ -6,6 +6,7 @@ import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -76,6 +77,7 @@ public class TripsController {
             e.printStackTrace();
         }
 
+        items.clear();
         items.addAll(tripsDTOList);
     }
 }

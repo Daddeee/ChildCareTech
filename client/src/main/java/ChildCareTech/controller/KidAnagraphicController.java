@@ -106,6 +106,7 @@ public class KidAnagraphicController {
             e.printStackTrace();
         }
 
+        items.clear();
         for(KidDTO kid : kidDTOList) {
             items.add(new ObservableKid(kid));
         }
