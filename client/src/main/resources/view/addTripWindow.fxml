@@ -120,20 +120,20 @@
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
           prefWidth="800.0">
         <children>
-            <TextField fx:id="arrivalLocationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                       minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" promptText="Luogo di arrivo">
+            <TextField fx:id="departureLocationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Luogo di partenza">
                 <HBox.margin>
                     <Insets left="20.0"/>
                 </HBox.margin>
             </TextField>
-            <DatePicker fx:id="arrivalDateField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                        minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Data di arrivo">
+            <TextField fx:id="arrivalLocationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Luogo di arrivo">
                 <HBox.margin>
                     <Insets left="20.0"/>
                 </HBox.margin>
-            </DatePicker>
-            <TextField fx:id="arrivalTimeField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                       minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Orario di arrivo">
+            </TextField>
+            <TextField fx:id="routeNumberField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" promptText="#">
                 <HBox.margin>
                     <Insets left="20.0"/>
                 </HBox.margin>
@@ -152,22 +152,25 @@
     </HBox>
 
     <TableView fx:id="routesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
-               prefHeight="200.0" prefWidth="780.0">
+               prefHeight="100.0" prefWidth="700.0">
         <columns>
-            <TableColumn fx:id="departureLocationColumn" prefWidth="220.0" text="Luogo di partenza">
+            <TableColumn fx:id="departureLocationColumn" prefWidth="300.0" text="Luogo di partenza">
                 <cellValueFactory><PropertyValueFactory property="departureLocation" /></cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="arrivalLocationColumn" prefWidth="220.0" text="Luogo di arrivo">
+            <TableColumn fx:id="arrivalLocationColumn" prefWidth="300.0" text="Luogo di arrivo">
                 <cellValueFactory><PropertyValueFactory property="arrivalLocation" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="routeNumberColumn" prefWidth="100.0" text="#Tratta">
+                <cellValueFactory><PropertyValueFactory property="routeNumber" /></cellValueFactory>
             </TableColumn>
         </columns>
         <HBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0"/>
         </HBox.margin>
     </TableView>
 
     <Label fx:id="alertLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
-           minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" textFill="#ff4444">
+           minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" textFill="#ff4444">
         <VBox.margin>
             <Insets left="100.0" top="10.0"/>
         </VBox.margin>
