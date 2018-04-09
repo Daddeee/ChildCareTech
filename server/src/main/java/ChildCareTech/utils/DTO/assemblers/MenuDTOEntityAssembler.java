@@ -28,8 +28,24 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
 
         Set<Dish> dishes = new HashSet<>();
         for(DishDTO d : dto.getDishes())
-            dishes.add(DTOEntityAssembler.getEntity(d));
+            dishes.add(DishDTOEntityAssembler.assembleMenuManySide(d, entity));
         entity.setDishes(dishes);
+
+        return entity;
+    }
+
+    public static Menu assembleDishOneSide(MenuDTO dto) {
+        if(dto == null)
+            return null;
+
+        Menu entity = new Menu(
+                DTOEntityAssembler.getEntity(dto.getMeal()),
+                dto.getNumMenu()
+        );
+
+        entity.setDrink(
+                DTOEntityAssembler.getEntity(dto.getDrink())
+        );
 
         return entity;
     }

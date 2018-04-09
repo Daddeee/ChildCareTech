@@ -27,4 +27,16 @@ public class BusDTOEntityAssembler implements AbstractDTOEntityAssembler<Bus, Bu
 
         return entity;
     }
+
+    public static Bus assembleTripPartecipationOneSide(BusDTO dto) {
+        if(dto == null)
+            return null;
+
+        Bus entity = new Bus(
+                dto.getLicensePlate(),
+                dto.getCapacity()
+        );
+
+        return entity;
+    }
 }

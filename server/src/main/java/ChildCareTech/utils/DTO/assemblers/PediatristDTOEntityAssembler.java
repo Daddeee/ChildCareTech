@@ -26,8 +26,24 @@ public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<
 
         Set<Kid> kids = new HashSet<>();
         for(KidDTO e : dto.getKids())
-            kids.add(DTOEntityAssembler.getEntity(e));
+            kids.add(KidDTOEntityAssembler.assemblePediatristManySide(e, entity));
         entity.setKids(kids);
+
+        return entity;
+    }
+
+    public static Pediatrist assembleKidOneSide(PediatristDTO dto){
+        if(dto == null)
+            return null;
+
+        Pediatrist entity = new Pediatrist(
+                DTOEntityAssembler.getEntity(dto.getPerson())
+        );
+
+        Set<Kid> contacts = new HashSet<>();
+        for(KidDTO e : dto.getContacts())
+            contacts.add(DTOEntityAssembler.getEntity(e));
+        entity.setContacts(contacts);
 
         return entity;
     }

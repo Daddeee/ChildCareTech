@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.model.canteen.Canteen;
 import ChildCareTech.model.meal.Meal;
+import ChildCareTech.model.workday.WorkDay;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, MealDTO> {
@@ -13,9 +14,9 @@ public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, 
             return null;
 
         return new Meal(
-                DTOEntityAssembler.getEntity(dto.getCanteen()),
+                CanteenDTOEntityAssembler.assembleMealOneSide(dto.getCanteen()),
                 dto.getMealNum(),
-                DTOEntityAssembler.getEntity(dto.getWorkDay())
+                WorkDayDTOEntityAssembler.assembleMealOneSide(dto.getWorkDay())
         );
     }
 
@@ -27,6 +28,17 @@ public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, 
                 canteen,
                 dto.getMealNum(),
                 DTOEntityAssembler.getEntity(dto.getWorkDay())
+        );
+    }
+
+    public static Meal assembleWorkDayManySide(MealDTO dto, WorkDay workDay) {
+        if(dto == null)
+            return null;
+
+        return new Meal(
+                CanteenDTOEntityAssembler.assembleMealOneSide(dto.getCanteen()),
+                dto.getMealNum(),
+                workDay
         );
     }
 }

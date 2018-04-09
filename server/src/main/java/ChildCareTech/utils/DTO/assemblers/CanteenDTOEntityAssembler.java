@@ -26,4 +26,10 @@ public class CanteenDTOEntityAssembler implements AbstractDTOEntityAssembler<Can
 
         return entity;
     }
+
+    public static Canteen assembleMealOneSide(CanteenDTO dto){
+        if(dto==null)
+            return null;
+        return new Canteen(dto.getName());
+    }
 }

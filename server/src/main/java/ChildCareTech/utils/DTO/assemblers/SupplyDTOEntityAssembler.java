@@ -1,6 +1,8 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.SupplyDTO;
+import ChildCareTech.model.food.Food;
+import ChildCareTech.model.supplier.Supplier;
 import ChildCareTech.model.supply.Supply;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
@@ -11,8 +13,32 @@ public class SupplyDTOEntityAssembler implements AbstractDTOEntityAssembler<Supp
             return null;
 
         return new Supply(
-                DTOEntityAssembler.getEntity(dto.getSupplier()),
-                DTOEntityAssembler.getEntity(dto.getFood()),
+                SupplierDTOEntityAssembler.assembleSupplyOneSide(dto.getSupplier()),
+                FoodDTOEntityAssembler.assembleSupplyOneSide(dto.getFood()),
+                dto.getQuantity(),
+                dto.getDate()
+        );
+    }
+
+    public static Supply assembleFoodManySide(SupplyDTO dto, Food food) {
+        if(dto == null)
+            return null;
+
+        return new Supply(
+                SupplierDTOEntityAssembler.assembleSupplyOneSide(dto.getSupplier()),
+                food,
+                dto.getQuantity(),
+                dto.getDate()
+        );
+    }
+
+    public static Supply assembleSupplierManySide(SupplyDTO dto, Supplier supplier){
+        if(dto == null)
+            return null;
+
+        return new Supply(
+                supplier,
+                FoodDTOEntityAssembler.assembleSupplyOneSide(dto.getFood()),
                 dto.getQuantity(),
                 dto.getDate()
         );

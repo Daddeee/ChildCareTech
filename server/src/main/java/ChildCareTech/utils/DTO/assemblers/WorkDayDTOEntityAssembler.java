@@ -21,12 +21,40 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
-            meals.add(DTOEntityAssembler.getEntity(m));
+            meals.add(MealDTOEntityAssembler.assembleWorkDayManySide(m, entity));
         entity.setMeals(meals);
 
         Set<Event> events = new HashSet<>();
         for(EventDTO e : dto.getEvents())
-            events.add(DTOEntityAssembler.getEntity(e));
+            events.add(EventDTOEntityAssembler.assembleWorkDayManySide(e, entity));
+        entity.setEvents(events);
+
+        return entity;
+    }
+
+    public static WorkDay assembleEventOneSide(WorkDayDTO dto){
+        if(dto == null)
+            return null;
+
+        WorkDay entity = new WorkDay(dto.getDate());
+
+        Set<Meal> meals = new HashSet<>();
+        for(MealDTO m : dto.getMeals())
+            meals.add(DTOEntityAssembler.getEntity(m));
+        entity.setMeals(meals);
+
+        return entity;
+    }
+
+    public static WorkDay assembleMealOneSide(WorkDayDTO dto){
+        if(dto == null)
+            return null;
+
+        WorkDay entity = new WorkDay(dto.getDate());
+
+        Set<Event> events = new HashSet<>();
+        for(EventDTO e : dto.getEvents())
+            events.add(EventDTOEntityAssembler.assembleWorkDayManySide(e, entity));
         entity.setEvents(events);
 
         return entity;

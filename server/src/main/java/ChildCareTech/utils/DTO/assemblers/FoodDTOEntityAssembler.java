@@ -24,9 +24,19 @@ public class FoodDTOEntityAssembler implements AbstractDTOEntityAssembler<Food, 
 
         Set<Supply> supplies = new HashSet<>();
         for(SupplyDTO e : dto.getSupplies())
-            supplies.add(DTOEntityAssembler.getEntity(e));
+            supplies.add(SupplyDTOEntityAssembler.assembleFoodManySide(e, entity));
         entity.setSupplies(supplies);
 
         return entity;
+    }
+
+    public static Food assembleSupplyOneSide(FoodDTO dto){
+        if(dto == null)
+            return null;
+
+        return new Food(
+                dto.getName(),
+                dto.isDrink()
+        );
     }
 }

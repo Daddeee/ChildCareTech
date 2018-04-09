@@ -31,8 +31,46 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
         for(TripPartecipationDTO t : dto.getTripPartecipations())
+            tripPartecipations.add(TripPartecipationDTOEntityAssembler.assembleTripManySide(t, entity));
+        entity.setTripPartecipations(tripPartecipations);
+
+        return entity;
+    }
+
+    public static Trip assembleRouteOneSide(TripDTO dto){
+        if(dto == null)
+            return null;
+
+        Trip entity = new Trip(
+                dto.getMeta(),
+                dto.getNote(),
+                dto.getDepDate(),
+                dto.getArrDate()
+        );
+
+        Set<TripPartecipation> tripPartecipations = new HashSet<>();
+        for(TripPartecipationDTO t : dto.getTripPartecipations())
             tripPartecipations.add(DTOEntityAssembler.getEntity(t));
         entity.setTripPartecipations(tripPartecipations);
+
+        return entity;
+    }
+
+    public static Trip assembleTripPartecipationOneSide(TripDTO dto){
+        if(dto == null)
+            return null;
+
+        Trip entity = new Trip(
+                dto.getMeta(),
+                dto.getNote(),
+                dto.getDepDate(),
+                dto.getArrDate()
+        );
+
+        Set<Route> routes = new HashSet<>();
+        for(RouteDTO r : dto.getRoutes())
+            routes.add(RouteDTOEntityAssembler.assembleTripManySide(r, entity));
+        entity.setRoutes(routes);
 
         return entity;
     }

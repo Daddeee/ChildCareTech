@@ -26,4 +26,15 @@ public class SupplierDTOEntityAssembler implements AbstractDTOEntityAssembler<Su
 
         return entity;
     }
+
+    public static Supplier assembleSupplyOneSide(SupplierDTO dto) {
+        if(dto == null)
+            return null;
+
+        Supplier entity = new Supplier(
+                DTOEntityAssembler.getEntity(dto.getPerson())
+        );
+
+        return entity;
+    }
 }
