@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.DrinkDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.model.drink.Drink;
 import ChildCareTech.model.food.Food;
+import ChildCareTech.model.menu.Menu;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 import java.util.HashSet;
@@ -17,7 +18,26 @@ public class DrinkDTOEntityAssembler implements AbstractDTOEntityAssembler<Drink
 
         Drink entity = new Drink(
                 dto.getName(),
-                DTOEntityAssembler.getEntity(dto.getMenu())
+                null
+        );
+
+        entity.setMenu(MenuDTOEntityAssembler.assembleDrinkOneSide(dto.getMenu(), entity));
+
+        Set<Food> foods = new HashSet<>();
+        for(FoodDTO f : dto.getFoods())
+            foods.add(DTOEntityAssembler.getEntity(f));
+        entity.setFoods(foods);
+
+        return entity;
+    }
+
+    public static Drink assembleMenuOneSide(DrinkDTO dto, Menu menu){
+        if(dto == null)
+            return null;
+
+        Drink entity = new Drink(
+                dto.getName(),
+                menu
         );
 
         Set<Food> foods = new HashSet<>();

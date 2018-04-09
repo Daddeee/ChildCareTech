@@ -63,7 +63,7 @@ public class Drink implements iEntity<Drink, Integer> {
         return menu;
     }
 
-    private void setMenu(Menu menu) {
+    public void setMenu(Menu menu) {
         this.menu = menu;
     }
 
