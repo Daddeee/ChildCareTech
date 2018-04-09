@@ -16,17 +16,34 @@ public class PediatristDTOFactory implements AbstractDTOFactory<Pediatrist, Pedi
         if (entity == null)
             return null;
 
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
+        PediatristDTO dto = new PediatristDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null,
+                null
+        );
+
         Set<KidDTO> contacts = new HashSet<>();
-        Set<KidDTO> kids = new HashSet<>();
-
         for (Kid k : entity.getContacts())
-            contacts.add(DTOFactory.getDTO(k));
+            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+        dto.setContacts(contacts);
 
+        Set<KidDTO> kids = new HashSet<>();
         for (Kid k : entity.getKids())
-            kids.add(DTOFactory.getDTO(k));
+            kids.add(KidDTOFactory.getPediatristManySide(k, dto));
+        dto.setKids(kids);
 
-        return new PediatristDTO(person, contacts, kids);
+        return dto;
+    }
+
+    public static PediatristDTO getKidOneSide(Pediatrist entity){
+        if (entity == null)
+            return null;
+
+        return new PediatristDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null,
+                null
+        );
     }
 }
 

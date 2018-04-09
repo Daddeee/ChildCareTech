@@ -18,17 +18,42 @@ public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, Supplier
         if (entity == null)
             return null;
 
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
+        SupplierDTO dto = new SupplierDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null,
+                null
+        );
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
-            contacts.add(DTOFactory.getDTO(k));
+            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+        dto.setContacts(contacts);
+
 
         Set<SupplyDTO> supplies = new HashSet<>();
         for (Supply s : entity.getSupplies())
-            supplies.add(DTOFactory.getDTO(s));
+            supplies.add(SupplyDTOFactory.getSupplierManySide(s, dto));
+        dto.setSupplies(supplies);
 
-        return new SupplierDTO(person, contacts, supplies);
+        return dto;
+    }
+
+    public static SupplierDTO getSupplyOneSide(Supplier entity){
+        if (entity == null)
+            return null;
+
+        SupplierDTO dto = new SupplierDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null,
+                null
+        );
+
+        Set<KidDTO> contacts = new HashSet<>();
+        for (Kid k : entity.getContacts())
+            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+        dto.setContacts(contacts);
+
+        return dto;
     }
 }
 

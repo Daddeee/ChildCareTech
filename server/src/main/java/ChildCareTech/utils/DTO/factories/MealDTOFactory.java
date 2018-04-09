@@ -12,11 +12,33 @@ public class MealDTOFactory implements AbstractDTOFactory<Meal, MealDTO> {
         if (entity == null)
             return null;
 
-        CanteenDTO canteen = DTOFactory.getDTO(entity.getCanteen());
-        WorkDayDTO workDay = DTOFactory.getDTO(entity.getWorkDay());
-        int mealNum = entity.getMealNum();
+        return new MealDTO(
+                CanteenDTOFactory.getMealOneSide(entity.getCanteen()),
+                WorkDayDTOFactory.getMealOneSide(entity.getWorkDay()),
+                entity.getMealNum()
+        );
+    }
 
-        return new MealDTO(canteen, workDay, mealNum);
+    public static MealDTO getCanteenManySide(Meal entity, CanteenDTO canteenDTO){
+        if (entity == null)
+            return null;
+
+        return new MealDTO(
+                canteenDTO,
+                DTOFactory.getDTO(entity.getWorkDay()),
+                entity.getMealNum()
+        );
+    }
+
+    public static MealDTO getWorkDayManySide(Meal entity, WorkDayDTO workDayDTO){
+        if (entity == null)
+            return null;
+
+        return new MealDTO(
+                CanteenDTOFactory.getMealOneSide(entity.getCanteen()),
+                workDayDTO,
+                entity.getMealNum()
+        );
     }
 }
 

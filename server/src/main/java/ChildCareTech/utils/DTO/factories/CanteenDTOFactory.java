@@ -15,13 +15,27 @@ public class CanteenDTOFactory implements AbstractDTOFactory<Canteen, CanteenDTO
         if (entity == null)
             return null;
 
-        String name = entity.getName();
+        CanteenDTO dto = new CanteenDTO(
+                entity.getName(),
+                null
+        );
 
         Set<MealDTO> meals = new HashSet<>();
         for (Meal m : entity.getMeals())
-            meals.add(DTOFactory.getDTO(m));
+            meals.add(MealDTOFactory.getCanteenManySide(m, dto));
+        dto.setMeals(meals);
 
-        return new CanteenDTO(name, meals);
+        return dto;
+    }
+
+    public static CanteenDTO getMealOneSide(Canteen entity){
+        if (entity == null)
+            return null;
+
+        return new CanteenDTO(
+                entity.getName(),
+                null
+        );
     }
 }
 

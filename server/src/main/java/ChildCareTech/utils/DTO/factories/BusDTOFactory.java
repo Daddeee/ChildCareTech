@@ -15,14 +15,29 @@ public class BusDTOFactory implements AbstractDTOFactory<Bus, BusDTO> {
         if (entity == null)
             return null;
 
-        String licensePlate = entity.getLicensePlate();
-        int capacity = entity.getCapacity();
+        BusDTO dto = new BusDTO(
+                entity.getLicensePlate(),
+                null,
+                entity.getCapacity()
+        );
 
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
         for (TripPartecipation t : entity.getTripPartecipations())
-            tripPartecipations.add(DTOFactory.getDTO(t));
+            tripPartecipations.add(TripPartecipationDTOFactory.getBusManySide(t, dto));
+        dto.setTripPartecipations(tripPartecipations);
 
-        return new BusDTO(licensePlate, tripPartecipations, capacity);
+        return dto;
+    }
+
+    public static BusDTO getTripPartecipationOneSide(Bus entity){
+        if (entity == null)
+            return null;
+
+        return new BusDTO(
+                entity.getLicensePlate(),
+                null,
+                entity.getCapacity()
+        );
     }
 }
 

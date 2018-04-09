@@ -17,15 +17,31 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
         if (entity == null)
             return null;
 
-        String name = entity.getName();
-        boolean isDrink = entity.isDrink();
-        int residualQuantity = entity.getResidualQuantity();
+        FoodDTO dto = new FoodDTO(
+                entity.getName(),
+                entity.isDrink(),
+                entity.getResidualQuantity(),
+                null
+        );
 
         Set<SupplyDTO> supplies = new HashSet<>();
         for (Supply s : entity.getSupplies())
-            supplies.add(DTOFactory.getDTO(s));
+            supplies.add(SupplyDTOFactory.getFoodManySide(s, dto));
+        dto.setSupplies(supplies);
 
-        return new FoodDTO(name, isDrink, residualQuantity, supplies);
+        return dto;
+    }
+
+    public static FoodDTO getSupplyOneSide(Food entity){
+        if (entity == null)
+            return null;
+
+        return new FoodDTO(
+                entity.getName(),
+                entity.isDrink(),
+                entity.getResidualQuantity(),
+                null
+        );
     }
 }
 

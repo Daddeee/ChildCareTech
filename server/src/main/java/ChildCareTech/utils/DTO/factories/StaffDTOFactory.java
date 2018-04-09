@@ -16,13 +16,17 @@ public class StaffDTOFactory implements AbstractDTOFactory<Staff, StaffDTO> {
         if (entity == null)
             return null;
 
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
+        StaffDTO dto = new StaffDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null
+        );
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
-            contacts.add(DTOFactory.getDTO(k));
+            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+        dto.setContacts(contacts);
 
-        return new StaffDTO(person, contacts);
+        return dto;
     }
 }
 

@@ -21,7 +21,7 @@ public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
                 DTOFactory.getDTO(entity.getPerson()),
                 AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
                 AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
-                DTOFactory.getDTO(entity.getPediatrist()),
+                PediatristDTOFactory.getKidOneSide(entity.getPediatrist()),
                 null
         );
 
@@ -41,7 +41,20 @@ public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
                 DTOFactory.getDTO(entity.getPerson()),
                 AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
                 AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
-                DTOFactory.getDTO(entity.getPediatrist()),
+                PediatristDTOFactory.getKidOneSide(entity.getPediatrist()),
+                null
+        );
+    }
+
+    public static KidDTO getPediatristManySide(Kid entity, PediatristDTO pediatristDTO){
+        if (entity == null)
+            return null;
+
+        return new KidDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
+                AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
+                pediatristDTO,
                 null
         );
     }

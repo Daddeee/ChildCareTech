@@ -13,11 +13,33 @@ public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripParte
         if (entity == null)
             return null;
 
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
-        TripDTO trip = DTOFactory.getDTO(entity.getTrip());
-        BusDTO bus = DTOFactory.getDTO(entity.getBus());
+        return new TripPartecipationDTO(DTOFactory.getDTO(
+                entity.getPerson()),
+                TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
+                DTOFactory.getDTO(entity.getBus())
+        );
+    }
 
-        return new TripPartecipationDTO(person, trip, bus);
+    public static TripPartecipationDTO getBusManySide(TripPartecipation entity, BusDTO busDTO){
+        if (entity == null)
+            return null;
+
+        return new TripPartecipationDTO(DTOFactory.getDTO(
+                entity.getPerson()),
+                TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
+                busDTO
+        );
+    }
+
+    public static TripPartecipationDTO getTripManySide(TripPartecipation entity, TripDTO tripDTO){
+        if (entity == null)
+            return null;
+
+        return new TripPartecipationDTO(DTOFactory.getDTO(
+                entity.getPerson()),
+                TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
+                DTOFactory.getDTO(entity.getBus())
+        );
     }
 }
 

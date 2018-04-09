@@ -17,15 +17,31 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
         if (entity == null)
             return null;
 
-        MealDTO meal = DTOFactory.getDTO(entity.getMeal());
-        int numMenu = entity.getNumMenu();
-        DrinkDTO drink = DTOFactory.getDTO(entity.getDrink());
+        MenuDTO dto = new MenuDTO(
+                DTOFactory.getDTO(entity.getMeal()),
+                entity.getNumMenu(),
+                null,
+                DTOFactory.getDTO(entity.getDrink())
+        );
 
         Set<DishDTO> dishes = new HashSet<>();
         for (Dish d : entity.getDishes())
-            dishes.add(DTOFactory.getDTO(d));
+            dishes.add(DishDTOFactory.getMenuManySide(d, dto));
+        dto.setDishes(dishes);
 
-        return new MenuDTO(meal, numMenu, dishes, drink);
+        return dto;
+    }
+
+    public static MenuDTO getDishOneSide(Menu entity){
+        if (entity == null)
+            return null;
+
+        return new MenuDTO(
+                DTOFactory.getDTO(entity.getMeal()),
+                entity.getNumMenu(),
+                null,
+                DTOFactory.getDTO(entity.getDrink())
+        );
     }
 }
 

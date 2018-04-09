@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.event.Event;
+import ChildCareTech.model.workday.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
 
 import java.time.LocalTime;
@@ -14,12 +15,24 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
         if (entity == null)
             return null;
 
-        WorkDayDTO workDay = DTOFactory.getDTO(entity.getWorkDay());
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
-        LocalTime time = entity.getTime();
-        boolean isIn = entity.isIn();
+        return new EventDTO(
+                WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()),
+                DTOFactory.getDTO(entity.getPerson()),
+                entity.getTime(),
+                entity.isIn()
+        );
+    }
 
-        return new EventDTO(workDay, person, time, isIn);
+    public static EventDTO getWorkDayManySide(Event entity, WorkDayDTO workDayDTO){
+        if (entity == null)
+            return null;
+
+        return new EventDTO(
+                workDayDTO,
+                DTOFactory.getDTO(entity.getPerson()),
+                entity.getTime(),
+                entity.isIn()
+        );
     }
 }
 
