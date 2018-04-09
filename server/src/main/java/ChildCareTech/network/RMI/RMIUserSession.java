@@ -72,6 +72,33 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void removeTrip(TripDTO tripDTO) {
+        TripDAO tripDAO = new TripDAO();
+        Trip trip;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("meta", tripDTO.getMeta());
+        paramMap.put("depDate", tripDTO.getDepDate().toString());
+        paramMap.put("arrDate", tripDTO.getArrDate().toString());
+
+        tripDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            trip = tripDAO.read(paramMap).get(0);
+            tripDAO.delete(trip);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void saveTrip(TripDTO tripDTO) throws AddFailedException{
         TripDAO tripDAO = new TripDAO();
         Trip trip = DTOEntityAssembler.getEntity(tripDTO);

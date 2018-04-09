@@ -64,6 +64,19 @@ public class TripsController {
             });
             contextMenu.getItems().add(showTrip);
 
+            final MenuItem deleteTrip = new MenuItem("Elimina");
+            deleteTrip.setOnAction(event -> {
+                contextMenu.hide();
+                try {
+                    SessionService.getSession().removeTrip(row.getItem());
+                } catch (RemoteException ex) {
+                    System.err.println("error remote");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(deleteTrip);
+
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                             .then((ContextMenu) null)

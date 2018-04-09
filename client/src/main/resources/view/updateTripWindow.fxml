@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ChildCareTech.controller.AddTripController"
+      fx:id="mainBox"
+      prefHeight="600.0" prefWidth="800.0">
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="400.0">
+        <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="25.0" prefWidth="80.0" text="Meta:">
+                <HBox.margin>
+                    <Insets left="40.0"/>
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="metaField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
+        </children>
+        <VBox.margin>
+            <Insets top="30.0"/>
+        </VBox.margin>
+    </HBox>
+
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="800.0">
+        <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="25.0" prefWidth="80.0" text="Note:">
+                <HBox.margin>
+                    <Insets left="40.0"/>
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="noteField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
+        </children>
+        <VBox.margin>
+            <Insets top="30.0"/>
+        </VBox.margin>
+    </HBox>
+
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="800.0">
+        <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="25.0" prefWidth="80.0" text="Data di partenza:">
+                <HBox.margin>
+                    <Insets left="40.0"/>
+                </HBox.margin>
+            </Label>
+            <DatePicker fx:id="depDateField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </DatePicker>
+        </children>
+        <VBox.margin>
+            <Insets top="30.0"/>
+        </VBox.margin>
+    </HBox>
+
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="800.0">
+        <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="25.0" prefWidth="80.0" text="Data di arrivo:">
+                <HBox.margin>
+                    <Insets left="40.0"/>
+                </HBox.margin>
+            </Label>
+            <DatePicker fx:id="arrDateField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </DatePicker>
+        </children>
+        <VBox.margin>
+            <Insets top="30.0"/>
+        </VBox.margin>
+    </HBox>
+
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="800.0">
+        <children>
+            <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0"
+                    prefWidth="80.0" text="Cancella">
+                <HBox.margin>
+                    <Insets left="100.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0"
+                    prefWidth="120.0" text="Salva">
+                <HBox.margin>
+                    <Insets left="100.0"/>
+                </HBox.margin>
+            </Button>
+        </children>
+        <VBox.margin>
+            <Insets top="20.0"/>
+        </VBox.margin>
+    </HBox>
+
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
+          prefWidth="800.0">
+        <children>
+            <TextField fx:id="departureLocationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Luogo di partenza">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
+            <TextField fx:id="arrivalLocationField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Luogo di arrivo">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
+            <TextField fx:id="routeNumberField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" promptText="#">
+                <HBox.margin>
+                    <Insets left="20.0"/>
+                </HBox.margin>
+            </TextField>
+            <Button fx:id="addRouteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#addRouteButtonAction" prefHeight="25.0"
+                    prefWidth="80.0" text="Aggiungi tratta">
+                <HBox.margin>
+                    <Insets left="100.0"/>
+                </HBox.margin>
+            </Button>
+        </children>
+        <VBox.margin>
+            <Insets top="20.0"/>
+        </VBox.margin>
+    </HBox>
+
+    <TableView fx:id="routesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
+               prefHeight="100.0" prefWidth="700.0">
+        <columns>
+            <TableColumn fx:id="departureLocationColumn" prefWidth="300.0" text="Luogo di partenza">
+                <cellValueFactory><PropertyValueFactory property="departureLocation" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="arrivalLocationColumn" prefWidth="300.0" text="Luogo di arrivo">
+                <cellValueFactory><PropertyValueFactory property="arrivalLocation" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+        <HBox.margin>
+            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0"/>
+        </HBox.margin>
+    </TableView>
+
+    <Label fx:id="alertLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+           minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" textFill="#ff4444">
+        <VBox.margin>
+            <Insets left="100.0" top="10.0"/>
+        </VBox.margin>
+    </Label>
+</VBox>
