@@ -26,4 +26,13 @@ public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult
 
         return entity;
     }
+
+    public static Adult assembleKidManySide(AdultDTO dto) {
+        if(dto == null)
+            return null;
+
+        return new Adult(
+                DTOEntityAssembler.getEntity(dto.getPerson())
+        );
+    }
 }

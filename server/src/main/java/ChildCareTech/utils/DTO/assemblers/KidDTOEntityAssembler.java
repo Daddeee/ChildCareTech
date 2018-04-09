@@ -18,14 +18,14 @@ public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, Ki
 
         Kid entity = new Kid(
                 DTOEntityAssembler.getEntity(dto.getPerson()),
-                DTOEntityAssembler.getEntity(dto.getFirstTutor()),
-                DTOEntityAssembler.getEntity(dto.getSecondTutor()),
+                AdultDTOEntityAssembler.assembleKidManySide(dto.getFirstTutor()),
+                AdultDTOEntityAssembler.assembleKidManySide(dto.getSecondTutor()),
                 PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist())
         );
 
         Set<Adult> contacts = new HashSet<>();
         for(AdultDTO a : dto.getContacts())
-            contacts.add(DTOEntityAssembler.getEntity(a));
+            contacts.add(AdultDTOEntityAssembler.assembleKidManySide(a));
         entity.setContacts(contacts);
 
         return entity;
