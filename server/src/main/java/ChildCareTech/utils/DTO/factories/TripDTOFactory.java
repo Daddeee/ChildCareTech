@@ -18,20 +18,26 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
         if (entity == null)
             return null;
 
-        String meta = entity.getMeta();
-        String note = entity.getNote();
-        LocalDate depDate = entity.getDepDate();
-        LocalDate arrDate = entity.getArrDate();
+        TripDTO dto = new TripDTO(
+          entity.getMeta(),
+          entity.getNote(),
+          entity.getDepDate(),
+          entity.getArrDate(),
+          null,
+          null
+        );
 
-        Set<RouteDTO> stops = new HashSet<>();
+        Set<RouteDTO> routes = new HashSet<>();
         for (Route s : entity.getRoutes())
-            stops.add(DTOFactory.getDTO(s));
+            routes.add(RouteDTOFactory.getDTOTripManySide(s, dto));
+        dto.setRoutes(routes);
 
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
         for (TripPartecipation t : entity.getTripPartecipations())
             tripPartecipations.add(DTOFactory.getDTO(t));
+        dto.setTripPartecipations(tripPartecipations);
 
-        return new TripDTO(meta, note, depDate, arrDate, stops, tripPartecipations);
+        return dto;
     }
 }
 

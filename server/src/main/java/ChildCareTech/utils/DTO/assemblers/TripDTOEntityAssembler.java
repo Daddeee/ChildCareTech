@@ -26,7 +26,7 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
 
         Set<Route> routes = new HashSet<>();
         for(RouteDTO r : dto.getRoutes())
-            routes.add(DTOEntityAssembler.getEntity(r));
+            routes.add(RouteDTOEntityAssembler.assembleTripManySide(r, entity));
         entity.setRoutes(routes);
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
