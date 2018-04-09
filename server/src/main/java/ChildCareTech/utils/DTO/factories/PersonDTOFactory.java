@@ -12,15 +12,15 @@ public class PersonDTOFactory implements AbstractDTOFactory<Person, PersonDTO> {
         if (entity == null)
             return null;
 
-        String fiscalCode = entity.getFiscalCode();
-        String firstName = entity.getFirstName();
-        String lastName = entity.getLastName();
-        LocalDate birthDate = entity.getBirthDate();
-        Sex sex = entity.getSex();
-        String address = entity.getAddress();
-        String phoneNumber = entity.getAddress();
-
-        return new PersonDTO(fiscalCode, firstName, lastName, birthDate, sex, address, phoneNumber);
+        return new PersonDTO(
+            entity.getFiscalCode(),
+            entity.getFirstName(),
+            entity.getLastName(),
+            entity.getBirthDate(),
+            entity.getSex(),
+            entity.getAddress(),
+            entity.getAddress()
+        );
     }
 }
 

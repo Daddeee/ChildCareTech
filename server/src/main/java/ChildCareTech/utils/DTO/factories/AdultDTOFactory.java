@@ -16,13 +16,27 @@ public class AdultDTOFactory implements AbstractDTOFactory<Adult, AdultDTO> {
         if (entity == null)
             return null;
 
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
+        AdultDTO dto = new AdultDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null
+        );
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
-            contacts.add(DTOFactory.getDTO(k));
+            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+        dto.setContacts(contacts);
 
-        return new AdultDTO(person, contacts);
+        return dto;
+    }
+
+    public static AdultDTO getKidContactsManySide(Adult entity){
+        if (entity == null)
+            return null;
+
+        return new AdultDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                null
+        );
     }
 }
 

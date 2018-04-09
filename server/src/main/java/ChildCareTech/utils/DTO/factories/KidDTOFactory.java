@@ -17,16 +17,33 @@ public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
         if (entity == null)
             return null;
 
-        PersonDTO person = DTOFactory.getDTO(entity.getPerson());
-        AdultDTO firstTutor = DTOFactory.getDTO(entity.getFirstTutor());
-        AdultDTO secondTutor = DTOFactory.getDTO(entity.getSecondTutor());
-        PediatristDTO pediatrist = DTOFactory.getDTO(entity.getPediatrist());
+        KidDTO dto = new KidDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
+                AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
+                DTOFactory.getDTO(entity.getPediatrist()),
+                null
+        );
 
         Set<AdultDTO> contacts = new HashSet<>();
         for (Adult a : entity.getContacts())
-            contacts.add(DTOFactory.getDTO(a));
+            contacts.add(AdultDTOFactory.getKidContactsManySide(a));
+        dto.setContacts(contacts);
 
-        return new KidDTO(person, firstTutor, secondTutor, pediatrist, contacts);
+        return dto;
+    }
+
+    public static KidDTO getAdultContactsManySide(Kid entity){
+        if (entity == null)
+            return null;
+
+        return new KidDTO(
+                DTOFactory.getDTO(entity.getPerson()),
+                AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
+                AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
+                DTOFactory.getDTO(entity.getPediatrist()),
+                null
+        );
     }
 }
 

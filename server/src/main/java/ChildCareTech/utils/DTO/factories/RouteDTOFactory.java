@@ -13,12 +13,12 @@ public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
         if (entity == null)
             return null;
 
-        TripDTO trip = DTOFactory.getDTO(entity.getTrip());
-        int routeNumber = entity.getRouteNumber();
-        String departureLocationLocation = entity.getDepartureLocation();
-        String arrivalLocation = entity.getArrivalLocation();
-
-        return new RouteDTO(trip, routeNumber, departureLocationLocation, arrivalLocation);
+        return new RouteDTO(
+                DTOFactory.getDTO(entity.getTrip()),
+                entity.getRouteNumber(),
+                entity.getDepartureLocation(),
+                entity.getArrivalLocation()
+        );
     }
 
     public static RouteDTO getDTOTripManySide(Route entity, TripDTO tripDTO){
