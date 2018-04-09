@@ -4,14 +4,15 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -46,6 +47,31 @@ public class TripsController {
     public void initialize(){
         refreshTable();
         tripsTable.setItems(items);
+
+        tripsTable.setRowFactory(tripDTOTableView -> {
+            final TableRow<TripDTO> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+
+            final MenuItem showTrip = new MenuItem("Dettagli");
+            showTrip.setOnAction(event ->  {
+                    contextMenu.hide();
+                    try {
+                        AccessorSceneManager.loadShowTrip(row.getItem());
+                    } catch (IOException ex) {
+                        System.err.println("Can't load addTrip window");
+                        ex.printStackTrace();
+                    }
+            });
+            contextMenu.getItems().add(showTrip);
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
     }
 
     @FXML
