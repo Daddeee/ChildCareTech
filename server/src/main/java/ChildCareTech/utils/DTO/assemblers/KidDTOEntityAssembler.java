@@ -12,6 +12,22 @@ import java.util.Set;
 public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, KidDTO> {
     @Override
     public Kid assemble(KidDTO dto) {
+        Kid entity = getKid(dto);
+        if (entity == null) return null;
+
+        Set<Adult> contacts = new HashSet<>();
+        for(AdultDTO a : dto.getContacts())
+            contacts.add(DTOEntityAssembler.getEntity(a));
+        entity.setContacts(contacts);
+
+        return entity;
+    }
+
+    public static Kid assembleAdultManySide(KidDTO dto){
+        return getKid(dto);
+    }
+
+    private static Kid getKid(KidDTO dto) {
         if(dto == null)
             return null;
 
@@ -21,12 +37,6 @@ public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, Ki
                 DTOEntityAssembler.getEntity(dto.getSecondTutor()),
                 DTOEntityAssembler.getEntity(dto.getPediatrist())
         );
-
-        Set<Adult> contacts = new HashSet<>();
-        for(AdultDTO a : dto.getContacts())
-            contacts.add(DTOEntityAssembler.getEntity(a));
-        entity.setContacts(contacts);
-
         return entity;
     }
 }

@@ -1,6 +1,8 @@
 package ChildCareTech.utils.DTO.assemblers;
 
+import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
+import ChildCareTech.model.canteen.Canteen;
 import ChildCareTech.model.meal.Meal;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
@@ -12,6 +14,17 @@ public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, 
 
         return new Meal(
                 DTOEntityAssembler.getEntity(dto.getCanteen()),
+                dto.getMealNum(),
+                DTOEntityAssembler.getEntity(dto.getWorkDay())
+        );
+    }
+
+    public static Meal assembleCanteenManySide(MealDTO dto, Canteen canteen) {
+        if(dto == null)
+            return null;
+
+        return new Meal(
+                canteen,
                 dto.getMealNum(),
                 DTOEntityAssembler.getEntity(dto.getWorkDay())
         );

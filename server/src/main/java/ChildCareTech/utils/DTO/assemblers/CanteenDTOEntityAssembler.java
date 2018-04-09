@@ -21,7 +21,7 @@ public class CanteenDTOEntityAssembler implements AbstractDTOEntityAssembler<Can
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
-            meals.add(DTOEntityAssembler.getEntity(m));
+            meals.add(MealDTOEntityAssembler.assembleCanteenManySide(m, entity));
         entity.setMeals(meals);
 
         return entity;

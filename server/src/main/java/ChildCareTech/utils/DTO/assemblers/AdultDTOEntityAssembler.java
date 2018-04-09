@@ -21,7 +21,7 @@ public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO k : dto.getContacts())
-            contacts.add(DTOEntityAssembler.getEntity(k));
+            contacts.add(KidDTOEntityAssembler.assembleAdultManySide(k));
         entity.setContacts(contacts);
 
         return entity;

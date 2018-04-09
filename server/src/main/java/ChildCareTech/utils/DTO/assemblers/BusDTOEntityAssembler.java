@@ -22,7 +22,7 @@ public class BusDTOEntityAssembler implements AbstractDTOEntityAssembler<Bus, Bu
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
         for(TripPartecipationDTO t : dto.getTripPartecipations())
-            tripPartecipations.add(DTOEntityAssembler.getEntity(t));
+            tripPartecipations.add(TripPartecipationDTOEntityAssembler.assembleBusManySide(t, entity));
         entity.setTripPartecipations(tripPartecipations);
 
         return entity;
