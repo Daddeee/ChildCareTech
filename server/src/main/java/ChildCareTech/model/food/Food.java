@@ -29,10 +29,6 @@ public class Food implements iEntity<Food, Integer> {
     @ColumnDefault("0")
     private int residualQuantity;
 
-    @ManyToMany(targetEntity = Dish.class)
-    @JoinTable(name = "ingredients")
-    private Set<Dish> dishes;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "food")
     private Set<Supply> supplies;
 
@@ -50,11 +46,10 @@ public class Food implements iEntity<Food, Integer> {
         this.residualQuantity = residualQuantity;
     }
 
-    public Food(String name, boolean isDrink, int residualQuantity, Set<Dish> dishes, Set<Supply> supplies) {
+    public Food(String name, boolean isDrink, int residualQuantity, Set<Supply> supplies) {
         this.name = name;
         this.isDrink = isDrink;
         this.residualQuantity = residualQuantity;
-        this.dishes = dishes;
         this.supplies = supplies;
     }
 
@@ -88,14 +83,6 @@ public class Food implements iEntity<Food, Integer> {
 
     public void setSupplies(Set<Supply> supplies) {
         this.supplies = supplies;
-    }
-
-    public Set<Dish> getDishes() {
-        return dishes == null ? Collections.EMPTY_SET : dishes;
-    }
-
-    public void setDishes(Set<Dish> dishes) {
-        this.dishes = dishes;
     }
 
     @Override

@@ -14,9 +14,7 @@ public class FoodDAO extends AbstractGenericDAO<Food, Integer> {
         initializeSupplyRelation(obj);
     }
 
-    public void initializeDishRelation(Food obj) {
-        Hibernate.initialize(obj.getDishes());
-    }
+    public void initializeDishRelation(Food obj) {}
 
     public void initializeSupplyRelation(Food obj){
         Hibernate.initialize(obj.getSupplies());

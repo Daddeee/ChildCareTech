@@ -21,15 +21,11 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
         boolean isDrink = entity.isDrink();
         int residualQuantity = entity.getResidualQuantity();
 
-        Set<DishDTO> dishes = new HashSet<>();
-        for (Dish d : entity.getDishes())
-            dishes.add(DTOFactory.getDTO(d));
-
         Set<SupplyDTO> supplies = new HashSet<>();
         for (Supply s : entity.getSupplies())
             supplies.add(DTOFactory.getDTO(s));
 
-        return new FoodDTO(name, isDrink, residualQuantity, dishes, supplies);
+        return new FoodDTO(name, isDrink, residualQuantity, supplies);
     }
 }
 
