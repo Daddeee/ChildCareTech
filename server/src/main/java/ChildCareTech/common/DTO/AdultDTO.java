@@ -20,4 +20,12 @@ public class AdultDTO implements Serializable {
     public Set<KidDTO> getContacts() {
         return contacts;
     }
+
+    public void setPerson(PersonDTO person) {
+        this.person = person;
+    }
+
+    public void setContacts(Set<KidDTO> contacts) {
+        this.contacts = contacts;
+    }
 }

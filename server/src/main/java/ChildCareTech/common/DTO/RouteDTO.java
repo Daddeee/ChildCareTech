@@ -20,16 +20,31 @@ public class RouteDTO implements Serializable {
         return trip;
     }
 
+    public void setTrip(TripDTO trip) {
+        this.trip = trip;
+    }
+
     public int getRouteNumber() {
         return routeNumber;
+    }
+
+    public void setRouteNumber(int routeNumber) {
+        this.routeNumber = routeNumber;
     }
 
     public String getDepartureLocation() {
         return departureLocation;
     }
 
+    public void setDepartureLocation(String departureLocation) {
+        this.departureLocation = departureLocation;
+    }
+
     public String getArrivalLocation() {
         return arrivalLocation;
     }
 
+    public void setArrivalLocation(String arrivalLocation) {
+        this.arrivalLocation = arrivalLocation;
+    }
 }

@@ -19,11 +19,23 @@ public class DrinkDTO implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public MenuDTO getMenu() {
         return menu;
     }
 
+    public void setMenu(MenuDTO menu) {
+        this.menu = menu;
+    }
+
     public Set<FoodDTO> getFoods() {
         return foods;
+    }
+
+    public void setFoods(Set<FoodDTO> foods) {
+        this.foods = foods;
     }
 }

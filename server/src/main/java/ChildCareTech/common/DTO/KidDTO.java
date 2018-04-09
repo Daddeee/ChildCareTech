@@ -23,19 +23,39 @@ public class KidDTO implements Serializable {
         return person;
     }
 
+    public void setPerson(PersonDTO person) {
+        this.person = person;
+    }
+
     public AdultDTO getFirstTutor() {
         return firstTutor;
+    }
+
+    public void setFirstTutor(AdultDTO firstTutor) {
+        this.firstTutor = firstTutor;
     }
 
     public AdultDTO getSecondTutor() {
         return secondTutor;
     }
 
+    public void setSecondTutor(AdultDTO secondTutor) {
+        this.secondTutor = secondTutor;
+    }
+
     public PediatristDTO getPediatrist() {
         return pediatrist;
     }
 
+    public void setPediatrist(PediatristDTO pediatrist) {
+        this.pediatrist = pediatrist;
+    }
+
     public Set<AdultDTO> getContacts() {
         return contacts;
+    }
+
+    public void setContacts(Set<AdultDTO> contacts) {
+        this.contacts = contacts;
     }
 }

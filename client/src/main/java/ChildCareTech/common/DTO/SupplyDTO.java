@@ -20,15 +20,31 @@ public class SupplyDTO implements Serializable {
         return supplier;
     }
 
+    public void setSupplier(SupplierDTO supplier) {
+        this.supplier = supplier;
+    }
+
     public FoodDTO getFood() {
         return food;
+    }
+
+    public void setFood(FoodDTO food) {
+        this.food = food;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -23,19 +23,39 @@ public class FoodDTO implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public boolean isDrink() {
         return isDrink;
+    }
+
+    public void setDrink(boolean drink) {
+        isDrink = drink;
     }
 
     public int getResidualQuantity() {
         return residualQuantity;
     }
 
+    public void setResidualQuantity(int residualQuantity) {
+        this.residualQuantity = residualQuantity;
+    }
+
     public Set<DishDTO> getDishes() {
         return dishes;
     }
 
+    public void setDishes(Set<DishDTO> dishes) {
+        this.dishes = dishes;
+    }
+
     public Set<SupplyDTO> getSupplies() {
         return supplies;
+    }
+
+    public void setSupplies(Set<SupplyDTO> supplies) {
+        this.supplies = supplies;
     }
 }

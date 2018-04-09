@@ -26,4 +26,16 @@ public class DishDTO implements Serializable {
     public Set<FoodDTO> getFoods() {
         return foods;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMenu(MenuDTO menu) {
+        this.menu = menu;
+    }
+
+    public void setFoods(Set<FoodDTO> foods) {
+        this.foods = foods;
+    }
 }

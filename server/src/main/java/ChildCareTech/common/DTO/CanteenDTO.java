@@ -17,7 +17,15 @@ public class CanteenDTO implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Set<MealDTO> getMeals() {
         return meals;
+    }
+
+    public void setMeals(Set<MealDTO> meals) {
+        this.meals = meals;
     }
 }

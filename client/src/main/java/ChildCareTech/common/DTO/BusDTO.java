@@ -26,4 +26,16 @@ public class BusDTO implements Serializable {
     public int getCapacity() {
         return capacity;
     }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setTripPartecipations(Set<TripPartecipationDTO> tripPartecipations) {
+        this.tripPartecipations = tripPartecipations;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
 }

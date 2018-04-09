@@ -20,15 +20,31 @@ public class EventDTO implements Serializable {
         return workDay;
     }
 
+    public void setWorkDay(WorkDayDTO workDay) {
+        this.workDay = workDay;
+    }
+
     public PersonDTO getPerson() {
         return person;
+    }
+
+    public void setPerson(PersonDTO person) {
+        this.person = person;
     }
 
     public LocalTime getTime() {
         return time;
     }
 
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
     public boolean isIn() {
         return isIn;
+    }
+
+    public void setIn(boolean in) {
+        isIn = in;
     }
 }

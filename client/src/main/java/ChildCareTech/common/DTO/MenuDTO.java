@@ -21,15 +21,31 @@ public class MenuDTO implements Serializable {
         return meal;
     }
 
+    public void setMeal(MealDTO meal) {
+        this.meal = meal;
+    }
+
     public int getNumMenu() {
         return numMenu;
+    }
+
+    public void setNumMenu(int numMenu) {
+        this.numMenu = numMenu;
     }
 
     public Set<DishDTO> getDishes() {
         return dishes;
     }
 
+    public void setDishes(Set<DishDTO> dishes) {
+        this.dishes = dishes;
+    }
+
     public DrinkDTO getDrink() {
         return drink;
+    }
+
+    public void setDrink(DrinkDTO drink) {
+        this.drink = drink;
     }
 }

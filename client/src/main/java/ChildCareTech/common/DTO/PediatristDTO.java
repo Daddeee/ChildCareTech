@@ -15,4 +15,8 @@ public class PediatristDTO extends AdultDTO implements Serializable {
     public Set<KidDTO> getKids() {
         return kids;
     }
+
+    public void setKids(Set<KidDTO> kids) {
+        this.kids = kids;
+    }
 }

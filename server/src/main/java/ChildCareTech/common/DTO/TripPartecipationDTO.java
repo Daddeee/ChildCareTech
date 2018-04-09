@@ -17,11 +17,23 @@ public class TripPartecipationDTO implements Serializable {
         return person;
     }
 
+    public void setPerson(PersonDTO person) {
+        this.person = person;
+    }
+
     public TripDTO getTrip() {
         return trip;
     }
 
+    public void setTrip(TripDTO trip) {
+        this.trip = trip;
+    }
+
     public BusDTO getBus() {
         return bus;
+    }
+
+    public void setBus(BusDTO bus) {
+        this.bus = bus;
     }
 }

@@ -20,11 +20,23 @@ public class WorkDayDTO implements Serializable {
         return date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public Set<MealDTO> getMeals() {
         return meals;
     }
 
+    public void setMeals(Set<MealDTO> meals) {
+        this.meals = meals;
+    }
+
     public Set<EventDTO> getEvents() {
         return events;
+    }
+
+    public void setEvents(Set<EventDTO> events) {
+        this.events = events;
     }
 }

@@ -15,4 +15,8 @@ public class SupplierDTO extends AdultDTO implements Serializable {
     public Set<SupplyDTO> getSupplies() {
         return supplies;
     }
+
+    public void setSupplies(Set<SupplyDTO> supplies) {
+        this.supplies = supplies;
+    }
 }
