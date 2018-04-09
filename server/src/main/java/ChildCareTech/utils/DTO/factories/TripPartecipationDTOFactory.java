@@ -16,7 +16,7 @@ public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripParte
         return new TripPartecipationDTO(DTOFactory.getDTO(
                 entity.getPerson()),
                 TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
-                DTOFactory.getDTO(entity.getBus())
+                BusDTOFactory.getTripPartecipationOneSide(entity.getBus())
         );
     }
 
@@ -38,7 +38,7 @@ public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripParte
         return new TripPartecipationDTO(DTOFactory.getDTO(
                 entity.getPerson()),
                 TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
-                DTOFactory.getDTO(entity.getBus())
+                BusDTOFactory.getTripPartecipationOneSide(entity.getBus())
         );
     }
 }

@@ -16,14 +16,44 @@ public class DrinkDTOFactory implements AbstractDTOFactory<Drink, DrinkDTO> {
         if (entity == null)
             return null;
 
-        String name = entity.getName();
-        MenuDTO menu = DTOFactory.getDTO(entity.getMenu());
+        DrinkDTO dto = new DrinkDTO(
+                entity.getName(),
+                null,
+                null
+        );
+
+        dto.setMenu(
+                MenuDTOFactory.getDrinkOneSide(entity.getMenu(), dto)
+        );
 
         Set<FoodDTO> foods = new HashSet<>();
         for (Food f : entity.getFoods())
             foods.add(DTOFactory.getDTO(f));
+        dto.setFoods(foods);
 
-        return new DrinkDTO(name, menu, foods);
+        return dto;
+    }
+
+    public static DrinkDTO getMenuOneSide(Drink entity, MenuDTO menuDTO){
+        if (entity == null)
+            return null;
+
+        DrinkDTO dto = new DrinkDTO(
+                entity.getName(),
+                null,
+                null
+        );
+
+        dto.setMenu(
+                menuDTO
+        );
+
+        Set<FoodDTO> foods = new HashSet<>();
+        for (Food f : entity.getFoods())
+            foods.add(DTOFactory.getDTO(f));
+        dto.setFoods(foods);
+
+        return dto;
     }
 }
 
