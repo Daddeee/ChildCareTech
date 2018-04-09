@@ -20,8 +20,8 @@ public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<
         );
 
         Set<Kid> contacts = new HashSet<>();
-        for(KidDTO e : dto.getContacts())
-            contacts.add(DTOEntityAssembler.getEntity(e));
+        for(KidDTO k : dto.getContacts())
+            contacts.add(KidDTOEntityAssembler.assembleAdultManySide(k));
         entity.setContacts(contacts);
 
         Set<Kid> kids = new HashSet<>();
