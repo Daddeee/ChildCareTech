@@ -7,7 +7,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="ChildCareTech.controller.AddTripController"
+      fx:controller="ChildCareTech.controller.UpdateTripController"
       fx:id="mainBox"
       prefHeight="600.0" prefWidth="800.0">
     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
@@ -105,8 +105,8 @@
                 </HBox.margin>
             </Button>
             <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0"
-                    prefWidth="120.0" text="Salva">
+                    minWidth="-Infinity" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="25.0"
+                    prefWidth="120.0" text="Aggiorna">
                 <HBox.margin>
                     <Insets left="100.0"/>
                 </HBox.margin>

@@ -2,6 +2,7 @@ package ChildCareTech.services;
 
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.controller.ShowTripController;
+import ChildCareTech.controller.UpdateTripController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -15,11 +16,13 @@ public class AccessorSceneManager {
     private static FXMLLoader registerUserLoader;
     private static FXMLLoader addTripLoader;
     private static FXMLLoader showTripLoader;
+    private static FXMLLoader updateTripLoader;
 
     private static Scene addKidScene;
     private static Scene registerUserScene;
     private static Scene addTripScene;
     private static Scene showTripScene;
+    private static Scene updateTripScene;
 
 
     private AccessorSceneManager() {
@@ -64,6 +67,20 @@ public class AccessorSceneManager {
 
         try {
             AccessorStageService.changeScene(showTripScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadUpdateTrip(TripDTO row) throws IOException {
+        updateTripLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/updateTripWindow.fxml"));
+        updateTripScene = sceneInit(updateTripLoader, "/style/updateTripWindow.css");
+
+        UpdateTripController controller = updateTripLoader.getController();
+        controller.initData(row);
+
+        try{
+            AccessorStageService.changeScene(updateTripScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }

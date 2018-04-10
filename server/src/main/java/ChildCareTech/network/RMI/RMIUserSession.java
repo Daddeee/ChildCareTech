@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.kid.Kid;
 import ChildCareTech.model.kid.KidDAO;
@@ -120,10 +121,47 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
                 throw new AddFailedException("Una gita per la stessa meta e con stesse date è già presente");
 
             tx.commit();
+        } catch(Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void updateTrip(TripDTO oldTripDTO, TripDTO newTripDTO) throws UpdateFailedException{
+        TripDAO tripDAO = new TripDAO();
+        Trip newTrip = DTOEntityAssembler.getEntity(newTripDTO);
+        Trip oldTrip = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("meta", oldTripDTO.getMeta());
+        paramMap.put("depDate", oldTripDTO.getDepDate().toString());
+        paramMap.put("arrDate", oldTripDTO.getArrDate().toString());
+
+        tripDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            oldTrip = tripDAO.read(paramMap).get(0);
+            newTrip.setPrimaryKey(oldTrip);
+            tripDAO.update(oldTrip, newTrip);
+
+            tx.commit();
+        }catch(IndexOutOfBoundsException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException("Non è stata trovata alcuna gita da aggiornare");
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
+            throw new UpdateFailedException(e.getMessage());
+        } finally {
+            session.close();
         }
     }
 

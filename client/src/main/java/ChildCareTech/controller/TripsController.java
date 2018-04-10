@@ -1,6 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
@@ -58,7 +59,7 @@ public class TripsController {
                     try {
                         AccessorSceneManager.loadShowTrip(row.getItem());
                     } catch (IOException ex) {
-                        System.err.println("Can't load addTrip window");
+                        System.err.println("Can't load showTrip window");
                         ex.printStackTrace();
                     }
             });
@@ -76,6 +77,19 @@ public class TripsController {
                 refreshTable();
             });
             contextMenu.getItems().add(deleteTrip);
+
+            final MenuItem updateTrip = new MenuItem("Modifica");
+            updateTrip.setOnAction(event -> {
+                contextMenu.hide();
+                try {
+                    AccessorSceneManager.loadUpdateTrip(row.getItem());
+                } catch (IOException ex) {
+                    System.err.println("Can't load updateTrip window");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(updateTrip);
 
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
