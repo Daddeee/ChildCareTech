@@ -4,6 +4,8 @@ import ChildCareTech.model.iEntity;
 import ChildCareTech.model.trip.Trip;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,12 +21,18 @@ public class Route implements iEntity<Route, Integer> {
     @JoinColumn(nullable = false)
     private Trip trip;
 
+    @NotNull(message = "E' necessario specificare il numero della tratta")
     @Column(nullable = false)
     private int routeNumber;
 
+    @NotNull(message = "E' necessario specificare il luogo di partenza")
+    @Size(min = 1, message = "E' necessario specificare il luogo di partenza")
     @Column(nullable = false)
     private String departureLocation;
 
+
+    @NotNull(message = "E' necessario specificare il luogo di arrivo")
+    @Size(min = 1, message = "E' necessario specificare il luogo di arrivo")
     @Column(nullable = false)
     private String arrivalLocation;
 

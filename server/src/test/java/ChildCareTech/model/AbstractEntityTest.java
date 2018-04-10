@@ -1,6 +1,7 @@
 package ChildCareTech.model;
 
 import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,7 +47,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
 
             session.flush();
             tx.commit();
-        } catch (HibernateException e) {
+        } catch (HibernateException | ValidationFailedException e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
@@ -118,7 +119,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
             t = dao.read((K) o.getPrimaryKey());
 
             assertTrue(t == null);
-        } catch (HibernateException e) {
+        } catch (HibernateException | ValidationFailedException e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();

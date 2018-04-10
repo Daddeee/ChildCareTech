@@ -6,6 +6,10 @@ import ChildCareTech.model.trippartecipation.TripPartecipation;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
@@ -18,18 +22,23 @@ public class Trip implements iEntity<Trip, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull(message = "E' necessario specificare la meta")
+    @Size(min = 1, message = "E' necessario specificare la meta")
     @Column(nullable = false)
     private String meta;
 
     @ColumnDefault("''")
     private String note;
 
+    @NotNull(message = "E' necessario specificare la data di partenza")
     @Column(nullable = false)
     private LocalDate depDate;
 
+    @NotNull(message = "E' necessario specificare la data di arrivo")
     @Column(nullable = false)
     private LocalDate arrDate;
 
+    @Valid
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<Route> routes;
 

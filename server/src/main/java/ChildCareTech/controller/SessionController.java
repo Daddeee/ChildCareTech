@@ -6,6 +6,7 @@ import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.model.user.User;
 import ChildCareTech.model.user.UserDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -62,7 +63,7 @@ public class SessionController {
             dao.create(u);
 
             tx.commit();
-        } catch (HibernateException e) {
+        } catch (HibernateException | ValidationFailedException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
             throw new RegistrationFailedException("Registration failed.");

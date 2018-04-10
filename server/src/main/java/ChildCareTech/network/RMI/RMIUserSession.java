@@ -20,6 +20,7 @@ import org.hibernate.Transaction;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,10 +107,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         HashMap<String, String> paramMap = new HashMap<>();
+        StringBuilder fetchErrorMessage = new StringBuilder();
 
         paramMap.put("meta", tripDTO.getMeta());
-        paramMap.put("depDate", tripDTO.getDepDate().toString());
-        paramMap.put("arrDate", tripDTO.getArrDate().toString());
+        paramMap.put("depDate", tripDTO.getDepDate() == null ? LocalDate.MIN.toString() : tripDTO.getDepDate().toString());
+        paramMap.put("arrDate", tripDTO.getArrDate() == null ? LocalDate.MIN.toString() : tripDTO.getArrDate().toString());
 
         tripDAO.setSession(session);
         try{

@@ -2,24 +2,28 @@ package ChildCareTech.utils;
 
 import ChildCareTech.model.iEntity;
 import ChildCareTech.model.kid.Kid;
+import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidationException;
+import javax.validation.Validator;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializable> {
 
     private Class<T> persistentClass;
     private Session session;
+    private Validator validator;
 
     public AbstractGenericDAO(Class<T> clazz) {
         this.persistentClass = clazz;
+        this.validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
 
     public void setSession(Session s) {
@@ -36,7 +40,8 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
         return persistentClass;
     }
 
-    public void create(T obj) {
+    public void create(T obj) throws ValidationFailedException{
+        validateEntity(obj);
         session.save(obj);
     }
 
@@ -76,13 +81,27 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
     }
 
     @SuppressWarnings("unchecked")
-    public void update(T baseObj, T updatedObj) {
+    public void update(T baseObj, T updatedObj) throws ValidationFailedException{
+        validateEntity(updatedObj);
         updatedObj.setPrimaryKey(baseObj);
         session.merge(updatedObj);
     }
 
     public void delete(T obj) {
         session.delete(obj);
+    }
+
+    private void validateEntity(T entity) throws ValidationFailedException{
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if(constraintViolations.isEmpty()) return;
+
+        StringBuilder errorMessage = new StringBuilder();
+        for(ConstraintViolation<T> e : constraintViolations){
+            errorMessage.append(e.getMessage());
+            errorMessage.append("\n");
+        }
+
+        throw new ValidationFailedException(errorMessage.toString());
     }
 
     public abstract void initializeLazyRelations(T obj);
