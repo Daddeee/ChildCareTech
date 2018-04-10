@@ -132,12 +132,6 @@
                     <Insets left="20.0"/>
                 </HBox.margin>
             </TextField>
-            <TextField fx:id="routeNumberField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                       minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" promptText="#">
-                <HBox.margin>
-                    <Insets left="20.0"/>
-                </HBox.margin>
-            </TextField>
             <Button fx:id="addRouteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                     minWidth="-Infinity" mnemonicParsing="false" onAction="#addRouteButtonAction" prefHeight="25.0"
                     prefWidth="80.0" text="Aggiungi tratta">
