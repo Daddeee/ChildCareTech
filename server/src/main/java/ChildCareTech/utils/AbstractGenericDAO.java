@@ -1,7 +1,6 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.model.iEntity;
-import ChildCareTech.model.kid.Kid;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.Session;
 
@@ -10,7 +9,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.ValidationException;
 import javax.validation.Validator;
 import java.io.Serializable;
 import java.util.*;

@@ -1,11 +1,9 @@
 package ChildCareTech.utils.DTO.assemblers;
 
-import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
-import ChildCareTech.model.canteen.Canteen;
-import ChildCareTech.model.meal.Meal;
-import ChildCareTech.model.workday.WorkDay;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.model.entities.Canteen;
+import ChildCareTech.model.entities.Meal;
+import ChildCareTech.model.entities.WorkDay;
 
 public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, MealDTO> {
     @Override

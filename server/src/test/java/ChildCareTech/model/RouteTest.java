@@ -1,13 +1,12 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.route.Route;
-import ChildCareTech.model.route.RouteDAO;
-import ChildCareTech.model.trip.Trip;
+import ChildCareTech.model.entities.Route;
+import ChildCareTech.model.DAO.RouteDAO;
+import ChildCareTech.model.entities.Trip;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.junit.Assert.fail;
 

@@ -1,8 +1,8 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.staff.Staff;
-import ChildCareTech.model.staff.StaffDAO;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.entities.Staff;
+import ChildCareTech.model.DAO.StaffDAO;
 
 import java.time.LocalDate;
 

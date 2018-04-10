@@ -2,9 +2,8 @@ package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
-import ChildCareTech.common.DTO.PersonDTO;
-import ChildCareTech.model.adult.Adult;
-import ChildCareTech.model.kid.Kid;
+import ChildCareTech.model.entities.Adult;
+import ChildCareTech.model.entities.Kid;
 import ChildCareTech.utils.DTO.DTOFactory;
 
 import java.util.HashSet;

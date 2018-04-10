@@ -1,8 +1,8 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event, EventDTO> {

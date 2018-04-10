@@ -1,12 +1,9 @@
 package ChildCareTech.utils.DTO.assemblers;
 
-import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
-import ChildCareTech.model.dish.Dish;
-import ChildCareTech.model.food.Food;
-import ChildCareTech.model.supply.Supply;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.model.entities.Food;
+import ChildCareTech.model.entities.Supply;
 
 import java.util.HashSet;
 import java.util.Set;

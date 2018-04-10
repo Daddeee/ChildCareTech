@@ -1,9 +1,9 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.kid.Kid;
-import ChildCareTech.model.pediatrist.Pediatrist;
-import ChildCareTech.model.pediatrist.PediatristDAO;
-import ChildCareTech.model.person.Person;
+import ChildCareTech.model.entities.Kid;
+import ChildCareTech.model.entities.Pediatrist;
+import ChildCareTech.model.DAO.PediatristDAO;
+import ChildCareTech.model.entities.Person;
 
 import java.time.LocalDate;
 import java.util.HashSet;

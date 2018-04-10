@@ -2,10 +2,7 @@ package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
-import ChildCareTech.model.route.Route;
-import ChildCareTech.utils.DTO.DTOFactory;
-
-import java.time.LocalDateTime;
+import ChildCareTech.model.entities.Route;
 
 public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
     @Override

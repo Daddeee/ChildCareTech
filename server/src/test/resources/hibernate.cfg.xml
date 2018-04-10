@@ -37,26 +37,26 @@
         </property>
 
         <!-- List of mapped entities -->
-        <mapping class="ChildCareTech.model.person.Person"/>
-        <mapping class="ChildCareTech.model.adult.Adult"/>
-        <mapping class="ChildCareTech.model.pediatrist.Pediatrist"/>
-        <mapping class="ChildCareTech.model.supplier.Supplier"/>
-        <mapping class="ChildCareTech.model.staff.Staff"/>
-        <mapping class="ChildCareTech.model.kid.Kid"/>
-        <mapping class="ChildCareTech.model.canteen.Canteen"/>
-        <mapping class="ChildCareTech.model.meal.Meal"/>
-        <mapping class="ChildCareTech.model.dish.Dish"/>
-        <mapping class="ChildCareTech.model.drink.Drink"/>
-        <mapping class="ChildCareTech.model.food.Food"/>
-        <mapping class="ChildCareTech.model.menu.Menu"/>
-        <mapping class="ChildCareTech.model.supply.Supply"/>
-        <mapping class="ChildCareTech.model.workday.WorkDay"/>
-        <mapping class="ChildCareTech.model.event.Event"/>
-        <mapping class="ChildCareTech.model.trip.Trip"/>
-        <mapping class="ChildCareTech.model.bus.Bus"/>
-        <mapping class="ChildCareTech.model.route.Route"/>
-        <mapping class="ChildCareTech.model.trippartecipation.TripPartecipation"/>
-        <mapping class="ChildCareTech.model.user.User"/>
+        <mapping class="ChildCareTech.model.entities.Person"/>
+        <mapping class="ChildCareTech.model.entities.Adult"/>
+        <mapping class="ChildCareTech.model.entities.Pediatrist"/>
+        <mapping class="ChildCareTech.model.entities.Supplier"/>
+        <mapping class="ChildCareTech.model.entities.Staff"/>
+        <mapping class="ChildCareTech.model.entities.Kid"/>
+        <mapping class="ChildCareTech.model.entities.Canteen"/>
+        <mapping class="ChildCareTech.model.entities.Meal"/>
+        <mapping class="ChildCareTech.model.entities.Dish"/>
+        <mapping class="ChildCareTech.model.entities.Drink"/>
+        <mapping class="ChildCareTech.model.entities.Food"/>
+        <mapping class="ChildCareTech.model.entities.Menu"/>
+        <mapping class="ChildCareTech.model.entities.Supply"/>
+        <mapping class="ChildCareTech.model.entities.WorkDay"/>
+        <mapping class="ChildCareTech.model.entities.Event"/>
+        <mapping class="ChildCareTech.model.entities.Trip"/>
+        <mapping class="ChildCareTech.model.entities.Bus"/>
+        <mapping class="ChildCareTech.model.entities.Route"/>
+        <mapping class="ChildCareTech.model.entities.TripPartecipation"/>
+        <mapping class="ChildCareTech.model.entities.User"/>
 
     </session-factory>
 </hibernate-configuration>

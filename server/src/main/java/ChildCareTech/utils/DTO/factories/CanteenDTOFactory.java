@@ -2,9 +2,8 @@ package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
-import ChildCareTech.model.canteen.Canteen;
-import ChildCareTech.model.meal.Meal;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.model.entities.Canteen;
+import ChildCareTech.model.entities.Meal;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,9 +1,8 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.RouteDTO;
-import ChildCareTech.model.route.Route;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.model.entities.Route;
+import ChildCareTech.model.entities.Trip;
 
 public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route, RouteDTO> {
     @Override

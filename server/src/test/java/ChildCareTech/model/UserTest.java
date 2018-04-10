@@ -1,7 +1,7 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.user.User;
-import ChildCareTech.model.user.UserDAO;
+import ChildCareTech.model.entities.User;
+import ChildCareTech.model.DAO.UserDAO;
 
 public class UserTest extends AbstractEntityTest<User, Integer> {
     @Override

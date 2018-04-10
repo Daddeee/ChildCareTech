@@ -1,9 +1,9 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.bus.Bus;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAssembler<TripPartecipation, TripPartecipationDTO> {

@@ -2,9 +2,8 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.bus.Bus;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.TripPartecipation;
 
 import java.util.HashSet;
 import java.util.Set;

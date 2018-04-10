@@ -1,7 +1,7 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.drink.Drink;
-import ChildCareTech.model.drink.DrinkDAO;
+import ChildCareTech.model.entities.Drink;
+import ChildCareTech.model.DAO.DrinkDAO;
 
 public class DrinkTest extends AbstractEntityTest<Drink, Integer> {
     @Override

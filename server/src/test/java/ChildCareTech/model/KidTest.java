@@ -1,9 +1,9 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.adult.Adult;
-import ChildCareTech.model.kid.Kid;
-import ChildCareTech.model.kid.KidDAO;
-import ChildCareTech.model.person.Person;
+import ChildCareTech.model.entities.Adult;
+import ChildCareTech.model.entities.Kid;
+import ChildCareTech.model.DAO.KidDAO;
+import ChildCareTech.model.entities.Person;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 

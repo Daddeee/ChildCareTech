@@ -1,10 +1,9 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.SupplyDTO;
-import ChildCareTech.model.food.Food;
-import ChildCareTech.model.supplier.Supplier;
-import ChildCareTech.model.supply.Supply;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.model.entities.Food;
+import ChildCareTech.model.entities.Supplier;
+import ChildCareTech.model.entities.Supply;
 
 public class SupplyDTOEntityAssembler implements AbstractDTOEntityAssembler<Supply, SupplyDTO> {
     @Override

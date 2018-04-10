@@ -1,9 +1,9 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.event.EventDAO;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.DAO.EventDAO;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.entities.WorkDay;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 

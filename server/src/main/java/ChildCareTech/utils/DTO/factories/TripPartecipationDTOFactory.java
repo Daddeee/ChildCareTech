@@ -1,10 +1,9 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.BusDTO;
-import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.DTO.DTOFactory;
 
 public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripPartecipation, TripPartecipationDTO> {

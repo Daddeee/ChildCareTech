@@ -3,11 +3,7 @@ package ChildCareTech.utils.DTO.factories;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.SupplierDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
-import ChildCareTech.model.food.Food;
-import ChildCareTech.model.supply.Supply;
-import ChildCareTech.utils.DTO.DTOFactory;
-
-import java.time.LocalDate;
+import ChildCareTech.model.entities.Supply;
 
 public class SupplyDTOFactory implements AbstractDTOFactory<Supply, SupplyDTO> {
     @Override

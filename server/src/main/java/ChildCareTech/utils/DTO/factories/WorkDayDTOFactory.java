@@ -3,11 +3,10 @@ package ChildCareTech.utils.DTO.factories;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.meal.Meal;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Meal;
+import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
-import ChildCareTech.utils.DTO.assemblers.MealDTOEntityAssembler;
 
 import java.util.HashSet;
 import java.util.Set;

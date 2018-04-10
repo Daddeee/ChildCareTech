@@ -2,8 +2,8 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
-import ChildCareTech.model.kid.Kid;
-import ChildCareTech.model.pediatrist.Pediatrist;
+import ChildCareTech.model.entities.Kid;
+import ChildCareTech.model.entities.Pediatrist;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 import java.util.HashSet;

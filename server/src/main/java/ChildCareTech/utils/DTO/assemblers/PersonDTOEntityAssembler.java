@@ -1,12 +1,7 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.PersonDTO;
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-
-import java.util.HashSet;
-import java.util.Set;
+import ChildCareTech.model.entities.Person;
 
 public class PersonDTOEntityAssembler implements AbstractDTOEntityAssembler<Person, PersonDTO> {
     @Override

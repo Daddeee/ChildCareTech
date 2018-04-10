@@ -1,25 +1,25 @@
 package ChildCareTech.utils.DTO;
 
 import ChildCareTech.common.DTO.*;
-import ChildCareTech.model.adult.Adult;
-import ChildCareTech.model.bus.Bus;
-import ChildCareTech.model.canteen.Canteen;
-import ChildCareTech.model.dish.Dish;
-import ChildCareTech.model.drink.Drink;
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.food.Food;
-import ChildCareTech.model.kid.Kid;
-import ChildCareTech.model.meal.Meal;
-import ChildCareTech.model.menu.Menu;
-import ChildCareTech.model.pediatrist.Pediatrist;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.route.Route;
-import ChildCareTech.model.staff.Staff;
-import ChildCareTech.model.supplier.Supplier;
-import ChildCareTech.model.supply.Supply;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Adult;
+import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Canteen;
+import ChildCareTech.model.entities.Dish;
+import ChildCareTech.model.entities.Drink;
+import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Food;
+import ChildCareTech.model.entities.Kid;
+import ChildCareTech.model.entities.Meal;
+import ChildCareTech.model.entities.Menu;
+import ChildCareTech.model.entities.Pediatrist;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.entities.Route;
+import ChildCareTech.model.entities.Staff;
+import ChildCareTech.model.entities.Supplier;
+import ChildCareTech.model.entities.Supply;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.entities.TripPartecipation;
+import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.factories.*;
 
 public class DTOFactory {

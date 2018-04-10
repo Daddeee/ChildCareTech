@@ -4,7 +4,7 @@ import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.controller.SessionController;
-import ChildCareTech.model.user.User;
+import ChildCareTech.model.entities.User;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

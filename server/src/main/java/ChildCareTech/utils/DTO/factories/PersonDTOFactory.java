@@ -1,10 +1,7 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.PersonDTO;
-import ChildCareTech.common.Sex;
-import ChildCareTech.model.person.Person;
-
-import java.time.LocalDate;
+import ChildCareTech.model.entities.Person;
 
 public class PersonDTOFactory implements AbstractDTOFactory<Person, PersonDTO> {
     @Override

@@ -1,10 +1,10 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.bus.Bus;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
-import ChildCareTech.model.trippartecipation.TripPartecipationDAO;
+import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.entities.TripPartecipation;
+import ChildCareTech.model.DAO.TripPartecipationDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 

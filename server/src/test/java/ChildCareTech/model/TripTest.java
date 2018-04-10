@@ -1,17 +1,16 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.bus.Bus;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.route.Route;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trip.TripDAO;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.entities.Route;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.DAO.TripDAO;
+import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;

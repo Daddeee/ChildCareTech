@@ -1,9 +1,9 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.canteen.Canteen;
-import ChildCareTech.model.meal.Meal;
-import ChildCareTech.model.meal.MealDAO;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Canteen;
+import ChildCareTech.model.entities.Meal;
+import ChildCareTech.model.DAO.MealDAO;
+import ChildCareTech.model.entities.WorkDay;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 

@@ -3,7 +3,7 @@ package ChildCareTech.utils.DTO.factories;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.meal.Meal;
+import ChildCareTech.model.entities.Meal;
 import ChildCareTech.utils.DTO.DTOFactory;
 
 public class MealDTOFactory implements AbstractDTOFactory<Meal, MealDTO> {

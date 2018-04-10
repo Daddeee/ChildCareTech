@@ -3,8 +3,8 @@ package ChildCareTech.utils.DTO.factories;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.MenuDTO;
-import ChildCareTech.model.dish.Dish;
-import ChildCareTech.model.food.Food;
+import ChildCareTech.model.entities.Dish;
+import ChildCareTech.model.entities.Food;
 import ChildCareTech.utils.DTO.DTOFactory;
 
 import java.util.HashSet;

@@ -3,12 +3,11 @@ package ChildCareTech.utils.DTO.factories;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.route.Route;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.model.entities.Route;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.DTO.DTOFactory;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 

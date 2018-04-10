@@ -3,9 +3,9 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.route.Route;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
+import ChildCareTech.model.entities.Route;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 import java.util.HashSet;

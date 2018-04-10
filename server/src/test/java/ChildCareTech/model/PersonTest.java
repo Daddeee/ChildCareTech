@@ -1,12 +1,12 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.bus.Bus;
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.person.PersonDAO;
-import ChildCareTech.model.trip.Trip;
-import ChildCareTech.model.trippartecipation.TripPartecipation;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.DAO.PersonDAO;
+import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.entities.TripPartecipation;
+import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;

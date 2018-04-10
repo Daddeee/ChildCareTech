@@ -1,13 +1,9 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.event.Event;
-import ChildCareTech.model.workday.WorkDay;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.utils.DTO.DTOFactory;
-
-import java.time.LocalTime;
 
 public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
     @Override

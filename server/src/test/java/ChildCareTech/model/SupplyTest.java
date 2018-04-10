@@ -1,10 +1,10 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.food.Food;
-import ChildCareTech.model.person.Person;
-import ChildCareTech.model.supplier.Supplier;
-import ChildCareTech.model.supply.Supply;
-import ChildCareTech.model.supply.SupplyDAO;
+import ChildCareTech.model.entities.Food;
+import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.entities.Supplier;
+import ChildCareTech.model.entities.Supply;
+import ChildCareTech.model.DAO.SupplyDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
