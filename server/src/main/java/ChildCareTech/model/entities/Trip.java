@@ -1,6 +1,8 @@
 package ChildCareTech.model.entities;
 
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.validators.ValidRoutes;
+import ChildCareTech.model.validators.ValidTripDates;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -14,28 +16,31 @@ import java.util.Set;
 @Entity
 @Table(name = "trips",
         uniqueConstraints = @UniqueConstraint(columnNames = {"meta", "depDate", "arrDate"}))
+@ValidTripDates(message = "La data di arrivo non può precedere la data di partenza.")
+@ValidRoutes(message ="Le tratte inserite non sono in sequenza.")
 public class Trip implements iEntity<Trip, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull(message = "E' necessario specificare la meta")
-    @Size(min = 1, message = "E' necessario specificare la meta")
+    @NotNull(message = "E' necessario specificare la meta.")
+    @Size(min = 1, message = "E' necessario specificare la meta.")
     @Column(nullable = false)
     private String meta;
 
     @ColumnDefault("''")
     private String note;
 
-    @NotNull(message = "E' necessario specificare la data di partenza")
+    @NotNull(message = "E' necessario specificare la data di partenza.")
     @Column(nullable = false)
     private LocalDate depDate;
 
-    @NotNull(message = "E' necessario specificare la data di arrivo")
+    @NotNull(message = "E' necessario specificare la data di arrivo.")
     @Column(nullable = false)
     private LocalDate arrDate;
 
     @Valid
+    @Size(min = 2, message = "Inserire almeno 2 tratte (andata e ritorno)")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<Route> routes;
 
