@@ -7,6 +7,7 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
+import ChildCareTech.utils.TempRouteData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,11 +42,11 @@ public class UpdateTripController {
     private TextField arrivalLocationField;
 
     @FXML
-    private TableView<AddTripController.TempRouteData> routesTable;
+    private TableView<TempRouteData> routesTable;
 
     private TripDTO oldTrip;
 
-    private ObservableList<AddTripController.TempRouteData> routes = FXCollections.observableArrayList();
+    private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
     private int maxRouteNumber = 1;
 
     private void initialize(){
@@ -53,7 +54,7 @@ public class UpdateTripController {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if(keyEvent.getCode() == KeyCode.CANCEL) {
-                    AddTripController.TempRouteData removed = routesTable.getSelectionModel().getSelectedItem();
+                    TempRouteData removed = routesTable.getSelectionModel().getSelectedItem();
                     routes.remove(removed);
 
                     maxRouteNumber--;
@@ -104,7 +105,7 @@ public class UpdateTripController {
 
         TripDTO tripDTO = new TripDTO(meta, note, depDate, arrDate, new HashSet<>(), null);
 
-        for(AddTripController.TempRouteData r : routes)
+        for(TempRouteData r : routes)
             tripDTO.getRoutes().add(r.getRouteDTO(tripDTO));
 
         try {
@@ -129,7 +130,7 @@ public class UpdateTripController {
     }
 
     private void addRoute(int routeNumber, String departureLocation, String arrivalLocation){
-        AddTripController.TempRouteData r = new AddTripController.TempRouteData(
+        TempRouteData r = new TempRouteData(
                 routeNumber,
                 departureLocation,
                 arrivalLocation
@@ -137,23 +138,5 @@ public class UpdateTripController {
         maxRouteNumber++;
         routes.add(r);
         routesTable.getItems().add(r);
-    }
-
-    private static class TempRouteData{
-        public int routeNumber;
-        public String departureLocation;
-        public String arrivalLocation;
-
-        public TempRouteData(int routeNumber, String departureLocation, String arrivalLocation){
-            this.routeNumber = routeNumber;
-            this.departureLocation = departureLocation;
-            this.arrivalLocation = arrivalLocation;
-        }
-
-        public int getRouteNumber() { return routeNumber; }
-        public String getDepartureLocation() { return departureLocation; }
-        public String getArrivalLocation() { return arrivalLocation; }
-
-        public RouteDTO getRouteDTO(TripDTO t) { return new RouteDTO(t, routeNumber, departureLocation, arrivalLocation); }
     }
 }
