@@ -2,23 +2,17 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
-import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.TempRouteData;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -47,24 +41,28 @@ public class UpdateTripController {
     private TripDTO oldTrip;
 
     private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
-    private int maxRouteNumber = 1;
+    private int routeCounter = 0;
 
-    private void initialize(){
-        routesTable.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(keyEvent.getCode() == KeyCode.CANCEL) {
-                    TempRouteData removed = routesTable.getSelectionModel().getSelectedItem();
-                    routes.remove(removed);
+    public void initialize(){
+        routesTable.setRowFactory(tempRouteDataTableView -> {
+            final TableRow<TempRouteData> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
 
-                    maxRouteNumber--;
-                    for(int i = 0; i < maxRouteNumber; i++)
-                        routes.get(i).routeNumber = i + 1;
+            final MenuItem deleteRoute = new MenuItem("Elimina");
+            deleteRoute.setOnAction(event -> {
+                contextMenu.hide();
+                removeRoute(row.getItem());
+                refreshTable();
+            });
+            contextMenu.getItems().add(deleteRoute);
 
-                    routesTable.getItems().clear();
-                    routesTable.getItems().addAll(routes);
-                }
-            }
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
         });
     }
 
@@ -77,13 +75,13 @@ public class UpdateTripController {
         arrDateField.setValue(tripDTO.getArrDate());
 
         for(RouteDTO r : tripDTO.getRoutes())
-            addRoute(r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation());
+            addRoute(new TempRouteData(r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation()));
 
     }
 
     @FXML
-    public void addRouteButtonAction(ActionEvent e) throws IOException {
-        addRoute(maxRouteNumber, departureLocationField.getText(), arrivalLocationField.getText());
+    public void addRouteButtonAction(ActionEvent e) throws IOException{
+        addRoute(new TempRouteData(routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
     }
 
     @FXML
@@ -129,14 +127,24 @@ public class UpdateTripController {
         }
     }
 
-    private void addRoute(int routeNumber, String departureLocation, String arrivalLocation){
-        TempRouteData r = new TempRouteData(
-                routeNumber,
-                departureLocation,
-                arrivalLocation
-        );
-        maxRouteNumber++;
-        routes.add(r);
-        routesTable.getItems().add(r);
+    private void addRoute(TempRouteData added){
+        routeCounter++;
+        routes.add(added);
+        routesTable.getItems().add(added);
+    }
+
+    private void removeRoute(TempRouteData removed){
+        routes.remove(removed);
+
+        routeCounter--;
+        for(int i = 0; i < routeCounter; i++)
+            routes.get(i).routeNumber = i + 1;
+
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        routesTable.getItems().clear();
+        routesTable.getItems().addAll(routes);
     }
 }

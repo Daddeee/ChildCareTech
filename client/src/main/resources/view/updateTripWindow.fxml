@@ -154,6 +154,9 @@
             <TableColumn fx:id="arrivalLocationColumn" prefWidth="300.0" text="Luogo di arrivo">
                 <cellValueFactory><PropertyValueFactory property="arrivalLocation" /></cellValueFactory>
             </TableColumn>
+            <TableColumn fx:id="routeNumberColumn" prefWidth="100.0" text="numero tratta">
+                <cellValueFactory><PropertyValueFactory property="routeNumber" /></cellValueFactory>
+            </TableColumn>
         </columns>
         <HBox.margin>
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0"/>

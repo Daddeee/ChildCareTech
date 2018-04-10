@@ -37,9 +37,9 @@ public class AddTripController {
     private TableView<TempRouteData> routesTable;
 
     private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
-    private int maxRouteNumber = 1;
+    private int routeCounter = 0;
 
-    private void initialize(){
+    public void initialize(){
         routesTable.setRowFactory(tempRouteDataTableView -> {
             final TableRow<TempRouteData> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
@@ -64,8 +64,7 @@ public class AddTripController {
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        TempRouteData r = new TempRouteData(maxRouteNumber, departureLocationField.getText(), arrivalLocationField.getText());
-        addRoute(r);
+        addRoute(new TempRouteData(routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
     }
 
     @FXML
@@ -112,7 +111,7 @@ public class AddTripController {
     }
 
     private void addRoute(TempRouteData added){
-        maxRouteNumber++;
+        routeCounter++;
         routes.add(added);
         routesTable.getItems().add(added);
     }
@@ -120,8 +119,8 @@ public class AddTripController {
     private void removeRoute(TempRouteData removed){
         routes.remove(removed);
 
-        maxRouteNumber--;
-        for(int i = 0; i < maxRouteNumber; i++)
+        routeCounter--;
+        for(int i = 0; i < routeCounter; i++)
             routes.get(i).routeNumber = i + 1;
 
         refreshTable();
