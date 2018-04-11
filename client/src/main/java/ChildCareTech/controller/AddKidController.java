@@ -64,8 +64,11 @@ public class AddKidController {
         kid = new KidDTO(person, null, null, null, null);
         try {
             SessionService.getSession().saveKid(kid);
+            AccessorStageService.close();
         } catch (RemoteException ex) {
-            System.err.println("error remote");
+            System.err.println("error closing stage");
+            ex.printStackTrace();
+        } catch(NoSuchFieldException ex) {
             ex.printStackTrace();
         }
     }

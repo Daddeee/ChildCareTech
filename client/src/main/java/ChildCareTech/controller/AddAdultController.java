@@ -49,7 +49,7 @@ public class AddAdultController {
         adultAnagController = MainSceneManager.getAdultAnagController();
         maleButton.setToggleGroup(group);
         femaleButton.setToggleGroup(group);
-        maleButton.arm();
+        maleButton.fire();
     }
 
     @FXML
@@ -63,22 +63,25 @@ public class AddAdultController {
             return;
         }
         Sex sex;
-        if (maleButton.isArmed())
+        if (maleButton.isSelected())
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(firstNameField.getText(), lastNameField.getText(), fiscalCodeField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText());
+        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText());
         adult = new AdultDTO(person, null);
         try {
             SessionService.getSession().saveAdult(adult);
+            AccessorStageService.close();
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
         } catch(AddFailedException ex) {
+            alertLabel.setText(ex.getMessage());
+            ex.printStackTrace();
+        } catch(NoSuchFieldException ex) {
             ex.printStackTrace();
         }
         adultAnagController.refreshTable();
-        //AccessorStageService.close();
     }
 
     @FXML
