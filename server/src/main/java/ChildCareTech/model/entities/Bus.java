@@ -1,24 +1,30 @@
 package ChildCareTech.model.entities;
 
 import ChildCareTech.model.iEntity;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Collections;
 import java.util.Set;
 
 @Entity
 @Table(name = "buses")
 public class Bus implements iEntity<Bus, Integer> {
+    private static final String LICENSE_PLATE_REGEX = "[a-zA-Z]{2}\\d{3}[a-zA-Z]{2}$";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Pattern(regexp = LICENSE_PLATE_REGEX)
     @Column(nullable = false, unique = true)
     private String licensePlate;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "bus")
     private Set<TripPartecipation> tripPartecipations;
 
+    @Range(min=0, message = "La capienza di un autobus non può essere negativa")
     @Column(nullable = false)
     private int capacity;
 
