@@ -86,7 +86,12 @@ public class BusController {
 
     @FXML
     protected void addButtonAction(ActionEvent e){
-
+        try {
+            AccessorSceneManager.loadAddBus();
+        } catch (IOException ex) {
+            System.err.println("Can't load addKid window");
+            ex.printStackTrace();
+        }
     }
 
     @FXML

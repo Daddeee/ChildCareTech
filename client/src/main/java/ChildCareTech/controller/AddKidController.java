@@ -61,7 +61,7 @@ public class AddKidController {
         else
             sex = Sex.FEMALE;
         person = new PersonDTO(firstNameField.getText(), lastNameField.getText(), fiscalCodeField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
-        kid = new KidDTO(person, null, null, null, null);
+        kid = new KidDTO(0, person, null, null, null, null);
         try {
             SessionService.getSession().saveKid(kid);
             AccessorStageService.close();

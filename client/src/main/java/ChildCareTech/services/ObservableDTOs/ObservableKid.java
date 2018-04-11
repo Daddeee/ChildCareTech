@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ObservableKid extends KidDTO {
     public ObservableKid(KidDTO kidDTO) {
-        super(kidDTO.getPerson(), kidDTO.getFirstTutor(), kidDTO.getSecondTutor(), kidDTO.getPediatrist(), kidDTO.getContacts());
+        super( kidDTO.getId(), kidDTO.getPerson(), kidDTO.getFirstTutor(), kidDTO.getSecondTutor(), kidDTO.getPediatrist(), kidDTO.getContacts());
     }
     public StringProperty firstNameProperty() {
         return new SimpleStringProperty(getPerson().getFirstName());

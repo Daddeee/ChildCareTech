@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ObservableAdult extends AdultDTO{
     public ObservableAdult(AdultDTO adultDTO) {
-        super(adultDTO.getPerson(), adultDTO.getContacts());
+        super(adultDTO.getId(), adultDTO.getPerson(), adultDTO.getContacts());
     }
     public StringProperty firstNameProperty() {
         return new SimpleStringProperty(getPerson().getFirstName());

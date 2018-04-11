@@ -68,7 +68,7 @@ public class AddAdultController {
         else
             sex = Sex.FEMALE;
         person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText());
-        adult = new AdultDTO(person, null);
+        adult = new AdultDTO(0, person, null);
         try {
             SessionService.getSession().saveAdult(adult);
             AccessorStageService.close();
