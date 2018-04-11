@@ -12,13 +12,8 @@ import java.util.Set;
 public class AdultDTOFactory implements AbstractDTOFactory<Adult, AdultDTO> {
     @Override
     public AdultDTO getDTO(Adult entity) {
-        if (entity == null)
-            return null;
-
-        AdultDTO dto = new AdultDTO(
-                DTOFactory.getDTO(entity.getPerson()),
-                null
-        );
+        AdultDTO dto = getAdultDTO(entity);
+        if(dto == null) return null;
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
@@ -29,10 +24,15 @@ public class AdultDTOFactory implements AbstractDTOFactory<Adult, AdultDTO> {
     }
 
     public static AdultDTO getKidContactsManySide(Adult entity){
+        return getAdultDTO(entity);
+    }
+
+    private static AdultDTO getAdultDTO(Adult entity) {
         if (entity == null)
             return null;
 
         return new AdultDTO(
+                entity.getId(),
                 DTOFactory.getDTO(entity.getPerson()),
                 null
         );

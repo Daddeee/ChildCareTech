@@ -11,13 +11,8 @@ import java.util.Set;
 public class CanteenDTOFactory implements AbstractDTOFactory<Canteen, CanteenDTO> {
     @Override
     public CanteenDTO getDTO(Canteen entity) {
-        if (entity == null)
-            return null;
-
-        CanteenDTO dto = new CanteenDTO(
-                entity.getName(),
-                null
-        );
+        CanteenDTO dto = getCanteenDTO(entity);
+        if (dto == null) return null;
 
         Set<MealDTO> meals = new HashSet<>();
         for (Meal m : entity.getMeals())
@@ -28,13 +23,19 @@ public class CanteenDTOFactory implements AbstractDTOFactory<Canteen, CanteenDTO
     }
 
     public static CanteenDTO getMealOneSide(Canteen entity){
+        return getCanteenDTO(entity);
+    }
+
+    private static CanteenDTO getCanteenDTO(Canteen entity) {
         if (entity == null)
             return null;
 
-        return new CanteenDTO(
+        CanteenDTO dto = new CanteenDTO(
+                entity.getId(),
                 entity.getName(),
                 null
         );
+        return dto;
     }
 }
 

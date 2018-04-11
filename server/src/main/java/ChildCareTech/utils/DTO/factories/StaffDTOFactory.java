@@ -16,6 +16,7 @@ public class StaffDTOFactory implements AbstractDTOFactory<Staff, StaffDTO> {
             return null;
 
         StaffDTO dto = new StaffDTO(
+                entity.getId(),
                 DTOFactory.getDTO(entity.getPerson()),
                 null
         );

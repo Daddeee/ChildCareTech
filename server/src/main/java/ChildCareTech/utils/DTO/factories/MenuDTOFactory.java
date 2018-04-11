@@ -13,15 +13,8 @@ import java.util.Set;
 public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
     @Override
     public MenuDTO getDTO(Menu entity) {
-        if (entity == null)
-            return null;
-
-        MenuDTO dto = new MenuDTO(
-                DTOFactory.getDTO(entity.getMeal()),
-                entity.getNumMenu(),
-                null,
-                null
-        );
+        MenuDTO dto = getMenuDTO(entity);
+        if (dto == null) return null;
 
         dto.setDrink(
                 DrinkDTOFactory.getMenuOneSide(entity.getDrink(), dto)
@@ -36,15 +29,8 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
     }
 
     public static MenuDTO getDishOneSide(Menu entity){
-        if (entity == null)
-            return null;
-
-        MenuDTO dto = new MenuDTO(
-                DTOFactory.getDTO(entity.getMeal()),
-                entity.getNumMenu(),
-                null,
-                null
-        );
+        MenuDTO dto = getMenuDTO(entity);
+        if (dto == null) return null;
 
         dto.setDrink(
                 DrinkDTOFactory.getMenuOneSide(entity.getDrink(), dto)
@@ -54,15 +40,8 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
     }
 
     public static MenuDTO getDrinkOneSide(Menu entity, DrinkDTO drinkDTO){
-        if (entity == null)
-            return null;
-
-        MenuDTO dto = new MenuDTO(
-                DTOFactory.getDTO(entity.getMeal()),
-                entity.getNumMenu(),
-                null,
-                null
-        );
+        MenuDTO dto = getMenuDTO(entity);
+        if (dto == null) return null;
 
         dto.setDrink(
                 drinkDTO
@@ -73,6 +52,20 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
             dishes.add(DishDTOFactory.getMenuManySide(d, dto));
         dto.setDishes(dishes);
 
+        return dto;
+    }
+
+    private static MenuDTO getMenuDTO(Menu entity) {
+        if (entity == null)
+            return null;
+
+        MenuDTO dto = new MenuDTO(
+                entity.getId(),
+                DTOFactory.getDTO(entity.getMeal()),
+                entity.getNumMenu(),
+                null,
+                null
+        );
         return dto;
     }
 }

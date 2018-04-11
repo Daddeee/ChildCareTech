@@ -12,14 +12,8 @@ import java.util.Set;
 public class PediatristDTOFactory implements AbstractDTOFactory<Pediatrist, PediatristDTO> {
     @Override
     public PediatristDTO getDTO(Pediatrist entity) {
-        if (entity == null)
-            return null;
-
-        PediatristDTO dto = new PediatristDTO(
-                DTOFactory.getDTO(entity.getPerson()),
-                null,
-                null
-        );
+        PediatristDTO dto = getPediatristDTO(entity);
+        if (dto == null) return null;
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
@@ -35,10 +29,15 @@ public class PediatristDTOFactory implements AbstractDTOFactory<Pediatrist, Pedi
     }
 
     public static PediatristDTO getKidOneSide(Pediatrist entity){
+        return getPediatristDTO(entity);
+    }
+
+    private static PediatristDTO getPediatristDTO(Pediatrist entity) {
         if (entity == null)
             return null;
 
         return new PediatristDTO(
+                entity.getId(),
                 DTOFactory.getDTO(entity.getPerson()),
                 null,
                 null

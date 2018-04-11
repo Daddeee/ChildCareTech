@@ -9,13 +9,9 @@ import ChildCareTech.utils.DTO.DTOFactory;
 public class MealDTOFactory implements AbstractDTOFactory<Meal, MealDTO> {
     @Override
     public MealDTO getDTO(Meal entity) {
-        if (entity == null)
-            return null;
-
-        return new MealDTO(
+        return getMealDTO(entity,
                 CanteenDTOFactory.getMealOneSide(entity.getCanteen()),
-                WorkDayDTOFactory.getMealOneSide(entity.getWorkDay()),
-                entity.getMealNum()
+                WorkDayDTOFactory.getMealOneSide(entity.getWorkDay())
         );
     }
 
@@ -23,19 +19,31 @@ public class MealDTOFactory implements AbstractDTOFactory<Meal, MealDTO> {
         if (entity == null)
             return null;
 
-        return new MealDTO(
+        return getMealDTO(
+                entity,
                 canteenDTO,
-                DTOFactory.getDTO(entity.getWorkDay()),
-                entity.getMealNum()
+                WorkDayDTOFactory.getMealOneSide(entity.getWorkDay())
         );
     }
 
     public static MealDTO getWorkDayManySide(Meal entity, WorkDayDTO workDayDTO){
+        if(entity == null)
+            return null;
+
+        return getMealDTO(
+                entity,
+                CanteenDTOFactory.getMealOneSide(entity.getCanteen()),
+                workDayDTO
+        );
+    }
+
+    private static MealDTO getMealDTO(Meal entity, CanteenDTO canteenDTO ,WorkDayDTO workDayDTO) {
         if (entity == null)
             return null;
 
         return new MealDTO(
-                CanteenDTOFactory.getMealOneSide(entity.getCanteen()),
+                entity.getId(),
+                canteenDTO,
                 workDayDTO,
                 entity.getMealNum()
         );

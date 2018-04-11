@@ -357,7 +357,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     public List<BusDTO> getAllBuses() throws RemoteException{
         ArrayList<BusDTO> a = new ArrayList<>();
-        a.add(new BusDTO("prova", null, 20));
+        a.add(new BusDTO(1,"prova", null, 20));
         return a;
     }
 }

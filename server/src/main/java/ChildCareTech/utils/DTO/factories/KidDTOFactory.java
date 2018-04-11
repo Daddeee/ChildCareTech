@@ -13,16 +13,9 @@ import java.util.Set;
 public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
     @Override
     public KidDTO getDTO(Kid entity) {
-        if (entity == null)
-            return null;
+        if (entity == null) return null;
+        KidDTO dto = getKidDTO(entity, PediatristDTOFactory.getKidOneSide(entity.getPediatrist()));
 
-        KidDTO dto = new KidDTO(
-                DTOFactory.getDTO(entity.getPerson()),
-                AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
-                AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
-                PediatristDTOFactory.getKidOneSide(entity.getPediatrist()),
-                null
-        );
 
         Set<AdultDTO> contacts = new HashSet<>();
         for (Adult a : entity.getContacts())
@@ -33,23 +26,20 @@ public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
     }
 
     public static KidDTO getAdultContactsManySide(Kid entity){
-        if (entity == null)
-            return null;
-
-        return new KidDTO(
-                DTOFactory.getDTO(entity.getPerson()),
-                AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
-                AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),
-                PediatristDTOFactory.getKidOneSide(entity.getPediatrist()),
-                null
-        );
+        if(entity == null) return null;
+        return getKidDTO(entity, PediatristDTOFactory.getKidOneSide(entity.getPediatrist()));
     }
 
     public static KidDTO getPediatristManySide(Kid entity, PediatristDTO pediatristDTO){
+        return getKidDTO(entity, pediatristDTO);
+    }
+
+    private static KidDTO getKidDTO(Kid entity, PediatristDTO pediatristDTO) {
         if (entity == null)
             return null;
 
         return new KidDTO(
+                entity.getId(),
                 DTOFactory.getDTO(entity.getPerson()),
                 AdultDTOFactory.getKidContactsManySide(entity.getFirstTutor()),
                 AdultDTOFactory.getKidContactsManySide(entity.getSecondTutor()),

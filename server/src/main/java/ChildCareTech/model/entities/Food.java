@@ -58,6 +58,10 @@ public class Food implements iEntity<Food, Integer> {
         this.supplies = supplies;
     }
 
+    public int getId() {
+        return id;
+    }
+
     private void setName(String name) {
         this.name = name;
     }

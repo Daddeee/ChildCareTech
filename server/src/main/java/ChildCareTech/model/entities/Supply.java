@@ -46,6 +46,10 @@ public class Supply implements iEntity<Supply, Integer> {
         this.date = date;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Supplier getSupplier() {
         return supplier;
     }

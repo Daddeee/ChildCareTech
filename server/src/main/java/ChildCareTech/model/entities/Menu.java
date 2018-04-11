@@ -61,6 +61,10 @@ public class Menu implements iEntity<Menu, Integer> {
         this.id = a.getPrimaryKey();
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setDishes(Set<Dish> dishes) {
         this.dishes = dishes;
     }

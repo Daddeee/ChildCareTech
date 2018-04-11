@@ -14,18 +14,8 @@ import java.util.Set;
 public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
     @Override
     public TripDTO getDTO(Trip entity) {
-        if (entity == null)
-            return null;
-
-        TripDTO dto = new TripDTO(
-                entity.getId(),
-                entity.getMeta(),
-                entity.getNote(),
-                entity.getDepDate(),
-                entity.getArrDate(),
-          null,
-          null
-        );
+        TripDTO dto = getTripDTO(entity);
+        if (dto == null) return null;
 
         Set<RouteDTO> routes = new HashSet<>();
         for (Route s : entity.getRoutes())
@@ -41,18 +31,8 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
     }
 
     public static TripDTO getRouteOneSide(Trip entity){
-        if (entity == null)
-            return null;
-
-        TripDTO dto = new TripDTO(
-                entity.getId(),
-                entity.getMeta(),
-                entity.getNote(),
-                entity.getDepDate(),
-                entity.getArrDate(),
-                null,
-                null
-        );
+        TripDTO dto = getTripDTO(entity);
+        if (dto == null) return null;
 
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
         for (TripPartecipation t : entity.getTripPartecipations())
@@ -63,6 +43,18 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
     }
 
     public static TripDTO getTripPartecipationOneSide(Trip entity){
+        TripDTO dto = getTripDTO(entity);
+        if (dto == null) return null;
+
+        Set<RouteDTO> routes = new HashSet<>();
+        for (Route s : entity.getRoutes())
+            routes.add(RouteDTOFactory.getTripManySide(s, dto));
+        dto.setRoutes(routes);
+
+        return dto;
+    }
+
+    private static TripDTO getTripDTO(Trip entity) {
         if (entity == null)
             return null;
 
@@ -75,12 +67,6 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
                 null,
                 null
         );
-
-        Set<RouteDTO> routes = new HashSet<>();
-        for (Route s : entity.getRoutes())
-            routes.add(RouteDTOFactory.getTripManySide(s, dto));
-        dto.setRoutes(routes);
-
         return dto;
     }
 }

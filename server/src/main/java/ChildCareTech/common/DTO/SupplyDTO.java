@@ -4,16 +4,22 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class SupplyDTO implements Serializable {
+    private int id;
     private SupplierDTO supplier;
     private FoodDTO food;
     private int quantity;
     private LocalDate date;
 
-    public SupplyDTO(SupplierDTO supplier, FoodDTO food, int quantity, LocalDate date) {
+    public SupplyDTO(int id, SupplierDTO supplier, FoodDTO food, int quantity, LocalDate date) {
+        this.id = id;
         this.supplier = supplier;
         this.food = food;
         this.quantity = quantity;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public SupplierDTO getSupplier() {

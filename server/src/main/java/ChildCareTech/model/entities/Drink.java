@@ -56,6 +56,10 @@ public class Drink implements iEntity<Drink, Integer> {
         this.id = a.getPrimaryKey();
     }
 
+    public int getId() {
+        return id;
+    }
+
     private void setName(String name) {
         this.name = name;
     }

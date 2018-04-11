@@ -8,36 +8,37 @@ import ChildCareTech.model.entities.Supply;
 public class SupplyDTOFactory implements AbstractDTOFactory<Supply, SupplyDTO> {
     @Override
     public SupplyDTO getDTO(Supply entity) {
-        if (entity == null)
-            return null;
-
-        return new SupplyDTO(
+        if(entity == null) return null;
+        return getSupplyDTO(entity,
                 SupplierDTOFactory.getSupplyOneSide(entity.getSupplier()),
-                FoodDTOFactory.getSupplyOneSide(entity.getFood()),
-                entity.getQuantity(),
-                entity.getDate()
+                FoodDTOFactory.getSupplyOneSide(entity.getFood())
         );
     }
 
     public static SupplyDTO getFoodManySide(Supply entity, FoodDTO foodDTO){
-        if (entity == null)
-            return null;
-
-        return new SupplyDTO(
+        if(entity == null) return null;
+        return getSupplyDTO(entity,
                 SupplierDTOFactory.getSupplyOneSide(entity.getSupplier()),
-                foodDTO,
-                entity.getQuantity(),
-                entity.getDate()
+                foodDTO
         );
     }
 
     public static SupplyDTO getSupplierManySide(Supply entity, SupplierDTO supplierDTO){
+        if(entity == null) return null;
+        return getSupplyDTO(entity,
+                supplierDTO,
+                FoodDTOFactory.getSupplyOneSide(entity.getFood())
+        );
+    }
+
+    private static SupplyDTO getSupplyDTO(Supply entity, SupplierDTO supplierDTO, FoodDTO foodDTO) {
         if (entity == null)
             return null;
 
         return new SupplyDTO(
+                entity.getId(),
                 supplierDTO,
-                FoodDTOFactory.getSupplyOneSide(entity.getFood()),
+                foodDTO,
                 entity.getQuantity(),
                 entity.getDate()
         );

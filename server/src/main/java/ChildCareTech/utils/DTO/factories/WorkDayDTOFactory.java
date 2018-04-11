@@ -14,14 +14,8 @@ import java.util.Set;
 public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO> {
     @Override
     public WorkDayDTO getDTO(WorkDay entity) {
-        if (entity == null)
-            return null;
-
-        WorkDayDTO dto = new WorkDayDTO(
-                entity.getDate(),
-                null,
-                null
-        );
+        WorkDayDTO dto = getWorkDayDTO(entity);
+        if (dto == null) return null;
 
         Set<MealDTO> meals = new HashSet<>();
         for (Meal m : entity.getMeals())
@@ -37,14 +31,8 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
     }
 
     public static WorkDayDTO getMealOneSide(WorkDay entity){
-        if (entity == null)
-            return null;
-
-        WorkDayDTO dto = new WorkDayDTO(
-                entity.getDate(),
-                null,
-                null
-        );
+        WorkDayDTO dto = getWorkDayDTO(entity);
+        if (dto == null) return null;
 
         Set<EventDTO> events = new HashSet<>();
         for (Event e : entity.getEvents())
@@ -55,20 +43,27 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
     }
 
     public static WorkDayDTO getEventOneSide(WorkDay entity){
-        if (entity == null)
-            return null;
-
-        WorkDayDTO dto = new WorkDayDTO(
-                entity.getDate(),
-                null,
-                null
-        );
+        WorkDayDTO dto = getWorkDayDTO(entity);
+        if (dto == null) return null;
 
         Set<MealDTO> meals = new HashSet<>();
         for (Meal m : entity.getMeals())
             meals.add(DTOFactory.getDTO(m));
         dto.setMeals(meals);
 
+        return dto;
+    }
+
+    private static WorkDayDTO getWorkDayDTO(WorkDay entity) {
+        if (entity == null)
+            return null;
+
+        WorkDayDTO dto = new WorkDayDTO(
+                entity.getId(),
+                entity.getDate(),
+                null,
+                null
+        );
         return dto;
     }
 }

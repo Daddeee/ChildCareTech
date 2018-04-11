@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class StaffDTO extends AdultDTO implements Serializable {
-    public StaffDTO(PersonDTO person, Set<KidDTO> contacts) {
-        super(person, contacts);
+    public StaffDTO(int id, PersonDTO person, Set<KidDTO> contacts) {
+        super(id, person, contacts);
     }
 }

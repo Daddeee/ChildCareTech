@@ -9,35 +9,41 @@ import ChildCareTech.utils.DTO.DTOFactory;
 public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripPartecipation, TripPartecipationDTO> {
     @Override
     public TripPartecipationDTO getDTO(TripPartecipation entity) {
-        if (entity == null)
-            return null;
-
-        return new TripPartecipationDTO(DTOFactory.getDTO(
-                entity.getPerson()),
+        if(entity == null) return null;
+        return getTripPartecipationDTO(
+                entity,
                 TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
                 BusDTOFactory.getTripPartecipationOneSide(entity.getBus())
         );
     }
 
     public static TripPartecipationDTO getBusManySide(TripPartecipation entity, BusDTO busDTO){
-        if (entity == null)
-            return null;
-
-        return new TripPartecipationDTO(DTOFactory.getDTO(
-                entity.getPerson()),
+        if (entity == null)return null;
+        return getTripPartecipationDTO(
+                entity,
                 TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
                 busDTO
         );
     }
 
     public static TripPartecipationDTO getTripManySide(TripPartecipation entity, TripDTO tripDTO){
+        if(entity == null) return null;
+        return getTripPartecipationDTO(
+                entity,
+                tripDTO,
+                BusDTOFactory.getTripPartecipationOneSide(entity.getBus())
+        );
+    }
+
+    private static TripPartecipationDTO getTripPartecipationDTO(TripPartecipation entity, TripDTO tripDTO, BusDTO busDTO) {
         if (entity == null)
             return null;
 
-        return new TripPartecipationDTO(DTOFactory.getDTO(
-                entity.getPerson()),
-                TripDTOFactory.getTripPartecipationOneSide(entity.getTrip()),
-                BusDTOFactory.getTripPartecipationOneSide(entity.getBus())
+        return new TripPartecipationDTO(
+                entity.getId(),
+                DTOFactory.getDTO(entity.getPerson()),
+                tripDTO,
+                busDTO
         );
     }
 }

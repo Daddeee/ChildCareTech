@@ -7,8 +7,8 @@ import java.util.Set;
 public class SupplierDTO extends AdultDTO implements Serializable {
     private Set<SupplyDTO> supplies;
 
-    public SupplierDTO(PersonDTO person, Set<KidDTO> contacts, Set<SupplyDTO> supplies) {
-        super(person, contacts);
+    public SupplierDTO(int id, PersonDTO person, Set<KidDTO> contacts, Set<SupplyDTO> supplies) {
+        super(id, person, contacts);
         this.supplies = supplies == null ? Collections.EMPTY_SET : supplies;
     }
 

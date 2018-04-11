@@ -5,17 +5,23 @@ import java.util.Collections;
 import java.util.Set;
 
 public class FoodDTO implements Serializable {
+    private int id;
     private String name;
     private boolean isDrink;
     private int residualQuantity;
     private Set<DishDTO> dishes;
     private Set<SupplyDTO> supplies;
 
-    public FoodDTO(String name, boolean isDrink, int residualQuantity, Set<SupplyDTO> supplies) {
+    public FoodDTO(int id, String name, boolean isDrink, int residualQuantity, Set<SupplyDTO> supplies) {
+        this.id = id;
         this.name = name;
         this.isDrink = isDrink;
         this.residualQuantity = residualQuantity;
         this.supplies = supplies == null ? Collections.EMPTY_SET : supplies;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

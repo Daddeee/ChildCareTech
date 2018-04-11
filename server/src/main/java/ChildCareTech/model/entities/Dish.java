@@ -58,6 +58,10 @@ public class Dish implements iEntity<Dish, Integer> {
         this.id = a.getPrimaryKey();
     }
 
+    public int getId() {
+        return id;
+    }
+
     private void setMenu(Menu menu) {
         this.menu = menu;
     }

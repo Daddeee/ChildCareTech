@@ -13,14 +13,8 @@ import java.util.Set;
 public class DrinkDTOFactory implements AbstractDTOFactory<Drink, DrinkDTO> {
     @Override
     public DrinkDTO getDTO(Drink entity) {
-        if (entity == null)
-            return null;
-
-        DrinkDTO dto = new DrinkDTO(
-                entity.getName(),
-                null,
-                null
-        );
+        DrinkDTO dto = getDrinkDTO(entity);
+        if(dto == null) return null;
 
         dto.setMenu(
                 MenuDTOFactory.getDrinkOneSide(entity.getMenu(), dto)
@@ -35,14 +29,8 @@ public class DrinkDTOFactory implements AbstractDTOFactory<Drink, DrinkDTO> {
     }
 
     public static DrinkDTO getMenuOneSide(Drink entity, MenuDTO menuDTO){
-        if (entity == null)
-            return null;
-
-        DrinkDTO dto = new DrinkDTO(
-                entity.getName(),
-                null,
-                null
-        );
+        DrinkDTO dto = getDrinkDTO(entity);
+        if (dto == null) return null;
 
         dto.setMenu(
                 menuDTO
@@ -53,6 +41,19 @@ public class DrinkDTOFactory implements AbstractDTOFactory<Drink, DrinkDTO> {
             foods.add(DTOFactory.getDTO(f));
         dto.setFoods(foods);
 
+        return dto;
+    }
+
+    private static DrinkDTO getDrinkDTO(Drink entity) {
+        if (entity == null)
+            return null;
+
+        DrinkDTO dto = new DrinkDTO(
+                entity.getId(),
+                entity.getName(),
+                null,
+                null
+        );
         return dto;
     }
 }

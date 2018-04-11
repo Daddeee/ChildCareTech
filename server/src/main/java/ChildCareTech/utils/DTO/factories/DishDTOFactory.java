@@ -13,15 +13,8 @@ import java.util.Set;
 public class DishDTOFactory implements AbstractDTOFactory<Dish, DishDTO> {
     @Override
     public DishDTO getDTO(Dish entity) {
-        if (entity == null)
-            return null;
-
-        DishDTO dto = new DishDTO(
-                entity.getName(),
-                MenuDTOFactory.getDishOneSide(entity.getMenu()),
-                null
-        );
-
+        if(entity == null) return null;
+        DishDTO dto = getDishDTO(entity, MenuDTOFactory.getDishOneSide(entity.getMenu()));
 
         Set<FoodDTO> foods = new HashSet<>();
         for (Food f : entity.getFoods())
@@ -32,14 +25,8 @@ public class DishDTOFactory implements AbstractDTOFactory<Dish, DishDTO> {
     }
 
     public static DishDTO getMenuManySide(Dish entity, MenuDTO menuDTO){
-        if (entity == null)
-            return null;
-
-        DishDTO dto = new DishDTO(
-                entity.getName(),
-                menuDTO,
-                null
-        );
+        DishDTO dto = getDishDTO(entity, menuDTO);
+        if (dto == null) return null;
 
 
         Set<FoodDTO> foods = new HashSet<>();
@@ -47,6 +34,19 @@ public class DishDTOFactory implements AbstractDTOFactory<Dish, DishDTO> {
             foods.add(DTOFactory.getDTO(f));
         dto.setFoods(foods);
 
+        return dto;
+    }
+
+    private static DishDTO getDishDTO(Dish entity, MenuDTO menuDTO) {
+        if (entity == null)
+            return null;
+
+        DishDTO dto = new DishDTO(
+                entity.getId(),
+                entity.getName(),
+                menuDTO,
+                null
+        );
         return dto;
     }
 }

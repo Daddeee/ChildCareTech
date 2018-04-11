@@ -14,14 +14,8 @@ import java.util.Set;
 public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, SupplierDTO> {
     @Override
     public SupplierDTO getDTO(Supplier entity) {
-        if (entity == null)
-            return null;
-
-        SupplierDTO dto = new SupplierDTO(
-                DTOFactory.getDTO(entity.getPerson()),
-                null,
-                null
-        );
+        SupplierDTO dto = getSupplierDTO(entity);
+        if (dto == null) return null;
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
@@ -38,20 +32,27 @@ public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, Supplier
     }
 
     public static SupplierDTO getSupplyOneSide(Supplier entity){
-        if (entity == null)
-            return null;
-
-        SupplierDTO dto = new SupplierDTO(
-                DTOFactory.getDTO(entity.getPerson()),
-                null,
-                null
-        );
+        SupplierDTO dto = getSupplierDTO(entity);
+        if (dto == null) return null;
 
         Set<KidDTO> contacts = new HashSet<>();
         for (Kid k : entity.getContacts())
             contacts.add(KidDTOFactory.getAdultContactsManySide(k));
         dto.setContacts(contacts);
 
+        return dto;
+    }
+
+    private static SupplierDTO getSupplierDTO(Supplier entity) {
+        if (entity == null)
+            return null;
+
+        SupplierDTO dto = new SupplierDTO(
+                entity.getId(),
+                DTOFactory.getDTO(entity.getPerson()),
+                null,
+                null
+        );
         return dto;
     }
 }
