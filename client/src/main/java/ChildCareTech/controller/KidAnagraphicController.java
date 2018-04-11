@@ -81,11 +81,6 @@ public class KidAnagraphicController {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();
         }
-        try {
-            List<KidDTO> list = SessionService.getSession().getAllKids();
-        } catch(RemoteException ex) {
-            System.err.println("remote error");
-        }
     }
 
     @FXML
@@ -110,10 +105,8 @@ public class KidAnagraphicController {
         for(KidDTO kid : kidDTOList) {
             items.add(new ObservableKid(kid));
         }
-
         //debug
         //PersonDTO person = new PersonDTO("fisc", "nome", "cognome", LocalDate.now(), Sex.MALE, "addr", "");
         //items.add(new ObservableKid(new KidDTO(person, new AdultDTO(person, new HashSet<KidDTO>()), new AdultDTO(person, new HashSet<KidDTO>()), new PediatristDTO(person, new HashSet<KidDTO>(), new HashSet<KidDTO>()), new HashSet<>())));
-
     }
 }

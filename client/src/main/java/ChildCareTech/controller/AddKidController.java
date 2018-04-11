@@ -42,7 +42,7 @@ public class AddKidController {
     public void initialize() {
         maleButton.setToggleGroup(group);
         femaleButton.setToggleGroup(group);
-        maleButton.arm();
+        maleButton.fire();
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class AddKidController {
             return;
         }
         Sex sex;
-        if (maleButton.isArmed())
+        if (maleButton.isSelected())
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;

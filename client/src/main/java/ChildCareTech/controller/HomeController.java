@@ -12,16 +12,26 @@ import java.io.IOException;
 public class HomeController {
 
     @FXML
-    private Button anagraphicsButton;
+    private Button kidsAnagraphicsButton;
+    @FXML
+    private Button adultsAnagraphicsBUtton;
 
-    public HomeController() {
+    public HomeController() { }
 
+    @FXML
+    protected void kidAnagraphicsButtonAction(ActionEvent action) {
+        try {
+            MainSceneManager.loadKidAnagraphics();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 
     @FXML
-    protected void anagraphicsButtonAction(ActionEvent action) {
+    protected void adultAnagraphicsButtonAction(ActionEvent action) {
         try {
-            MainSceneManager.loadAnagraphics();
+            MainSceneManager.loadAdultAnagraphics();
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
