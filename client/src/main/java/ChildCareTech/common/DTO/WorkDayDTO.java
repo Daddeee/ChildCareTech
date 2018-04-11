@@ -6,14 +6,20 @@ import java.util.Collections;
 import java.util.Set;
 
 public class WorkDayDTO implements Serializable {
+    private int id;
     private LocalDate date;
     private Set<MealDTO> meals;
     private Set<EventDTO> events;
 
-    public WorkDayDTO(LocalDate date, Set<MealDTO> meals, Set<EventDTO> events) {
+    public WorkDayDTO(int id, LocalDate date, Set<MealDTO> meals, Set<EventDTO> events) {
+        this.id = id;
         this.date = date;
         this.meals = meals == null ? Collections.EMPTY_SET : meals;
         this.events = events == null ? Collections.EMPTY_SET : events;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public LocalDate getDate() {

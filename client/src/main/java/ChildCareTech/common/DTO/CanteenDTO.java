@@ -5,12 +5,18 @@ import java.util.Collections;
 import java.util.Set;
 
 public class CanteenDTO implements Serializable {
+    private int id;
     private String name;
     private Set<MealDTO> meals;
 
-    public CanteenDTO(String name, Set<MealDTO> meals) {
+    public CanteenDTO(int id, String name, Set<MealDTO> meals) {
+        this.id = id;
         this.name = name;
         this.meals = meals == null ? Collections.EMPTY_SET : meals;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

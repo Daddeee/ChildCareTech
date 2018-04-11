@@ -5,16 +5,22 @@ import java.util.Collections;
 import java.util.Set;
 
 public class MenuDTO implements Serializable {
+    private int id;
     private MealDTO meal;
     private int numMenu;
     private Set<DishDTO> dishes;
     private DrinkDTO drink;
 
-    public MenuDTO(MealDTO meal, int numMenu, Set<DishDTO> dishes, DrinkDTO drink) {
+    public MenuDTO(int id, MealDTO meal, int numMenu, Set<DishDTO> dishes, DrinkDTO drink) {
+        this.id = id;
         this.meal = meal;
         this.numMenu = numMenu;
         this.dishes = dishes == null ? Collections.EMPTY_SET : dishes;
         this.drink = drink;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public MealDTO getMeal() {
