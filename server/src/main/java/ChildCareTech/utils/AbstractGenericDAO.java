@@ -83,13 +83,6 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
         session.merge(updatedObj);
     }
 
-    @SuppressWarnings("unchecked")
-    public void update(T baseObj, T updatedObj) throws ValidationFailedException{
-        validateEntity(updatedObj);
-        updatedObj.setPrimaryKey(baseObj);
-        session.merge(updatedObj);
-    }
-
     public void delete(T obj) {
         session.delete(obj);
     }

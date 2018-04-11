@@ -101,7 +101,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
 
             /* updating */
             tx = session.beginTransaction();
-            dao.update(o, ou);
+            dao.update(ou);
             tx.commit();
 
             /* reading */
