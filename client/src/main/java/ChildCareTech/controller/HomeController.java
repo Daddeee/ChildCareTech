@@ -49,6 +49,16 @@ public class HomeController {
     }
 
     @FXML
+    protected void busButtonAction(ActionEvent action){
+        try {
+            MainSceneManager.loadBuses();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void logoutButtonAction(ActionEvent action) {
         SessionService.logoutAttempt();
         try {

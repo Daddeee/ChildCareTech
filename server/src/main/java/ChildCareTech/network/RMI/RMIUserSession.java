@@ -338,4 +338,22 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
         return tripsDTOCollection;
     }
+
+    public void saveBus(BusDTO bus) throws RemoteException, AddFailedException{
+        System.out.println("save bus");
+    }
+
+    public void removeBus(BusDTO bus) throws RemoteException{
+        System.out.println("remove bus");
+    }
+
+    public void updateBus(BusDTO oldBus, BusDTO newBus) throws RemoteException, UpdateFailedException{
+        System.out.println("update bus");
+    }
+
+    public List<BusDTO> getAllBuses() throws RemoteException{
+        ArrayList<BusDTO> a = new ArrayList<>();
+        a.add(new BusDTO("prova", null, 20));
+        return a;
+    }
 }
