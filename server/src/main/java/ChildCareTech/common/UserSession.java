@@ -3,6 +3,7 @@ package ChildCareTech.common;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
+import ChildCareTech.model.entities.Bus;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -24,6 +25,11 @@ public interface UserSession extends Remote {
     List<KidDTO> getAllKids() throws RemoteException;
     List<AdultDTO> getAllAdults() throws RemoteException;
     List<TripDTO> getAllTrips() throws RemoteException;
+
+    void saveBus(BusDTO bus) throws RemoteException, AddFailedException;
+    void removeBus(BusDTO bus) throws RemoteException;
+    void updateBus(BusDTO oldBus, BusDTO newBus) throws RemoteException, UpdateFailedException;
+    List<BusDTO> getAllBuses() throws RemoteException;
 
     void logout() throws RemoteException;
 }

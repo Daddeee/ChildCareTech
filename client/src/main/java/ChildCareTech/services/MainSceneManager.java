@@ -17,11 +17,14 @@ public class MainSceneManager {
     private static FXMLLoader kidAnagraphicsLoader;
     private static FXMLLoader tripListLoader;
     private static FXMLLoader adultAnagraphicsLoader;
+    private static FXMLLoader busLoader;
+    
     private static Scene loginScene;
     private static Scene homeScene;
     private static Scene kidAnagraphicsScene;
     private static Scene tripListScene;
     private static Scene adultAnagraphicsScene;
+    private static Scene busScene;
 
     private MainSceneManager() {
     }
@@ -86,6 +89,16 @@ public class MainSceneManager {
         try {
             MainStageService.changeScene(tripListScene);
         } catch (NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void loadBuses() throws IOException {
+        busLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/busWindow.fxml"));
+        busScene = sceneInit(busLoader, "/style/busWindow.css");
+        try{
+            MainStageService.changeScene(busScene);
+        } catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
     }
