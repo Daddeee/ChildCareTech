@@ -4,16 +4,22 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class RouteDTO implements Serializable {
+    private int id;
     private TripDTO trip;
     private int routeNumber;
     private String departureLocation;
     private String arrivalLocation;
 
-    public RouteDTO(TripDTO trip, int routeNumber, String departureLocation, String arrivalLocation) {
+    public RouteDTO(int id, TripDTO trip, int routeNumber, String departureLocation, String arrivalLocation) {
+        this.id = id;
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public TripDTO getTrip() {

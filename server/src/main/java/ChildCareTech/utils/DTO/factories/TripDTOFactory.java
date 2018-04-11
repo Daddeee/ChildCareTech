@@ -18,10 +18,11 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
             return null;
 
         TripDTO dto = new TripDTO(
-          entity.getMeta(),
-          entity.getNote(),
-          entity.getDepDate(),
-          entity.getArrDate(),
+                entity.getId(),
+                entity.getMeta(),
+                entity.getNote(),
+                entity.getDepDate(),
+                entity.getArrDate(),
           null,
           null
         );
@@ -44,6 +45,7 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
             return null;
 
         TripDTO dto = new TripDTO(
+                entity.getId(),
                 entity.getMeta(),
                 entity.getNote(),
                 entity.getDepDate(),
@@ -65,6 +67,7 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
             return null;
 
         TripDTO dto = new TripDTO(
+                entity.getId(),
                 entity.getMeta(),
                 entity.getNote(),
                 entity.getDepDate(),

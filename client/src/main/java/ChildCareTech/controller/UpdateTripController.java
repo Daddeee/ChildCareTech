@@ -52,7 +52,6 @@ public class UpdateTripController {
             deleteRoute.setOnAction(event -> {
                 contextMenu.hide();
                 removeRoute(row.getItem());
-                refreshTable();
             });
             contextMenu.getItems().add(deleteRoute);
 
@@ -75,13 +74,13 @@ public class UpdateTripController {
         arrDateField.setValue(tripDTO.getArrDate());
 
         for(RouteDTO r : tripDTO.getRoutes())
-            addRoute(new TempRouteData(r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation()));
+            addRoute(new TempRouteData(r.getId(), r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation()));
 
     }
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        addRoute(new TempRouteData(routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
+        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
     }
 
     @FXML
@@ -96,18 +95,19 @@ public class UpdateTripController {
 
     @FXML
     public void updateButtonAction(ActionEvent e){
+        int id = oldTrip.getId();
         String meta = metaField.getText();
         String note = noteField.getText();
         LocalDate depDate = depDateField.getValue();
         LocalDate arrDate = arrDateField.getValue();
 
-        TripDTO tripDTO = new TripDTO(meta, note, depDate, arrDate, new HashSet<>(), null);
+        TripDTO tripDTO = new TripDTO(id, meta, note, depDate, arrDate, new HashSet<>(), null);
 
         for(TempRouteData r : routes)
             tripDTO.getRoutes().add(r.getRouteDTO(tripDTO));
 
         try {
-            SessionService.getSession().updateTrip(oldTrip, tripDTO);
+            SessionService.getSession().updateTrip(tripDTO);
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
@@ -134,6 +134,13 @@ public class UpdateTripController {
     }
 
     private void removeRoute(TempRouteData removed){
+        try {
+            SessionService.getSession().removeRoute(removed.getRouteDTO(oldTrip));
+        } catch (RemoteException ex) {
+            System.err.println("error remote");
+            ex.printStackTrace();
+        }
+
         routes.remove(removed);
 
         routeCounter--;

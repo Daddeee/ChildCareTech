@@ -63,6 +63,14 @@ public class Trip implements iEntity<Trip, Integer> {
         this.arrDate = arrDate;
     }
 
+    public Trip(int id, String meta, String note,LocalDate depDate, LocalDate arrDate) {
+        this.id = id;
+        this.meta = meta;
+        this.note = note;
+        this.depDate = depDate;
+        this.arrDate = arrDate;
+    }
+
     public int getId() {
         return id;
     }

@@ -146,7 +146,7 @@
     </HBox>
 
     <TableView fx:id="routesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
-               prefHeight="100.0" prefWidth="700.0">
+               prefHeight="100.0" prefWidth="700.0" editable="true">
         <columns>
             <TableColumn fx:id="departureLocationColumn" prefWidth="300.0" text="Luogo di partenza">
                 <cellValueFactory><PropertyValueFactory property="departureLocation" /></cellValueFactory>

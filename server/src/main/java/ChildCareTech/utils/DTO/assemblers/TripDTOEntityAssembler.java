@@ -18,6 +18,7 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
             return null;
 
         Trip entity = new Trip(
+                dto.getId(),
                 dto.getMeta(),
                 dto.getNote(),
                 dto.getDepDate(),
@@ -42,6 +43,7 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
             return null;
 
         Trip entity = new Trip(
+                dto.getId(),
                 dto.getMeta(),
                 dto.getNote(),
                 dto.getDepDate(),
@@ -61,6 +63,7 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
             return null;
 
         Trip entity = new Trip(
+                dto.getId(),
                 dto.getMeta(),
                 dto.getNote(),
                 dto.getDepDate(),

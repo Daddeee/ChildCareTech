@@ -78,6 +78,11 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
         return session.createQuery(criteria).getResultList();
     }
 
+    public void update(T updatedObj) throws ValidationFailedException {
+        validateEntity(updatedObj);
+        session.saveOrUpdate(updatedObj);
+    }
+
     @SuppressWarnings("unchecked")
     public void update(T baseObj, T updatedObj) throws ValidationFailedException{
         validateEntity(updatedObj);

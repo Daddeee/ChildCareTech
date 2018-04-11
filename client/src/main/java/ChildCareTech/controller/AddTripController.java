@@ -64,7 +64,7 @@ public class AddTripController {
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        addRoute(new TempRouteData(routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
+        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
     }
 
     @FXML
@@ -84,7 +84,7 @@ public class AddTripController {
         LocalDate depDate = depDateField.getValue();
         LocalDate arrDate = arrDateField.getValue();
 
-        TripDTO tripDTO = new TripDTO(meta, note, depDate, arrDate, new HashSet<>(), null);
+        TripDTO tripDTO = new TripDTO(0, meta, note, depDate, arrDate, new HashSet<>(), null);
 
         for(TempRouteData r : routes)
             tripDTO.getRoutes().add(r.getRouteDTO(tripDTO));

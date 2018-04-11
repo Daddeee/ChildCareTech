@@ -11,6 +11,7 @@ public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route
             return null;
 
         return new Route(
+                dto.getId(),
                 TripDTOEntityAssembler.assembleRouteOneSide(dto.getTrip()),
                 dto.getRouteNumber(),
                 dto.getDepartureLocation(),
@@ -23,6 +24,7 @@ public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route
             return null;
 
         return new Route(
+                dto.getId(),
                 trip,
                 dto.getRouteNumber(),
                 dto.getDepartureLocation(),

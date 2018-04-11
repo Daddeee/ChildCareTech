@@ -219,27 +219,38 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public void removeTrip(TripDTO tripDTO) {
         TripDAO tripDAO = new TripDAO();
-        Trip trip;
+        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
-
-        paramMap.put("meta", tripDTO.getMeta());
-        paramMap.put("depDate", tripDTO.getDepDate().toString());
-        paramMap.put("arrDate", tripDTO.getArrDate().toString());
-
         tripDAO.setSession(session);
-
         try{
             tx = session.beginTransaction();
-
-            trip = tripDAO.read(paramMap).get(0);
             tripDAO.delete(trip);
 
             tx.commit();
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        }
+    }
+
+    public void removeRoute(RouteDTO routeDTO) throws RemoteException{
+        RouteDAO routeDAO = new RouteDAO();
+        Route route = DTOEntityAssembler.getEntity(routeDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        routeDAO.setSession(session);
+        try {
+            tx = session.beginTransaction();
+            routeDAO.delete(route);
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
 
@@ -276,25 +287,18 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public void updateTrip(TripDTO oldTripDTO, TripDTO newTripDTO) throws UpdateFailedException{
+    public void updateTrip(TripDTO newTripDTO) throws UpdateFailedException{
         TripDAO tripDAO = new TripDAO();
         Trip newTrip = DTOEntityAssembler.getEntity(newTripDTO);
-        Trip oldTrip = null;
+        Trip oldTrip;
+
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
-
-        paramMap.put("meta", oldTripDTO.getMeta());
-        paramMap.put("depDate", oldTripDTO.getDepDate().toString());
-        paramMap.put("arrDate", oldTripDTO.getArrDate().toString());
-
         tripDAO.setSession(session);
         try{
             tx = session.beginTransaction();
 
-            oldTrip = tripDAO.read(paramMap).get(0);
-            newTrip.setPrimaryKey(oldTrip);
-            tripDAO.update(oldTrip, newTrip);
+            tripDAO.update(newTrip);
 
             tx.commit();
         }catch(IndexOutOfBoundsException e){

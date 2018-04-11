@@ -11,6 +11,7 @@ public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
             return null;
 
         return new RouteDTO(
+                entity.getId(),
                 TripDTOFactory.getRouteOneSide(entity.getTrip()),
                 entity.getRouteNumber(),
                 entity.getDepartureLocation(),
@@ -23,6 +24,7 @@ public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
             return null;
 
         return new RouteDTO(
+                entity.getId(),
                 tripDTO,
                 entity.getRouteNumber(),
                 entity.getDepartureLocation(),

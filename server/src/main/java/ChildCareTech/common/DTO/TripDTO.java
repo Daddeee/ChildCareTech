@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Set;
 
 public class TripDTO implements Serializable {
+    private int id;
     private String meta;
     private String note;
     private LocalDate depDate;
@@ -13,13 +14,18 @@ public class TripDTO implements Serializable {
     private Set<RouteDTO> routes;
     private Set<TripPartecipationDTO> tripPartecipations;
 
-    public TripDTO(String meta, String note, LocalDate depDate, LocalDate arrDate, Set<RouteDTO> routes, Set<TripPartecipationDTO> tripPartecipations) {
+    public TripDTO(int id, String meta, String note, LocalDate depDate, LocalDate arrDate, Set<RouteDTO> routes, Set<TripPartecipationDTO> tripPartecipations) {
+        this.id = id;
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;
         this.arrDate = arrDate;
         this.routes = routes == null ? Collections.EMPTY_SET : routes;
         this.tripPartecipations = tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getMeta() {
