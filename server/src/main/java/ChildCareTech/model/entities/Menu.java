@@ -43,6 +43,14 @@ public class Menu implements iEntity<Menu, Integer> {
         this.drink = drink;
     }
 
+    public Menu(int id, Meal meal, int numMenu, Set<Dish> dishes, Drink drink) {
+        this.id = id;
+        this.meal = meal;
+        this.numMenu = numMenu;
+        this.dishes = dishes;
+        this.drink = drink;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

@@ -31,6 +31,11 @@ public class Adult implements iEntity<Adult, Integer> {
         this.person = person;
     }
 
+    public Adult(int id, Person person){
+        this.id = id;
+        this.person = person;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

@@ -32,6 +32,12 @@ public class Canteen implements iEntity<Canteen, Integer> {
         this.meals = meals;
     }
 
+    public Canteen(int id, String name, Set<Meal> meals) {
+        this.id = id;
+        this.name = name;
+        this.meals = meals;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

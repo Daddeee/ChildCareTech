@@ -37,15 +37,15 @@ public class Route implements iEntity<Route, Integer> {
     public Route() {
     }
 
-    public Route(int id, Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
-        this.id = id;
+    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
     }
 
-    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
+    public Route(int id, Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
+        this.id = id;
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;

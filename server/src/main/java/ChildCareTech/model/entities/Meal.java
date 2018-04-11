@@ -35,6 +35,13 @@ public class Meal implements iEntity<Meal, Integer> {
         this.workDay = workDay;
     }
 
+    public Meal(int id, Canteen canteen, int mealNum, WorkDay workDay) {
+        this.id = id;
+        this.canteen = canteen;
+        this.mealNum = mealNum;
+        this.workDay = workDay;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

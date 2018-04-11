@@ -38,6 +38,14 @@ public class Event implements iEntity<Event, Integer> {
         this.isIn = isIn;
     }
 
+    public Event(int id, WorkDay workDay, Person person, LocalTime time, boolean isIn) {
+        this.id = id;
+        this.workDay = workDay;
+        this.person = person;
+        this.time = time.minusNanos(time.getNano());
+        this.isIn = isIn;
+    }
+
     public int getId() {
         return id;
     }

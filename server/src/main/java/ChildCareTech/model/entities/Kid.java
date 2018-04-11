@@ -40,6 +40,14 @@ public class Kid implements iEntity<Kid, Integer> {
         this.pediatrist = pediatrist;
     }
 
+    public Kid(int id, Person person, Adult firstTutor, Adult secondTutor, Pediatrist pediatrist) {
+        this.id = id;
+        this.person = person;
+        this.firstTutor = firstTutor;
+        this.secondTutor = secondTutor;
+        this.pediatrist = pediatrist;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

@@ -36,6 +36,12 @@ public class Bus implements iEntity<Bus, Integer> {
         this.capacity = capacity;
     }
 
+    public Bus(int id, String licensePlate, int capacity) {
+        this.id = id;
+        this.licensePlate = licensePlate;
+        this.capacity = capacity;
+    }
+
     public int getId() {
         return id;
     }

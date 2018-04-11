@@ -27,6 +27,11 @@ public class Pediatrist extends Adult {
         this.kids = kids;
     }
 
+    public Pediatrist(int id, Person person, Set<Kid> kids) {
+        super(id, person);
+        this.kids = kids;
+    }
+
     public Set<Kid> getKids() {
         return kids == null ? Collections.EMPTY_SET : kids;
     }

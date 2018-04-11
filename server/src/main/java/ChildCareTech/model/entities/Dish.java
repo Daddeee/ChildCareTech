@@ -41,6 +41,13 @@ public class Dish implements iEntity<Dish, Integer> {
         this.foods = foods;
     }
 
+    public Dish(int id, String name, Menu menu, Set<Food> foods) {
+        this.id = id;
+        this.name = name;
+        this.menu = menu;
+        this.foods = foods;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

@@ -25,6 +25,12 @@ public class User implements iEntity<User, Integer> {
         this.password = password;
     }
 
+    public User(int id, String userName, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return getId();

@@ -33,6 +33,13 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
         this.bus = bus;
     }
 
+    public TripPartecipation(int id, Person person, Trip trip, Bus bus) {
+        this.id = id;
+        this.person = person;
+        this.trip = trip;
+        this.bus = bus;
+    }
+
     public int getId() {
         return id;
     }

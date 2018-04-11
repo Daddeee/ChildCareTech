@@ -18,6 +18,10 @@ public class Supplier extends Adult {
         super(person);
     }
 
+    public Supplier(int id, Person person) {
+        super(id, person);
+    }
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "supplier")
     private Set<Supply> supplies;
 

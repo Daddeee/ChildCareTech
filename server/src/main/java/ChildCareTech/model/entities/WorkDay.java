@@ -31,6 +31,11 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
         this.date = date;
     }
 
+    public WorkDay(int id, LocalDate date) {
+        this.id = id;
+        this.date = date;
+    }
+
     @Override
     public Integer getPrimaryKey() {
         return id;

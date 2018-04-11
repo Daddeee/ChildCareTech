@@ -51,6 +51,13 @@ public class Food implements iEntity<Food, Integer> {
         this.supplies = supplies;
     }
 
+    public Food(int id, String name, boolean isDrink, int residualQuantity, Set<Supply> supplies) {
+        this.name = name;
+        this.isDrink = isDrink;
+        this.residualQuantity = residualQuantity;
+        this.supplies = supplies;
+    }
+
     private void setName(String name) {
         this.name = name;
     }
