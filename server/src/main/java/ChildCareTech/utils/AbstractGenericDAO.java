@@ -80,7 +80,7 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
 
     public void update(T updatedObj) throws ValidationFailedException {
         validateEntity(updatedObj);
-        session.saveOrUpdate(updatedObj);
+        session.merge(updatedObj);
     }
 
     @SuppressWarnings("unchecked")
