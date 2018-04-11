@@ -1,5 +1,9 @@
 package ChildCareTech.services;
 
+import ChildCareTech.controller.AdultAnagraphicsController;
+import ChildCareTech.controller.HomeController;
+import ChildCareTech.controller.KidAnagraphicController;
+import ChildCareTech.controller.TripsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,12 +16,27 @@ public class MainSceneManager {
     private static FXMLLoader homeLoader;
     private static FXMLLoader kidAnagraphicsLoader;
     private static FXMLLoader tripListLoader;
+    private static FXMLLoader adultAnagraphicsLoader;
     private static Scene loginScene;
     private static Scene homeScene;
     private static Scene kidAnagraphicsScene;
     private static Scene tripListScene;
+    private static Scene adultAnagraphicsScene;
 
     private MainSceneManager() {
+    }
+
+    public static AdultAnagraphicsController getAdultAnagController() {
+        return  adultAnagraphicsLoader.getController();
+    }
+    public static HomeController getHomeController() {
+        return homeLoader.getController();
+    }
+    public static KidAnagraphicController getKidAnagController() {
+        return kidAnagraphicsLoader.getController();
+    }
+    public static TripsController getTripsController() {
+        return tripListLoader.getController();
     }
 
     public static void loadLogin() throws IOException {
@@ -41,11 +60,21 @@ public class MainSceneManager {
 
     }
 
-    public static void loadAnagraphics() throws IOException {
+    public static void loadKidAnagraphics() throws IOException {
         kidAnagraphicsLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/kidAnagraphicsWindow.fxml"));
         kidAnagraphicsScene = sceneInit(kidAnagraphicsLoader, "/style/anagraphicsWindow.css");
         try {
             MainStageService.changeScene(kidAnagraphicsScene);
+        } catch (NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void loadAdultAnagraphics() throws IOException {
+        adultAnagraphicsLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/adultAnagraphicsWindow.fxml"));
+        adultAnagraphicsScene = sceneInit(adultAnagraphicsLoader, "/style/adultAnagraphicsWindow.css");
+        try {
+            MainStageService.changeScene(adultAnagraphicsScene);
         } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }

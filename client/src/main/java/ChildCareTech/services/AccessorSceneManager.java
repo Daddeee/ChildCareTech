@@ -1,8 +1,7 @@
 package ChildCareTech.services;
 
 import ChildCareTech.common.DTO.TripDTO;
-import ChildCareTech.controller.ShowTripController;
-import ChildCareTech.controller.UpdateTripController;
+import ChildCareTech.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,12 +12,16 @@ import java.io.IOException;
 public class AccessorSceneManager {
 
     private static FXMLLoader addKidLoader;
+    private static FXMLLoader addAdultLoader;
+    private static FXMLLoader selectAdultKindLoader;
     private static FXMLLoader registerUserLoader;
     private static FXMLLoader addTripLoader;
     private static FXMLLoader showTripLoader;
     private static FXMLLoader updateTripLoader;
 
     private static Scene addKidScene;
+    private static Scene addAdultScene;
+    private static Scene selectAdultKindScene;
     private static Scene registerUserScene;
     private static Scene addTripScene;
     private static Scene showTripScene;
@@ -28,11 +31,50 @@ public class AccessorSceneManager {
     private AccessorSceneManager() {
     }
 
+    public static AddKidController getAddKidController() {
+        return addKidLoader.getController();
+    }
+    public static AddAdultController getAddAdultController() {
+        return addAdultLoader.getController();
+    }
+    public static SelectAdultKindController getSelectAdultController() {
+        return selectAdultKindLoader.getController();
+    }
+    public static AddTripController getAddTripController() {
+        return addTripLoader.getController();
+    }
+    public static ShowTripController getShowTripControllet() {
+        return showTripLoader.getController();
+    }
+    public static UpdateTripController getUpdateTripController() {
+        return updateTripLoader.getController();
+    }
+
     public static void loadAddKid() throws IOException {
         addKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addKidWindow.fxml"));
         addKidScene = sceneInit(addKidLoader, "/style/addKidWindow.css");
         try {
             AccessorStageService.changeScene(addKidScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAddAdult() throws IOException {
+        addAdultLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addAdultWindow.fxml"));
+        addAdultScene = sceneInit(addAdultLoader, "/style/addAdultWindow.fxml");
+        try {
+            AccessorStageService.changeScene(addAdultScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadSelectAdultKind() throws  IOException {
+        selectAdultKindLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/selectAdultKindWindow.fxml"));
+        selectAdultKindScene = sceneInit(selectAdultKindLoader, "/style/selectAdultKindWindow.css");
+        try {
+            AccessorStageService.changeScene(selectAdultKindScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
