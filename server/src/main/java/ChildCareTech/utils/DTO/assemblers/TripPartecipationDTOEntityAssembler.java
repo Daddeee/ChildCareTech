@@ -9,35 +9,41 @@ import ChildCareTech.utils.DTO.DTOEntityAssembler;
 public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAssembler<TripPartecipation, TripPartecipationDTO> {
     @Override
     public TripPartecipation assemble(TripPartecipationDTO dto) {
-        if(dto == null)
-            return null;
-
-        return new TripPartecipation(
-                DTOEntityAssembler.getEntity(dto.getPerson()),
+        if(dto == null) return null;
+        return getTripPartecipation(
+                dto,
                 TripDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getTrip()),
                 BusDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getBus())
         );
     }
 
     public static TripPartecipation assembleBusManySide(TripPartecipationDTO dto, Bus bus){
-        if(dto == null)
-            return null;
-
-        return new TripPartecipation(
-                DTOEntityAssembler.getEntity(dto.getPerson()),
-                DTOEntityAssembler.getEntity(dto.getTrip()),
+        if(dto == null) return null;
+        return getTripPartecipation(
+                dto,
+                TripDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getTrip()),
                 bus
         );
     }
 
     public static TripPartecipation assembleTripManySide(TripPartecipationDTO dto, Trip trip){
+        if(dto == null) return null;
+        return getTripPartecipation(
+                dto,
+                trip,
+                BusDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getBus())
+        );
+    }
+
+    private static TripPartecipation getTripPartecipation(TripPartecipationDTO dto, Trip trip, Bus bus) {
         if(dto == null)
             return null;
 
         return new TripPartecipation(
+                dto.getId(),
                 DTOEntityAssembler.getEntity(dto.getPerson()),
                 trip,
-                BusDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getBus())
+                bus
         );
     }
 }

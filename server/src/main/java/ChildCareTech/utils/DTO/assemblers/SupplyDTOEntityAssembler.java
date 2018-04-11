@@ -8,36 +8,40 @@ import ChildCareTech.model.entities.Supply;
 public class SupplyDTOEntityAssembler implements AbstractDTOEntityAssembler<Supply, SupplyDTO> {
     @Override
     public Supply assemble(SupplyDTO dto) {
-        if(dto == null)
-            return null;
-
-        return new Supply(
+        if(dto == null) return null;
+        return getSupply(
+                dto,
                 SupplierDTOEntityAssembler.assembleSupplyOneSide(dto.getSupplier()),
-                FoodDTOEntityAssembler.assembleSupplyOneSide(dto.getFood()),
-                dto.getQuantity(),
-                dto.getDate()
+                FoodDTOEntityAssembler.assembleSupplyOneSide(dto.getFood())
         );
     }
 
     public static Supply assembleFoodManySide(SupplyDTO dto, Food food) {
-        if(dto == null)
-            return null;
-
-        return new Supply(
+        if(dto == null) return null;
+        return getSupply(
+                dto,
                 SupplierDTOEntityAssembler.assembleSupplyOneSide(dto.getSupplier()),
-                food,
-                dto.getQuantity(),
-                dto.getDate()
+                food
         );
     }
 
     public static Supply assembleSupplierManySide(SupplyDTO dto, Supplier supplier){
+        if(dto == null) return null;
+        return getSupply(
+                dto,
+                supplier,
+                FoodDTOEntityAssembler.assembleSupplyOneSide(dto.getFood())
+        );
+    }
+
+    private static Supply getSupply(SupplyDTO dto, Supplier supplier, Food food) {
         if(dto == null)
             return null;
 
         return new Supply(
+                dto.getId(),
                 supplier,
-                FoodDTOEntityAssembler.assembleSupplyOneSide(dto.getFood()),
+                food,
                 dto.getQuantity(),
                 dto.getDate()
         );

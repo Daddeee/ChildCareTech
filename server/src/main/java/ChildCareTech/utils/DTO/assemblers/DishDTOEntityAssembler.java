@@ -13,13 +13,8 @@ import java.util.Set;
 public class DishDTOEntityAssembler implements AbstractDTOEntityAssembler<Dish, DishDTO> {
     @Override
     public Dish assemble(DishDTO dto) {
-        if(dto == null)
-            return null;
-
-        Dish entity = new Dish(
-                dto.getName(),
-                MenuDTOEntityAssembler.assembleDishOneSide(dto.getMenu())
-        );
+        if (dto == null) return null;
+        Dish entity = getDish(dto, MenuDTOEntityAssembler.assembleDishOneSide(dto.getMenu()));
 
         Set<Food> foods = new HashSet<>();
         for(FoodDTO f : dto.getFoods())
@@ -30,19 +25,27 @@ public class DishDTOEntityAssembler implements AbstractDTOEntityAssembler<Dish, 
     }
 
     public static Dish assembleMenuManySide(DishDTO dto, Menu menu){
-        if(dto == null)
-            return null;
-
-        Dish entity = new Dish(
-                dto.getName(),
-                menu
-        );
+        Dish entity = getDish(dto, menu);
+        if (entity == null) return null;
 
         Set<Food> foods = new HashSet<>();
         for(FoodDTO f : dto.getFoods())
             foods.add(DTOEntityAssembler.getEntity(f));
         entity.setFoods(foods);
 
+        return entity;
+    }
+
+    private static Dish getDish(DishDTO dto, Menu menu) {
+        if(dto == null)
+            return null;
+
+        Dish entity = new Dish(
+                dto.getId(),
+                dto.getName(),
+                menu,
+                null
+        );
         return entity;
     }
 }

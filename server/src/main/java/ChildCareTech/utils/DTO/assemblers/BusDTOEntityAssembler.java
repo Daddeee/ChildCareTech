@@ -11,13 +11,8 @@ import java.util.Set;
 public class BusDTOEntityAssembler implements AbstractDTOEntityAssembler<Bus, BusDTO> {
     @Override
     public Bus assemble(BusDTO dto) {
-        if(dto == null)
-            return null;
-
-        Bus entity = new Bus(
-                dto.getLicensePlate(),
-                dto.getCapacity()
-        );
+        Bus entity = getBus(dto);
+        if(entity == null) return null;
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
         for(TripPartecipationDTO t : dto.getTripPartecipations())
@@ -28,10 +23,15 @@ public class BusDTOEntityAssembler implements AbstractDTOEntityAssembler<Bus, Bu
     }
 
     public static Bus assembleTripPartecipationOneSide(BusDTO dto) {
+        return getBus(dto);
+    }
+
+    private static Bus getBus(BusDTO dto) {
         if(dto == null)
             return null;
 
         Bus entity = new Bus(
+                dto.getId(),
                 dto.getLicensePlate(),
                 dto.getCapacity()
         );

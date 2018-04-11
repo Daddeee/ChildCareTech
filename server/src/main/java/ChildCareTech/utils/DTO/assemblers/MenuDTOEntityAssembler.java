@@ -13,13 +13,8 @@ import java.util.Set;
 public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, MenuDTO> {
     @Override
     public Menu assemble(MenuDTO dto) {
-        if(dto == null)
-            return null;
-
-        Menu entity = new Menu(
-                DTOEntityAssembler.getEntity(dto.getMeal()),
-                dto.getNumMenu()
-        );
+        Menu entity = getMenu(dto);
+        if (entity == null) return null;
 
         entity.setDrink(
                 DrinkDTOEntityAssembler.assembleMenuOneSide(dto.getDrink(), entity)
@@ -34,13 +29,8 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
     }
 
     public static Menu assembleDishOneSide(MenuDTO dto) {
-        if(dto == null)
-            return null;
-
-        Menu entity = new Menu(
-                DTOEntityAssembler.getEntity(dto.getMeal()),
-                dto.getNumMenu()
-        );
+        Menu entity = getMenu(dto);
+        if (entity == null) return null;
 
         entity.setDrink(
                 DTOEntityAssembler.getEntity(dto.getDrink())
@@ -50,13 +40,8 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
     }
 
     public static Menu assembleDrinkOneSide(MenuDTO dto, Drink drink){
-        if(dto == null)
-            return null;
-
-        Menu entity = new Menu(
-                DTOEntityAssembler.getEntity(dto.getMeal()),
-                dto.getNumMenu()
-        );
+        Menu entity = getMenu(dto);
+        if (entity == null) return null;
 
         entity.setDrink(
                 drink
@@ -67,6 +52,20 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
             dishes.add(DishDTOEntityAssembler.assembleMenuManySide(d, entity));
         entity.setDishes(dishes);
 
+        return entity;
+    }
+
+    private static Menu getMenu(MenuDTO dto) {
+        if(dto == null)
+            return null;
+
+        Menu entity = new Menu(
+                dto.getId(),
+                DTOEntityAssembler.getEntity(dto.getMeal()),
+                dto.getNumMenu(),
+                null,
+                null
+        );
         return entity;
     }
 }

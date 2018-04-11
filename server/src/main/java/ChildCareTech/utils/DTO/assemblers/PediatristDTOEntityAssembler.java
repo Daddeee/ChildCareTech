@@ -12,12 +12,8 @@ import java.util.Set;
 public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<Pediatrist, PediatristDTO> {
     @Override
     public Pediatrist assemble(PediatristDTO dto) {
-        if(dto == null)
-            return null;
-
-        Pediatrist entity = new Pediatrist(
-                DTOEntityAssembler.getEntity(dto.getPerson())
-        );
+        Pediatrist entity = getPediatrist(dto);
+        if (entity == null) return null;
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO k : dto.getContacts())
@@ -33,18 +29,26 @@ public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<
     }
 
     public static Pediatrist assembleKidOneSide(PediatristDTO dto){
-        if(dto == null)
-            return null;
-
-        Pediatrist entity = new Pediatrist(
-                DTOEntityAssembler.getEntity(dto.getPerson())
-        );
+        Pediatrist entity = getPediatrist(dto);
+        if (entity == null) return null;
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO e : dto.getContacts())
             contacts.add(DTOEntityAssembler.getEntity(e));
         entity.setContacts(contacts);
 
+        return entity;
+    }
+
+    private static Pediatrist getPediatrist(PediatristDTO dto) {
+        if(dto == null)
+            return null;
+
+        Pediatrist entity = new Pediatrist(
+                dto.getId(),
+                DTOEntityAssembler.getEntity(dto.getPerson()),
+                null
+        );
         return entity;
     }
 }

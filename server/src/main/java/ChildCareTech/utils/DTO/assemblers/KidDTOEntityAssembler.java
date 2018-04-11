@@ -13,15 +13,8 @@ import java.util.Set;
 public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, KidDTO> {
     @Override
     public Kid assemble(KidDTO dto) {
-        if(dto == null)
-            return null;
-
-        Kid entity = new Kid(
-                DTOEntityAssembler.getEntity(dto.getPerson()),
-                AdultDTOEntityAssembler.assembleKidManySide(dto.getFirstTutor()),
-                AdultDTOEntityAssembler.assembleKidManySide(dto.getSecondTutor()),
-                PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist())
-        );
+        if(dto == null) return null;
+        Kid entity = getKid(dto, PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist()));
 
         Set<Adult> contacts = new HashSet<>();
         for(AdultDTO a : dto.getContacts())
@@ -32,28 +25,24 @@ public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, Ki
     }
 
     public static Kid assembleAdultManySide(KidDTO dto){
-        if(dto == null)
-            return null;
-
-        Kid entity = new Kid(
-                DTOEntityAssembler.getEntity(dto.getPerson()),
-                DTOEntityAssembler.getEntity(dto.getFirstTutor()),
-                DTOEntityAssembler.getEntity(dto.getSecondTutor()),
-                PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist())
-        );
-        return entity;
+        if(dto == null) return null;
+        return getKid(dto, PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist()));
     }
 
     public static Kid assemblePediatristManySide(KidDTO dto, Pediatrist pediatrist){
+        return getKid(dto, pediatrist);
+    }
+
+    private static Kid getKid(KidDTO dto, Pediatrist pediatrist) {
         if(dto == null)
             return null;
 
-        Kid entity = new Kid(
+        return new Kid(
+                dto.getId(),
                 DTOEntityAssembler.getEntity(dto.getPerson()),
                 DTOEntityAssembler.getEntity(dto.getFirstTutor()),
                 DTOEntityAssembler.getEntity(dto.getSecondTutor()),
                 pediatrist
         );
-        return entity;
     }
 }

@@ -11,6 +11,7 @@ public class StaffDTOEntityAssembler implements AbstractDTOEntityAssembler<Staff
             return null;
 
         return new Staff(
+                dto.getId(),
                 DTOEntityAssembler.getEntity(dto.getPerson())
         );
     }

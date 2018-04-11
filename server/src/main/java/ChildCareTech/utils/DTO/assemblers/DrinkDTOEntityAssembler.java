@@ -13,15 +13,11 @@ import java.util.Set;
 public class DrinkDTOEntityAssembler implements AbstractDTOEntityAssembler<Drink, DrinkDTO> {
     @Override
     public Drink assemble(DrinkDTO dto) {
-        if(dto == null)
-            return null;
-
-        Drink entity = new Drink(
-                dto.getName(),
-                null
-        );
-
+        if(dto == null) return null;
+        Drink entity = getDrink(dto, null);
         entity.setMenu(MenuDTOEntityAssembler.assembleDrinkOneSide(dto.getMenu(), entity));
+
+
 
         Set<Food> foods = new HashSet<>();
         for(FoodDTO f : dto.getFoods())
@@ -32,19 +28,27 @@ public class DrinkDTOEntityAssembler implements AbstractDTOEntityAssembler<Drink
     }
 
     public static Drink assembleMenuOneSide(DrinkDTO dto, Menu menu){
-        if(dto == null)
-            return null;
-
-        Drink entity = new Drink(
-                dto.getName(),
-                menu
-        );
+        Drink entity = getDrink(dto, menu);
+        if (entity == null) return null;
 
         Set<Food> foods = new HashSet<>();
         for(FoodDTO f : dto.getFoods())
             foods.add(DTOEntityAssembler.getEntity(f));
         entity.setFoods(foods);
 
+        return entity;
+    }
+
+    private static Drink getDrink(DrinkDTO dto, Menu menu) {
+        if(dto == null)
+            return null;
+
+        Drink entity = new Drink(
+                dto.getId(),
+                dto.getName(),
+                menu,
+                null
+        );
         return entity;
     }
 }

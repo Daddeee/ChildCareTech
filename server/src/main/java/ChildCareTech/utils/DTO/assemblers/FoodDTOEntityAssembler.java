@@ -11,13 +11,8 @@ import java.util.Set;
 public class FoodDTOEntityAssembler implements AbstractDTOEntityAssembler<Food, FoodDTO> {
     @Override
     public Food assemble(FoodDTO dto) {
-        if(dto == null)
-            return null;
-
-        Food entity = new Food(
-                dto.getName(),
-                dto.isDrink()
-        );
+        if(dto == null) return null;
+        Food entity = getFood(dto);
 
         Set<Supply> supplies = new HashSet<>();
         for(SupplyDTO e : dto.getSupplies())
@@ -28,12 +23,19 @@ public class FoodDTOEntityAssembler implements AbstractDTOEntityAssembler<Food, 
     }
 
     public static Food assembleSupplyOneSide(FoodDTO dto){
+        return getFood(dto);
+    }
+
+    private static Food getFood(FoodDTO dto) {
         if(dto == null)
             return null;
 
         return new Food(
+                dto.getId(),
                 dto.getName(),
-                dto.isDrink()
+                dto.isDrink(),
+                dto.getResidualQuantity(),
+                null
         );
     }
 }

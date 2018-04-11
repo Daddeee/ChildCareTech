@@ -14,10 +14,8 @@ import java.util.Set;
 public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<WorkDay, WorkDayDTO> {
     @Override
     public WorkDay assemble(WorkDayDTO dto) {
-        if(dto == null)
-            return null;
-
-        WorkDay entity = new WorkDay(dto.getDate());
+        WorkDay entity = getWorkDay(dto);
+        if (entity == null) return null;
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
@@ -33,10 +31,8 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
     }
 
     public static WorkDay assembleEventOneSide(WorkDayDTO dto){
-        if(dto == null)
-            return null;
-
-        WorkDay entity = new WorkDay(dto.getDate());
+        WorkDay entity = getWorkDay(dto);
+        if (entity == null) return null;
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
@@ -47,10 +43,8 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
     }
 
     public static WorkDay assembleMealOneSide(WorkDayDTO dto){
-        if(dto == null)
-            return null;
-
-        WorkDay entity = new WorkDay(dto.getDate());
+        WorkDay entity = getWorkDay(dto);
+        if (entity == null) return null;
 
         Set<Event> events = new HashSet<>();
         for(EventDTO e : dto.getEvents())
@@ -58,5 +52,15 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
         entity.setEvents(events);
 
         return entity;
+    }
+
+    private static WorkDay getWorkDay(WorkDayDTO dto) {
+        if(dto == null)
+            return null;
+
+        return new WorkDay(
+                dto.getId(),
+                dto.getDate()
+        );
     }
 }

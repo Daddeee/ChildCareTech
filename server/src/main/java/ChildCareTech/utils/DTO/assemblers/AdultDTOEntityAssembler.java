@@ -12,12 +12,9 @@ import java.util.Set;
 public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult, AdultDTO> {
     @Override
     public Adult assemble(AdultDTO dto) {
-        if(dto == null)
-            return null;
+        Adult entity = getAdult(dto);
+        if(entity == null) return null;
 
-        Adult entity = new Adult(
-                DTOEntityAssembler.getEntity(dto.getPerson())
-        );
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO k : dto.getContacts())
@@ -28,10 +25,15 @@ public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult
     }
 
     public static Adult assembleKidManySide(AdultDTO dto) {
+        return getAdult(dto);
+    }
+
+    private static Adult getAdult(AdultDTO dto) {
         if(dto == null)
             return null;
 
         return new Adult(
+                dto.getId(),
                 DTOEntityAssembler.getEntity(dto.getPerson())
         );
     }

@@ -12,12 +12,8 @@ import java.util.Set;
 public class SupplierDTOEntityAssembler implements AbstractDTOEntityAssembler<Supplier, SupplierDTO> {
     @Override
     public Supplier assemble(SupplierDTO dto) {
-        if(dto == null)
-            return null;
-
-        Supplier entity = new Supplier(
-                DTOEntityAssembler.getEntity(dto.getPerson())
-        );
+        Supplier entity = getSupplier(dto);
+        if(entity == null) return null;
 
         Set<Supply> supplies = new HashSet<>();
         for(SupplyDTO s : dto.getSupplies())
@@ -28,10 +24,15 @@ public class SupplierDTOEntityAssembler implements AbstractDTOEntityAssembler<Su
     }
 
     public static Supplier assembleSupplyOneSide(SupplierDTO dto) {
+        return getSupplier(dto);
+    }
+
+    private static Supplier getSupplier(SupplierDTO dto) {
         if(dto == null)
             return null;
 
         Supplier entity = new Supplier(
+                dto.getId(),
                 DTOEntityAssembler.getEntity(dto.getPerson())
         );
 

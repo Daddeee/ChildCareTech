@@ -11,12 +11,8 @@ import java.util.Set;
 public class CanteenDTOEntityAssembler implements AbstractDTOEntityAssembler<Canteen, CanteenDTO> {
     @Override
     public Canteen assemble(CanteenDTO dto) {
-        if(dto == null)
-            return null;
-
-        Canteen entity = new Canteen(
-                dto.getName()
-        );
+        Canteen entity = getCanteen(dto);
+        if(entity == null) return null;
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
@@ -27,8 +23,16 @@ public class CanteenDTOEntityAssembler implements AbstractDTOEntityAssembler<Can
     }
 
     public static Canteen assembleMealOneSide(CanteenDTO dto){
+        return getCanteen(dto);
+    }
+
+    private static Canteen getCanteen(CanteenDTO dto) {
         if(dto==null)
             return null;
-        return new Canteen(dto.getName());
+        return new Canteen(
+                dto.getId(),
+                dto.getName(),
+                null
+        );
     }
 }
