@@ -1,16 +1,12 @@
 package ChildCareTech.network.RMI;
 
-import ChildCareTech.common.DTO.KidDTO;
-import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.SessionController;
-import ChildCareTech.model.entities.Kid;
-import ChildCareTech.model.DAO.KidDAO;
-import ChildCareTech.model.entities.Trip;
-import ChildCareTech.model.DAO.TripDAO;
-import ChildCareTech.model.entities.User;
+import ChildCareTech.model.DAO.*;
+import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
@@ -71,6 +67,153 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             kidDTOList.add(DTOFactory.getDTO(kid));
         }
         return kidDTOList;
+    }
+
+    @Override
+    public void saveAdult(AdultDTO adultDTO) throws AddFailedException {
+        AdultDAO adultDAO = new AdultDAO();
+        PersonDAO personDAO = new PersonDAO();
+        Adult adult = DTOEntityAssembler.getEntity(adultDTO);
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("fiscalCode", adultDTO.getPerson().getFiscalCode());
+
+        adultDAO.setSession(session);
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            if(personDAO.read(paramMap).isEmpty())
+                adultDAO.create(adult);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        }
+    }
+
+
+    @Override
+    public void saveSupplier(SupplierDTO supplierDTO) throws AddFailedException {
+        SupplierDAO supplierDAO = new SupplierDAO();
+        PersonDAO personDAO = new PersonDAO();
+        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("fiscalCode", supplierDTO.getPerson().getFiscalCode());
+
+        supplierDAO.setSession(session);
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            if(personDAO.read(paramMap).isEmpty())
+                supplierDAO.create(supplier);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void saveStaff(StaffDTO staffDTO) throws AddFailedException {
+        StaffDAO staffDAO = new StaffDAO();
+        PersonDAO personDAO = new PersonDAO();
+        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("fiscalCode", staffDTO.getPerson().getFiscalCode());
+
+        staffDAO.setSession(session);
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            if(personDAO.read(paramMap).isEmpty())
+                staffDAO.create(staff);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void savePediatrist(PediatristDTO pediatristDTO) throws AddFailedException {
+        PediatristDAO pediatristDAO = new PediatristDAO();
+        PersonDAO personDAO = new PersonDAO();
+        Pediatrist pediatrist = DTOEntityAssembler.getEntity(pediatristDTO);
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("fiscalCode", pediatristDTO.getPerson().getFiscalCode());
+
+        pediatristDAO.setSession(session);
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            if(personDAO.read(paramMap).isEmpty())
+                pediatristDAO.create(pediatrist);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<AdultDTO> getAllAdults() throws RemoteException {
+        AdultDAO adultDAO = new AdultDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        List<AdultDTO> adultDTOList = new ArrayList<>();
+        List<Adult> adultList = new ArrayList<>();
+        Transaction tx = null;
+        adultDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            adultList = adultDAO.readAll();
+            for(Adult adult : adultList)
+                adultDAO.initializeLazyRelations(adult);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Adult adult : adultList) {
+            adultDTOList.add(DTOFactory.getDTO(adult));
+        }
+        return adultDTOList;
     }
 
     @Override
