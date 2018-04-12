@@ -1,17 +1,20 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.AdultDTO;
+import ChildCareTech.common.DTO.PediatristDTO;
+import ChildCareTech.common.DTO.StaffDTO;
+import ChildCareTech.common.DTO.SupplierDTO;
+import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.ObservableDTOs.ObservableAdult;
+import ChildCareTech.services.ObservableDTOs.*;
 import ChildCareTech.services.SessionService;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -29,29 +32,38 @@ public class AdultAnagraphicsController {
     @FXML
     private Button logOutButton;
     @FXML
-    private TableView<ObservableAdult> personTable;
+    private TableView<ObservablePersonInterface> personTable;
     @FXML
-    private TableColumn<ObservableAdult, String> firstNameColumn;
+    private TableColumn<ObservablePersonInterface, String> firstNameColumn;
     @FXML
-    private TableColumn<ObservableAdult, String> lastNameColumn;
+    private TableColumn<ObservablePersonInterface, String> lastNameColumn;
     @FXML
-    private TableColumn<ObservableAdult, String> fiscalCodeColumn;
+    private TableColumn<ObservablePersonInterface, String> fiscalCodeColumn;
     @FXML
-    private TableColumn<ObservableAdult, LocalDate> bDateColumn;
+    private TableColumn<ObservablePersonInterface, LocalDate> bDateColumn;
     @FXML
-    private TableColumn<ObservableAdult, String> addressColumn;
+    private TableColumn<ObservablePersonInterface, String> addressColumn;
+    @FXML
+    private TableColumn<ObservablePersonInterface, String> roleColumn;
 
-    private ObservableList<ObservableAdult> items = FXCollections.observableArrayList();
+    private ObservableList<ObservablePersonInterface> items = FXCollections.observableArrayList();
+    private ObservableList<ObservableSupplier> suppliers = FXCollections.observableArrayList();
+    private ObservableList<ObservableStaff> staffMembers = FXCollections.observableArrayList();
+    private ObservableList<ObservablePediatrist> pediatrists = FXCollections.observableArrayList();
+    private ObservableList<ObservableAdult> adults = FXCollections.observableArrayList();
 
     public AdultAnagraphicsController() { }
 
     @FXML
     public void initialize() {
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<ObservableAdult, String>("firstName"));
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<ObservableAdult, String>("lastName"));
-        fiscalCodeColumn.setCellValueFactory(new PropertyValueFactory<ObservableAdult, String>("fiscalCode"));
-        bDateColumn.setCellValueFactory(new PropertyValueFactory<ObservableAdult, LocalDate>("birthDate"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<ObservableAdult, String>("address"));
+        initMenu();
+
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<ObservablePersonInterface, String>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<ObservablePersonInterface, String>("lastName"));
+        fiscalCodeColumn.setCellValueFactory(new PropertyValueFactory<ObservablePersonInterface, String>("fiscalCode"));
+        bDateColumn.setCellValueFactory(new PropertyValueFactory<ObservablePersonInterface, LocalDate>("birthDate"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<ObservablePersonInterface, String>("address"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<ObservablePersonInterface, String>("role"));
 
         refreshTable();
         personTable.setItems(items);
@@ -78,9 +90,17 @@ public class AdultAnagraphicsController {
     }
 
     public void refreshTable() {
+        UserSession session = SessionService.getSession();
         List<AdultDTO> adultDTOList = new ArrayList<>();
+        List<PediatristDTO> pediatristDTOList = new ArrayList<>();
+        List<StaffDTO> staffDTOList = new ArrayList<>();
+        List<SupplierDTO> supplierDTOList = new ArrayList<>();
         try {
-            adultDTOList = SessionService.getSession().getAllAdults();
+            adultDTOList = session.getAllAdultsEx();
+            pediatristDTOList = session.getAllPediatrists();
+            staffDTOList = session.getAllStaffMembers();
+            supplierDTOList = session.getAllSuppliers();
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -88,6 +108,15 @@ public class AdultAnagraphicsController {
         items.clear();
         for (AdultDTO adult : adultDTOList) {
             items.add(new ObservableAdult(adult));
+        }
+        for(PediatristDTO pediatrist : pediatristDTOList) {
+            items.add(new ObservablePediatrist(pediatrist));
+        }
+        for(StaffDTO staff : staffDTOList) {
+            items.add(new ObservableStaff(staff));
+        }
+        for(SupplierDTO supplier : supplierDTOList) {
+            items.add(new ObservableSupplier(supplier));
         }
     }
 
@@ -99,5 +128,69 @@ public class AdultAnagraphicsController {
         } catch(AddFailedException ex) {
             ex.printStackTrace();
         }
+    }
+
+
+    private void initMenu() {
+        personTable.setRowFactory(tripDTOTableView -> {
+            final TableRow<ObservablePersonInterface> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem showGenericAdult = new MenuItem("Dettagli");
+            showGenericAdult.setOnAction(event ->  {
+                contextMenu.hide();
+
+                try {
+                    if(row.getItem() instanceof ObservableAdult) {
+                        AccessorSceneManager.loadShowAdult((ObservableAdult) row.getItem());
+                    }
+                    else if(row.getItem() instanceof ObservablePediatrist) {
+                        AccessorSceneManager.loadShowPediatrist((ObservablePediatrist) row.getItem());
+                    }
+                    else if(row.getItem() instanceof ObservableStaff) {
+                        AccessorSceneManager.loadShowStaffMember((ObservableStaff) row.getItem());
+                    }
+                    else if(row.getItem() instanceof ObservableSupplier) {
+                        AccessorSceneManager.loadShowSupplier((ObservableSupplier) row.getItem());
+                    }
+                } catch (IOException ex) {
+                    System.err.println("Can't load show window");
+                    ex.printStackTrace();
+                }
+            });
+            contextMenu.getItems().add(showGenericAdult);
+
+            final MenuItem deleteGenericAdult= new MenuItem("Elimina");
+            deleteGenericAdult.setOnAction(event -> {
+                contextMenu.hide();
+
+                try {
+                    if(row.getItem() instanceof ObservableAdult) {
+                        SessionService.getSession().removeAdult(((ObservableAdult) row.getItem()).getDTO());
+                    }
+                    else if(row.getItem() instanceof ObservablePediatrist) {
+                        SessionService.getSession().removePediatrist(((ObservablePediatrist) row.getItem()).getDTO());
+                    }
+                    else if(row.getItem() instanceof ObservableStaff) {
+                        SessionService.getSession().removeStaffMember(((ObservableStaff) row.getItem()).getDTO());
+                    }
+                    else if(row.getItem() instanceof ObservableSupplier) {
+                        SessionService.getSession().removeSupplier(((ObservableSupplier) row.getItem()).getDTO());
+                    }
+                } catch (RemoteException ex) {
+                    System.err.println("error remote");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(deleteGenericAdult);
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
     }
 }

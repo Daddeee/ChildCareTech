@@ -2,6 +2,10 @@ package ChildCareTech.services;
 
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.controller.*;
+import ChildCareTech.services.ObservableDTOs.ObservableAdult;
+import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
+import ChildCareTech.services.ObservableDTOs.ObservableStaff;
+import ChildCareTech.services.ObservableDTOs.ObservableSupplier;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -71,6 +75,21 @@ public class AccessorSceneManager {
         }
     }
 
+    public static void loadShowAdult(ObservableAdult observableAdult) throws IOException {
+        System.out.println("show adult");
+    }
+
+    public static void loadShowPediatrist(ObservablePediatrist observablePediatrist) throws IOException {
+        System.out.println("show pediatrist");
+    }
+
+    public static void loadShowStaffMember(ObservableStaff observableStaff) throws IOException {
+        System.out.println("show staff member");
+    }
+
+    public static void loadShowSupplier(ObservableSupplier observableSupplier) throws IOException {
+        System.out.println("show supplier");
+    }
     public static void loadSelectAdultKind() throws  IOException {
         selectAdultKindLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/selectAdultKindWindow.fxml"));
         selectAdultKindScene = sceneInit(selectAdultKindLoader, "/style/selectAdultKindWindow.css");

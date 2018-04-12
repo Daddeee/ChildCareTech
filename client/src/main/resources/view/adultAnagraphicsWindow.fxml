@@ -35,6 +35,7 @@
                 <TableColumn fx:id="fiscalCodeColumn" prefWidth="110.0" text="Fiscal Code" />
                 <TableColumn fx:id="bDateColumn" prefWidth="110.0" text="Birth Date" />
                 <TableColumn fx:id="addressColumn" prefWidth="110.0" text="Address" />
+                <TableColumn fx:id="roleColumn" prefWidth="110.0" text="Role" />
             </columns>
             <HBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
