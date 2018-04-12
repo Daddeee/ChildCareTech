@@ -16,7 +16,7 @@ import java.util.*;
 public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializable> {
 
     private Class<T> persistentClass;
-    private Session session;
+    protected Session session;
     private Validator validator;
 
     public AbstractGenericDAO(Class<T> clazz) {
