@@ -48,14 +48,27 @@ public class SelectAdultKindController {
             return;
         }
         if(supplierButton.isSelected()) {
+            try {
+                AccessorSceneManager.loadAddSupplier();
+            } catch (IOException ex) {
+                System.err.println("Can't load addSupplier window");
+                ex.printStackTrace();
+            }
             return;
         }
         if(pediatristButton.isSelected()) {
+            try {
+                AccessorSceneManager.loadAddPediatrist();
+            } catch (IOException ex) {
+                System.err.println("Can't load addPediatrist window");
+                ex.printStackTrace();
+            }
             return;
         }
         if(staffButton.isSelected()) {
             return;
         }
+
     }
 
     @FXML

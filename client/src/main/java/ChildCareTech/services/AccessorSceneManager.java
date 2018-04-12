@@ -18,6 +18,9 @@ public class AccessorSceneManager {
 
     private static FXMLLoader addKidLoader;
     private static FXMLLoader addAdultLoader;
+    private static FXMLLoader addPediatristLoader;
+    private static FXMLLoader addStaffLoader;
+    private static FXMLLoader addSupplierLoader;
     private static FXMLLoader selectAdultKindLoader;
     private static FXMLLoader registerUserLoader;
     private static FXMLLoader addTripLoader;
@@ -29,6 +32,9 @@ public class AccessorSceneManager {
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
+    private static Scene addPediatristScene;
+    private static Scene addStaffScene;
+    private static Scene addSupplierScene;
     private static Scene selectAdultKindScene;
     private static Scene registerUserScene;
     private static Scene addTripScene;
@@ -75,6 +81,26 @@ public class AccessorSceneManager {
         addAdultScene = sceneInit(addAdultLoader, "/style/addAdultWindow.fxml");
         try {
             AccessorStageService.changeScene(addAdultScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAddPediatrist() throws IOException {
+        addPediatristLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addPediatristWindow.fxml"));
+        addPediatristScene = sceneInit(addPediatristLoader, "/style/addPediatristWindow.css");
+        try {
+            AccessorStageService.changeScene(addPediatristScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAddSupplier() throws IOException {
+        addSupplierLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addSupplierWindow.fxml"));
+        addSupplierScene = sceneInit(addSupplierLoader, "/style/addSupplierWindow.css");
+        try {
+            AccessorStageService.changeScene(addSupplierScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
