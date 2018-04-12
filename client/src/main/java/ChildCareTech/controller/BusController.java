@@ -35,41 +35,39 @@ public class BusController {
 
             final MenuItem showBus = new MenuItem("Dettagli");
             showBus.setOnAction(event ->  {
-                /*contextMenu.hide();
+                contextMenu.hide();
                 try {
                     AccessorSceneManager.loadShowBus(row.getItem());
                 } catch (IOException ex) {
                     System.err.println("Can't load showBus window");
                     ex.printStackTrace();
-                }*/
-                System.out.println("dettagli");
+                }
             });
             contextMenu.getItems().add(showBus);
 
             final MenuItem deleteBus = new MenuItem("Elimina");
             deleteBus.setOnAction(event -> {
-                /*contextMenu.hide();
+                contextMenu.hide();
                 try {
-                    SessionService.getSession().removeTrip(row.getItem());
+                    SessionService.getSession().removeBus(row.getItem());
                 } catch (RemoteException ex) {
                     System.err.println("error remote");
                     ex.printStackTrace();
                 }
-                refreshTable();*/
-                System.out.println("elimina");
+                refreshTable();
             });
             contextMenu.getItems().add(deleteBus);
 
             final MenuItem updateBus = new MenuItem("Modifica");
             updateBus.setOnAction(event -> {
-                /*contextMenu.hide();
+                contextMenu.hide();
                 try {
-                    AccessorSceneManager.loadUpdateTrip(row.getItem());
+                    AccessorSceneManager.loadUpdateBus(row.getItem());
                 } catch (IOException ex) {
                     System.err.println("Can't load updateBus window");
                     ex.printStackTrace();
                 }
-                refreshTable();*/
+                refreshTable();
                 System.out.println("modifica");
             });
             contextMenu.getItems().add(updateBus);

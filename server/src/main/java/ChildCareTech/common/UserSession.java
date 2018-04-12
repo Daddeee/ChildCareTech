@@ -38,7 +38,7 @@ public interface UserSession extends Remote {
 
     void saveBus(BusDTO bus) throws RemoteException, AddFailedException;
     void removeBus(BusDTO bus) throws RemoteException;
-    void updateBus(BusDTO oldBus, BusDTO newBus) throws RemoteException, UpdateFailedException;
+    void updateBus(BusDTO newBus) throws RemoteException, UpdateFailedException;
     List<BusDTO> getAllBuses() throws RemoteException;
 
     void logout() throws RemoteException;

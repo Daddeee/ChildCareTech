@@ -17,7 +17,7 @@ public class Bus implements iEntity<Bus, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Pattern(regexp = LICENSE_PLATE_REGEX)
+    @Pattern(regexp = LICENSE_PLATE_REGEX, message = "Formato della targa non valido")
     @Column(nullable = false, unique = true)
     private String licensePlate;
 

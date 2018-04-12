@@ -407,7 +407,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     public void updateTrip(TripDTO newTripDTO) throws UpdateFailedException{
         TripDAO tripDAO = new TripDAO();
         Trip newTrip = DTOEntityAssembler.getEntity(newTripDTO);
-        Trip oldTrip;
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -529,21 +528,99 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         }
     }
 
-    public void saveBus(BusDTO bus) throws RemoteException, AddFailedException{
-        System.out.println("save bus");
+    public void saveBus(BusDTO busDTO) throws RemoteException, AddFailedException{
+        Bus bus = DTOEntityAssembler.getEntity(busDTO);
+        BusDAO busDAO = new BusDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        busDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            busDAO.create(bus);
+
+            tx.commit();
+        } catch(Exception ex){
+            if(tx!=null) tx.rollback();
+            ex.printStackTrace();
+            throw new AddFailedException(ex.getMessage());
+        } finally {
+            session.close();
+        }
     }
 
-    public void removeBus(BusDTO bus) throws RemoteException{
-        System.out.println("remove bus");
+    public void removeBus(BusDTO busDTO) throws RemoteException{
+        BusDAO busDAO = new BusDAO();
+        Bus bus = DTOEntityAssembler.getEntity(busDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        busDAO.setSession(session);
+        try {
+            tx = session.beginTransaction();
+            busDAO.delete(bus);
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
-    public void updateBus(BusDTO oldBus, BusDTO newBus) throws RemoteException, UpdateFailedException{
-        System.out.println("update bus");
+    public void updateBus(BusDTO newBusDTO) throws RemoteException, UpdateFailedException{
+        BusDAO busDAO = new BusDAO();
+        Bus newBus = DTOEntityAssembler.getEntity(newBusDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        busDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            busDAO.update(newBus);
+
+            tx.commit();
+        }catch(IndexOutOfBoundsException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException("Non è stato trovato alcun autobus da aggiornare");
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
     }
 
     public List<BusDTO> getAllBuses() throws RemoteException{
-        ArrayList<BusDTO> a = new ArrayList<>();
-        a.add(new BusDTO(1,"prova", null, 20));
-        return a;
+        BusDAO dao = new BusDAO();
+        List<BusDTO> busesDTOCollection = new ArrayList<>();
+        List<Bus> busesCollection = new ArrayList<>();
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        dao.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            busesCollection = dao.readAll();
+            for(Bus b : busesCollection)
+                dao.initializeLazyRelations(b);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Bus b : busesCollection)
+            busesDTOCollection.add(DTOFactory.getDTO(b));
+
+        return busesDTOCollection;
     }
 }

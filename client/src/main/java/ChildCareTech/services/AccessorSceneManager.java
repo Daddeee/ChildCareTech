@@ -1,5 +1,6 @@
 package ChildCareTech.services;
 
+import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.controller.*;
 import ChildCareTech.services.ObservableDTOs.ObservableAdult;
@@ -23,6 +24,8 @@ public class AccessorSceneManager {
     private static FXMLLoader showTripLoader;
     private static FXMLLoader updateTripLoader;
     private static FXMLLoader addBusLoader;
+    private static FXMLLoader showBusLoader;
+    private static FXMLLoader updateBusLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -32,6 +35,8 @@ public class AccessorSceneManager {
     private static Scene showTripScene;
     private static Scene updateTripScene;
     private static Scene addBusScene;
+    private static Scene showBusScene;
+    private static Scene updateBusScene;
 
     private AccessorSceneManager() {
     }
@@ -154,6 +159,34 @@ public class AccessorSceneManager {
 
         try{
             AccessorStageService.changeScene(addBusScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadShowBus(BusDTO row) throws IOException {
+        showBusLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/showBusWindow.fxml"));
+        showBusScene = sceneInit(showBusLoader, "/style/showBusWindow.css");
+
+        ShowBusController controller = showBusLoader.getController();
+        controller.initData(row);
+
+        try {
+            AccessorStageService.changeScene(showBusScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadUpdateBus(BusDTO row) throws IOException {
+        updateBusLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/updateBusWindow.fxml"));
+        updateBusScene = sceneInit(updateBusLoader, "/style/updateBusWindow.css");
+
+        UpdateBusController controller = updateBusLoader.getController();
+        controller.initData(row);
+
+        try{
+            AccessorStageService.changeScene(updateBusScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
