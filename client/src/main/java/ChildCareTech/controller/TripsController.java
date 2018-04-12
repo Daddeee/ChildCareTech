@@ -45,7 +45,8 @@ public class TripsController {
     public TripsController() {}
 
     @FXML
-    public void initialize(){
+    public void initialize() {
+        tripsTable.setItems(items);
         refreshTable();
 
         tripsTable.setRowFactory(tripDTOTableView -> {
@@ -131,6 +132,5 @@ public class TripsController {
 
         items.clear();
         items.addAll(tripsDTOList);
-        tripsTable.setItems(items);
     }
 }
