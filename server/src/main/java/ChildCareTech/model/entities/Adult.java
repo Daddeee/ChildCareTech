@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Collections;
 import java.util.Set;
 
-@javax.persistence.Entity
+@Entity
 @Table(name = "adults")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
@@ -23,6 +23,9 @@ public class Adult implements iEntity<Adult, Integer> {
     @ManyToMany
     @JoinTable(name = "contacts")
     private Set<Kid> contacts;
+
+    @Column(insertable = false, updatable = false)
+    private int role;
 
     public Adult() {
     }
@@ -69,6 +72,10 @@ public class Adult implements iEntity<Adult, Integer> {
     public void setContacts(Set<Kid> contacts) {
         this.contacts = contacts;
     }
+
+    private void setRole(int role) { this.role = role; }
+
+    public int getRole() { return role; }
 
     @Override
     public boolean equals(Object o) {
