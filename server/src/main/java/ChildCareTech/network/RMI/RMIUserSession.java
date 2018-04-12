@@ -187,6 +187,123 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public List<AdultDTO> getAllAdultsEx() throws RemoteException {
+        AdultDAO adultDAO = new AdultDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        List<AdultDTO> adultDTOList = new ArrayList<>();
+        List<Adult> adultList = new ArrayList<>();
+        Transaction tx = null;
+        adultDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            adultList = adultDAO.readAllExclusive();
+            for(Adult adult : adultList)
+                adultDAO.initializeLazyRelations(adult);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Adult adult : adultList) {
+            adultDTOList.add(DTOFactory.getDTO(adult));
+        }
+        return adultDTOList;
+    }
+    @Override
+    public List<PediatristDTO> getAllPediatrists() throws RemoteException {
+        PediatristDAO pediatristDAO = new PediatristDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        List<PediatristDTO> pediatristDTOList = new ArrayList<>();
+        List<Pediatrist> pediatristList = new ArrayList<>();
+        Transaction tx = null;
+        pediatristDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            pediatristList = pediatristDAO.readAll();
+            for(Pediatrist pediatrist : pediatristList)
+                pediatristDAO.initializeLazyRelations(pediatrist);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Pediatrist pediatrist : pediatristList) {
+            pediatristDTOList.add(DTOFactory.getDTO(pediatrist));
+        }
+        return pediatristDTOList;
+    }
+    @Override
+    public List<StaffDTO> getAllStaffMembers() throws RemoteException {
+        StaffDAO staffDAO = new StaffDAO();
+        List<StaffDTO> staffDTOList = new ArrayList<>();
+        List<Staff> staffList = new ArrayList<>();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        staffDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            staffList = staffDAO.readAll();
+            for(Staff staff : staffList)
+                staffDAO.initializeLazyRelations(staff);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Staff staff : staffList) {
+            staffDTOList.add(DTOFactory.getDTO(staff));
+        }
+        return staffDTOList;
+    }
+    @Override
+    public List<SupplierDTO> getAllSuppliers() throws RemoteException {
+        SupplierDAO supplierDAO = new SupplierDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        List<SupplierDTO> supplierDTOList = new ArrayList<>();
+        List<Supplier> supplierList = new ArrayList<>();
+        Transaction tx = null;
+        supplierDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            supplierList = supplierDAO.readAll();
+            for(Supplier supplier : supplierList)
+                supplierDAO.initializeLazyRelations(supplier);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Supplier supplier : supplierList) {
+            supplierDTOList.add(DTOFactory.getDTO(supplier));
+        }
+        return supplierDTOList;
+    }
+
+    @Override
     public List<AdultDTO> getAllAdults() throws RemoteException {
         AdultDAO adultDAO = new AdultDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -341,6 +458,75 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tripsDTOCollection.add(DTOFactory.getDTO(t));
 
         return tripsDTOCollection;
+    }
+
+    public void removeAdult(AdultDTO adultDTO) throws RemoteException {
+        AdultDAO adultDAO = new AdultDAO();
+        Adult adult = DTOEntityAssembler.getEntity(adultDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        adultDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            adultDAO.delete(adult);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+    public void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException {
+        PediatristDAO pediatristDAO = new PediatristDAO();
+        Pediatrist pediatrist = DTOEntityAssembler.getEntity(pediatristDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        pediatristDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            pediatristDAO.delete(pediatrist);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+    public void removeStaffMember(StaffDTO staffDTO) throws RemoteException {
+        StaffDAO staffDAO = new StaffDAO();
+        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        staffDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            staffDAO.delete(staff);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+    public void removeSupplier(SupplierDTO supplierDTO) throws RemoteException {
+        SupplierDAO supplierDAO = new SupplierDAO();
+        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        supplierDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            supplierDAO.delete(supplier);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
     }
 
     public void saveBus(BusDTO bus) throws RemoteException, AddFailedException{

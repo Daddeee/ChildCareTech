@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Pediatrist;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -16,6 +17,10 @@ public interface UserSession extends Remote {
     void saveSupplier(SupplierDTO supplier) throws RemoteException, AddFailedException;
     void savePediatrist(PediatristDTO pediatrist) throws RemoteException, AddFailedException;
     void saveStaff(StaffDTO supplier) throws  RemoteException, AddFailedException;
+    void removeAdult(AdultDTO adult) throws RemoteException;
+    void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException;
+    void removeStaffMember(StaffDTO staffDTO) throws RemoteException;
+    void removeSupplier(SupplierDTO supplierDTO) throws RemoteException;
     void saveTrip(TripDTO trip) throws RemoteException, AddFailedException;
 
     void updateTrip(TripDTO newTripDTO) throws RemoteException, UpdateFailedException;
@@ -25,6 +30,10 @@ public interface UserSession extends Remote {
 
     List<KidDTO> getAllKids() throws RemoteException;
     List<AdultDTO> getAllAdults() throws RemoteException;
+    List<AdultDTO> getAllAdultsEx() throws RemoteException;
+    List<PediatristDTO> getAllPediatrists() throws RemoteException;
+    List<StaffDTO> getAllStaffMembers() throws RemoteException;
+    List<SupplierDTO> getAllSuppliers() throws RemoteException;
     List<TripDTO> getAllTrips() throws RemoteException;
 
     void saveBus(BusDTO bus) throws RemoteException, AddFailedException;
