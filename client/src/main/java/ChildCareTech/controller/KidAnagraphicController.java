@@ -93,7 +93,7 @@ public class KidAnagraphicController {
         }
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
         List<KidDTO> kidDTOList = new ArrayList<>();
         try {
             kidDTOList = SessionService.getSession().getAllKids();

@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface UserSession extends Remote {
 
-    void saveKid(KidDTO kid) throws RemoteException;
+    void saveKid(KidDTO kid) throws RemoteException, AddFailedException;
     void saveAdult(AdultDTO adult) throws  RemoteException, AddFailedException;
     void saveSupplier(SupplierDTO supplier) throws RemoteException, AddFailedException;
     void savePediatrist(PediatristDTO pediatrist) throws RemoteException, AddFailedException;

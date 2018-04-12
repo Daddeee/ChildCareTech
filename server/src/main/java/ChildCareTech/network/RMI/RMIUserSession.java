@@ -35,8 +35,32 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public void saveKid(KidDTO kid) throws RemoteException {
-        //
+    public void saveKid(KidDTO kidDTO) throws AddFailedException {
+        KidDAO kidDAO = new KidDAO();
+        PersonDAO personDAO = new PersonDAO();
+        Kid kid = DTOEntityAssembler.getEntity(kidDTO);
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("fiscalCode", kidDTO.getPerson().getFiscalCode());
+
+        kidDAO.setSession(session);
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            if(personDAO.read(paramMap).isEmpty())
+                kidDAO.create(kid);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        }
     }
 
     @Override
