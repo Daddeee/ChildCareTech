@@ -1,12 +1,13 @@
 package ChildCareTech.services.ObservableDTOs;
 
 import ChildCareTech.common.DTO.AdultDTO;
+import ChildCareTech.common.DTO.PersonDTO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.format.DateTimeFormatter;
 
-public class ObservableAdult extends AdultDTO{
+public class ObservableAdult extends AdultDTO implements ObservablePersonInterface<AdultDTO>{
     public ObservableAdult(AdultDTO adultDTO) {
         super(adultDTO.getId(), adultDTO.getPerson(), adultDTO.getContacts());
     }
@@ -26,4 +27,6 @@ public class ObservableAdult extends AdultDTO{
     public StringProperty addressProperty() {
         return new SimpleStringProperty(getPerson().getAddress());
     }
+    public StringProperty roleProperty() { return new SimpleStringProperty("-"); }
+    public AdultDTO getDTO() { return new AdultDTO(getId(), getPerson(), getContacts()); }
 }

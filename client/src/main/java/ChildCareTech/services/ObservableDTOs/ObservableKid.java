@@ -37,4 +37,5 @@ public class ObservableKid extends KidDTO {
     public StringProperty pediatristFCProperty() {
         return new SimpleStringProperty(getPediatrist().getPerson().getFiscalCode());
     }
+    public KidDTO getDTO() { return new KidDTO(getId(), getPerson(), getFirstTutor(), getSecondTutor(), getPediatrist(), getContacts()); }
 }
