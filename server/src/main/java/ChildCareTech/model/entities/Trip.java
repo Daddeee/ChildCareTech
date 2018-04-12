@@ -133,11 +133,6 @@ public class Trip implements iEntity<Trip, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Trip o) {
-        setId(o.getPrimaryKey());
-    }
-
-    @Override
     public int hashCode() {
         return ("" + meta + depDate + arrDate).hashCode();
     }

@@ -88,11 +88,6 @@ public class Supply implements iEntity<Supply, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Supply a) {
-        this.id = a.getPrimaryKey();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Supply)) return false;

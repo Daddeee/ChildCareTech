@@ -44,11 +44,6 @@ public class Adult implements iEntity<Adult, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Adult a) {
-        this.id = a.getPrimaryKey();
-    }
-
     public int getId() {
         return id;
     }

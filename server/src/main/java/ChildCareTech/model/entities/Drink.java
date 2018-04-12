@@ -51,11 +51,6 @@ public class Drink implements iEntity<Drink, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Drink a) {
-        this.id = a.getPrimaryKey();
-    }
-
     public int getId() {
         return id;
     }

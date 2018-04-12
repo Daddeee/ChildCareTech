@@ -80,11 +80,6 @@ public class Bus implements iEntity<Bus, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Bus o) {
-        setId(o.getPrimaryKey());
-    }
-
-    @Override
     public int hashCode() {
         return licensePlate.hashCode();
     }

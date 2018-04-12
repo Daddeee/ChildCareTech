@@ -98,11 +98,6 @@ public class Route implements iEntity<Route, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Route o) {
-        setId(o.getPrimaryKey());
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Route)) return false;

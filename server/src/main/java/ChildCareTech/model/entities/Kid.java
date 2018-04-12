@@ -53,11 +53,6 @@ public class Kid implements iEntity<Kid, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Kid a) {
-        this.id = a.getPrimaryKey();
-    }
-
     public int getId() {
         return id;
     }

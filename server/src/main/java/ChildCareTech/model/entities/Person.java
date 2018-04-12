@@ -58,11 +58,6 @@ public class Person implements iEntity<Person, String> {
         return fiscalCode;
     }
 
-    @Override
-    public void setPrimaryKey(Person a) {
-        setFiscalCode(a.getFiscalCode());
-    }
-
     public String getFiscalCode() {
         return fiscalCode;
     }

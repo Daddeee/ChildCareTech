@@ -43,11 +43,6 @@ public class Canteen implements iEntity<Canteen, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Canteen a) {
-        setId(a.getPrimaryKey());
-    }
-
     public int getId() {
         return id;
     }

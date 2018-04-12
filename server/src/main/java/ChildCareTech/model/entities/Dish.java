@@ -53,11 +53,6 @@ public class Dish implements iEntity<Dish, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Dish a) {
-        this.id = a.getPrimaryKey();
-    }
-
     public int getId() {
         return id;
     }

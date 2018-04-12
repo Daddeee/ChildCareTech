@@ -47,11 +47,6 @@ public class Meal implements iEntity<Meal, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Meal a) {
-        this.id = a.getPrimaryKey();
-    }
-
     public LocalDate getDate() {
         return workDay.getDate();
     }

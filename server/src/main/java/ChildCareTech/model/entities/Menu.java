@@ -56,11 +56,6 @@ public class Menu implements iEntity<Menu, Integer> {
         return id;
     }
 
-    @Override
-    public void setPrimaryKey(Menu a) {
-        this.id = a.getPrimaryKey();
-    }
-
     public int getId() {
         return id;
     }

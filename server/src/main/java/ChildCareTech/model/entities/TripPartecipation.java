@@ -78,11 +78,6 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(TripPartecipation o) {
-        setId(o.getId());
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TripPartecipation)) return false;

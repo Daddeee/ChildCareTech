@@ -92,11 +92,6 @@ public class Event implements iEntity<Event, Integer> {
     }
 
     @Override
-    public void setPrimaryKey(Event o) {
-        setId(o.getPrimaryKey());
-    }
-
-    @Override
     public int hashCode() {
         return (Integer.toString(person.hashCode()) + workDay.hashCode() + time).hashCode();
     }

@@ -36,11 +36,6 @@ public class User implements iEntity<User, Integer> {
         return getId();
     }
 
-    @Override
-    public void setPrimaryKey(User o) {
-        setId(o.getPrimaryKey());
-    }
-
     public int getId() {
         return id;
     }

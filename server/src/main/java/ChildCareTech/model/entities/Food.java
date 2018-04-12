@@ -98,12 +98,6 @@ public class Food implements iEntity<Food, Integer> {
     public Integer getPrimaryKey() {
         return id;
     }
-
-    @Override
-    public void setPrimaryKey(Food a) {
-        this.id = a.getPrimaryKey();
-    }
-
     @Override
     public int hashCode() {
         return name.hashCode();
