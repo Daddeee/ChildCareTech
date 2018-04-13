@@ -2,117 +2,79 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.services.AccessorSceneManager;
-import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.ObservableDTOs.ObservableBus;
 import ChildCareTech.services.SessionService;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-public class BusController {
-    @FXML
-    private TableView<BusDTO> busesTable;
+public class BusController extends AbstractGenericAnagraphicController<ObservableBus> {
 
-    private ObservableList<BusDTO> items = FXCollections.observableArrayList();
-
-    @FXML
     public void initialize(){
-        refreshTable();
-
-        busesTable.setRowFactory(tripDTOTableView -> {
-            final TableRow<BusDTO> row = new TableRow<>();
-            final ContextMenu contextMenu = new ContextMenu();
-
-            final MenuItem showBus = new MenuItem("Dettagli");
-            showBus.setOnAction(event ->  {
-                contextMenu.hide();
-                try {
-                    AccessorSceneManager.loadShowBus(row.getItem());
-                } catch (IOException ex) {
-                    System.err.println("Can't load showBus window");
-                    ex.printStackTrace();
-                }
-            });
-            contextMenu.getItems().add(showBus);
-
-            final MenuItem deleteBus = new MenuItem("Elimina");
-            deleteBus.setOnAction(event -> {
-                contextMenu.hide();
-                try {
-                    SessionService.getSession().removeBus(row.getItem());
-                } catch (RemoteException ex) {
-                    System.err.println("error remote");
-                    ex.printStackTrace();
-                }
-                refreshTable();
-            });
-            contextMenu.getItems().add(deleteBus);
-
-            final MenuItem updateBus = new MenuItem("Modifica");
-            updateBus.setOnAction(event -> {
-                contextMenu.hide();
-                try {
-                    AccessorSceneManager.loadUpdateBus(row.getItem());
-                } catch (IOException ex) {
-                    System.err.println("Can't load updateBus window");
-                    ex.printStackTrace();
-                }
-                refreshTable();
-                System.out.println("modifica");
-            });
-            contextMenu.getItems().add(updateBus);
-
-            row.contextMenuProperty().bind(
-                    Bindings.when(row.emptyProperty())
-                            .then((ContextMenu) null)
-                            .otherwise(contextMenu)
-            );
-
-            return row;
-        });
+        Map<String, String> properties = ObservableBus.getProperties();
+        init(properties);
     }
 
-    @FXML
-    protected void addButtonAction(ActionEvent e){
+    @Override
+    protected void addButtonAction(ActionEvent e) {
         try {
             AccessorSceneManager.loadAddBus();
         } catch (IOException ex) {
-            System.err.println("Can't load addKid window");
+            System.err.println("Can't load showTrip window");
             ex.printStackTrace();
         }
     }
 
-    @FXML
-    public void backButtonAction(ActionEvent event) {
-        try {
-            MainSceneManager.loadHome();
-        } catch (IOException ex) {
-            System.err.println("Can't load addKid window");
-            ex.printStackTrace();
-        }
-    }
-
-    private void refreshTable(){
-        List<BusDTO> busesDTOList = new ArrayList<>();
+    @Override
+    protected List<ObservableBus> getItems() {
+        List<BusDTO> busesDTOList;
+        List<ObservableBus> observableBusesDTOList = new ArrayList<>();
 
         try {
             busesDTOList = SessionService.getSession().getAllBuses();
         } catch(RemoteException e){
             e.printStackTrace();
+            return Collections.EMPTY_LIST;
         }
 
-        items.clear();
-        items.addAll(busesDTOList);
-        busesTable.setItems(items);
+        for(BusDTO busDTO : busesDTOList)
+            observableBusesDTOList.add(new ObservableBus(busDTO));
+
+        return observableBusesDTOList;
+    }
+
+    @Override
+    public void show(ObservableBus observableBus) {
+        try {
+            AccessorSceneManager.loadShowBus(observableBus);
+        } catch (IOException ex) {
+            System.err.println("Can't load showTrip window");
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(ObservableBus observableBus) {
+        try {
+            SessionService.getSession().removeBus(observableBus.getDTO());
+        } catch (RemoteException ex) {
+            System.err.println("error remote");
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(ObservableBus observableBus) {
+        try {
+            AccessorSceneManager.loadUpdateBus(observableBus);
+        } catch (IOException ex) {
+            System.err.println("Can't load showTrip window");
+            ex.printStackTrace();
+        }
     }
 }
