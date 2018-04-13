@@ -5,6 +5,7 @@ import ChildCareTech.network.RMI.RMIServer;
 import ChildCareTech.network.RMI.RMIUserSessionFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
+import ChildCareTech.utils.WorkDaysUtil;
 
 import java.rmi.RemoteException;
 
@@ -25,6 +26,7 @@ public class Server {
         Server server = new Server();
 
         HibernateSessionFactoryUtil.startHibernate();
+        WorkDaysUtil.initDays();
         server.start();
     }
 

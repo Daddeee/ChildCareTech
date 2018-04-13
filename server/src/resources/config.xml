@@ -2,10 +2,9 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+    <entry key="firstDate">2018-04-01</entry>
 
-    <entry key="firstLaunch">true</entry>
-
-    <entry key="dayGeneration.number">84<!-- 12 weeks --></entry>
+    <entry key="lastDate">2018-05-31</entry>
 
     <entry key="port.rmi">1099</entry>
 
