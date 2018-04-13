@@ -3,11 +3,10 @@ package ChildCareTech.common;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-import ChildCareTech.model.entities.Bus;
-import ChildCareTech.model.entities.Pediatrist;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface UserSession extends Remote {
@@ -40,6 +39,9 @@ public interface UserSession extends Remote {
     void removeBus(BusDTO bus) throws RemoteException;
     void updateBus(BusDTO newBus) throws RemoteException, UpdateFailedException;
     List<BusDTO> getAllBuses() throws RemoteException;
+
+    LocalDate getMinSavedDate() throws RemoteException;
+    LocalDate getMaxSavedDate() throws RemoteException;
 
     void logout() throws RemoteException;
 }

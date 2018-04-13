@@ -10,6 +10,7 @@ import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.WorkDaysUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -26,6 +27,16 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
+    }
+
+    @Override
+    public LocalDate getMinSavedDate() {
+        return WorkDaysUtil.getFirstDate();
+    }
+
+    @Override
+    public LocalDate getMaxSavedDate() {
+        return WorkDaysUtil.getLastDate();
     }
 
     @Override
