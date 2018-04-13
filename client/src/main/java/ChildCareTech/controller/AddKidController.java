@@ -78,18 +78,6 @@ public class AddKidController {
 
     @FXML
     public void saveButtonAction(ActionEvent event) {
-        alertLabel.setText("");
-        if (fiscalCodeField.getText().length() != 16 ||
-                firstNameField.getText().equals("") ||
-                lastNameField.getText().equals("") ||
-                addressField.getText().equals("") ||
-                (firstTutorComboBox.getSelectionModel().isEmpty() &&
-                secondTutorComboBox.getSelectionModel().isEmpty()) ||
-                pediatristComboBox.getSelectionModel().isEmpty() ||
-                firstTutorComboBox.getValue().equals(secondTutorComboBox.getValue())){
-            alertLabel.setText("invalid input");
-            return;
-        }
         Sex sex;
         if (maleButton.isSelected())
             sex = Sex.MALE;
