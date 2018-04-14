@@ -53,6 +53,7 @@ public class UpdateBusController {
                     oldBus.getId(),
                     licensePlateField.getText(),
                     null,
+                    null,
                     Integer.parseInt(capacityField.getText())
             );
             SessionService.getSession().updateBus(updatedBusDTO);

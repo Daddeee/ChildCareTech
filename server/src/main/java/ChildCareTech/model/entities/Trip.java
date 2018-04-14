@@ -47,6 +47,9 @@ public class Trip implements iEntity<Trip, Integer> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
     private Set<TripPartecipation> tripPartecipations;
 
+    @ManyToMany
+    private Set<Bus> buses;
+
     public Trip() {
     }
 
@@ -109,6 +112,14 @@ public class Trip implements iEntity<Trip, Integer> {
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
+    }
+
+    public Set<Bus> getBuses() {
+        return buses;
+    }
+
+    public void setBuses(Set<Bus> buses) {
+        this.buses = buses;
     }
 
     public LocalDate getArrDate() {

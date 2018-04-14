@@ -31,7 +31,7 @@ public class AddBusController {
 
         try{
             capacity = Integer.parseInt(capacityField.getText());
-            busDTO = new BusDTO(0, licensePlate, null, capacity);
+            busDTO = new BusDTO(0, licensePlate, null, null, capacity);
             SessionService.getSession().saveBus(busDTO);
         } catch (NumberFormatException ex){
             alertLabel.setText("Salvataggio non riuscito: la capacità deve essere un numero");

@@ -84,7 +84,7 @@ public class AddTripController {
         LocalDate depDate = depDateField.getValue();
         LocalDate arrDate = arrDateField.getValue();
 
-        TripDTO tripDTO = new TripDTO(0, meta, note, depDate, arrDate, new HashSet<>(), null);
+        TripDTO tripDTO = new TripDTO(0, meta, note, depDate, arrDate, null, null, null);
 
         for(TempRouteData r : routes)
             tripDTO.getRoutes().add(r.getRouteDTO(tripDTO));

@@ -13,8 +13,9 @@ public class TripDTO implements Serializable {
     private LocalDate arrDate;
     private Set<RouteDTO> routes;
     private Set<TripPartecipationDTO> tripPartecipations;
+    private Set<BusDTO> buses;
 
-    public TripDTO(int id, String meta, String note, LocalDate depDate, LocalDate arrDate, Set<RouteDTO> routes, Set<TripPartecipationDTO> tripPartecipations) {
+    public TripDTO(int id, String meta, String note, LocalDate depDate, LocalDate arrDate, Set<RouteDTO> routes, Set<TripPartecipationDTO> tripPartecipations, Set<BusDTO> buses) {
         this.id = id;
         this.meta = meta;
         this.note = note;
@@ -22,6 +23,7 @@ public class TripDTO implements Serializable {
         this.arrDate = arrDate;
         this.routes = routes == null ? Collections.EMPTY_SET : routes;
         this.tripPartecipations = tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
+        this.buses = buses == null ? Collections.EMPTY_SET : buses;
     }
 
     public int getId(){
@@ -74,5 +76,13 @@ public class TripDTO implements Serializable {
 
     public void setTripPartecipations(Set<TripPartecipationDTO> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
+    }
+
+    public Set<BusDTO> getBuses() {
+        return buses;
+    }
+
+    public void setBuses(Set<BusDTO> buses) {
+        this.buses = buses;
     }
 }

@@ -28,6 +28,9 @@ public class Bus implements iEntity<Bus, Integer> {
     @Column(nullable = false)
     private int capacity;
 
+    @ManyToMany
+    private Set<Trip> trips;
+
     public Bus() {
     }
 
@@ -64,6 +67,14 @@ public class Bus implements iEntity<Bus, Integer> {
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
+    }
+
+    public Set<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(Set<Trip> trips) {
+        this.trips = trips;
     }
 
     public int getCapacity() {

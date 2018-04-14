@@ -1,8 +1,10 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.BusDTO;
+import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.model.entities.Bus;
+import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.TripPartecipation;
 
 import java.util.HashSet;
@@ -19,6 +21,11 @@ public class BusDTOFactory implements AbstractDTOFactory<Bus, BusDTO> {
             tripPartecipations.add(TripPartecipationDTOFactory.getBusManySide(t, dto));
         dto.setTripPartecipations(tripPartecipations);
 
+        Set<TripDTO> trips = new HashSet<>();
+        for(Trip t : entity.getTrips())
+            trips.add(TripDTOFactory.getBusManySide(t));
+        dto.setTrips(trips);
+
         return dto;
     }
 
@@ -30,8 +37,22 @@ public class BusDTOFactory implements AbstractDTOFactory<Bus, BusDTO> {
                 entity.getId(),
                 entity.getLicensePlate(),
                 null,
+                null,
                 entity.getCapacity()
         );
+    }
+
+
+    public static BusDTO getTripManySide(Bus entity) {
+        BusDTO dto = getBusDTO(entity);
+        if (dto == null) return null;
+
+        Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
+        for (TripPartecipation t : entity.getTripPartecipations())
+            tripPartecipations.add(TripPartecipationDTOFactory.getBusManySide(t, dto));
+        dto.setTripPartecipations(tripPartecipations);
+
+        return dto;
     }
 
     public static BusDTO getTripPartecipationOneSide(Bus entity){
