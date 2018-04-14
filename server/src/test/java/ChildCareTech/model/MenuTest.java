@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;
@@ -27,7 +28,7 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
         Transaction tx = null;
 
         Canteen c = new Canteen("canteen");
-        WorkDay wd = new WorkDay(LocalDate.now());
+        WorkDay wd = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Meal meal = new Meal(c, 1, wd);
         Menu m = new Menu(meal, 1);
         Dish d1 = new Dish("d1", m);
@@ -65,7 +66,7 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
     @Override
     public void testCRUD() {
         Canteen c = new Canteen("mensa");
-        WorkDay w = new WorkDay(LocalDate.now());
+        WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Meal ml = new Meal(c, 0, w);
 
         session = sessionFactory.openSession();

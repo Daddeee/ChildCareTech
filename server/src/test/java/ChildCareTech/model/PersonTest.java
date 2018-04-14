@@ -28,8 +28,8 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
     public void testRelations() {
         Transaction tx = null;
 
-        WorkDay wd = new WorkDay(LocalDate.now());
-        WorkDay wd2 = new WorkDay(LocalDate.now().plusDays(1));
+        WorkDay wd = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
+        WorkDay wd2 = new WorkDay(LocalDate.now().plusDays(1), LocalTime.MIN, LocalTime.MAX, false);
         Person p = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Event e1 = new Event(wd, p, LocalTime.now(), false);
         Event e2 = new Event(wd2, p, LocalTime.now().plusHours(1), false);

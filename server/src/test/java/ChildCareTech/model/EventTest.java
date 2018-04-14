@@ -21,7 +21,7 @@ public class EventTest extends AbstractEntityTest<Event, Integer> {
 
     @Override
     public void testCRUD() {
-        WorkDay w = new WorkDay(LocalDate.now());
+        WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Person p = new Person("fisccode",
                 "nome",
                 "cognome",

@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
@@ -23,7 +24,7 @@ public class DishTest extends AbstractEntityTest<Dish, Integer> {
     @Override
     public void testCRUD() {
         Canteen c = new Canteen("mensa");
-        WorkDay w = new WorkDay(LocalDate.now());
+        WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Meal ml = new Meal(c, 0, w);
         Menu m = new Menu(ml, 0, null, null);
 

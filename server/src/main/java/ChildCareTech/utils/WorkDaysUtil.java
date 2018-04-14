@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class WorkDaysUtil {
     private static LocalDate firstDate;
@@ -63,6 +64,6 @@ public class WorkDaysUtil {
 
     private static void persistRange(LocalDate start, LocalDate end) throws ValidationFailedException{
         for(; !start.isAfter(end); start = start.plusDays(1))
-            workDayDAO.create(new WorkDay(start));
+            workDayDAO.create(new WorkDay(start, LocalTime.MIN, LocalTime.MAX, false));
     }
 }

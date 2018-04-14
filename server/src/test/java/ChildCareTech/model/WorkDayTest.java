@@ -27,7 +27,7 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        WorkDay wd = new WorkDay(LocalDate.now());
+        WorkDay wd = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Canteen c1 = new Canteen("canteen1");
         Canteen c2 = new Canteen("canteen2");
         Meal m1 = new Meal(c1, 1, wd);
@@ -106,8 +106,8 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
 
     @Override
     public void testCRUD() {
-        WorkDay d = new WorkDay(LocalDate.now());
-        WorkDay du = new WorkDay(LocalDate.now().plusDays(1));
+        WorkDay d = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
+        WorkDay du = new WorkDay(LocalDate.now().plusDays(1), LocalTime.MIN, LocalTime.MAX, false);
 
         testCRUDImpl(d, du);
     }

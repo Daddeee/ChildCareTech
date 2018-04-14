@@ -61,6 +61,9 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
         WorkDayDTO dto = new WorkDayDTO(
                 entity.getId(),
                 entity.getDate(),
+                entity.getEntryTime(),
+                entity.getExitTime(),
+                entity.isHoliday(),
                 null,
                 null
         );

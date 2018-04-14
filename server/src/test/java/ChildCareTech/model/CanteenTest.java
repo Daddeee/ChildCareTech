@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 
 import static org.junit.Assert.fail;
@@ -26,8 +27,8 @@ public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
         Transaction tx = null;
 
         Canteen c = new Canteen("canteen");
-        WorkDay w1 = new WorkDay(LocalDate.now());
-        WorkDay w2 = new WorkDay(LocalDate.now().plusDays(1));
+        WorkDay w1 = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
+        WorkDay w2 = new WorkDay(LocalDate.now().plusDays(1), LocalTime.MIN, LocalTime.MAX, false);
         Meal m1 = new Meal(c, 1, w1);
         Meal m2 = new Meal(c, 2, w2);
 

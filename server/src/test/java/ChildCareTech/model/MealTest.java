@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
@@ -21,7 +22,7 @@ public class MealTest extends AbstractEntityTest<Meal, Integer> {
     @Override
     public void testCRUD() {
         Canteen c = new Canteen("mensa");
-        WorkDay workDay = new WorkDay(LocalDate.now());
+        WorkDay workDay = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         session = sessionFactory.openSession();
         Transaction tx = null;
 

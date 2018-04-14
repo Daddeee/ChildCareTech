@@ -60,7 +60,10 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
 
         return new WorkDay(
                 dto.getId(),
-                dto.getDate()
+                dto.getDate(),
+                dto.getEntryTime(),
+                dto.getExitTime(),
+                dto.isHoliday()
         );
     }
 }
