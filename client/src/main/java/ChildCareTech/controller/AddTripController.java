@@ -3,7 +3,6 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.*;
-import ChildCareTech.utils.CustomDatePicker;
 import ChildCareTech.utils.TempRouteData;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -24,9 +23,9 @@ public class AddTripController {
     @FXML
     private TextField noteField;
     @FXML
-    private CustomDatePicker depDateField;
+    private DatePicker depDateField;
     @FXML
-    private CustomDatePicker arrDateField;
+    private DatePicker arrDateField;
     @FXML
     private Label alertLabel;
     @FXML
