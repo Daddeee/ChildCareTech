@@ -37,7 +37,7 @@ public class Settings {
         try {
             out = new FileOutputStream(confPath);
             properties.setProperty(name, value);
-            properties.store(out, null);
+            properties.storeToXML(out, null);
         } catch (Exception e) {
             e.printStackTrace();
         }

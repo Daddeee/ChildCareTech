@@ -49,8 +49,14 @@ public class LoginController {
 
         SessionService.loginAttempt(userNameField.getText(), passwordField.getText());
 
+
         try {
-            if (!SessionService.isNull()) MainSceneManager.loadHome(); //!SessionService.isNull()
+            if (!SessionService.isNull()){
+                if(SessionService.getSession().isFirstEverStartup())
+                    MainSceneManager.loadDayGeneration();
+                else
+                    MainSceneManager.loadHome();
+            }
             else alertBox.setText(SessionService.getLoginErrorMessage());
         } catch (IOException e) {
             e.printStackTrace();

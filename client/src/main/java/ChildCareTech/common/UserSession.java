@@ -40,9 +40,9 @@ public interface UserSession extends Remote {
     void updateBus(BusDTO newBus) throws RemoteException, UpdateFailedException;
     List<BusDTO> getAllBuses() throws RemoteException;
 
-    LocalDate getMinSavedDate() throws RemoteException;
-    LocalDate getMaxSavedDate() throws RemoteException;
-
+    boolean isFirstEverStartup() throws RemoteException;
+    void setFirstEverStartup(boolean value) throws RemoteException;
+    void generateDays(DayGenerationSettingsDTO settings) throws RemoteException;
     void logout() throws RemoteException;
 }
 

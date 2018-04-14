@@ -18,6 +18,7 @@ public class MainSceneManager {
     private static FXMLLoader tripListLoader;
     private static FXMLLoader adultAnagraphicsLoader;
     private static FXMLLoader busLoader;
+    private static FXMLLoader dayGenerationLoader;
     
     private static Scene loginScene;
     private static Scene homeScene;
@@ -25,6 +26,7 @@ public class MainSceneManager {
     private static Scene tripListScene;
     private static Scene adultAnagraphicsScene;
     private static Scene busScene;
+    private static Scene dayGenerationScene;
 
     private MainSceneManager() {
     }
@@ -60,7 +62,16 @@ public class MainSceneManager {
         } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
         }
+    }
 
+    public static void loadDayGeneration() throws IOException {
+        dayGenerationLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/dayGenerationWindow.fxml"));
+        dayGenerationScene = sceneInit(dayGenerationLoader, "/style/dayGenerationWindow.css");
+        try {
+            MainStageService.changeScene(dayGenerationScene);
+        } catch (NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void loadKidAnagraphics() throws IOException {

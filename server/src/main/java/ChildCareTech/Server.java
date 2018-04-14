@@ -26,7 +26,6 @@ public class Server {
         Server server = new Server();
 
         HibernateSessionFactoryUtil.startHibernate();
-        WorkDaysUtil.initDays();
         server.start();
     }
 

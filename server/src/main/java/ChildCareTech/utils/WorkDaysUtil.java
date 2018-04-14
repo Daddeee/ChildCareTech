@@ -1,69 +1,50 @@
 package ChildCareTech.utils;
 
+import ChildCareTech.common.DTO.DayGenerationSettingsDTO;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Map;
 
 public class WorkDaysUtil {
-    private static LocalDate firstDate;
-    private static LocalDate lastDate;
-    private static WorkDayDAO workDayDAO;
+    private DayGenerationSettingsDTO settings;
+    private WorkDayDAO workDayDAO;
 
-    static {
-        firstDate = LocalDate.parse(Settings.getProperty("firstDate"));
-        lastDate = LocalDate.parse(Settings.getProperty("lastDate"));
-
-        if(firstDate.isAfter(lastDate))
-            throw new RuntimeException("Invalid dates configuration: lastDate cannot preceed firstDate");
+    public WorkDaysUtil(DayGenerationSettingsDTO settings){
+        this.settings = settings;
+        this.workDayDAO = new WorkDayDAO();
     }
 
-    public static LocalDate getFirstDate(){
-        return firstDate;
-    }
+    public void generateDays(){
+        LocalDate start = LocalDate.now().with(DayOfWeek.MONDAY);
+        LocalDate end = start.plusDays(settings.getWeekNumber() * 7);
 
-    public static LocalDate getLastDate(){
-        return lastDate;
-    }
+        Map<DayOfWeek, Boolean> holidayMap = settings.getAreHolidays();
 
-    public static void initDays(){
-        LocalDate minPersistentDate = null;
-        LocalDate maxPersistentDate = null;
-        workDayDAO = new WorkDayDAO();
-
-        Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
         workDayDAO.setSession(session);
-        try{
+        try {
             tx = session.beginTransaction();
-
-            minPersistentDate = workDayDAO.getMinPersistentDate();
-            maxPersistentDate = workDayDAO.getMaxPersistentDate();
-
-            if(minPersistentDate == null || maxPersistentDate == null){
-                persistRange(firstDate, lastDate);
-            } else {
-                if(minPersistentDate.isAfter(firstDate))
-                    persistRange(firstDate, minPersistentDate.minusDays(1));
-
-                if(maxPersistentDate.isBefore(lastDate))
-                    persistRange(maxPersistentDate.plusDays(1), lastDate);
-            }
-
+            for (; !start.isAfter(end); start = start.plusDays(1))
+                workDayDAO.create(new WorkDay(
+                        start,
+                        settings.getEntryTime(),
+                        settings.getExitTime(),
+                        holidayMap.get(start.getDayOfWeek())
+                ));
             tx.commit();
-        } catch (Exception e){
+        } catch (Exception ex){
             if(tx!=null) tx.rollback();
-            e.printStackTrace();
+            ex.printStackTrace();
+        } finally {
+            session.close();
         }
 
-    }
-
-    private static void persistRange(LocalDate start, LocalDate end) throws ValidationFailedException{
-        for(; !start.isAfter(end); start = start.plusDays(1))
-            workDayDAO.create(new WorkDay(start, LocalTime.MIN, LocalTime.MAX, false));
     }
 }

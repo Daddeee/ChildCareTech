@@ -10,6 +10,7 @@ import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.Settings;
 import ChildCareTech.utils.WorkDaysUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -30,13 +31,19 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public LocalDate getMinSavedDate() {
-        return WorkDaysUtil.getFirstDate();
+    public boolean isFirstEverStartup() {
+        return Boolean.parseBoolean(Settings.getProperty("firstRun"));
     }
 
     @Override
-    public LocalDate getMaxSavedDate() {
-        return WorkDaysUtil.getLastDate();
+    public void setFirstEverStartup(boolean value) {
+        Settings.storeProperty("firstRun", Boolean.toString(value));
+    }
+
+    @Override
+    public void generateDays(DayGenerationSettingsDTO settings) {
+        WorkDaysUtil wdu = new WorkDaysUtil(settings);
+        wdu.generateDays();
     }
 
     @Override
