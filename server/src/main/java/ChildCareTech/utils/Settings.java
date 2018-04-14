@@ -1,8 +1,6 @@
 package ChildCareTech.utils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 public class Settings {
@@ -34,4 +32,14 @@ public class Settings {
         return properties.getProperty(property);
     }
 
+    public static void storeProperty(String name, String value) {
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(confPath);
+            properties.setProperty(name, value);
+            properties.store(out, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
