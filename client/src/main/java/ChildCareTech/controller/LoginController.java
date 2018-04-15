@@ -48,7 +48,7 @@ public class LoginController {
         }
 
         SessionService.loginAttempt(userNameField.getText(), passwordField.getText());
-
+        SessionService.registerRemoteEventObserver();
 
         try {
             if (!SessionService.isNull()){
