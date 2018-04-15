@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
-public class CurrentWorkDay {
+public class CurrentWorkDayService {
     private final static WorkDayDAO workDayDAO = new WorkDayDAO();
 
     public static WorkDay getCurrent() {

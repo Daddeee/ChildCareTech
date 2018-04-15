@@ -1,17 +1,22 @@
 package ChildCareTech.model.entities;
 
 
+import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "workdays")
 public class WorkDay implements iEntity<WorkDay, Integer> {
+    public static final int EVENT_TIME_DURATION = 10;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -108,6 +113,24 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
 
     public void setCheckpoints(Set<Checkpoint> checkpoints) {
         this.checkpoints = checkpoints;
+    }
+
+    public List<EventDTO> getEvents(){
+        List<EventDTO> events = new ArrayList<>();
+
+        events.add(new EventDTO(
+                "Ingresso",
+                getEntryTime(),
+                getEntryTime().plusMinutes(EVENT_TIME_DURATION)
+        ));
+
+        events.add(new EventDTO(
+                "Uscita",
+                getExitTime(),
+                getExitTime().plusMinutes(EVENT_TIME_DURATION)
+        ));
+
+        return events;
     }
 
     @Override
