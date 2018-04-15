@@ -26,6 +26,8 @@ public class CurrentWorkDay {
             tx = session.beginTransaction();
 
             result = workDayDAO.read("date", LocalDate.now().toString());
+            for(WorkDay w : result)
+                workDayDAO.initializeLazyRelations(w);
 
             tx.commit();
         } catch(Exception e){

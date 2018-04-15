@@ -29,6 +29,16 @@ public class HomeController {
     }
 
     @FXML
+    protected void dailyButtonAction(ActionEvent action){
+        try {
+            MainSceneManager.loadDaily();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void adultAnagraphicsButtonAction(ActionEvent action) {
         try {
             MainSceneManager.loadAdultAnagraphics();
