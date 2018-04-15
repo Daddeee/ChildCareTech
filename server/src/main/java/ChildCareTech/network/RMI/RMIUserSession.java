@@ -7,8 +7,10 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
+import ChildCareTech.utils.CurrentWorkDay;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.factories.WorkDayDTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
 import ChildCareTech.utils.WorkDaysGenerationUtil;
@@ -28,6 +30,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
+    }
+
+    @Override
+    public WorkDayDTO getCurrentWorkDay() {
+        return DTOFactory.getDTO(CurrentWorkDay.getCurrent());
     }
 
     @Override

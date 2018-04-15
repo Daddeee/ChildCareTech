@@ -3,10 +3,8 @@ package ChildCareTech.common;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface UserSession extends Remote {
@@ -42,8 +40,9 @@ public interface UserSession extends Remote {
 
     boolean isFirstEverStartup() throws RemoteException;
     void setFirstEverStartup(boolean value) throws RemoteException;
+
     void generateDays(DayGenerationSettingsDTO settings) throws RemoteException;
+    WorkDayDTO getCurrentWorkDay() throws RemoteException;
+
     void logout() throws RemoteException;
 }
-
-
