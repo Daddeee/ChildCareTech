@@ -2,10 +2,8 @@ package ChildCareTech;
 
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.network.RMI.RMIServer;
-import ChildCareTech.network.RMI.RMIUserSessionFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
-import ChildCareTech.utils.WorkDaysUtil;
 
 import java.rmi.RemoteException;
 

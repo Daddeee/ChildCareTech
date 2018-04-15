@@ -11,11 +11,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Map;
 
-public class WorkDaysUtil {
+public class WorkDaysGenerationUtil {
     private DayGenerationSettingsDTO settings;
     private WorkDayDAO workDayDAO;
 
-    public WorkDaysUtil(DayGenerationSettingsDTO settings){
+    public WorkDaysGenerationUtil(DayGenerationSettingsDTO settings){
         this.settings = settings;
         this.workDayDAO = new WorkDayDAO();
     }

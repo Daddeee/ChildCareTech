@@ -11,7 +11,7 @@ import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
-import ChildCareTech.utils.WorkDaysUtil;
+import ChildCareTech.utils.WorkDaysGenerationUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,7 +42,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void generateDays(DayGenerationSettingsDTO settings) {
-        WorkDaysUtil wdu = new WorkDaysUtil(settings);
+        WorkDaysGenerationUtil wdu = new WorkDaysGenerationUtil(settings);
         wdu.generateDays();
     }
 
