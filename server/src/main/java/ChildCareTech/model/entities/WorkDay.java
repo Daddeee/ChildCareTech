@@ -116,6 +116,15 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
         this.checkpoints = checkpoints;
     }
 
+    public List<EventDTO> getEvents(){
+        List<EventDTO> events = new ArrayList<>();
+
+        events.add(new EventDTO("Ingresso", getEntryTime(), getEntryTime().plusMinutes(10), EventStatus.WAIT));
+        events.add(new EventDTO("Uscita", getEntryTime(), getEntryTime().plusMinutes(10), EventStatus.WAIT));
+
+        return events;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

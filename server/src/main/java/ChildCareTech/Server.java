@@ -1,11 +1,9 @@
 package ChildCareTech;
 
-import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.network.RMI.RMIServer;
+import ChildCareTech.utils.EventScheduler;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
-
-import java.rmi.RemoteException;
 
 public class Server {
     private int rmiPort;
@@ -20,11 +18,12 @@ public class Server {
     }
 
 
-    public static void main(String[] args) throws RemoteException, LoginFailedException {
+    public static void main(String[] args) {
         Server server = new Server();
 
         HibernateSessionFactoryUtil.startHibernate();
         server.start();
+        EventScheduler scheduler = new EventScheduler();
     }
 
     public void start() {
