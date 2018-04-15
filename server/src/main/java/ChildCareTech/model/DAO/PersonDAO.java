@@ -16,7 +16,7 @@ public class PersonDAO extends AbstractGenericDAO<Person, String> {
     }
 
     public void initializeEventRelation(Person obj){
-        Hibernate.initialize(obj.getEvents());
+        Hibernate.initialize(obj.getCheckpoints());
     }
 
     public void initializeTripPartecipationRelation(Person obj){

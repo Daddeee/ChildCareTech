@@ -35,7 +35,7 @@ public class Person implements iEntity<Person, String> {
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
-    private Set<Event> events = new HashSet<>();
+    private Set<Checkpoint> checkpoints = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
     private Set<TripPartecipation> tripPartecipations = new HashSet<>();
@@ -114,12 +114,12 @@ public class Person implements iEntity<Person, String> {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Event> getEvents() {
-        return events;
+    public Set<Checkpoint> getCheckpoints() {
+        return checkpoints;
     }
 
-    public void setEvents(Set<Event> events) {
-        this.events = events;
+    public void setCheckpoints(Set<Checkpoint> checkpoints) {
+        this.checkpoints = checkpoints;
     }
 
     public Set<TripPartecipation> getTripPartecipations() {

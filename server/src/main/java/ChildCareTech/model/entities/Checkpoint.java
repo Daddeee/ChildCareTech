@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @Table(name = "events",
         uniqueConstraints = @UniqueConstraint(columnNames = {"workDay_id", "person_fiscalCode", "time"})
 )
-public class Event implements iEntity<Event, Integer> {
+public class Checkpoint implements iEntity<Checkpoint, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -28,17 +28,17 @@ public class Event implements iEntity<Event, Integer> {
     @Column(nullable = false)
     private boolean isIn;
 
-    public Event() {
+    public Checkpoint() {
     }
 
-    public Event(WorkDay workDay, Person person, LocalTime time, boolean isIn) {
+    public Checkpoint(WorkDay workDay, Person person, LocalTime time, boolean isIn) {
         this.workDay = workDay;
         this.person = person;
         this.time = time.minusNanos(time.getNano());
         this.isIn = isIn;
     }
 
-    public Event(int id, WorkDay workDay, Person person, LocalTime time, boolean isIn) {
+    public Checkpoint(int id, WorkDay workDay, Person person, LocalTime time, boolean isIn) {
         this.id = id;
         this.workDay = workDay;
         this.person = person;
@@ -99,9 +99,9 @@ public class Event implements iEntity<Event, Integer> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Event)) return false;
+        if (!(o instanceof Checkpoint)) return false;
 
-        Event e = (Event) o;
+        Checkpoint e = (Checkpoint) o;
         return this.workDay.equals(e.workDay) &&
                 this.time.equals(e.time) &&
                 this.person.equals(e.person);

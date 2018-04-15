@@ -15,9 +15,9 @@ import ChildCareTech.utils.DTO.assemblers.FoodDTOEntityAssembler;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.utils.DTO.assemblers.CanteenDTOEntityAssembler;
-import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.model.entities.Event;
-import ChildCareTech.utils.DTO.assemblers.EventDTOEntityAssembler;
+import ChildCareTech.common.DTO.CheckpointDTO;
+import ChildCareTech.model.entities.Checkpoint;
+import ChildCareTech.utils.DTO.assemblers.CheckpointDTOEntityAssembler;
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.utils.DTO.assemblers.AdultDTOEntityAssembler;
@@ -84,9 +84,9 @@ public class DTOEntityAssembler {
         return canteenDTOEntityAssembler.assemble(dto);
     }
 
-    public static Event getEntity(EventDTO dto) {
-        EventDTOEntityAssembler eventDTOEntityAssembler = new EventDTOEntityAssembler();
-        return eventDTOEntityAssembler.assemble(dto);
+    public static Checkpoint getEntity(CheckpointDTO dto) {
+        CheckpointDTOEntityAssembler checkpointDTOEntityAssembler = new CheckpointDTOEntityAssembler();
+        return checkpointDTOEntityAssembler.assemble(dto);
     }
 
     public static Adult getEntity(AdultDTO dto) {

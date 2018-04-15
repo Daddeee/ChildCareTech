@@ -1,7 +1,7 @@
 package ChildCareTech.model;
 
-import ChildCareTech.model.entities.Event;
-import ChildCareTech.model.DAO.EventDAO;
+import ChildCareTech.model.entities.Checkpoint;
+import ChildCareTech.model.DAO.CheckpointDAO;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.WorkDay;
 import org.hibernate.HibernateException;
@@ -12,11 +12,11 @@ import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
-public class EventTest extends AbstractEntityTest<Event, Integer> {
+public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        dao = new EventDAO();
+        dao = new CheckpointDAO();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class EventTest extends AbstractEntityTest<Event, Integer> {
             session.close();
         }
 
-        Event e = new Event(w, p, LocalTime.now(), true);
-        Event eu = new Event(w, p, LocalTime.now(), false);
+        Checkpoint e = new Checkpoint(w, p, LocalTime.now(), true);
+        Checkpoint eu = new Checkpoint(w, p, LocalTime.now(), false);
 
         testCRUDImpl(e, eu);
     }

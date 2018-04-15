@@ -3,14 +3,14 @@ package ChildCareTech.common.DTO;
 import java.io.Serializable;
 import java.time.LocalTime;
 
-public class EventDTO implements Serializable {
+public class CheckpointDTO implements Serializable {
     private int id;
     private WorkDayDTO workDay;
     private PersonDTO person;
     private LocalTime time;
     private boolean isIn;
 
-    public EventDTO(int id, WorkDayDTO workDay, PersonDTO person, LocalTime time, boolean isIn) {
+    public CheckpointDTO(int id, WorkDayDTO workDay, PersonDTO person, LocalTime time, boolean isIn) {
         this.id = id;
         this.workDay = workDay;
         this.person = person;

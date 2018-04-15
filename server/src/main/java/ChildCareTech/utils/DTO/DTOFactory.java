@@ -6,7 +6,7 @@ import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Drink;
-import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Meal;
@@ -53,9 +53,9 @@ public class DTOFactory {
         return factory.getDTO(canteen);
     }
 
-    public static EventDTO getDTO(Event event) {
-        EventDTOFactory factory = new EventDTOFactory();
-        return factory.getDTO(event);
+    public static CheckpointDTO getDTO(Checkpoint checkpoint) {
+        CheckpointDTOFactory factory = new CheckpointDTOFactory();
+        return factory.getDTO(checkpoint);
     }
 
     public static AdultDTO getDTO(Adult adult) {

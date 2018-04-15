@@ -1,25 +1,25 @@
 package ChildCareTech.utils.DTO.factories;
 
-import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.utils.DTO.DTOFactory;
 
-public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
+public class CheckpointDTOFactory implements AbstractDTOFactory<Checkpoint, CheckpointDTO> {
     @Override
-    public EventDTO getDTO(Event entity) {
+    public CheckpointDTO getDTO(Checkpoint entity) {
         return getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
     }
 
-    public static EventDTO getWorkDayManySide(Event entity, WorkDayDTO workDayDTO){
+    public static CheckpointDTO getWorkDayManySide(Checkpoint entity, WorkDayDTO workDayDTO){
         return getEventDTO(entity, workDayDTO);
     }
 
-    private static EventDTO getEventDTO(Event entity, WorkDayDTO workDayDTO) {
+    private static CheckpointDTO getEventDTO(Checkpoint entity, WorkDayDTO workDayDTO) {
         if (entity == null)
             return null;
 
-        return new EventDTO(
+        return new CheckpointDTO(
                 entity.getId(),
                 workDayDTO,
                 DTOFactory.getDTO(entity.getPerson()),

@@ -55,7 +55,7 @@
         <mapping class="ChildCareTech.model.entities.Menu"/>
         <mapping class="ChildCareTech.model.entities.Supply"/>
         <mapping class="ChildCareTech.model.entities.WorkDay"/>
-        <mapping class="ChildCareTech.model.entities.Event"/>
+        <mapping class="ChildCareTech.model.entities.Checkpoint"/>
         <mapping class="ChildCareTech.model.entities.Trip"/>
         <mapping class="ChildCareTech.model.entities.Bus"/>
         <mapping class="ChildCareTech.model.entities.Route"/>

@@ -13,9 +13,9 @@ public class WorkDayDTO implements Serializable {
     private LocalTime exitTime;
     private boolean isHoliday;
     private Set<MealDTO> meals;
-    private Set<EventDTO> events;
+    private Set<CheckpointDTO> events;
 
-    public WorkDayDTO(int id, LocalDate date, LocalTime entryTime, LocalTime exitTime, boolean isHoliday, Set<MealDTO> meals, Set<EventDTO> events) {
+    public WorkDayDTO(int id, LocalDate date, LocalTime entryTime, LocalTime exitTime, boolean isHoliday, Set<MealDTO> meals, Set<CheckpointDTO> events) {
         this.id = id;
         this.date = date;
         this.entryTime = entryTime;
@@ -69,11 +69,11 @@ public class WorkDayDTO implements Serializable {
         this.meals = meals;
     }
 
-    public Set<EventDTO> getEvents() {
+    public Set<CheckpointDTO> getEvents() {
         return events;
     }
 
-    public void setEvents(Set<EventDTO> events) {
+    public void setEvents(Set<CheckpointDTO> events) {
         this.events = events;
     }
 }

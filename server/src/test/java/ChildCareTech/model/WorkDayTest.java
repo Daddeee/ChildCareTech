@@ -1,7 +1,7 @@
 package ChildCareTech.model;
 
 import ChildCareTech.model.entities.Canteen;
-import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.WorkDay;
@@ -46,8 +46,8 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
                 ChildCareTech.common.Sex.MALE,
                 "",
                 "");
-        Event e1 = new Event(wd, p1, LocalTime.now(), false);
-        Event e2 = new Event(wd, p2, LocalTime.now().plusHours(1), false);
+        Checkpoint e1 = new Checkpoint(wd, p1, LocalTime.now(), false);
+        Checkpoint e2 = new Checkpoint(wd, p2, LocalTime.now().plusHours(1), false);
 
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -97,11 +97,11 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
             session.close();
         }
 
-        HashSet<Event> set1 = new HashSet<>();
+        HashSet<Checkpoint> set1 = new HashSet<>();
         set1.add(e1);
         set1.add(e2);
 
-        testOneToMany(wd, set1, WorkDay::getEvents);
+        testOneToMany(wd, set1, WorkDay::getCheckpoints);
     }
 
     @Override

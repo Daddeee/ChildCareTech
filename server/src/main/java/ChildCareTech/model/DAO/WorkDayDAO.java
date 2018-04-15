@@ -30,6 +30,6 @@ public class WorkDayDAO extends AbstractGenericDAO<WorkDay, Integer> {
     }
 
     public void initializeEventRelation(WorkDay workDay){
-        Hibernate.initialize(workDay.getEvents());
+        Hibernate.initialize(workDay.getCheckpoints());
     }
 }

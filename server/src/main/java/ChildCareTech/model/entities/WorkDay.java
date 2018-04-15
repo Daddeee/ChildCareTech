@@ -29,7 +29,7 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
     private Set<Meal> meals;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workDay")
-    private Set<Event> events;
+    private Set<Checkpoint> checkpoints;
 
     public WorkDay() {
     }
@@ -102,12 +102,12 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
         this.meals = meals;
     }
 
-    public Set<Event> getEvents() {
-        return events == null ? Collections.EMPTY_SET : events;
+    public Set<Checkpoint> getCheckpoints() {
+        return checkpoints == null ? Collections.EMPTY_SET : checkpoints;
     }
 
-    public void setEvents(Set<Event> events) {
-        this.events = events;
+    public void setCheckpoints(Set<Checkpoint> checkpoints) {
+        this.checkpoints = checkpoints;
     }
 
     @Override

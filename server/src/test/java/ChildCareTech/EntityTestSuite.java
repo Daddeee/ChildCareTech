@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import ChildCareTech.model.CheckpointTest;
 import ChildCareTech.model.RouteTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -11,7 +12,7 @@ import org.junit.runners.Suite;
         ChildCareTech.model.CanteenTest.class,
         ChildCareTech.model.DishTest.class,
         ChildCareTech.model.DrinkTest.class,
-        ChildCareTech.model.EventTest.class,
+        CheckpointTest.class,
         ChildCareTech.model.FoodTest.class,
         ChildCareTech.model.KidTest.class,
         ChildCareTech.model.MealTest.class,
