@@ -11,9 +11,15 @@ import java.util.List;
 
 public class CurrentWorkDayService {
     private final static WorkDayDAO workDayDAO = new WorkDayDAO();
+    private static LocalDate today = LocalDate.now();
+    private static WorkDay current = null;
 
     public static WorkDay getCurrent() {
-        return  retrieveCurrentWorkDay();
+        if(LocalDate.now().isAfter(today) || current == null){
+            today = LocalDate.now();
+            current = retrieveCurrentWorkDay();
+        }
+        return  current;
     }
 
     private static WorkDay retrieveCurrentWorkDay(){
@@ -26,6 +32,8 @@ public class CurrentWorkDayService {
             tx = session.beginTransaction();
 
             result = workDayDAO.read("date", LocalDate.now().toString());
+            for(WorkDay w : result)
+                workDayDAO.initializeLazyRelations(w);
 
             tx.commit();
         } catch(Exception e){

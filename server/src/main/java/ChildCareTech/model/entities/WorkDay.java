@@ -2,6 +2,7 @@ package ChildCareTech.model.entities;
 
 
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
@@ -113,24 +114,6 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
 
     public void setCheckpoints(Set<Checkpoint> checkpoints) {
         this.checkpoints = checkpoints;
-    }
-
-    public List<EventDTO> getEvents(){
-        List<EventDTO> events = new ArrayList<>();
-
-        events.add(new EventDTO(
-                "Ingresso",
-                getEntryTime(),
-                getEntryTime().plusMinutes(EVENT_TIME_DURATION)
-        ));
-
-        events.add(new EventDTO(
-                "Uscita",
-                getExitTime(),
-                getExitTime().plusMinutes(EVENT_TIME_DURATION)
-        ));
-
-        return events;
     }
 
     @Override
