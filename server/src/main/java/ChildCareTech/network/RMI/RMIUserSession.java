@@ -32,6 +32,32 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public WorkDayDTO getWorkDay(LocalDate date) {
+        WorkDayDAO workDayDAO = new WorkDayDAO();
+        EventDAO eventDAO = new EventDAO();
+        WorkDay result = null;
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        workDayDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            result = workDayDAO.read("date", date.toString()).get(0);
+            workDayDAO.initializeLazyRelations(result);
+            for(Event e : result.getEvents())
+                eventDAO.initializeLazyRelations(e);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+
+        return DTOFactory.getDTO(result);
+    }
+
+    @Override
     public WorkDayDTO getCurrentWorkDay() {
         return DTOFactory.getDTO(CurrentWorkDayService.getCurrent());
     }

@@ -5,6 +5,7 @@ import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface UserSession extends Remote {
@@ -43,6 +44,7 @@ public interface UserSession extends Remote {
 
     void generateDays(DayGenerationSettingsDTO settings) throws RemoteException;
     WorkDayDTO getCurrentWorkDay() throws RemoteException;
+    WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
 
     void logout() throws RemoteException;
 }
