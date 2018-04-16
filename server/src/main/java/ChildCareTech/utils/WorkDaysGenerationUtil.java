@@ -6,6 +6,7 @@ import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
+import javafx.beans.binding.ObjectExpression;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -18,10 +19,15 @@ import java.util.Set;
 public class WorkDaysGenerationUtil {
     private DayGenerationSettingsDTO settings;
     private WorkDayDAO workDayDAO;
+    private static Object lock = new Object();
 
     public WorkDaysGenerationUtil(DayGenerationSettingsDTO settings){
         this.settings = settings;
         this.workDayDAO = new WorkDayDAO();
+    }
+
+    public static Object getLock(){
+        return lock;
     }
 
     public void generateDays(){
@@ -77,5 +83,8 @@ public class WorkDaysGenerationUtil {
             session.close();
         }
 
+        synchronized(lock) {
+            lock.notifyAll();
+        }
     }
 }

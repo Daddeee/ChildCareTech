@@ -1,6 +1,8 @@
 package ChildCareTech.utils;
 
+import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.WorkDayDAO;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class CurrentWorkDayService {
     private final static WorkDayDAO workDayDAO = new WorkDayDAO();
+    private final static EventDAO eventDAO = new EventDAO();
     private static LocalDate today = LocalDate.now();
     private static WorkDay current = null;
 
@@ -32,9 +35,11 @@ public class CurrentWorkDayService {
             tx = session.beginTransaction();
 
             result = workDayDAO.read("date", LocalDate.now().toString());
-            for(WorkDay w : result)
+            for(WorkDay w : result) {
                 workDayDAO.initializeLazyRelations(w);
-
+                for(Event e : w.getEvents())
+                    eventDAO.initializeLazyRelations(e);
+            }
             tx.commit();
         } catch(Exception e){
             if(tx != null) tx.rollback();

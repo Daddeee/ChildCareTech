@@ -1,11 +1,8 @@
 package ChildCareTech.utils;
 
-import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.utils.DTO.DTOFactory;
-import ChildCareTech.utils.DTO.factories.EventDTOFactory;
 
 import java.rmi.RemoteException;
 import java.time.Duration;
@@ -67,9 +64,22 @@ public class EventScheduler {
                 scheduler.schedule(stopEvent, duration.getSeconds(), TimeUnit.SECONDS);
 
         }
+
+        System.out.println("[SCHEDULER] Daily scheduling terminated.");
     };
 
-    public EventScheduler() {
+    public  EventScheduler(){
+        Object lock = WorkDaysGenerationUtil.getLock();
+        synchronized(lock) {
+            try {
+                while (CurrentWorkDayService.getCurrent() == null)
+                    lock.wait();
+            } catch (InterruptedException ex){
+                ex.printStackTrace();
+            }
+        }
+
+        System.out.println("[SCHEDULER] automatic scheduler ready. Start scheduling.");
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime dailyTime = now.withHour(0).withMinute(30);
         Duration duration;
@@ -81,7 +91,7 @@ public class EventScheduler {
             duration = Duration.between(now, dailyTime);
             initialDelay = duration.getSeconds();
 
-            firstTimeJobScheduled = scheduler.schedule(dailyScheduling, 10, TimeUnit.SECONDS);
+            firstTimeJobScheduled = scheduler.schedule(dailyScheduling, 5, TimeUnit.SECONDS);
             jobScheduled = scheduler.scheduleAtFixedRate(dailyScheduling, initialDelay, 24*60*60, TimeUnit.SECONDS);
         } else {
             duration = Duration.between(now, dailyTime);

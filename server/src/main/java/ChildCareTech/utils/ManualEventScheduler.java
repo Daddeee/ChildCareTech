@@ -1,15 +1,12 @@
 package ChildCareTech.utils;
 
-import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.utils.DTO.DTOFactory;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class ManualEventScheduler implements Runnable{
     /*
@@ -67,8 +64,8 @@ public class ManualEventScheduler implements Runnable{
         int selection = in.nextInt();
         in.nextLine();
 
-        RemoteEventObservable.getInstance().setNextEvent(
+        /*RemoteEventObservable.getInstance().setNextEvent(
                 DTOFactory.getDTO(events.get(selection))
-        );
+        );*/
     }
 }

@@ -14,6 +14,6 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
     @Override
     public void update(List<EventDTO> eventDTOs) {
         for(EventDTO e : eventDTOs)
-            System.out.println(e.getName());
+            System.out.println(e.getName() + " " + e.getEventStatus().toString());
     }
 }

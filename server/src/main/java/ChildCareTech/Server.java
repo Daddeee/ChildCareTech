@@ -24,8 +24,8 @@ public class Server {
 
         HibernateSessionFactoryUtil.startHibernate();
         server.start();
-        //EventScheduler scheduler = new EventScheduler();
-        ManualEventScheduler scheduler = new ManualEventScheduler();
+        //ManualEventScheduler scheduler = new ManualEventScheduler();
+        EventScheduler scheduler = new EventScheduler();
     }
 
     public void start() {
