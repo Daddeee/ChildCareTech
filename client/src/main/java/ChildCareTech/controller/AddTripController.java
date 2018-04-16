@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.*;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
 
 public class AddTripController {
@@ -86,8 +88,10 @@ public class AddTripController {
 
         TripDTO tripDTO = new TripDTO(0, meta, note, depDate, arrDate, null, null, null);
 
+        Set<RouteDTO> routeDTOSet = new HashSet<>();
         for(TempRouteData r : routes)
-            tripDTO.getRoutes().add(r.getRouteDTO(tripDTO));
+            routeDTOSet.add(r.getRouteDTO(tripDTO));
+        tripDTO.setRoutes(routeDTOSet);
 
         try {
             SessionService.getSession().saveTrip(tripDTO);

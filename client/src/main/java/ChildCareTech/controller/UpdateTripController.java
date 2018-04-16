@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
 public class UpdateTripController {
     @FXML
@@ -103,8 +104,10 @@ public class UpdateTripController {
 
         TripDTO tripDTO = new TripDTO(id, meta, note, depDate, arrDate, null, null, null);
 
+        Set<RouteDTO> routeDTOSet = new HashSet<>();
         for(TempRouteData r : routes)
-            tripDTO.getRoutes().add(r.getRouteDTO(tripDTO));
+            routeDTOSet.add(r.getRouteDTO(tripDTO));
+        tripDTO.setRoutes(routeDTOSet);
 
         try {
             SessionService.getSession().updateTrip(tripDTO);
