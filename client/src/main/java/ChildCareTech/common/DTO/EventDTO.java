@@ -18,6 +18,7 @@ public class EventDTO implements Serializable {
     public EventDTO(int id, String name, WorkDayDTO workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus, Set<CheckpointDTO> checkpoints){
         this.id = id;
         this.name = name;
+        this.workDay = workDay;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.eventStatus = eventStatus;
