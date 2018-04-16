@@ -78,6 +78,10 @@ public class Event implements iEntity<Event, Integer> {
         return eventStatus;
     }
 
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+
     public Set<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
