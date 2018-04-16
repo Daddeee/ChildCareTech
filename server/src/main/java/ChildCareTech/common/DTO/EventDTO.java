@@ -75,4 +75,12 @@ public class EventDTO implements Serializable {
     public void setCheckpoints(Set<CheckpointDTO> checkpoints) {
         this.checkpoints = checkpoints;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventDTO)) return false;
+        return this.name.equals(((EventDTO) o).name) &&
+                this.workDay.equals(((EventDTO) o).workDay);
+    }
 }

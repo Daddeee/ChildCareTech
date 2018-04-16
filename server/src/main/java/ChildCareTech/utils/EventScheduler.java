@@ -7,9 +7,11 @@ import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.DTO.factories.EventDTOFactory;
 
+import java.rmi.RemoteException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
@@ -24,16 +26,20 @@ public class EventScheduler {
     private final Runnable dailyScheduling = () -> {
         WorkDay current = CurrentWorkDayService.getCurrent();
 
-        Set<Event> todayEvents = current.getEvents();
+        List<Event> todayEvents = new ArrayList<>(current.getEvents());
+
+        try {
+            RemoteEventObservable.getInstance().setPlannedEvents(todayEvents);
+        } catch(RemoteException e){
+            e.printStackTrace();
+        }
 
         for(Event e : todayEvents){
             Runnable startEvent = new Runnable() {
                 @Override
                 public void run() {
                     try{
-                        RemoteEventObservable.getInstance().setNextEvent(
-                                DTOFactory.getDTO(e)
-                        );
+                        RemoteEventObservable.getInstance().changeEventStatus(e, EventStatus.OPEN);
                     } catch(Exception e){
                         e.printStackTrace();
                     }
@@ -44,9 +50,7 @@ public class EventScheduler {
                 @Override
                 public void run() {
                     try{
-                        RemoteEventObservable.getInstance().setNextEvent(
-                                DTOFactory.getDTO(e)
-                        );
+                        RemoteEventObservable.getInstance().changeEventStatus(e, EventStatus.CLOSED);
                     } catch(Exception e){
                         e.printStackTrace();
                     }
