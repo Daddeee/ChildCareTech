@@ -33,11 +33,11 @@
         </property>
 
         <property name="show_sql">
-            true
+            false
         </property>
 
         <property name="format_sql">
-            true
+            false
         </property>
 
         <!-- List of mapped entities -->
