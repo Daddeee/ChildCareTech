@@ -1,28 +1,15 @@
 package ChildCareTech.utils.DTO;
 
 import ChildCareTech.common.DTO.*;
-import ChildCareTech.model.entities.Adult;
-import ChildCareTech.model.entities.Bus;
-import ChildCareTech.model.entities.Canteen;
-import ChildCareTech.model.entities.Dish;
-import ChildCareTech.model.entities.Drink;
-import ChildCareTech.model.entities.Checkpoint;
-import ChildCareTech.model.entities.Food;
-import ChildCareTech.model.entities.Kid;
-import ChildCareTech.model.entities.Meal;
-import ChildCareTech.model.entities.Menu;
-import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.model.entities.Person;
-import ChildCareTech.model.entities.Route;
-import ChildCareTech.model.entities.Staff;
-import ChildCareTech.model.entities.Supplier;
-import ChildCareTech.model.entities.Supply;
-import ChildCareTech.model.entities.Trip;
-import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.model.entities.WorkDay;
+import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.factories.*;
 
 public class DTOFactory {
+    public static EventDTO getDTO(Event event){
+        EventDTOFactory factory = new EventDTOFactory();
+        return factory.getDTO(event);
+    }
+
     public static MealDTO getDTO(Meal meal) {
         MealDTOFactory factory = new MealDTOFactory();
         return factory.getDTO(meal);

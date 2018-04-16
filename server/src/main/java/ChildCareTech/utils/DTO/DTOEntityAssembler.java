@@ -1,64 +1,15 @@
 package ChildCareTech.utils.DTO;
 
-import ChildCareTech.common.DTO.MealDTO;
-import ChildCareTech.model.entities.Meal;
-import ChildCareTech.utils.DTO.assemblers.MealDTOEntityAssembler;
-import ChildCareTech.common.DTO.TripDTO;
-import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.DTO.assemblers.TripDTOEntityAssembler;
-import ChildCareTech.common.DTO.KidDTO;
-import ChildCareTech.model.entities.Kid;
-import ChildCareTech.utils.DTO.assemblers.KidDTOEntityAssembler;
-import ChildCareTech.common.DTO.FoodDTO;
-import ChildCareTech.model.entities.Food;
-import ChildCareTech.utils.DTO.assemblers.FoodDTOEntityAssembler;
-import ChildCareTech.common.DTO.CanteenDTO;
-import ChildCareTech.model.entities.Canteen;
-import ChildCareTech.utils.DTO.assemblers.CanteenDTOEntityAssembler;
-import ChildCareTech.common.DTO.CheckpointDTO;
-import ChildCareTech.model.entities.Checkpoint;
-import ChildCareTech.utils.DTO.assemblers.CheckpointDTOEntityAssembler;
-import ChildCareTech.common.DTO.AdultDTO;
-import ChildCareTech.model.entities.Adult;
-import ChildCareTech.utils.DTO.assemblers.AdultDTOEntityAssembler;
-import ChildCareTech.common.DTO.TripPartecipationDTO;
-import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.DTO.assemblers.TripPartecipationDTOEntityAssembler;
-import ChildCareTech.common.DTO.DrinkDTO;
-import ChildCareTech.model.entities.Drink;
-import ChildCareTech.utils.DTO.assemblers.DrinkDTOEntityAssembler;
-import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.utils.DTO.assemblers.WorkDayDTOEntityAssembler;
-import ChildCareTech.common.DTO.RouteDTO;
-import ChildCareTech.model.entities.Route;
-import ChildCareTech.utils.DTO.assemblers.RouteDTOEntityAssembler;
-import ChildCareTech.common.DTO.PersonDTO;
-import ChildCareTech.model.entities.Person;
-import ChildCareTech.utils.DTO.assemblers.PersonDTOEntityAssembler;
-import ChildCareTech.common.DTO.MenuDTO;
-import ChildCareTech.model.entities.Menu;
-import ChildCareTech.utils.DTO.assemblers.MenuDTOEntityAssembler;
-import ChildCareTech.common.DTO.PediatristDTO;
-import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.utils.DTO.assemblers.PediatristDTOEntityAssembler;
-import ChildCareTech.common.DTO.BusDTO;
-import ChildCareTech.model.entities.Bus;
-import ChildCareTech.utils.DTO.assemblers.BusDTOEntityAssembler;
-import ChildCareTech.common.DTO.SupplyDTO;
-import ChildCareTech.model.entities.Supply;
-import ChildCareTech.utils.DTO.assemblers.SupplyDTOEntityAssembler;
-import ChildCareTech.common.DTO.SupplierDTO;
-import ChildCareTech.model.entities.Supplier;
-import ChildCareTech.utils.DTO.assemblers.SupplierDTOEntityAssembler;
-import ChildCareTech.common.DTO.DishDTO;
-import ChildCareTech.model.entities.Dish;
-import ChildCareTech.utils.DTO.assemblers.DishDTOEntityAssembler;
-import ChildCareTech.common.DTO.StaffDTO;
-import ChildCareTech.model.entities.Staff;
-import ChildCareTech.utils.DTO.assemblers.StaffDTOEntityAssembler;
+import ChildCareTech.common.DTO.*;
+import ChildCareTech.model.entities.*;
+import ChildCareTech.utils.DTO.assemblers.*;
 
 public class DTOEntityAssembler {
+    public static Event getEntity(EventDTO dto){
+        EventDTOEntityAssembler eventDTOEntityAssembler = new EventDTOEntityAssembler();
+        return eventDTOEntityAssembler.assemble(dto);
+    }
+
     public static Meal getEntity(MealDTO dto) {
         MealDTOEntityAssembler mealDTOEntityAssembler = new MealDTOEntityAssembler();
         return mealDTOEntityAssembler.assemble(dto);
