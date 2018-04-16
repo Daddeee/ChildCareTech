@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.services.MainSceneManager;
+import javafx.application.Platform;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -17,8 +18,8 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
     public RMIRemoteEventObserver() throws RemoteException {}
 
     @Override
-    public void update(WorkDayDTO workDayDTO) throws RemoteException{
+    public void update(WorkDayDTO workDayDTO) {
         today = workDayDTO;
-        MainSceneManager.getHomeController().refresh(today);
+        Platform.runLater(() -> MainSceneManager.getHomeController().refresh(today));
     }
 }

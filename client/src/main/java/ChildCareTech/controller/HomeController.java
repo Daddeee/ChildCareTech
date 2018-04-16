@@ -39,7 +39,7 @@ public class HomeController {
         }
     }
 
-    public void refresh(WorkDayDTO workDayDTO) throws RemoteException{
+    public void refresh(WorkDayDTO workDayDTO){
         selectedWorkDay = workDayDTO;
         refreshDateLabel(workDayDTO.getDate());
         refreshTable(workDayDTO.getEvents());
@@ -50,7 +50,6 @@ public class HomeController {
     }
 
     private void refreshTable(Set<EventDTO> events){
-        //need dependency injection on this to use socket connection
         eventsTable.getItems().clear();
         eventsTable.getItems().addAll(events);
     }
