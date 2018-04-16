@@ -19,12 +19,14 @@ public class ManualEventScheduler implements Runnable{
     */
 
     private Scanner in;
+    private WorkDay planned;
     private WorkDay toPlan;
     private WorkDayDAO workDayDAO;
     private EventDAO eventDAO;
 
     public ManualEventScheduler() {
         in = new Scanner(System.in);
+        planned = null;
         toPlan = CurrentWorkDayService.getCurrent();
         workDayDAO = new WorkDayDAO();
         eventDAO = new EventDAO();
@@ -133,8 +135,8 @@ public class ManualEventScheduler implements Runnable{
         try {
             tx = session.beginTransaction();
 
-            List<Event> events = new ArrayList<>(toPlan.getEvents());
-            RemoteEventObservable.getInstance().setPlannedEvents(events);
+            planned = toPlan;
+            RemoteEventObservable.getInstance().setDay(planned);
 
             toPlan = workDayDAO.tomorrow(toPlan);
             workDayDAO.initializeLazyRelations(toPlan);

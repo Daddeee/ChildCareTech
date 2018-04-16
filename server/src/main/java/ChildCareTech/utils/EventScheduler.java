@@ -23,15 +23,13 @@ public class EventScheduler {
     private final Runnable dailyScheduling = () -> {
         WorkDay current = CurrentWorkDayService.getCurrent();
 
-        List<Event> todayEvents = new ArrayList<>(current.getEvents());
-
         try {
-            RemoteEventObservable.getInstance().setPlannedEvents(todayEvents);
+            RemoteEventObservable.getInstance().setDay(current);
         } catch(RemoteException e){
             e.printStackTrace();
         }
 
-        for(Event e : todayEvents){
+        for(Event e : current.getEvents()){
             Runnable startEvent = new Runnable() {
                 @Override
                 public void run() {

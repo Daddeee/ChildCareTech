@@ -7,9 +7,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.DatePicker?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.HomeController">
     <children>
-        <VBox layoutX="50.0" layoutY="87.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="900.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="50.0"
+              layoutY="87.0"
+              maxHeight="-Infinity"
+              maxWidth="-Infinity"
+              minHeight="-Infinity"
+              minWidth="-Infinity"
+              prefHeight="700.0"
+              prefWidth="100.0"
+              AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="900.0"
+              AnchorPane.topAnchor="0.0">
             <children>
                 <Button fx:id="kidsAnagraphicsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kidAnagraphicsButtonAction" prefHeight="80.0" prefWidth="80.0" text="BAMBINI">
                     <VBox.margin>
@@ -58,5 +75,50 @@
             </children>
         </VBox>
         <ListView layoutX="400.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <VBox
+                layoutX="50.0"
+                layoutY="87.0"
+                maxHeight="-Infinity"
+                maxWidth="-Infinity"
+                minHeight="-Infinity"
+                minWidth="-Infinity"
+                prefHeight="600.0"
+                prefWidth="900.0"
+                AnchorPane.bottomAnchor="0.0"
+                AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="0.0">
+            <TableView fx:id="eventsTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
+                       prefHeight="600.0" prefWidth="900.0" editable="true">
+                <columns>
+                    <TableColumn fx:id="nameColumn" prefWidth="300.0" text="Nome">
+                        <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="beginTimeColumn" prefWidth="300.0" text="Orario di inizio">
+                        <cellValueFactory><PropertyValueFactory property="beginTime" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="endTimeColumn" prefWidth="100.0" text="Orario di fine">
+                        <cellValueFactory><PropertyValueFactory property="endTime" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="eventStatusColumn" prefWidth="100.0" text="Stato">
+                        <cellValueFactory><PropertyValueFactory property="eventStatus" /></cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+
+            <VBox AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0"
+                  prefWidth="900.0"
+                  prefHeight="100.0"
+                  layoutX="50.0"
+                  layoutY="87.0"
+                  maxHeight="-Infinity"
+                  maxWidth="-Infinity"
+                  minHeight="-Infinity"
+                  minWidth="-Infinity">
+                <HBox>
+                    <Label fx:id="currentDate" prefWidth="300"/>
+                </HBox>
+            </VBox>
+        </VBox>
     </children>
 </AnchorPane>
