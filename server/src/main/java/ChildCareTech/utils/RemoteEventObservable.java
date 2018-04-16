@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RemoteEventObservable {
@@ -32,7 +33,7 @@ public class RemoteEventObservable {
     }
 
     public List<Event> getPlannedEvents() {
-        return new ArrayList<>(today.getEvents());
+        return today == null ? Collections.emptyList() : new ArrayList<>(today.getEvents());
     }
 
     public void setDay(WorkDay day) throws RemoteException{
