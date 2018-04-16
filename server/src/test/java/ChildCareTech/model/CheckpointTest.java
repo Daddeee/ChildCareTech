@@ -1,7 +1,9 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.DAO.CheckpointDAO;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.WorkDay;
 import org.hibernate.HibernateException;
@@ -22,6 +24,7 @@ public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
     @Override
     public void testCRUD() {
         WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
+        Event event = new Event("nome", w, LocalTime.now(), LocalTime.now().plusMinutes(10), EventStatus.WAIT);
         Person p = new Person("fisccode",
                 "nome",
                 "cognome",
@@ -38,6 +41,7 @@ public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
         try {
             tx = session.beginTransaction();
             session.save(w);
+            session.save(event);
             session.save(p);
             tx.commit();
         } catch (HibernateException e) {
@@ -48,8 +52,8 @@ public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
             session.close();
         }
 
-        Checkpoint e = new Checkpoint(w, p, LocalTime.now(), true);
-        Checkpoint eu = new Checkpoint(w, p, LocalTime.now(), false);
+        Checkpoint e = new Checkpoint(event, p, LocalTime.now(), true);
+        Checkpoint eu = new Checkpoint(event, p, LocalTime.now(), false);
 
         testCRUDImpl(e, eu);
     }

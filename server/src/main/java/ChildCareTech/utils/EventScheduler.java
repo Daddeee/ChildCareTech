@@ -2,12 +2,16 @@ package ChildCareTech.utils;
 
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
+import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.factories.EventDTOFactory;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -20,19 +24,16 @@ public class EventScheduler {
     private final Runnable dailyScheduling = () -> {
         WorkDay current = CurrentWorkDayService.getCurrent();
 
-        List<EventDTO> todayEvents = current.getEvents();
+        Set<Event> todayEvents = current.getEvents();
 
-        for(EventDTO e : todayEvents){
+        for(Event e : todayEvents){
             Runnable startEvent = new Runnable() {
                 @Override
                 public void run() {
                     try{
-                        RemoteEventObservable.getInstance().setNextEvent(new EventDTO(
-                                e.getName(),
-                                e.getStartTime(),
-                                e.getEndTime(),
-                                EventStatus.OPEN
-                        ));
+                        RemoteEventObservable.getInstance().setNextEvent(
+                                DTOFactory.getDTO(e)
+                        );
                     } catch(Exception e){
                         e.printStackTrace();
                     }
@@ -43,19 +44,16 @@ public class EventScheduler {
                 @Override
                 public void run() {
                     try{
-                        RemoteEventObservable.getInstance().setNextEvent(new EventDTO(
-                                e.getName(),
-                                e.getStartTime(),
-                                e.getEndTime(),
-                                EventStatus.CLOSED
-                        ));
+                        RemoteEventObservable.getInstance().setNextEvent(
+                                DTOFactory.getDTO(e)
+                        );
                     } catch(Exception e){
                         e.printStackTrace();
                     }
                 }
             };
             LocalTime now = LocalTime.now();
-            Duration duration = Duration.between(now, e.getStartTime());
+            Duration duration = Duration.between(now, e.getBeginTime());
 
             if(duration.getSeconds() > 0)
                 scheduler.schedule(startEvent, duration.getSeconds(),TimeUnit.SECONDS);

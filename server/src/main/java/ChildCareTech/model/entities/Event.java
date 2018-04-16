@@ -30,6 +30,8 @@ public class Event implements iEntity<Event, Integer> {
     @OneToMany
     private Set<Checkpoint> checkpoints;
 
+    public Event(){}
+
     public Event(int id, String name, WorkDay workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus){
         this.id = id;
         this.name = name;
@@ -82,5 +84,18 @@ public class Event implements iEntity<Event, Integer> {
 
     public void setCheckpoints(Set<Checkpoint> checkpoints) {
         this.checkpoints = checkpoints;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+        return this.name.equals(((Event) o).name) &&
+                this.workDay.equals(((Event) o).workDay);
+    }
+
+    @Override
+    public int hashCode() {
+        return (name + workDay.hashCode()).hashCode();
     }
 }

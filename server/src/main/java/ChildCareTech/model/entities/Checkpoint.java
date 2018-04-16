@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "events",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"workDay_id", "person_fiscalCode", "time"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"event_id", "person_fiscalCode"})
 )
 public class Checkpoint implements iEntity<Checkpoint, Integer> {
     @Id
