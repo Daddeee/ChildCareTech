@@ -4,6 +4,7 @@ import ChildCareTech.common.EventStatus;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.Set;
 
 public class EventDTO implements Serializable {
     private int id;
@@ -12,13 +13,15 @@ public class EventDTO implements Serializable {
     private LocalTime beginTime;
     private LocalTime endTime;
     private EventStatus eventStatus;
+    private Set<CheckpointDTO> checkpoints;
 
-    public EventDTO(int id, String name, WorkDayDTO workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus){
+    public EventDTO(int id, String name, WorkDayDTO workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus, Set<CheckpointDTO> checkpoints){
         this.id = id;
         this.name = name;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.eventStatus = eventStatus;
+        this.checkpoints = checkpoints;
     }
 
     public int getId() {
@@ -45,6 +48,10 @@ public class EventDTO implements Serializable {
         return eventStatus;
     }
 
+    public Set<CheckpointDTO> getCheckpoints() {
+        return checkpoints;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -63,5 +70,9 @@ public class EventDTO implements Serializable {
 
     public void setEventStatus(EventStatus eventStatus) {
         this.eventStatus = eventStatus;
+    }
+
+    public void setCheckpoints(Set<CheckpointDTO> checkpoints) {
+        this.checkpoints = checkpoints;
     }
 }
