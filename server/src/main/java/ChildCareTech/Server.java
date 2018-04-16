@@ -3,6 +3,7 @@ package ChildCareTech;
 import ChildCareTech.network.RMI.RMIServer;
 import ChildCareTech.utils.EventScheduler;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.ManualEventScheduler;
 import ChildCareTech.utils.Settings;
 
 public class Server {
@@ -23,7 +24,8 @@ public class Server {
 
         HibernateSessionFactoryUtil.startHibernate();
         server.start();
-        EventScheduler scheduler = new EventScheduler();
+        //EventScheduler scheduler = new EventScheduler();
+        ManualEventScheduler scheduler = new ManualEventScheduler();
     }
 
     public void start() {
