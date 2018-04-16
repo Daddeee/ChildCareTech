@@ -1,23 +1,17 @@
 package ChildCareTech.model.entities;
 
 
-import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "workdays")
 public class WorkDay implements iEntity<WorkDay, Integer> {
-    public static final int EVENT_TIME_DURATION = 10;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -35,7 +29,7 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
     private Set<Meal> meals;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "workDay")
-    private Set<Checkpoint> checkpoints;
+    private Set<Event> events;
 
     public WorkDay() {
     }
@@ -108,21 +102,12 @@ public class WorkDay implements iEntity<WorkDay, Integer> {
         this.meals = meals;
     }
 
-    public Set<Checkpoint> getCheckpoints() {
-        return checkpoints == null ? Collections.EMPTY_SET : checkpoints;
+    public Set<Event> getEvents() {
+        return events == null ? Collections.EMPTY_SET : events;
     }
 
-    public void setCheckpoints(Set<Checkpoint> checkpoints) {
-        this.checkpoints = checkpoints;
-    }
-
-    public List<EventDTO> getEvents(){
-        List<EventDTO> events = new ArrayList<>();
-
-        events.add(new EventDTO("Ingresso", getEntryTime(), getEntryTime().plusMinutes(10), EventStatus.WAIT));
-        events.add(new EventDTO("Uscita", getEntryTime(), getEntryTime().plusMinutes(10), EventStatus.WAIT));
-
-        return events;
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     @Override

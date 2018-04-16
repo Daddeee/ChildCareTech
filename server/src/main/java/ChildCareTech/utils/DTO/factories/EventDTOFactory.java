@@ -1,25 +1,27 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Event;
 
 public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
     @Override
     public EventDTO getDTO(Event entity) {
-        EventDTO dto = getEventDTO(entity);
-        if(dto == null)return null;
-
-        return dto;
+        return getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
     }
 
-    private EventDTO getEventDTO(Event entity){
+    public static EventDTO getWorkDayManySide(Event entity, WorkDayDTO workDayDTO){
+        return getEventDTO(entity, workDayDTO);
+    }
+
+    private static EventDTO getEventDTO(Event entity, WorkDayDTO workDayDTO){
         if(entity == null)
             return null;
 
         return new EventDTO(
                 entity.getId(),
                 entity.getName(),
-                WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()),
+                workDayDTO,
                 entity.getBeginTime(),
                 entity.getEndTime(),
                 entity.getEventStatus()

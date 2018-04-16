@@ -1,9 +1,11 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.CheckpointDTO;
+import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Checkpoint;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
@@ -22,9 +24,9 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
             meals.add(MealDTOFactory.getWorkDayManySide(m, dto));
         dto.setMeals(meals);
 
-        Set<CheckpointDTO> events = new HashSet<>();
-        for (Checkpoint e : entity.getCheckpoints())
-            events.add(CheckpointDTOFactory.getWorkDayManySide(e, dto));
+        Set<EventDTO> events = new HashSet<>();
+        for (Event e : entity.getEvents())
+            events.add(EventDTOFactory.getWorkDayManySide(e, dto));
         dto.setEvents(events);
 
         return dto;
@@ -34,9 +36,9 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
         WorkDayDTO dto = getWorkDayDTO(entity);
         if (dto == null) return null;
 
-        Set<CheckpointDTO> events = new HashSet<>();
-        for (Checkpoint e : entity.getCheckpoints())
-            events.add(CheckpointDTOFactory.getWorkDayManySide(e, dto));
+        Set<EventDTO> events = new HashSet<>();
+        for (Event e : entity.getEvents())
+            events.add(EventDTOFactory.getWorkDayManySide(e, dto));
         dto.setEvents(events);
 
         return dto;

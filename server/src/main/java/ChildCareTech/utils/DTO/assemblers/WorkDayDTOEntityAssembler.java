@@ -1,9 +1,11 @@
 package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.CheckpointDTO;
+import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Checkpoint;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
@@ -22,10 +24,10 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
             meals.add(MealDTOEntityAssembler.assembleWorkDayManySide(m, entity));
         entity.setMeals(meals);
 
-        Set<Checkpoint> checkpoints = new HashSet<>();
-        for(CheckpointDTO e : dto.getEvents())
-            checkpoints.add(CheckpointDTOEntityAssembler.assembleWorkDayManySide(e, entity));
-        entity.setCheckpoints(checkpoints);
+        Set<Event> events = new HashSet<>();
+        for(EventDTO e : dto.getEvents())
+            events.add(EventDTOEntityAssembler.assembleWorkDayManySide(e, entity));
+        entity.setEvents(events);
 
         return entity;
     }
@@ -46,10 +48,10 @@ public class WorkDayDTOEntityAssembler implements AbstractDTOEntityAssembler<Wor
         WorkDay entity = getWorkDay(dto);
         if (entity == null) return null;
 
-        Set<Checkpoint> checkpoints = new HashSet<>();
-        for(CheckpointDTO e : dto.getEvents())
-            checkpoints.add(CheckpointDTOEntityAssembler.assembleWorkDayManySide(e, entity));
-        entity.setCheckpoints(checkpoints);
+        Set<Event> events = new HashSet<>();
+        for(EventDTO e : dto.getEvents())
+            events.add(EventDTOEntityAssembler.assembleWorkDayManySide(e, entity));
+        entity.setEvents(events);
 
         return entity;
     }
