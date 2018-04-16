@@ -2,6 +2,7 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.model.entities.Checkpoint;
+import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
@@ -9,20 +10,20 @@ public class CheckpointDTOEntityAssembler implements AbstractDTOEntityAssembler<
     @Override
     public Checkpoint assemble(CheckpointDTO dto) {
         if(dto == null) return null;
-        return getEvent(dto, WorkDayDTOEntityAssembler.assembleEventOneSide(dto.getWorkDay()));
+        return getEvent(dto, EventDTOEntityAssembler.assembleCheckpointOneSide(dto.getEvent()));
     }
 
-    public static Checkpoint assembleWorkDayManySide(CheckpointDTO dto, WorkDay workDay) {
-        return getEvent(dto, workDay);
+    public static Checkpoint assembleEventManySide(CheckpointDTO dto, Event event) {
+        return getEvent(dto, event);
     }
 
-    private static Checkpoint getEvent(CheckpointDTO dto, WorkDay workDay) {
+    private static Checkpoint getEvent(CheckpointDTO dto, Event event) {
         if(dto == null)
             return null;
 
         return new Checkpoint(
                 dto.getId(),
-                workDay,
+                event,
                 DTOEntityAssembler.getEntity(dto.getPerson()),
                 dto.getTime(),
                 dto.isIn()

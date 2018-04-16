@@ -16,7 +16,7 @@ public class Checkpoint implements iEntity<Checkpoint, Integer> {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private WorkDay workDay;
+    private Event event;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -31,16 +31,16 @@ public class Checkpoint implements iEntity<Checkpoint, Integer> {
     public Checkpoint() {
     }
 
-    public Checkpoint(WorkDay workDay, Person person, LocalTime time, boolean isIn) {
-        this.workDay = workDay;
+    public Checkpoint(Event event, Person person, LocalTime time, boolean isIn) {
+        this.event = event;
         this.person = person;
         this.time = time.minusNanos(time.getNano());
         this.isIn = isIn;
     }
 
-    public Checkpoint(int id, WorkDay workDay, Person person, LocalTime time, boolean isIn) {
+    public Checkpoint(int id, Event event, Person person, LocalTime time, boolean isIn) {
         this.id = id;
-        this.workDay = workDay;
+        this.event = event;
         this.person = person;
         this.time = time.minusNanos(time.getNano());
         this.isIn = isIn;
@@ -62,12 +62,12 @@ public class Checkpoint implements iEntity<Checkpoint, Integer> {
         this.person = person;
     }
 
-    public WorkDay getWorkDay() {
-        return workDay;
+    public Event getEvent() {
+        return event;
     }
 
-    private void setWorkDay(WorkDay day) {
-        this.workDay = day;
+    private void setEvent(Event day) {
+        this.event = day;
     }
 
     public LocalTime getTime() {
@@ -93,7 +93,7 @@ public class Checkpoint implements iEntity<Checkpoint, Integer> {
 
     @Override
     public int hashCode() {
-        return (Integer.toString(person.hashCode()) + workDay.hashCode() + time).hashCode();
+        return (Integer.toString(person.hashCode()) + event.hashCode() + time).hashCode();
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Checkpoint implements iEntity<Checkpoint, Integer> {
         if (!(o instanceof Checkpoint)) return false;
 
         Checkpoint e = (Checkpoint) o;
-        return this.workDay.equals(e.workDay) &&
+        return this.event.equals(e.event) &&
                 this.time.equals(e.time) &&
                 this.person.equals(e.person);
     }

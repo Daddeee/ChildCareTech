@@ -5,14 +5,14 @@ import java.time.LocalTime;
 
 public class CheckpointDTO implements Serializable {
     private int id;
-    private WorkDayDTO workDay;
+    private EventDTO event;
     private PersonDTO person;
     private LocalTime time;
     private boolean isIn;
 
-    public CheckpointDTO(int id, WorkDayDTO workDay, PersonDTO person, LocalTime time, boolean isIn) {
+    public CheckpointDTO(int id, EventDTO event, PersonDTO person, LocalTime time, boolean isIn) {
         this.id = id;
-        this.workDay = workDay;
+        this.event = event;
         this.person = person;
         this.time = time;
         this.isIn = isIn;
@@ -22,12 +22,12 @@ public class CheckpointDTO implements Serializable {
         return id;
     }
 
-    public WorkDayDTO getWorkDay() {
-        return workDay;
+    public EventDTO getEvent() {
+        return event;
     }
 
-    public void setWorkDay(WorkDayDTO workDay) {
-        this.workDay = workDay;
+    public void setEvent(EventDTO event) {
+        this.event = event;
     }
 
     public PersonDTO getPerson() {

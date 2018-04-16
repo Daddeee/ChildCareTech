@@ -6,6 +6,7 @@ import ChildCareTech.model.iEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "workDay_id"}))
@@ -25,6 +26,9 @@ public class Event implements iEntity<Event, Integer> {
     private LocalTime endTime;
 
     private EventStatus eventStatus;
+
+    @OneToMany
+    private Set<Checkpoint> checkpoints;
 
     public Event(int id, String name, WorkDay workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus){
         this.id = id;
@@ -70,5 +74,13 @@ public class Event implements iEntity<Event, Integer> {
 
     public EventStatus getEventStatus() {
         return eventStatus;
+    }
+
+    public Set<Checkpoint> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void setCheckpoints(Set<Checkpoint> checkpoints) {
+        this.checkpoints = checkpoints;
     }
 }

@@ -7,11 +7,17 @@ import ChildCareTech.model.entities.Event;
 public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
     @Override
     public EventDTO getDTO(Event entity) {
+        if(entity == null) return null;
         return getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
     }
 
     public static EventDTO getWorkDayManySide(Event entity, WorkDayDTO workDayDTO){
         return getEventDTO(entity, workDayDTO);
+    }
+
+    public static EventDTO getCheckpointOneSide(Event entity){
+        if(entity == null) return null;
+        return getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
     }
 
     private static EventDTO getEventDTO(Event entity, WorkDayDTO workDayDTO){
