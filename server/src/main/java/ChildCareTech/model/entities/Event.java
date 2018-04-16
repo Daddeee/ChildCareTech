@@ -102,4 +102,9 @@ public class Event implements iEntity<Event, Integer> {
     public int hashCode() {
         return (name + workDay.hashCode()).hashCode();
     }
+
+    @Override
+    public String toString() {
+        return getName() + " [" + getBeginTime().toString() + " | " + getEndTime().toString() + "] " + getEventStatus().toString();
+    }
 }

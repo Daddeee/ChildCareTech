@@ -5,10 +5,16 @@ import ChildCareTech.utils.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class WorkDayDAO extends AbstractGenericDAO<WorkDay, Integer> {
     public WorkDayDAO() {
         super(WorkDay.class);
+    }
+
+    public WorkDay tomorrow(WorkDay today){
+        List<WorkDay> result = read("date", today.getDate().plusDays(1).toString());
+        return result.isEmpty() ? null : result.get(0);
     }
 
     public LocalDate getMinPersistentDate(){

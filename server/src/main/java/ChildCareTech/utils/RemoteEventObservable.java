@@ -22,6 +22,7 @@ public class RemoteEventObservable {
 
     private RemoteEventObservable() {
         observers = new ArrayList<>();
+        plannedEvents = new ArrayList<>();
     }
 
     public List<Event> getPlannedEvents() {
