@@ -47,6 +47,8 @@ public interface UserSession extends Remote {
     void generateDays(DayGenerationSettingsDTO settings) throws RemoteException;
     WorkDayDTO getCurrentWorkDay() throws RemoteException;
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
+    LocalDate getMinSavedDate() throws RemoteException;
+    LocalDate getMaxSavedDate() throws RemoteException;
 
     void saveCheckpoint(String fiscalCode, EventDTO event, LocalTime time) throws CheckpointFailedException, RemoteException;
 

@@ -35,6 +35,44 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public LocalDate getMinSavedDate() {
+        LocalDate result = null;
+        Transaction tx = null;
+        WorkDayDAO workDayDAO = new WorkDayDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        workDayDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            result = workDayDAO.getMinPersistentDate();
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
+    public LocalDate getMaxSavedDate() {
+        LocalDate result = null;
+        Transaction tx = null;
+        WorkDayDAO workDayDAO = new WorkDayDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        workDayDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            result = workDayDAO.getMaxPersistentDate();
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
     public void saveCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time) throws CheckpointFailedException {
         PersonDAO personDAO = new PersonDAO();
         Person person;

@@ -4,9 +4,9 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
+import ChildCareTech.utils.RestrictedDatePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class WorkDayController {
     @FXML
     protected TableView<EventDTO> eventsTable;
     @FXML
-    protected DatePicker workDayDatePicker;
+    protected RestrictedDatePicker workDayDatePicker;
 
     @FXML
     public void updateTable(ActionEvent event){
