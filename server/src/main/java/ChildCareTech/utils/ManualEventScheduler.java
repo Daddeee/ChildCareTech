@@ -77,6 +77,9 @@ public class ManualEventScheduler implements Runnable{
                 case "next":
                     System.out.println(toPlan.getDate().toString());
                     break;
+                case "reset":
+                    reset();
+                    break;
                 default:
                     break;
             }
@@ -125,6 +128,12 @@ public class ManualEventScheduler implements Runnable{
         for(int i = 0; i < plannedEvents.size(); i++){
             System.out.println(i + ": " + plannedEvents.get(i).toString());
         }
+    }
+
+    private void reset(){
+        planned = null;
+        toPlan = CurrentWorkDayService.getCurrent();
+        runDailyScheduling();
     }
 
     private void runDailyScheduling(){
