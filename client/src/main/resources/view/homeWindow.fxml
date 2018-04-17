@@ -28,7 +28,7 @@
             <children>
                 <Button fx:id="kidsAnagraphicsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kidAnagraphicsButtonAction" prefHeight="80.0" prefWidth="80.0" text="BAMBINI">
                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </VBox.margin>
                     <font>
                         <Font size="9.0" />
@@ -38,13 +38,13 @@
                <font>
                   <Font size="9.0" />
                </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
-               </VBox.margin>
+                <VBox.margin>
+                    <Insets bottom="10.0" left="10.0" right="10.0"/>
+                </VBox.margin>
             </Button>
                 <Button fx:id="tripButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#tripButtonAction" prefHeight="80.0" prefWidth="80.0" text="GITE">
                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
                     <font>
                         <Font size="9.0" />
@@ -54,7 +54,7 @@
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#busButtonAction"
                         prefHeight="80.0" prefWidth="80.0" text="BUS">
                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                        <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
                     <font>
                         <Font size="9.0"/>
@@ -64,7 +64,7 @@
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#workDayButtonAction"
                         prefHeight="80.0" prefWidth="80.0" text="REPORT EVENTI">
                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                        <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
                     <font>
                         <Font size="9.0"/>
@@ -74,7 +74,7 @@
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#logoutButtonAction" prefHeight="80.0"
                         prefWidth="80.0" text="LOGOUT">
                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
                     <font>
                         <Font size="9.0" />
