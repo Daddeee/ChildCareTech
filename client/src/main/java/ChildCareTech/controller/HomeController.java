@@ -68,6 +68,19 @@ public class HomeController {
             });
             contextMenu.getItems().add(codeInput);
 
+            final MenuItem eventReport = new MenuItem("Consulta report");
+            eventReport.setOnAction(event -> {
+                contextMenu.hide();
+                alertLabel.setText("");
+                try {
+                    AccessorSceneManager.loadEventReport(row.getItem());
+                } catch (IOException ex) {
+                    System.err.println("Can't load eventReport window");
+                    ex.printStackTrace();
+                }
+            });
+            contextMenu.getItems().add(eventReport);
+
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                             .then((ContextMenu) null)

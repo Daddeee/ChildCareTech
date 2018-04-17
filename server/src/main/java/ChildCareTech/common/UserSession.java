@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 public interface UserSession extends Remote {
 
@@ -50,6 +51,7 @@ public interface UserSession extends Remote {
     LocalDate getMinSavedDate() throws RemoteException;
     LocalDate getMaxSavedDate() throws RemoteException;
 
+    Set<CheckpointDTO> getEventCheckpoints(EventDTO eventDTO) throws RemoteException;
     void saveCheckpoint(String fiscalCode, EventDTO event, LocalTime time) throws CheckpointFailedException, RemoteException;
 
     void logout() throws RemoteException;

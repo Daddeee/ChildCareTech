@@ -23,9 +23,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private User user;
@@ -70,6 +68,33 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         }
 
         return result;
+    }
+
+    @Override
+    public Set<CheckpointDTO> getEventCheckpoints(EventDTO eventDTO) {
+        Event result;
+        EventDTO resultDTO = null;
+        EventDAO eventDAO = new EventDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        eventDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            result = eventDAO.read(eventDTO.getId());
+            eventDAO.initializeLazyRelations(result);
+            resultDTO = DTOFactory.getDTO(result);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return resultDTO == null ? Collections.emptySet() : resultDTO.getCheckpoints();
     }
 
     @Override

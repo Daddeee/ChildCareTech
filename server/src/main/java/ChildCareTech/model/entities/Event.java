@@ -27,7 +27,7 @@ public class Event implements iEntity<Event, Integer> {
 
     private EventStatus eventStatus;
 
-    @OneToMany
+    @OneToMany(mappedBy = "event")
     private Set<Checkpoint> checkpoints;
 
     public Event(){}

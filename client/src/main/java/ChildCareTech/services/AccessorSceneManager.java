@@ -31,6 +31,7 @@ public class AccessorSceneManager {
     private static FXMLLoader showBusLoader;
     private static FXMLLoader updateBusLoader;
     private static FXMLLoader codeInputLoader;
+    private static FXMLLoader eventReportLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -46,6 +47,7 @@ public class AccessorSceneManager {
     private static Scene showBusScene;
     private static Scene updateBusScene;
     private static Scene codeInputScene;
+    private static Scene eventReportScene;
 
     private AccessorSceneManager() {
     }
@@ -78,6 +80,20 @@ public class AccessorSceneManager {
 
         try {
             AccessorStageService.changeScene(codeInputScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadEventReport(EventDTO eventDTO) throws IOException {
+        eventReportLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/eventReportWindow.fxml"));
+        eventReportScene = sceneInit(eventReportLoader, "/style/eventReportWindow.css");
+
+        EventReportController controller = eventReportLoader.getController();
+        controller.initData(eventDTO);
+
+        try {
+            AccessorStageService.changeScene(eventReportScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }

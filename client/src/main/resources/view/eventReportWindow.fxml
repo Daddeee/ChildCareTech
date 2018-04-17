@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ChildCareTech.controller.EventReportController"
-            prefHeight="700.0" prefWidth="1000.0">
+            fx:controller="ChildCareTech.controller.EventReportController">
+    <TableView fx:id="reportTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
+               prefHeight="600.0" prefWidth="1000.0" editable="true">
+        <columns>
+            <TableColumn fx:id="fiscalCodeColumn" prefWidth="250.0" text="Codice Fiscale">
+                <cellValueFactory><PropertyValueFactory property="fiscalCode" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="firstNameColumn" prefWidth="250.0" text="Nome">
+                <cellValueFactory><PropertyValueFactory property="firstName" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="lastNameColumn" prefWidth="250.0" text="Cognome">
+                <cellValueFactory><PropertyValueFactory property="lastName" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="recordTimeColumn" prefWidth="250.0" text="Orario registrato">
+                <cellValueFactory><PropertyValueFactory property="recordTime" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
 </AnchorPane>
