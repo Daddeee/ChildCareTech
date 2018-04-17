@@ -19,6 +19,7 @@ public class MainSceneManager {
     private static FXMLLoader adultAnagraphicsLoader;
     private static FXMLLoader busLoader;
     private static FXMLLoader dayGenerationLoader;
+    private static FXMLLoader workDayLoader;
     
     private static Scene loginScene;
     private static Scene homeScene;
@@ -27,6 +28,7 @@ public class MainSceneManager {
     private static Scene adultAnagraphicsScene;
     private static Scene busScene;
     private static Scene dayGenerationScene;
+    private static Scene workDayScene;
 
     private MainSceneManager() {
     }
@@ -60,6 +62,16 @@ public class MainSceneManager {
         try {
             MainStageService.changeScene(homeScene);
         } catch (NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void loadWorkDay() throws IOException {
+        workDayLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/workDayWindow.fxml"));
+        workDayScene = sceneInit(workDayLoader, "/style/workDayWindow.css");
+        try{
+            MainStageService.changeScene(workDayScene);
+        } catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
     }

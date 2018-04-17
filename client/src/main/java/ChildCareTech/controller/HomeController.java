@@ -135,6 +135,16 @@ public class HomeController {
     }
 
     @FXML
+    protected void workDayButtonAction(ActionEvent ev){
+        try {
+            MainSceneManager.loadWorkDay();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void logoutButtonAction(ActionEvent action) {
         SessionService.logoutAttempt();
         try {
