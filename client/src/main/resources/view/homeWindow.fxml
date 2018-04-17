@@ -115,9 +115,10 @@
                   maxWidth="-Infinity"
                   minHeight="-Infinity"
                   minWidth="-Infinity">
-                <HBox>
-                    <Label fx:id="currentDate" prefWidth="300"/>
-                </HBox>
+                <VBox>
+                    <Label fx:id="currentDate"/>
+                    <Label fx:id="alertLabel" textFill="#ff4444"/>
+                </VBox>
             </VBox>
         </VBox>
     </children>

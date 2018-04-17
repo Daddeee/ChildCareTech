@@ -2,10 +2,12 @@ package ChildCareTech.common;
 
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface UserSession extends Remote {
@@ -45,6 +47,8 @@ public interface UserSession extends Remote {
     void generateDays(DayGenerationSettingsDTO settings) throws RemoteException;
     WorkDayDTO getCurrentWorkDay() throws RemoteException;
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
+
+    void saveCheckpoint(String fiscalCode, EventDTO event, LocalTime time) throws CheckpointFailedException, RemoteException;
 
     void logout() throws RemoteException;
 }

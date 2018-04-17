@@ -1,6 +1,7 @@
 package ChildCareTech.services;
 
 import ChildCareTech.common.DTO.BusDTO;
+import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.controller.*;
 import ChildCareTech.services.ObservableDTOs.ObservableAdult;
@@ -29,6 +30,7 @@ public class AccessorSceneManager {
     private static FXMLLoader addBusLoader;
     private static FXMLLoader showBusLoader;
     private static FXMLLoader updateBusLoader;
+    private static FXMLLoader codeInputLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -43,6 +45,7 @@ public class AccessorSceneManager {
     private static Scene addBusScene;
     private static Scene showBusScene;
     private static Scene updateBusScene;
+    private static Scene codeInputScene;
 
     private AccessorSceneManager() {
     }
@@ -64,6 +67,20 @@ public class AccessorSceneManager {
     }
     public static UpdateTripController getUpdateTripController() {
         return updateTripLoader.getController();
+    }
+
+    public static void loadCodeInput(EventDTO eventDTO) throws IOException {
+        codeInputLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/codeInputWindow.fxml"));
+        codeInputScene = sceneInit(codeInputLoader, "/style/codeInputWindow.css");
+
+        CodeInputWindowController controller = codeInputLoader.getController();
+        controller.initData(eventDTO);
+
+        try {
+            AccessorStageService.changeScene(codeInputScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
     }
 
     public static void loadAddKid() throws IOException {

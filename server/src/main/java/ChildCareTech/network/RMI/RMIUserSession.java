@@ -1,8 +1,10 @@
 package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.*;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.DAO.*;
@@ -20,6 +22,7 @@ import org.hibernate.Transaction;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +32,48 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
+    }
+
+    @Override
+    public void saveCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time) throws CheckpointFailedException {
+        PersonDAO personDAO = new PersonDAO();
+        Person person;
+        EventDAO eventDAO = new EventDAO();
+        Event event;
+        Checkpoint record;
+        CheckpointDAO checkpointDAO = new CheckpointDAO();
+
+        if(fiscalCode == null || eventDTO == null || time == null)
+            throw new CheckpointFailedException("Uno o più parametri mancanti");
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        personDAO.setSession(session);
+        eventDAO.setSession(session);
+        checkpointDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            person = personDAO.read(fiscalCode);
+            if(person == null)
+                throw new CheckpointFailedException("Persona non trovata");
+
+            event = eventDAO.read(eventDTO.getId());
+            eventDAO.initializeLazyRelations(event);
+            if(event == null || !event.getEventStatus().equals(EventStatus.OPEN))
+                throw new CheckpointFailedException("Evento non disponibile");
+
+            record = new Checkpoint(event, person, time, false);
+            checkpointDAO.create(record);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new CheckpointFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package ChildCareTech;
 
 import ChildCareTech.network.RMI.RMIServer;
-import ChildCareTech.utils.EventScheduler;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.ManualEventScheduler;
 import ChildCareTech.utils.Settings;

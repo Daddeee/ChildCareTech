@@ -6,8 +6,7 @@ import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "events",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"event_id", "person_fiscalCode"})
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"event_id", "person_fiscalCode"})
 )
 public class Checkpoint implements iEntity<Checkpoint, Integer> {
     @Id
