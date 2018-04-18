@@ -54,4 +54,9 @@ public class BusDTO implements Serializable {
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
+
+    @Override
+    public String toString() {
+        return licensePlate;
+    }
 }
