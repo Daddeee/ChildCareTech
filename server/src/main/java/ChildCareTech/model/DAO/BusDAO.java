@@ -12,9 +12,14 @@ public class BusDAO extends AbstractGenericDAO<Bus, Integer> {
     @Override
     public void initializeLazyRelations(Bus obj) {
         initializeTripPartecipationRelation(obj);
+        initializeTripRelation(obj);
     }
 
     public void initializeTripPartecipationRelation(Bus obj) {
         Hibernate.initialize(obj.getTripPartecipations());
+    }
+
+    public void initializeTripRelation(Bus obj) {
+        Hibernate.initialize(obj.getTrips());
     }
 }
