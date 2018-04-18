@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface RemoteEventObserver extends Remote {
     void update(WorkDayDTO workDayDTO) throws RemoteException;
+    void unexport() throws RemoteException;
 }

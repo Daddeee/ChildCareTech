@@ -18,6 +18,11 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
     public RMIRemoteEventObserver() throws RemoteException {}
 
     @Override
+    public void unexport() throws RemoteException {
+        UnicastRemoteObject.unexportObject(this, true);
+    }
+
+    @Override
     public void update(WorkDayDTO workDayDTO) {
         today = workDayDTO;
         Platform.runLater(() -> MainSceneManager.getHomeController().refresh(today));

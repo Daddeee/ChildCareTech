@@ -52,6 +52,7 @@ public class SessionService {
         try {
             if (session != null) session.logout();
             if (sessionFactory != null) sessionFactory.removeRemoteEventObserver(observer);
+            if (observer != null) observer.unexport();
         } catch (RemoteException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
