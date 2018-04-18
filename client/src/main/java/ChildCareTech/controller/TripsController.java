@@ -91,6 +91,19 @@ public class TripsController {
             });
             contextMenu.getItems().add(updateTrip);
 
+            final MenuItem manageTripPartecipations = new MenuItem("Iscrizioni");
+            manageTripPartecipations.setOnAction(event -> {
+                contextMenu.hide();
+                try {
+                    AccessorSceneManager.loadTripPartecipationManagement(row.getItem());
+                } catch (IOException ex) {
+                    System.err.println("Can't load trip partecipation window");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(manageTripPartecipations);
+
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                             .then((ContextMenu) null)

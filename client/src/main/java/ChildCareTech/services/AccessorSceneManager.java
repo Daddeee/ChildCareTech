@@ -32,6 +32,7 @@ public class AccessorSceneManager {
     private static FXMLLoader updateBusLoader;
     private static FXMLLoader codeInputLoader;
     private static FXMLLoader eventReportLoader;
+    private static FXMLLoader tripPartecipationanagementLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -48,6 +49,7 @@ public class AccessorSceneManager {
     private static Scene updateBusScene;
     private static Scene codeInputScene;
     private static Scene eventReportScene;
+    private static Scene tripPartecipationanagementScene;
 
     private AccessorSceneManager() {
     }
@@ -80,6 +82,20 @@ public class AccessorSceneManager {
 
         try {
             AccessorStageService.changeScene(codeInputScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadTripPartecipationManagement(TripDTO tripDTO) throws IOException{
+        tripPartecipationanagementLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/tripPartecipationWindow.fxml"));
+        tripPartecipationanagementScene = sceneInit(tripPartecipationanagementLoader, "/style/tripPartecipationWindow.css");
+
+        TripPartecipationController controller = tripPartecipationanagementLoader.getController();
+        controller.initData(tripDTO);
+
+        try{
+            AccessorStageService.changeScene(tripPartecipationanagementScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
