@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.*;
+import ChildCareTech.utils.RestrictedDatePicker;
 import ChildCareTech.utils.TempRouteData;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -25,9 +26,9 @@ public class AddTripController {
     @FXML
     private TextField noteField;
     @FXML
-    private DatePicker depDateField;
+    private RestrictedDatePicker depDateField;
     @FXML
-    private DatePicker arrDateField;
+    private RestrictedDatePicker arrDateField;
     @FXML
     private Label alertLabel;
     @FXML

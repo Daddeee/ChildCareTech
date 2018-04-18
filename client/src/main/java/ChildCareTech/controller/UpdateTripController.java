@@ -6,6 +6,7 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
+import ChildCareTech.utils.RestrictedDatePicker;
 import ChildCareTech.utils.TempRouteData;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -26,9 +27,9 @@ public class UpdateTripController {
     @FXML
     private TextField noteField;
     @FXML
-    private DatePicker depDateField;
+    private RestrictedDatePicker depDateField;
     @FXML
-    private DatePicker arrDateField;
+    private RestrictedDatePicker arrDateField;
     @FXML
     private Label alertLabel;
     @FXML
