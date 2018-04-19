@@ -9,8 +9,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
-@Table(name = "foods",
-        uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Food implements iEntity<Food, Integer> {
 
     @Id

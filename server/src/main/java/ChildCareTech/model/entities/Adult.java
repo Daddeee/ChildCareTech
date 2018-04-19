@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Table(name = "adults")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
@@ -21,7 +20,6 @@ public class Adult implements iEntity<Adult, Integer> {
     private Person person;
 
     @ManyToMany
-    @JoinTable(name = "contacts")
     private Set<Kid> contacts;
 
     @Column(insertable = false, updatable = false)

@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
-@Table(name = "kids")
 public class Kid implements iEntity<Kid, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +26,6 @@ public class Kid implements iEntity<Kid, Integer> {
     private Pediatrist pediatrist;
 
     @ManyToMany
-    @JoinTable(name = "contacts")
     private Set<Adult> contacts;
 
     public Kid() {

@@ -7,11 +7,9 @@ import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Table(name = "canteens")
 public class Canteen implements iEntity<Canteen, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private int id;
 
     @Column(nullable = false, unique = true)

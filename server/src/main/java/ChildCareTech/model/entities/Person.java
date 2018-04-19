@@ -10,7 +10,6 @@ import java.util.Set;
 
 
 @javax.persistence.Entity
-@Table(name = "persons")
 public class Person implements iEntity<Person, String> {
     @Id
     @Column(length = 16)

@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @javax.persistence.Entity
-@Table(name = "meals",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "workDay_id"})
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"canteen_id", "mealNum", "workDay_id"}))
 public class Meal implements iEntity<Meal, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

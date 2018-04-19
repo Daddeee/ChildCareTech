@@ -7,9 +7,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
-@Table(name = "menus",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"meal_id", "numMenu"})
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"meal_id", "numMenu"}))
 public class Menu implements iEntity<Menu, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

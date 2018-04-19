@@ -7,9 +7,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
-@Table(name = "dishes",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "menu_id"})
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "menu_id"}))
 public class Dish implements iEntity<Dish, Integer> {
 
     @Id
@@ -24,7 +22,6 @@ public class Dish implements iEntity<Dish, Integer> {
     private Menu menu;
 
     @ManyToMany(targetEntity = Food.class)
-    @JoinTable(name = "dish_ingredients")
     private Set<Food> foods;
 
     public Dish() {

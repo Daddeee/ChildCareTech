@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Table(name = "buses")
 public class Bus implements iEntity<Bus, Integer> {
     private static final String LICENSE_PLATE_REGEX = "[a-zA-Z]{2}\\d{3}[a-zA-Z]{2}$";
 

@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "supplies",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"supplier_id", "food_id", "date"})
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"supplier_id", "food_id", "date"}))
 public class Supply implements iEntity<Supply, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

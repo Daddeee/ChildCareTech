@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Table(name = "workdays")
 public class WorkDay implements iEntity<WorkDay, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

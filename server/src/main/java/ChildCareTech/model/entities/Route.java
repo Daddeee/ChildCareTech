@@ -7,9 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "routes",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"trip_id", "routeNumber"})
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"trip_id", "routeNumber"}))
 public class Route implements iEntity<Route, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

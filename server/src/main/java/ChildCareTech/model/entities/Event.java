@@ -94,6 +94,7 @@ public class Event implements iEntity<Event, Integer> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Event)) return false;
+        if (this.id != 0 && ((Event) o).id != 0) return this.id == id;
         return this.name.equals(((Event) o).name) &&
                 this.workDay.equals(((Event) o).workDay);
     }

@@ -5,7 +5,6 @@ import ChildCareTech.model.iEntity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
 public class User implements iEntity<User, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

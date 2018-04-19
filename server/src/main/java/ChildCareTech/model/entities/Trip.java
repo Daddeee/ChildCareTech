@@ -14,8 +14,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @Entity
-@Table(name = "trips",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"meta", "depDate", "arrDate"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"meta", "depDate", "arrDate"}))
 @ValidTripDates(message = "La data di arrivo non può precedere la data di partenza.")
 @ValidRoutes(message ="Le tratte inserite non sono in sequenza.")
 public class Trip implements iEntity<Trip, Integer> {

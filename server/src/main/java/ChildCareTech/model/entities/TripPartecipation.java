@@ -5,8 +5,7 @@ import ChildCareTech.model.iEntity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "trip_partecipations",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"person_fiscalCode", "trip_id"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"person_fiscalCode", "trip_id"}))
 public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
