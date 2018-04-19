@@ -64,4 +64,9 @@ public class KidDTO implements Serializable {
     public void setContacts(Set<AdultDTO> contacts) {
         this.contacts = contacts;
     }
+
+    @Override
+    public String toString() {
+        return getPerson().getLastName() + " " + getPerson().getFirstName();
+    }
 }

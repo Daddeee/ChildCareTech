@@ -40,6 +40,8 @@
             false
         </property>
 
+        <property name="connection.pool_size">50</property>
+
         <!-- List of mapped entities -->
         <mapping class="ChildCareTech.model.entities.Person"/>
         <mapping class="ChildCareTech.model.entities.Adult"/>
