@@ -608,18 +608,23 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     public List<TripDTO> getAllTrips() {
         TripDAO dao = new TripDAO();
+        BusDAO busDao = new BusDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         List<TripDTO> tripsDTOCollection = new ArrayList<>();
         List<Trip> tripsCollection = new ArrayList<>();
         Transaction tx = null;
 
         dao.setSession(session);
+        busDao.setSession(session);
         try{
             tx = session.beginTransaction();
 
             tripsCollection = dao.readAll();
-            for(Trip t : tripsCollection)
+            for(Trip t : tripsCollection) {
                 dao.initializeLazyRelations(t);
+                for(Bus b : t.getBuses())
+                    busDao.initializeLazyRelations(b);
+            }
 
             tx.commit();
         } catch(HibernateException e){
@@ -783,6 +788,37 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             busesCollection = dao.readAll();
+            for(Bus b : busesCollection)
+                dao.initializeLazyRelations(b);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Bus b : busesCollection)
+            busesDTOCollection.add(DTOFactory.getDTO(b));
+
+        return busesDTOCollection;
+    }
+
+    @Override
+    public Collection<BusDTO> getAvailableBuses(TripDTO tripDTO) {
+        BusDAO dao = new BusDAO();
+        List<BusDTO> busesDTOCollection = new ArrayList<>();
+        List<Bus> busesCollection = new ArrayList<>();
+        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        dao.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            busesCollection = dao.getAvailableBuses(trip);
             for(Bus b : busesCollection)
                 dao.initializeLazyRelations(b);
 

@@ -8,6 +8,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -41,6 +42,7 @@ public interface UserSession extends Remote {
     void removeBus(BusDTO bus) throws RemoteException;
     void updateBus(BusDTO newBus) throws RemoteException, UpdateFailedException;
     List<BusDTO> getAllBuses() throws RemoteException;
+    Collection<BusDTO> getAvailableBuses(TripDTO tripDTO) throws RemoteException;
 
     boolean isFirstEverStartup() throws RemoteException;
     void setFirstEverStartup(boolean value) throws RemoteException;

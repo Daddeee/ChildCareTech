@@ -6,12 +6,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="ChildCareTech.controller.TripPartecipationController"
             prefHeight="700.0" prefWidth="1000.0">
     <VBox>
         <children>
+            <HBox>
+                <ComboBox fx:id="availableBusesComboBox"/>
+                <Button fx:id="addBusButton" onAction="#addBusButtonAction" text="Aggiungi"/>
+            </HBox>
             <TableView fx:id="busesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
                        prefHeight="200.0" prefWidth="1000.0">
                 <columns>
