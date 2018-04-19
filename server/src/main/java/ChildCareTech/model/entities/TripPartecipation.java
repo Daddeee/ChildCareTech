@@ -11,7 +11,7 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     private Person person;
 
@@ -19,7 +19,7 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
     @JoinColumn(nullable = false)
     private Trip trip;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     private Bus bus;
 
@@ -86,6 +86,7 @@ public class TripPartecipation implements iEntity<TripPartecipation, Integer> {
 
     @Override
     public int hashCode() {
+        if(person == null || trip == null) return super.hashCode();
         return (Integer.toString(person.hashCode()) + trip.hashCode()).hashCode();
     }
 }
