@@ -107,7 +107,7 @@ public class Trip implements iEntity<Trip, Integer> {
     }
 
     public Set<TripPartecipation> getTripPartecipations() {
-        return tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
+        return tripPartecipations;
     }
 
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
