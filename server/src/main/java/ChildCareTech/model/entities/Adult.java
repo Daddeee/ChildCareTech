@@ -20,6 +20,7 @@ public class Adult implements iEntity<Adult, Integer> {
     private Person person;
 
     @ManyToMany
+    @JoinTable(joinColumns = { @JoinColumn(name ="kid_id") }, inverseJoinColumns = { @JoinColumn(name = "adult_id") })
     private Set<Kid> contacts;
 
     @Column(insertable = false, updatable = false)

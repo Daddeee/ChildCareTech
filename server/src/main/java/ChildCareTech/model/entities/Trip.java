@@ -47,6 +47,7 @@ public class Trip implements iEntity<Trip, Integer> {
     private Set<TripPartecipation> tripPartecipations;
 
     @ManyToMany
+    @JoinTable(joinColumns = { @JoinColumn(name = "trip_id") }, inverseJoinColumns = { @JoinColumn(name = "bus_id") })
     private Set<Bus> buses;
 
     public Trip() {

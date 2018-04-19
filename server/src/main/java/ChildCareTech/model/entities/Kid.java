@@ -25,7 +25,7 @@ public class Kid implements iEntity<Kid, Integer> {
     @ManyToOne
     private Pediatrist pediatrist;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "contacts")
     private Set<Adult> contacts;
 
     public Kid() {

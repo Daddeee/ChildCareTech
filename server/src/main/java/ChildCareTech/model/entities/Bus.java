@@ -27,7 +27,7 @@ public class Bus implements iEntity<Bus, Integer> {
     @Column(nullable = false)
     private int capacity;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "buses")
     private Set<Trip> trips;
 
     public Bus() {
