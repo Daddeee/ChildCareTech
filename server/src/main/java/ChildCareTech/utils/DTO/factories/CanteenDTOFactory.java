@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Meal;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,10 +15,7 @@ public class CanteenDTOFactory implements AbstractDTOFactory<Canteen, CanteenDTO
         CanteenDTO dto = getCanteenDTO(entity);
         if (dto == null) return null;
 
-        Set<MealDTO> meals = new HashSet<>();
-        for (Meal m : entity.getMeals())
-            meals.add(MealDTOFactory.getCanteenManySide(m, dto));
-        dto.setMeals(meals);
+        loadMealRelationship(entity, dto);
 
         return dto;
     }
@@ -36,6 +34,16 @@ public class CanteenDTOFactory implements AbstractDTOFactory<Canteen, CanteenDTO
                 null
         );
         return dto;
+    }
+
+    private static void loadMealRelationship(Canteen entity, CanteenDTO dto) {
+        Set<MealDTO> meals = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getMeals()))
+            for (Meal m : entity.getMeals())
+                meals.add(MealDTOFactory.getCanteenManySide(m, dto));
+
+        dto.setMeals(meals);
     }
 }
 

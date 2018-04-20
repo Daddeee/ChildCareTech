@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Menu;
 import ChildCareTech.utils.DTO.DTOFactory;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,10 +21,7 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
                 DrinkDTOFactory.getMenuOneSide(entity.getDrink(), dto)
         );
 
-        Set<DishDTO> dishes = new HashSet<>();
-        for (Dish d : entity.getDishes())
-            dishes.add(DishDTOFactory.getMenuManySide(d, dto));
-        dto.setDishes(dishes);
+        loadDishRelationship(entity, dto);
 
         return dto;
     }
@@ -47,10 +45,7 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
                 drinkDTO
         );
 
-        Set<DishDTO> dishes = new HashSet<>();
-        for (Dish d : entity.getDishes())
-            dishes.add(DishDTOFactory.getMenuManySide(d, dto));
-        dto.setDishes(dishes);
+        loadDishRelationship(entity, dto);
 
         return dto;
     }
@@ -67,6 +62,16 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
                 null
         );
         return dto;
+    }
+
+    private static void loadDishRelationship(Menu entity, MenuDTO dto) {
+        Set<DishDTO> dishes = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getDishes()))
+            for (Dish d : entity.getDishes())
+                dishes.add(DishDTOFactory.getMenuManySide(d, dto));
+
+        dto.setDishes(dishes);
     }
 }
 

@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Supply;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,10 +15,7 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
         FoodDTO dto = getFoodDTO(entity);
         if(dto == null) return null;
 
-        Set<SupplyDTO> supplies = new HashSet<>();
-        for (Supply s : entity.getSupplies())
-            supplies.add(SupplyDTOFactory.getFoodManySide(s, dto));
-        dto.setSupplies(supplies);
+        loadSupplyRelationship(entity, dto);
 
         return dto;
     }
@@ -37,6 +35,16 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
                 entity.getResidualQuantity(),
                 null
         );
+    }
+
+    private void loadSupplyRelationship(Food entity, FoodDTO dto) {
+        Set<SupplyDTO> supplies = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getSupplies()))
+            for (Supply s : entity.getSupplies())
+                supplies.add(SupplyDTOFactory.getFoodManySide(s, dto));
+
+        dto.setSupplies(supplies);
     }
 }
 

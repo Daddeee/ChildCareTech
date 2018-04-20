@@ -9,6 +9,7 @@ import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,15 +20,8 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
         WorkDayDTO dto = getWorkDayDTO(entity);
         if (dto == null) return null;
 
-        Set<MealDTO> meals = new HashSet<>();
-        for (Meal m : entity.getMeals())
-            meals.add(MealDTOFactory.getWorkDayManySide(m, dto));
-        dto.setMeals(meals);
-
-        Set<EventDTO> events = new HashSet<>();
-        for (Event e : entity.getEvents())
-            events.add(EventDTOFactory.getWorkDayManySide(e, dto));
-        dto.setEvents(events);
+        loadMealRelationship(entity, dto);
+        loadEventRelationship(entity, dto);
 
         return dto;
     }
@@ -36,10 +30,7 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
         WorkDayDTO dto = getWorkDayDTO(entity);
         if (dto == null) return null;
 
-        Set<EventDTO> events = new HashSet<>();
-        for (Event e : entity.getEvents())
-            events.add(EventDTOFactory.getWorkDayManySide(e, dto));
-        dto.setEvents(events);
+        loadEventRelationship(entity, dto);
 
         return dto;
     }
@@ -48,10 +39,7 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
         WorkDayDTO dto = getWorkDayDTO(entity);
         if (dto == null) return null;
 
-        Set<MealDTO> meals = new HashSet<>();
-        for (Meal m : entity.getMeals())
-            meals.add(DTOFactory.getDTO(m));
-        dto.setMeals(meals);
+        loadMealRelationship(entity, dto);
 
         return dto;
     }
@@ -70,6 +58,26 @@ public class WorkDayDTOFactory implements AbstractDTOFactory<WorkDay, WorkDayDTO
                 null
         );
         return dto;
+    }
+
+    private static void loadEventRelationship(WorkDay entity, WorkDayDTO dto) {
+        Set<EventDTO> events = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getEvents()))
+            for (Event e : entity.getEvents())
+                events.add(EventDTOFactory.getWorkDayManySide(e, dto));
+
+        dto.setEvents(events);
+    }
+
+    private static void loadMealRelationship(WorkDay entity, WorkDayDTO dto) {
+        Set<MealDTO> meals = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getMeals()))
+            for (Meal m : entity.getMeals())
+                meals.add(MealDTOFactory.getWorkDayManySide(m, dto));
+
+        dto.setMeals(meals);
     }
 }
 

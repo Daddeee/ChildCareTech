@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Event;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,10 +16,7 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
         if(entity == null) return null;
         EventDTO dto =  getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
 
-        Set<CheckpointDTO> checkpoints = new HashSet<>();
-        for(Checkpoint c : entity.getCheckpoints())
-            checkpoints.add(CheckpointDTOFactory.getEventManySide(c, dto));
-        dto.setCheckpoints(checkpoints);
+        loadCheckpointRelationship(entity, dto);
 
         return dto;
     }
@@ -27,10 +25,7 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
         if(entity == null) return null;
         EventDTO dto =  getEventDTO(entity, workDayDTO);
 
-        Set<CheckpointDTO> checkpoints = new HashSet<>();
-        for(Checkpoint c : entity.getCheckpoints())
-            checkpoints.add(CheckpointDTOFactory.getEventManySide(c, dto));
-        dto.setCheckpoints(checkpoints);
+        loadCheckpointRelationship(entity, dto);
 
         return dto;
     }
@@ -53,5 +48,15 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
                 entity.getEventStatus(),
                 null
         );
+    }
+
+    private static void loadCheckpointRelationship(Event entity, EventDTO dto) {
+        Set<CheckpointDTO> checkpoints = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getCheckpoints()))
+            for(Checkpoint c : entity.getCheckpoints())
+                checkpoints.add(CheckpointDTOFactory.getEventManySide(c, dto));
+
+        dto.setCheckpoints(checkpoints);
     }
 }

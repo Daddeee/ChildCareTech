@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Staff;
 import ChildCareTech.utils.DTO.DTOFactory;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +23,11 @@ public class StaffDTOFactory implements AbstractDTOFactory<Staff, StaffDTO> {
         );
 
         Set<KidDTO> contacts = new HashSet<>();
-        for (Kid k : entity.getContacts())
-            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+
+        if(Hibernate.isInitialized(entity.getContacts()))
+            for (Kid k : entity.getContacts())
+                contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+
         dto.setContacts(contacts);
 
         return dto;

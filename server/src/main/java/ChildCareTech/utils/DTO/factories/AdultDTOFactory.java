@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.utils.DTO.DTOFactory;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,10 +16,7 @@ public class AdultDTOFactory implements AbstractDTOFactory<Adult, AdultDTO> {
         AdultDTO dto = getAdultDTO(entity);
         if(dto == null) return null;
 
-        Set<KidDTO> contacts = new HashSet<>();
-        for (Kid k : entity.getContacts())
-            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
-        dto.setContacts(contacts);
+        loadContactRelationship(entity, dto);
 
         return dto;
     }
@@ -36,6 +34,16 @@ public class AdultDTOFactory implements AbstractDTOFactory<Adult, AdultDTO> {
                 DTOFactory.getDTO(entity.getPerson()),
                 null
         );
+    }
+
+    private static void loadContactRelationship(Adult entity, AdultDTO dto) {
+        Set<KidDTO> contacts = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getContacts()))
+            for (Kid k : entity.getContacts())
+                contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+
+        dto.setContacts(contacts);
     }
 }
 

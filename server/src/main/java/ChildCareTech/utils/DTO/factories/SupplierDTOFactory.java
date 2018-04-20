@@ -7,6 +7,7 @@ import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Supplier;
 import ChildCareTech.model.entities.Supply;
 import ChildCareTech.utils.DTO.DTOFactory;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,16 +18,8 @@ public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, Supplier
         SupplierDTO dto = getSupplierDTO(entity);
         if (dto == null) return null;
 
-        Set<KidDTO> contacts = new HashSet<>();
-        for (Kid k : entity.getContacts())
-            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
-        dto.setContacts(contacts);
-
-
-        Set<SupplyDTO> supplies = new HashSet<>();
-        for (Supply s : entity.getSupplies())
-            supplies.add(SupplyDTOFactory.getSupplierManySide(s, dto));
-        dto.setSupplies(supplies);
+        loadContactRelationship(entity, dto);
+        loadSupplyRelationship(entity, dto);
 
         return dto;
     }
@@ -35,10 +28,7 @@ public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, Supplier
         SupplierDTO dto = getSupplierDTO(entity);
         if (dto == null) return null;
 
-        Set<KidDTO> contacts = new HashSet<>();
-        for (Kid k : entity.getContacts())
-            contacts.add(KidDTOFactory.getAdultContactsManySide(k));
-        dto.setContacts(contacts);
+        loadContactRelationship(entity, dto);
 
         return dto;
     }
@@ -54,6 +44,26 @@ public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, Supplier
                 null
         );
         return dto;
+    }
+
+    private static void loadContactRelationship(Supplier entity, SupplierDTO dto) {
+        Set<KidDTO> contacts = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getContacts()))
+            for (Kid k : entity.getContacts())
+                contacts.add(KidDTOFactory.getAdultContactsManySide(k));
+
+        dto.setContacts(contacts);
+    }
+
+    private static void loadSupplyRelationship(Supplier entity, SupplierDTO dto) {
+        Set<SupplyDTO> supplies = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getSupplies()))
+            for (Supply s : entity.getSupplies())
+                supplies.add(SupplyDTOFactory.getSupplierManySide(s, dto));
+
+        dto.setSupplies(supplies);
     }
 }
 
