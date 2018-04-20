@@ -15,6 +15,7 @@ import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
 import ChildCareTech.utils.WorkDaysGenerationUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -35,7 +36,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public TripDTO getTrip(int id) throws NoSuchElementException {
         TripDAO tripDAO = new TripDAO();
-        BusDAO busDAO = new BusDAO();
+
 
         Trip result = null;
         TripDTO resultDTO = null;
@@ -43,14 +44,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         tripDAO.setSession(session);
-        busDAO.setSession(session);
         try{
             tx = session.beginTransaction();
 
             result = tripDAO.read(id);
             tripDAO.initializeLazyRelations(result);
-            for(Bus b : result.getBuses())
-                busDAO.initializeLazyRelations(b);
 
             tx.commit();
         } catch(Exception e){
@@ -81,12 +79,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             trip = tripDAO.read(tripDTO.getId());
-            tripDAO.initializeLazyRelations(trip);
-            for(Bus b : trip.getBuses())
-                busDAO.initializeLazyRelations(b);
-
             bus = busDAO.read(busDTO.getId());
-            busDAO.initializeLazyRelations(bus);
 
             if (trip.getBuses() != null) {
                 trip.getBuses().add(bus);
@@ -255,8 +248,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
             result = workDayDAO.read("date", date.toString()).get(0);
             workDayDAO.initializeLazyRelations(result);
-            for(Event e : result.getEvents())
-                eventDAO.initializeLazyRelations(e);
 
             tx.commit();
         } catch (Exception e){
@@ -734,11 +725,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             tripsCollection = dao.readAll();
-            for(Trip t : tripsCollection) {
+            for(Trip t : tripsCollection)
                 dao.initializeLazyRelations(t);
-                for(Bus b : t.getBuses())
-                    busDao.initializeLazyRelations(b);
-            }
 
             tx.commit();
         } catch(HibernateException e){
@@ -912,11 +900,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             busesCollection = busDAO.readAll();
-            for(Bus b : busesCollection) {
+            for(Bus b : busesCollection)
                 busDAO.initializeLazyRelations(b);
-                for(Trip t : b.getTrips())
-                    tripDAO.initializeLazyRelations(t);
-            }
 
             tx.commit();
         } catch(HibernateException e){
@@ -948,12 +933,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             busesCollection = busDAO.getAvailableBuses(trip);
-            for(Bus b : busesCollection) {
-                busDAO.initializeLazyRelations(b);
-                for(Trip t : b.getTrips())
-                    tripDAO.initializeLazyRelations(t);
-            }
-
 
             tx.commit();
         } catch(HibernateException e){
