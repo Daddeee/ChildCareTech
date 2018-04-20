@@ -10,13 +10,11 @@ import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.ObservableDTOs.ObservableAdult;
 import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
-import ChildCareTech.services.ObservableDTOs.ObservablePersonInterface;
 import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
 
@@ -27,38 +25,38 @@ import java.util.List;
 public class AddKidController {
 
     @FXML
-    private TextField firstNameField;
+    protected TextField firstNameField;
     @FXML
-    private TextField lastNameField;
+    protected TextField lastNameField;
     @FXML
-    private TextField fiscalCodeField;
+    protected TextField fiscalCodeField;
     @FXML
-    private DatePicker birthDatePicker;
+    protected DatePicker birthDatePicker;
     @FXML
-    private TextField addressField;
+    protected TextField addressField;
     @FXML
-    private RadioButton maleButton;
+    protected RadioButton maleButton;
     @FXML
-    private RadioButton femaleButton;
+    protected RadioButton femaleButton;
     @FXML
-    private ComboBox<ObservableAdult> firstTutorComboBox;
+    protected ComboBox<ObservableAdult> firstTutorComboBox;
     @FXML
-    private ComboBox<ObservableAdult> secondTutorComboBox;
+    protected ComboBox<ObservableAdult> secondTutorComboBox;
     @FXML
-    private ComboBox<ObservablePediatrist> pediatristComboBox;
+    protected ComboBox<ObservablePediatrist> pediatristComboBox;
     @FXML
-    private Button cancelButton;
+    protected Button cancelButton;
     @FXML
-    private Button saveButton;
+    protected Button saveButton;
     @FXML
-    private Label alertLabel;
+    protected Label alertLabel;
 
-    private ToggleGroup group = new ToggleGroup();
-    private PersonDTO person;
-    private KidDTO kid;
-    private ObservableList<ObservableAdult> adults = FXCollections.observableArrayList();
-    private ObservableList<ObservablePediatrist> pediatrists = FXCollections.observableArrayList();
-    private KidAnagraphicController kidAnagraphicsController;
+    protected ToggleGroup group = new ToggleGroup();
+    protected PersonDTO person;
+    protected KidDTO kid;
+    protected ObservableList<ObservableAdult> adults = FXCollections.observableArrayList();
+    protected ObservableList<ObservablePediatrist> pediatrists = FXCollections.observableArrayList();
+    protected KidAnagraphicsController kidAnagraphicsController;
 
     @FXML
     public void initialize() {
@@ -89,12 +87,12 @@ public class AddKidController {
             SessionService.getSession().saveKid(kid);
             AccessorStageService.close();
         } catch (RemoteException ex) {
-            System.err.println("error closing stage");
             ex.printStackTrace();
         } catch(AddFailedException ex) {
             alertLabel.setText(ex.getMessage());
             ex.printStackTrace();
         } catch(NoSuchFieldException ex) {
+            System.err.println("error closing stage");
             ex.printStackTrace();
         }
         kidAnagraphicsController.refreshTable();

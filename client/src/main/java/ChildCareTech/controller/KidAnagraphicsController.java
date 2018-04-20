@@ -9,13 +9,12 @@ import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
 import ChildCareTech.services.SessionService;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
-public class KidAnagraphicController {
+public class KidAnagraphicsController {
 
     @FXML
     private Button addButton;
@@ -57,7 +56,7 @@ public class KidAnagraphicController {
     private ObservableList<ObservableKid> items = FXCollections.observableArrayList();
 
 
-    public KidAnagraphicController() { }
+    public KidAnagraphicsController() { }
 
     @FXML
     public void initialize() {
@@ -71,6 +70,7 @@ public class KidAnagraphicController {
         pediatristFCColumn.setCellValueFactory(new PropertyValueFactory<ObservableKid, String>("pediatristFC"));
         refreshTable();
         personTable.setItems(items);
+        initMenu();
     }
 
     @FXML
@@ -97,16 +97,68 @@ public class KidAnagraphicController {
         List<KidDTO> kidDTOList = new ArrayList<>();
         try {
             kidDTOList = SessionService.getSession().getAllKids();
-        } catch(RemoteException e){
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
 
         items.clear();
-        for(KidDTO kid : kidDTOList) {
+        for (KidDTO kid : kidDTOList) {
             items.add(new ObservableKid(kid));
         }
-        //debug
-        //PersonDTO person = new PersonDTO("fisc", "nome", "cognome", LocalDate.now(), Sex.MALE, "addr", "");
-        //items.add(new ObservableKid(new KidDTO(person, new AdultDTO(person, new HashSet<KidDTO>()), new AdultDTO(person, new HashSet<KidDTO>()), new PediatristDTO(person, new HashSet<KidDTO>(), new HashSet<KidDTO>()), new HashSet<>())));
+    }
+
+    private void initMenu() {
+        personTable.setRowFactory(tripDTOTableView -> {
+            final TableRow<ObservableKid> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem showKid = new MenuItem("Dettagli");
+            showKid.setOnAction(event ->  {
+                contextMenu.hide();
+
+                try {
+                    AccessorSceneManager.loadShowKid((ObservableKid) row.getItem());
+                } catch (IOException ex) {
+                    System.err.println("Can't load show window");
+                    ex.printStackTrace();
+                }
+            });
+            contextMenu.getItems().add(showKid);
+
+            final MenuItem deleteKid= new MenuItem("Elimina");
+            deleteKid.setOnAction(event -> {
+                contextMenu.hide();
+
+                try {
+                    SessionService.getSession().removeKid(((ObservableKid) row.getItem()).getDTO());
+                } catch (RemoteException ex) {
+                    System.err.println("error remote");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(deleteKid);
+
+            final MenuItem kidEdit= new MenuItem("Modifica");
+            kidEdit.setOnAction(event -> {
+                contextMenu.hide();
+
+                try {
+                    AccessorSceneManager.loadEditKid(row.getItem());
+                } catch (IOException ex) {
+                    System.err.println("can't load editKid window");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(kidEdit);
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
     }
 }
