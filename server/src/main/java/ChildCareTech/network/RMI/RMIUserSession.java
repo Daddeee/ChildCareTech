@@ -25,12 +25,42 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private User user;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
+    }
+
+    @Override
+    public void removeTripBusRelation(TripDTO tripDTO, BusDTO busDTO) {
+        TripDAO tripDAO = new TripDAO();
+        BusDAO busDAO = new BusDAO();
+        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        tripDAO.setSession(session);
+        busDAO.setSession(session);
+        tripPartecipationDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            Trip trip = tripDAO.read(tripDTO.getId());
+            Bus bus = busDAO.read(busDTO.getId());
+            trip.getBuses().removeIf(b -> b.getId() == busDTO.getId());
+
+            tripPartecipationDAO.removeAssociatedTripPartecipations(trip, bus);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     @Override

@@ -65,6 +65,31 @@ public class TripPartecipationController {
 
             return row;
         });
+
+        busesTable.setRowFactory(busesTableView -> {
+            final TableRow<BusDTOWithResidualCapacity> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+
+            final MenuItem removeTripPartecipation = new MenuItem("Elimina");
+            removeTripPartecipation.setOnAction(event -> {
+                try {
+                    SessionService.getSession().removeTripBusRelation(currentTripDTO, row.getItem().getBusDTO());
+                } catch (RemoteException e){
+                    e.printStackTrace();
+                }
+                refresh();
+            });
+
+            contextMenu.getItems().add(removeTripPartecipation);
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
     }
 
     @FXML
