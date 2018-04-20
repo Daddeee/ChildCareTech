@@ -780,6 +780,9 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             System.err.println("validation failed");
             ex.printStackTrace();
         }
+        finally{
+            session.close();
+        }
     }
 
     public List<TripDTO> getAllTrips() {
@@ -828,6 +831,9 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        }
+        finally {
+            session.close();
         }
     }
 

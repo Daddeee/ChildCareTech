@@ -172,7 +172,7 @@ public class AccessorSceneManager {
 
     public static void loadShowKid(ObservableKid observableKid) throws  IOException {
         showKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/showKidWindow.fxml"));
-        showKidScene = sceneInit(showKidLoader, "/style/ShowKidWindow.css");
+        showKidScene = sceneInit(showKidLoader, "/style/showKidWindow.css");
         try {
             AccessorStageService.changeScene(showKidScene);
             getShowKidController().initData(observableKid);
