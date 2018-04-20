@@ -58,6 +58,20 @@ public class AddKidController {
     protected ObservableList<ObservablePediatrist> pediatrists = FXCollections.observableArrayList();
     protected KidAnagraphicsController kidAnagraphicsController;
 
+    protected final AdultDTO nullAdult = new AdultDTO(
+            0,
+            new PersonDTO(
+                    "",
+                    "-",
+                    "",
+                    null,
+                    null,
+                    "",
+                    ""
+            ),
+            null
+    );;
+
     @FXML
     public void initialize() {
         kidAnagraphicsController = MainSceneManager.getKidAnagController();
@@ -82,7 +96,16 @@ public class AddKidController {
         else
             sex = Sex.FEMALE;
         person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
-        kid = new KidDTO(0, person, firstTutorComboBox.getValue().getDTO(), secondTutorComboBox.getValue().getDTO(), pediatristComboBox.getValue().getDTO(), null);
+
+        AdultDTO firstTutor = firstTutorComboBox.getValue().getDTO();
+        if(firstTutor.getPerson().getFiscalCode().equals(""))
+            firstTutor = null;
+
+        AdultDTO secondTutor = secondTutorComboBox.getValue().getDTO();
+        if(secondTutor.getPerson().getFiscalCode().equals(""))
+            secondTutor = null;
+
+        kid = new KidDTO(0, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {
             SessionService.getSession().saveKid(kid);
             AccessorStageService.close();
@@ -148,6 +171,8 @@ public class AddKidController {
         pediatrists.clear();
         try {
             adultDTOList = SessionService.getSession().getAllAdults();
+            adultDTOList.add(nullAdult);
+
             pediatristDTOList =  SessionService.getSession().getAllPediatrists();
         } catch(RemoteException ex) {
             alertLabel.setText(ex.getMessage());

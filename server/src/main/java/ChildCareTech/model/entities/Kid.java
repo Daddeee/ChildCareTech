@@ -1,12 +1,14 @@
 package ChildCareTech.model.entities;
 
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.validators.ValidTutors;
 
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
+@ValidTutors(message = "Specificare almeno un tutore.")
 public class Kid implements iEntity<Kid, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

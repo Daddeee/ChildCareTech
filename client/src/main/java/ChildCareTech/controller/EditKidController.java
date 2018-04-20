@@ -30,18 +30,25 @@ public class EditKidController extends AddKidController {
         else
             sex = Sex.FEMALE;
         person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
-        kid = new KidDTO(id, person, firstTutorComboBox.getValue().getDTO(), secondTutorComboBox.getValue().getDTO(), pediatristComboBox.getValue().getDTO(), null);
+
+        AdultDTO firstTutor = firstTutorComboBox.getValue().getDTO();
+        if(firstTutor.getPerson().getFiscalCode().equals("")) firstTutor = null;
+
+        AdultDTO secondTutor = secondTutorComboBox.getValue().getDTO();
+        if(secondTutor.getPerson().getFiscalCode().equals("")) secondTutor = null;
+
+        kid = new KidDTO(id, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {
             SessionService.getSession().updateKid(kid);
             AccessorStageService.close();
-        } catch (RemoteException ex) {
-            System.out.println(ex.getMessage());
-            ex.printStackTrace();
         } catch(UpdateFailedException ex) {
             alertLabel.setText(ex.getMessage());
             ex.printStackTrace();
         } catch(NoSuchFieldException ex) {
             System.err.println("error closing stage");
+            ex.printStackTrace();
+        } catch (RemoteException ex) {
+            System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
         kidAnagraphicsController.refreshTable();
@@ -57,9 +64,15 @@ public class EditKidController extends AddKidController {
             maleButton.fire();
         else
             femaleButton.fire();
+        if(observableKid.getFirstTutor() == null)
+            firstTutorComboBox.getSelectionModel().select(new ObservableAdult(nullAdult));
+        else
+            firstTutorComboBox.getSelectionModel().select(new ObservableAdult(observableKid.getFirstTutor()));
 
-        firstTutorComboBox.getSelectionModel().select(new ObservableAdult(observableKid.getFirstTutor()));
-        secondTutorComboBox.getSelectionModel().select(new ObservableAdult(observableKid.getSecondTutor()));
+        if(observableKid.getSecondTutor() == null)
+            secondTutorComboBox.getSelectionModel().select(new ObservableAdult(nullAdult));
+        else
+            secondTutorComboBox.getSelectionModel().select(new ObservableAdult(observableKid.getSecondTutor()));
         pediatristComboBox.getSelectionModel().select(new ObservablePediatrist(observableKid.getPediatrist()));
     }
 }

@@ -129,7 +129,7 @@ public class AccessorSceneManager {
 
     public static void loadAddAdult() throws IOException {
         addAdultLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addAdultWindow.fxml"));
-        addAdultScene = sceneInit(addAdultLoader, "/style/addAdultWindow.fxml");
+        addAdultScene = sceneInit(addAdultLoader, "/style/addAdultWindow.css");
         try {
             AccessorStageService.changeScene(addAdultScene);
         } catch (NoSuchFieldException ex) {
