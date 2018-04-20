@@ -2,7 +2,7 @@ package ChildCareTech.services;
 
 import ChildCareTech.controller.AdultAnagraphicsController;
 import ChildCareTech.controller.HomeController;
-import ChildCareTech.controller.KidAnagraphicController;
+import ChildCareTech.controller.KidAnagraphicsController;
 import ChildCareTech.controller.TripsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,7 +39,7 @@ public class MainSceneManager {
     public static HomeController getHomeController() {
         return homeLoader.getController();
     }
-    public static KidAnagraphicController getKidAnagController() {
+    public static KidAnagraphicsController getKidAnagController() {
         return kidAnagraphicsLoader.getController();
     }
     public static TripsController getTripsController() {

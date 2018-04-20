@@ -42,6 +42,7 @@ public class AddTripController {
     private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
     private int routeCounter = 0;
 
+    @FXML
     public void initialize(){
         routesTable.setRowFactory(tempRouteDataTableView -> {
             final TableRow<TempRouteData> row = new TableRow<>();

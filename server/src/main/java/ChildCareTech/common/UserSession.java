@@ -17,13 +17,18 @@ public interface UserSession extends Remote {
     void saveSupplier(SupplierDTO supplier) throws RemoteException, AddFailedException;
     void savePediatrist(PediatristDTO pediatrist) throws RemoteException, AddFailedException;
     void saveStaff(StaffDTO supplier) throws  RemoteException, AddFailedException;
+    void removeKid(KidDTO kidDTO) throws RemoteException;
     void removeAdult(AdultDTO adult) throws RemoteException;
     void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException;
     void removeStaffMember(StaffDTO staffDTO) throws RemoteException;
     void removeSupplier(SupplierDTO supplierDTO) throws RemoteException;
     void saveTrip(TripDTO trip) throws RemoteException, AddFailedException;
     void updateTrip(TripDTO newTripDTO) throws RemoteException, UpdateFailedException;
+
     TripDTO getTrip(int id) throws RemoteException, NoSuchElementException;
+
+    void updateKid(KidDTO newKidDTO) throws RemoteException, UpdateFailedException;
+
     void removeTrip(TripDTO trip) throws RemoteException;
 
     void removeRoute(RouteDTO route) throws RemoteException;

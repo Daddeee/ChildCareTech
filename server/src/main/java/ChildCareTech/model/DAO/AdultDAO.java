@@ -18,8 +18,6 @@ public class AdultDAO extends AbstractGenericDAO<Adult, Integer> {
 
 
     public List<Adult> readAllExclusive() {
-        //DetachedCriteria adultCrit = DetachedCriteria.forClass(Adult.class).add(Restrictions.eq("role", ))
-
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Adult> criteria = builder.createQuery(Adult.class);
         Root<Adult> root = criteria.from(Adult.class);

@@ -16,6 +16,7 @@ import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.Settings;
 import ChildCareTech.utils.WorkDaysGenerationUtil;
 import org.hibernate.Hibernate;
+import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -764,6 +765,23 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         }
     }
 
+    public void updateKid(KidDTO newKidDTO) throws RemoteException, UpdateFailedException {
+        KidDAO kidDAO = new KidDAO();
+        Kid kid = DTOEntityAssembler.getEntity(newKidDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        kidDAO.setSession(session);
+        try {
+            tx = session.beginTransaction();
+            kidDAO.update(kid);
+            tx.commit();
+        } catch(ValidationFailedException ex) {
+            System.err.println("validation failed");
+            ex.printStackTrace();
+        }
+    }
+
     public List<TripDTO> getAllTrips() {
         TripDAO dao = new TripDAO();
         BusDAO busDao = new BusDAO();
@@ -793,6 +811,24 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tripsDTOCollection.add(DTOFactory.getDTO(t));
 
         return tripsDTOCollection;
+    }
+
+    public void removeKid(KidDTO kidDTO) throws RemoteException {
+        KidDAO kidDAO = new KidDAO();
+        Kid kid = DTOEntityAssembler.getEntity(kidDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        kidDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            kidDAO.delete(kid);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
     }
 
     public void removeAdult(AdultDTO adultDTO) throws RemoteException {

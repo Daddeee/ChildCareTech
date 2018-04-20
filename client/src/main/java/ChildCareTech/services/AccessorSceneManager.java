@@ -4,10 +4,7 @@ import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.controller.*;
-import ChildCareTech.services.ObservableDTOs.ObservableAdult;
-import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
-import ChildCareTech.services.ObservableDTOs.ObservableStaff;
-import ChildCareTech.services.ObservableDTOs.ObservableSupplier;
+import ChildCareTech.services.ObservableDTOs.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -25,6 +22,7 @@ public class AccessorSceneManager {
     private static FXMLLoader selectAdultKindLoader;
     private static FXMLLoader registerUserLoader;
     private static FXMLLoader addTripLoader;
+    private static FXMLLoader showKidLoader;
     private static FXMLLoader showTripLoader;
     private static FXMLLoader updateTripLoader;
     private static FXMLLoader addBusLoader;
@@ -33,6 +31,7 @@ public class AccessorSceneManager {
     private static FXMLLoader codeInputLoader;
     private static FXMLLoader eventReportLoader;
     private static FXMLLoader tripPartecipationanagementLoader;
+    private static FXMLLoader editKidLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -42,6 +41,7 @@ public class AccessorSceneManager {
     private static Scene selectAdultKindScene;
     private static Scene registerUserScene;
     private static Scene addTripScene;
+    private static Scene showKidScene;
     private static Scene showTripScene;
     private static Scene updateTripScene;
     private static Scene addBusScene;
@@ -50,6 +50,7 @@ public class AccessorSceneManager {
     private static Scene codeInputScene;
     private static Scene eventReportScene;
     private static Scene tripPartecipationanagementScene;
+    private static Scene editKidScene;
 
     private AccessorSceneManager() {
     }
@@ -72,6 +73,7 @@ public class AccessorSceneManager {
     public static UpdateTripController getUpdateTripController() {
         return updateTripLoader.getController();
     }
+    public static ShowKidController getShowKidController() { return showKidLoader.getController(); }
 
     public static void loadCodeInput(EventDTO eventDTO) throws IOException {
         codeInputLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/codeInputWindow.fxml"));
@@ -135,6 +137,19 @@ public class AccessorSceneManager {
         }
     }
 
+    public static void loadEditKid(ObservableKid observableKid) throws IOException {
+        EditKidController editKidController;
+        editKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/editKidWindow.fxml"));
+        editKidScene = sceneInit(editKidLoader, "/style/editKidWindow.css");
+        try {
+            AccessorStageService.changeScene(editKidScene);
+            editKidController = editKidLoader.getController();
+            editKidController.initData(observableKid);
+        } catch(NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
     public static void loadAddPediatrist() throws IOException {
         addPediatristLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addPediatristWindow.fxml"));
         addPediatristScene = sceneInit(addPediatristLoader, "/style/addPediatristWindow.css");
@@ -150,6 +165,17 @@ public class AccessorSceneManager {
         addSupplierScene = sceneInit(addSupplierLoader, "/style/addSupplierWindow.css");
         try {
             AccessorStageService.changeScene(addSupplierScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadShowKid(ObservableKid observableKid) throws  IOException {
+        showKidLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/showKidWindow.fxml"));
+        showKidScene = sceneInit(showKidLoader, "/style/ShowKidWindow.css");
+        try {
+            AccessorStageService.changeScene(showKidScene);
+            getShowKidController().initData(observableKid);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }

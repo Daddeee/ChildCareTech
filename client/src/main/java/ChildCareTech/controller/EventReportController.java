@@ -17,6 +17,7 @@ public class EventReportController {
     @FXML
     protected TableView<ReportTableData> reportTable;
 
+    @FXML
     public void initialize(){
         System.out.println("initialize");
     }

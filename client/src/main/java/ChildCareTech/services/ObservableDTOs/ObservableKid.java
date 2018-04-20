@@ -2,6 +2,7 @@ package ChildCareTech.services.ObservableDTOs;
 
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.Sex;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -21,6 +22,7 @@ public class ObservableKid extends KidDTO {
     public StringProperty fiscalCodeProperty() {
         return new SimpleStringProperty(getPerson().getFiscalCode());
     }
+    public StringProperty sexProperty() { return new SimpleStringProperty(getPerson().getSex().toString()); }
     public StringProperty birthDateProperty() {
         DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return new SimpleStringProperty(getPerson().getBirthDate().format(myDateFormatter));
@@ -38,4 +40,32 @@ public class ObservableKid extends KidDTO {
         return new SimpleStringProperty(getPediatrist().getPerson().getFiscalCode());
     }
     public KidDTO getDTO() { return new KidDTO(getId(), getPerson(), getFirstTutor(), getSecondTutor(), getPediatrist(), getContacts()); }
+
+    public String getFirstName() {
+        return getPerson().getFirstName();
+    }
+    public String getLastName() {
+        return getPerson().getLastName();
+    }
+    public String getFiscalCode() {
+        return getPerson().getFiscalCode();
+    }
+    public String getAddress() {
+        return getPerson().getAddress();
+    }
+    public Sex getSex() {
+        return getPerson().getSex();
+    }
+    public LocalDate getBirthDate() {
+        return getPerson().getBirthDate();
+    }
+    public String getFirstTutorFC() {
+        return getFirstTutor().getPerson().getFiscalCode();
+    }
+    public String getSecondTutorFC() {
+        return getSecondTutor().getPerson().getFiscalCode();
+    }
+    public String getPediatristCF() {
+        return  getPediatrist().getPerson().getFiscalCode();
+    }
 }

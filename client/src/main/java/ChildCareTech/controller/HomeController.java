@@ -34,6 +34,7 @@ public class HomeController {
 
     public HomeController() { }
 
+    @FXML
     public void initialize() {
         if (selectedWorkDay != null) {
             refresh(selectedWorkDay);

@@ -26,6 +26,7 @@ public class CodeInputWindowController {
         setTextInput();
     }
 
+    @FXML
     public void initData(EventDTO event){
         this.event = event;
     }

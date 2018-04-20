@@ -24,6 +24,7 @@ public class WorkDayController {
     @FXML
     protected Label alertLabel;
 
+    @FXML
     public void initialize() {
         eventsTable.setRowFactory(eventDTOTableView -> {
             final TableRow<EventDTO> row = new TableRow<>();
