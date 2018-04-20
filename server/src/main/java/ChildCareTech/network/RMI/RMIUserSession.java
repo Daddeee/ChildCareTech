@@ -33,6 +33,104 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public TripDTO getTrip(int id) throws NoSuchElementException {
+        TripDAO tripDAO = new TripDAO();
+        BusDAO busDAO = new BusDAO();
+
+        Trip result = null;
+        TripDTO resultDTO = null;
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        tripDAO.setSession(session);
+        busDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            result = tripDAO.read(id);
+            tripDAO.initializeLazyRelations(result);
+            for(Bus b : result.getBuses())
+                busDAO.initializeLazyRelations(b);
+
+            tx.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+            throw new NoSuchElementException(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        resultDTO = DTOFactory.getDTO(result);
+
+        return resultDTO;
+    }
+
+    @Override
+    public void saveTripBusRelation(TripDTO tripDTO, BusDTO busDTO) throws AddFailedException {
+        TripDAO tripDAO = new TripDAO();
+        BusDAO busDAO = new BusDAO();
+        Trip trip = null;
+        Bus bus = null;
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        tripDAO.setSession(session);
+        busDAO.setSession(session);
+
+        try {
+            tx = session.beginTransaction();
+
+            trip = tripDAO.read(tripDTO.getId());
+            tripDAO.initializeLazyRelations(trip);
+            for(Bus b : trip.getBuses())
+                busDAO.initializeLazyRelations(b);
+
+            bus = busDAO.read(busDTO.getId());
+            busDAO.initializeLazyRelations(bus);
+
+            if (trip.getBuses() != null) {
+                trip.getBuses().add(bus);
+            } else {
+                Set<Bus> buses = new HashSet<>();
+                buses.add(bus);
+                trip.setBuses(buses);
+            }
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void saveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) throws AddFailedException {
+        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
+        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        tripPartecipationDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            tripPartecipationDAO.create(tripPartecipation);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public LocalDate getMinSavedDate() {
         LocalDate result = null;
         Transaction tx = null;
@@ -46,6 +144,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
 
         return result;
@@ -65,6 +165,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
 
         return result;
@@ -160,6 +262,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch (Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
 
         return DTOFactory.getDTO(result);
@@ -271,6 +375,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             if(tx!=null) tx.rollback();
             e.printStackTrace();
             throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
         }
     }
 
@@ -301,6 +407,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             if(tx!=null) tx.rollback();
             e.printStackTrace();
             throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
         }
     }
 
@@ -330,6 +438,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             if(tx!=null) tx.rollback();
             e.printStackTrace();
             throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
         }
     }
 
@@ -359,6 +469,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             if(tx!=null) tx.rollback();
             e.printStackTrace();
             throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
         }
     }
 
@@ -525,6 +637,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
 
@@ -655,6 +769,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
     public void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException {
@@ -672,6 +788,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
     public void removeStaffMember(StaffDTO staffDTO) throws RemoteException {
@@ -689,6 +807,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
     public void removeSupplier(SupplierDTO supplierDTO) throws RemoteException {
@@ -706,6 +826,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
 
@@ -777,19 +899,24 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     public List<BusDTO> getAllBuses() throws RemoteException{
-        BusDAO dao = new BusDAO();
+        BusDAO busDAO = new BusDAO();
+        TripDAO tripDAO = new TripDAO();
         List<BusDTO> busesDTOCollection = new ArrayList<>();
         List<Bus> busesCollection = new ArrayList<>();
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        dao.setSession(session);
+        busDAO.setSession(session);
+        tripDAO.setSession(session);
         try{
             tx = session.beginTransaction();
 
-            busesCollection = dao.readAll();
-            for(Bus b : busesCollection)
-                dao.initializeLazyRelations(b);
+            busesCollection = busDAO.readAll();
+            for(Bus b : busesCollection) {
+                busDAO.initializeLazyRelations(b);
+                for(Trip t : b.getTrips())
+                    tripDAO.initializeLazyRelations(t);
+            }
 
             tx.commit();
         } catch(HibernateException e){
@@ -807,20 +934,26 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public Collection<BusDTO> getAvailableBuses(TripDTO tripDTO) {
-        BusDAO dao = new BusDAO();
+        BusDAO busDAO = new BusDAO();
+        TripDAO tripDAO = new TripDAO();
         List<BusDTO> busesDTOCollection = new ArrayList<>();
         List<Bus> busesCollection = new ArrayList<>();
         Trip trip = DTOEntityAssembler.getEntity(tripDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        dao.setSession(session);
+        busDAO.setSession(session);
+        tripDAO.setSession(session);
         try{
             tx = session.beginTransaction();
 
-            busesCollection = dao.getAvailableBuses(trip);
-            for(Bus b : busesCollection)
-                dao.initializeLazyRelations(b);
+            busesCollection = busDAO.getAvailableBuses(trip);
+            for(Bus b : busesCollection) {
+                busDAO.initializeLazyRelations(b);
+                for(Trip t : b.getTrips())
+                    tripDAO.initializeLazyRelations(t);
+            }
+
 
             tx.commit();
         } catch(HibernateException e){
@@ -834,5 +967,36 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             busesDTOCollection.add(DTOFactory.getDTO(b));
 
         return busesDTOCollection;
+    }
+
+    @Override
+    public Collection<KidDTO> getAvailableKids(TripDTO tripDTO) {
+        KidDAO kidDAO = new KidDAO();
+        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+        List<Kid> kidCollection = new ArrayList<>();
+        List<KidDTO> kidDTOCollection = new ArrayList<>();
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        kidDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            kidCollection = kidDAO.getAvailableKids(trip);
+            for(Kid k : kidCollection)
+                kidDAO.initializeLazyRelations(k);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Kid k : kidCollection)
+            kidDTOCollection.add(DTOFactory.getDTO(k));
+
+        return kidDTOCollection;
     }
 }

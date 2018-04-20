@@ -8,9 +8,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public interface UserSession extends Remote {
 
@@ -24,19 +22,23 @@ public interface UserSession extends Remote {
     void removeStaffMember(StaffDTO staffDTO) throws RemoteException;
     void removeSupplier(SupplierDTO supplierDTO) throws RemoteException;
     void saveTrip(TripDTO trip) throws RemoteException, AddFailedException;
-
     void updateTrip(TripDTO newTripDTO) throws RemoteException, UpdateFailedException;
-
+    TripDTO getTrip(int id) throws RemoteException, NoSuchElementException;
     void removeTrip(TripDTO trip) throws RemoteException;
-    void removeRoute(RouteDTO route) throws RemoteException;
 
+    void removeRoute(RouteDTO route) throws RemoteException;
     List<KidDTO> getAllKids() throws RemoteException;
+    Collection<KidDTO> getAvailableKids(TripDTO tripDTO) throws RemoteException;
+
     List<AdultDTO> getAllAdults() throws RemoteException;
     List<AdultDTO> getAllAdultsEx() throws RemoteException;
     List<PediatristDTO> getAllPediatrists() throws RemoteException;
     List<StaffDTO> getAllStaffMembers() throws RemoteException;
     List<SupplierDTO> getAllSuppliers() throws RemoteException;
     List<TripDTO> getAllTrips() throws RemoteException;
+
+    void saveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) throws RemoteException, AddFailedException;
+    void saveTripBusRelation(TripDTO tripDTO, BusDTO busDTO) throws RemoteException, AddFailedException;
 
     void saveBus(BusDTO bus) throws RemoteException, AddFailedException;
     void removeBus(BusDTO bus) throws RemoteException;
