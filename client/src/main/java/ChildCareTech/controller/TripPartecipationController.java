@@ -9,11 +9,11 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.BusDTOWithResidualCapacity;
 import ChildCareTech.utils.TripPartecipationData;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 
 import java.rmi.RemoteException;
 import java.util.*;
@@ -38,6 +38,33 @@ public class TripPartecipationController {
     public void initData(TripDTO tripDTO){
         currentTripDTO = tripDTO;
         refresh();
+    }
+
+    public void initialize(){
+        tripPartecipationTable.setRowFactory(tripPartecipationDataTableView -> {
+            final TableRow<TripPartecipationData> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+
+            final MenuItem removeTripPartecipation = new MenuItem("Elimina");
+            removeTripPartecipation.setOnAction(event -> {
+                try {
+                    SessionService.getSession().removeTripPartecipation(row.getItem().getTripPartecipationDTO());
+                } catch (RemoteException e){
+                    e.printStackTrace();
+                }
+                refresh();
+            });
+
+            contextMenu.getItems().add(removeTripPartecipation);
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
     }
 
     @FXML

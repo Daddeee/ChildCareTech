@@ -3,16 +3,22 @@ package ChildCareTech.utils;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 
 public class TripPartecipationData {
+    private TripPartecipationDTO tripPartecipationDTO;
     private String fiscalCode;
     private String firstName;
     private String lastName;
     private String licensePlate;
 
-    public TripPartecipationData(String fiscalCode, String firstName, String lastName, String licensePlate){
+    public TripPartecipationData(TripPartecipationDTO tripPartecipationDTO, String fiscalCode, String firstName, String lastName, String licensePlate){
+        this.tripPartecipationDTO = tripPartecipationDTO;
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.licensePlate = licensePlate;
+    }
+
+    public TripPartecipationDTO getTripPartecipationDTO() {
+        return tripPartecipationDTO;
     }
 
     public String getFiscalCode() {
@@ -29,6 +35,10 @@ public class TripPartecipationData {
 
     public String getLicensePlate() {
         return licensePlate;
+    }
+
+    public void setTripPartecipationDTO(TripPartecipationDTO tripPartecipationDTO) {
+        this.tripPartecipationDTO = tripPartecipationDTO;
     }
 
     public void setFiscalCode(String fiscalCode) {
@@ -49,6 +59,7 @@ public class TripPartecipationData {
 
     public static TripPartecipationData buildFromDTO(TripPartecipationDTO tripPartecipationDTO){
         return new TripPartecipationData(
+                tripPartecipationDTO,
                 tripPartecipationDTO.getPerson().getFiscalCode(),
                 tripPartecipationDTO.getPerson().getFirstName(),
                 tripPartecipationDTO.getPerson().getLastName(),

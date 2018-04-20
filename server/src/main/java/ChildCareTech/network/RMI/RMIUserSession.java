@@ -34,6 +34,29 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void removeTripPartecipation(TripPartecipationDTO tripPartecipationDTO) {
+        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
+
+        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        tripPartecipationDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            tripPartecipationDAO.delete(tripPartecipation);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public TripDTO getTrip(int id) throws NoSuchElementException {
         TripDAO tripDAO = new TripDAO();
 
