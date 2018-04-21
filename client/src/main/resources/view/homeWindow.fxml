@@ -96,7 +96,7 @@
                 AnchorPane.rightAnchor="0.0"
                 AnchorPane.topAnchor="0.0">
             <TableView fx:id="eventsTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
-                       prefHeight="600.0" prefWidth="900.0" editable="true">
+                       prefHeight="300.0" prefWidth="900.0" editable="true">
                 <columns>
                     <TableColumn fx:id="nameColumn" prefWidth="300.0" text="Nome">
                         <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
@@ -112,7 +112,26 @@
                     </TableColumn>
                 </columns>
             </TableView>
-
+            <TableView fx:id="openTripsTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
+                       prefHeight="300.0" prefWidth="900.0">
+                <columns>
+                    <TableColumn fx:id="metaColumn" prefWidth="180.0" text="Destinazione">
+                        <cellValueFactory><PropertyValueFactory property="meta" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="noteColumn" prefWidth="180.0" text="Note">
+                        <cellValueFactory><PropertyValueFactory property="note" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="depDateColumn" prefWidth="180.0" text="Data di partenza">
+                        <cellValueFactory><PropertyValueFactory property="depDate" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="arrDateColumn" prefWidth="180.0" text="Data di arrivo">
+                        <cellValueFactory><PropertyValueFactory property="arrDate" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="statusColumn" prefWidth="180.0" text="Stato">
+                        <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
             <VBox AnchorPane.bottomAnchor="0.0"
                   AnchorPane.rightAnchor="0.0"
                   prefWidth="900.0"

@@ -36,6 +36,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void triggerDailyScheduling() throws RemoteException {
+        RemoteEventObservable.getInstance().setDay(RemoteEventObservable.getInstance().getToday());
+    }
+
+    @Override
     public void removeTripBusRelation(TripDTO tripDTO, BusDTO busDTO) {
         TripDAO tripDAO = new TripDAO();
         BusDAO busDAO = new BusDAO();

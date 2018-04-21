@@ -1,10 +1,9 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
-import ChildCareTech.common.UserSession;
-import ChildCareTech.network.RMI.RMIRemoteEventObserver;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
@@ -12,13 +11,9 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Callback;
-import sun.applet.Main;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -28,19 +23,22 @@ public class HomeController {
     @FXML
     protected TableView<EventDTO> eventsTable;
     @FXML
+    protected TableView<TripDTO> openTripsTable;
+    @FXML
     protected Label alertLabel;
 
     private static WorkDayDTO selectedWorkDay;
+    private static List<TripDTO> todayOpenTrips;
 
     public HomeController() { }
 
     @FXML
     public void initialize() {
-        if (selectedWorkDay != null) {
-            refresh(selectedWorkDay);
+        if (selectedWorkDay != null && todayOpenTrips != null) {
+            refresh(selectedWorkDay, todayOpenTrips);
         } else {
             try{
-                refresh(SessionService.getSession().getCurrentWorkDay());
+                SessionService.getSession().triggerDailyScheduling();
             } catch(Exception e){
                 e.printStackTrace();
             }
@@ -93,19 +91,26 @@ public class HomeController {
         });
     }
 
-    public void refresh(WorkDayDTO workDayDTO){
+    public void refresh(WorkDayDTO workDayDTO, List<TripDTO> tripDTOS){
         selectedWorkDay = workDayDTO;
-        refreshDateLabel(workDayDTO.getDate());
-        refreshTable(workDayDTO.getEvents());
+        todayOpenTrips = tripDTOS;
+        refreshDateLabel();
+        refreshWorkDayTable();
+        refreshOpenTripsTable();
     }
 
-    private void refreshDateLabel(LocalDate date){
-        currentDate.setText(date.toString());
+    private void refreshDateLabel(){
+        currentDate.setText(selectedWorkDay.getDate().toString());
     }
 
-    private void refreshTable(Set<EventDTO> events){
+    private void refreshWorkDayTable(){
         eventsTable.getItems().clear();
-        eventsTable.getItems().addAll(events);
+        eventsTable.getItems().addAll(selectedWorkDay.getEvents());
+    }
+
+    private void refreshOpenTripsTable(){
+        openTripsTable.getItems().clear();
+        openTripsTable.getItems().addAll(todayOpenTrips);
     }
 
     @FXML

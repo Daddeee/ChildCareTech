@@ -1,6 +1,7 @@
 package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.services.MainSceneManager;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class RMIRemoteEventObserver extends UnicastRemoteObject implements RemoteEventObserver, Serializable {
     private static WorkDayDTO today;
+    private static List<TripDTO> todayTrips;
 
     public RMIRemoteEventObserver() throws RemoteException {}
 
@@ -23,8 +25,9 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
     }
 
     @Override
-    public void update(WorkDayDTO workDayDTO) {
+    public void update(WorkDayDTO workDayDTO, List<TripDTO> tripDTOS) {
         today = workDayDTO;
-        Platform.runLater(() -> MainSceneManager.getHomeController().refresh(today));
+        todayTrips = tripDTOS;
+        Platform.runLater(() -> MainSceneManager.getHomeController().refresh(today, todayTrips));
     }
 }

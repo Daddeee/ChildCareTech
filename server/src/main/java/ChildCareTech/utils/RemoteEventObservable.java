@@ -1,6 +1,7 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.RemoteEventObserver;
@@ -22,6 +23,7 @@ public class RemoteEventObservable {
     private static RemoteEventObservable ourInstance = new RemoteEventObservable();
 
     private static WorkDay today = CurrentWorkDayService.getCurrent();
+    private static List<Trip> todayTrips = new ArrayList<>();
     private List<RemoteEventObserver> observers;
     private EventDAO eventDAO;
 
@@ -83,8 +85,13 @@ public class RemoteEventObservable {
 
     private void notifyObservers() throws RemoteException{
         WorkDayDTO workDayDTO = DTOFactory.getDTO(today);
+
+        List<TripDTO> todayTripsDTO = new ArrayList<>();
+        for(Trip t : todayTrips)
+            todayTripsDTO.add(DTOFactory.getDTO(t));
+
         for(RemoteEventObserver o : observers)
-            o.update(workDayDTO);
+            o.update(workDayDTO, todayTripsDTO);
     }
 
     private void updateTripStatus() {
@@ -103,11 +110,15 @@ public class RemoteEventObservable {
                 tripDAO.update(t);
             }
 
+            todayTrips.addAll(tripStartingToday);
+
             List<Trip> tripEndedYesterday = tripDAO.read("arrDate", today.getDate().minusDays(1).toString());
             for(Trip t : tripEndedYesterday) {
                 t.setStatus(EventStatus.CLOSED);
                 tripDAO.update(t);
             }
+
+            todayTrips.removeAll(tripEndedYesterday);
 
             tx.commit();
         } catch(Exception e){
