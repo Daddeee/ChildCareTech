@@ -1,5 +1,7 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.common.EventStatus;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -11,16 +13,18 @@ public class TripDTO implements Serializable {
     private String note;
     private LocalDate depDate;
     private LocalDate arrDate;
+    private EventStatus status;
     private Set<RouteDTO> routes;
     private Set<TripPartecipationDTO> tripPartecipations;
     private Set<BusDTO> buses;
 
-    public TripDTO(int id, String meta, String note, LocalDate depDate, LocalDate arrDate, Set<RouteDTO> routes, Set<TripPartecipationDTO> tripPartecipations, Set<BusDTO> buses) {
+    public TripDTO(int id, String meta, String note, LocalDate depDate, LocalDate arrDate, EventStatus status, Set<RouteDTO> routes, Set<TripPartecipationDTO> tripPartecipations, Set<BusDTO> buses) {
         this.id = id;
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;
         this.arrDate = arrDate;
+        this.status = status;
         this.routes = routes == null ? Collections.EMPTY_SET : routes;
         this.tripPartecipations = tripPartecipations == null ? Collections.EMPTY_SET : tripPartecipations;
         this.buses = buses == null ? Collections.EMPTY_SET : buses;
@@ -60,6 +64,14 @@ public class TripDTO implements Serializable {
 
     public void setArrDate(LocalDate arrDate) {
         this.arrDate = arrDate;
+    }
+
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
     }
 
     public Set<RouteDTO> getRoutes() {

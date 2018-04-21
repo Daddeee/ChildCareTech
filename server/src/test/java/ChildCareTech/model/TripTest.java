@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Route;
@@ -28,7 +29,7 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
 
         Person p1 = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Person p2 = new Person("cf2", "fn2", "ln2", LocalDate.now().plusDays(1), ChildCareTech.common.Sex.MALE, "", "");
-        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
+        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
         Bus b1 = new Bus("AA111AA", 10);
         Bus b2 = new Bus("AA111AB", 11);
         TripPartecipation tp1 = new TripPartecipation(p1, t, b1);
@@ -93,8 +94,8 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
 
     @Override
     public void testCRUD() {
-        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(2));
-        Trip tu = new Trip("meta",  "note", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3));
+        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(2), EventStatus.OPEN);
+        Trip tu = new Trip("meta",  "note", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3), EventStatus.OPEN);
 
         testCRUDImpl(t, tu);
     }

@@ -87,7 +87,8 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
                 dto.getMeta(),
                 dto.getNote(),
                 dto.getDepDate(),
-                dto.getArrDate()
+                dto.getArrDate(),
+                dto.getStatus()
         );
         return entity;
     }

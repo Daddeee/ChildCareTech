@@ -32,17 +32,20 @@
         <TableView fx:id="tripsTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
                    prefHeight="680.0" prefWidth="880.0">
             <columns>
-                <TableColumn fx:id="metaColumn" prefWidth="220.0" text="Destinazione">
+                <TableColumn fx:id="metaColumn" prefWidth="176.0" text="Destinazione">
                     <cellValueFactory><PropertyValueFactory property="meta" /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="noteColumn" prefWidth="220.0" text="Note">
+                <TableColumn fx:id="noteColumn" prefWidth="176.0" text="Note">
                     <cellValueFactory><PropertyValueFactory property="note" /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="depDateColumn" prefWidth="220.0" text="Data di partenza">
+                <TableColumn fx:id="depDateColumn" prefWidth="176.0" text="Data di partenza">
                     <cellValueFactory><PropertyValueFactory property="depDate" /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="arrDateColumn" prefWidth="220.0" text="Data di arrivo">
+                <TableColumn fx:id="arrDateColumn" prefWidth="176.0" text="Data di arrivo">
                     <cellValueFactory><PropertyValueFactory property="arrDate" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="statusColumn" prefWidth="176.0" text="Stato">
+                    <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
                 </TableColumn>
             </columns>
             <HBox.margin>

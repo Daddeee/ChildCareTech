@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.DAO.BusDAO;
 import ChildCareTech.model.DAO.TripDAO;
 import ChildCareTech.model.entities.Bus;
@@ -25,7 +26,7 @@ public class AvailableBusTest {
 
     @Test
     public void testAvailableBusQuery(){
-        TripDAO tripDAO = new TripDAO();
+        TripDAO tripDAO =new TripDAO();
         BusDAO busDAO = new BusDAO();
         Transaction tx = null;
 
@@ -33,14 +34,16 @@ public class AvailableBusTest {
                 "Meta",
                 "Gita di cui cerchiamo i bus disponibili",
                 LocalDate.parse("2018-03-01"),
-                LocalDate.parse("2018-03-10")
+                LocalDate.parse("2018-03-10"),
+                EventStatus.OPEN
         );
 
         Trip overlappingTrip = new Trip(
                 "Altra meta",
                 "Gita che si sovrappone alla gita di riferimento",
                 LocalDate.parse("2018-03-02"),
-                LocalDate.parse("2018-03-12")
+                LocalDate.parse("2018-03-12"),
+                EventStatus.OPEN
         );
 
         Bus availableBus = new Bus(

@@ -104,7 +104,7 @@ public class UpdateTripController {
         LocalDate depDate = depDateField.getValue();
         LocalDate arrDate = arrDateField.getValue();
 
-        TripDTO tripDTO = new TripDTO(id, meta, note, depDate, arrDate, null, null, null);
+        TripDTO tripDTO = new TripDTO(id, meta, note, depDate, arrDate, oldTrip.getStatus(),null, null, null);
 
         Set<RouteDTO> routeDTOSet = new HashSet<>();
         for(TempRouteData r : routes)

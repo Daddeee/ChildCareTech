@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Person;
@@ -29,8 +30,8 @@ public class PersonTest extends AbstractEntityTest<Person, String> {
         Transaction tx = null;
 
         Person p = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
-        Trip t1 = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
-        Trip t2 = new Trip("meta1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3));
+        Trip t1 = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
+        Trip t2 = new Trip("meta1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), EventStatus.OPEN);
         Bus b = new Bus("AA111AA", 10);
         TripPartecipation tp1 = new TripPartecipation(p, t1, b);
         TripPartecipation tp2 = new TripPartecipation(p, t2, b);

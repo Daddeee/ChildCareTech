@@ -66,6 +66,7 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
                 entity.getNote(),
                 entity.getDepDate(),
                 entity.getArrDate(),
+                entity.getStatus(),
                 null,
                 null,
                 null

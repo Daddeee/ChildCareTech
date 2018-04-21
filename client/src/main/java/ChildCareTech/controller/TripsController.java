@@ -29,14 +29,6 @@ public class TripsController {
 
     @FXML
     private TableView<TripDTO> tripsTable;
-    @FXML
-    private TableColumn<TripDTO, String> metaColumn;
-    @FXML
-    private TableColumn<TripDTO, String> noteColumn;
-    @FXML
-    private TableColumn<TripDTO, LocalDate> depDateColumn;
-    @FXML
-    private TableColumn<TripDTO, LocalDate> arrDateColumn;
 
 
     private ObservableList<TripDTO> items = FXCollections.observableArrayList();

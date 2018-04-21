@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.DAO.RouteDAO;
 import ChildCareTech.model.entities.Trip;
@@ -19,7 +20,7 @@ public class RouteTest extends AbstractEntityTest<Route, Integer> {
 
     @Override
     public void testCRUD() {
-        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
+        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
 
         session = sessionFactory.openSession();
         Transaction tx = null;

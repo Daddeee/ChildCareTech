@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.DAO.BusDAO;
 import ChildCareTech.model.entities.Person;
@@ -26,7 +27,7 @@ public class BusTest extends AbstractEntityTest<Bus, Integer> {
         Transaction tx = null;
 
         Bus b = new Bus("AA111AA", 10);
-        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1));
+        Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
         Person p1 = new Person("fisc1", "fn1", "ln1", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Person p2 = new Person("fisc2", "fn2", "ln2", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         TripPartecipation tp1 = new TripPartecipation(p1, t, b);

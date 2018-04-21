@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.Sex;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
@@ -37,14 +38,16 @@ public class AvailableKidTest {
                 "Meta",
                 "Gita di test",
                 LocalDate.parse("2018-03-01"),
-                LocalDate.parse("2018-03-10")
+                LocalDate.parse("2018-03-10"),
+                EventStatus.OPEN
         );
 
         Trip overlappingTrip = new Trip(
                 "Meta 2",
                 "Overlapping trip",
                 LocalDate.parse("2018-03-05"),
-                LocalDate.parse("2018-03-12")
+                LocalDate.parse("2018-03-12"),
+                EventStatus.OPEN
         );
 
         Bus bus = new Bus(

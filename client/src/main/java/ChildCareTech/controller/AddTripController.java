@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.*;
 import ChildCareTech.utils.RestrictedDatePicker;
@@ -88,7 +89,7 @@ public class AddTripController {
         LocalDate depDate = depDateField.getValue();
         LocalDate arrDate = arrDateField.getValue();
 
-        TripDTO tripDTO = new TripDTO(0, meta, note, depDate, arrDate, null, null, null);
+        TripDTO tripDTO = new TripDTO(0, meta, note, depDate, arrDate, EventStatus.WAIT,null, null, null);
 
         Set<RouteDTO> routeDTOSet = new HashSet<>();
         for(TempRouteData r : routes)

@@ -1,5 +1,6 @@
 package ChildCareTech.model.entities;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.iEntity;
 import ChildCareTech.model.validators.ValidRoutes;
 import ChildCareTech.model.validators.ValidTripDates;
@@ -38,6 +39,8 @@ public class Trip implements iEntity<Trip, Integer> {
     @Column(nullable = false)
     private LocalDate arrDate;
 
+    private EventStatus status;
+
     @Valid
     @Size(min = 2, message = "Inserire almeno 2 tratte (andata e ritorno)")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "trip")
@@ -53,25 +56,28 @@ public class Trip implements iEntity<Trip, Integer> {
     public Trip() {
     }
 
-    public Trip(String meta, LocalDate depDate, LocalDate arrDate) {
+    public Trip(String meta, LocalDate depDate, LocalDate arrDate, EventStatus status) {
         this.meta = meta;
         this.depDate = depDate;
         this.arrDate = arrDate;
+        this.status = status;
     }
 
-    public Trip(String meta, String note,LocalDate depDate, LocalDate arrDate) {
+    public Trip(String meta, String note,LocalDate depDate, LocalDate arrDate, EventStatus status) {
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;
         this.arrDate = arrDate;
+        this.status = status;
     }
 
-    public Trip(int id, String meta, String note,LocalDate depDate, LocalDate arrDate) {
+    public Trip(int id, String meta, String note,LocalDate depDate, LocalDate arrDate, EventStatus status) {
         this.id = id;
         this.meta = meta;
         this.note = note;
         this.depDate = depDate;
         this.arrDate = arrDate;
+        this.status = status;
     }
 
     public int getId() {
@@ -136,6 +142,14 @@ public class Trip implements iEntity<Trip, Integer> {
 
     private void setArrDate(LocalDate arrDate) {
         this.arrDate = arrDate;
+    }
+
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    private void setStatus(EventStatus status) {
+        this.status = status;
     }
 
     @Override
