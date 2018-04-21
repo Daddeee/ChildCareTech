@@ -19,7 +19,7 @@ import java.util.List;
 public class RemoteEventObservable {
     private static RemoteEventObservable ourInstance = new RemoteEventObservable();
 
-    private WorkDay today;
+    private static WorkDay today = CurrentWorkDayService.getCurrent();
     private List<RemoteEventObserver> observers;
     private EventDAO eventDAO;
 
@@ -32,12 +32,16 @@ public class RemoteEventObservable {
         eventDAO = new EventDAO();
     }
 
+    public WorkDay getToday(){
+        return today;
+    }
+
     public List<Event> getPlannedEvents() {
         return today == null ? Collections.emptyList() : new ArrayList<>(today.getEvents());
     }
 
     public void setDay(WorkDay day) throws RemoteException{
-        this.today = day;
+        today = day;
         notifyObservers();
     }
 

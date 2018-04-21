@@ -34,7 +34,7 @@ public class CurrentWorkDayService {
         try{
             tx = session.beginTransaction();
 
-            result = workDayDAO.read("date", LocalDate.now().toString());
+            result = workDayDAO.read("date", today.toString());
             for(WorkDay w : result) {
                 workDayDAO.initializeLazyRelations(w);
                 for(Event e : w.getEvents())
