@@ -5,7 +5,9 @@ import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.model.DAO.EventDAO;
+import ChildCareTech.model.DAO.TripDAO;
 import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
 import org.hibernate.Session;
@@ -42,6 +44,7 @@ public class RemoteEventObservable {
 
     public void setDay(WorkDay day) throws RemoteException{
         today = day;
+        updateTripStatus();
         notifyObservers();
     }
 
@@ -82,5 +85,36 @@ public class RemoteEventObservable {
         WorkDayDTO workDayDTO = DTOFactory.getDTO(today);
         for(RemoteEventObserver o : observers)
             o.update(workDayDTO);
+    }
+
+    private void updateTripStatus() {
+        TripDAO tripDAO = new TripDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        tripDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            List<Trip> tripStartingToday = tripDAO.read("depDate", today.getDate().toString());
+            for(Trip t : tripStartingToday) {
+                t.setStatus(EventStatus.OPEN);
+                tripDAO.update(t);
+            }
+
+            List<Trip> tripEndedYesterday = tripDAO.read("arrDate", today.getDate().minusDays(1).toString());
+            for(Trip t : tripEndedYesterday) {
+                t.setStatus(EventStatus.CLOSED);
+                tripDAO.update(t);
+            }
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }

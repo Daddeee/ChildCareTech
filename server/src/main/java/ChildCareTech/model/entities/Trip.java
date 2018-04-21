@@ -148,7 +148,7 @@ public class Trip implements iEntity<Trip, Integer> {
         return status;
     }
 
-    private void setStatus(EventStatus status) {
+    public void setStatus(EventStatus status) {
         this.status = status;
     }
 
