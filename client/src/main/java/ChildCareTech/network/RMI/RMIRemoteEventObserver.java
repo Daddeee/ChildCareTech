@@ -27,8 +27,4 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
         today = workDayDTO;
         Platform.runLater(() -> MainSceneManager.getHomeController().refresh(today));
     }
-
-    public static WorkDayDTO getToday() {
-        return today;
-    }
 }

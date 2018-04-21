@@ -742,12 +742,18 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     public void updateTrip(TripDTO newTripDTO) throws UpdateFailedException{
         TripDAO tripDAO = new TripDAO();
         Trip newTrip = DTOEntityAssembler.getEntity(newTripDTO);
+        Trip oldTrip;
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         tripDAO.setSession(session);
         try{
             tx = session.beginTransaction();
+
+            oldTrip = tripDAO.read(newTripDTO.getId());
+            if(!(oldTrip.getDepDate().equals(newTrip.getDepDate()) && oldTrip.getArrDate().equals(newTrip.getArrDate()))
+               && (oldTrip.getBuses() != null && !oldTrip.getBuses().isEmpty()))
+                throw new UpdateFailedException("Non è possibile cambiare le date avendo dei bus associati alla gita");
 
             tripDAO.update(newTrip);
 
