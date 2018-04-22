@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.collections.FXCollections?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
       prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ChildCareTech.controller.TripsController">
@@ -29,29 +28,32 @@
                 </Button>
             </children>
         </VBox>
-        <TableView fx:id="tripsTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
-                   prefHeight="680.0" prefWidth="880.0">
-            <columns>
-                <TableColumn fx:id="metaColumn" prefWidth="176.0" text="Destinazione">
-                    <cellValueFactory><PropertyValueFactory property="meta" /></cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="noteColumn" prefWidth="176.0" text="Note">
-                    <cellValueFactory><PropertyValueFactory property="note" /></cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="depDateColumn" prefWidth="176.0" text="Data di partenza">
-                    <cellValueFactory><PropertyValueFactory property="depDate" /></cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="arrDateColumn" prefWidth="176.0" text="Data di arrivo">
-                    <cellValueFactory><PropertyValueFactory property="arrDate" /></cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="statusColumn" prefWidth="176.0" text="Stato">
-                    <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
-                </TableColumn>
-            </columns>
-            <HBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </HBox.margin>
-        </TableView>
+        <VBox>
+            <TableView fx:id="tripsTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
+                       prefHeight="630.0" prefWidth="880.0">
+                <columns>
+                    <TableColumn fx:id="metaColumn" prefWidth="176.0" text="Destinazione">
+                        <cellValueFactory><PropertyValueFactory property="meta" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="noteColumn" prefWidth="176.0" text="Note">
+                        <cellValueFactory><PropertyValueFactory property="note" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="depDateColumn" prefWidth="176.0" text="Data di partenza">
+                        <cellValueFactory><PropertyValueFactory property="depDate" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="arrDateColumn" prefWidth="176.0" text="Data di arrivo">
+                        <cellValueFactory><PropertyValueFactory property="arrDate" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="statusColumn" prefWidth="176.0" text="Stato">
+                        <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
+                    </TableColumn>
+                </columns>
+                <HBox.margin>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </HBox.margin>
+            </TableView>
+            <Label fx:id="alertLabel" textFill="#ff4444" prefHeight="50.0" prefWidth="900.0"/>
+        </VBox>
     </children>
 </HBox>
 

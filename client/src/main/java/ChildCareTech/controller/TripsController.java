@@ -27,6 +27,8 @@ public class TripsController {
     private Button addButton;
     @FXML
     private Button backButton;
+    @FXML
+    private Label alertLabel;
 
     @FXML
     private TableView<TripDTO> tripsTable;
@@ -49,6 +51,8 @@ public class TripsController {
             final MenuItem showTrip = new MenuItem("Dettagli");
             showTrip.setOnAction(event ->  {
                     contextMenu.hide();
+                    alertLabel.setText("");
+
                     try {
                         AccessorSceneManager.loadShowTrip(row.getItem());
                     } catch (IOException ex) {
@@ -60,6 +64,7 @@ public class TripsController {
             final MenuItem deleteTrip = new MenuItem("Elimina");
             deleteTrip.setOnAction(event -> {
                 contextMenu.hide();
+                alertLabel.setText("");
                 try {
                     SessionService.getSession().removeTrip(row.getItem());
                 } catch (RemoteException ex) {
@@ -72,6 +77,12 @@ public class TripsController {
             final MenuItem updateTrip = new MenuItem("Modifica");
             updateTrip.setOnAction(event -> {
                 contextMenu.hide();
+                alertLabel.setText("");
+                if(!row.getItem().getStatus().equals(EventStatus.WAIT)){
+                    alertLabel.setText("Non è possibile modificare una gita aperta o chiusa.");
+                    return;
+                }
+
                 try {
                     AccessorSceneManager.loadUpdateTrip(row.getItem());
                 } catch (IOException ex) {
@@ -84,6 +95,12 @@ public class TripsController {
             final MenuItem manageTripPartecipations = new MenuItem("Iscrizioni");
             manageTripPartecipations.setOnAction(event -> {
                 contextMenu.hide();
+                alertLabel.setText("");
+                if(!row.getItem().getStatus().equals(EventStatus.WAIT)){
+                    alertLabel.setText("Non è possibile gestire le iscrizioni di una gita aperta o chiusa.");
+                    return;
+                }
+
                 try {
                     AccessorSceneManager.loadTripPartecipationManagement(row.getItem());
                 } catch (IOException ex) {
@@ -96,6 +113,13 @@ public class TripsController {
             final MenuItem manageTripRoutes = new MenuItem("Gestione tragitto");
             manageTripRoutes.setOnAction(event -> {
                 contextMenu.hide();
+                alertLabel.setText("");
+                if(!row.getItem().getStatus().equals(EventStatus.OPEN)){
+                    alertLabel.setText("Non è possibile gestire il tragitto di una gita non aperta.");
+                    return;
+                }
+
+                System.out.println("ok");
             });
 
             contextMenu.getItems().add(showTrip);
