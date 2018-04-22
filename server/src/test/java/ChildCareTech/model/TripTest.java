@@ -34,8 +34,8 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
         Bus b2 = new Bus("AA111AB", 11);
         TripPartecipation tp1 = new TripPartecipation(p1, t, b1);
         TripPartecipation tp2 = new TripPartecipation(p2, t, b2);
-        Route s1 = new Route(t, 0, "a", "b");
-        Route s2 = new Route(t, 1, "b", "a");
+        Route s1 = new Route(t, 0, "a", "b", EventStatus.OPEN);
+        Route s2 = new Route(t, 1, "b", "a", EventStatus.OPEN);
 
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();

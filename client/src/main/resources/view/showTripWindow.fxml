@@ -55,6 +55,9 @@
             <TableColumn fx:id="routeNumberColumn" prefWidth="100.0" text="Numero tratta">
                 <cellValueFactory><PropertyValueFactory property="routeNumber"/></cellValueFactory>
             </TableColumn>
+            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Stato">
+                <cellValueFactory><PropertyValueFactory property="status"/></cellValueFactory>
+            </TableColumn>
         </columns>
     </TableView>
 </VBox>

@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
@@ -77,13 +78,13 @@ public class UpdateTripController {
         arrDateField.setValue(tripDTO.getArrDate());
 
         for(RouteDTO r : tripDTO.getRoutes())
-            addRoute(new TempRouteData(r.getId(), r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation()));
+            addRoute(new TempRouteData(r.getId(), r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation(), r.getStatus()));
 
     }
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
+        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText(), EventStatus.WAIT));
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package ChildCareTech.model.entities;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
@@ -32,22 +33,26 @@ public class Route implements iEntity<Route, Integer> {
     @Column(nullable = false)
     private String arrivalLocation;
 
+    private EventStatus status;
+
     public Route() {
     }
 
-    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
+    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status) {
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
+        this.status = status;
     }
 
-    public Route(int id, Trip trip, int routeNumber, String departureLocation, String arrivalLocation) {
+    public Route(int id, Trip trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status) {
         this.id = id;
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
+        this.status = status;
     }
 
     public int getId() {
@@ -88,6 +93,14 @@ public class Route implements iEntity<Route, Integer> {
 
     private void setArrivalLocation(String arrivalLocation) {
         this.arrivalLocation = arrivalLocation;
+    }
+
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
     }
 
     @Override

@@ -149,14 +149,17 @@
     <TableView fx:id="routesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
                prefHeight="100.0" prefWidth="700.0" editable="true">
         <columns>
-            <TableColumn fx:id="departureLocationColumn" prefWidth="300.0" text="Luogo di partenza">
+            <TableColumn fx:id="departureLocationColumn" prefWidth="250.0" text="Luogo di partenza">
                 <cellValueFactory><PropertyValueFactory property="departureLocation" /></cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="arrivalLocationColumn" prefWidth="300.0" text="Luogo di arrivo">
+            <TableColumn fx:id="arrivalLocationColumn" prefWidth="250.0" text="Luogo di arrivo">
                 <cellValueFactory><PropertyValueFactory property="arrivalLocation" /></cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="routeNumberColumn" prefWidth="100.0" text="numero tratta">
                 <cellValueFactory><PropertyValueFactory property="routeNumber" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Stato">
+                <cellValueFactory><PropertyValueFactory property="status"/></cellValueFactory>
             </TableColumn>
         </columns>
         <HBox.margin>

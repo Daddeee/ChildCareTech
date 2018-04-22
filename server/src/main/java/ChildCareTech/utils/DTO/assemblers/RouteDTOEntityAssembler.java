@@ -23,7 +23,8 @@ public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route
                 trip,
                 dto.getRouteNumber(),
                 dto.getDepartureLocation(),
-                dto.getArrivalLocation()
+                dto.getArrivalLocation(),
+                dto.getStatus()
         );
     }
 }

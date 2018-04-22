@@ -1,6 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
@@ -55,7 +56,6 @@ public class TripsController {
                         ex.printStackTrace();
                     }
             });
-            contextMenu.getItems().add(showTrip);
 
             final MenuItem deleteTrip = new MenuItem("Elimina");
             deleteTrip.setOnAction(event -> {
@@ -68,7 +68,6 @@ public class TripsController {
                 }
                 refreshTable();
             });
-            contextMenu.getItems().add(deleteTrip);
 
             final MenuItem updateTrip = new MenuItem("Modifica");
             updateTrip.setOnAction(event -> {
@@ -81,7 +80,6 @@ public class TripsController {
                 }
                 refreshTable();
             });
-            contextMenu.getItems().add(updateTrip);
 
             final MenuItem manageTripPartecipations = new MenuItem("Iscrizioni");
             manageTripPartecipations.setOnAction(event -> {
@@ -94,7 +92,18 @@ public class TripsController {
                 }
                 refreshTable();
             });
+
+            final MenuItem manageTripRoutes = new MenuItem("Gestione tragitto");
+            manageTripRoutes.setOnAction(event -> {
+                contextMenu.hide();
+            });
+
+            contextMenu.getItems().add(showTrip);
+            contextMenu.getItems().add(deleteTrip);
+            contextMenu.getItems().add(updateTrip);
             contextMenu.getItems().add(manageTripPartecipations);
+            contextMenu.getItems().add(manageTripRoutes);
+
 
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())

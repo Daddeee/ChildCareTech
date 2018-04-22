@@ -1,5 +1,7 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.common.EventStatus;
+
 import java.io.Serializable;
 
 public class RouteDTO implements Serializable {
@@ -8,13 +10,15 @@ public class RouteDTO implements Serializable {
     private int routeNumber;
     private String departureLocation;
     private String arrivalLocation;
+    private EventStatus status;
 
-    public RouteDTO(int id, TripDTO trip, int routeNumber, String departureLocation, String arrivalLocation) {
+    public RouteDTO(int id, TripDTO trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status) {
         this.id = id;
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
+        this.status = status;
     }
 
     public int getId() {
@@ -51,5 +55,13 @@ public class RouteDTO implements Serializable {
 
     public void setArrivalLocation(String arrivalLocation) {
         this.arrivalLocation = arrivalLocation;
+    }
+
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
     }
 }

@@ -69,7 +69,7 @@ public class AddTripController {
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText()));
+        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText(), EventStatus.WAIT));
     }
 
     @FXML

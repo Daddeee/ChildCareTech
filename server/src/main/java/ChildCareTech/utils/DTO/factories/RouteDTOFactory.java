@@ -24,7 +24,8 @@ public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
                 tripDTO,
                 entity.getRouteNumber(),
                 entity.getDepartureLocation(),
-                entity.getArrivalLocation()
+                entity.getArrivalLocation(),
+                entity.getStatus()
         );
     }
 }
