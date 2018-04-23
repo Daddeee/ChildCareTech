@@ -31,9 +31,8 @@
             </columns>
         </TableView>
         <VBox prefHeight="400.0" prefWidth="300.0">
-            <TextField fx:id="duration" promptText="inserisci durata limite in minuti"/>
-            <Button fx:id="startEvent"/>
-            <Button fx:id="stopEvent"/>
+            <Button fx:id="startEvent" onAction="#startEventButtonAction"/>
+            <Button fx:id="stopEvent" onAction="#stopEventButtonAction"/>
         </VBox>
     </HBox>
 </AnchorPane>
