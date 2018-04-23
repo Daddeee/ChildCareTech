@@ -48,10 +48,19 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         try{
             tx = session.beginTransaction();
 
-            if(route.getDepartureEvent() != null && route.getDepartureEvent().getId() == 0)
-                eventDAO.create(route.getDepartureEvent());
-            if(route.getArrivalEvent() != null && route.getArrivalEvent().getId() == 0)
-                eventDAO.create(route.getArrivalEvent());
+            if(route.getDepartureEvent() != null)
+                if(route.getDepartureEvent().getId() == 0) {
+                    eventDAO.create(route.getDepartureEvent());
+                } else {
+                    eventDAO.update(route.getDepartureEvent());
+                }
+
+            if(route.getArrivalEvent() != null)
+                if(route.getArrivalEvent().getId() == 0) {
+                    eventDAO.create(route.getArrivalEvent());
+                } else {
+                    eventDAO.update(route.getArrivalEvent());
+                }
 
             routeDAO.update(route);
 
@@ -68,7 +77,28 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void triggerDailyScheduling() throws RemoteException {
-        RemoteEventObservable.getInstance().setDay(RemoteEventObservable.getInstance().getToday());
+        WorkDayDAO workDayDAO = new WorkDayDAO();
+        EventDAO eventDAO = new EventDAO();
+        WorkDay reloadedToday = null;
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        workDayDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            reloadedToday = workDayDAO.read(RemoteEventObservable.getInstance().getToday());
+            workDayDAO.initializeLazyRelations(reloadedToday);
+
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        RemoteEventObservable.getInstance().setDay(reloadedToday);
     }
 
     @Override

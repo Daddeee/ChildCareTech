@@ -39,13 +39,17 @@ public class TripRoutesController {
 
     public void initData(TripDTO tripDTO) {
         this.tripDTO = tripDTO;
+        refresh();
+    }
 
+    private void refresh() {
+        data.clear();
         data.addAll(tripDTO.getRoutes());
         FXCollections.sort(data, Comparator.comparing(RouteDTO::getRouteNumber));
         routesTable.setItems(data);
 
-        for(RouteDTO r : data){
-            if(!r.getStatus().equals(EventStatus.CLOSED)){
+        for (RouteDTO r : data) {
+            if (!r.getStatus().equals(EventStatus.CLOSED)) {
                 currentRoute = r;
                 break;
             }
@@ -53,12 +57,12 @@ public class TripRoutesController {
 
         isStarting = currentRoute.getStatus().equals(EventStatus.WAIT);
 
-        if(isStarting)
+        if (isStarting)
             isEventOpening = currentRoute.getDepartureEvent() == null;
         else
             isEventOpening = currentRoute.getArrivalEvent() == null;
 
-        if(isStarting){
+        if (isStarting) {
             startEvent.setText("Apri partenza da " + currentRoute.getDepartureLocation());
             stopEvent.setText("Chiudi partenza da " + currentRoute.getDepartureLocation());
         } else {
@@ -66,10 +70,13 @@ public class TripRoutesController {
             stopEvent.setText("Chiudi arrivo a " + currentRoute.getArrivalLocation());
         }
 
-        if(isEventOpening)
+        if (isEventOpening) {
+            startEvent.setDisable(false);
             stopEvent.setDisable(true);
-        else
+        } else {
             startEvent.setDisable(true);
+            stopEvent.setDisable(false);
+        }
     }
 
     @FXML
@@ -101,10 +108,13 @@ public class TripRoutesController {
 
         try{
             SessionService.getSession().updateRouteEvent(currentRoute);
+            tripDTO = SessionService.getSession().getTrip(tripDTO.getId());
         } catch(RemoteException | UpdateFailedException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+
+        refresh();
     }
 
     @FXML
@@ -124,9 +134,12 @@ public class TripRoutesController {
 
         try{
             SessionService.getSession().updateRouteEvent(currentRoute);
+            tripDTO = SessionService.getSession().getTrip(tripDTO.getId());
         } catch(RemoteException | UpdateFailedException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+
+        refresh();
     }
 }
