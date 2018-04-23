@@ -143,6 +143,7 @@ public class Route implements iEntity<Route, Integer> {
 
     @Override
     public int hashCode() {
+        if(trip == null) return super.hashCode();
         return (Integer.toString(routeNumber) + trip.hashCode()).hashCode();
     }
 }

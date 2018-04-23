@@ -101,6 +101,8 @@ public class Event implements iEntity<Event, Integer> {
 
     @Override
     public String toString() {
-        return getName() + " [" + getBeginTime().toString() + " | " + getEndTime().toString() + "] " + getEventStatus().toString();
+        String beginTime = getBeginTime() == null ? "" : getBeginTime().toString();
+        String endTime = getEndTime() == null ? "" : getEndTime().toString();
+        return getName() + " [" + beginTime + " | " + endTime + "] " + getEventStatus().toString();
     }
 }
