@@ -89,7 +89,6 @@ public class TripsController {
                     System.err.println("Can't load updateTrip window");
                     ex.printStackTrace();
                 }
-                refreshTable();
             });
 
             final MenuItem manageTripPartecipations = new MenuItem("Iscrizioni");
@@ -107,7 +106,6 @@ public class TripsController {
                     System.err.println("Can't load trip partecipation window");
                     ex.printStackTrace();
                 }
-                refreshTable();
             });
 
             final MenuItem manageTripRoutes = new MenuItem("Gestione tragitto");
@@ -117,6 +115,13 @@ public class TripsController {
                 if(!row.getItem().getStatus().equals(EventStatus.OPEN)){
                     alertLabel.setText("Non è possibile gestire il tragitto di una gita non aperta.");
                     return;
+                }
+
+                try {
+                    AccessorSceneManager.loadTripRoutes(row.getItem());
+                } catch (IOException ex) {
+                    System.err.println("Can't load trip partecipation window");
+                    ex.printStackTrace();
                 }
 
                 System.out.println("ok");

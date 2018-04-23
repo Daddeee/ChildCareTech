@@ -32,6 +32,7 @@ public class AccessorSceneManager {
     private static FXMLLoader eventReportLoader;
     private static FXMLLoader tripPartecipationanagementLoader;
     private static FXMLLoader editKidLoader;
+    private static FXMLLoader tripRoutesLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -51,6 +52,7 @@ public class AccessorSceneManager {
     private static Scene eventReportScene;
     private static Scene tripPartecipationanagementScene;
     private static Scene editKidScene;
+    private static Scene tripRoutesScene;
 
     private AccessorSceneManager() {
     }
@@ -74,6 +76,20 @@ public class AccessorSceneManager {
         return updateTripLoader.getController();
     }
     public static ShowKidController getShowKidController() { return showKidLoader.getController(); }
+
+    public static void loadTripRoutes(TripDTO tripDTO) throws IOException {
+        tripRoutesLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/tripRoutesWindow.fxml"));
+        tripRoutesScene = sceneInit(tripRoutesLoader, "/style/tripRoutesWindow.css");
+
+        TripRoutesController controller = tripRoutesLoader.getController();
+        controller.initData(tripDTO);
+
+        try{
+            AccessorStageService.changeScene(tripRoutesScene);
+        } catch (NoSuchFieldException ex){
+            AccessorSceneManager.stageError(ex);
+        }
+    }
 
     public static void loadCodeInput(EventDTO eventDTO) throws IOException {
         codeInputLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/codeInputWindow.fxml"));
