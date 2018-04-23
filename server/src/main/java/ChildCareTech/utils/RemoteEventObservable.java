@@ -18,6 +18,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class RemoteEventObservable {
     private static RemoteEventObservable ourInstance = new RemoteEventObservable();
@@ -109,6 +110,9 @@ public class RemoteEventObservable {
                 t.setStatus(EventStatus.OPEN);
                 tripDAO.update(t);
             }
+
+            // There can be duplicate trips because of the "TriggerDailyScheduling"
+            tripStartingToday.removeIf(trip -> todayTrips.contains(trip));
 
             todayTrips.addAll(tripStartingToday);
 
