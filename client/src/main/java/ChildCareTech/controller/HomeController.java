@@ -32,18 +32,12 @@ public class HomeController {
 
     public HomeController() { }
 
+    public static WorkDayDTO getSelectedWorkDay() {
+        return selectedWorkDay;
+    }
+
     @FXML
     public void initialize() {
-        if (selectedWorkDay != null && todayOpenTrips != null) {
-            refresh(selectedWorkDay, todayOpenTrips);
-        } else {
-            try{
-                SessionService.getSession().triggerDailyScheduling();
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-
         eventsTable.setRowFactory(eventDTOTableView -> {
             final TableRow<EventDTO> row = new TableRow<>();
 
@@ -89,6 +83,16 @@ public class HomeController {
             return row;
 
         });
+
+        if (selectedWorkDay != null && todayOpenTrips != null) {
+            refresh(selectedWorkDay, todayOpenTrips);
+        } else {
+            try{
+                SessionService.getSession().triggerDailyScheduling();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void refresh(WorkDayDTO workDayDTO, List<TripDTO> tripDTOS){
