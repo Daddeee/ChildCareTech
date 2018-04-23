@@ -35,24 +35,33 @@ public class Route implements iEntity<Route, Integer> {
 
     private EventStatus status;
 
+    @OneToOne
+    private Event departureEvent;
+    @OneToOne
+    private Event arrivalEvent;
+
     public Route() {
     }
 
-    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status) {
+    public Route(Trip trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status, Event departureEvent, Event arrivalEvent) {
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
         this.status = status;
+        this.departureEvent = departureEvent;
+        this.arrivalEvent = arrivalEvent;
     }
 
-    public Route(int id, Trip trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status) {
+    public Route(int id, Trip trip, int routeNumber, String departureLocation, String arrivalLocation, EventStatus status, Event departureEvent, Event arrivalEvent) {
         this.id = id;
         this.trip = trip;
         this.routeNumber = routeNumber;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
         this.status = status;
+        this.departureEvent = departureEvent;
+        this.arrivalEvent = arrivalEvent;
     }
 
     public int getId() {
@@ -101,6 +110,22 @@ public class Route implements iEntity<Route, Integer> {
 
     public void setStatus(EventStatus status) {
         this.status = status;
+    }
+
+    public Event getDepartureEvent() {
+        return departureEvent;
+    }
+
+    public void setDepartureEvent(Event departureEvent) {
+        this.departureEvent = departureEvent;
+    }
+
+    public Event getArrivalEvent() {
+        return arrivalEvent;
+    }
+
+    public void setArrivalEvent(Event arrivalEvent) {
+        this.arrivalEvent = arrivalEvent;
     }
 
     @Override

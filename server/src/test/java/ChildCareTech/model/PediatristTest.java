@@ -30,8 +30,8 @@ public class PediatristTest extends AbstractEntityTest<Pediatrist, Integer> {
         Person kp1 = new Person("bimbo1", "n", "c", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
         Person kp2 = new Person("bimbo2", "n", "c", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
 
-        Kid k1 = new Kid(kp1, null, null, p);
-        Kid k2 = new Kid(kp2, null, null, p);
+        Kid k1 = new Kid(kp1, p, null, p);
+        Kid k2 = new Kid(kp2, p, null, p);
 
         HashSet<Kid> set = new HashSet<>();
         set.add(k1);

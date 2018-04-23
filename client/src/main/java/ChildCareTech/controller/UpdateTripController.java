@@ -78,13 +78,13 @@ public class UpdateTripController {
         arrDateField.setValue(tripDTO.getArrDate());
 
         for(RouteDTO r : tripDTO.getRoutes())
-            addRoute(new TempRouteData(r.getId(), r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation(), r.getStatus()));
+            addRoute(new TempRouteData(r.getId(), r.getRouteNumber(), r.getDepartureLocation(), r.getArrivalLocation(), r.getStatus(), r.getDepartureEvent(), r.getArrivalEvent()));
 
     }
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText(), EventStatus.WAIT));
+        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText(), EventStatus.WAIT, null, null));
     }
 
     @FXML

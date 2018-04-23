@@ -3,6 +3,7 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.entities.Trip;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
 public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route, RouteDTO> {
     @Override
@@ -24,7 +25,9 @@ public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route
                 dto.getRouteNumber(),
                 dto.getDepartureLocation(),
                 dto.getArrivalLocation(),
-                dto.getStatus()
+                dto.getStatus(),
+                DTOEntityAssembler.getEntity(dto.getDepartureEvent()),
+                DTOEntityAssembler.getEntity(dto.getDepartureEvent())
         );
     }
 }

@@ -37,8 +37,8 @@ public class RouteTest extends AbstractEntityTest<Route, Integer> {
             session.close();
         }
 
-        Route s = new Route(t, 0, "a", "b", EventStatus.OPEN);
-        Route su = new Route(t, 1, "b", "a", EventStatus.OPEN);
+        Route s = new Route(t, 0, "a", "b", EventStatus.OPEN, null, null);
+        Route su = new Route(t, 1, "b", "a", EventStatus.OPEN, null, null);
 
         testCRUDImpl(s, su);
     }
