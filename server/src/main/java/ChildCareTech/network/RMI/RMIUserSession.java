@@ -36,6 +36,37 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void updateRouteEvent(RouteDTO routeDTO) throws RemoteException, UpdateFailedException{
+        RouteDAO routeDAO = new RouteDAO();
+        EventDAO eventDAO = new EventDAO();
+        Route route = DTOEntityAssembler.getEntity(routeDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        routeDAO.setSession(session);
+        eventDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            if(route.getDepartureEvent() != null && route.getDepartureEvent().getId() == 0)
+                eventDAO.create(route.getDepartureEvent());
+            if(route.getArrivalEvent() != null && route.getArrivalEvent().getId() == 0)
+                eventDAO.create(route.getArrivalEvent());
+
+            routeDAO.update(route);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            throw new UpdateFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        triggerDailyScheduling();
+    }
+
+    @Override
     public void triggerDailyScheduling() throws RemoteException {
         RemoteEventObservable.getInstance().setDay(RemoteEventObservable.getInstance().getToday());
     }

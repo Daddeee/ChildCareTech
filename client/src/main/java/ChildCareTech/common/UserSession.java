@@ -32,6 +32,7 @@ public interface UserSession extends Remote {
 
     void removeTrip(TripDTO trip) throws RemoteException;
     void removeRoute(RouteDTO route) throws RemoteException;
+    void updateRouteEvent(RouteDTO routeDTO) throws RemoteException, UpdateFailedException;
 
     List<KidDTO> getAllKids() throws RemoteException;
     Collection<KidDTO> getAvailableKids(TripDTO tripDTO) throws RemoteException;
