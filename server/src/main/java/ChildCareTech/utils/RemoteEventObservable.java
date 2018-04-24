@@ -105,7 +105,11 @@ public class RemoteEventObservable {
         try{
             tx = session.beginTransaction();
 
+            if(today == null)
+                today = CurrentWorkDayService.getCurrent();
+
             List<Trip> tripStartingToday = tripDAO.read("depDate", today.getDate().toString());
+
             for(Trip t : tripStartingToday) {
                 t.setStatus(EventStatus.OPEN);
                 tripDAO.update(t);
