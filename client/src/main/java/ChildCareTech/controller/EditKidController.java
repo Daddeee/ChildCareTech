@@ -29,7 +29,7 @@ public class EditKidController extends AddKidController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
+        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null, null);
 
         AdultDTO firstTutor = firstTutorComboBox.getValue().getDTO();
         if(firstTutor.getPerson().getFiscalCode().equals("")) firstTutor = null;

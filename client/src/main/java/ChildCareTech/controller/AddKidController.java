@@ -67,7 +67,8 @@ public class AddKidController {
                     null,
                     null,
                     "",
-                    ""
+                    "",
+                    null
             ),
             null
     );;
@@ -95,7 +96,7 @@ public class AddKidController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
+        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null, null);
 
         AdultDTO firstTutor = null;
         if(firstTutorComboBox.getValue() != null) {

@@ -32,6 +32,58 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
     @Test
     public abstract void testCRUD();
 
+    protected <T2> void testManyToMany(Set<T> ents1, Set<T2> ents2, Function<T, Set<T2>> getRelationSet) throws IllegalArgumentException {
+        session = sessionFactory.openSession();
+        dao.setSession(session);
+        Transaction tx = null;
+        Iterator<T> ents1Iter = ents1.iterator();
+        Iterator<T2> ents2Iter = ents2.iterator();
+        try {
+            tx = session.beginTransaction();
+
+            while (ents1Iter.hasNext()) {
+                session.merge(ents1Iter.next());
+            }
+            while (ents2Iter.hasNext()) {
+                session.merge(ents2Iter.next());
+            }
+
+            session.flush();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        ents1Iter = ents1.iterator();
+        T read = null;
+        Set<T2> set = new HashSet<>();
+        session = sessionFactory.openSession();
+        dao.setSession(session);
+        tx = null;
+        try {
+            while(ents1Iter.hasNext()){
+                tx = session.beginTransaction();
+                read = dao.read(ents1Iter.next());
+                getRelationSet.apply(read).size();
+                set = getRelationSet.apply(read);
+                tx.commit();
+
+                assertTrue(ents2.containsAll(set) && set.containsAll(ents2));
+            }
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
     protected <T2> void testOneToMany(T ent1, Set<T2> ent2, Function<T, Set<T2>> getRelationSet) throws IllegalArgumentException {
         session = sessionFactory.openSession();
         dao.setSession(session);

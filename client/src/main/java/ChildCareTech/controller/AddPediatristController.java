@@ -65,7 +65,7 @@ public class AddPediatristController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText());
+        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText(), null);
         pediatrist = new PediatristDTO(0, person, null, null);
         try {
             SessionService.getSession().savePediatrist(pediatrist);

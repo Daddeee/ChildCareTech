@@ -31,7 +31,7 @@ public class AddFoodController {
         FoodDTO foodDTO;
 
         try{
-            foodDTO = new FoodDTO(0, name, isDrink, 0, null);
+            foodDTO = new FoodDTO(0, name, isDrink, 0, null, null);
             SessionService.getSession().saveFood(foodDTO);
         } catch(RemoteException | AddFailedException ex) {
             alertLabel.setText("Salvataggio non riuscito:" + ex.getMessage());

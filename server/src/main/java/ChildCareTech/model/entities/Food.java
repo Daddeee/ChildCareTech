@@ -26,7 +26,7 @@ public class Food implements iEntity<Food, Integer> {
     @ColumnDefault("0")
     private int residualQuantity;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "food")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "food")
     private Set<Supply> supplies;
 
     @ManyToMany
