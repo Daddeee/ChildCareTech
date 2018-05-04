@@ -88,8 +88,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             reloadedToday = workDayDAO.read(RemoteEventObservable.getInstance().getToday());
-            workDayDAO.initializeLazyRelations(reloadedToday);
 
+            workDayDAO.initializeLazyRelations(reloadedToday);
 
             tx.commit();
         } catch (Exception e){

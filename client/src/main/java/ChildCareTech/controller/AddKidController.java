@@ -97,13 +97,19 @@ public class AddKidController {
             sex = Sex.FEMALE;
         person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null);
 
-        AdultDTO firstTutor = firstTutorComboBox.getValue().getDTO();
-        if(firstTutor.getPerson().getFiscalCode().equals(""))
-            firstTutor = null;
+        AdultDTO firstTutor = null;
+        if(firstTutorComboBox.getValue() != null) {
+            firstTutor = firstTutorComboBox.getValue().getDTO();
+            if (firstTutor.getPerson().getFiscalCode().equals(""))
+                firstTutor = null;
+        }
 
-        AdultDTO secondTutor = secondTutorComboBox.getValue().getDTO();
-        if(secondTutor.getPerson().getFiscalCode().equals(""))
-            secondTutor = null;
+        AdultDTO secondTutor = null;
+        if(secondTutorComboBox.getValue() != null) {
+            secondTutor = secondTutorComboBox.getValue().getDTO();
+            if (secondTutor.getPerson().getFiscalCode().equals(""))
+                secondTutor = null;
+        }
 
         kid = new KidDTO(0, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {

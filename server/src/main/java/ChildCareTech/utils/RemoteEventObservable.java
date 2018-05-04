@@ -38,6 +38,9 @@ public class RemoteEventObservable {
     }
 
     public WorkDay getToday(){
+        if(today == null)
+            today = CurrentWorkDayService.getCurrent();
+
         return today;
     }
 
@@ -104,9 +107,6 @@ public class RemoteEventObservable {
 
         try{
             tx = session.beginTransaction();
-
-            if(today == null)
-                today = CurrentWorkDayService.getCurrent();
 
             List<Trip> tripStartingToday = tripDAO.read("depDate", today.getDate().toString());
 
