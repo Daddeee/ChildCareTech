@@ -2,6 +2,7 @@ package ChildCareTech.services;
 
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.controller.*;
 import ChildCareTech.services.ObservableDTOs.*;
@@ -34,6 +35,7 @@ public class AccessorSceneManager {
     private static FXMLLoader editKidLoader;
     private static FXMLLoader tripRoutesLoader;
     private static FXMLLoader addFoodLoader;
+    private static FXMLLoader updateFoodLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -55,6 +57,7 @@ public class AccessorSceneManager {
     private static Scene editKidScene;
     private static Scene tripRoutesScene;
     private static Scene addFoodScene;
+    private static Scene updateFoodScene;
 
     private AccessorSceneManager() {
     }
@@ -279,6 +282,24 @@ public class AccessorSceneManager {
         try{
             AccessorStageService.changeScene(addFoodScene);
         } catch (NoSuchFieldException ex){
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadShowFood() throws IOException {
+
+    }
+
+    public static void loadUpdateFood(FoodDTO foodDTO) throws IOException {
+        updateFoodLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/updateFoodWindow.fxml"));
+        updateFoodScene = sceneInit(updateFoodLoader, "/style/updateFoodWindow.css");
+
+        UpdateFoodController controller = updateFoodLoader.getController();
+        controller.initData(foodDTO);
+
+        try{
+            AccessorStageService.changeScene(updateFoodScene);
+        } catch(NoSuchFieldException ex){
             AccessorSceneManager.stageError(ex);
         }
     }

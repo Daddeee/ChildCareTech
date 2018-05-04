@@ -54,12 +54,12 @@ public class FoodController {
             final MenuItem deleteFood = new MenuItem("Elimina");
             deleteFood.setOnAction(event -> {
                 contextMenu.hide();
-                /*try {
-                    SessionService.getSession().removeBus(row.getItem());
+                try {
+                    SessionService.getSession().removeFood(row.getItem());
                 } catch (RemoteException ex) {
                     System.err.println("error remote");
                     ex.printStackTrace();
-                }*/
+                }
                 refreshTable();
             });
             contextMenu.getItems().add(deleteFood);
@@ -67,14 +67,13 @@ public class FoodController {
             final MenuItem updateFood = new MenuItem("Modifica");
             updateFood.setOnAction(event -> {
                 contextMenu.hide();
-                /*try {
-                    AccessorSceneManager.loadUpdateBus(row.getItem());
+                try {
+                    AccessorSceneManager.loadUpdateFood(row.getItem());
                 } catch (IOException ex) {
                     System.err.println("Can't load updateFood window");
                     ex.printStackTrace();
-                }*/
+                }
                 refreshTable();
-                System.out.println("modifica");
             });
             contextMenu.getItems().add(updateFood);
 

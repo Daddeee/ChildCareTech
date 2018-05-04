@@ -57,6 +57,8 @@ public interface UserSession extends Remote {
     Collection<BusDTO> getAvailableBuses(TripDTO tripDTO) throws RemoteException;
 
     void saveFood(FoodDTO foodDTO) throws RemoteException, AddFailedException;
+    void updateFood(FoodDTO newFood) throws RemoteException, UpdateFailedException;
+    void removeFood(FoodDTO foodDTO) throws RemoteException;
     List<FoodDTO> getAllFoods() throws RemoteException;
 
     boolean isFirstEverStartup() throws RemoteException;

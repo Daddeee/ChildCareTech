@@ -34,6 +34,50 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
     }
+    public void updateFood(FoodDTO newFoodDTO) throws UpdateFailedException {
+        FoodDAO foodDAO = new FoodDAO();
+        Food newFood = DTOEntityAssembler.getEntity(newFoodDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        foodDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            foodDAO.update(newFood);
+
+            tx.commit();
+        }catch(IndexOutOfBoundsException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException("Non è stato trovato alcun alimento da aggiornare");
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    public void removeFood(FoodDTO foodDTO) throws RemoteException {
+        FoodDAO foodDAO = new FoodDAO();
+        Food food = DTOEntityAssembler.getEntity(foodDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        foodDAO.setSession(session);
+        try {
+            tx = session.beginTransaction();
+            foodDAO.delete(food);
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 
     @Override
     public void saveFood(FoodDTO foodDTO) throws AddFailedException {
