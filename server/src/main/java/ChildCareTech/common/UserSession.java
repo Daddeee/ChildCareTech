@@ -4,6 +4,8 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
+import ChildCareTech.model.entities.Food;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -53,6 +55,8 @@ public interface UserSession extends Remote {
     void updateBus(BusDTO newBus) throws RemoteException, UpdateFailedException;
     List<BusDTO> getAllBuses() throws RemoteException;
     Collection<BusDTO> getAvailableBuses(TripDTO tripDTO) throws RemoteException;
+
+    List<FoodDTO> getAllFoods() throws RemoteException;
 
     boolean isFirstEverStartup() throws RemoteException;
     void setFirstEverStartup(boolean value) throws RemoteException;

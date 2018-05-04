@@ -36,6 +36,35 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public List<FoodDTO> getAllFoods() {
+        FoodDAO foodDAO = new FoodDAO();
+        List<Food> foodsCollection = new ArrayList<>();
+        List<FoodDTO> foodsDTOCollection = new ArrayList<>();
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        foodDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            foodsCollection = foodDAO.readAll();
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Food f : foodsCollection)
+            foodsDTOCollection.add(DTOFactory.getDTO(f));
+
+        return foodsDTOCollection;
+    }
+
+    @Override
     public void updateRouteEvent(RouteDTO routeDTO) throws RemoteException, UpdateFailedException{
         RouteDAO routeDAO = new RouteDAO();
         EventDAO eventDAO = new EventDAO();
