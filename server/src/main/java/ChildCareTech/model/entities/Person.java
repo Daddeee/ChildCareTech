@@ -39,6 +39,9 @@ public class Person implements iEntity<Person, String> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
     private Set<TripPartecipation> tripPartecipations = new HashSet<>();
 
+    @ManyToMany
+    private Set<Food> allergies = new HashSet<>();
+
     public Person() {
     }
 
@@ -128,6 +131,10 @@ public class Person implements iEntity<Person, String> {
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
     }
+
+    public Set<Food> getAllergies() { return allergies; }
+
+    public void setAllergies(Set<Food> allergies) { this.allergies = allergies; }
 
     @Override
     public int hashCode() {

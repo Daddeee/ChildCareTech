@@ -29,6 +29,9 @@ public class Food implements iEntity<Food, Integer> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "food")
     private Set<Supply> supplies;
 
+    @ManyToMany
+    private Set<Person> allergies;
+
     public Food() {
     }
 
@@ -43,19 +46,21 @@ public class Food implements iEntity<Food, Integer> {
         this.residualQuantity = residualQuantity;
     }
 
-    public Food(String name, boolean isDrink, int residualQuantity, Set<Supply> supplies) {
+    public Food(String name, boolean isDrink, int residualQuantity, Set<Supply> supplies, Set<Person> allergies) {
         this.name = name;
         this.isDrink = isDrink;
         this.residualQuantity = residualQuantity;
         this.supplies = supplies;
+        this.allergies = allergies;
     }
 
-    public Food(int id, String name, boolean isDrink, int residualQuantity, Set<Supply> supplies) {
+    public Food(int id, String name, boolean isDrink, int residualQuantity, Set<Supply> supplies, Set<Person> allergies) {
         this.id = id;
         this.name = name;
         this.isDrink = isDrink;
         this.residualQuantity = residualQuantity;
         this.supplies = supplies;
+        this.allergies = allergies;
     }
 
     public int getId() {
@@ -94,6 +99,14 @@ public class Food implements iEntity<Food, Integer> {
 
     public void setSupplies(Set<Supply> supplies) {
         this.supplies = supplies;
+    }
+
+    public Set<Person> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(Set<Person> allergies) {
+        this.allergies = allergies;
     }
 
     @Override

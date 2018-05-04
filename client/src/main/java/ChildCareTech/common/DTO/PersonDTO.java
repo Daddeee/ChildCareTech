@@ -4,6 +4,8 @@ import ChildCareTech.common.Sex;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Set;
 
 public class PersonDTO implements Serializable {
     private String fiscalCode;
@@ -14,7 +16,9 @@ public class PersonDTO implements Serializable {
     private String address;
     private String phoneNumber;
 
-    public PersonDTO(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
+    private Set<FoodDTO> allergies;
+
+    public PersonDTO(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber, Set<FoodDTO> allergies) {
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,6 +26,7 @@ public class PersonDTO implements Serializable {
         this.sex = sex;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.allergies = allergies == null ? Collections.EMPTY_SET : allergies;
     }
 
     public String getFirstName() {
@@ -79,4 +84,8 @@ public class PersonDTO implements Serializable {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public Set<FoodDTO> getAllergies() { return allergies; }
+
+    public void setAllergies(Set<FoodDTO> allergies) { this.allergies = allergies; }
 }

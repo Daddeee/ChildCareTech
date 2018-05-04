@@ -9,15 +9,16 @@ public class FoodDTO implements Serializable {
     private String name;
     private boolean isDrink;
     private int residualQuantity;
-    private Set<DishDTO> dishes;
     private Set<SupplyDTO> supplies;
+    private Set<PersonDTO> allergies;
 
-    public FoodDTO(int id, String name, boolean isDrink, int residualQuantity, Set<SupplyDTO> supplies) {
+    public FoodDTO(int id, String name, boolean isDrink, int residualQuantity, Set<SupplyDTO> supplies, Set<PersonDTO> allergies) {
         this.id = id;
         this.name = name;
         this.isDrink = isDrink;
         this.residualQuantity = residualQuantity;
         this.supplies = supplies == null ? Collections.EMPTY_SET : supplies;
+        this.allergies = allergies == null ? Collections.EMPTY_SET : allergies;
     }
 
     public int getId() {
@@ -54,5 +55,13 @@ public class FoodDTO implements Serializable {
 
     public void setSupplies(Set<SupplyDTO> supplies) {
         this.supplies = supplies;
+    }
+
+    public Set<PersonDTO> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(Set<PersonDTO> allergies) {
+        this.allergies = allergies;
     }
 }

@@ -1,8 +1,10 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.FoodDTO;
+import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.entities.Food;
+import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Supply;
 import org.hibernate.Hibernate;
 
@@ -16,12 +18,26 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
         if(dto == null) return null;
 
         loadSupplyRelationship(entity, dto);
+        loadAllergiesRelationship(entity, dto);
 
         return dto;
     }
 
     public static FoodDTO getSupplyOneSide(Food entity){
-        return getFoodDTO(entity);
+        FoodDTO dto = getFoodDTO(entity);
+        if(dto == null) return null;
+
+        loadAllergiesRelationship(entity, dto);
+
+        return dto;
+    }
+    public static FoodDTO getAllergiesManySide(Food entity) {
+        FoodDTO dto = getFoodDTO(entity);
+        if(dto == null) return null;
+
+        loadSupplyRelationship(entity, dto);
+
+        return dto;
     }
 
     private static FoodDTO getFoodDTO(Food entity) {
@@ -33,11 +49,22 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
                 entity.getName(),
                 entity.isDrink(),
                 entity.getResidualQuantity(),
+                null,
                 null
         );
     }
 
-    private void loadSupplyRelationship(Food entity, FoodDTO dto) {
+    private static void loadAllergiesRelationship(Food entity, FoodDTO dto){
+        Set<PersonDTO> allergies = new HashSet<>();
+
+        if(Hibernate.isInitialized(entity.getAllergies()))
+            for(Person p : entity.getAllergies())
+                allergies.add(PersonDTOFactory.getAllergiesManySide(p));
+
+        dto.setAllergies(allergies);
+    }
+
+    private static void loadSupplyRelationship(Food entity, FoodDTO dto) {
         Set<SupplyDTO> supplies = new HashSet<>();
 
         if(Hibernate.isInitialized(entity.getSupplies()))
