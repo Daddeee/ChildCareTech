@@ -152,6 +152,21 @@ public class KidAnagraphicsController {
             });
             contextMenu.getItems().add(kidEdit);
 
+            final MenuItem allergiesManagement = new MenuItem("Allergie");
+            allergiesManagement.setOnAction(event -> {
+                contextMenu.hide();
+
+                try {
+                    AccessorSceneManager.loadAllergies(row.getItem().getPerson());
+                } catch (IOException ex) {
+                    System.err.println("can't load allergies management window");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(allergiesManagement);
+
+
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                             .then((ContextMenu) null)

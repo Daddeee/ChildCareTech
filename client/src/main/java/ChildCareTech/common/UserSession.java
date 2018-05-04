@@ -58,6 +58,11 @@ public interface UserSession extends Remote {
     void updateFood(FoodDTO newFood) throws RemoteException, UpdateFailedException;
     void removeFood(FoodDTO foodDTO) throws RemoteException;
     List<FoodDTO> getAllFoods() throws RemoteException;
+    Collection<FoodDTO> getAvailableFoods(PersonDTO personDTO) throws RemoteException;
+
+    void addAllergy(PersonDTO personDTO, FoodDTO foodDTO) throws RemoteException, AddFailedException;
+    void removeAllergy(PersonDTO personDTO, FoodDTO foodDTO) throws RemoteException;
+    PersonDTO getPerson(String fiscalCode) throws RemoteException;
 
     boolean isFirstEverStartup() throws RemoteException;
     void setFirstEverStartup(boolean value) throws RemoteException;

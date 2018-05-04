@@ -34,6 +34,122 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
     }
+
+    @Override
+    public void removeAllergy(PersonDTO personDTO, FoodDTO foodDTO) {
+        PersonDAO personDAO = new PersonDAO();
+        FoodDAO foodDAO = new FoodDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        personDAO.setSession(session);
+        foodDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            Person person = personDAO.read(personDTO.getFiscalCode());
+
+            person.getAllergies().removeIf(food -> food.getId() == foodDTO.getId());
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void addAllergy(PersonDTO personDTO, FoodDTO foodDTO) throws AddFailedException{
+        PersonDAO personDAO = new PersonDAO();
+        FoodDAO foodDAO = new FoodDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        personDAO.setSession(session);
+        foodDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            Person person = personDAO.read(personDTO.getFiscalCode());
+            Food food = foodDAO.read(foodDTO.getId());
+
+            person.getAllergies().add(food);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public PersonDTO getPerson(String fiscalCode) {
+        PersonDAO personDAO = new PersonDAO();
+
+
+        Person result = null;
+        PersonDTO resultDTO = null;
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            result = personDAO.read(fiscalCode);
+            personDAO.initializeLazyRelations(result);
+
+            tx.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+            throw new NoSuchElementException(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        resultDTO = DTOFactory.getDTO(result);
+
+        return resultDTO;
+    }
+
+    @Override
+    public Collection<FoodDTO> getAvailableFoods(PersonDTO personDTO) {
+        FoodDAO foodDAO = new FoodDAO();
+        PersonDAO personDAO = new PersonDAO();
+        List<FoodDTO> foodsDTOCollection = new ArrayList<>();
+        List<Food> foodsCollection = new ArrayList<>();
+        Person person = DTOEntityAssembler.getEntity(personDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        foodDAO.setSession(session);
+        personDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            foodsCollection = foodDAO.getAvailableFoods(person);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Food f : foodsCollection)
+            foodsDTOCollection.add(DTOFactory.getDTO(f));
+
+        return foodsDTOCollection;
+    }
+
     public void updateFood(FoodDTO newFoodDTO) throws UpdateFailedException {
         FoodDAO foodDAO = new FoodDAO();
         Food newFood = DTOEntityAssembler.getEntity(newFoodDTO);

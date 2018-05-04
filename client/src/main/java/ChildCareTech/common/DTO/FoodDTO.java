@@ -64,4 +64,9 @@ public class FoodDTO implements Serializable {
     public void setAllergies(Set<PersonDTO> allergies) {
         this.allergies = allergies;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

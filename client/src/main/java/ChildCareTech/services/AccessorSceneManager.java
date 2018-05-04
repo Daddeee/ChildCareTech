@@ -1,9 +1,6 @@
 package ChildCareTech.services;
 
-import ChildCareTech.common.DTO.BusDTO;
-import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.common.DTO.FoodDTO;
-import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.DTO.*;
 import ChildCareTech.controller.*;
 import ChildCareTech.services.ObservableDTOs.*;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +33,7 @@ public class AccessorSceneManager {
     private static FXMLLoader tripRoutesLoader;
     private static FXMLLoader addFoodLoader;
     private static FXMLLoader updateFoodLoader;
+    private static FXMLLoader allergiesLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -58,6 +56,7 @@ public class AccessorSceneManager {
     private static Scene tripRoutesScene;
     private static Scene addFoodScene;
     private static Scene updateFoodScene;
+    private static Scene allergiesScene;
 
     private AccessorSceneManager() {
     }
@@ -299,6 +298,20 @@ public class AccessorSceneManager {
 
         try{
             AccessorStageService.changeScene(updateFoodScene);
+        } catch(NoSuchFieldException ex){
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAllergies(PersonDTO personDTO) throws IOException {
+        allergiesLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/allergiesWindow.fxml"));
+        allergiesScene = sceneInit(allergiesLoader, "/style/allergiesWindow.css");
+
+        AllergiesController controller = allergiesLoader.getController();
+        controller.initData(personDTO);
+
+        try{
+            AccessorStageService.changeScene(allergiesScene);
         } catch(NoSuchFieldException ex){
             AccessorSceneManager.stageError(ex);
         }

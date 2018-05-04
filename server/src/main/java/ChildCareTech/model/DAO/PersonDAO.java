@@ -13,7 +13,10 @@ public class PersonDAO extends AbstractGenericDAO<Person, String> {
     public void initializeLazyRelations(Person obj) {
         initializeEventRelation(obj);
         initializeTripPartecipationRelation(obj);
+        initializellergiesRelation(obj);
     }
+
+    public void initializellergiesRelation(Person obj) { Hibernate.initialize(obj.getAllergies()); }
 
     public void initializeEventRelation(Person obj){
         Hibernate.initialize(obj.getCheckpoints());

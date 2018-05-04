@@ -29,7 +29,7 @@ public class Food implements iEntity<Food, Integer> {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "food")
     private Set<Supply> supplies;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "allergies")
     private Set<Person> allergies;
 
     public Food() {
