@@ -1,22 +1,25 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.FoodDTO;
+import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 public class FoodController {
     @FXML
@@ -27,6 +30,10 @@ public class FoodController {
     @FXML
     public void initialize(){
         refreshTable();
+
+        TableColumn<FoodDTO, Boolean> isDrinkColumn  =new TableColumn<>("Bevanda?");
+        isDrinkColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isDrink()));
+        foodsTable.getColumns().add(isDrinkColumn);
 
         foodsTable.setRowFactory(tripDTOTableView -> {
             final TableRow<FoodDTO> row = new TableRow<>();
@@ -83,12 +90,12 @@ public class FoodController {
 
     @FXML
     protected void addButtonAction(ActionEvent e){
-        /*try {
-            AccessorSceneManager.loadAddBus();
+        try {
+            AccessorSceneManager.loadAddFood();
         } catch (IOException ex) {
             System.err.println("Can't load addKid window");
             ex.printStackTrace();
-        }*/
+        }
     }
 
     @FXML

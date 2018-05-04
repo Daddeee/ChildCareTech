@@ -38,9 +38,6 @@
                 <TableColumn fx:id="residualQuantityColumn" prefWidth="220.0" text="Unità residue">
                     <cellValueFactory><PropertyValueFactory property="residualQuantity" /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="isDrinkColumn" prefWidth="220.0" text="Bevanda?">
-                    <cellValueFactory><PropertyValueFactory property="isDrink" /></cellValueFactory>
-                </TableColumn>
             </columns>
             <HBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>

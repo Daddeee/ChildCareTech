@@ -33,6 +33,7 @@ public class AccessorSceneManager {
     private static FXMLLoader tripPartecipationanagementLoader;
     private static FXMLLoader editKidLoader;
     private static FXMLLoader tripRoutesLoader;
+    private static FXMLLoader addFoodLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -53,6 +54,7 @@ public class AccessorSceneManager {
     private static Scene tripPartecipationanagementScene;
     private static Scene editKidScene;
     private static Scene tripRoutesScene;
+    private static Scene addFoodScene;
 
     private AccessorSceneManager() {
     }
@@ -270,6 +272,17 @@ public class AccessorSceneManager {
         }
     }
 
+    public static void loadAddFood() throws IOException {
+        addFoodLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addFoodWindow.fxml"));
+        addFoodScene = sceneInit(addFoodLoader, "/style/addFoodWindow.css");
+
+        try{
+            AccessorStageService.changeScene(addFoodScene);
+        } catch (NoSuchFieldException ex){
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
     public static void loadAddBus() throws IOException {
         addBusLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addBusWindow.fxml"));
         addBusScene = sceneInit(addBusLoader, "/style/addBusWindow.css");
@@ -280,6 +293,7 @@ public class AccessorSceneManager {
             AccessorSceneManager.stageError(ex);
         }
     }
+
 
     public static void loadShowBus(BusDTO row) throws IOException {
         showBusLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/showBusWindow.fxml"));
