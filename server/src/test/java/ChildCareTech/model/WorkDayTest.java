@@ -27,8 +27,8 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
         WorkDay wd = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Canteen c1 = new Canteen("canteen1");
         Canteen c2 = new Canteen("canteen2");
-        Meal m1 = new Meal(c1, 1, wd);
-        Meal m2 = new Meal(c2, 2, wd);
+        Meal m1 = new Meal(c1, 1, wd, null, null);
+        Meal m2 = new Meal(c2, 2, wd, null, null);
         Person p1 = new Person("generic1",
                 "generic1",
                 "generic1",

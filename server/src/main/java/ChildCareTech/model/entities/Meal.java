@@ -23,21 +23,29 @@ public class Meal implements iEntity<Meal, Integer> {
     @Column(nullable = false)
     private int mealNum;
 
+    @OneToOne
+    private Event entryEvent;
+    @OneToOne
+    private Event exitEvent;
 
     public Meal() {
     }
 
-    public Meal(Canteen canteen, int mealNum, WorkDay workDay) {
+    public Meal(Canteen canteen, int mealNum, WorkDay workDay, Event entryEvent, Event exitEvent) {
         this.canteen = canteen;
         this.mealNum = mealNum;
         this.workDay = workDay;
+        this.entryEvent = entryEvent;
+        this.exitEvent = exitEvent;
     }
 
-    public Meal(int id, Canteen canteen, int mealNum, WorkDay workDay) {
+    public Meal(int id, Canteen canteen, int mealNum, WorkDay workDay, Event entryEvent, Event exitEvent) {
         this.id = id;
         this.canteen = canteen;
         this.mealNum = mealNum;
         this.workDay = workDay;
+        this.entryEvent = entryEvent;
+        this.exitEvent = exitEvent;
     }
 
     @Override
@@ -57,7 +65,7 @@ public class Meal implements iEntity<Meal, Integer> {
         return canteen;
     }
 
-    private void setCanteen_id(Canteen canteen_id) {
+    private void setCanteen(Canteen canteen) {
         this.canteen = canteen;
     }
 
@@ -65,7 +73,7 @@ public class Meal implements iEntity<Meal, Integer> {
         return mealNum;
     }
 
-    private void setMealNum(int meal_num) {
+    private void setMealNum(int mealNum) {
         this.mealNum = mealNum;
     }
 
@@ -79,6 +87,22 @@ public class Meal implements iEntity<Meal, Integer> {
 
     public WorkDay getWorkDay() {
         return workDay;
+    }
+
+    public Event getEntryEvent() {
+        return entryEvent;
+    }
+
+    private void setEntryEvent(Event entryEvent) {
+        this.entryEvent = entryEvent;
+    }
+
+    public Event getExitEvent() {
+        return exitEvent;
+    }
+
+    private void setExitEvent(Event exitEvent) {
+        this.exitEvent = exitEvent;
     }
 
     @Override

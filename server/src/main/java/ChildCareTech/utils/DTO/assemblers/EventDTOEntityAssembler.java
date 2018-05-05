@@ -15,10 +15,7 @@ public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event
         if(dto == null) return null;
         Event entity = getEvent(dto, WorkDayDTOEntityAssembler.assembleEventOneSide(dto.getWorkDay()));
 
-        Set<Checkpoint> checkpoints = new HashSet<>();
-        for(CheckpointDTO c : dto.getCheckpoints())
-            checkpoints.add(CheckpointDTOEntityAssembler.assembleEventManySide(c, entity));
-        entity.setCheckpoints(checkpoints);
+        assembleCheckpointRelationship(dto, entity);
 
         return entity;
     }
@@ -27,10 +24,7 @@ public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event
         if(dto == null) return null;
         Event entity = getEvent(dto, workDay);
 
-        Set<Checkpoint> checkpoints = new HashSet<>();
-        for(CheckpointDTO c : dto.getCheckpoints())
-            checkpoints.add(CheckpointDTOEntityAssembler.assembleEventManySide(c, entity));
-        entity.setCheckpoints(checkpoints);
+        assembleCheckpointRelationship(dto, entity);
 
         return entity;
     }
@@ -38,6 +32,22 @@ public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event
     public static Event assembleCheckpointOneSide(EventDTO dto){
         if(dto == null) return null;
         return getEvent(dto, WorkDayDTOEntityAssembler.assembleEventOneSide(dto.getWorkDay()));
+    }
+
+    public static Event assembleMealOneSide(EventDTO dto){
+        if(dto == null) return null;
+        Event entity = getEvent(dto, WorkDayDTOEntityAssembler.assembleEventOneSide(dto.getWorkDay()));
+
+        assembleCheckpointRelationship(dto, entity);
+
+        return entity;
+    }
+
+    private static void assembleCheckpointRelationship(EventDTO dto, Event entity) {
+        Set<Checkpoint> checkpoints = new HashSet<>();
+        for(CheckpointDTO c : dto.getCheckpoints())
+            checkpoints.add(CheckpointDTOEntityAssembler.assembleEventManySide(c, entity));
+        entity.setCheckpoints(checkpoints);
     }
 
     private static Event getEvent(EventDTO dto, WorkDay workDay){

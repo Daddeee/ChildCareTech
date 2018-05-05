@@ -21,6 +21,11 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
         return dto;
     }
 
+    public static EventDTO getMealOneSide(Event entity){
+        if(entity == null) return null;
+        return getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
+    }
+
     public static EventDTO getWorkDayManySide(Event entity, WorkDayDTO workDayDTO){
         if(entity == null) return null;
         EventDTO dto =  getEventDTO(entity, workDayDTO);

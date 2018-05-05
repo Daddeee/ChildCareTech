@@ -45,7 +45,9 @@ public class MealDTOFactory implements AbstractDTOFactory<Meal, MealDTO> {
                 entity.getId(),
                 canteenDTO,
                 workDayDTO,
-                entity.getMealNum()
+                entity.getMealNum(),
+                EventDTOFactory.getMealOneSide(entity.getEntryEvent()),
+                EventDTOFactory.getMealOneSide(entity.getExitEvent())
         );
     }
 }

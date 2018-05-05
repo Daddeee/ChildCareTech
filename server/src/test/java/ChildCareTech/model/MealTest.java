@@ -39,8 +39,8 @@ public class MealTest extends AbstractEntityTest<Meal, Integer> {
             session.close();
         }
 
-        Meal m = new Meal(c, 0, workDay);
-        Meal mu = new Meal(c, 1, workDay);
+        Meal m = new Meal(c, 0, workDay, null, null);
+        Meal mu = new Meal(c, 1, workDay, null, null);
 
         testCRUDImpl(m, mu);
     }
