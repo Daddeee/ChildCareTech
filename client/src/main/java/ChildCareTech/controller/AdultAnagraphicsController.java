@@ -184,6 +184,31 @@ public class AdultAnagraphicsController {
             });
             contextMenu.getItems().add(deleteGenericAdult);
 
+            final MenuItem allergiesManagement = new MenuItem("Allergie");
+            allergiesManagement.setOnAction(event -> {
+                contextMenu.hide();
+
+                try {
+                    if(row.getItem() instanceof ObservableAdult) {
+                        AccessorSceneManager.loadAllergies(((ObservableAdult) row.getItem()).getDTO().getPerson());
+                    }
+                    else if(row.getItem() instanceof ObservablePediatrist) {
+                        AccessorSceneManager.loadAllergies(((ObservablePediatrist) row.getItem()).getDTO().getPerson());
+                    }
+                    else if(row.getItem() instanceof ObservableStaff) {
+                        AccessorSceneManager.loadAllergies(((ObservableStaff) row.getItem()).getDTO().getPerson());
+                    }
+                    else if(row.getItem() instanceof ObservableSupplier) {
+                        AccessorSceneManager.loadAllergies(((ObservableSupplier) row.getItem()).getDTO().getPerson());
+                    }
+                } catch (IOException ex) {
+                    System.err.println("can't load allergies management window");
+                    ex.printStackTrace();
+                }
+                refreshTable();
+            });
+            contextMenu.getItems().add(allergiesManagement);
+
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                             .then((ContextMenu) null)
