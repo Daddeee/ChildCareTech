@@ -21,6 +21,7 @@ public class MainSceneManager {
     private static FXMLLoader dayGenerationLoader;
     private static FXMLLoader workDayLoader;
     private static FXMLLoader foodLoader;
+    private static FXMLLoader canteenLoader;
     
     private static Scene loginScene;
     private static Scene homeScene;
@@ -31,6 +32,7 @@ public class MainSceneManager {
     private static Scene dayGenerationScene;
     private static Scene workDayScene;
     private static Scene foodScene;
+    private static Scene canteenScene;
 
     private MainSceneManager() {
     }
@@ -133,6 +135,16 @@ public class MainSceneManager {
         foodScene = sceneInit(foodLoader, "/style/foodWindow.css");
         try{
             MainStageService.changeScene(foodScene);
+        } catch(NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public static void loadCanteen() throws IOException {
+        canteenLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/canteenWindow.fxml"));
+        canteenScene = sceneInit(canteenLoader, "/style/canteenWindow.css");
+        try{
+            MainStageService.changeScene(canteenScene);
         } catch(NoSuchFieldException ex){
             ex.printStackTrace();
         }
