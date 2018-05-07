@@ -34,6 +34,7 @@ public class AccessorSceneManager {
     private static FXMLLoader addFoodLoader;
     private static FXMLLoader updateFoodLoader;
     private static FXMLLoader allergiesLoader;
+    private static FXMLLoader addCanteenLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -57,6 +58,7 @@ public class AccessorSceneManager {
     private static Scene addFoodScene;
     private static Scene updateFoodScene;
     private static Scene allergiesScene;
+    private static Scene addCanteenScene;
 
     private AccessorSceneManager() {
     }
@@ -352,6 +354,17 @@ public class AccessorSceneManager {
 
         try{
             AccessorStageService.changeScene(updateBusScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAddCanteen() throws IOException {
+        addCanteenLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addCanteenWindow.fxml"));
+        addCanteenScene = sceneInit(addCanteenLoader, "/style/addCanteenWindow.css");
+
+        try{
+            AccessorStageService.changeScene(addCanteenScene);
         } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }

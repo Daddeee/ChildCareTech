@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.WorkDay;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -21,9 +22,9 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
         return dto;
     }
 
-    public static EventDTO getMealOneSide(Event entity){
+    public static EventDTO getMealOneSide(Event entity, WorkDayDTO workDayDTO){
         if(entity == null) return null;
-        return getEventDTO(entity, WorkDayDTOFactory.getEventOneSide(entity.getWorkDay()));
+        return getEventDTO(entity, workDayDTO);
     }
 
     public static EventDTO getWorkDayManySide(Event entity, WorkDayDTO workDayDTO){

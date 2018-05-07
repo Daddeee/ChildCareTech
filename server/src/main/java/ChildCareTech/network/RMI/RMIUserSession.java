@@ -9,12 +9,9 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
+import ChildCareTech.utils.*;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
-import ChildCareTech.utils.HibernateSessionFactoryUtil;
-import ChildCareTech.utils.RemoteEventObservable;
-import ChildCareTech.utils.Settings;
-import ChildCareTech.utils.WorkDaysGenerationUtil;
 import org.hibernate.Hibernate;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
@@ -33,6 +30,53 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
+    }
+
+    @Override
+    public List<String> getAllCanteenNames() {
+        CanteenDAO canteenDAO = new CanteenDAO();
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        canteenDAO.setSession(session);
+        List<String> names = Collections.emptyList();
+        try{
+            tx = session.beginTransaction();
+
+            names = canteenDAO.getAllNames();
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return names;
+    }
+
+    @Override
+    public void saveCanteen(CanteenDTO canteenDTO, List<LocalTime> entryTimeList, List<LocalTime> exitTimeList) throws AddFailedException{
+        CanteenDAO canteenDAO = new CanteenDAO();
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        canteenDAO.setSession(session);
+        Canteen canteen;
+        try{
+            tx = session.beginTransaction();
+
+            canteen = DTOEntityAssembler.getEntity(canteenDTO);
+            canteenDAO.create(canteen);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        MealsGenerationUtil.generateMeals(canteen, entryTimeList, exitTimeList);
     }
 
     @Override

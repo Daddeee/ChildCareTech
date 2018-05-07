@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ChildCareTech.controller.AddCanteenController"
+      prefHeight="400.0" prefWidth="600.0">
+    <HBox>
+        <Label text="Nome:"/>
+        <TextField fx:id="nameField"/>
+    </HBox>
+
+    <HBox>
+        <TextField fx:id="entryTimeField" promptText="Orario di ingresso"/>
+        <TextField fx:id="exitTimeField" promptText="Orario di uscita"/>
+        <Button text="Aggiungi" onAction="#addMealButtonAction"/>
+    </HBox>
+    <TableView fx:id="mealsDataTable" editable="true">
+        <columns>
+            <TableColumn text="Orario di ingresso">
+                <cellValueFactory><PropertyValueFactory property="entryTime" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Orario di uscita">
+                <cellValueFactory><PropertyValueFactory property="exitTime" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+    <Button text="Salva" onAction="#saveButtonAction"/>
+</VBox>
