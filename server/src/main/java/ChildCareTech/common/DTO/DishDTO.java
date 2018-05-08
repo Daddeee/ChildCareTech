@@ -10,7 +10,7 @@ public class DishDTO implements Serializable {
     private Set<MenuDTO> menus;
     private Set<FoodDTO> foods;
 
-    public DishDTO(int id, String name, Set<MenuDTO> menu, Set<FoodDTO> foods) {
+    public DishDTO(int id, String name, Set<MenuDTO> menus, Set<FoodDTO> foods) {
         this.id = id;
         this.name = name;
         this.menus = menus;
