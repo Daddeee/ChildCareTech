@@ -31,9 +31,10 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
         Canteen c = new Canteen("canteen");
         WorkDay wd = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Meal meal = new Meal(c, 1, wd, null, null, EventStatus.CLOSED);
-        Menu m = new Menu(meal, 1);
-        Dish d1 = new Dish("d1", m);
-        Dish d12 = new Dish("d2", m);
+        Menu m1 = new Menu(meal, 1);
+        Menu m2 = new Menu(meal, 2);
+        Dish d1 = new Dish("d1");
+        Dish d2 = new Dish("d2");
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
         try {
@@ -42,6 +43,11 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
             session.save(wd);
             session.save(c);
             session.save(meal);
+
+            session.save(m1);
+            session.save(m2);
+            session.save(d1);
+            session.save(d2);
 
             session.flush();
             tx.commit();
@@ -54,13 +60,15 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
             session.close();
         }
 
-        HashSet<Dish> set = new HashSet<>();
-        set.add(d1);
-        set.add(d1);
+        HashSet<Dish> dishSet = new HashSet<>();
+        dishSet.add(d1);
+        dishSet.add(d2);
 
+        HashSet<Menu> menuSet = new HashSet<>();
+        menuSet.add(m1);
+        menuSet.add(m2);
 
-        testOneToMany(m, set, Menu::getDishes);
-
+        //testManyToMany(menuSet, dishSet, Menu::getDishes);
     }
 
 

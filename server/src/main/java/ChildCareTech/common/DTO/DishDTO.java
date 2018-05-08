@@ -7,13 +7,13 @@ import java.util.Set;
 public class DishDTO implements Serializable {
     private int id;
     private String name;
-    private MenuDTO menu;
+    private Set<MenuDTO> menus;
     private Set<FoodDTO> foods;
 
-    public DishDTO(int id, String name, MenuDTO menu, Set<FoodDTO> foods) {
+    public DishDTO(int id, String name, Set<MenuDTO> menu, Set<FoodDTO> foods) {
         this.id = id;
         this.name = name;
-        this.menu = menu;
+        this.menus = menus;
         this.foods = foods == null ? Collections.EMPTY_SET : foods;
     }
 
@@ -25,8 +25,8 @@ public class DishDTO implements Serializable {
         return name;
     }
 
-    public MenuDTO getMenu() {
-        return menu;
+    public Set<MenuDTO> getMenus() {
+        return menus;
     }
 
     public Set<FoodDTO> getFoods() {
@@ -37,8 +37,8 @@ public class DishDTO implements Serializable {
         this.name = name;
     }
 
-    public void setMenu(MenuDTO menu) {
-        this.menu = menu;
+    public void setMenus(Set<MenuDTO> menus) {
+        this.menus = menus;
     }
 
     public void setFoods(Set<FoodDTO> foods) {

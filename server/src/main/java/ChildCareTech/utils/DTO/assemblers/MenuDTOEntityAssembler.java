@@ -20,15 +20,12 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
                 DrinkDTOEntityAssembler.assembleMenuOneSide(dto.getDrink(), entity)
         );
 
-        Set<Dish> dishes = new HashSet<>();
-        for(DishDTO d : dto.getDishes())
-            dishes.add(DishDTOEntityAssembler.assembleMenuManySide(d, entity));
-        entity.setDishes(dishes);
+        loadDishesRelationship(dto, entity);
 
         return entity;
     }
 
-    public static Menu assembleDishOneSide(MenuDTO dto) {
+    public static Menu assembleDishManySide(MenuDTO dto) {
         Menu entity = getMenu(dto);
         if (entity == null) return null;
 
@@ -47,12 +44,16 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
                 drink
         );
 
-        Set<Dish> dishes = new HashSet<>();
-        for(DishDTO d : dto.getDishes())
-            dishes.add(DishDTOEntityAssembler.assembleMenuManySide(d, entity));
-        entity.setDishes(dishes);
+        loadDishesRelationship(dto, entity);
 
         return entity;
+    }
+
+    private static void loadDishesRelationship(MenuDTO dto, Menu entity) {
+        Set<Dish> dishes = new HashSet<>();
+        for(DishDTO d : dto.getDishes())
+            dishes.add(DishDTOEntityAssembler.assembleMenuManySide(d));
+        entity.setDishes(dishes);
     }
 
     private static Menu getMenu(MenuDTO dto) {

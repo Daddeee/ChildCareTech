@@ -47,8 +47,8 @@ public class DishTest extends AbstractEntityTest<Dish, Integer> {
             session.close();
         }
 
-        Dish o = new Dish("nome", m);
-        Dish ou = new Dish("nomeu", m);
+        Dish o = new Dish("nome");
+        Dish ou = new Dish("nomeu");
 
         testCRUDImpl(o, ou);
     }

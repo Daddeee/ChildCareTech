@@ -26,7 +26,7 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
         return dto;
     }
 
-    public static MenuDTO getDishOneSide(Menu entity){
+    public static MenuDTO getDishManySide(Menu entity){
         MenuDTO dto = getMenuDTO(entity);
         if (dto == null) return null;
 
@@ -69,7 +69,7 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
 
         if(Hibernate.isInitialized(entity.getDishes()))
             for (Dish d : entity.getDishes())
-                dishes.add(DishDTOFactory.getMenuManySide(d, dto));
+                dishes.add(DishDTOFactory.getMenuManySide(d));
 
         dto.setDishes(dishes);
     }

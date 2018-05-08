@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @javax.persistence.Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "menu_id"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Dish implements iEntity<Dish, Integer> {
 
     @Id
@@ -17,9 +17,8 @@ public class Dish implements iEntity<Dish, Integer> {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(targetEntity = Menu.class)
-    @JoinColumn(nullable = false)
-    private Menu menu;
+    @ManyToMany
+    private Set<Menu> menus;
 
     @ManyToMany(targetEntity = Food.class)
     private Set<Food> foods;
@@ -27,21 +26,20 @@ public class Dish implements iEntity<Dish, Integer> {
     public Dish() {
     }
 
-    public Dish(String name, Menu menu) {
+    public Dish(String name) {
         this.name = name;
-        this.menu = menu;
     }
 
-    public Dish(String name, Menu menu, Set<Food> foods) {
+    public Dish(String name, Set<Menu> menus, Set<Food> foods) {
         this.name = name;
-        this.menu = menu;
+        this.menus = menus;
         this.foods = foods;
     }
 
-    public Dish(int id, String name, Menu menu, Set<Food> foods) {
+    public Dish(int id, String name, Set<Menu> menus, Set<Food> foods) {
         this.id = id;
         this.name = name;
-        this.menu = menu;
+        this.menus = menus;
         this.foods = foods;
     }
 
@@ -54,12 +52,12 @@ public class Dish implements iEntity<Dish, Integer> {
         return id;
     }
 
-    private void setMenu(Menu menu) {
-        this.menu = menu;
+    public Set<Menu> getMenus() {
+        return menus;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
     }
 
     public Set<Food> getFoods() {
@@ -80,15 +78,14 @@ public class Dish implements iEntity<Dish, Integer> {
 
     @Override
     public int hashCode() {
-        return (name + menu.hashCode()).hashCode();
+        return name.hashCode();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Dish)) return false;
-        return this.name.equals(((Dish) o).name) &&
-                this.menu.equals(((Dish) o).menu);
+        return this.name.equals(((Dish) o).name);
     }
 
 }
