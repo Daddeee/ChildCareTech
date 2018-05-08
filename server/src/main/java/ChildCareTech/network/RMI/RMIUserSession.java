@@ -33,6 +33,31 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public CanteenDTO getCanteenByName(String name) throws NoSuchElementException {
+        CanteenDAO canteenDAO = new CanteenDAO();
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        canteenDAO.setSession(session);
+        List<Canteen> result = Collections.emptyList();
+        try{
+            tx = session.beginTransaction();
+
+            result = canteenDAO.read("name", name);
+            if(result.size() == 0) throw new NoSuchElementException("Nessuna mensa trovata");
+            canteenDAO.initializeLazyRelations(result.get(0));
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return DTOFactory.getDTO(result.get(0));
+    }
+
+    @Override
     public List<String> getAllCanteenNames() {
         CanteenDAO canteenDAO = new CanteenDAO();
         Transaction tx = null;

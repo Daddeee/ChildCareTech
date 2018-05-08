@@ -74,6 +74,7 @@ public interface UserSession extends Remote {
 
     void saveCanteen(CanteenDTO canteenDTO, List<LocalTime> entryTimeList, List<LocalTime> exitTimeList) throws RemoteException, AddFailedException;
     List<String> getAllCanteenNames() throws RemoteException;
+    CanteenDTO getCanteenByName(String name) throws NoSuchElementException, RemoteException;
 
     WorkDayDTO getCurrentWorkDay() throws RemoteException;
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;

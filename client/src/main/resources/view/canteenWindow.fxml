@@ -33,10 +33,21 @@
                 </Button>
             </children>
         </VBox>
-        <VBox>
-            <ComboBox fx:id="selectCanteen"/>
-            <TableView fx:id="mealsTable">
-
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+              prefWidth="900.0">
+            <ComboBox fx:id="selectCanteen" onAction="#changeSelectedCanteen"/>
+            <TableView fx:id="mealsDataTable">
+                <columns>
+                    <TableColumn fx:id="dayColumn" text="Data">
+                        <cellValueFactory><PropertyValueFactory property="day" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="entryTimeColumn" text="Orario d'inizio">
+                        <cellValueFactory><PropertyValueFactory property="entryTime" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="exitTimeColumn" text="Orario di fine">
+                        <cellValueFactory><PropertyValueFactory property="exitTime" /></cellValueFactory>
+                    </TableColumn>
+                </columns>
             </TableView>
         </VBox>
     </children>
