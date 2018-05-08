@@ -22,6 +22,7 @@ public class MainSceneManager {
     private static FXMLLoader workDayLoader;
     private static FXMLLoader foodLoader;
     private static FXMLLoader canteenLoader;
+    private static FXMLLoader dishLoader;
     
     private static Scene loginScene;
     private static Scene homeScene;
@@ -33,6 +34,7 @@ public class MainSceneManager {
     private static Scene workDayScene;
     private static Scene foodScene;
     private static Scene canteenScene;
+    private static Scene dishScene;
 
     private MainSceneManager() {
     }
@@ -66,6 +68,17 @@ public class MainSceneManager {
         try {
             MainStageService.changeScene(homeScene);
         } catch (NoSuchFieldException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void loadDish() throws IOException {
+        dishLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/dishWindow.fxml"));
+        dishScene = sceneInit(dishLoader, "/style/dishWindow.css");
+
+        try {
+            MainStageService.changeScene(dishScene);
+        } catch (NoSuchFieldException ex){
             ex.printStackTrace();
         }
     }

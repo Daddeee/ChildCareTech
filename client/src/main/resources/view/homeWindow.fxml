@@ -26,7 +26,7 @@
               AnchorPane.rightAnchor="900.0"
               AnchorPane.topAnchor="0.0">
             <children>
-                <Button fx:id="kidsAnagraphicsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kidAnagraphicsButtonAction" prefHeight="80.0" prefWidth="80.0" text="BAMBINI">
+                <Button fx:id="kidsAnagraphicsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kidAnagraphicsButtonAction" prefHeight="60.0" prefWidth="80.0" text="BAMBINI">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </VBox.margin>
@@ -34,7 +34,7 @@
                         <Font size="9.0" />
                     </font>
                 </Button>
-            <Button fx:id="adultsAnagraphicsButton" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adultAnagraphicsButtonAction" prefHeight="80.0" prefWidth="80.0" text="ADULTI">
+            <Button fx:id="adultsAnagraphicsButton" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adultAnagraphicsButtonAction" prefHeight="60.0" prefWidth="80.0" text="ADULTI">
                <font>
                   <Font size="9.0" />
                </font>
@@ -42,7 +42,7 @@
                     <Insets bottom="10.0" left="10.0" right="10.0"/>
                 </VBox.margin>
             </Button>
-                <Button fx:id="tripButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#tripButtonAction" prefHeight="80.0" prefWidth="80.0" text="GITE">
+                <Button fx:id="tripButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#tripButtonAction" prefHeight="60.0" prefWidth="80.0" text="GITE">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
@@ -52,7 +52,7 @@
                 </Button>
                 <Button fx:id="busButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#busButtonAction"
-                        prefHeight="80.0" prefWidth="80.0" text="BUS">
+                        prefHeight="60.0" prefWidth="80.0" text="BUS">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
@@ -62,7 +62,7 @@
                 </Button>
                 <Button fx:id="foodButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#foodButtonAction"
-                        prefHeight="80.0" prefWidth="80.0" text="CIBO">
+                        prefHeight="60.0" prefWidth="80.0" text="CIBO">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
@@ -72,7 +72,17 @@
                 </Button>
                 <Button fx:id="canteenButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#canteenButtonAction"
-                        prefHeight="80.0" prefWidth="80.0" text="MENSA">
+                        prefHeight="60.0" prefWidth="80.0" text="MENSA">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0"/>
+                    </VBox.margin>
+                    <font>
+                        <Font size="9.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="dishButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" mnemonicParsing="false" onAction="#dishButtonAction"
+                        prefHeight="60.0" prefWidth="80.0" text="PIATTI">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
@@ -82,7 +92,7 @@
                 </Button>
                 <Button fx:id="workDayButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#workDayButtonAction"
-                        prefHeight="80.0" prefWidth="80.0" text="REPORT EVENTI">
+                        prefHeight="60.0" prefWidth="80.0" text="REPORT EVENTI">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>
@@ -92,7 +102,7 @@
                 </Button>
                 <Button fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                         minWidth="-Infinity" mnemonicParsing="false" onAction="#logoutButtonAction" prefHeight="80.0"
-                        prefWidth="80.0" text="LOGOUT">
+                        prefWidth="60.0" text="LOGOUT">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0"/>
                     </VBox.margin>

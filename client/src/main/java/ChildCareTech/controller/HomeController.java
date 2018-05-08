@@ -168,6 +168,16 @@ public class HomeController {
     }
 
     @FXML
+    protected void dishButtonAction(ActionEvent action){
+        try{
+            MainSceneManager.loadDish();
+        } catch (IOException ex){
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void foodButtonAction(ActionEvent action){
         try {
             MainSceneManager.loadFoods();
