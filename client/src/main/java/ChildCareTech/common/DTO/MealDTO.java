@@ -1,5 +1,7 @@
 package ChildCareTech.common.DTO;
 
+import ChildCareTech.common.EventStatus;
+
 import java.io.Serializable;
 
 public class MealDTO implements Serializable {
@@ -9,14 +11,16 @@ public class MealDTO implements Serializable {
     private int mealNum;
     private EventDTO entryEvent;
     private EventDTO exitEvent;
+    private EventStatus status;
 
-    public MealDTO(int id, CanteenDTO canteen, WorkDayDTO workDay, int mealNum, EventDTO entryEvent, EventDTO exitEvent) {
+    public MealDTO(int id, CanteenDTO canteen, WorkDayDTO workDay, int mealNum, EventDTO entryEvent, EventDTO exitEvent, EventStatus status) {
         this.id = id;
         this.canteen = canteen;
         this.workDay = workDay;
         this.mealNum = mealNum;
         this.entryEvent = entryEvent;
         this.exitEvent = exitEvent;
+        this.status = status;
     }
 
     public int getId() {
@@ -61,5 +65,13 @@ public class MealDTO implements Serializable {
 
     public void setExitEvent(EventDTO exitEvent) {
         this.exitEvent = exitEvent;
+    }
+
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
     }
 }

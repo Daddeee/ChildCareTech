@@ -1,5 +1,6 @@
 package ChildCareTech.model;
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.DAO.MealDAO;
@@ -39,8 +40,8 @@ public class MealTest extends AbstractEntityTest<Meal, Integer> {
             session.close();
         }
 
-        Meal m = new Meal(c, 0, workDay, null, null);
-        Meal mu = new Meal(c, 1, workDay, null, null);
+        Meal m = new Meal(c, 0, workDay, null, null, EventStatus.CLOSED);
+        Meal mu = new Meal(c, 1, workDay, null, null, EventStatus.CLOSED);
 
         testCRUDImpl(m, mu);
     }

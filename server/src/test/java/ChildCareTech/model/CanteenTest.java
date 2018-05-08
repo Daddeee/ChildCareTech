@@ -1,6 +1,7 @@
 package ChildCareTech.model;
 
 
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.DAO.CanteenDAO;
 import ChildCareTech.model.entities.Meal;
@@ -29,8 +30,8 @@ public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
         Canteen c = new Canteen("canteen");
         WorkDay w1 = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         WorkDay w2 = new WorkDay(LocalDate.now().plusDays(1), LocalTime.MIN, LocalTime.MAX, false);
-        Meal m1 = new Meal(c, 1, w1, null, null);
-        Meal m2 = new Meal(c, 2, w2, null, null);
+        Meal m1 = new Meal(c, 1, w1, null, null, EventStatus.CLOSED);
+        Meal m2 = new Meal(c, 2, w2, null, null, EventStatus.CLOSED);
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
 

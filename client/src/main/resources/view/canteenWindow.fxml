@@ -47,6 +47,9 @@
                     <TableColumn fx:id="exitTimeColumn" text="Orario di fine">
                         <cellValueFactory><PropertyValueFactory property="exitTime" /></cellValueFactory>
                     </TableColumn>
+                    <TableColumn fx:id="statusColumn" text="Stato">
+                        <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
+                    </TableColumn>
                 </columns>
             </TableView>
         </VBox>

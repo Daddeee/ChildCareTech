@@ -1,6 +1,7 @@
 package ChildCareTech;
 
 import ChildCareTech.common.DTO.CanteenDTO;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.model.DAO.CanteenDAO;
 import ChildCareTech.model.DAO.MealDAO;
 import ChildCareTech.model.DAO.WorkDayDAO;
@@ -33,8 +34,8 @@ public class GetCanteenByNameTest {
         WorkDayDAO workDayDAO = new WorkDayDAO();
         Canteen canteen = new Canteen("nome", null);
         WorkDay w = new WorkDay(LocalDate.now(), LocalTime.NOON, LocalTime.MIDNIGHT, false);
-        Meal m1 = new Meal(canteen, 0, w, null, null);
-        Meal m2 = new Meal(canteen, 1, w, null, null);
+        Meal m1 = new Meal(canteen, 0, w, null, null, EventStatus.CLOSED);
+        Meal m2 = new Meal(canteen, 1, w, null, null, EventStatus.CLOSED);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();

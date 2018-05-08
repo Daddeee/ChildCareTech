@@ -37,14 +37,18 @@ public class MealsGenerationUtil {
             allWorkDays.removeIf(WorkDay::isHoliday);
 
             for(WorkDay w : allWorkDays){
+                EventStatus status = EventStatus.WAIT;
+                if(w.getDate().isBefore(RemoteEventObservable.getInstance().getToday().getDate()))
+                    status = EventStatus.CLOSED;
+
                 for(int i = 0; i < entryTimes.size(); i++){
                     String entryEventName = canteen.getName() + " " + w.getDate().toString() + " - Entrata " + (i+1);
                     String exitEventName = canteen.getName() + " " + w.getDate().toString() + " - Uscita " + (i+1);
 
-                    Event entryEvent = new Event(entryEventName, w, entryTimes.get(i), entryTimes.get(i).plusMinutes(10), EventStatus.WAIT);
-                    Event exitEvent = new Event(exitEventName, w, exitTimes.get(i), exitTimes.get(i).plusMinutes(10), EventStatus.WAIT);
+                    Event entryEvent = new Event(entryEventName, w, entryTimes.get(i), entryTimes.get(i).plusMinutes(10), status);
+                    Event exitEvent = new Event(exitEventName, w, exitTimes.get(i), exitTimes.get(i).plusMinutes(10), status);
 
-                    Meal meal = new Meal(canteen, i + 1, w, entryEvent, exitEvent);
+                    Meal meal = new Meal(canteen, i + 1, w, entryEvent, exitEvent, status);
 
                     eventDAO.create(entryEvent);
                     eventDAO.create(exitEvent);

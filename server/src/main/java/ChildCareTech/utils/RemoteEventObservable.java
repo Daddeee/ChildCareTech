@@ -7,7 +7,9 @@ import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.TripDAO;
+import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.Event;
+import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.DTO.DTOFactory;
@@ -74,6 +76,8 @@ public class RemoteEventObservable {
             } finally {
                 session.close();
             }
+
+            updateMealStatus();
             notifyObservers();
         }
     }
@@ -96,6 +100,39 @@ public class RemoteEventObservable {
 
         for(RemoteEventObserver o : observers)
             o.update(workDayDTO, todayTripsDTO);
+    }
+
+    private void updateMealStatus() {
+        WorkDayDAO workDayDAO = new WorkDayDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        workDayDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            WorkDay w = workDayDAO.read(today);
+            for(Meal m : w.getMeals())
+                m.setStatus(getStatusFromEvents(m.getEntryEvent(), m.getExitEvent()));
+
+            tx.commit();
+        } catch (Exception e) {
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    private EventStatus getStatusFromEvents(Event entry, Event exit) {
+        if(entry.getEventStatus().equals(EventStatus.WAIT))
+            return EventStatus.WAIT;
+        if(entry.getEventStatus().equals(EventStatus.CLOSED))
+            if(exit.getEventStatus().equals(EventStatus.CLOSED))
+                return EventStatus.CLOSED;
+            else
+                return EventStatus.OPEN;
+
+        return EventStatus.OPEN;
     }
 
     private void updateTripStatus() {

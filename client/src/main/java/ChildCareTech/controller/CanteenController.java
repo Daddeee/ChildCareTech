@@ -6,10 +6,10 @@ import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.TempMealData;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -32,6 +32,21 @@ public class CanteenController {
         } catch (RemoteException e){
             e.printStackTrace();
         }
+
+        mealsDataTable.setRowFactory(tempMealDataTableView -> {
+            final TableRow<TempMealData> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+
+            //TODO menu...
+
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
     }
 
     @FXML
@@ -73,6 +88,7 @@ public class CanteenController {
                m.getWorkDay().getDate().toString(),
                m.getEntryEvent().getBeginTime().toString(),
                m.getExitEvent().getEndTime().toString(),
+               m.getStatus().toString(),
                m
             ));
         }
