@@ -30,7 +30,7 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
 
         Canteen c = new Canteen("canteen");
         WorkDay wd = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
-        Meal meal = new Meal(c, 1, wd, null, null, EventStatus.CLOSED);
+        Meal meal = new Meal(c, 1, wd, null, null, EventStatus.CLOSED, null);
         Menu m1 = new Menu(meal, 1);
         Menu m2 = new Menu(meal, 2);
         Dish d1 = new Dish("d1");
@@ -76,7 +76,7 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
     public void testCRUD() {
         Canteen c = new Canteen("mensa");
         WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
-        Meal ml = new Meal(c, 0, w, null, null, EventStatus.CLOSED);
+        Meal ml = new Meal(c, 0, w, null, null, EventStatus.CLOSED, null);
 
         session = sessionFactory.openSession();
         Transaction tx = null;

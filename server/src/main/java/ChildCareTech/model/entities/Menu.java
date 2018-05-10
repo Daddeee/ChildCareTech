@@ -65,7 +65,7 @@ public class Menu implements iEntity<Menu, Integer> {
         return meal;
     }
 
-    private void setMeal(Meal meal) {
+    public void setMeal(Meal meal) {
         this.meal = meal;
     }
 

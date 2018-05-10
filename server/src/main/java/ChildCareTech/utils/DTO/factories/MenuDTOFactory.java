@@ -1,6 +1,7 @@
 package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.DishDTO;
+import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Menu;
@@ -16,6 +17,7 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
         MenuDTO dto = getMenuDTO(entity);
         if (dto == null) return null;
 
+        dto.setMeal(MealDTOFactory.getMenuOneSide(entity.getMeal(), dto));
         loadDishRelationship(entity, dto);
 
         return dto;
@@ -24,6 +26,18 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
     public static MenuDTO getDishManySide(Menu entity){
         MenuDTO dto = getMenuDTO(entity);
         if (dto == null) return null;
+
+        dto.setMeal(MealDTOFactory.getMenuOneSide(entity.getMeal(), dto));
+
+        return dto;
+    }
+
+    public static MenuDTO getMealOneSide(Menu entity, MealDTO mealDTO){
+        MenuDTO dto = getMenuDTO(entity);
+        if (dto == null) return null;
+
+        dto.setMeal(mealDTO);
+        loadDishRelationship(entity, dto);
 
         return dto;
     }
@@ -34,7 +48,7 @@ public class MenuDTOFactory implements AbstractDTOFactory<Menu, MenuDTO> {
 
         MenuDTO dto = new MenuDTO(
                 entity.getId(),
-                DTOFactory.getDTO(entity.getMeal()),
+                null,
                 entity.getNumMenu(),
                 null
         );

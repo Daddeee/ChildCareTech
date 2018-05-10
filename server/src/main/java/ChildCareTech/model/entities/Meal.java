@@ -31,10 +31,13 @@ public class Meal implements iEntity<Meal, Integer> {
 
     private EventStatus status;
 
+    @OneToOne
+    private Menu menu;
+
     public Meal() {
     }
 
-    public Meal(Canteen canteen, int mealNum, WorkDay workDay, Event entryEvent, Event exitEvent, EventStatus status) {
+    public Meal(Canteen canteen, int mealNum, WorkDay workDay, Event entryEvent, Event exitEvent, EventStatus status, Menu menu) {
         this.canteen = canteen;
         this.mealNum = mealNum;
         this.workDay = workDay;
@@ -43,7 +46,7 @@ public class Meal implements iEntity<Meal, Integer> {
         this.status = status;
     }
 
-    public Meal(int id, Canteen canteen, int mealNum, WorkDay workDay, Event entryEvent, Event exitEvent, EventStatus status) {
+    public Meal(int id, Canteen canteen, int mealNum, WorkDay workDay, Event entryEvent, Event exitEvent, EventStatus status, Menu menu) {
         this.id = id;
         this.canteen = canteen;
         this.mealNum = mealNum;
@@ -116,6 +119,14 @@ public class Meal implements iEntity<Meal, Integer> {
 
     public void setStatus(EventStatus status) {
         this.status = status;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     @Override

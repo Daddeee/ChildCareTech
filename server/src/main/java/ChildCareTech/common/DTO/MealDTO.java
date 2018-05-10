@@ -12,8 +12,9 @@ public class MealDTO implements Serializable {
     private EventDTO entryEvent;
     private EventDTO exitEvent;
     private EventStatus status;
+    private MenuDTO menu;
 
-    public MealDTO(int id, CanteenDTO canteen, WorkDayDTO workDay, int mealNum, EventDTO entryEvent, EventDTO exitEvent, EventStatus status) {
+    public MealDTO(int id, CanteenDTO canteen, WorkDayDTO workDay, int mealNum, EventDTO entryEvent, EventDTO exitEvent, EventStatus status, MenuDTO menu) {
         this.id = id;
         this.canteen = canteen;
         this.workDay = workDay;
@@ -21,6 +22,7 @@ public class MealDTO implements Serializable {
         this.entryEvent = entryEvent;
         this.exitEvent = exitEvent;
         this.status = status;
+        this.menu = menu;
     }
 
     public int getId() {
@@ -73,5 +75,13 @@ public class MealDTO implements Serializable {
 
     public void setStatus(EventStatus status) {
         this.status = status;
+    }
+
+    public MenuDTO getMenu() {
+        return menu;
+    }
+
+    public void setMenu(MenuDTO menu) {
+        this.menu = menu;
     }
 }

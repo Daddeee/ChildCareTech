@@ -30,8 +30,8 @@ public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
         Canteen c = new Canteen("canteen");
         WorkDay w1 = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         WorkDay w2 = new WorkDay(LocalDate.now().plusDays(1), LocalTime.MIN, LocalTime.MAX, false);
-        Meal m1 = new Meal(c, 1, w1, null, null, EventStatus.CLOSED);
-        Meal m2 = new Meal(c, 2, w2, null, null, EventStatus.CLOSED);
+        Meal m1 = new Meal(c, 1, w1, null, null, EventStatus.CLOSED, null);
+        Meal m2 = new Meal(c, 2, w2, null, null, EventStatus.CLOSED, null);
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
 

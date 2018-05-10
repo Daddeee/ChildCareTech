@@ -48,7 +48,7 @@ public class MealsGenerationUtil {
                     Event entryEvent = new Event(entryEventName, w, entryTimes.get(i), entryTimes.get(i).plusMinutes(10), status);
                     Event exitEvent = new Event(exitEventName, w, exitTimes.get(i), exitTimes.get(i).plusMinutes(10), status);
 
-                    Meal meal = new Meal(canteen, i + 1, w, entryEvent, exitEvent, status);
+                    Meal meal = new Meal(canteen, i + 1, w, entryEvent, exitEvent, status, null);
 
                     eventDAO.create(entryEvent);
                     eventDAO.create(exitEvent);
