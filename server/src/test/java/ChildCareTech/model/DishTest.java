@@ -27,7 +27,7 @@ public class DishTest extends AbstractEntityTest<Dish, Integer> {
         Canteen c = new Canteen("mensa");
         WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Meal ml = new Meal(c, 0, w, null, null, EventStatus.CLOSED);
-        Menu m = new Menu(ml, 0, null, null);
+        Menu m = new Menu(ml, 0, null);
 
         session = sessionFactory.openSession();
         Transaction tx = null;

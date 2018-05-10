@@ -3,7 +3,6 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.model.entities.Dish;
-import ChildCareTech.model.entities.Drink;
 import ChildCareTech.model.entities.Menu;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 
@@ -15,11 +14,6 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
     public Menu assemble(MenuDTO dto) {
         Menu entity = getMenu(dto);
         if (entity == null) return null;
-
-        entity.setDrink(
-                DrinkDTOEntityAssembler.assembleMenuOneSide(dto.getDrink(), entity)
-        );
-
         loadDishesRelationship(dto, entity);
 
         return entity;
@@ -28,23 +22,6 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
     public static Menu assembleDishManySide(MenuDTO dto) {
         Menu entity = getMenu(dto);
         if (entity == null) return null;
-
-        entity.setDrink(
-                DTOEntityAssembler.getEntity(dto.getDrink())
-        );
-
-        return entity;
-    }
-
-    public static Menu assembleDrinkOneSide(MenuDTO dto, Drink drink){
-        Menu entity = getMenu(dto);
-        if (entity == null) return null;
-
-        entity.setDrink(
-                drink
-        );
-
-        loadDishesRelationship(dto, entity);
 
         return entity;
     }
@@ -64,7 +41,6 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
                 dto.getId(),
                 DTOEntityAssembler.getEntity(dto.getMeal()),
                 dto.getNumMenu(),
-                null,
                 null
         );
         return entity;

@@ -55,11 +55,6 @@ public class DTOFactory {
         return factory.getDTO(trippartecipation);
     }
 
-    public static DrinkDTO getDTO(Drink drink) {
-        DrinkDTOFactory factory = new DrinkDTOFactory();
-        return factory.getDTO(drink);
-    }
-
     public static WorkDayDTO getDTO(WorkDay workday) {
         WorkDayDTOFactory factory = new WorkDayDTOFactory();
         return factory.getDTO(workday);

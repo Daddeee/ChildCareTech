@@ -50,11 +50,6 @@ public class DTOEntityAssembler {
         return trippartecipationDTOEntityAssembler.assemble(dto);
     }
 
-    public static Drink getEntity(DrinkDTO dto) {
-        DrinkDTOEntityAssembler drinkDTOEntityAssembler = new DrinkDTOEntityAssembler();
-        return drinkDTOEntityAssembler.assemble(dto);
-    }
-
     public static WorkDay getEntity(WorkDayDTO dto) {
         WorkDayDTOEntityAssembler workdayDTOEntityAssembler = new WorkDayDTOEntityAssembler();
         return workdayDTOEntityAssembler.assemble(dto);

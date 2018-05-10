@@ -11,7 +11,6 @@ import org.junit.runners.Suite;
         ChildCareTech.model.BusTest.class,
         ChildCareTech.model.CanteenTest.class,
         ChildCareTech.model.DishTest.class,
-        ChildCareTech.model.DrinkTest.class,
         CheckpointTest.class,
         ChildCareTech.model.FoodTest.class,
         ChildCareTech.model.KidTest.class,

@@ -52,7 +52,6 @@
         <mapping class="ChildCareTech.model.entities.Canteen"/>
         <mapping class="ChildCareTech.model.entities.Meal"/>
         <mapping class="ChildCareTech.model.entities.Dish"/>
-        <mapping class="ChildCareTech.model.entities.Drink"/>
         <mapping class="ChildCareTech.model.entities.Food"/>
         <mapping class="ChildCareTech.model.entities.Menu"/>
         <mapping class="ChildCareTech.model.entities.Supply"/>

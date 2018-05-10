@@ -9,14 +9,12 @@ public class MenuDTO implements Serializable {
     private MealDTO meal;
     private int numMenu;
     private Set<DishDTO> dishes;
-    private DrinkDTO drink;
 
-    public MenuDTO(int id, MealDTO meal, int numMenu, Set<DishDTO> dishes, DrinkDTO drink) {
+    public MenuDTO(int id, MealDTO meal, int numMenu, Set<DishDTO> dishes) {
         this.id = id;
         this.meal = meal;
         this.numMenu = numMenu;
         this.dishes = dishes == null ? Collections.EMPTY_SET : dishes;
-        this.drink = drink;
     }
 
     public int getId() {
@@ -45,13 +43,5 @@ public class MenuDTO implements Serializable {
 
     public void setDishes(Set<DishDTO> dishes) {
         this.dishes = dishes;
-    }
-
-    public DrinkDTO getDrink() {
-        return drink;
-    }
-
-    public void setDrink(DrinkDTO drink) {
-        this.drink = drink;
     }
 }
