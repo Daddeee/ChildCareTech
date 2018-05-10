@@ -131,6 +131,7 @@ public class Meal implements iEntity<Meal, Integer> {
 
     @Override
     public int hashCode() {
+        if(canteen == null || workDay == null) return Integer.toString(mealNum).hashCode();
         return (Integer.toString(mealNum) + canteen.hashCode() + workDay.hashCode()).hashCode();
     }
 
