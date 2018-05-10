@@ -74,6 +74,9 @@ public interface UserSession extends Remote {
     List<String> getAllCanteenNames() throws RemoteException;
     CanteenDTO getCanteenByName(String name) throws NoSuchElementException, RemoteException;
 
+    List<DishDTO> getAllDishes() throws RemoteException;
+    void createDish(DishDTO dishDTO) throws RemoteException;
+
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
     LocalDate getMinSavedDate() throws RemoteException;
     LocalDate getMaxSavedDate() throws RemoteException;

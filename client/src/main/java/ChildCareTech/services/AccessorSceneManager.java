@@ -35,6 +35,7 @@ public class AccessorSceneManager {
     private static FXMLLoader updateFoodLoader;
     private static FXMLLoader allergiesLoader;
     private static FXMLLoader addCanteenLoader;
+    private static FXMLLoader addDishLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -59,6 +60,7 @@ public class AccessorSceneManager {
     private static Scene updateFoodScene;
     private static Scene allergiesScene;
     private static Scene addCanteenScene;
+    private static Scene addDishScene;
 
     private AccessorSceneManager() {
     }
@@ -282,13 +284,20 @@ public class AccessorSceneManager {
 
         try{
             AccessorStageService.changeScene(addFoodScene);
-        } catch (NoSuchFieldException ex){
+        } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
     }
 
-    public static void loadShowFood() throws IOException {
+    public static void loadAddDish() throws IOException {
+        addDishLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addDishWindow.fxml"));
+        addDishScene = sceneInit(addDishLoader, "/style/addDishWindow.css");
 
+        try{
+            AccessorStageService.changeScene(addDishScene);
+        } catch (NoSuchFieldException ex) {
+            AccessorSceneManager.stageError(ex);
+        }
     }
 
     public static void loadUpdateFood(FoodDTO foodDTO) throws IOException {
@@ -369,6 +378,7 @@ public class AccessorSceneManager {
             AccessorSceneManager.stageError(ex);
         }
     }
+
 
     private static void stageError(NoSuchFieldException ex) {
         System.err.println("accessory stage not initialized");

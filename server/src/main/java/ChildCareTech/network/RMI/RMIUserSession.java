@@ -33,6 +33,54 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void createDish(DishDTO dishDTO) {
+        DishDAO dishDAO = new DishDAO();
+        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        dishDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            dishDAO.create(dish);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<DishDTO> getAllDishes() {
+        List<DishDTO> result = new ArrayList<>();
+        List<Dish> queryResult = Collections.emptyList();
+
+        DishDAO dishDAO = new DishDAO();
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        dishDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            queryResult = dishDAO.readAll();
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+
+        for(Dish d : queryResult)
+            result.add(DTOFactory.getDTO(d));
+
+        return result;
+    }
+
+    @Override
     public CanteenDTO getCanteenByName(String name) throws NoSuchElementException {
         CanteenDAO canteenDAO = new CanteenDAO();
         Transaction tx = null;

@@ -13,7 +13,7 @@ public class DishDTO implements Serializable {
     public DishDTO(int id, String name, Set<MenuDTO> menus, Set<FoodDTO> foods) {
         this.id = id;
         this.name = name;
-        this.menus = menus;
+        this.menus = menus == null ? Collections.EMPTY_SET : menus;
         this.foods = foods == null ? Collections.EMPTY_SET : foods;
     }
 

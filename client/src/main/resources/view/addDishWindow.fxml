@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ChildCareTech.controller.AddDishController"
+      prefHeight="400.0" prefWidth="600.0">
+    <HBox>
+        <Label text="Nome:"/>
+        <TextField fx:id="nameField"/>
+    </HBox>
+
+    <HBox>
+        <TableView fx:id="availableIngredientsTable" prefWidth="250">
+            <columns>
+                <TableColumn text="Nome">
+                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <VBox prefWidth="100">
+            <Button onAction="#addIngredientButtonAction" text="&gt;"/>
+            <Button onAction="#removeIngredientButtonAction" text="&lt;"/>
+        </VBox>
+        <TableView fx:id="selectedIngredientsTable" prefWidth="250">
+            <columns>
+                <TableColumn text="Nome">
+                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </HBox>
+
+    <Button fx:id="saveButton" text="Salva" onAction="#saveButtonAction"/>
+</VBox>
