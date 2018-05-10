@@ -33,6 +33,50 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void deleteDish(DishDTO dishDTO) {
+        DishDAO dishDAO = new DishDAO();
+        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        dishDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            dishDAO.delete(dish);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void updateDish(DishDTO dishDTO) {
+        DishDAO dishDAO = new DishDAO();
+        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        dishDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            dishDAO.update(dish);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public void createDish(DishDTO dishDTO) {
         DishDAO dishDAO = new DishDAO();
         Dish dish = DTOEntityAssembler.getEntity(dishDTO);
@@ -67,6 +111,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             tx = session.beginTransaction();
 
             queryResult = dishDAO.readAll();
+            for(Dish d : queryResult)
+                dishDAO.initializeLazyRelations(d);
 
             tx.commit();
         } catch(Exception e){

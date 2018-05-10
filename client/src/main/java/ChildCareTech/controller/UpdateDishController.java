@@ -4,24 +4,19 @@ import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.MainStageService;
 import ChildCareTech.services.SessionService;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class AddDishController {
+public class UpdateDishController {
     @FXML
     protected TextField nameField;
     @FXML
@@ -29,25 +24,41 @@ public class AddDishController {
     @FXML
     protected TableView<FoodDTO> selectedIngredientsTable;
 
-    public void initialize() {
-        List<FoodDTO> availableIngredients = Collections.emptyList();
+    private DishDTO currentDishDTO;
+
+    public void initData(DishDTO dishDTO){
+        this.currentDishDTO = dishDTO;
+
+        nameField.setText(dishDTO.getName());
+
+        List<FoodDTO> availableIngredients = new ArrayList<>();
         try{
             availableIngredients = SessionService.getSession().getAllFoods();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
+        availableIngredients.removeIf(foodDTO -> {
+            for(FoodDTO f : currentDishDTO.getFoods())
+                if(f.getId() == foodDTO.getId()) return true;
+
+            return false;
+        });
+
         availableIngredientsTable.getItems().clear();
         availableIngredientsTable.getItems().addAll(availableIngredients);
+
+        selectedIngredientsTable.getItems().clear();
+        selectedIngredientsTable.getItems().addAll(currentDishDTO.getFoods());
     }
 
     @FXML
-    protected void saveButtonAction(ActionEvent event){
+    protected void updateButtonAction(ActionEvent event){
         Set<FoodDTO> foods = new HashSet<>(selectedIngredientsTable.getItems());
-        DishDTO dishDTO = new DishDTO(0, nameField.getText(), null, foods);
-
+        currentDishDTO.setFoods(foods);
+        currentDishDTO.setName(nameField.getText());
         try {
-            SessionService.getSession().createDish(dishDTO);
+            SessionService.getSession().updateDish(currentDishDTO);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

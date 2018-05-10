@@ -78,6 +78,8 @@ public interface UserSession extends Remote {
 
     List<DishDTO> getAllDishes() throws RemoteException;
     void createDish(DishDTO dishDTO) throws RemoteException;
+    void updateDish(DishDTO dishDTO) throws RemoteException;
+    void deleteDish(DishDTO dishDTO) throws RemoteException;
 
     WorkDayDTO getCurrentWorkDay() throws RemoteException;
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
