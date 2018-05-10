@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ChildCareTech.controller.ShowDishController"
+      prefHeight="400.0" prefWidth="600.0">
+    <HBox>
+        <Label text="Nome: "/>
+        <Label fx:id="nameLabel"/>
+    </HBox>
+    <TableView fx:id="ingredientsTable">
+        <columns>
+            <TableColumn text="Nome">
+                <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</VBox>

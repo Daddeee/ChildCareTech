@@ -2,7 +2,6 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.services.AccessorSceneManager;
-import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import javafx.beans.binding.Bindings;
@@ -14,7 +13,6 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,6 +45,17 @@ public class DishController {
                 }
             });
             contextMenu.getItems().add(updateDishItem);
+
+            final MenuItem showDishItem = new MenuItem("Dettagli");
+            showDishItem.setOnAction(event -> {
+                contextMenu.hide();
+                try{
+                    AccessorSceneManager.loadShowDish(row.getItem());
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            });
+            contextMenu.getItems().add(showDishItem);
 
             final MenuItem deleteDishItem = new MenuItem("Elimina");
             deleteDishItem.setOnAction(event -> {
