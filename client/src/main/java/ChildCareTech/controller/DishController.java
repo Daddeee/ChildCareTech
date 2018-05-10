@@ -90,16 +90,6 @@ public class DishController {
     }
 
     @FXML
-    public void addDrinkButtonAction(ActionEvent event) {
-        /*try {
-            AccessorSceneManager.loadAddTrip();
-        } catch (IOException ex) {
-            System.err.println("Can't load addTrip window");
-            ex.printStackTrace();
-        }*/
-    }
-
-    @FXML
     public void backButtonAction(ActionEvent event) {
         try {
             MainSceneManager.loadHome();

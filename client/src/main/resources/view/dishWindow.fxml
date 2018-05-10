@@ -18,13 +18,6 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </VBox.margin>
                 </Button>
-                <Button fx:id="addDrinkButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                        minWidth="-Infinity" mnemonicParsing="false" onAction="#addDrinkButtonAction" prefHeight="80.0"
-                        prefWidth="80.0" text="Nuovo Drink">
-                    <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                    </VBox.margin>
-                </Button>
                 <Button fx:id="backButton" onAction="#backButtonAction" maxHeight="-Infinity" maxWidth="-Infinity"
                         minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="80.0"
                         prefWidth="80.0" text="&lt;--">
@@ -36,15 +29,7 @@
         </VBox>
         <VBox>
             <TableView fx:id="dishesTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
-                       prefHeight="350.0" prefWidth="900.0">
-                <columns>
-                    <TableColumn text="Nome">
-                        <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
-                    </TableColumn>
-                </columns>
-            </TableView>
-            <TableView fx:id="drinksTable" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
-                       prefHeight="350.0" prefWidth="900.0">
+                       prefHeight="700.0" prefWidth="900.0">
                 <columns>
                     <TableColumn text="Nome">
                         <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
