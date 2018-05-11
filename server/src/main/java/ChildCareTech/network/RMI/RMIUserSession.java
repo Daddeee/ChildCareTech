@@ -32,6 +32,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private CanteenController canteenController;
     private PersonController personController;
     private FoodController foodController;
+    private BusController busController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
@@ -40,6 +41,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         this.canteenController = new CanteenController();
         this.personController = new PersonController();
         this.foodController = new FoodController();
+        this.busController = new BusController();
     }
 
     @Override
@@ -1089,132 +1091,24 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     public void saveBus(BusDTO busDTO) throws RemoteException, AddFailedException{
-        Bus bus = DTOEntityAssembler.getEntity(busDTO);
-        BusDAO busDAO = new BusDAO();
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        busDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            busDAO.create(bus);
-
-            tx.commit();
-        } catch(Exception ex){
-            if(tx!=null) tx.rollback();
-            ex.printStackTrace();
-            throw new AddFailedException(ex.getMessage());
-        } finally {
-            session.close();
-        }
+        busController.doSaveBus(busDTO);
     }
-
     public void removeBus(BusDTO busDTO) throws RemoteException{
-        BusDAO busDAO = new BusDAO();
-        Bus bus = DTOEntityAssembler.getEntity(busDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        busDAO.setSession(session);
-        try {
-            tx = session.beginTransaction();
-            busDAO.delete(bus);
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        busController.doRemoveBus(busDTO);
     }
 
     public void updateBus(BusDTO newBusDTO) throws RemoteException, UpdateFailedException{
-        BusDAO busDAO = new BusDAO();
-        Bus newBus = DTOEntityAssembler.getEntity(newBusDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        busDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            busDAO.update(newBus);
-
-            tx.commit();
-        }catch(IndexOutOfBoundsException e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new UpdateFailedException("Non è stato trovato alcun autobus da aggiornare");
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new UpdateFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        busController.doUpdateBus(newBusDTO);
     }
 
+    @Override
     public List<BusDTO> getAllBuses() throws RemoteException{
-        BusDAO busDAO = new BusDAO();
-        TripDAO tripDAO = new TripDAO();
-        List<BusDTO> busesDTOCollection = new ArrayList<>();
-        List<Bus> busesCollection = new ArrayList<>();
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        busDAO.setSession(session);
-        tripDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            busesCollection = busDAO.readAll();
-            for(Bus b : busesCollection)
-                busDAO.initializeLazyRelations(b);
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        for(Bus b : busesCollection)
-            busesDTOCollection.add(DTOFactory.getDTO(b));
-
-        return busesDTOCollection;
+        return busController.doGetAllBuses();
     }
 
     @Override
     public Collection<BusDTO> getAvailableBuses(TripDTO tripDTO) {
-        BusDAO busDAO = new BusDAO();
-        TripDAO tripDAO = new TripDAO();
-        List<BusDTO> busesDTOCollection = new ArrayList<>();
-        List<Bus> busesCollection = new ArrayList<>();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        busDAO.setSession(session);
-        tripDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            busesCollection = busDAO.getAvailableBuses(trip);
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        for(Bus b : busesCollection)
-            busesDTOCollection.add(DTOFactory.getDTO(b));
-
-        return busesDTOCollection;
+        return busController.doGetAvailableBuses(tripDTO);
     }
 
     @Override
