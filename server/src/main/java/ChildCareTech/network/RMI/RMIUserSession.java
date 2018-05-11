@@ -6,10 +6,7 @@ import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-import ChildCareTech.controller.CanteenController;
-import ChildCareTech.controller.DishController;
-import ChildCareTech.controller.MenuController;
-import ChildCareTech.controller.SessionController;
+import ChildCareTech.controller.*;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.*;
@@ -33,12 +30,14 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private MenuController menuController;
     private DishController dishController;
     private CanteenController canteenController;
+    private PersonController personController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
         this.menuController = new MenuController();
         this.dishController = new DishController();
         this.canteenController = new CanteenController();
+        this.personController = new PersonController();
     }
 
     @Override
@@ -100,86 +99,17 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void removeAllergy(PersonDTO personDTO, FoodDTO foodDTO) {
-        PersonDAO personDAO = new PersonDAO();
-        FoodDAO foodDAO = new FoodDAO();
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        personDAO.setSession(session);
-        foodDAO.setSession(session);
-
-        try{
-            tx = session.beginTransaction();
-
-            Person person = personDAO.read(personDTO.getFiscalCode());
-
-            person.getAllergies().removeIf(food -> food.getId() == foodDTO.getId());
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        personController.doRemoveAllergy(personDTO, foodDTO);
     }
 
     @Override
     public void addAllergy(PersonDTO personDTO, FoodDTO foodDTO) throws AddFailedException{
-        PersonDAO personDAO = new PersonDAO();
-        FoodDAO foodDAO = new FoodDAO();
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        personDAO.setSession(session);
-        foodDAO.setSession(session);
-
-        try{
-            tx = session.beginTransaction();
-
-            Person person = personDAO.read(personDTO.getFiscalCode());
-            Food food = foodDAO.read(foodDTO.getId());
-
-            person.getAllergies().add(food);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        personController.doAddAllergy(personDTO, foodDTO);
     }
 
     @Override
     public PersonDTO getPerson(String fiscalCode) {
-        PersonDAO personDAO = new PersonDAO();
-
-
-        Person result = null;
-        PersonDTO resultDTO = null;
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        personDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            result = personDAO.read(fiscalCode);
-            personDAO.initializeLazyRelations(result);
-
-            tx.commit();
-        } catch(Exception e){
-            e.printStackTrace();
-            throw new NoSuchElementException(e.getMessage());
-        } finally {
-            session.close();
-        }
-
-        resultDTO = DTOFactory.getDTO(result);
-
-        return resultDTO;
+        return personController.doGetPerson(fiscalCode);
     }
 
     @Override
