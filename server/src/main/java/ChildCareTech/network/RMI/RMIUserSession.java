@@ -33,6 +33,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private PersonController personController;
     private FoodController foodController;
     private BusController busController;
+    private WorkDayController workDayController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
@@ -42,6 +43,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         this.personController = new PersonController();
         this.foodController = new FoodController();
         this.busController = new BusController();
+        this.workDayController = new WorkDayController();
     }
 
     @Override
@@ -177,32 +179,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         }
 
         triggerDailyScheduling();
-    }
-
-    @Override
-    public void triggerDailyScheduling() throws RemoteException {
-        WorkDayDAO workDayDAO = new WorkDayDAO();
-        EventDAO eventDAO = new EventDAO();
-        WorkDay reloadedToday = null;
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        workDayDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            reloadedToday = workDayDAO.read(RemoteEventObservable.getInstance().getToday());
-
-            workDayDAO.initializeLazyRelations(reloadedToday);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        RemoteEventObservable.getInstance().setDay(reloadedToday);
     }
 
     @Override
@@ -348,48 +324,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public LocalDate getMinSavedDate() {
-        LocalDate result = null;
-        Transaction tx = null;
-        WorkDayDAO workDayDAO = new WorkDayDAO();
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        workDayDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-            result = workDayDAO.getMinPersistentDate();
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return result;
-    }
-
-    @Override
-    public LocalDate getMaxSavedDate() {
-        LocalDate result = null;
-        Transaction tx = null;
-        WorkDayDAO workDayDAO = new WorkDayDAO();
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        workDayDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-            result = workDayDAO.getMaxPersistentDate();
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return result;
-    }
-
-    @Override
     public Set<CheckpointDTO> getEventCheckpoints(EventDTO eventDTO) {
         Event result;
         EventDTO resultDTO = null;
@@ -459,29 +393,23 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public LocalDate getMinSavedDate() {
+        return workDayController.doGetMinSavedDate();
+    }
+
+    @Override
+    public LocalDate getMaxSavedDate() {
+        return workDayController.doGetMaxSavedDate();
+    }
+
+    @Override
     public WorkDayDTO getWorkDay(LocalDate date) {
-        WorkDayDAO workDayDAO = new WorkDayDAO();
-        EventDAO eventDAO = new EventDAO();
-        WorkDay result = null;
+        return workDayController.doGetWorkDay(date);
+    }
 
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        workDayDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            result = workDayDAO.read("date", date.toString()).get(0);
-            workDayDAO.initializeLazyRelations(result);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return DTOFactory.getDTO(result);
+    @Override
+    public void triggerDailyScheduling() throws RemoteException {
+        workDayController.doTriggerDailyScheduling();
     }
 
     @Override
@@ -490,25 +418,9 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public boolean isFirstEverStartup() {
-        return Boolean.parseBoolean(Settings.getProperty("firstRun"));
-    }
-
-    @Override
-    public void setFirstEverStartup(boolean value) {
-        Settings.storeProperty("firstRun", Boolean.toString(value));
-    }
-
-    @Override
     public void generateDays(DayGenerationSettingsDTO settings) {
         WorkDaysGenerationUtil wdu = new WorkDaysGenerationUtil(settings);
         wdu.generateDays();
-    }
-
-    @Override
-    public void logout() throws RemoteException {
-        SessionController.removeSession(user.getUserName());
-        UnicastRemoteObject.unexportObject(this, true);
     }
 
     @Override
@@ -1140,5 +1052,21 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             kidDTOCollection.add(DTOFactory.getDTO(k));
 
         return kidDTOCollection;
+    }
+
+    @Override
+    public boolean isFirstEverStartup() {
+        return Boolean.parseBoolean(Settings.getProperty("firstRun"));
+    }
+
+    @Override
+    public void setFirstEverStartup(boolean value) {
+        Settings.storeProperty("firstRun", Boolean.toString(value));
+    }
+
+    @Override
+    public void logout() throws RemoteException {
+        SessionController.removeSession(user.getUserName());
+        UnicastRemoteObject.unexportObject(this, true);
     }
 }
