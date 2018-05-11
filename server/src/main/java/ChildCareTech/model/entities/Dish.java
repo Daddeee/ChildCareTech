@@ -17,7 +17,7 @@ public class Dish implements iEntity<Dish, Integer> {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "dishes")
     private Set<Menu> menus;
 
     @ManyToMany(targetEntity = Food.class)

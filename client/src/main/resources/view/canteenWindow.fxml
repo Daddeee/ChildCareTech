@@ -50,6 +50,9 @@
                     <TableColumn fx:id="statusColumn" text="Stato">
                         <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
                     </TableColumn>
+                    <TableColumn fx:id="menuListColumn" text="Menu">
+                        <cellValueFactory><PropertyValueFactory property="menuList" /></cellValueFactory>
+                    </TableColumn>
                 </columns>
             </TableView>
         </VBox>

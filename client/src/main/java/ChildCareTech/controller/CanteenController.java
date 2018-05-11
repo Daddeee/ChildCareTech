@@ -37,7 +37,17 @@ public class CanteenController {
             final TableRow<TempMealData> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
 
-            //TODO menu...
+
+            final MenuItem addMenuItem = new MenuItem("Aggiungi Menu");
+            addMenuItem.setOnAction(event -> {
+                try{
+                    AccessorSceneManager.loadAddMenu(row.getItem().getMealDTO());
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            });
+
+            contextMenu.getItems().add(addMenuItem);
 
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())

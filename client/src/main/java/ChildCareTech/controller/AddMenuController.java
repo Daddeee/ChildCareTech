@@ -3,6 +3,8 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
+import ChildCareTech.services.AccessorStageService;
+import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,6 +53,20 @@ public class AddMenuController {
     protected void saveButtonAction(ActionEvent event){
         Set<DishDTO> dishes = new HashSet<>(selectedDishesTable.getItems());
         MenuDTO menuDTO = new MenuDTO(0, currentMealDTO, 0, dishes);
-        currentMealDTO.set
+        currentMealDTO.setMenu(menuDTO);
+        menuDTO.setDishes(dishes);
+
+        try{
+            SessionService.getSession().createMenu(currentMealDTO);
+        } catch (RemoteException e){
+            e.printStackTrace();
+        }
+
+        try{
+            AccessorStageService.close();
+            MainSceneManager.loadCanteen();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

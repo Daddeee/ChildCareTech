@@ -20,7 +20,7 @@ public class Menu implements iEntity<Menu, Integer> {
     @Column(nullable = false)
     private int numMenu;
 
-    @ManyToMany(mappedBy = "menus")
+    @ManyToMany
     private Set<Dish> dishes;
 
     public Menu() {

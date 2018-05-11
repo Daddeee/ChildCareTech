@@ -33,6 +33,32 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void createMenu(MealDTO mealDTO) {
+        MealDAO mealDAO = new MealDAO();
+        MenuDAO menuDAO = new MenuDAO();
+
+        Meal meal = DTOEntityAssembler.getEntity(mealDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        mealDAO.setSession(session);
+        menuDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            menuDAO.create(meal.getMenu());
+            mealDAO.update(meal);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public void deleteDish(DishDTO dishDTO) {
         DishDAO dishDAO = new DishDAO();
         Dish dish = DTOEntityAssembler.getEntity(dishDTO);
@@ -129,9 +155,13 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public CanteenDTO getCanteenByName(String name) throws NoSuchElementException {
         CanteenDAO canteenDAO = new CanteenDAO();
+        MealDAO mealDAO = new MealDAO();
+        MenuDAO menuDAO = new MenuDAO();
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         canteenDAO.setSession(session);
+        mealDAO.setSession(session);
+        menuDAO.setSession(session);
         List<Canteen> result = Collections.emptyList();
         try{
             tx = session.beginTransaction();
@@ -139,6 +169,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
             result = canteenDAO.read("name", name);
             if(result.size() == 0) throw new NoSuchElementException("Nessuna mensa trovata");
             canteenDAO.initializeLazyRelations(result.get(0));
+            for(Meal m : result.get(0).getMeals()) {
+                mealDAO.initializeLazyRelations(m);
+                if(m.getMenu() != null)
+                    menuDAO.initializeLazyRelations(m.getMenu());
+            }
 
             tx.commit();
         } catch(HibernateException e){

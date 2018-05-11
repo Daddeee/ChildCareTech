@@ -38,6 +38,7 @@ public class AccessorSceneManager {
     private static FXMLLoader addDishLoader;
     private static FXMLLoader updateDishLoader;
     private static FXMLLoader showDishLoader;
+    private static FXMLLoader addMenuLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -65,6 +66,7 @@ public class AccessorSceneManager {
     private static Scene addDishScene;
     private static Scene updateDishScene;
     private static Scene showDishScene;
+    private static Scene addMenuScene;
 
     private AccessorSceneManager() {
     }
@@ -342,6 +344,20 @@ public class AccessorSceneManager {
         try{
             AccessorStageService.changeScene(updateFoodScene);
         } catch(NoSuchFieldException ex){
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    public static void loadAddMenu(MealDTO mealDTO) throws IOException {
+        addMenuLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/addMenuWindow.fxml"));
+        addMenuScene = sceneInit(addMenuLoader, "/style/addMenuWindow.css");
+
+        AddMenuController controller = addMenuLoader.getController();
+        controller.initData(mealDTO);
+
+        try{
+            AccessorStageService.changeScene(addMenuScene);
+        } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
     }

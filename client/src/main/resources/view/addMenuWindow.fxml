@@ -37,5 +37,5 @@
             </columns>
         </TableView>
     </HBox>
-    <Button fx:id="saveButton" onAction="#saveButtonAction"/>
+    <Button fx:id="saveButton" text="Salva" onAction="#saveButtonAction"/>
 </VBox>

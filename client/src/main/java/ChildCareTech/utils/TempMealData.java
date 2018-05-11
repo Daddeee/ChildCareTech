@@ -1,5 +1,6 @@
 package ChildCareTech.utils;
 
+import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.EventStatus;
 
@@ -9,6 +10,7 @@ public class TempMealData {
     private String exitTime;
     private String status;
     private MealDTO mealDTO;
+    private String menuList;
 
     public TempMealData(String day, String entryTime, String exitTime, String status,MealDTO mealDTO) {
         this.day = day;
@@ -16,6 +18,7 @@ public class TempMealData {
         this.exitTime = exitTime;
         this.status = status;
         this.mealDTO = mealDTO;
+        this.menuList = buildMenuList();
     }
 
     public String getDay() {
@@ -52,5 +55,30 @@ public class TempMealData {
 
     public MealDTO getMealDTO() {
         return mealDTO;
+    }
+
+    public String getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(String menuList) {
+        this.menuList = menuList;
+    }
+
+    private String buildMenuList(){
+        if(mealDTO.getMenu() == null || mealDTO.getMenu().getDishes().size() <= 0) {
+            return  "";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for(DishDTO d : mealDTO.getMenu().getDishes()) {
+                sb.append(d.getName());
+                sb.append(", ");
+            }
+
+            sb.deleteCharAt(sb.length() - 1);
+            sb.deleteCharAt(sb.length() - 1);
+
+            return sb.toString();
+        }
     }
 }
