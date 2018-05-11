@@ -6,6 +6,9 @@ import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
+import ChildCareTech.controller.CanteenController;
+import ChildCareTech.controller.DishController;
+import ChildCareTech.controller.MenuController;
 import ChildCareTech.controller.SessionController;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
@@ -27,280 +30,72 @@ import java.util.function.Predicate;
 
 public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private User user;
+    private MenuController menuController;
+    private DishController dishController;
+    private CanteenController canteenController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
+        this.menuController = new MenuController();
+        this.dishController = new DishController();
+        this.canteenController = new CanteenController();
     }
 
     @Override
-    public void addDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) {
-        MenuDAO menuDAO = new MenuDAO();
-        DishDAO dishDAO = new DishDAO();
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        menuDAO.setSession(session);
-        dishDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            Dish dish = dishDAO.read(dishDTO.getId());
-            menuDAO.read(menuDTO.getId()).getDishes().add(dish);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+    public void addDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) {
+        menuController.doAddDishToMenu(menuDTO, dishDTO);
     }
 
     @Override
     public void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) {
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        try{
-            tx = session.beginTransaction();
-
-            session.createSQLQuery("delete from Menu_Dish where menus_id = :menuId and dishes_id = :dishId")
-                    .setParameter("menuId", menuDTO.getId())
-                    .setParameter("dishId", dishDTO.getId())
-                    .executeUpdate();
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        menuController.doRemoveDishFromMenu(menuDTO, dishDTO);
     }
 
     @Override
     public void updateMenu(MealDTO mealDTO) {
-        MenuDAO menuDAO = new MenuDAO();
-        MealDAO mealDAO = new MealDAO();
-
-        Meal meal = DTOEntityAssembler.getEntity(mealDTO);
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        menuDAO.setSession(session);
-        mealDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            menuDAO.update(meal.getMenu());
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        menuController.doUpdateMenu(mealDTO);
     }
 
     @Override
     public void createMenu(MealDTO mealDTO) {
-        MealDAO mealDAO = new MealDAO();
-        MenuDAO menuDAO = new MenuDAO();
-
-        Meal meal = DTOEntityAssembler.getEntity(mealDTO);
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        mealDAO.setSession(session);
-        menuDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            menuDAO.create(meal.getMenu());
-            mealDAO.update(meal);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        menuController.doCreateMenu(mealDTO);
     }
 
     @Override
     public void deleteDish(DishDTO dishDTO) {
-        DishDAO dishDAO = new DishDAO();
-        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        dishDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            dishDAO.delete(dish);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        dishController.doDeleteDish(dishDTO);
     }
 
     @Override
     public void updateDish(DishDTO dishDTO) {
-        DishDAO dishDAO = new DishDAO();
-        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        dishDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            dishDAO.update(dish);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        dishController.doUpdateDish(dishDTO);
     }
+
+
 
     @Override
     public void createDish(DishDTO dishDTO) {
-        DishDAO dishDAO = new DishDAO();
-        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        dishDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            dishDAO.create(dish);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        dishController.doCreateDish(dishDTO);
     }
 
     @Override
     public List<DishDTO> getAllDishes() {
-        List<DishDTO> result = new ArrayList<>();
-        List<Dish> queryResult = Collections.emptyList();
-
-        DishDAO dishDAO = new DishDAO();
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        dishDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            queryResult = dishDAO.readAll();
-            for(Dish d : queryResult)
-                dishDAO.initializeLazyRelations(d);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        }
-
-        for(Dish d : queryResult)
-            result.add(DTOFactory.getDTO(d));
-
-        return result;
+        return dishController.doGetAllDishes();
     }
 
     @Override
     public CanteenDTO getCanteenByName(String name) throws NoSuchElementException {
-        CanteenDAO canteenDAO = new CanteenDAO();
-        MealDAO mealDAO = new MealDAO();
-        MenuDAO menuDAO = new MenuDAO();
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        canteenDAO.setSession(session);
-        mealDAO.setSession(session);
-        menuDAO.setSession(session);
-        List<Canteen> result = Collections.emptyList();
-        try{
-            tx = session.beginTransaction();
-
-            result = canteenDAO.read("name", name);
-            if(result.size() == 0) throw new NoSuchElementException("Nessuna mensa trovata");
-            canteenDAO.initializeLazyRelations(result.get(0));
-            for(Meal m : result.get(0).getMeals()) {
-                mealDAO.initializeLazyRelations(m);
-                if(m.getMenu() != null)
-                    menuDAO.initializeLazyRelations(m.getMenu());
-            }
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return DTOFactory.getDTO(result.get(0));
+        return canteenController.doGetCanteenByName(name);
     }
 
     @Override
     public List<String> getAllCanteenNames() {
-        CanteenDAO canteenDAO = new CanteenDAO();
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        canteenDAO.setSession(session);
-        List<String> names = Collections.emptyList();
-        try{
-            tx = session.beginTransaction();
-
-            names = canteenDAO.getAllNames();
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return names;
+        return canteenController.doGetAllCanteenNames();
     }
 
     @Override
     public void saveCanteen(CanteenDTO canteenDTO, List<LocalTime> entryTimeList, List<LocalTime> exitTimeList) throws AddFailedException{
-        CanteenDAO canteenDAO = new CanteenDAO();
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        canteenDAO.setSession(session);
-        Canteen canteen;
-        try{
-            tx = session.beginTransaction();
-
-            canteen = DTOEntityAssembler.getEntity(canteenDTO);
-            canteenDAO.create(canteen);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            throw new AddFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
-
-        MealsGenerationUtil.generateMeals(canteen, entryTimeList, exitTimeList);
+        canteenController.doSaveCanteen(canteenDTO, entryTimeList, exitTimeList);
     }
 
     @Override

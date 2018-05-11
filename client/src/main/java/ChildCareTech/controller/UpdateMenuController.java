@@ -48,7 +48,7 @@ public class UpdateMenuController {
     protected void addDishButtonAction(ActionEvent event){
         try {
             int rowIndex = availableDishesTable.getSelectionModel().getFocusedIndex();
-            SessionService.getSession().addDishFromMenu(currentMealDTO.getMenu(), availableDishesTable.getItems().get(rowIndex));
+            SessionService.getSession().addDishToMenu(currentMealDTO.getMenu(), availableDishesTable.getItems().get(rowIndex));
             selectedDishesTable.getItems().add(availableDishesTable.getItems().get(rowIndex));
             availableDishesTable.getItems().remove(rowIndex);
         } catch (RemoteException e) {

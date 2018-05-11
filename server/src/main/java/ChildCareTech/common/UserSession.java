@@ -84,7 +84,7 @@ public interface UserSession extends Remote {
     void createMenu(MealDTO mealDTO) throws RemoteException;
     void updateMenu(MealDTO mealDTO) throws RemoteException;
     void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
-    void addDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
+    void addDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
 
     WorkDayDTO getCurrentWorkDay() throws RemoteException;
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
