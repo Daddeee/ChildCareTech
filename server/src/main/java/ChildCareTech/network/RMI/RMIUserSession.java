@@ -33,6 +33,76 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void addDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) {
+        MenuDAO menuDAO = new MenuDAO();
+        DishDAO dishDAO = new DishDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        menuDAO.setSession(session);
+        dishDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            Dish dish = dishDAO.read(dishDTO.getId());
+            menuDAO.read(menuDTO.getId()).getDishes().add(dish);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) {
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        try{
+            tx = session.beginTransaction();
+
+            session.createSQLQuery("delete from Menu_Dish where menus_id = :menuId and dishes_id = :dishId")
+                    .setParameter("menuId", menuDTO.getId())
+                    .setParameter("dishId", dishDTO.getId())
+                    .executeUpdate();
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void updateMenu(MealDTO mealDTO) {
+        MenuDAO menuDAO = new MenuDAO();
+        MealDAO mealDAO = new MealDAO();
+
+        Meal meal = DTOEntityAssembler.getEntity(mealDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        menuDAO.setSession(session);
+        mealDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            menuDAO.update(meal.getMenu());
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public void createMenu(MealDTO mealDTO) {
         MealDAO mealDAO = new MealDAO();
         MenuDAO menuDAO = new MenuDAO();

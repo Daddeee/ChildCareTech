@@ -2,12 +2,14 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.services.AccessorSceneManager;
 import ChildCareTech.services.MainSceneManager;
 import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.TempMealData;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -33,16 +35,19 @@ public class CanteenController {
             final ContextMenu contextMenu = new ContextMenu();
 
 
-            final MenuItem addMenuItem = new MenuItem("Aggiungi Menu");
-            addMenuItem.setOnAction(event -> {
+            final MenuItem manageMenuItem = new MenuItem("Gestione Menu");
+            manageMenuItem.setOnAction(event -> {
                 try{
-                    AccessorSceneManager.loadAddMenu(row.getItem().getMealDTO());
+                    if(row.getItem().getMealDTO().getMenu() == null)
+                        AccessorSceneManager.loadAddMenu(row.getItem().getMealDTO());
+                    else
+                        AccessorSceneManager.loadUpdateMenu(row.getItem().getMealDTO());
                 } catch (IOException e){
                     e.printStackTrace();
                 }
             });
 
-            contextMenu.getItems().add(addMenuItem);
+            contextMenu.getItems().add(manageMenuItem);
 
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
