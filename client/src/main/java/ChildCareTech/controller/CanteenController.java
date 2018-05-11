@@ -26,12 +26,7 @@ public class CanteenController {
     private CanteenDTO canteenDTO;
 
     public void initialize() {
-        try{
-            selectCanteen.getItems().clear();
-            selectCanteen.getItems().addAll(SessionService.getSession().getAllCanteenNames());
-        } catch (RemoteException e){
-            e.printStackTrace();
-        }
+        List<String> names;
 
         mealsDataTable.setRowFactory(tempMealDataTableView -> {
             final TableRow<TempMealData> row = new TableRow<>();
@@ -57,6 +52,19 @@ public class CanteenController {
 
             return row;
         });
+
+        try{
+            names = SessionService.getSession().getAllCanteenNames();
+
+            selectCanteen.getItems().clear();
+            selectCanteen.getItems().addAll(names);
+            if(names.size() > 0){
+                selectCanteen.getSelectionModel().select(0);
+                changeSelectedCanteen(null);
+            }
+        } catch (RemoteException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
