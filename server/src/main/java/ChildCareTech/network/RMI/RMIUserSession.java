@@ -39,6 +39,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private PediatristController pediatristController;
     private StaffController staffController;
     private SupplierController supplierController;
+    private TripController tripController;
+    private RouteController routeController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
@@ -54,6 +56,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         this.pediatristController = new PediatristController();
         this.staffController = new StaffController();
         this.supplierController = new SupplierController();
+        this.tripController = new TripController();
+        this.routeController = new RouteController();
     }
 
     @Override
@@ -152,75 +156,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
-    public void updateRouteEvent(RouteDTO routeDTO) throws RemoteException, UpdateFailedException{
-        RouteDAO routeDAO = new RouteDAO();
-        EventDAO eventDAO = new EventDAO();
-        Route route = DTOEntityAssembler.getEntity(routeDTO);
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        routeDAO.setSession(session);
-        eventDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            if(route.getDepartureEvent() != null)
-                if(route.getDepartureEvent().getId() == 0) {
-                    eventDAO.create(route.getDepartureEvent());
-                } else {
-                    eventDAO.update(route.getDepartureEvent());
-                }
-
-            if(route.getArrivalEvent() != null)
-                if(route.getArrivalEvent().getId() == 0) {
-                    eventDAO.create(route.getArrivalEvent());
-                } else {
-                    eventDAO.update(route.getArrivalEvent());
-                }
-
-            routeDAO.update(route);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            throw new UpdateFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
-
-        triggerDailyScheduling();
-    }
-
-    @Override
-    public void removeTripBusRelation(TripDTO tripDTO, BusDTO busDTO) {
-        TripDAO tripDAO = new TripDAO();
-        BusDAO busDAO = new BusDAO();
-        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        tripDAO.setSession(session);
-        busDAO.setSession(session);
-        tripPartecipationDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            Trip trip = tripDAO.read(tripDTO.getId());
-            Bus bus = busDAO.read(busDTO.getId());
-            trip.getBuses().removeIf(b -> b.getId() == busDTO.getId());
-
-            tripPartecipationDAO.removeAssociatedTripPartecipations(trip, bus);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
     public void removeTripPartecipation(TripPartecipationDTO tripPartecipationDTO) {
         TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
 
@@ -238,72 +173,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public TripDTO getTrip(int id) throws NoSuchElementException {
-        TripDAO tripDAO = new TripDAO();
-
-
-        Trip result = null;
-        TripDTO resultDTO = null;
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        tripDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            result = tripDAO.read(id);
-            tripDAO.initializeLazyRelations(result);
-
-            tx.commit();
-        } catch(Exception e){
-            e.printStackTrace();
-            throw new NoSuchElementException(e.getMessage());
-        } finally {
-            session.close();
-        }
-
-        resultDTO = DTOFactory.getDTO(result);
-
-        return resultDTO;
-    }
-
-    @Override
-    public void saveTripBusRelation(TripDTO tripDTO, BusDTO busDTO) throws AddFailedException {
-        TripDAO tripDAO = new TripDAO();
-        BusDAO busDAO = new BusDAO();
-        Trip trip = null;
-        Bus bus = null;
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        tripDAO.setSession(session);
-        busDAO.setSession(session);
-
-        try {
-            tx = session.beginTransaction();
-
-            trip = tripDAO.read(tripDTO.getId());
-            bus = busDAO.read(busDTO.getId());
-
-            if (trip.getBuses() != null) {
-                trip.getBuses().add(bus);
-            } else {
-                Set<Bus> buses = new HashSet<>();
-                buses.add(bus);
-                trip.setBuses(buses);
-            }
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
         } finally {
             session.close();
         }
@@ -433,142 +302,49 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         wdu.generateDays();
     }
 
+    @Override
+    public void updateRouteEvent(RouteDTO routeDTO) throws RemoteException, UpdateFailedException{
+        routeController.doUpdateRouteEvent(routeDTO);
+    }
 
-
+    @Override
     public void removeRoute(RouteDTO routeDTO) throws RemoteException{
-        RouteDAO routeDAO = new RouteDAO();
-        Route route = DTOEntityAssembler.getEntity(routeDTO);
+        routeController.doRemoveRoute(routeDTO);
+    }
 
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        routeDAO.setSession(session);
-        try {
-            tx = session.beginTransaction();
-            routeDAO.delete(route);
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+    @Override
+    public void removeTripBusRelation(TripDTO tripDTO, BusDTO busDTO) {
+        tripController.doRemoveTripBusRelation(tripDTO, busDTO);
+    }
+
+    @Override
+    public void saveTripBusRelation(TripDTO tripDTO, BusDTO busDTO) throws AddFailedException {
+        tripController.doSaveTripBusRelation(tripDTO, busDTO);
+    }
+
+    @Override
+    public TripDTO getTrip(int id) throws NoSuchElementException {
+        return tripController.doGetTrip(id);
     }
 
     @Override
     public void removeTrip(TripDTO tripDTO) {
-        TripDAO tripDAO = new TripDAO();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        tripDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-            tripDAO.delete(trip);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        tripController.doRemoveTrip(tripDTO);
     }
 
     @Override
     public void saveTrip(TripDTO tripDTO) throws AddFailedException{
-        TripDAO tripDAO = new TripDAO();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
-        StringBuilder fetchErrorMessage = new StringBuilder();
-
-        paramMap.put("meta", tripDTO.getMeta());
-        paramMap.put("depDate", tripDTO.getDepDate() == null ? LocalDate.MIN.toString() : tripDTO.getDepDate().toString());
-        paramMap.put("arrDate", tripDTO.getArrDate() == null ? LocalDate.MIN.toString() : tripDTO.getArrDate().toString());
-
-        tripDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            if(tripDAO.read(paramMap).isEmpty())
-                tripDAO.create(trip);
-            else
-                throw new AddFailedException("Una gita per la stessa meta e con stesse date è già presente");
-
-            tx.commit();
-        } catch(Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        tripController.doSaveTrip(tripDTO);
     }
 
     @Override
     public void updateTrip(TripDTO newTripDTO) throws UpdateFailedException{
-        TripDAO tripDAO = new TripDAO();
-        Trip newTrip = DTOEntityAssembler.getEntity(newTripDTO);
-        Trip oldTrip;
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        tripDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            oldTrip = tripDAO.read(newTripDTO.getId());
-            if(!(oldTrip.getDepDate().equals(newTrip.getDepDate()) && oldTrip.getArrDate().equals(newTrip.getArrDate()))
-               && (oldTrip.getBuses() != null && !oldTrip.getBuses().isEmpty()))
-                throw new UpdateFailedException("Non è possibile cambiare le date avendo dei bus associati alla gita");
-
-            tripDAO.update(newTrip);
-
-            tx.commit();
-        }catch(IndexOutOfBoundsException e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new UpdateFailedException("Non è stata trovata alcuna gita da aggiornare");
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new UpdateFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        tripController.doUpdateTrip(newTripDTO);
     }
 
+    @Override
     public List<TripDTO> getAllTrips() {
-        TripDAO dao = new TripDAO();
-        BusDAO busDao = new BusDAO();
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        List<TripDTO> tripsDTOCollection = new ArrayList<>();
-        List<Trip> tripsCollection = new ArrayList<>();
-        Transaction tx = null;
-
-        dao.setSession(session);
-        busDao.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            tripsCollection = dao.readAll();
-            for(Trip t : tripsCollection)
-                dao.initializeLazyRelations(t);
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        for(Trip t : tripsCollection)
-            tripsDTOCollection.add(DTOFactory.getDTO(t));
-
-        return tripsDTOCollection;
+        return tripController.doGetAllTrips();
     }
 
     @Override
@@ -576,6 +352,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         kidController.doUpdateKid(newKidDTO);
     }
 
+    @Override
     public void removeKid(KidDTO kidDTO) throws RemoteException {
         kidController.doRemoveKid(kidDTO);
     }
@@ -584,7 +361,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     public void saveKid(KidDTO kidDTO) throws AddFailedException {
         kidController.doSaveKid(kidDTO);
     }
-
 
     @Override
     public Collection<KidDTO> getAvailableKids(TripDTO tripDTO) {
@@ -611,6 +387,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         return adultController.doGetAllAdultsEx();
     }
 
+    @Override
     public void removeAdult(AdultDTO adultDTO) throws RemoteException {
         adultController.doRemoveAdult(adultDTO);
     }
@@ -660,14 +437,17 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         supplierController.doRemoveSupplier(supplierDTO);
     }
 
+    @Override
     public void saveBus(BusDTO busDTO) throws RemoteException, AddFailedException{
         busController.doSaveBus(busDTO);
     }
 
+    @Override
     public void removeBus(BusDTO busDTO) throws RemoteException{
         busController.doRemoveBus(busDTO);
     }
 
+    @Override
     public void updateBus(BusDTO newBusDTO) throws RemoteException, UpdateFailedException{
         busController.doUpdateBus(newBusDTO);
     }
