@@ -41,6 +41,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private SupplierController supplierController;
     private TripController tripController;
     private RouteController routeController;
+    private CheckpointController checkpointController;
+    private TripPartecipationController tripPartecipationController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
@@ -58,6 +60,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         this.supplierController = new SupplierController();
         this.tripController = new TripController();
         this.routeController = new RouteController();
+        this.checkpointController = new CheckpointController();
+        this.tripPartecipationController = new TripPartecipationController();
     }
 
     @Override
@@ -89,8 +93,6 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     public void updateDish(DishDTO dishDTO) {
         dishController.doUpdateDish(dishDTO);
     }
-
-
 
     @Override
     public void createDish(DishDTO dishDTO) {
@@ -157,118 +159,22 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void removeTripPartecipation(TripPartecipationDTO tripPartecipationDTO) {
-        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
-
-        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        tripPartecipationDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            tripPartecipationDAO.delete(tripPartecipation);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        tripPartecipationController.doRemoveTripPartecipation(tripPartecipationDTO);
     }
 
     @Override
     public void saveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) throws AddFailedException {
-        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
-        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        tripPartecipationDAO.setSession(session);
-
-        try{
-            tx = session.beginTransaction();
-
-            tripPartecipationDAO.create(tripPartecipation);
-
-            tx.commit();
-        } catch (Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        tripPartecipationController.doSaveTripPartecipation(tripPartecipationDTO);
     }
 
     @Override
     public Set<CheckpointDTO> getEventCheckpoints(EventDTO eventDTO) {
-        Event result;
-        EventDTO resultDTO = null;
-        EventDAO eventDAO = new EventDAO();
-
-        Transaction tx = null;
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        eventDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            result = eventDAO.read(eventDTO.getId());
-            eventDAO.initializeLazyRelations(result);
-            resultDTO = DTOFactory.getDTO(result);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return resultDTO == null ? Collections.emptySet() : resultDTO.getCheckpoints();
+        return checkpointController.doGetEventCheckpoints(eventDTO);
     }
 
     @Override
     public void saveCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time) throws CheckpointFailedException {
-        PersonDAO personDAO = new PersonDAO();
-        Person person;
-        EventDAO eventDAO = new EventDAO();
-        Event event;
-        Checkpoint record;
-        CheckpointDAO checkpointDAO = new CheckpointDAO();
-
-        if(fiscalCode == null || eventDTO == null || time == null)
-            throw new CheckpointFailedException("Uno o più parametri mancanti");
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        personDAO.setSession(session);
-        eventDAO.setSession(session);
-        checkpointDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            person = personDAO.read(fiscalCode);
-            if(person == null)
-                throw new CheckpointFailedException("Persona non trovata");
-
-            event = eventDAO.read(eventDTO.getId());
-            eventDAO.initializeLazyRelations(event);
-            if(event == null || !event.getEventStatus().equals(EventStatus.OPEN))
-                throw new CheckpointFailedException("Evento non disponibile");
-
-            record = new Checkpoint(event, person, time, false);
-            checkpointDAO.create(record);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new CheckpointFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        checkpointController.doSaveCheckpoint(fiscalCode, eventDTO, time);
     }
 
     @Override
