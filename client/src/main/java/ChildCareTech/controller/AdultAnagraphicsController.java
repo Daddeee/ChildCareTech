@@ -98,7 +98,7 @@ public class AdultAnagraphicsController {
         try {
             adultDTOList = session.getAllAdultsEx();
             pediatristDTOList = session.getAllPediatrists();
-            staffDTOList = session.getAllStaffMembers();
+            staffDTOList = session.getAllStaff();
             supplierDTOList = session.getAllSuppliers();
 
         } catch (RemoteException e) {
@@ -171,7 +171,7 @@ public class AdultAnagraphicsController {
                         SessionService.getSession().removePediatrist(((ObservablePediatrist) row.getItem()).getDTO());
                     }
                     else if(row.getItem() instanceof ObservableStaff) {
-                        SessionService.getSession().removeStaffMember(((ObservableStaff) row.getItem()).getDTO());
+                        SessionService.getSession().removeStaff(((ObservableStaff) row.getItem()).getDTO());
                     }
                     else if(row.getItem() instanceof ObservableSupplier) {
                         SessionService.getSession().removeSupplier(((ObservableSupplier) row.getItem()).getDTO());

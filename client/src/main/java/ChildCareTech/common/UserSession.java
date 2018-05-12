@@ -23,7 +23,7 @@ public interface UserSession extends Remote {
     void removeKid(KidDTO kidDTO) throws RemoteException;
     void removeAdult(AdultDTO adult) throws RemoteException;
     void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException;
-    void removeStaffMember(StaffDTO staffDTO) throws RemoteException;
+    void removeStaff(StaffDTO staffDTO) throws RemoteException;
     void removeSupplier(SupplierDTO supplierDTO) throws RemoteException;
     void saveTrip(TripDTO trip) throws RemoteException, AddFailedException;
     TripDTO getTrip(int id) throws RemoteException, NoSuchElementException;
@@ -39,7 +39,7 @@ public interface UserSession extends Remote {
     List<AdultDTO> getAllAdults() throws RemoteException;
     List<AdultDTO> getAllAdultsEx() throws RemoteException;
     List<PediatristDTO> getAllPediatrists() throws RemoteException;
-    List<StaffDTO> getAllStaffMembers() throws RemoteException;
+    List<StaffDTO> getAllStaff() throws RemoteException;
     List<SupplierDTO> getAllSuppliers() throws RemoteException;
     List<TripDTO> getAllTrips() throws RemoteException;
 

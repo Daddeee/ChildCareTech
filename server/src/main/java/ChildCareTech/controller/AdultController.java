@@ -97,4 +97,33 @@ public class AdultController {
             session.close();
         }
     }
+
+    public List<AdultDTO> doGetAllAdultsEx() {
+        AdultDAO adultDAO = new AdultDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        List<AdultDTO> adultDTOList = new ArrayList<>();
+        List<Adult> adultList = new ArrayList<>();
+        Transaction tx = null;
+        adultDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            adultList = adultDAO.readAllExclusive();
+            for(Adult adult : adultList)
+                adultDAO.initializeLazyRelations(adult);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Adult adult : adultList) {
+            adultDTOList.add(DTOFactory.getDTO(adult));
+        }
+        return adultDTOList;
+    }
 }
