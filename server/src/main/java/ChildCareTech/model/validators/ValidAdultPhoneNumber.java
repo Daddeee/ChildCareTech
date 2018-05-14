@@ -1,5 +1,6 @@
 package ChildCareTech.model.validators;
 
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
@@ -12,14 +13,13 @@ import static java.lang.annotation.ElementType.TYPE;
 
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {ValidTripDatesValidator.class})
+@Constraint(validatedBy = {ValidAdultPhoneNumberValidator.class})
 @Documented
-public @interface ValidTripDates {
+public @interface ValidAdultPhoneNumber {
     String message() default "{ChildCareTech.model.validators" +
-            "ValidTripDates.message}";
+            "ValidAdultPhoneNumber.message}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
-

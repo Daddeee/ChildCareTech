@@ -1,8 +1,10 @@
 package ChildCareTech.model.entities;
 
 import ChildCareTech.model.iEntity;
+import ChildCareTech.model.validators.ValidAdultPhoneNumber;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
+@ValidAdultPhoneNumber(message = "Numero di telefono non valido")
 public class Adult implements iEntity<Adult, Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
