@@ -34,9 +34,9 @@ public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event
         return getEvent(dto, WorkDayDTOEntityAssembler.assembleEventOneSide(dto.getWorkDay()));
     }
 
-    public static Event assembleMealOneSide(EventDTO dto){
+    public static Event assembleMealOneSide(EventDTO dto, WorkDay workDay){
         if(dto == null) return null;
-        Event entity = getEvent(dto, WorkDayDTOEntityAssembler.assembleEventOneSide(dto.getWorkDay()));
+        Event entity = getEvent(dto, workDay);
 
         assembleCheckpointRelationship(dto, entity);
 
