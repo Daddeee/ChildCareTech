@@ -42,7 +42,7 @@ public class HomeController {
             final TableRow<EventDTO> row = new TableRow<>();
 
             final ContextMenu contextMenu = new ContextMenu();
-            final MenuItem codeInput = new MenuItem("Acquisisci codici");
+            final MenuItem codeInput = new MenuItem("Acquisisci codici (testo)");
             codeInput.setOnAction(event ->  {
                 contextMenu.hide();
                 if(row.getItem().getEventStatus().equals(EventStatus.CLOSED))
@@ -60,6 +60,25 @@ public class HomeController {
                 }
             });
             contextMenu.getItems().add(codeInput);
+
+            final MenuItem qrInput = new MenuItem("Acquisisci codici (QR)");
+            qrInput.setOnAction(event ->  {
+                contextMenu.hide();
+                if(row.getItem().getEventStatus().equals(EventStatus.CLOSED))
+                    alertLabel.setText("This event is now closed.");
+                else if(row.getItem().getEventStatus().equals(EventStatus.WAIT))
+                    alertLabel.setText("This event has not yet been opened.");
+                else {
+                    alertLabel.setText("");
+                    try {
+                        AccessorSceneManager.loadQRCode(row.getItem());
+                    } catch (IOException ex) {
+                        System.err.println("Can't load showTrip window");
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            contextMenu.getItems().add(qrInput);
 
             final MenuItem eventReport = new MenuItem("Consulta report");
             eventReport.setOnAction(event -> {

@@ -3,10 +3,12 @@ package ChildCareTech.services;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.controller.*;
 import ChildCareTech.services.ObservableDTOs.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -40,6 +42,7 @@ public class AccessorSceneManager {
     private static FXMLLoader showDishLoader;
     private static FXMLLoader addMenuLoader;
     private static FXMLLoader updateMenuLoader;
+    private static FXMLLoader QRCodeLoader;
 
     private static Scene addKidScene;
     private static Scene addAdultScene;
@@ -69,6 +72,7 @@ public class AccessorSceneManager {
     private static Scene showDishScene;
     private static Scene addMenuScene;
     private static Scene updateMenuScene;
+    private static Scene QRCodeScene;
 
     private AccessorSceneManager() {
     }
@@ -103,6 +107,37 @@ public class AccessorSceneManager {
         try{
             AccessorStageService.changeScene(tripRoutesScene);
         } catch (NoSuchFieldException ex){
+            AccessorSceneManager.stageError(ex);
+        }
+    }
+
+    private static void setOnCloseRequestWebcamClose(QRCodeController controller) throws NoSuchFieldException{
+        EventHandler<WindowEvent> windowClose = new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                controller.shutDown();
+                try {
+                    AccessorStageService.getStage().removeEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this);
+                } catch (NoSuchFieldException e){
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        AccessorStageService.getStage().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, windowClose);
+    }
+
+    public static void loadQRCode(EventDTO eventDTO) throws IOException {
+        QRCodeLoader = new FXMLLoader(AccessorSceneManager.class.getResource("/view/QRCodeWindow.fxml"));
+        QRCodeScene = sceneInit(QRCodeLoader, "/style/QRCodeWindow.css");
+
+        QRCodeController controller = QRCodeLoader.getController();
+        controller.initData(eventDTO);
+
+        try {
+            AccessorStageService.changeScene(QRCodeScene);
+            AccessorSceneManager.setOnCloseRequestWebcamClose(controller);
+        } catch (NoSuchFieldException ex) {
             AccessorSceneManager.stageError(ex);
         }
     }
