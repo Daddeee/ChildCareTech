@@ -65,6 +65,9 @@ public class AddCanteenController {
             exitTimeList.add(m.exitTimeParsed);
         }
 
+        entryTimeList.sort(LocalTime::compareTo);
+        exitTimeList.sort(LocalTime::compareTo);
+
         try{
             SessionService.getSession().saveCanteen(canteenDTO, entryTimeList, exitTimeList);
         } catch(RemoteException | AddFailedException ex){
