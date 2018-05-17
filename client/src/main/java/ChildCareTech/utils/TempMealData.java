@@ -21,6 +21,15 @@ public class TempMealData {
         this.menuList = buildMenuList();
     }
 
+    public TempMealData(MealDTO mealDTO) {
+        this.day = mealDTO.getWorkDay().getDate().toString();
+        this.entryTime = mealDTO.getEntryEvent().getBeginTime().toString();
+        this.exitTime = mealDTO.getExitEvent().getEndTime().toString();
+        this.status = mealDTO.getStatus().toString();
+        this.mealDTO = mealDTO;
+        this.menuList = buildMenuList();
+    }
+
     public String getDay() {
         return day;
     }

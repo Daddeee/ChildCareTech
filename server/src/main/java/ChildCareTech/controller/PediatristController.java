@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PediatristDAO;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Pediatrist;
@@ -93,6 +94,27 @@ public class PediatristController {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public void doUpdatePediatrist(PediatristDTO pediatristDTO) throws UpdateFailedException{
+        PediatristDAO pediatristDAO = new PediatristDAO();
+        Pediatrist pediatrist = DTOEntityAssembler.getEntity(pediatristDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        pediatristDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+            pediatristDAO.update(pediatrist);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException(e.getMessage());
         } finally {
             session.close();
         }

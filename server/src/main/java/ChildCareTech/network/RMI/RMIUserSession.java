@@ -12,8 +12,6 @@ import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.*;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
-import org.hibernate.Hibernate;
-import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -23,7 +21,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private User user;
@@ -37,6 +34,8 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private KidController kidController;
     private AdultController adultController;
     private PediatristController pediatristController;
+    private SupplierController supplierController;
+    private StaffController staffController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
@@ -50,6 +49,33 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         this.kidController = new KidController();
         this.adultController = new AdultController();
         this.pediatristController = new PediatristController();
+        this.supplierController = new SupplierController();
+        this.staffController = new StaffController();
+    }
+
+    @Override
+    public List<CanteenDTO> getAllCanteenes() throws RemoteException {
+        return canteenController.doGetAllCanteenes();
+    }
+
+    @Override
+    public void updateAdult(AdultDTO adult) throws RemoteException, UpdateFailedException {
+        adultController.doUpdateAdult(adult);
+    }
+
+    @Override
+    public void updatePediatrist(PediatristDTO pediatristDTO) throws RemoteException, UpdateFailedException {
+        pediatristController.doUpdatePediatrist(pediatristDTO);
+    }
+
+    @Override
+    public void updateStaffMember(StaffDTO staffDTO) throws RemoteException, UpdateFailedException {
+        staffController.doUpdateStaffMember(staffDTO);
+    }
+
+    @Override
+    public void updateSupplier(SupplierDTO supplierDTO) throws RemoteException, UpdateFailedException {
+        supplierController.doUpdateSupplier(supplierDTO);
     }
 
     @Override
@@ -102,6 +128,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public List<String> getAllCanteenNames() {
         return canteenController.doGetAllCanteenNames();
+    }
+
+    @Override
+    public void removeCanteen(CanteenDTO canteenDTO) {
+        canteenController.doRemoveCanteen(canteenDTO);
     }
 
     @Override
@@ -432,155 +463,28 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void saveSupplier(SupplierDTO supplierDTO) throws AddFailedException {
-        SupplierDAO supplierDAO = new SupplierDAO();
-        PersonDAO personDAO = new PersonDAO();
-        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
-
-        paramMap.put("fiscalCode", supplierDTO.getPerson().getFiscalCode());
-
-        supplierDAO.setSession(session);
-        personDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            if(personDAO.read(paramMap).isEmpty())
-                supplierDAO.create(supplier);
-            else
-                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        supplierController.doSaveSupplier(supplierDTO);
     }
 
     @Override
     public void saveStaff(StaffDTO staffDTO) throws AddFailedException {
-        StaffDAO staffDAO = new StaffDAO();
-        PersonDAO personDAO = new PersonDAO();
-        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
-
-        paramMap.put("fiscalCode", staffDTO.getPerson().getFiscalCode());
-
-        staffDAO.setSession(session);
-        personDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-
-            if(personDAO.read(paramMap).isEmpty())
-                staffDAO.create(staff);
-            else
-                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
-        } finally {
-            session.close();
-        }
+        staffController.doSaveStaffMember(staffDTO);
     }
 
 
 
     @Override
     public List<AdultDTO> getAllAdultsEx() throws RemoteException {
-        AdultDAO adultDAO = new AdultDAO();
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        List<AdultDTO> adultDTOList = new ArrayList<>();
-        List<Adult> adultList = new ArrayList<>();
-        Transaction tx = null;
-        adultDAO.setSession(session);
-
-        try{
-            tx = session.beginTransaction();
-
-            adultList = adultDAO.readAllExclusive();
-            for(Adult adult : adultList)
-                adultDAO.initializeLazyRelations(adult);
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        for(Adult adult : adultList) {
-            adultDTOList.add(DTOFactory.getDTO(adult));
-        }
-        return adultDTOList;
+        return adultController.doGetAllAdultsEx();
     }
 
     @Override
     public List<StaffDTO> getAllStaffMembers() throws RemoteException {
-        StaffDAO staffDAO = new StaffDAO();
-        List<StaffDTO> staffDTOList = new ArrayList<>();
-        List<Staff> staffList = new ArrayList<>();
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        staffDAO.setSession(session);
-
-        try{
-            tx = session.beginTransaction();
-
-            staffList = staffDAO.readAll();
-            for(Staff staff : staffList)
-                staffDAO.initializeLazyRelations(staff);
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        for(Staff staff : staffList) {
-            staffDTOList.add(DTOFactory.getDTO(staff));
-        }
-        return staffDTOList;
+        return staffController.doGetAllStaffMembers();
     }
     @Override
     public List<SupplierDTO> getAllSuppliers() throws RemoteException {
-        SupplierDAO supplierDAO = new SupplierDAO();
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        List<SupplierDTO> supplierDTOList = new ArrayList<>();
-        List<Supplier> supplierList = new ArrayList<>();
-        Transaction tx = null;
-        supplierDAO.setSession(session);
-
-        try{
-            tx = session.beginTransaction();
-
-            supplierList = supplierDAO.readAll();
-            for(Supplier supplier : supplierList)
-                supplierDAO.initializeLazyRelations(supplier);
-
-            tx.commit();
-        } catch(HibernateException e){
-            if(tx!=null)tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        for(Supplier supplier : supplierList) {
-            supplierDTOList.add(DTOFactory.getDTO(supplier));
-        }
-        return supplierDTOList;
+        return supplierController.doGetAllSuppliers();
     }
 
     @Override
@@ -774,43 +678,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     public void removeStaffMember(StaffDTO staffDTO) throws RemoteException {
-        StaffDAO staffDAO = new StaffDAO();
-        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        staffDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-            staffDAO.delete(staff);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        staffController.doRemoveStaffMember(staffDTO);
     }
 
     public void removeSupplier(SupplierDTO supplierDTO) throws RemoteException {
-        SupplierDAO supplierDAO = new SupplierDAO();
-        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
-
-        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
-        Transaction tx = null;
-        supplierDAO.setSession(session);
-        try{
-            tx = session.beginTransaction();
-            supplierDAO.delete(supplier);
-
-            tx.commit();
-        } catch(Exception e){
-            if(tx!=null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        supplierController.doRemoveSupplier(supplierDTO);
     }
     public void saveBus(BusDTO busDTO) throws RemoteException, AddFailedException{
         busController.doSaveBus(busDTO);

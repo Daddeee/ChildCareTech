@@ -1,59 +1,74 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.DTO.AdultDTO;
-import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.Sex;
 import ChildCareTech.common.exceptions.AddFailedException;
-import ChildCareTech.services.AccessorSceneManager;
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.SessionService;
+import ChildCareTech.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
-public class AddAdultController {
+public class AddAdultController implements AccessorWindowController{
 
     @FXML
-    private TextField firstNameField;
+    protected TextField firstNameField;
     @FXML
-    private TextField lastNameField;
+    protected TextField lastNameField;
     @FXML
-    private TextField fiscalCodeField;
+    protected TextField fiscalCodeField;
     @FXML
-    private DatePicker birthDatePicker;
+    protected DatePicker birthDatePicker;
     @FXML
-    private TextField addressField;
+    protected TextField addressField;
     @FXML
-    private TextField phoneField;
+    protected TextField phoneField;
     @FXML
-    private RadioButton maleButton;
+    protected RadioButton maleButton;
     @FXML
-    private RadioButton femaleButton;
+    protected RadioButton femaleButton;
     @FXML
-    private Button cancelButton;
+    protected RadioButton noneSelecter;
     @FXML
-    private Button saveButton;
+    protected RadioButton staffSelecter;
     @FXML
-    private Label alertLabel;
+    protected RadioButton supplierSelecter;
+    @FXML
+    protected RadioButton pediatristSelecter;
+    @FXML
+    protected Button cancelButton;
+    @FXML
+    protected Button saveButton;
+    @FXML
+    protected Label alertLabel;
 
-    private ToggleGroup group = new ToggleGroup();
-    private PersonDTO person;
-    private AdultDTO adult;
-    private AdultAnagraphicsController adultAnagController;
+    protected ToggleGroup sexGroup = new ToggleGroup();
+    protected ToggleGroup roleGroup = new ToggleGroup();
+    protected AccessorWindowService accessorWindowService;
 
     @FXML
     public void initialize() {
-        adultAnagController = MainSceneManager.getAdultAnagController();
-        maleButton.setToggleGroup(group);
-        femaleButton.setToggleGroup(group);
+        maleButton.setToggleGroup(sexGroup);
+        femaleButton.setToggleGroup(sexGroup);
         maleButton.fire();
+
+        noneSelecter.setToggleGroup(roleGroup);
+        staffSelecter.setToggleGroup(roleGroup);
+        supplierSelecter.setToggleGroup(roleGroup);
+        pediatristSelecter.setToggleGroup(roleGroup);
+        noneSelecter.fire();
     }
 
     @FXML
-    public void saveButtonAction(ActionEvent event) {
+    protected void saveButtonAction(ActionEvent event) {
+        PersonDTO person;
+        AdultDTO adult;
+        SupplierDTO supplier;
+        PediatristDTO pediatrist;
+        StaffDTO staff;
+
         alertLabel.setText("");
         if (fiscalCodeField.getText().length() != 16 ||
                 firstNameField.getText().equals("") ||
@@ -67,30 +82,76 @@ public class AddAdultController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText(), null);
-        adult = new AdultDTO(0, person, null);
-        try {
-            SessionService.getSession().saveAdult(adult);
-            AccessorStageService.close();
-        } catch (RemoteException ex) {
-            System.err.println("error remote");
-            ex.printStackTrace();
-        } catch(AddFailedException ex) {
-            alertLabel.setText(ex.getMessage());
-            ex.printStackTrace();
-        } catch(NoSuchFieldException ex) {
-            ex.printStackTrace();
+        person = new PersonDTO(0, fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), phoneField.getText(), null);
+        if(roleGroup.getSelectedToggle().equals(noneSelecter)) {
+            adult = new AdultDTO(0, person, null);
+            try {
+                SessionService.getSession().saveAdult(adult);
+                accessorWindowService.close();
+            } catch (RemoteException ex) {
+                System.err.println("error remote");
+                ex.printStackTrace();
+            } catch (AddFailedException ex) {
+                alertLabel.setText(ex.getMessage());
+                ex.printStackTrace();
+            }
         }
-        adultAnagController.refreshTable();
+        if(roleGroup.getSelectedToggle().equals(staffSelecter)) {
+            staff = new StaffDTO(0, person, null);
+            try {
+                SessionService.getSession().saveStaff(staff);
+                accessorWindowService.close();
+            } catch (RemoteException ex) {
+                System.err.println("error remote");
+                ex.printStackTrace();
+            } catch(AddFailedException ex) {
+                alertLabel.setText(ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+        if(roleGroup.getSelectedToggle().equals(supplierSelecter)) {
+            supplier = new SupplierDTO(0, person, null, null);
+            try {
+                SessionService.getSession().saveSupplier(supplier);
+                accessorWindowService.close();
+            } catch (RemoteException ex) {
+                System.err.println("error remote");
+                ex.printStackTrace();
+            } catch(AddFailedException ex) {
+                alertLabel.setText(ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+        if(roleGroup.getSelectedToggle().equals(pediatristSelecter)){
+            pediatrist = new PediatristDTO(0, person, null, null);
+            try {
+                SessionService.getSession().savePediatrist(pediatrist);
+                accessorWindowService.close();
+            } catch (RemoteException ex) {
+                System.err.println("error remote");
+                ex.printStackTrace();
+            } catch(AddFailedException ex) {
+                alertLabel.setText(ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+        refreshAdultAnagraphics();
     }
 
     @FXML
-    public void cancelButtonAction(ActionEvent event) {
-        try {
-            AccessorStageService.close();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Stage not initialized");
-            ex.printStackTrace();
+    protected void cancelButtonAction(ActionEvent event) {
+        accessorWindowService.close();
+    }
+
+    protected void refreshAdultAnagraphics() {
+        List<NewAdultAnagraphicsController> list = ContainedWindowService.getAdultAnagraphicsList();
+        for( NewAdultAnagraphicsController naac : list) {
+            naac.refreshTable();
         }
+    }
+
+    @Override
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class ObservableKid extends KidDTO {
-    private static final StringProperty EMPTY_FISCAL_CODE = new SimpleStringProperty("");
+    private static final StringProperty EMPTY_FISCAL_CODE = new SimpleStringProperty("-");
 
     public ObservableKid(KidDTO kidDTO) {
         super( kidDTO.getId(), kidDTO.getPerson(), kidDTO.getFirstTutor(), kidDTO.getSecondTutor(), kidDTO.getPediatrist(), kidDTO.getContacts());
@@ -64,12 +64,17 @@ public class ObservableKid extends KidDTO {
         return getPerson().getBirthDate();
     }
     public String getFirstTutorFC() {
+        if(getFirstTutor() == null)
+            return "-";
         return getFirstTutor().getPerson().getFiscalCode();
     }
     public String getSecondTutorFC() {
+        if(getSecondTutor() == null)
+            return "-";
         return getSecondTutor().getPerson().getFiscalCode();
     }
     public String getPediatristCF() {
         return  getPediatrist().getPerson().getFiscalCode();
     }
+    public int getPersonId() { return getPerson().getId(); }
 }

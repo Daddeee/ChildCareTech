@@ -11,7 +11,7 @@
       prefWidth="400.0"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ChildCareTech.controller.LoginController"
+      fx:controller="ChildCareTech.controller.RegisterUserController"
 >
     <children>
         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
@@ -77,13 +77,13 @@
         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0"
               prefWidth="400.0">
             <children>
-                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                <Button fx:id="cancelButton" onAction="#cancelButtonAction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                         mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancel">
                     <HBox.margin>
                         <Insets left="100.0"/>
                     </HBox.margin>
                 </Button>
-                <Button fx:id="registerButton" onAction="#doRegisterButtonAction" maxHeight="-Infinity"
+                <Button fx:id="registerButton" onAction="#registerButtonAction" maxHeight="-Infinity"
                         maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
                         prefHeight="25.0" prefWidth="120.0" text="Registra utenre"/>
             </children>

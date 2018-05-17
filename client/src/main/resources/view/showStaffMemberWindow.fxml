@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.ShowStaffMemberController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="Nome:" />
+            <Label />
+            <Label fx:id="firstNameLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="Cognome:" />
+            <Label />
+            <Label fx:id="lastNameLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="CF:" />
+            <Label />
+            <Label fx:id="cfLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="Data di nascita:" />
+            <Label />
+            <Label fx:id="bDateLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="Sesso:" />
+            <Label />
+            <Label fx:id="sexLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="Indirizzo:" />
+            <Label />
+            <Label fx:id="addressLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <Label text="Telefono:" />
+            <Label />
+            <Label fx:id="phoneNumberLabel" text="" />
+            <Label />
+         </children>
+      </HBox>
+   </children>
+</VBox>

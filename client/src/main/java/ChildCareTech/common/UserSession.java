@@ -19,7 +19,7 @@ public interface UserSession extends Remote {
     void saveAdult(AdultDTO adult) throws  RemoteException, AddFailedException;
     void saveSupplier(SupplierDTO supplier) throws RemoteException, AddFailedException;
     void savePediatrist(PediatristDTO pediatrist) throws RemoteException, AddFailedException;
-    void saveStaff(StaffDTO supplier) throws  RemoteException, AddFailedException;
+    void saveStaff(StaffDTO staff) throws  RemoteException, AddFailedException;
     void removeKid(KidDTO kidDTO) throws RemoteException;
     void removeAdult(AdultDTO adult) throws RemoteException;
     void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException;
@@ -29,6 +29,10 @@ public interface UserSession extends Remote {
     TripDTO getTrip(int id) throws RemoteException, NoSuchElementException;
     void updateTrip(TripDTO newTripDTO) throws RemoteException, UpdateFailedException;
     void updateKid(KidDTO newKidDTO) throws RemoteException, UpdateFailedException;
+    void updateAdult(AdultDTO adult) throws RemoteException, UpdateFailedException;
+    void updatePediatrist(PediatristDTO pediatristDTO) throws RemoteException, UpdateFailedException;
+    void updateStaffMember(StaffDTO staffDTO) throws RemoteException, UpdateFailedException;
+    void updateSupplier(SupplierDTO supplierDTO) throws RemoteException, UpdateFailedException;
 
     void removeTrip(TripDTO trip) throws RemoteException;
     void removeRoute(RouteDTO route) throws RemoteException;
@@ -72,7 +76,9 @@ public interface UserSession extends Remote {
 
     void saveCanteen(CanteenDTO canteenDTO, List<LocalTime> entryTimeList, List<LocalTime> exitTimeList) throws RemoteException, AddFailedException;
     List<String> getAllCanteenNames() throws RemoteException;
+    List<CanteenDTO> getAllCanteenes() throws RemoteException;
     CanteenDTO getCanteenByName(String name) throws NoSuchElementException, RemoteException;
+    void removeCanteen(CanteenDTO canteenDTO) throws RemoteException;
 
     List<DishDTO> getAllDishes() throws RemoteException;
     void createDish(DishDTO dishDTO) throws RemoteException;

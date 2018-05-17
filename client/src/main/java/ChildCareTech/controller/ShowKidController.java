@@ -1,10 +1,11 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ShowKidController {
+public class ShowKidController implements AccessorWindowController{
     @FXML
     private Label firstNameLabel;
     @FXML
@@ -37,4 +38,6 @@ public class ShowKidController {
         cfSecondTutorLabel.setText(observableKid.getSecondTutorFC());
         cfPediatristLabel.setText(observableKid.getPediatristCF());
     }
+
+    public void setAccessorWindowService(AccessorWindowService accessoWindowService) { }
 }

@@ -2,10 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.MainStageService;
-import ChildCareTech.services.SessionService;
+import ChildCareTech.services.*;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,13 +18,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AddDishController {
+public class AddDishController implements AccessorWindowController{
     @FXML
     protected TextField nameField;
     @FXML
     protected TableView<FoodDTO> availableIngredientsTable;
     @FXML
     protected TableView<FoodDTO> selectedIngredientsTable;
+
+    private AccessorWindowService accessorWindowService;
 
     public void initialize() {
         List<FoodDTO> availableIngredients = Collections.emptyList();
@@ -48,14 +47,9 @@ public class AddDishController {
 
         try {
             SessionService.getSession().createDish(dishDTO);
+            accessorWindowService.close();
+            accessorWindowService.refreshTable();
         } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            AccessorStageService.close();
-            MainSceneManager.loadDish();
-        } catch (IOException | NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
@@ -74,5 +68,9 @@ public class AddDishController {
 
         availableIngredientsTable.getItems().add(selectedIngredientsTable.getItems().get(rowIndex));
         selectedIngredientsTable.getItems().remove(rowIndex);
+    }
+
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

@@ -4,9 +4,7 @@ import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.SessionService;
+import ChildCareTech.services.*;
 import ChildCareTech.utils.RestrictedDatePicker;
 import ChildCareTech.utils.TempRouteData;
 import javafx.beans.binding.Bindings;
@@ -20,9 +18,10 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class UpdateTripController {
+public class UpdateTripController implements AccessorWindowController{
     @FXML
     private TextField metaField;
     @FXML
@@ -45,6 +44,7 @@ public class UpdateTripController {
 
     private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
     private int routeCounter = 0;
+    private AccessorWindowService accessorWindowService;
 
     @FXML
     public void initialize(){
@@ -89,12 +89,7 @@ public class UpdateTripController {
 
     @FXML
     public void cancelButtonAction(ActionEvent e){
-        try {
-            AccessorStageService.close();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Stage not initialized");
-            ex.printStackTrace();
-        }
+        accessorWindowService.close();
     }
 
     @FXML
@@ -114,6 +109,7 @@ public class UpdateTripController {
 
         try {
             SessionService.getSession().updateTrip(tripDTO);
+            accessorWindowService.close();
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
@@ -122,15 +118,7 @@ public class UpdateTripController {
             return;
         }
 
-        try {
-            AccessorStageService.close();
-            MainSceneManager.loadTrips();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Stage not initialized");
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        refreshTripList();
     }
 
     private void addRoute(TempRouteData added){
@@ -159,5 +147,15 @@ public class UpdateTripController {
     private void refreshTable() {
         routesTable.getItems().clear();
         routesTable.getItems().addAll(routes);
+    }
+
+    private void refreshTripList() {
+        List<NewTripListController> list = ContainedWindowService.getTripsListList();
+        for(NewTripListController ntlc : list ) {
+            ntlc.refreshTable();
+        }
+    }
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

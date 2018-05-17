@@ -37,6 +37,7 @@ public class PersonDTOEntityAssembler implements AbstractDTOEntityAssembler<Pers
             return null;
 
         return new Person(
+                dto.getId(),
                 dto.getFiscalCode(),
                 dto.getFirstName(),
                 dto.getLastName(),

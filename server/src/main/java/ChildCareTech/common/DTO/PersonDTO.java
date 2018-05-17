@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Set;
 
 public class PersonDTO implements Serializable {
+    private int id;
     private String fiscalCode;
     private String firstName;
     private String lastName;
@@ -18,7 +19,8 @@ public class PersonDTO implements Serializable {
 
     private Set<FoodDTO> allergies;
 
-    public PersonDTO(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber, Set<FoodDTO> allergies) {
+    public PersonDTO(int id, String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber, Set<FoodDTO> allergies) {
+        this.id = id;
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +30,8 @@ public class PersonDTO implements Serializable {
         this.phoneNumber = phoneNumber;
         this.allergies = allergies == null ? Collections.EMPTY_SET : allergies;
     }
+
+    public int getId() { return id; }
 
     public String getFirstName() {
         return firstName;

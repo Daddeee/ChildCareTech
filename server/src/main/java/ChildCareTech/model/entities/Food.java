@@ -2,6 +2,7 @@ package ChildCareTech.model.entities;
 
 
 import ChildCareTech.model.iEntity;
+import jdk.nashorn.internal.objects.annotations.Property;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;

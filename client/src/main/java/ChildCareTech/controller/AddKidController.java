@@ -6,11 +6,9 @@ import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.Sex;
 import ChildCareTech.common.exceptions.AddFailedException;
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.*;
 import ChildCareTech.services.ObservableDTOs.ObservableAdult;
 import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +20,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddKidController {
+public class AddKidController implements AccessorWindowController{
 
     @FXML
     protected TextField firstNameField;
@@ -56,11 +54,12 @@ public class AddKidController {
     protected KidDTO kid;
     protected ObservableList<ObservableAdult> adults = FXCollections.observableArrayList();
     protected ObservableList<ObservablePediatrist> pediatrists = FXCollections.observableArrayList();
-    protected KidAnagraphicsController kidAnagraphicsController;
+    protected AccessorWindowService accessorWindowService;
 
     protected final AdultDTO nullAdult = new AdultDTO(
             0,
             new PersonDTO(
+                    0,
                     "",
                     "-",
                     "",
@@ -71,11 +70,10 @@ public class AddKidController {
                     null
             ),
             null
-    );;
+    );
 
     @FXML
     public void initialize() {
-        kidAnagraphicsController = MainSceneManager.getKidAnagController();
         initLists();
         initComboBoxes();
         firstTutorComboBox.setVisibleRowCount(10);
@@ -96,7 +94,7 @@ public class AddKidController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null, null);
+        person = new PersonDTO(0, fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null, null);
 
         AdultDTO firstTutor = null;
         if(firstTutorComboBox.getValue() != null) {
@@ -115,27 +113,19 @@ public class AddKidController {
         kid = new KidDTO(0, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {
             SessionService.getSession().saveKid(kid);
-            AccessorStageService.close();
+            accessorWindowService.close();
         } catch (RemoteException ex) {
             ex.printStackTrace();
         } catch(AddFailedException ex) {
             alertLabel.setText(ex.getMessage());
             ex.printStackTrace();
-        } catch(NoSuchFieldException ex) {
-            System.err.println("error closing stage");
-            ex.printStackTrace();
         }
-        kidAnagraphicsController.refreshTable();
+        refreshKidAnagraphics();
     }
 
     @FXML
     public void cancelButtonAction(ActionEvent event) {
-        try {
-            AccessorStageService.close();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Stage not initialized");
-            ex.printStackTrace();
-        }
+        accessorWindowService.close();
 
     }
     private void initComboBoxes() {
@@ -190,5 +180,18 @@ public class AddKidController {
         for(PediatristDTO pediatrist : pediatristDTOList) {
             pediatrists.add(new ObservablePediatrist(pediatrist));
         }
+    }
+
+
+    protected void refreshKidAnagraphics() {
+        List<NewKidAnagraphicsController> list = ContainedWindowService.getKidAnagraphicsList();
+        for( NewKidAnagraphicsController nkac : list) {
+            nkac.refreshTable();
+        }
+    }
+
+    @Override
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

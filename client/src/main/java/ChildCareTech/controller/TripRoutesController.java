@@ -3,11 +3,9 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
-import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
-import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 
 import java.rmi.RemoteException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Comparator;
 
 
-public class TripRoutesController {
+public class TripRoutesController implements AccessorWindowController{
     @FXML
     protected TableView<RouteDTO> routesTable;
     @FXML
@@ -36,6 +33,7 @@ public class TripRoutesController {
     private RouteDTO currentRoute;
     private boolean isStarting;
     private boolean isEventOpening;
+    private AccessorWindowService accessorWindowService;
 
     public void initData(TripDTO tripDTO) {
         this.tripDTO = tripDTO;
@@ -81,7 +79,7 @@ public class TripRoutesController {
 
     @FXML
     protected void startEventButtonAction(ActionEvent event) {
-        EventDTO eventDTO;
+        /*EventDTO eventDTO;
         String eventName;
 
         if (isStarting)
@@ -92,7 +90,7 @@ public class TripRoutesController {
         eventDTO = new EventDTO(
                 0,
                 eventName,
-                HomeController.getSelectedWorkDay(),
+                Home Controller .getSelectedWorkDay(),
                 LocalTime.now(),
                 null,
                 EventStatus.OPEN,
@@ -115,6 +113,7 @@ public class TripRoutesController {
         }
 
         refresh();
+        */
     }
 
     @FXML
@@ -141,5 +140,8 @@ public class TripRoutesController {
         }
 
         refresh();
+    }
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

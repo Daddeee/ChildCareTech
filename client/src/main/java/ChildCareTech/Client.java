@@ -1,9 +1,6 @@
 package ChildCareTech;
 
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
-import ChildCareTech.services.MainStageService;
-import ChildCareTech.services.SessionService;
+import ChildCareTech.services.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,19 +10,14 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        MainStageService.setStage(primaryStage);
+        MainWindowService mainWindowService = new MainWindowService(primaryStage);
+        mainWindowService.setTitle("ChildCareTech");
+        //posso settare una onClose in modo che quando si chiude dalla X rossa si rilasciano i collegamenti rmi
 
         try {
-            MainStageService.setTitle("ChildCareTech");
-            MainStageService.setResizable(false);
-            AccessorStageService.init();
-
-            MainSceneManager.loadLogin();
+            mainWindowService.loadLoginWindow();
         } catch (IOException ex) {
             System.err.println("Can't render login window");
-            ex.printStackTrace();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Main stage not initialized");
             ex.printStackTrace();
         }
     }

@@ -2,21 +2,17 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
-import ChildCareTech.services.AccessorStageService;
-import ChildCareTech.services.MainSceneManager;
+import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.SessionService;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.*;
 
-public class UpdateDishController {
+public class UpdateDishController implements AccessorWindowController{
     @FXML
     protected TextField nameField;
     @FXML
@@ -25,6 +21,7 @@ public class UpdateDishController {
     protected TableView<FoodDTO> selectedIngredientsTable;
 
     private DishDTO currentDishDTO;
+    private AccessorWindowService accessorWindowService;
 
     public void initData(DishDTO dishDTO){
         this.currentDishDTO = dishDTO;
@@ -59,14 +56,9 @@ public class UpdateDishController {
         currentDishDTO.setName(nameField.getText());
         try {
             SessionService.getSession().updateDish(currentDishDTO);
+            accessorWindowService.close();
+            accessorWindowService.refreshTable();
         } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            AccessorStageService.close();
-            MainSceneManager.loadDish();
-        } catch (IOException | NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
@@ -85,5 +77,8 @@ public class UpdateDishController {
 
         availableIngredientsTable.getItems().add(selectedIngredientsTable.getItems().get(rowIndex));
         selectedIngredientsTable.getItems().remove(rowIndex);
+    }
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

@@ -2,12 +2,9 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
-import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.Sex;
-import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-import ChildCareTech.services.AccessorStageService;
 import ChildCareTech.services.ObservableDTOs.ObservableAdult;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
 import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
@@ -20,6 +17,7 @@ import java.rmi.RemoteException;
 
 public class EditKidController extends AddKidController {
     private int id = 0;
+    private int personId = 0;
 
     @FXML
     @Override
@@ -29,7 +27,7 @@ public class EditKidController extends AddKidController {
             sex = Sex.MALE;
         else
             sex = Sex.FEMALE;
-        person = new PersonDTO(fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null, null);
+        person = new PersonDTO(personId, fiscalCodeField.getText(), firstNameField.getText(), lastNameField.getText(), birthDatePicker.getValue(), sex, addressField.getText(), null, null);
 
         AdultDTO firstTutor = firstTutorComboBox.getValue().getDTO();
         if(firstTutor.getPerson().getFiscalCode().equals("")) firstTutor = null;
@@ -40,21 +38,19 @@ public class EditKidController extends AddKidController {
         kid = new KidDTO(id, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {
             SessionService.getSession().updateKid(kid);
-            AccessorStageService.close();
+            accessorWindowService.close();
         } catch(UpdateFailedException ex) {
             alertLabel.setText(ex.getMessage());
-            ex.printStackTrace();
-        } catch(NoSuchFieldException ex) {
-            System.err.println("error closing stage");
             ex.printStackTrace();
         } catch (RemoteException ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
-        kidAnagraphicsController.refreshTable();
+        refreshKidAnagraphics();
     }
     public void initData(ObservableKid observableKid) {
         id = observableKid.getId();
+        personId = observableKid.getPersonId();
         firstNameField.setText(observableKid.getFirstName());
         lastNameField.setText(observableKid.getLastName());
         fiscalCodeField.setText(observableKid.getFiscalCode());

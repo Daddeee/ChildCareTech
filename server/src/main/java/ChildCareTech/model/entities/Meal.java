@@ -24,9 +24,9 @@ public class Meal implements iEntity<Meal, Integer> {
     @Column(nullable = false)
     private int mealNum;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Event entryEvent;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Event exitEvent;
 
     private EventStatus status;

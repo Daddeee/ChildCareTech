@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
+import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.BusDTOWithResidualCapacity;
 import ChildCareTech.utils.TripPartecipationData;
@@ -18,7 +19,7 @@ import javafx.util.Callback;
 import java.rmi.RemoteException;
 import java.util.*;
 
-public class TripPartecipationController {
+public class TripPartecipationController implements AccessorWindowController{
     @FXML
     protected TableView<BusDTOWithResidualCapacity> busesTable;
     @FXML
@@ -32,8 +33,8 @@ public class TripPartecipationController {
     @FXML
     protected Label alertLabel;
 
-
     private TripDTO currentTripDTO;
+    private AccessorWindowService accessorWindowService;
 
     public void initData(TripDTO tripDTO){
         currentTripDTO = tripDTO;
@@ -210,5 +211,8 @@ public class TripPartecipationController {
 
         tripPartecipationTable.getItems().clear();
         tripPartecipationTable.getItems().addAll(tripPartecipationElems);
+    }
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+        this.accessorWindowService = accessorWindowService;
     }
 }

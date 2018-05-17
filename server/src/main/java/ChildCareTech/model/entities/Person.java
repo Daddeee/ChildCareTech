@@ -2,6 +2,7 @@ package ChildCareTech.model.entities;
 
 import ChildCareTech.common.Sex;
 import ChildCareTech.model.iEntity;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,9 +11,13 @@ import java.util.Set;
 
 
 @javax.persistence.Entity
-public class Person implements iEntity<Person, String> {
+public class Person implements iEntity<Person, Integer> {
     @Id
-    @Column(length = 16)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Length(max = 16, min = 16, message = "Il codice fiscale deve avere 16 caratteri.")
+    @Column(unique = true)
     private String fiscalCode;
 
     @Column(nullable = false)
@@ -40,6 +45,8 @@ public class Person implements iEntity<Person, String> {
     private Set<TripPartecipation> tripPartecipations = new HashSet<>();
 
     @ManyToMany
+    @JoinTable(joinColumns = {@JoinColumn(name = "food_id", nullable = false, updatable = false)},
+                inverseJoinColumns = {@JoinColumn(name = "person_id", nullable = false, updatable = false)})
     private Set<Food> allergies = new HashSet<>();
 
     public Person() {
@@ -55,9 +62,28 @@ public class Person implements iEntity<Person, String> {
         this.phoneNumber = phoneNumber;
     }
 
+    public Person(int id, String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
+        this.id = id;
+        this.fiscalCode = fiscalCode;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.sex = sex;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
     @Override
-    public String getPrimaryKey() {
-        return fiscalCode;
+    public Integer getPrimaryKey() {
+        return id;
     }
 
     public String getFiscalCode() {

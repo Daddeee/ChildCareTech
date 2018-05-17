@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Adult;
@@ -96,5 +97,56 @@ public class AdultController {
         } finally {
             session.close();
         }
+    }
+
+    public void doUpdateAdult(AdultDTO adultDTO) throws UpdateFailedException{
+        AdultDAO adultDAO = new AdultDAO();
+        Adult adult = DTOEntityAssembler.getEntity(adultDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        adultDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            adultDAO.update(adult);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+            throw new UpdateFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<AdultDTO> doGetAllAdultsEx() {
+        AdultDAO adultDAO = new AdultDAO();
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        List<AdultDTO> adultDTOList = new ArrayList<>();
+        List<Adult> adultList = new ArrayList<>();
+        Transaction tx = null;
+        adultDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            adultList = adultDAO.readAllExclusive();
+            for(Adult adult : adultList)
+                adultDAO.initializeLazyRelations(adult);
+
+            tx.commit();
+        } catch(HibernateException e){
+            if(tx!=null)tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        for(Adult adult : adultList) {
+            adultDTOList.add(DTOFactory.getDTO(adult));
+        }
+        return adultDTOList;
     }
 }

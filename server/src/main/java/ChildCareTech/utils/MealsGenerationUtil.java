@@ -71,6 +71,7 @@ public class MealsGenerationUtil {
             LocalTime entryTime = entryTimes.get(i);
             LocalTime exitTime = exitTimes.get(i);
 
+
             if(!entryTime.plusMinutes(10).isBefore(exitTime))
                 throw new AddFailedException("Devono esserci almeno 10 minuti tra gli orari di entrata e uscita");
 

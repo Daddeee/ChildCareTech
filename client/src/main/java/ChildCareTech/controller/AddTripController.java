@@ -18,10 +18,11 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
-public class AddTripController {
+public class AddTripController implements AccessorWindowController{
     @FXML
     private TextField metaField;
     @FXML
@@ -42,6 +43,7 @@ public class AddTripController {
 
     private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
     private int routeCounter = 0;
+    protected AccessorWindowService accessorWindowService;
 
     @FXML
     public void initialize(){
@@ -74,12 +76,7 @@ public class AddTripController {
 
     @FXML
     public void cancelButtonAction(ActionEvent e){
-        try {
-            AccessorStageService.close();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Stage not initialized");
-            ex.printStackTrace();
-        }
+        accessorWindowService.close();
     }
 
     @FXML
@@ -98,6 +95,8 @@ public class AddTripController {
 
         try {
             SessionService.getSession().saveTrip(tripDTO);
+            accessorWindowService.close();
+            refreshTripList();
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
@@ -106,15 +105,6 @@ public class AddTripController {
             return;
         }
 
-        try {
-            AccessorStageService.close();
-            MainSceneManager.loadTrips();
-        } catch (NoSuchFieldException ex) {
-            System.err.println("Stage not initialized");
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 
     private void addRoute(TempRouteData added){
@@ -137,4 +127,13 @@ public class AddTripController {
         routesTable.getItems().clear();
         routesTable.getItems().addAll(routes);
     }
+
+    private void refreshTripList() {
+        List<NewTripListController> list = ContainedWindowService.getTripsListList();
+        for(NewTripListController ntlc : list ) {
+            ntlc.refreshTable();
+        }
+    }
+
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) { this.accessorWindowService = accessorWindowService; }
 }

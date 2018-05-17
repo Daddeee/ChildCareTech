@@ -9,6 +9,7 @@ import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.factories.CanteenDTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.MealsGenerationUtil;
 import org.hibernate.HibernateException;
@@ -16,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -99,5 +101,52 @@ public class CanteenController {
         }
 
         MealsGenerationUtil.generateMeals(canteen, entryTimeList, exitTimeList);
+    }
+
+    public List<CanteenDTO> doGetAllCanteenes() {
+        List<Canteen> list = new ArrayList<>();
+        List<CanteenDTO> DTOList = new ArrayList<>();
+        CanteenDTOFactory canteenDTOFactory = new CanteenDTOFactory();
+        CanteenDAO canteenDAO = new CanteenDAO();
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        canteenDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            list = canteenDAO.readAll();
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        for(Canteen canteen : list)
+            DTOList.add(canteenDTOFactory.getDTO(canteen));
+        return DTOList;
+    }
+
+    public void doRemoveCanteen(CanteenDTO canteenDTO) {
+        CanteenDAO canteenDAO = new CanteenDAO();
+        Canteen canteen = DTOEntityAssembler.getEntity(canteenDTO);
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        canteenDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            canteenDAO.delete(canteen);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
     }
 }

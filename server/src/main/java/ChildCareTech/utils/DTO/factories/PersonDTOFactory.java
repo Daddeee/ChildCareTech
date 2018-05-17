@@ -37,13 +37,14 @@ public class PersonDTOFactory implements AbstractDTOFactory<Person, PersonDTO> {
             return null;
 
         return new PersonDTO(
+            entity.getId(),
             entity.getFiscalCode(),
             entity.getFirstName(),
             entity.getLastName(),
             entity.getBirthDate(),
             entity.getSex(),
             entity.getAddress(),
-            entity.getAddress(),
+            entity.getPhoneNumber(),
             null
         );
     }

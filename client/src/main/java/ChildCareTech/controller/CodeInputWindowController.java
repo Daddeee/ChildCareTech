@@ -1,6 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.paint.Paint;
 
 import java.time.LocalTime;
 
-public class CodeInputWindowController {
+public class CodeInputWindowController implements AccessorWindowController {
     @FXML
     private VBox acquisitionBox;
 
@@ -63,4 +64,6 @@ public class CodeInputWindowController {
             alertLabel.setText(e.getMessage());
         }
     }
+
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) { }
 }
