@@ -13,44 +13,34 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class StaffController {
+    public StaffController() {}
 
-    public void doSaveStaffMember(StaffDTO staffDTO) throws AddFailedException {
+    public void doRemoveStaff(StaffDTO staffDTO) {
         StaffDAO staffDAO = new StaffDAO();
-        PersonDAO personDAO = new PersonDAO();
         Staff staff = DTOEntityAssembler.getEntity(staffDTO);
+
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
-
-        paramMap.put("fiscalCode", staffDTO.getPerson().getFiscalCode());
-
         staffDAO.setSession(session);
-        personDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
-            if(personDAO.read(paramMap).isEmpty())
-                staffDAO.create(staff);
-            else
-                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+            staffDAO.delete(staff);
 
             tx.commit();
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
-            throw new AddFailedException(e.getMessage());
         } finally {
             session.close();
         }
     }
 
-    public List<StaffDTO> doGetAllStaffMembers() throws RemoteException {
+    public List<StaffDTO> doGetAllStaff() {
         StaffDAO staffDAO = new StaffDAO();
         List<StaffDTO> staffDTOList = new ArrayList<>();
         List<Staff> staffList = new ArrayList<>();
@@ -79,21 +69,31 @@ public class StaffController {
         return staffDTOList;
     }
 
-    public void doRemoveStaffMember(StaffDTO staffDTO) throws RemoteException {
+    public void doSaveStaff(StaffDTO staffDTO) throws AddFailedException {
         StaffDAO staffDAO = new StaffDAO();
+        PersonDAO personDAO = new PersonDAO();
         Staff staff = DTOEntityAssembler.getEntity(staffDTO);
-
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
+        HashMap<String, String> paramMap = new HashMap<>();
+
+        paramMap.put("fiscalCode", staffDTO.getPerson().getFiscalCode());
+
         staffDAO.setSession(session);
+        personDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-            staffDAO.delete(staff);
+
+            if(personDAO.read(paramMap).isEmpty())
+                staffDAO.create(staff);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
 
             tx.commit();
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
         } finally {
             session.close();
         }

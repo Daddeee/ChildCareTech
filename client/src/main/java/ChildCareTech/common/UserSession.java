@@ -4,14 +4,12 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 public interface UserSession extends Remote {
 
@@ -23,11 +21,13 @@ public interface UserSession extends Remote {
     void removeKid(KidDTO kidDTO) throws RemoteException;
     void removeAdult(AdultDTO adult) throws RemoteException;
     void removePediatrist(PediatristDTO pediatristDTO) throws RemoteException;
-    void removeStaffMember(StaffDTO staffDTO) throws RemoteException;
+    void removeStaff(StaffDTO staffDTO) throws RemoteException;
     void removeSupplier(SupplierDTO supplierDTO) throws RemoteException;
     void saveTrip(TripDTO trip) throws RemoteException, AddFailedException;
-    TripDTO getTrip(int id) throws RemoteException, NoSuchElementException;
     void updateTrip(TripDTO newTripDTO) throws RemoteException, UpdateFailedException;
+
+    TripDTO getTrip(int id) throws RemoteException, NoSuchElementException;
+
     void updateKid(KidDTO newKidDTO) throws RemoteException, UpdateFailedException;
     void updateAdult(AdultDTO adult) throws RemoteException, UpdateFailedException;
     void updatePediatrist(PediatristDTO pediatristDTO) throws RemoteException, UpdateFailedException;
@@ -40,10 +40,11 @@ public interface UserSession extends Remote {
 
     List<KidDTO> getAllKids() throws RemoteException;
     Collection<KidDTO> getAvailableKids(TripDTO tripDTO) throws RemoteException;
+
     List<AdultDTO> getAllAdults() throws RemoteException;
     List<AdultDTO> getAllAdultsEx() throws RemoteException;
     List<PediatristDTO> getAllPediatrists() throws RemoteException;
-    List<StaffDTO> getAllStaffMembers() throws RemoteException;
+    List<StaffDTO> getAllStaff() throws RemoteException;
     List<SupplierDTO> getAllSuppliers() throws RemoteException;
     List<TripDTO> getAllTrips() throws RemoteException;
 
@@ -90,6 +91,7 @@ public interface UserSession extends Remote {
     void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
     void addDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
 
+    WorkDayDTO getCurrentWorkDay() throws RemoteException;
     WorkDayDTO getWorkDay(LocalDate date) throws RemoteException;
     LocalDate getMinSavedDate() throws RemoteException;
     LocalDate getMaxSavedDate() throws RemoteException;

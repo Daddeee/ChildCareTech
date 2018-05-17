@@ -1,0 +1,59 @@
+package ChildCareTech.controller;
+
+import ChildCareTech.common.DTO.TripPartecipationDTO;
+import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.model.DAO.TripPartecipationDAO;
+import ChildCareTech.model.entities.TripPartecipation;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+public class TripPartecipationController {
+    public TripPartecipationController() {}
+
+    public void doSaveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) throws AddFailedException {
+        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
+        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
+
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        tripPartecipationDAO.setSession(session);
+
+        try{
+            tx = session.beginTransaction();
+
+            tripPartecipationDAO.create(tripPartecipation);
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new AddFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    public void doRemoveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) {
+        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
+
+        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        tripPartecipationDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            tripPartecipationDAO.delete(tripPartecipation);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+}

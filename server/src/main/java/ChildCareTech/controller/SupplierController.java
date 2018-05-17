@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SupplierController {
+    public SupplierController() {}
+
     public void doSaveSupplier(SupplierDTO supplierDTO) throws AddFailedException {
         SupplierDAO supplierDAO = new SupplierDAO();
         PersonDAO personDAO = new PersonDAO();

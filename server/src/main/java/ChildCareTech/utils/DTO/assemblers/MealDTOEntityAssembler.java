@@ -72,8 +72,8 @@ public class MealDTOEntityAssembler implements AbstractDTOEntityAssembler<Meal, 
                 canteen,
                 dto.getMealNum(),
                 workDay,
-                EventDTOEntityAssembler.assembleMealOneSide(dto.getEntryEvent()),
-                EventDTOEntityAssembler.assembleMealOneSide(dto.getExitEvent()),
+                EventDTOEntityAssembler.assembleMealOneSide(dto.getEntryEvent(), workDay),
+                EventDTOEntityAssembler.assembleMealOneSide(dto.getExitEvent(), workDay),
                 dto.getStatus(),
                 null
         );

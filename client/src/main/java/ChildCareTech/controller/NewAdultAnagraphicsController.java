@@ -102,7 +102,7 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
                 SessionService.getSession().removePediatrist(((ObservablePediatrist) selectedItem).getDTO());
             }
             else if(selectedItem instanceof ObservableStaff) {
-                SessionService.getSession().removeStaffMember(((ObservableStaff) selectedItem).getDTO());
+                SessionService.getSession().removeStaff(((ObservableStaff) selectedItem).getDTO());
             }
             else if(selectedItem instanceof ObservableSupplier) {
                 SessionService.getSession().removeSupplier(((ObservableSupplier) selectedItem).getDTO());
@@ -132,7 +132,7 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
         try {
             adultDTOList = session.getAllAdultsEx();
             pediatristDTOList = session.getAllPediatrists();
-            staffDTOList = session.getAllStaffMembers();
+            staffDTOList = session.getAllStaff();
             supplierDTOList = session.getAllSuppliers();
 
         } catch (RemoteException e) {
