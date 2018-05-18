@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserController {
-    private static final ConcurrentHashMap<User, Object> currentSessions = new ConcurrentHashMap<>();
+public class SessionController {
+    private static final ConcurrentHashMap<String, UserSession> currentSessions = new ConcurrentHashMap<>();
 
     public static User getUser(String username, String password) throws LoginFailedException {
         List<User> user;
@@ -72,14 +72,14 @@ public class UserController {
         return true;
     }
 
-    public static synchronized void storeSession(UserSession session, User user) throws LoginFailedException {
-        if (currentSessions.get(user) != null) {
+    public static synchronized void storeSession(UserSession session, String sessionKey) throws LoginFailedException {
+        if (currentSessions.get(sessionKey) != null) {
             throw new LoginFailedException("Another session associated with the same user is already present");
         }
-        currentSessions.put(user, session);
+        currentSessions.put(sessionKey, session);
     }
 
-    public static synchronized void removeSession(User user) {
-        currentSessions.remove(user);
+    public static synchronized void removeSession(String sessionKey) {
+        currentSessions.remove(sessionKey);
     }
 }

@@ -46,8 +46,6 @@ public class RemoteEventObservable extends Thread {
                 try {
                     while (CurrentWorkDayService.getCurrent() == null)
                         lock.wait();
-
-                    if(CurrentWorkDayService.getCurrent().getEvents() != null && CurrentWorkDayService.getCurrent().getEvents().size() <= 0) Thread.sleep(200);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }

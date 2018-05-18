@@ -1,14 +1,20 @@
 package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.*;
+import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.*;
+import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.*;
+import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -404,7 +410,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public void logout() throws RemoteException {
-        UserController.removeSession(user.getUserName());
+        SessionController.removeSession(user.getUserName());
         UnicastRemoteObject.unexportObject(this, true);
     }
 }
