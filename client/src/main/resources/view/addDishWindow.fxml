@@ -1,43 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ChildCareTech.controller.AddDishController"
-      prefHeight="400.0" prefWidth="600.0">
-    <HBox>
-        <Label text="Nome:"/>
-        <TextField fx:id="nameField"/>
-    </HBox>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-    <HBox>
-        <TableView fx:id="availableIngredientsTable" prefWidth="250">
-            <columns>
-                <TableColumn text="Nome">
-                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
-                </TableColumn>
-            </columns>
-        </TableView>
-        <VBox prefWidth="100">
-            <Button onAction="#addIngredientButtonAction" text="&gt;"/>
-            <Button onAction="#removeIngredientButtonAction" text="&lt;"/>
-        </VBox>
-        <TableView fx:id="selectedIngredientsTable" prefWidth="250">
-            <columns>
-                <TableColumn text="Nome">
-                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
-                </TableColumn>
-            </columns>
-        </TableView>
-    </HBox>
-
-    <Button fx:id="saveButton" text="Salva" onAction="#saveButtonAction"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.AddDishController">
+   <children>
+      <VBox layoutX="138.0" layoutY="90.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="0.0" prefHeight="40.0" prefWidth="600.0">
+               <children>
+                  <Label text="Nome piatto: "/>
+                  <TextField fx:id="nameField"/>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <TableView fx:id="selectedIngredientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                           <columns>
+                              <TableColumn fx:id="selectedName" prefWidth="75.0" text="Dish's ingredients" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addIngredientButtonAction" prefWidth="70.0" text="&lt;" />
+                              <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeIngredientButtonAction" prefWidth="70.0" text="X" />
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" prefWidth="70.0" text="Save" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <TableView fx:id="availableIngredientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                           <columns>
+                              <TableColumn fx:id="availableName" prefWidth="75.0" text="Food" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <VBox.margin>
+                              <Insets bottom="10.0" right="10.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
