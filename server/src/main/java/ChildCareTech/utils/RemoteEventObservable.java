@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class RemoteEventObservable {
+public class RemoteEventObservable extends Thread {
     private static RemoteEventObservable ourInstance = new RemoteEventObservable();
 
     private static WorkDay today = CurrentWorkDayService.getCurrent();
@@ -39,9 +39,20 @@ public class RemoteEventObservable {
         eventDAO = new EventDAO();
     }
 
-    public WorkDay getToday(){
-        if(today == null)
+    public WorkDay getToday() {
+        if (today == null) {
+            Object lock = WorkDaysGenerationUtil.getLock();
+            synchronized (lock) {
+                try {
+                    while (CurrentWorkDayService.getCurrent() == null)
+                        lock.wait();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
             today = CurrentWorkDayService.getCurrent();
+        }
 
         return today;
     }

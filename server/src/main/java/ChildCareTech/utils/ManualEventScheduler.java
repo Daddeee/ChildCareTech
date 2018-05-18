@@ -26,12 +26,14 @@ public class ManualEventScheduler implements Runnable{
 
     public ManualEventScheduler() {
         in = new Scanner(System.in);
-        planned = null;
-        toPlan = RemoteEventObservable.getInstance().getToday();
         workDayDAO = new WorkDayDAO();
         eventDAO = new EventDAO();
+
         Thread backgroundThread = new Thread(this);
         backgroundThread.start();
+
+        planned = null;
+        toPlan = RemoteEventObservable.getInstance().getToday();
     }
 
     @Override

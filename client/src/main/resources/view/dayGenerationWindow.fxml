@@ -1,71 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ChildCareTech.controller.DayGenerationController"
-      prefHeight="400.0" prefWidth="600.0">
-    <Label text="Primo avvio del software. Specificare i parametri per la generazione dei giorni"/>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-    <HBox>
-        <Label text="Numero di settimane da generare:"/>
-        <TextField fx:id="weekNumberField"/>
-    </HBox>
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.162-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.DayGenerationController">
+    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
-    <HBox>
-        <Label text="Orario di ingresso:"/>
-        <TextField fx:id="entryTimeField"/>
-    </HBox>
-
-    <HBox>
-        <Label text="Orario di uscita:"/>
-        <TextField fx:id="exitTimeField"/>
-    </HBox>
-
-    <VBox>
-        <Label text="Seleziona giorni di vacanza"/>
-        <HBox>
-            <Label text="Lun" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="lunHoliday"/>
-                </graphic>
-            </Label>
-            <Label text="Mar" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="marHoliday"/>
-                </graphic>
-            </Label>
-            <Label text="Mer" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="merHoliday"/>
-                </graphic>
-            </Label>
-            <Label text="Gio" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="gioHoliday"/>
-                </graphic>
-            </Label>
-            <Label text="Ven" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="venHoliday"/>
-                </graphic>
-            </Label>
-            <Label text="Sab" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="sabHoliday"/>
-                </graphic>
-            </Label>
-            <Label text="Dom" contentDisplay="TOP">
-                <graphic>
-                    <RadioButton fx:id="domHoliday"/>
-                </graphic>
-            </Label>
+        <HBox alignment="CENTER" maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="0.0" prefHeight="30.0">
+            <Label text="Numero di settimane da generare:" />
+            <TextField fx:id="weekNumberField" />
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
         </HBox>
-    </VBox>
 
-    <Button text="Salva e prosegui" onAction="#saveButtonAction"/>
-</VBox>
+        <HBox alignment="CENTER" maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="0.0" prefHeight="30.0">
+            <children>
+                <Label text="Ingresso:" />
+                <ComboBox fx:id="inComboBoxH" maxHeight="-Infinity" maxWidth="70.0" minHeight="-Infinity" prefWidth="70.0" />
+                <Label text=":" />
+                <ComboBox fx:id="inComboBoxM" layoutX="120.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="70.0" minHeight="-Infinity" prefWidth="70.0" />
+                <Label layoutX="10.0" layoutY="17.0" text="Uscita:">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Label>
+                <ComboBox fx:id="outComboBoxH" layoutX="24.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="70.0" minHeight="-Infinity" prefWidth="70.0" />
+                <Label layoutX="107.0" layoutY="17.0" text=":" />
+                <ComboBox fx:id="outComboBoxM" layoutX="24.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="70.0" minHeight="-Infinity" prefWidth="70.0" />
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+
+        <VBox alignment="CENTER">
+            <Label text="Seleziona giorni di vacanza" />
+            <HBox alignment="CENTER">
+                <Label contentDisplay="TOP" text="Lun">
+                    <graphic>
+                        <RadioButton fx:id="lunHoliday" />
+                    </graphic>
+                </Label>
+                <Label contentDisplay="TOP" text="Mar">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <RadioButton fx:id="marHoliday" />
+                    </graphic>
+                </Label>
+                <Label contentDisplay="TOP" text="Mer">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <RadioButton fx:id="merHoliday" />
+                    </graphic>
+                </Label>
+                <Label contentDisplay="TOP" text="Gio">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <RadioButton fx:id="gioHoliday" />
+                    </graphic>
+                </Label>
+                <Label contentDisplay="TOP" text="Ven">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <RadioButton fx:id="venHoliday" />
+                    </graphic>
+                </Label>
+                <Label contentDisplay="TOP" text="Sab">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <RadioButton fx:id="sabHoliday" />
+                    </graphic>
+                </Label>
+                <Label contentDisplay="TOP" text="Dom">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <RadioButton fx:id="domHoliday" />
+                    </graphic>
+                </Label>
+                <VBox.margin>
+                    <Insets top="5.0" />
+                </VBox.margin>
+            </HBox>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </VBox>
+
+        <Button onAction="#saveButtonAction" text="Salva e prosegui">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Button>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+    </VBox>
+</AnchorPane>
