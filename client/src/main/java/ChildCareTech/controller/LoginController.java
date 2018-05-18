@@ -44,7 +44,6 @@ public class LoginController implements MainWindowControllerInterface {
         }
 
         SessionService.loginAttempt(userNameField.getText(), passwordField.getText());
-        SessionService.registerRemoteEventObserver();
 
         try {
             if (!SessionService.isNull()){
@@ -55,7 +54,7 @@ public class LoginController implements MainWindowControllerInterface {
             }
             else alertBox.setText(SessionService.getLoginErrorMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             alertBox.setText(e.getMessage());
         }
     }

@@ -40,6 +40,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private RouteController routeController;
     private CheckpointController checkpointController;
     private TripPartecipationController tripPartecipationController;
+    private WorkDayGenerationController workDayGenerationController;
 
     public RMIUserSession(User user) throws RemoteException {
         this.user = user;
@@ -59,6 +60,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
         this.routeController = new RouteController();
         this.checkpointController = new CheckpointController();
         this.tripPartecipationController = new TripPartecipationController();
+        this.workDayGenerationController = new WorkDayGenerationController();
        
     }
 
@@ -398,12 +400,12 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public boolean isFirstEverStartup() {
-        return Boolean.parseBoolean(Settings.getProperty("firstRun"));
+        return workDayGenerationController.doIsFirstEverStartup();
     }
 
     @Override
     public void setFirstEverStartup(boolean value) {
-        Settings.storeProperty("firstRun", Boolean.toString(value));
+        workDayGenerationController.doSetFirstEverStartup(value);
     }
 
     @Override
