@@ -4,7 +4,7 @@ import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
-import ChildCareTech.controller.SessionController;
+import ChildCareTech.controller.UserController;
 import ChildCareTech.model.entities.User;
 import ChildCareTech.utils.RemoteEventObservable;
 
@@ -24,15 +24,15 @@ public class RMIUserSessionFactory extends UnicastRemoteObject implements UserSe
 
     @Override
     public RMIUserSession login(String userName, String password) throws LoginFailedException, RemoteException {
-        User u = SessionController.getUser(userName, password);
+        User u = UserController.getUser(userName, password);
         RMIUserSession session = new RMIUserSession(u);
-        SessionController.storeSession(session, userName);
+        UserController.storeSession(session, u);
         return session;
     }
 
     @Override
     public boolean register(String userName, String password) throws RegistrationFailedException {
-        return SessionController.registerUser(userName, password);
+        return UserController.registerUser(userName, password);
     }
 
     @Override

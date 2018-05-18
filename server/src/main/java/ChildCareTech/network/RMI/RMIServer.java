@@ -21,6 +21,6 @@ public class RMIServer {
             System.err.println(e.getMessage());
             return;
         }
-        System.out.println("[RMI] Authentication service running on port " + rmiPort);
+        System.out.println("[RMI] Server running on port " + rmiPort);
     }
 }
