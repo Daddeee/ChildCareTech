@@ -25,19 +25,10 @@ public class SessionService {
         try {
             initSessionFactory();
             session = sessionFactory.login(userName, password);
-        } catch (LoginFailedException | RemoteException | NotBoundException | MalformedURLException e) {
-            loginErrorMessage = e.getMessage();
-            e.printStackTrace();
-        }
-    }
 
-    public static void registerRemoteEventObserver(){
-
-        try {
-            initSessionFactory();
             observer = new RMIRemoteEventObserver();
             sessionFactory.addRemoteEventObserver(observer);
-        } catch (RemoteException | NotBoundException | MalformedURLException e) {
+        } catch (LoginFailedException | RemoteException | NotBoundException | MalformedURLException e) {
             loginErrorMessage = e.getMessage();
             e.printStackTrace();
         }
