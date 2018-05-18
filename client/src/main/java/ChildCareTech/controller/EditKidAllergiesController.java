@@ -83,7 +83,7 @@ public class EditKidAllergiesController implements AccessorWindowController {
     }
     @FXML
     public void removeButtonAction(ActionEvent event ) {
-        FoodDTO selected = foodsTable.getSelectionModel().getSelectedItem();
+        FoodDTO selected = allergiesTable.getSelectionModel().getSelectedItem();
         if(selected == null) return;
         foods.add(selected);
         allergies.remove(selected);

@@ -35,10 +35,11 @@ public class NewTripListController implements TableWindowControllerInterface {
     @FXML
     private TableView<TripDTO> tripsTable;
     private ObservableList<TripDTO> items = FXCollections.observableArrayList();
-    private AccessorWindowService accessorWindowService = new AccessorWindowService(this);
+    private AccessorWindowService accessorWindowService;
 
     @FXML
     public void initialize() {
+        accessorWindowService = new AccessorWindowService(this);
         tripsTable.setItems(items);
         refreshTable();
         initMenu();

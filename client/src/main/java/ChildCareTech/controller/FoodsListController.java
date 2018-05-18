@@ -40,6 +40,7 @@ public class FoodsListController implements AccessorWindowController {
     public void initialize() {
         initMenu();
         initFoods();
+        foodsTable.setItems(foods);
         nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
     }
 
@@ -84,8 +85,6 @@ public class FoodsListController implements AccessorWindowController {
     }
     private void initFoods() {
         List<FoodDTO> foodsList = new ArrayList<>();
-
-        foodsTable.setItems(foods);
         try {
             foodsList = SessionService.getSession().getAllFoods();
         } catch (RemoteException ex) {
