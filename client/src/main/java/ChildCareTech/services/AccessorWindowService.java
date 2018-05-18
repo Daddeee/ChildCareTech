@@ -56,6 +56,9 @@ public class AccessorWindowService {
     public void setOnCloseAction(EventHandler<WindowEvent> eventEventHandler) {
         stage.setOnCloseRequest(eventEventHandler);
     }
+    public Stage getStage() {
+        return this.stage;
+    }
 
     public void loadRegisterUserWindow() throws IOException{
         loadWindow(ResourcesPaths.getRegisterUserFXMLPath(), ResourcesPaths.getRegisterUserCSSPath());
