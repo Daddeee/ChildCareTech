@@ -85,7 +85,7 @@
                 </Button>
                 <Button fx:id="registerButton" onAction="#registerButtonAction" maxHeight="-Infinity"
                         maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                        prefHeight="25.0" prefWidth="120.0" text="Registra utenre"/>
+                        prefHeight="25.0" prefWidth="120.0" text="Registra utente"/>
             </children>
             <VBox.margin>
                 <Insets top="20.0"/>
