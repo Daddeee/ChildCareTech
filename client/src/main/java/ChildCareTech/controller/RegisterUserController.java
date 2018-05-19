@@ -1,7 +1,7 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.RegistrationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,12 +39,12 @@ public class RegisterUserController implements AccessorWindowController {
             return;
         }
 
-        status = RegistrationService.registerAttempt(addUserNameField.getText(), addPasswordField.getText());
+        status = Client.getRegistrationService().registerAttempt(addUserNameField.getText(), addPasswordField.getText());
 
         if (status) {
             accessorWindowService.close();
         } else
-            registrationAlertBox.setText(RegistrationService.getRegistrationErrorMessage());
+            registrationAlertBox.setText(Client.getRegistrationService().getRegistrationErrorMessage());
 
     }
     @FXML

@@ -1,7 +1,9 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.Client;
+import ChildCareTech.network.RMI.RMIRegistrationService;
 import ChildCareTech.network.RMI.RMISessionService;
+import ChildCareTech.network.socket.SocketRegistrationService;
 import ChildCareTech.network.socket.SocketSessionService;
 import ChildCareTech.services.*;
 import javafx.event.ActionEvent;
@@ -81,6 +83,21 @@ public class LoginController implements MainWindowControllerInterface {
     @FXML
     protected void registerButtonAction(ActionEvent event) {
         try {
+            if(connectivity.getSelectionModel().getSelectedItem().equals("RMI"))
+                Client.setRegistrationService(new RMIRegistrationService());
+            else if(connectivity.getSelectionModel().getSelectedItem().equals("Socket")) {
+                try {
+                    Client.setRegistrationService(new SocketRegistrationService());
+                } catch (IOException e) {
+                    alertBox.setText("Socket error");
+                    e.printStackTrace();
+                    return;
+                }
+            } else {
+                alertBox.setText("Connectivity selection error");
+                return;
+            }
+
             accessorWindowService.loadRegisterUserWindow();
         } catch (IOException e) {
             e.printStackTrace();

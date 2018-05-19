@@ -33,8 +33,6 @@ public class SocketUserSession implements Runnable {
                 SocketResponse response = socketProtocol.handleRequest(request);
                 out.writeObject(response);
             } catch (Exception e) {
-                System.err.println(e.getMessage());
-                e.printStackTrace();
                 break;
             }
         }

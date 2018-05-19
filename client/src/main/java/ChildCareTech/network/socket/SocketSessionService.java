@@ -46,7 +46,17 @@ public class SocketSessionService implements SessionService {
 
     @Override
     public void logoutAttempt() {
-        //TODO logout sul server
+        SocketRequest request = new SocketRequest(SocketRequestType.LOGOUT);
+        SocketResponse response;
+
+        try{
+            out.writeObject(request);
+
+            loginErrorMessage = "";
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         socketUserSession = null;
         Client.setSessionService(null);
 

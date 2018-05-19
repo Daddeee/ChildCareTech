@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import ChildCareTech.network.RegistrationService;
 import ChildCareTech.network.SessionService;
 import ChildCareTech.services.*;
 import javafx.application.Application;
@@ -9,6 +10,7 @@ import java.io.IOException;
 
 public class Client extends Application {
     private static SessionService sessionService;
+    private static RegistrationService registrationService;
 
     public static SessionService getSessionService() {
         return sessionService;
@@ -16,6 +18,14 @@ public class Client extends Application {
 
     public static void setSessionService(SessionService s) {
         sessionService = s;
+    }
+
+    public static RegistrationService getRegistrationService() {
+        return registrationService;
+    }
+
+    public static void setRegistrationService(RegistrationService r) {
+        registrationService = r;
     }
 
     @Override

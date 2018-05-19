@@ -1,18 +1,19 @@
-package ChildCareTech.services;
+package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
+import ChildCareTech.network.RegistrationService;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class RegistrationService {
-    private static UserSessionFactory sessionFactory = null;
-    private static String registrationErrorMessage = null;
+public class RMIRegistrationService implements RegistrationService {
+    private UserSessionFactory sessionFactory = null;
+    private String registrationErrorMessage = null;
 
-    public static boolean registerAttempt(String userName, String password) {
+    public boolean registerAttempt(String userName, String password) {
         boolean status = false;
         try {
             sessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
@@ -26,7 +27,7 @@ public class RegistrationService {
         return status;
     }
 
-    public static String getRegistrationErrorMessage() {
+    public String getRegistrationErrorMessage() {
         return registrationErrorMessage;
     }
 }
