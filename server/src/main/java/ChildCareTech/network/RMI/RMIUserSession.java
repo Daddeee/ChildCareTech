@@ -223,13 +223,12 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
 
     @Override
     public WorkDayDTO getCurrentWorkDay() {
-        return DTOFactory.getDTO(RemoteEventObservable.getInstance().getToday());
+        return workDayController.doGetCurrentWorkDay();
     }
 
     @Override
     public void generateDays(DayGenerationSettingsDTO settings) {
-        WorkDaysGenerationUtil wdu = new WorkDaysGenerationUtil(settings);
-        wdu.generateDays();
+        workDayGenerationController.doGenerateDays(settings);
     }
 
     @Override

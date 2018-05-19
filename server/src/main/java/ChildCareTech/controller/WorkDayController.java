@@ -79,6 +79,10 @@ public class WorkDayController {
         return result;
     }
 
+    public WorkDayDTO doGetCurrentWorkDay() {
+        return DTOFactory.getDTO(RemoteEventObservable.getInstance().getToday());
+    }
+
     public void doTriggerDailyScheduling() throws RemoteException {
         WorkDayDAO workDayDAO = new WorkDayDAO();
         WorkDay reloadedToday = null;
