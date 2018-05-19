@@ -4,7 +4,7 @@ import ChildCareTech.model.entities.Person;
 import ChildCareTech.utils.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
-public class PersonDAO extends AbstractGenericDAO<Person, String> {
+public class PersonDAO extends AbstractGenericDAO<Person, Integer> {
     public PersonDAO() {
         super(Person.class);
     }

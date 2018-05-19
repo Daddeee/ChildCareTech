@@ -29,7 +29,7 @@ public class PersonController {
         try{
             tx = session.beginTransaction();
 
-            Person person = personDAO.read(personDTO.getFiscalCode());
+            Person person = personDAO.read(personDTO.getId());
 
             person.getAllergies().removeIf(food -> food.getId() == foodDTO.getId());
 
@@ -54,7 +54,7 @@ public class PersonController {
         try{
             tx = session.beginTransaction();
 
-            Person person = personDAO.read(personDTO.getFiscalCode());
+            Person person = personDAO.read(personDTO.getId());
             Food food = foodDAO.read(foodDTO.getId());
 
             person.getAllergies().add(food);
@@ -82,7 +82,7 @@ public class PersonController {
         try{
             tx = session.beginTransaction();
 
-            result = personDAO.read(fiscalCode);
+            result = personDAO.read("fiscalCode", fiscalCode).get(0);
             personDAO.initializeLazyRelations(result);
 
             tx.commit();
