@@ -1,6 +1,6 @@
 package ChildCareTech.utils;
 
-import ChildCareTech.services.SessionService;
+import ChildCareTech.Client;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.util.Callback;
@@ -25,8 +25,8 @@ public class RestrictedDatePicker extends DatePicker {
 
     public void retrieveDates(){
         try{
-            minDate = SessionService.getSession().getMinSavedDate();
-            maxDate = SessionService.getSession().getMaxSavedDate();
+            minDate = Client.getSessionService().getSession().getMinSavedDate();
+            maxDate = Client.getSessionService().getSession().getMaxSavedDate();
         } catch (Exception e){
             e.printStackTrace();
         }

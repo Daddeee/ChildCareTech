@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.Sex;
 import ChildCareTech.common.exceptions.AddFailedException;
@@ -86,7 +87,7 @@ public class AddAdultController implements AccessorWindowController{
         if(roleGroup.getSelectedToggle().equals(noneSelecter)) {
             adult = new AdultDTO(0, person, null);
             try {
-                SessionService.getSession().saveAdult(adult);
+                Client.getSessionService().getSession().saveAdult(adult);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");
@@ -99,7 +100,7 @@ public class AddAdultController implements AccessorWindowController{
         if(roleGroup.getSelectedToggle().equals(staffSelecter)) {
             staff = new StaffDTO(0, person, null);
             try {
-                SessionService.getSession().saveStaff(staff);
+                Client.getSessionService() .getSession().saveStaff(staff);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");
@@ -112,7 +113,7 @@ public class AddAdultController implements AccessorWindowController{
         if(roleGroup.getSelectedToggle().equals(supplierSelecter)) {
             supplier = new SupplierDTO(0, person, null, null);
             try {
-                SessionService.getSession().saveSupplier(supplier);
+                Client.getSessionService().getSession().saveSupplier(supplier);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");
@@ -125,7 +126,7 @@ public class AddAdultController implements AccessorWindowController{
         if(roleGroup.getSelectedToggle().equals(pediatristSelecter)){
             pediatrist = new PediatristDTO(0, person, null, null);
             try {
-                SessionService.getSession().savePediatrist(pediatrist);
+                Client.getSessionService().getSession().savePediatrist(pediatrist);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");

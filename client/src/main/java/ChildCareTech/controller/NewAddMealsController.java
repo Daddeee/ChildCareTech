@@ -1,10 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -92,7 +92,7 @@ public class NewAddMealsController implements AccessorWindowController {
         }
 
         try{
-            SessionService.getSession().saveCanteen(canteenDTO, entryTimeList, exitTimeList);
+            Client.getSessionService().getSession().saveCanteen(canteenDTO, entryTimeList, exitTimeList);
         } catch(RemoteException | AddFailedException ex){
             System.err.println(ex.getMessage());
             ex.printStackTrace();
@@ -104,7 +104,7 @@ public class NewAddMealsController implements AccessorWindowController {
 
 
         try {
-            SessionService.getSession().triggerDailyScheduling();
+            Client.getSessionService().getSession().triggerDailyScheduling();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -140,7 +140,7 @@ public class NewAddMealsController implements AccessorWindowController {
         minutes.clear();
         hour.clear();
         try {
-            workDayDTO = SessionService.getSession().getWorkDay(LocalDate.now());
+            workDayDTO = Client.getSessionService().getSession().getWorkDay(LocalDate.now());
         } catch(RemoteException ex) {
             System.err.println("error reading today workday");
             ex.printStackTrace();

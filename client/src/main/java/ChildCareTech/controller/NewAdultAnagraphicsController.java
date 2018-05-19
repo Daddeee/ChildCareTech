@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.DTO.StaffDTO;
@@ -7,7 +8,6 @@ import ChildCareTech.common.DTO.SupplierDTO;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ObservableDTOs.*;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -96,16 +96,16 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
         ObservablePersonInterface selectedItem = personTable.getSelectionModel().getSelectedItem();
         try {
             if(selectedItem instanceof ObservableAdult) {
-                SessionService.getSession().removeAdult(((ObservableAdult) selectedItem).getDTO());
+                Client.getSessionService().getSession().removeAdult(((ObservableAdult) selectedItem).getDTO());
             }
             else if(selectedItem instanceof ObservablePediatrist) {
-                SessionService.getSession().removePediatrist(((ObservablePediatrist) selectedItem).getDTO());
+                Client.getSessionService().getSession().removePediatrist(((ObservablePediatrist) selectedItem).getDTO());
             }
             else if(selectedItem instanceof ObservableStaff) {
-                SessionService.getSession().removeStaff(((ObservableStaff) selectedItem).getDTO());
+                Client.getSessionService().getSession().removeStaff(((ObservableStaff) selectedItem).getDTO());
             }
             else if(selectedItem instanceof ObservableSupplier) {
-                SessionService.getSession().removeSupplier(((ObservableSupplier) selectedItem).getDTO());
+                Client.getSessionService().getSession().removeSupplier(((ObservableSupplier) selectedItem).getDTO());
             }
         } catch (RemoteException ex) {
             System.err.println("error remote");
@@ -124,7 +124,7 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
     }
 
     public void refreshTable() {
-        UserSession session = SessionService.getSession();
+        UserSession session = Client.getSessionService().getSession();
         List<AdultDTO> adultDTOList = new ArrayList<>();
         List<PediatristDTO> pediatristDTOList = new ArrayList<>();
         List<StaffDTO> staffDTOList = new ArrayList<>();

@@ -1,10 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,11 +71,11 @@ public class NewBusController implements AccessorWindowController {
             try{
                 if(editFlag) {
                     busDTO = new BusDTO(oldId, licensePlate, null, null, sitsNumber);
-                    SessionService.getSession().updateBus(busDTO);
+                    Client.getSessionService().getSession().updateBus(busDTO);
                 }
                 else {
                     busDTO = new BusDTO(0, licensePlate, null, null, sitsNumber);
-                    SessionService.getSession().saveBus(busDTO);
+                    Client.getSessionService().getSession().saveBus(busDTO);
                 }
                 fireAction();
                 refreshTable();
@@ -99,7 +99,7 @@ public class NewBusController implements AccessorWindowController {
     @FXML
     private void deleteButtonAction(ActionEvent event) {
         try {
-            SessionService.getSession().removeBus((BusDTO)busesTable.getSelectionModel().getSelectedItem());
+            Client.getSessionService().getSession().removeBus((BusDTO)busesTable.getSelectionModel().getSelectedItem());
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
@@ -165,7 +165,7 @@ public class NewBusController implements AccessorWindowController {
         List<BusDTO> busesDTOList = new ArrayList<>();
 
         try {
-            busesDTOList = SessionService.getSession().getAllBuses();
+            busesDTOList = Client.getSessionService().getSession().getAllBuses();
         } catch(RemoteException e){
             e.printStackTrace();
         }

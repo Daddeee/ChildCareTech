@@ -1,10 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ObservableDTOs.*;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,7 +79,7 @@ public class EditKidContactsController implements AccessorWindowController{
         }
         try {
             KidDTO newKid = new KidDTO(kidDTO.getId(), kidDTO.getPerson(), kidDTO.getFirstTutor(), kidDTO.getSecondTutor(), kidDTO.getPediatrist(), adults);
-            SessionService.getSession().updateKid(newKid);
+            Client.getSessionService().getSession().updateKid(newKid);
             accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException ex) {
@@ -133,7 +133,7 @@ public class EditKidContactsController implements AccessorWindowController{
         personsTable.setItems(persons);
 
         try {
-            adults = SessionService.getSession().getAllAdults();
+            adults = Client.getSessionService().getSession().getAllAdults();
         } catch(RemoteException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();

@@ -1,10 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.Sex;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.ObservableDTOs.ObservablePersonInterface;
-import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -81,7 +81,7 @@ public class EditAdultController extends AddAdultController {
         if(prevRole == 0) {
             adult = new AdultDTO(id, person, null);
             try {
-                SessionService.getSession().updateAdult(adult);
+                Client.getSessionService().getSession().updateAdult(adult);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");
@@ -95,7 +95,7 @@ public class EditAdultController extends AddAdultController {
         if(prevRole == 3) {
             staff = new StaffDTO(id, person, null);
             try {
-                SessionService.getSession().updateStaffMember(staff);
+                Client.getSessionService().getSession().updateStaffMember(staff);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");
@@ -109,7 +109,7 @@ public class EditAdultController extends AddAdultController {
         if(prevRole == 2) {
             supplier = new SupplierDTO(id, person, null, null);
             try {
-                SessionService.getSession().updateSupplier(supplier);
+                Client.getSessionService().getSession().updateSupplier(supplier);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");
@@ -123,7 +123,7 @@ public class EditAdultController extends AddAdultController {
         if(prevRole == 1) {
             pediatrist = new PediatristDTO(id, person, null, null);
             try {
-                SessionService.getSession().updatePediatrist(pediatrist);
+                Client.getSessionService().getSession().updatePediatrist(pediatrist);
                 accessorWindowService.close();
             } catch (RemoteException ex) {
                 System.err.println("error remote");

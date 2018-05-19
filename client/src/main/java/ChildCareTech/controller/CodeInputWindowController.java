@@ -1,8 +1,8 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -59,7 +59,7 @@ public class CodeInputWindowController implements AccessorWindowController {
         codeField.setText("");
 
         try{
-            SessionService.getSession().saveCheckpoint(fiscalCode, event, LocalTime.now());
+            Client.getSessionService().getSession().saveCheckpoint(fiscalCode, event, LocalTime.now());
         } catch (Exception e){
             alertLabel.setText(e.getMessage());
         }

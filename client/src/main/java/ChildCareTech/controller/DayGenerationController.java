@@ -1,8 +1,8 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DayGenerationSettingsDTO;
 import ChildCareTech.services.MainWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,8 +56,8 @@ public class DayGenerationController implements MainWindowControllerInterface {
         settings.setSundayHoliday(domHoliday.isSelected());
 
         try{
-            SessionService.getSession().generateDays(settings);
-            SessionService.getSession().setFirstEverStartup(false);
+            Client.getSessionService().getSession().generateDays(settings);
+            Client.getSessionService().getSession().setFirstEverStartup(false);
 
             mainWindowService.loadMainWindow();
         } catch (Exception ex){

@@ -1,10 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.ReportTableData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -27,8 +27,8 @@ public class EventReportController implements AccessorWindowController{
         List<CheckpointDTO> allAssociatedCheckpoints;
 
         try{
-            allKids = SessionService.getSession().getAllKids();
-            allAssociatedCheckpoints = new ArrayList<>(SessionService.getSession().getEventCheckpoints(eventDTO));
+            allKids = Client.getSessionService().getSession().getAllKids();
+            allAssociatedCheckpoints = new ArrayList<>(Client.getSessionService().getSession().getEventCheckpoints(eventDTO));
         } catch(RemoteException e){
             e.printStackTrace();
             return;

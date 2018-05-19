@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
@@ -112,7 +113,7 @@ public class AddKidController implements AccessorWindowController{
 
         kid = new KidDTO(0, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {
-            SessionService.getSession().saveKid(kid);
+            Client.getSessionService().getSession().saveKid(kid);
             accessorWindowService.close();
         } catch (RemoteException ex) {
             ex.printStackTrace();
@@ -167,10 +168,10 @@ public class AddKidController implements AccessorWindowController{
         adults.clear();
         pediatrists.clear();
         try {
-            adultDTOList = SessionService.getSession().getAllAdults();
+            adultDTOList = Client.getSessionService().getSession().getAllAdults();
             adultDTOList.add(nullAdult);
 
-            pediatristDTOList =  SessionService.getSession().getAllPediatrists();
+            pediatristDTOList =  Client.getSessionService().getSession().getAllPediatrists();
         } catch(RemoteException ex) {
             alertLabel.setText(ex.getMessage());
         }

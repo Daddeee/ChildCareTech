@@ -1,8 +1,8 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +58,7 @@ public class KitchenController implements AccessorWindowController, TableWindowC
         DishDTO selected = dishesTable.getSelectionModel().getSelectedItem();
         if(selected == null) return;
         try {
-            SessionService.getSession().deleteDish(selected);
+            Client.getSessionService().getSession().deleteDish(selected);
             refreshTable();
         } catch (IOException e){
             e.printStackTrace();
@@ -118,7 +118,7 @@ public class KitchenController implements AccessorWindowController, TableWindowC
     public void refreshTable() {
         List<DishDTO> dishesList = new ArrayList<>();
         try{
-            dishesList = SessionService.getSession().getAllDishes();
+            dishesList = Client.getSessionService().getSession().getAllDishes();
         } catch(Exception e){
             e.printStackTrace();
         }

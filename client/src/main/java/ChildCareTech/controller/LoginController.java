@@ -1,12 +1,12 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
+import ChildCareTech.network.RMI.RMISessionService;
+import ChildCareTech.network.socket.SocketSessionService;
 import ChildCareTech.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -23,6 +23,9 @@ public class LoginController implements MainWindowControllerInterface {
     @FXML
     private Button loginButton;
 
+    @FXML
+    private ComboBox<String> connectivity;
+
     private MainWindowService mainWindowService;
     private AccessorWindowService accessorWindowService;
 
@@ -32,6 +35,8 @@ public class LoginController implements MainWindowControllerInterface {
             @Override
             public void refreshTable() { }
         });
+
+        connectivity.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -43,16 +48,30 @@ public class LoginController implements MainWindowControllerInterface {
             return;
         }
 
-        SessionService.loginAttempt(userNameField.getText(), passwordField.getText());
+        if(connectivity.getSelectionModel().getSelectedItem().equals("RMI"))
+            Client.setSessionService(new RMISessionService());
+        else if(connectivity.getSelectionModel().getSelectedItem().equals("Socket")) {
+            try {
+                Client.setSessionService(new SocketSessionService());
+            } catch (IOException e) {
+                alertBox.setText("Socket error");
+                e.printStackTrace();
+            }
+        } else {
+            alertBox.setText("Connectivity selection error");
+        }
+
+
+        Client.getSessionService().loginAttempt(userNameField.getText(), passwordField.getText());
 
         try {
-            if (!SessionService.isNull()){
-                if(SessionService.getSession().isFirstEverStartup())
+            if (!Client.getSessionService().isNull()){
+                if(Client.getSessionService().getSession().isFirstEverStartup())
                     mainWindowService.loadDayGenerationWindow();
                 else
                     mainWindowService.loadMainWindow();
             }
-            else alertBox.setText(SessionService.getLoginErrorMessage());
+            else alertBox.setText(Client.getSessionService().getLoginErrorMessage());
         } catch (IOException e) {
             //e.printStackTrace();
             alertBox.setText(e.getMessage());

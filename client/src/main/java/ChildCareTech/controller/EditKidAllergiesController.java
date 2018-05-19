@@ -1,11 +1,11 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,11 +58,11 @@ public class EditKidAllergiesController implements AccessorWindowController {
         try {
             for(FoodDTO newAllergy : newAllergies) {
                 if(!oldAllergies.contains(newAllergy))
-                    SessionService.getSession().addAllergy(kidDTO.getPerson(), newAllergy);
+                    Client.getSessionService().getSession().addAllergy(kidDTO.getPerson(), newAllergy);
             }
             for(FoodDTO oldAllergy : oldAllergies) {
                 if(!newAllergies.contains(oldAllergy))
-                    SessionService.getSession().removeAllergy(kidDTO.getPerson(), oldAllergy);
+                    Client.getSessionService().getSession().removeAllergy(kidDTO.getPerson(), oldAllergy);
             }
             accessorWindowService.close();
             accessorWindowService.refreshTable();
@@ -124,7 +124,7 @@ public class EditKidAllergiesController implements AccessorWindowController {
         foodsTable.setItems(foods);
 
         try {
-            tempFoods = SessionService.getSession().getAllFoods();
+            tempFoods = Client.getSessionService().getSession().getAllFoods();
         } catch(RemoteException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();

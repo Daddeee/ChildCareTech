@@ -1,20 +1,18 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
-import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.BusDTOWithResidualCapacity;
 import ChildCareTech.utils.TripPartecipationData;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 
 import java.rmi.RemoteException;
 import java.util.*;
@@ -49,7 +47,7 @@ public class TripPartecipationController implements AccessorWindowController{
             final MenuItem removeTripPartecipation = new MenuItem("Elimina");
             removeTripPartecipation.setOnAction(event -> {
                 try {
-                    SessionService.getSession().removeTripPartecipation(row.getItem().getTripPartecipationDTO());
+                    Client.getSessionService().getSession().removeTripPartecipation(row.getItem().getTripPartecipationDTO());
                 } catch (RemoteException e){
                     e.printStackTrace();
                 }
@@ -74,7 +72,7 @@ public class TripPartecipationController implements AccessorWindowController{
             final MenuItem removeTripPartecipation = new MenuItem("Elimina");
             removeTripPartecipation.setOnAction(event -> {
                 try {
-                    SessionService.getSession().removeTripBusRelation(currentTripDTO, row.getItem().getBusDTO());
+                    Client.getSessionService().getSession().removeTripBusRelation(currentTripDTO, row.getItem().getBusDTO());
                 } catch (RemoteException e){
                     e.printStackTrace();
                 }
@@ -115,7 +113,7 @@ public class TripPartecipationController implements AccessorWindowController{
 
 
         try{
-            SessionService.getSession().saveTripPartecipation(tripPartecipationDTO);
+            Client.getSessionService().getSession().saveTripPartecipation(tripPartecipationDTO);
         } catch(RemoteException | AddFailedException e){
             e.printStackTrace();
         }
@@ -130,7 +128,7 @@ public class TripPartecipationController implements AccessorWindowController{
         currentTripDTO.getBuses().add(addedBus);
 
         try{
-            SessionService.getSession().saveTripBusRelation(currentTripDTO, addedBus);
+            Client.getSessionService().getSession().saveTripBusRelation(currentTripDTO, addedBus);
         } catch(RemoteException | AddFailedException e){
             e.printStackTrace();
         }
@@ -140,7 +138,7 @@ public class TripPartecipationController implements AccessorWindowController{
 
     private void refresh(){
         try{
-            currentTripDTO = SessionService.getSession().getTrip(currentTripDTO.getId());
+            currentTripDTO = Client.getSessionService().getSession().getTrip(currentTripDTO.getId());
         } catch(RemoteException | NoSuchElementException e){
             e.printStackTrace();
         }
@@ -179,7 +177,7 @@ public class TripPartecipationController implements AccessorWindowController{
     private void refreshAvailableBusesComboBox(){
         Collection<BusDTO> availableBuses = Collections.emptyList();
         try{
-            availableBuses = SessionService.getSession().getAvailableBuses(currentTripDTO);
+            availableBuses = Client.getSessionService().getSession().getAvailableBuses(currentTripDTO);
         } catch(RemoteException e){
             e.printStackTrace();
         }
@@ -196,7 +194,7 @@ public class TripPartecipationController implements AccessorWindowController{
     private void refreshSelectableKidComboBox(){
         Collection<KidDTO> availableKids = Collections.emptyList();
         try{
-            availableKids = SessionService.getSession().getAvailableKids(currentTripDTO);
+            availableKids = Client.getSessionService().getSession().getAvailableKids(currentTripDTO);
         } catch(RemoteException e){
             e.printStackTrace();
         }

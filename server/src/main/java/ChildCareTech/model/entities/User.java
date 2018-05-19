@@ -65,4 +65,9 @@ public class User implements iEntity<User, Integer> {
         if (!(o instanceof User)) return false;
         return this.userName.equals(((User) o).userName);
     }
+
+    @Override
+    public int hashCode() {
+        return this.userName.hashCode();
+    }
 }

@@ -1,12 +1,12 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +16,6 @@ import javafx.scene.control.TableView;
 
 import java.rmi.RemoteException;
 import java.time.LocalTime;
-import java.util.Collections;
 import java.util.Comparator;
 
 
@@ -105,8 +104,8 @@ public class TripRoutesController implements AccessorWindowController{
 
 
         try{
-            SessionService.getSession().updateRouteEvent(currentRoute);
-            tripDTO = SessionService.getSession().getTrip(tripDTO.getId());
+            RMISessionService.getSession().updateRouteEvent(currentRoute);
+            tripDTO = RMISessionService.getSession().getTrip(tripDTO.getId());
         } catch(RemoteException | UpdateFailedException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -132,8 +131,8 @@ public class TripRoutesController implements AccessorWindowController{
         eventDTO.setEndTime(LocalTime.now());
 
         try{
-            SessionService.getSession().updateRouteEvent(currentRoute);
-            tripDTO = SessionService.getSession().getTrip(tripDTO.getId());
+            Client.getSessionService().getSession().updateRouteEvent(currentRoute);
+            tripDTO = Client.getSessionService().getSession().getTrip(tripDTO.getId());
         } catch(RemoteException | UpdateFailedException e){
             System.err.println(e.getMessage());
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
@@ -108,7 +109,7 @@ public class UpdateTripController implements AccessorWindowController{
         tripDTO.setRoutes(routeDTOSet);
 
         try {
-            SessionService.getSession().updateTrip(tripDTO);
+            Client.getSessionService().getSession().updateTrip(tripDTO);
             accessorWindowService.close();
         } catch (RemoteException ex) {
             System.err.println("error remote");
@@ -129,7 +130,7 @@ public class UpdateTripController implements AccessorWindowController{
 
     private void removeRoute(TempRouteData removed){
         try {
-            SessionService.getSession().removeRoute(removed.getRouteDTO(oldTrip));
+            Client.getSessionService().getSession().removeRoute(removed.getRouteDTO(oldTrip));
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();

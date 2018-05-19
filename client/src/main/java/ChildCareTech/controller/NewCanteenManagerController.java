@@ -1,9 +1,9 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.TempMealData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,7 +114,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         List<String> names;
         String prevName = null;
         try{
-            names = SessionService.getSession().getAllCanteenNames();
+            names = Client.getSessionService().getSession().getAllCanteenNames();
             if(names.contains(selectCanteen.getSelectionModel().getSelectedItem()))
                 prevName = selectCanteen.getSelectionModel().getSelectedItem();
             selectCanteen.getItems().clear();
@@ -134,7 +134,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
     protected void changeSelectedCanteen(){
         try{
             if(selectCanteen.getValue() != null)
-                canteenDTO = SessionService.getSession().getCanteenByName(selectCanteen.getValue());
+                canteenDTO = Client.getSessionService().getSession().getCanteenByName(selectCanteen.getValue());
         } catch (RemoteException | NoSuchElementException ex){
             ex.printStackTrace();
         }

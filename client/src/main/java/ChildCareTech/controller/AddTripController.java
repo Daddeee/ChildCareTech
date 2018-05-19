@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
@@ -94,7 +95,7 @@ public class AddTripController implements AccessorWindowController{
         tripDTO.setRoutes(routeDTOSet);
 
         try {
-            SessionService.getSession().saveTrip(tripDTO);
+            Client.getSessionService().getSession().saveTrip(tripDTO);
             accessorWindowService.close();
             refreshTripList();
         } catch (RemoteException ex) {

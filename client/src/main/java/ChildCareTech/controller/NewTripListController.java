@@ -1,9 +1,9 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,7 +93,7 @@ public class NewTripListController implements TableWindowControllerInterface {
     @FXML
     public void deleteButtonAction(ActionEvent event) {
         try {
-            SessionService.getSession().removeTrip(tripsTable.getSelectionModel().getSelectedItem());
+            Client.getSessionService().getSession().removeTrip(tripsTable.getSelectionModel().getSelectedItem());
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
@@ -135,7 +135,7 @@ public class NewTripListController implements TableWindowControllerInterface {
         List<TripDTO> tripsDTOList = new ArrayList<>();
 
         try {
-            tripsDTOList = SessionService.getSession().getAllTrips();
+            tripsDTOList = Client.getSessionService().getSession().getAllTrips();
         } catch(RemoteException e){
             e.printStackTrace();
         }

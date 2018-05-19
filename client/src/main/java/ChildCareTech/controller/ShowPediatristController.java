@@ -3,7 +3,6 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
 import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

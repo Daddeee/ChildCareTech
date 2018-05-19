@@ -1,11 +1,11 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +49,7 @@ public class FoodsListController implements AccessorWindowController {
         String name = insertField.getText();
         if(name == null || name.equals("")) return;
         try {
-            SessionService.getSession().saveFood(new FoodDTO(0, name, false, 0, new HashSet<SupplyDTO>(), new HashSet<PersonDTO>()));
+            Client.getSessionService().getSession().saveFood(new FoodDTO(0, name, false, 0, new HashSet<SupplyDTO>(), new HashSet<PersonDTO>()));
             initFoods();
         } catch (RemoteException ex) {
             System.err.println(ex.getMessage());
@@ -64,7 +64,7 @@ public class FoodsListController implements AccessorWindowController {
         FoodDTO selected = foodsTable.getSelectionModel().getSelectedItem();
         if (selected == null) return;
         try {
-            SessionService.getSession().removeFood(selected);
+            Client.getSessionService().getSession().removeFood(selected);
         } catch (RemoteException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
@@ -86,7 +86,7 @@ public class FoodsListController implements AccessorWindowController {
     private void initFoods() {
         List<FoodDTO> foodsList = new ArrayList<>();
         try {
-            foodsList = SessionService.getSession().getAllFoods();
+            foodsList = Client.getSessionService().getSession().getAllFoods();
         } catch (RemoteException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();

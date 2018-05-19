@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ public class UserAccountController implements AccessorWindowController{
 
     @FXML
     private void logOutButtonAction(ActionEvent event) {
-        SessionService.logoutAttempt();
+        Client.getSessionService().logoutAttempt();
         accessorWindowService.close();
         accessorWindowService.refreshTable(); //trick non oop
     }

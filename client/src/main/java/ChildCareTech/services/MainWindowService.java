@@ -1,5 +1,6 @@
 package ChildCareTech.services;
 
+import ChildCareTech.Client;
 import ChildCareTech.controller.MainWindowControllerInterface;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,7 @@ public class MainWindowService {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                SessionService.logoutAttempt();
+                Client.getSessionService().logoutAttempt();
             }
         });
     }

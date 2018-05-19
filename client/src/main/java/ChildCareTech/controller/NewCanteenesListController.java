@@ -1,8 +1,8 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,8 +63,8 @@ public class NewCanteenesListController implements AccessorWindowController, Tab
         String canteenName = canteenesTable.getSelectionModel().getSelectedItem();
         CanteenDTO canteenDTO;
         try {
-            canteenDTO = SessionService.getSession().getCanteenByName(canteenName);
-            SessionService.getSession().removeCanteen(canteenDTO);
+            canteenDTO = Client.getSessionService().getSession().getCanteenByName(canteenName);
+            Client.getSessionService().getSession().removeCanteen(canteenDTO);
         } catch(RemoteException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
@@ -99,7 +99,7 @@ public class NewCanteenesListController implements AccessorWindowController, Tab
         List<String> names = new ArrayList<>();
         try {
             canteenNames.clear();
-            names.addAll(SessionService.getSession().getAllCanteenNames());
+            names.addAll(Client.getSessionService().getSession().getAllCanteenNames());
             for(String name : names) {
                 canteenNames.add(name);
             }

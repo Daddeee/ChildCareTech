@@ -1,9 +1,9 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,7 +103,7 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
     @FXML
     public void deleteButtonAction(ActionEvent event) {
         try {
-            SessionService.getSession().removeKid((personTable.getSelectionModel().getSelectedItem()).getDTO());
+            Client.getSessionService().getSession().removeKid((personTable.getSelectionModel().getSelectedItem()).getDTO());
         } catch (RemoteException ex) {
             System.err.println("error remote");
             ex.printStackTrace();
@@ -123,7 +123,7 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
     public void refreshTable() {
         List<KidDTO> kidDTOList = new ArrayList<>();
         try {
-            kidDTOList = SessionService.getSession().getAllKids();
+            kidDTOList = Client.getSessionService().getSession().getAllKids();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

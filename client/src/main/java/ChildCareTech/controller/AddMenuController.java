@@ -1,10 +1,10 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,7 +68,7 @@ public class AddMenuController implements AccessorWindowController {
         menuDTO.setDishes(dishes);
 
         try{
-            SessionService.getSession().createMenu(currentMealDTO);
+            Client.getSessionService().getSession().createMenu(currentMealDTO);
             accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException e){
@@ -78,7 +78,7 @@ public class AddMenuController implements AccessorWindowController {
     private void initTable() {
         availableDishes.clear();
         try{
-            availableDishes.addAll(SessionService.getSession().getAllDishes());
+            availableDishes.addAll(Client.getSessionService().getSession().getAllDishes());
         } catch (RemoteException e){
             e.printStackTrace();
         }

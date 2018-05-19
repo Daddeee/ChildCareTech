@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
@@ -8,7 +9,6 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.ObservableDTOs.ObservableAdult;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
 import ChildCareTech.services.ObservableDTOs.ObservablePediatrist;
-import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -37,7 +37,7 @@ public class EditKidController extends AddKidController {
 
         kid = new KidDTO(id, person, firstTutor, secondTutor, pediatristComboBox.getValue().getDTO(), null);
         try {
-            SessionService.getSession().updateKid(kid);
+            Client.getSessionService().getSession().updateKid(kid);
             accessorWindowService.close();
         } catch(UpdateFailedException ex) {
             alertLabel.setText(ex.getMessage());

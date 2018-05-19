@@ -1,18 +1,13 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.DTO.CheckpointDTO;
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.services.SessionService;
 import ChildCareTech.utils.WebcamQRCodeReader;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
-import javafx.collections.ObservableSet;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.time.LocalTime;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class QRCodeController {
@@ -39,7 +34,7 @@ public class QRCodeController {
             LocalTime time = LocalTime.now();
             if(!scannedCodes.contains(fiscalCode)) {
                 scannedCodes.add(fiscalCode);
-                SessionService.getSession().saveCheckpoint(fiscalCode, eventDTO, time);
+                Client.getSessionService().getSession().saveCheckpoint(fiscalCode, eventDTO, time);
                 alertLabel.setText(fiscalCode + " Registrato correttamente alle " + time);
             }
         } catch (Exception e){

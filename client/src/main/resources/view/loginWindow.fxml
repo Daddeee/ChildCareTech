@@ -6,6 +6,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0"
             prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ChildCareTech.controller.LoginController">
@@ -52,6 +54,14 @@
                         <Insets/>
                     </VBox.margin>
                 </Button>
+                <ComboBox fx:id="connectivity" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="282.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="RMI"/>
+                            <String fx:value="Socket"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
                 <Label fx:id="alertBox" textFill="#ff1a1a"/>
             </children>
             <BorderPane.margin>

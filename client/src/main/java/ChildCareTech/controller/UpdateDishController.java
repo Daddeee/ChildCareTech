@@ -1,9 +1,9 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.SessionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -30,7 +30,7 @@ public class UpdateDishController implements AccessorWindowController{
 
         List<FoodDTO> availableIngredients = new ArrayList<>();
         try{
-            availableIngredients = SessionService.getSession().getAllFoods();
+            availableIngredients = Client.getSessionService().getSession().getAllFoods();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -55,7 +55,7 @@ public class UpdateDishController implements AccessorWindowController{
         currentDishDTO.setFoods(foods);
         currentDishDTO.setName(nameField.getText());
         try {
-            SessionService.getSession().updateDish(currentDishDTO);
+            Client.getSessionService().getSession().updateDish(currentDishDTO);
             accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException e) {

@@ -1,27 +1,28 @@
-package ChildCareTech.services;
+package ChildCareTech.network.RMI;
 
 
 import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.LoginFailedException;
-import ChildCareTech.network.RMI.RMIRemoteEventObserver;
+import ChildCareTech.network.SessionService;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class SessionService {
-    private static UserSessionFactory sessionFactory = null;
-    private static UserSession session = null;
-    private static String loginErrorMessage = null;
-    private static RemoteEventObserver observer = null;
+public class RMISessionService implements SessionService {
+    private UserSessionFactory sessionFactory = null;
+    private UserSession session = null;
+    private String loginErrorMessage = null;
+    private RemoteEventObserver observer = null;
 
-    private SessionService() {
+    public RMISessionService() {
     }
 
-    public static void loginAttempt(String userName, String password) {
+    @Override
+    public void loginAttempt(String userName, String password) {
         try {
             initSessionFactory();
             session = sessionFactory.login(userName, password);
@@ -34,12 +35,8 @@ public class SessionService {
         }
     }
 
-    private static void initSessionFactory() throws NotBoundException, MalformedURLException, RemoteException {
-        if(sessionFactory == null)
-            sessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
-    }
-
-    public static void logoutAttempt() {
+    @Override
+    public void logoutAttempt() {
         try {
             if (session != null) session.logout();
             if (sessionFactory != null) sessionFactory.removeRemoteEventObserver(observer);
@@ -52,19 +49,28 @@ public class SessionService {
         observer = null;
     }
 
-    public static UserSession getSession() {
+    private void initSessionFactory() throws NotBoundException, MalformedURLException, RemoteException {
+        if(sessionFactory == null)
+            sessionFactory = (UserSessionFactory) Naming.lookup("rmi://localhost:1099/session_factory");
+    }
+
+    @Override
+    public UserSession getSession() {
         return session;
     }
 
-    public static RemoteEventObserver getObserver() {
+    @Override
+    public RemoteEventObserver getObserver() {
         return observer;
     }
 
-    public static boolean isNull() {
+    @Override
+    public boolean isNull() {
         return session == null;
     }
 
-    public static String getLoginErrorMessage() {
+    @Override
+    public String getLoginErrorMessage() {
         return loginErrorMessage;
     }
 }

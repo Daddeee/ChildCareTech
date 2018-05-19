@@ -1,5 +1,6 @@
 package ChildCareTech;
 
+import ChildCareTech.network.SessionService;
 import ChildCareTech.services.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -7,6 +8,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Client extends Application {
+    private static SessionService sessionService;
+
+    public static SessionService getSessionService() {
+        return sessionService;
+    }
+
+    public static void setSessionService(SessionService s) {
+        sessionService = s;
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -24,7 +34,8 @@ public class Client extends Application {
 
     @Override
     public void stop() throws Exception {
-        SessionService.logoutAttempt();
+        if(sessionService != null)
+            sessionService.logoutAttempt();
     }
 
     public static void main(String[] args) {

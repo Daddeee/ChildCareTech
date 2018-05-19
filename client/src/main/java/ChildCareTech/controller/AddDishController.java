@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.services.*;
@@ -46,7 +47,7 @@ public class AddDishController implements AccessorWindowController{
         DishDTO dishDTO = new DishDTO(0, nameField.getText(), null, foods);
 
         try {
-            SessionService.getSession().createDish(dishDTO);
+            Client.getSessionService().getSession().createDish(dishDTO);
             accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException e) {
@@ -117,7 +118,7 @@ public class AddDishController implements AccessorWindowController{
         selectedName.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
 
         try{
-            availableFoodsList = SessionService.getSession().getAllFoods();
+            availableFoodsList = Client.getSessionService().getSession().getAllFoods();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
