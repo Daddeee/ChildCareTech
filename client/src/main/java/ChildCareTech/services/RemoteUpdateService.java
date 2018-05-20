@@ -70,30 +70,37 @@ public class RemoteUpdateService {
     }
 
     private void updateDish(){
+        //TODO
         System.out.println("Dish update");
     }
 
     private void updateFood(){
+        //TODO
         System.out.println("Food update");
     }
 
     private void updateBus(){
+        //TODO
         System.out.println("Bus update");
     }
 
     private void updateCheckpoint(){
+        //TODO
         System.out.println("Checkpoint update");
     }
 
     private void updateMenu(){
+        //TODO
         System.out.println("Menu update");
     }
 
     private void updateAllergy(){
+        //TODO
         System.out.println("Allergy update");
     }
 
     private void updateTripPartecipation(){
+        //TODO
         System.out.println("TripPartecipation update");
     }
 }
