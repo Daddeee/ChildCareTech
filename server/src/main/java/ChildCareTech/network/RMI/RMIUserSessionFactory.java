@@ -34,14 +34,4 @@ public class RMIUserSessionFactory extends UnicastRemoteObject implements UserSe
     public boolean register(String userName, String password) throws RegistrationFailedException {
         return UserController.registerUser(userName, password);
     }
-
-    @Override
-    public void addRemoteEventObserver(RemoteEventObserver observer) {
-        RemoteEventObservable.getInstance().addObserver(observer);
-    }
-
-    @Override
-    public void removeRemoteEventObserver(RemoteEventObserver observer) {
-        RemoteEventObservable.getInstance().removeObserver(observer);
-    }
 }

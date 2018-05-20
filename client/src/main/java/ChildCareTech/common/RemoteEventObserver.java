@@ -6,5 +6,6 @@ import java.rmi.RemoteException;
 public interface RemoteEventObserver extends Remote {
     void update(RemoteUpdatable updatable) throws RemoteException;
     void unexport() throws RemoteException;
+    int getPort() throws RemoteException;
 }
 

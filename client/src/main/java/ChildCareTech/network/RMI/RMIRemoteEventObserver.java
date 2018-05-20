@@ -28,4 +28,10 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
     public void update(RemoteUpdatable updatable) {
         remoteUpdateService.handle(updatable);
     }
+
+    @Override
+    public int getPort() {
+        //Unused in RMI
+        return 0;
+    }
 }

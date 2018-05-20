@@ -1,6 +1,7 @@
 package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.*;
+import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
@@ -399,6 +400,16 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     @Override
     public void setFirstEverStartup(boolean value) {
         workDayGenerationController.doSetFirstEverStartup(value);
+    }
+
+    @Override
+    public void addRemoteEventObserver(RemoteEventObserver observer) {
+        RemoteEventObservable.getInstance().addObserver(observer);
+    }
+
+    @Override
+    public void removeRemoteEventObserver(RemoteEventObserver observer) {
+        RemoteEventObservable.getInstance().removeObserver(observer);
     }
 
     @Override

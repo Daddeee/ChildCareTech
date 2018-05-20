@@ -16,6 +16,7 @@ public class SocketSessionService implements SessionService {
     private ObjectOutputStream out;
     private String loginErrorMessage;
     private SocketUserSession socketUserSession;
+    private RemoteEventObserver socketRemoteEventObserver;
 
     public SocketSessionService() throws IOException {
         this.socket = new Socket("127.0.0.1", 1199);
@@ -36,7 +37,11 @@ public class SocketSessionService implements SessionService {
             if(response.responseType.equals(SocketResponseType.FAIL)){
                 loginErrorMessage = ((Exception) response.returnValue).getMessage();
             } else {
-                socketUserSession = new SocketUserSession(socket, out, in);
+                socketUserSession = new SocketUserSession(socket, out, in, userName);
+
+                socketRemoteEventObserver = new SocketRemoteEventObserver(1337);
+                ((SocketRemoteEventObserver) socketRemoteEventObserver).start();
+                socketUserSession.addRemoteEventObserver(socketRemoteEventObserver);
             }
         } catch (IOException | ClassNotFoundException e){
             loginErrorMessage = e.getMessage();
@@ -50,12 +55,19 @@ public class SocketSessionService implements SessionService {
         SocketResponse response;
 
         try{
+            socketUserSession.removeRemoteEventObserver(socketRemoteEventObserver);
+
             out.writeObject(request);
 
             loginErrorMessage = "";
-        } catch (IOException e){
+            response = (SocketResponse) in.readObject();
+            if(response.responseType.equals(SocketResponseType.FAIL)) {
+                loginErrorMessage = ((Exception) response.returnValue).getMessage();
+            }
+
+        } catch (ClassNotFoundException e){
             e.printStackTrace();
-        }
+        } catch (IOException e) {}
 
         socketUserSession = null;
         Client.setSessionService(null);
