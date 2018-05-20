@@ -1,6 +1,7 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
 
@@ -24,7 +25,8 @@ public class EventScheduler {
         WorkDay current = CurrentWorkDayService.getCurrent();
 
         try {
-            RemoteEventObservable.getInstance().setDay(current);
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TODAY);
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIP);
         } catch(RemoteException e){
             e.printStackTrace();
         }
@@ -34,7 +36,8 @@ public class EventScheduler {
                 @Override
                 public void run() {
                     try{
-                        RemoteEventObservable.getInstance().changeEventStatus(e, EventStatus.OPEN);
+                        CurrentWorkDayService.changeEventStatus(e, EventStatus.OPEN);
+                        RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.EVENT);
                     } catch(Exception e){
                         e.printStackTrace();
                     }
@@ -45,7 +48,8 @@ public class EventScheduler {
                 @Override
                 public void run() {
                     try{
-                        RemoteEventObservable.getInstance().changeEventStatus(e, EventStatus.CLOSED);
+                        CurrentWorkDayService.changeEventStatus(e, EventStatus.CLOSED);
+                        RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.EVENT);
                     } catch(Exception e){
                         e.printStackTrace();
                     }

@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.FoodDAO;
@@ -11,6 +12,7 @@ import ChildCareTech.model.entities.Person;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -61,10 +63,10 @@ public class FoodController {
         foodDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             foodDAO.update(newFood);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.FOOD);
         }catch(IndexOutOfBoundsException e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -89,7 +91,9 @@ public class FoodController {
             tx = session.beginTransaction();
             foodDAO.delete(food);
             tx.commit();
-        } catch(HibernateException e){
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.FOOD);
+        } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
         } finally {
@@ -106,10 +110,10 @@ public class FoodController {
         foodDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             foodDAO.create(food);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.FOOD);
         } catch(Exception ex){
             if(tx!=null) tx.rollback();
             ex.printStackTrace();

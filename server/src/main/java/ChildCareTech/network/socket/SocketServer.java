@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SocketServer {
+public class SocketServer implements Runnable{
     private int socketPort;
 
     public SocketServer(int socketPort) {
@@ -14,6 +14,11 @@ public class SocketServer {
     }
 
     public void start() {
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
         ExecutorService executor = Executors.newCachedThreadPool();
         ServerSocket serverSocket;
         try {
@@ -41,5 +46,4 @@ public class SocketServer {
             System.err.println(e.getMessage());
         }
     }
-
 }

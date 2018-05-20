@@ -38,7 +38,7 @@ public class MealsGenerationUtil {
 
             for(WorkDay w : allWorkDays){
                 EventStatus status = EventStatus.WAIT;
-                if(w.getDate().isBefore(RemoteEventObservable.getInstance().getToday().getDate()))
+                if(w.getDate().isBefore(CurrentWorkDayService.getCurrent().getDate()))
                     status = EventStatus.CLOSED;
 
                 for(int i = 0; i < entryTimes.size(); i++){

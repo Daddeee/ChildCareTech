@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.PersonDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.FoodDAO;
 import ChildCareTech.model.DAO.PersonDAO;
@@ -9,6 +10,7 @@ import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -30,10 +32,10 @@ public class PersonController {
             tx = session.beginTransaction();
 
             Person person = personDAO.read(personDTO.getId());
-
             person.getAllergies().removeIf(food -> food.getId() == foodDTO.getId());
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.ALLERGY);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -56,10 +58,10 @@ public class PersonController {
 
             Person person = personDAO.read(personDTO.getId());
             Food food = foodDAO.read(foodDTO.getId());
-
             person.getAllergies().add(food);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.ALLERGY);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();

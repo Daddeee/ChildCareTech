@@ -18,7 +18,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
-public class PersonTest extends AbstractEntityTest<Person, String> {
+public class PersonTest extends AbstractEntityTest<Person, Integer> {
     @Override
     public void setUp() throws Exception {
         super.setUp();

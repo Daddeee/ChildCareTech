@@ -3,17 +3,21 @@ package ChildCareTech.network.RMI;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.RemoteEventObserver;
+import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.services.RemoteUpdateService;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 import java.util.List;
 
 public class RMIRemoteEventObserver extends UnicastRemoteObject implements RemoteEventObserver, Serializable {
-    private static WorkDayDTO today;
-    private static List<TripDTO> todayTrips;
+    private RemoteUpdateService remoteUpdateService;
 
-    public RMIRemoteEventObserver() throws RemoteException {}
+    public RMIRemoteEventObserver() throws RemoteException {
+        this.remoteUpdateService = new RemoteUpdateService();
+    }
 
     @Override
     public void unexport() throws RemoteException {
@@ -21,9 +25,7 @@ public class RMIRemoteEventObserver extends UnicastRemoteObject implements Remot
     }
 
     @Override
-    public void update(WorkDayDTO workDayDTO, List<TripDTO> tripDTOS) {
-        today = workDayDTO;
-        todayTrips = tripDTOS;
-        //Platform.runLater(() -> MainSceneManager.getHomeController().refresh(today, todayTrips));
+    public void update(RemoteUpdatable updatable) {
+        remoteUpdateService.handle(updatable);
     }
 }

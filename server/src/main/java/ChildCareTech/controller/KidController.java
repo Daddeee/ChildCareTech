@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.KidDAO;
 import ChildCareTech.model.entities.Kid;
@@ -9,6 +10,7 @@ import ChildCareTech.model.entities.Trip;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -89,10 +91,10 @@ public class KidController {
         kidDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             kidDAO.create(kid);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.KID);
         } catch(Exception ex){
             if(tx!=null) tx.rollback();
             ex.printStackTrace();
@@ -112,8 +114,9 @@ public class KidController {
         try{
             tx = session.beginTransaction();
             kidDAO.delete(kid);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.KID);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -134,11 +137,13 @@ public class KidController {
             tx = session.beginTransaction();
             kidDAO.update(kid);
             tx.commit();
-        } catch(ValidationFailedException ex) {
-            System.err.println("validation failed");
-            ex.printStackTrace();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.KID);
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
         }
-        finally{
+        finally {
             session.close();
         }
     }

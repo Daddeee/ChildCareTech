@@ -1,6 +1,7 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.Event;
@@ -33,7 +34,7 @@ public class ManualEventScheduler implements Runnable{
         backgroundThread.start();
 
         planned = null;
-        toPlan = RemoteEventObservable.getInstance().getToday();
+        toPlan = CurrentWorkDayService.getCurrent();
     }
 
     @Override
@@ -89,7 +90,7 @@ public class ManualEventScheduler implements Runnable{
     }
 
     private void openEvent(){
-        List<Event> plannedEvents = new ArrayList<>(RemoteEventObservable.getInstance().getPlannedEvents());
+        List<Event> plannedEvents = new ArrayList<>(CurrentWorkDayService.getCurrent().getEvents());
         plannedEvents.removeIf(event -> !event.getEventStatus().equals(EventStatus.WAIT));
 
         for(int i = 0; i < plannedEvents.size(); i++){
@@ -100,14 +101,15 @@ public class ManualEventScheduler implements Runnable{
         in.nextLine();
 
         try {
-            RemoteEventObservable.getInstance().changeEventStatus(plannedEvents.get(selection), EventStatus.OPEN);
+            CurrentWorkDayService.changeEventStatus(plannedEvents.get(selection), EventStatus.OPEN);
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.EVENT);
         } catch(Exception e){
             e.printStackTrace();
         }
     }
 
     private void closeEvent(){
-        List<Event> plannedEvents = new ArrayList<>(RemoteEventObservable.getInstance().getPlannedEvents());
+        List<Event> plannedEvents = new ArrayList<>(CurrentWorkDayService.getCurrent().getEvents());
         plannedEvents.removeIf(event -> !event.getEventStatus().equals(EventStatus.OPEN));
 
         for(int i = 0; i < plannedEvents.size(); i++){
@@ -118,14 +120,15 @@ public class ManualEventScheduler implements Runnable{
         in.nextLine();
 
         try {
-            RemoteEventObservable.getInstance().changeEventStatus(plannedEvents.get(selection), EventStatus.CLOSED);
+            CurrentWorkDayService.changeEventStatus(plannedEvents.get(selection), EventStatus.CLOSED);
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.EVENT);
         } catch(Exception e){
             e.printStackTrace();
         }
     }
 
     private void listPlanned(){
-        List<Event> plannedEvents = RemoteEventObservable.getInstance().getPlannedEvents();
+        List<Event> plannedEvents = new ArrayList<>(CurrentWorkDayService.getCurrent().getEvents());
 
         for(int i = 0; i < plannedEvents.size(); i++){
             System.out.println(i + ": " + plannedEvents.get(i).toString());
@@ -147,7 +150,9 @@ public class ManualEventScheduler implements Runnable{
             tx = session.beginTransaction();
 
             planned = toPlan;
-            RemoteEventObservable.getInstance().setDay(planned);
+
+            CurrentWorkDayService.setCurrent(planned);
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TODAY);
 
             toPlan = workDayDAO.tomorrow(toPlan);
             workDayDAO.initializeLazyRelations(toPlan);

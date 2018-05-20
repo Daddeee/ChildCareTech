@@ -1,12 +1,14 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.RouteDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.RouteDAO;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -27,7 +29,9 @@ public class RouteController {
             tx = session.beginTransaction();
             routeDAO.delete(route);
             tx.commit();
-        } catch(HibernateException e){
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIP);
+        } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
         } finally {
@@ -64,6 +68,8 @@ public class RouteController {
             routeDAO.update(route);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIP);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             throw new UpdateFailedException(e.getMessage());

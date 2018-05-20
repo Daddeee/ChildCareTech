@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.BusDAO;
@@ -11,6 +12,7 @@ import ChildCareTech.model.entities.Trip;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -35,9 +37,7 @@ public class BusController {
         tripDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             busesCollection = busDAO.getAvailableBuses(trip);
-
             tx.commit();
         } catch(HibernateException e){
             if(tx!=null)tx.rollback();
@@ -92,10 +92,10 @@ public class BusController {
         busDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             busDAO.update(newBus);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.BUS);
         }catch(IndexOutOfBoundsException e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -120,7 +120,9 @@ public class BusController {
             tx = session.beginTransaction();
             busDAO.delete(bus);
             tx.commit();
-        } catch(HibernateException e){
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.BUS);
+        } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
         } finally {
@@ -137,10 +139,10 @@ public class BusController {
         busDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             busDAO.create(bus);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.BUS);
         } catch(Exception ex){
             if(tx!=null) tx.rollback();
             ex.printStackTrace();

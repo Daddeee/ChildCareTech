@@ -1,8 +1,10 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.WorkDayDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.WorkDay;
+import ChildCareTech.utils.CurrentWorkDayService;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
@@ -80,7 +82,7 @@ public class WorkDayController {
     }
 
     public WorkDayDTO doGetCurrentWorkDay() {
-        return DTOFactory.getDTO(RemoteEventObservable.getInstance().getToday());
+        return DTOFactory.getDTO(CurrentWorkDayService.getCurrent());
     }
 
     public void doTriggerDailyScheduling() throws RemoteException {
@@ -93,17 +95,19 @@ public class WorkDayController {
         try{
             tx = session.beginTransaction();
 
-            reloadedToday = workDayDAO.read(RemoteEventObservable.getInstance().getToday());
+            reloadedToday = workDayDAO.read(CurrentWorkDayService.getCurrent());
 
             workDayDAO.initializeLazyRelations(reloadedToday);
 
             tx.commit();
+
+            CurrentWorkDayService.setCurrent(reloadedToday);
         } catch (Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
-        RemoteEventObservable.getInstance().setDay(reloadedToday);
+        RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TODAY);
     }
 }

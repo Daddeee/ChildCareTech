@@ -1,6 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.AdultDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
@@ -9,6 +10,7 @@ import ChildCareTech.model.entities.Adult;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -41,6 +43,8 @@ public class AdultController {
                 throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.ADULT);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -48,6 +52,7 @@ public class AdultController {
         } finally {
             session.close();
         }
+
     }
 
     public List<AdultDTO> doGetAllAdults() {
@@ -89,8 +94,9 @@ public class AdultController {
         try{
             tx = session.beginTransaction();
             adultDAO.delete(adult);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.ADULT);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -108,10 +114,10 @@ public class AdultController {
         adultDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             adultDAO.update(adult);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.ADULT);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();

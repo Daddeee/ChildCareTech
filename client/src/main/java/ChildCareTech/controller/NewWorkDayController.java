@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.Client;
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.utils.RestrictedDatePicker;
@@ -37,6 +38,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
     @FXML
     protected Button logButton;
 
+    WorkDayDTO selectedWorkDay;
     Set<EventDTO> events = new HashSet<>();
     AccessorWindowService accessorWindowService;
     AccessorWindowService codeInputService;
@@ -86,10 +88,22 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         }
     }
 
+    public void remoteUpdate() {
+        try{
+            selectedWorkDay = Client.getSessionService().getSession().getCurrentWorkDay();
+            events = selectedWorkDay.getEvents();
+            workDayDatePicker.setValue(selectedWorkDay.getDate());
+            refreshTable();
+        } catch(RemoteException e){
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void updateTable(ActionEvent event){
         try{
-            events = Client.getSessionService().getSession().getWorkDay(workDayDatePicker.getValue()).getEvents();
+            selectedWorkDay = Client.getSessionService().getSession().getWorkDay(workDayDatePicker.getValue());
+            events = selectedWorkDay.getEvents();
             refreshTable();
         } catch(RemoteException e){
             e.printStackTrace();

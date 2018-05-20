@@ -1,11 +1,13 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.DishDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.DAO.DishDAO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,10 +27,10 @@ public class DishController {
         dishDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             dishDAO.delete(dish);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.DISH);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
@@ -46,10 +48,10 @@ public class DishController {
         dishDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             dishDAO.update(dish);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.DISH);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
@@ -67,10 +69,10 @@ public class DishController {
         dishDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             dishDAO.create(dish);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.DISH);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();

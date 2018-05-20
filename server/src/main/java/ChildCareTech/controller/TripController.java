@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.BusDAO;
@@ -12,6 +13,7 @@ import ChildCareTech.model.entities.Trip;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -72,6 +74,8 @@ public class TripController {
             tripDAO.update(newTrip);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIP);
         }catch(IndexOutOfBoundsException e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -107,6 +111,8 @@ public class TripController {
                 throw new AddFailedException("Una gita per la stessa meta e con stesse date è già presente");
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIP);
         } catch(Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
@@ -126,8 +132,9 @@ public class TripController {
         try{
             tx = session.beginTransaction();
             tripDAO.delete(trip);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIP);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -191,6 +198,8 @@ public class TripController {
             }
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIPPARTECIPATION);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -220,6 +229,8 @@ public class TripController {
             tripPartecipationDAO.removeAssociatedTripPartecipations(trip, bus);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIPPARTECIPATION);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();

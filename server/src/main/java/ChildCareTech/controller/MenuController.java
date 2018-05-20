@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.DAO.DishDAO;
 import ChildCareTech.model.DAO.MealDAO;
 import ChildCareTech.model.DAO.MenuDAO;
@@ -10,6 +11,7 @@ import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -33,6 +35,8 @@ public class MenuController {
             mealDAO.update(meal);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.MENU);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
@@ -57,6 +61,8 @@ public class MenuController {
             menuDAO.update(meal.getMenu());
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.MENU);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
@@ -77,6 +83,8 @@ public class MenuController {
                     .executeUpdate();
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.MENU);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
@@ -100,6 +108,8 @@ public class MenuController {
             menuDAO.read(menuDTO.getId()).getDishes().add(dish);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.MENU);
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();

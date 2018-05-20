@@ -1,6 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.CanteenDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.CanteenDAO;
 import ChildCareTech.model.DAO.MealDAO;
@@ -12,6 +13,7 @@ import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.DTO.factories.CanteenDTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.MealsGenerationUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -88,11 +90,12 @@ public class CanteenController {
         Canteen canteen;
         try{
             tx = session.beginTransaction();
-
             canteen = DTOEntityAssembler.getEntity(canteenDTO);
             canteenDAO.create(canteen);
-
             tx.commit();
+
+            MealsGenerationUtil.generateMeals(canteen, entryTimeList, exitTimeList);
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.CANTEEN);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             throw new AddFailedException(e.getMessage());
@@ -100,7 +103,6 @@ public class CanteenController {
             session.close();
         }
 
-        MealsGenerationUtil.generateMeals(canteen, entryTimeList, exitTimeList);
     }
 
     public List<CanteenDTO> doGetAllCanteenes() {
@@ -137,10 +139,10 @@ public class CanteenController {
         canteenDAO.setSession(session);
         try{
             tx = session.beginTransaction();
-
             canteenDAO.delete(canteen);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.CANTEEN);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();

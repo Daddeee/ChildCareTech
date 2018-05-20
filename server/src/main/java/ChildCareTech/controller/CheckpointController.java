@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.model.DAO.CheckpointDAO;
 import ChildCareTech.model.DAO.EventDAO;
@@ -12,6 +13,7 @@ import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.utils.DTO.DTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -41,7 +43,7 @@ public class CheckpointController {
         try{
             tx = session.beginTransaction();
 
-            person = personDAO.read(fiscalCode);
+            person = personDAO.read("fiscalCode", fiscalCode).get(0);
             if(person == null)
                 throw new CheckpointFailedException("Persona non trovata");
 
@@ -54,6 +56,8 @@ public class CheckpointController {
             checkpointDAO.create(record);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.CHECKPOINT);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();

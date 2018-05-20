@@ -1,11 +1,13 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.TripPartecipationDTO;
+import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.TripPartecipationDAO;
 import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
+import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -22,10 +24,10 @@ public class TripPartecipationController {
 
         try{
             tx = session.beginTransaction();
-
             tripPartecipationDAO.create(tripPartecipation);
-
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIPPARTECIPATION);
         } catch (Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
@@ -49,6 +51,8 @@ public class TripPartecipationController {
             tripPartecipationDAO.delete(tripPartecipation);
 
             tx.commit();
+
+            RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TRIPPARTECIPATION);
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
