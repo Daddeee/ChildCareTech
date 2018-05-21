@@ -140,7 +140,7 @@ public class EditKidAllergiesController implements AccessorWindowController {
             return;
         this.kidDTO = kidDTO;
         allergies.addAll(kidDTO.getPerson().getAllergies());
-        foods.removeAll(kidDTO.getPerson().getAllergies());
+        foods.removeAll(allergies);
     }
 
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
