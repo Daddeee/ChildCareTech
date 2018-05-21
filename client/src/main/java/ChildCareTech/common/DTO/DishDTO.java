@@ -44,4 +44,11 @@ public class DishDTO implements Serializable {
     public void setFoods(Set<FoodDTO> foods) {
         this.foods = foods;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof DishDTO)) return false;
+        return ((DishDTO) o).name.equals(this.name);
+    }
 }

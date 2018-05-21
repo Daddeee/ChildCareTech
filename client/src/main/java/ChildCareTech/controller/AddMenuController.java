@@ -39,8 +39,7 @@ public class AddMenuController implements AccessorWindowController {
         currentMealDTO = mealDTO;
         if(mealDTO.getMenu() != null) {
             selectedDishes.addAll(mealDTO.getMenu().getDishes());
-            for(DishDTO dishDTO : mealDTO.getMenu().getDishes())
-                availableDishes.remove(dishDTO);
+            availableDishes.removeAll(selectedDishes);
         }
     }
 
