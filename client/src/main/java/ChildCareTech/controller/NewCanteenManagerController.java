@@ -42,6 +42,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         refreshTable();
         initMenu();
         mealsDataTable.setItems(items);
+        mealsDataTable.getSortOrder().add(mealsDataTable.getColumns().get(0));
         accessorWindowService = new AccessorWindowService(this);
         accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
