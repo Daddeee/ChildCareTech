@@ -45,8 +45,8 @@ public class Person implements iEntity<Person, Integer> {
     private Set<TripPartecipation> tripPartecipations = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(joinColumns = {@JoinColumn(name = "food_id", nullable = false, updatable = false)},
-                inverseJoinColumns = {@JoinColumn(name = "person_id", nullable = false, updatable = false)})
+    @JoinTable(joinColumns = {@JoinColumn(name = "person_id", nullable = false, updatable = false)},
+                inverseJoinColumns = {@JoinColumn(name = "food_id", nullable = false, updatable = false)})
     private Set<Food> allergies = new HashSet<>();
 
     public Person() {
