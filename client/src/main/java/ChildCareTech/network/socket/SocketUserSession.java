@@ -23,11 +23,13 @@ public class SocketUserSession implements UserSession {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
+    private String userName;
 
-    public SocketUserSession(Socket socket, ObjectOutputStream out, ObjectInputStream in) {
+    public SocketUserSession(Socket socket, ObjectOutputStream out, ObjectInputStream in, String userName) {
         this.socket = socket;
         this.in = in;
         this.out = out;
+        this.userName = userName;
     }
 
     @Override
@@ -1260,5 +1262,37 @@ public class SocketUserSession implements UserSession {
             throw (RemoteException) response.returnValue;
     }
 
+    @Override
+    public void addRemoteEventObserver(RemoteEventObserver observer) throws RemoteException {
+        SocketRequest request = new SocketRequest(SocketRequestType.ADD_OBSERVER, observer.getPort(), this.userName);
+        SocketResponse response;
 
+        try{
+            out.writeObject(request);
+            response = (SocketResponse)in.readObject();
+        } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RemoteException(e.getMessage());
+        }
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (RemoteException) response.returnValue;
+    }
+
+    @Override
+    public void removeRemoteEventObserver(RemoteEventObserver observer) throws RemoteException {
+        SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_OBSERVER, this.userName);
+        SocketResponse response;
+
+        try{
+            out.writeObject(request);
+            response = (SocketResponse)in.readObject();
+        } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RemoteException(e.getMessage());
+        }
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (RemoteException) response.returnValue;
+    }
 }

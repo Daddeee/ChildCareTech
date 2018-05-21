@@ -28,7 +28,7 @@ public class RMISessionService implements SessionService {
             session = sessionFactory.login(userName, password);
 
             observer = new RMIRemoteEventObserver();
-            sessionFactory.addRemoteEventObserver(observer);
+            session.addRemoteEventObserver(observer);
         } catch (LoginFailedException | RemoteException | NotBoundException | MalformedURLException e) {
             loginErrorMessage = e.getMessage();
             e.printStackTrace();
@@ -38,8 +38,10 @@ public class RMISessionService implements SessionService {
     @Override
     public void logoutAttempt() {
         try {
-            if (session != null) session.logout();
-            if (sessionFactory != null) sessionFactory.removeRemoteEventObserver(observer);
+            if (session != null) {
+                session.removeRemoteEventObserver(observer);
+                session.logout();
+            }
             if (observer != null) observer.unexport();
         } catch (RemoteException e) {
             System.out.println(e.getMessage());

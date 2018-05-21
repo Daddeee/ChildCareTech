@@ -6,6 +6,7 @@ import ChildCareTech.common.SocketRequestType;
 import ChildCareTech.common.SocketResponse;
 import ChildCareTech.common.SocketResponseType;
 import ChildCareTech.controller.*;
+import ChildCareTech.utils.RemoteEventObservable;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -1211,6 +1212,43 @@ public class SocketProtocol {
         return response;
     }
 
+    private SocketResponse handleAddRemoteEventObserver(SocketRequest request) {
+        SocketResponse response;
+
+        try{
+            int port = (Integer) request.params[0];
+            String userName = (String) request.params[1];
+
+            SocketRemoteEventObserver observer = new SocketRemoteEventObserver(port);
+            RemoteEventObservable.getInstance().addObserver(observer);
+            SocketRemoteEventObserver.socketRemoteEventObserversMap.put(userName, observer);
+
+            response = new SocketResponse(SocketResponseType.SUCCESS, null);
+        } catch(Exception e) {
+            response = new SocketResponse(SocketResponseType.FAIL, e);
+        }
+
+        return response;
+    }
+
+    private SocketResponse handleRemoveRemoteEventObserver(SocketRequest request) {
+        SocketResponse response;
+
+        try{
+            String userName = (String) request.params[0];
+
+            SocketRemoteEventObserver observer = SocketRemoteEventObserver.socketRemoteEventObserversMap.get(userName);
+            RemoteEventObservable.getInstance().removeObserver(observer);
+            observer.unexport();
+
+            response = new SocketResponse(SocketResponseType.SUCCESS, null);
+        } catch(Exception e) {
+            response = new SocketResponse(SocketResponseType.FAIL, e);
+        }
+
+        return response;
+    }
+
     private void loadProtocol(){
         this.methodMap.put(SocketRequestType.LOGIN, this::handleLogin);
         this.methodMap.put(SocketRequestType.LOGOUT, this::handleLogout);
@@ -1284,6 +1322,8 @@ public class SocketProtocol {
         this.methodMap.put(SocketRequestType.UPDATE_FOOD, this:: handleUpdateFood);
         this.methodMap.put(SocketRequestType.GET_ALL_BUSES, this:: handleGetAllBuses);
         this.methodMap.put(SocketRequestType.GET_AVAILABLE_BUSES, this:: handleGetAvailableBuses);
+        this.methodMap.put(SocketRequestType.ADD_OBSERVER, this::handleAddRemoteEventObserver);
+        this.methodMap.put(SocketRequestType.REMOVE_OBSERVER, this::handleRemoveRemoteEventObserver);
     }
 
     public interface SocketRequestHandler {
