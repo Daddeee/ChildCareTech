@@ -59,6 +59,7 @@ public class PersonController {
             Person person = personDAO.read(personDTO.getId());
             Food food = foodDAO.read(foodDTO.getId());
             person.getAllergies().add(food);
+            personDAO.update(person);
             tx.commit();
 
             RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.ALLERGY);
