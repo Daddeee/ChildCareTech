@@ -72,7 +72,11 @@ public class AddTripController implements AccessorWindowController{
 
     @FXML
     public void addRouteButtonAction(ActionEvent e) throws IOException{
-        addRoute(new TempRouteData(0,routeCounter + 1, departureLocationField.getText(), arrivalLocationField.getText(), EventStatus.WAIT, null, null));
+        String departureLocation = departureLocationField.getText();
+        String arrivalLocation = arrivalLocationField.getText();
+        addRoute(new TempRouteData(0,routeCounter + 1, departureLocation, arrivalLocation, EventStatus.WAIT, null, null));
+        departureLocationField.setText(arrivalLocation);
+        arrivalLocationField.clear();
     }
 
     @FXML
