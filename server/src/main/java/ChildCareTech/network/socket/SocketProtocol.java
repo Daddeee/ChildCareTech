@@ -1249,6 +1249,40 @@ public class SocketProtocol {
         return response;
     }
 
+    private SocketResponse handleAddContactToKid(SocketRequest request) {
+        SocketResponse response;
+
+        try{
+            KidDTO arg0 = (KidDTO) request.params[0];
+            AdultDTO arg1 = (AdultDTO) request.params[1];
+
+            kidController.doAddContactToKid(arg0, arg1);
+
+            response = new SocketResponse(SocketResponseType.SUCCESS, null);
+        } catch (Exception e){
+            response = new SocketResponse(SocketResponseType.FAIL, e);
+        }
+
+        return response;
+    }
+
+    private SocketResponse handleRemoveContactFromKid(SocketRequest request) {
+        SocketResponse response;
+
+        try{
+            KidDTO arg0 = (KidDTO) request.params[0];
+            AdultDTO arg1 = (AdultDTO) request.params[1];
+
+            kidController.doRemoveContactFromKid(arg0, arg1);
+
+            response = new SocketResponse(SocketResponseType.SUCCESS, null);
+        } catch (Exception e){
+            response = new SocketResponse(SocketResponseType.FAIL, e);
+        }
+
+        return response;
+    }
+
     private void loadProtocol(){
         this.methodMap.put(SocketRequestType.LOGIN, this::handleLogin);
         this.methodMap.put(SocketRequestType.LOGOUT, this::handleLogout);
@@ -1324,6 +1358,8 @@ public class SocketProtocol {
         this.methodMap.put(SocketRequestType.GET_AVAILABLE_BUSES, this:: handleGetAvailableBuses);
         this.methodMap.put(SocketRequestType.ADD_OBSERVER, this::handleAddRemoteEventObserver);
         this.methodMap.put(SocketRequestType.REMOVE_OBSERVER, this::handleRemoveRemoteEventObserver);
+        this.methodMap.put(SocketRequestType.ADD_CONTACT_TO_KID, this::handleAddContactToKid);
+        this.methodMap.put(SocketRequestType.REMOVE_CONTACT_FROM_KID, this::handleRemoveContactFromKid);
     }
 
     public interface SocketRequestHandler {

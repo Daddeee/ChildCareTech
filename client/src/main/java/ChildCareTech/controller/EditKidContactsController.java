@@ -74,18 +74,17 @@ public class EditKidContactsController implements AccessorWindowController{
         Set<AdultDTO> adults = new HashSet<>();
         for(ObservablePersonInterface observablePersonInterface : contacts) {
             AdultDTO adultDTO = (AdultDTO) observablePersonInterface.getDTO();
-            //adultDTO.getContacts().add(kidDTO);  ??????
             adults.add(adultDTO);
         }
         try {
-            KidDTO newKid = new KidDTO(kidDTO.getId(), kidDTO.getPerson(), kidDTO.getFirstTutor(), kidDTO.getSecondTutor(), kidDTO.getPediatrist(), adults);
-            Client.getSessionService().getSession().updateKid(newKid);
+            for(AdultDTO a : kidDTO.getContacts())
+                Client.getSessionService().getSession().removeContactFromKid(kidDTO, a);
+            for(AdultDTO a : adults)
+                Client.getSessionService().getSession().addContactToKid(kidDTO, a);
+
             accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException ex) {
-            System.err.println(ex.getMessage());
-            ex.printStackTrace();
-        } catch (UpdateFailedException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
         }
@@ -147,11 +146,11 @@ public class EditKidContactsController implements AccessorWindowController{
     }
     public void initContacts(KidDTO kidDTO) {
         this.kidDTO = kidDTO;
-        Set<AdultDTO> contacts = kidDTO.getContacts();
-        contacts.clear();
-        for(AdultDTO adultDTO : contacts) {
-            this.contacts.add(new ObservableAdult(adultDTO));
-            this.persons.remove(new ObservableAdult(adultDTO));
+
+        for(AdultDTO a : kidDTO.getContacts()) {
+            ObservableAdult temp = new ObservableAdult(a);
+            contacts.add(temp);
+            persons.remove(temp);
         }
     }
 }

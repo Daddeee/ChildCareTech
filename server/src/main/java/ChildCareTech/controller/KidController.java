@@ -1,10 +1,13 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.DAO.KidDAO;
+import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.utils.DTO.DTOEntityAssembler;
@@ -144,6 +147,50 @@ public class KidController {
             e.printStackTrace();
         }
         finally {
+            session.close();
+        }
+    }
+
+    public void doAddContactToKid(KidDTO kidDTO, AdultDTO adultDTO){
+        KidDAO kidDAO = new KidDAO();
+        AdultDAO adultDAO = new AdultDAO();
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        kidDAO.setSession(session);
+        adultDAO.setSession(session);
+        try {
+            tx = session.beginTransaction();
+
+            Adult adult = adultDAO.read(adultDTO.getId());
+            kidDAO.read(kidDTO.getId()).getContacts().add(adult);
+
+            tx.commit();
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    public void doRemoveContactFromKid(KidDTO kidDTO, AdultDTO adultDTO){
+        Transaction tx = null;
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        try{
+            tx = session.beginTransaction();
+
+            session.createSQLQuery("delete from Kid_Adult where adult_id = :adultId and kid_id = :kidId")
+                    .setParameter("adultId", adultDTO.getId())
+                    .setParameter("kidId", kidDTO.getId())
+                    .executeUpdate();
+
+            tx.commit();
+        } catch (Exception e){
+            if(tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
             session.close();
         }
     }
