@@ -91,6 +91,7 @@ public interface UserSession extends Remote {
 
     void createMenu(MealDTO mealDTO) throws RemoteException;
     void updateMenu(MealDTO mealDTO) throws RemoteException;
+    void validateMenu(MenuDTO menuDTO) throws RemoteException, UpdateFailedException;
     void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
     void addDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
 

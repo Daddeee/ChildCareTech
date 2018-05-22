@@ -67,6 +67,7 @@ public enum SocketRequestType {
     DELETE_DISH,
     CREATE_MENU,
     UPDATE_MENU,
+    VALIDATE_MENU,
     REMOVE_DISH_FROM_MENU,
     ADD_DISH_TO_MENU,
     GET_CURRENT_WORK_DAY,

@@ -423,6 +423,11 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void validateMenu(MenuDTO menuDTO) throws UpdateFailedException {
+        menuController.doValidateMenu(menuDTO);
+    }
+
+    @Override
     public void logout() throws RemoteException {
         UserController.removeSession(user);
         UnicastRemoteObject.unexportObject(this, true);

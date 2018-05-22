@@ -1283,6 +1283,22 @@ public class SocketProtocol {
         return response;
     }
 
+    private SocketResponse handleValidateMenu(SocketRequest request) {
+        SocketResponse response;
+
+        try{
+            MenuDTO arg0 = (MenuDTO) request.params[0];
+
+            menuController.doValidateMenu(arg0);
+
+            response = new SocketResponse(SocketResponseType.SUCCESS, null);
+        } catch (Exception e){
+            response = new SocketResponse(SocketResponseType.FAIL, e);
+        }
+
+        return response;
+    }
+
     private void loadProtocol(){
         this.methodMap.put(SocketRequestType.LOGIN, this::handleLogin);
         this.methodMap.put(SocketRequestType.LOGOUT, this::handleLogout);
@@ -1360,6 +1376,7 @@ public class SocketProtocol {
         this.methodMap.put(SocketRequestType.REMOVE_OBSERVER, this::handleRemoveRemoteEventObserver);
         this.methodMap.put(SocketRequestType.ADD_CONTACT_TO_KID, this::handleAddContactToKid);
         this.methodMap.put(SocketRequestType.REMOVE_CONTACT_FROM_KID, this::handleRemoveContactFromKid);
+        this.methodMap.put(SocketRequestType.VALIDATE_MENU, this::handleValidateMenu);
     }
 
     public interface SocketRequestHandler {
