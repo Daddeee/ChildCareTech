@@ -29,7 +29,9 @@ public class TripPartecipationController implements AccessorWindowController{
     @FXML
     protected ComboBox<KidDTO> selectableKidsComboBox;
     @FXML
-    protected Label alertLabel;
+    protected Button removeBusButton;
+    @FXML
+    protected Button removePartecipationButton;
 
     private TripDTO currentTripDTO;
     private AccessorWindowService accessorWindowService;
@@ -40,55 +42,7 @@ public class TripPartecipationController implements AccessorWindowController{
     }
 
     public void initialize(){
-        tripPartecipationTable.setRowFactory(tripPartecipationDataTableView -> {
-            final TableRow<TripPartecipationData> row = new TableRow<>();
-            final ContextMenu contextMenu = new ContextMenu();
-
-            final MenuItem removeTripPartecipation = new MenuItem("Elimina");
-            removeTripPartecipation.setOnAction(event -> {
-                try {
-                    Client.getSessionService().getSession().removeTripPartecipation(row.getItem().getTripPartecipationDTO());
-                } catch (RemoteException e){
-                    e.printStackTrace();
-                }
-                refresh();
-            });
-
-            contextMenu.getItems().add(removeTripPartecipation);
-
-            row.contextMenuProperty().bind(
-                    Bindings.when(row.emptyProperty())
-                            .then((ContextMenu) null)
-                            .otherwise(contextMenu)
-            );
-
-            return row;
-        });
-
-        busesTable.setRowFactory(busesTableView -> {
-            final TableRow<BusDTOWithResidualCapacity> row = new TableRow<>();
-            final ContextMenu contextMenu = new ContextMenu();
-
-            final MenuItem removeTripPartecipation = new MenuItem("Elimina");
-            removeTripPartecipation.setOnAction(event -> {
-                try {
-                    Client.getSessionService().getSession().removeTripBusRelation(currentTripDTO, row.getItem().getBusDTO());
-                } catch (RemoteException e){
-                    e.printStackTrace();
-                }
-                refresh();
-            });
-
-            contextMenu.getItems().add(removeTripPartecipation);
-
-            row.contextMenuProperty().bind(
-                    Bindings.when(row.emptyProperty())
-                            .then((ContextMenu) null)
-                            .otherwise(contextMenu)
-            );
-
-            return row;
-        });
+        initMenu();
     }
 
     @FXML
@@ -96,10 +50,12 @@ public class TripPartecipationController implements AccessorWindowController{
         BusDTO selectedBus = selectableBusesComboBox.getValue();
         KidDTO selectedKid = selectableKidsComboBox.getValue();
 
+        if(selectedBus == null || selectedKid == null) return;
+
         for (BusDTOWithResidualCapacity brc : busesTable.getItems()) {
             if (brc.getLicensePlate().equals(selectedBus.getLicensePlate()))
                 if (brc.getResidualCapacity() <= 0) {
-                    alertLabel.setText("Il bus è già pieno.");
+                    //gestione
                     return;
                 }
         }
@@ -121,10 +77,26 @@ public class TripPartecipationController implements AccessorWindowController{
         refresh();
 
     }
+    @FXML
+    protected void removeBusButtonAction(ActionEvent event) {
+        BusDTOWithResidualCapacity selected = busesTable.getSelectionModel().getSelectedItem();
+        if(selected == null) return;
+        removeBus(selected.getBusDTO());
+
+    }
+    @FXML
+    protected void removePartecipationButtonAction(ActionEvent event) {
+        TripPartecipationData selected = tripPartecipationTable.getSelectionModel().getSelectedItem();
+        if(selected == null) return;
+        removePartecipation(selected.getTripPartecipationDTO());
+    }
 
     @FXML
     protected void addBusButtonAction(ActionEvent event){
         BusDTO addedBus = availableBusesComboBox.getValue();
+
+        if(addedBus == null) return;
+
         currentTripDTO.getBuses().add(addedBus);
 
         try{
@@ -147,7 +119,6 @@ public class TripPartecipationController implements AccessorWindowController{
     }
 
     private void refreshGUI(){
-        alertLabel.setText("");
         refreshBusesTable();
         refreshAvailableBusesComboBox();
         refreshSelectableBusesComboBox();
@@ -212,5 +183,43 @@ public class TripPartecipationController implements AccessorWindowController{
     }
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
         this.accessorWindowService = accessorWindowService;
+    }
+    private void removePartecipation(TripPartecipationDTO tripPartecipationDTO) {
+        try {
+            Client.getSessionService().getSession().removeTripPartecipation(tripPartecipationDTO);
+        } catch (RemoteException e){
+            e.printStackTrace();
+        }
+        refresh();
+    }
+    private void removeBus(BusDTO busDTO) {
+        try {
+            Client.getSessionService().getSession().removeTripBusRelation(currentTripDTO, busDTO);
+        } catch (RemoteException e){
+            e.printStackTrace();
+        }
+        refresh();
+    }
+    private void initMenu() {
+        removeBusButton.setDisable(true);
+        removePartecipationButton.setDisable(true);
+
+        busesTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                removeBusButton.setDisable(false);
+            }
+            else {
+                removeBusButton.setDisable(true);
+            }
+        });
+
+        tripPartecipationTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                removePartecipationButton.setDisable(false);
+            }
+            else {
+                removePartecipationButton.setDisable(true);
+            }
+        });
     }
 }
