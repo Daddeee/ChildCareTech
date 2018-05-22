@@ -64,7 +64,7 @@ public class ShowKidController implements AccessorWindowController{
     }
     private void initContactsList(Set<AdultDTO> cont) {
         for(AdultDTO adult : cont) {
-            contacts.add(adult.getPerson().getFirstName()+" "+adult.getPerson().getLastName()+" "+adult.getPerson().getFiscalCode());
+            contacts.add(adult.getPerson().getFirstName()+" "+adult.getPerson().getLastName()+" "+adult.getPerson().getPhoneNumber());
         }
     }
 
