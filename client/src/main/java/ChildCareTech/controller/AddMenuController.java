@@ -39,36 +39,42 @@ public class AddMenuController implements AccessorWindowController {
         currentMealDTO = mealDTO;
         if(mealDTO.getMenu() != null) {
             selectedDishes.addAll(mealDTO.getMenu().getDishes());
-            for(DishDTO dishDTO : mealDTO.getMenu().getDishes())
-                availableDishes.remove(dishDTO);
+            availableDishes.removeAll(selectedDishes);
         }
     }
 
     @FXML
-    protected void addDishButtonAction(ActionEvent event){
-        int rowIndex = availableDishesTable.getSelectionModel().getFocusedIndex();
+    protected void addDishButtonAction(ActionEvent event) {
+        DishDTO dish = availableDishesTable.getSelectionModel().getSelectedItem();
 
-        selectedDishesTable.getItems().add(availableDishesTable.getItems().get(rowIndex));
-        availableDishesTable.getItems().remove(rowIndex);
+        if (dish != null) {
+            selectedDishes.add(dish);
+            availableDishes.remove(dish);
+        }
     }
 
     @FXML
     protected void removeDishButtonAction(ActionEvent event){
-        int rowIndex = selectedDishesTable.getSelectionModel().getFocusedIndex();
+        DishDTO dish = selectedDishesTable.getSelectionModel().getSelectedItem();
 
-        availableDishesTable.getItems().add(selectedDishesTable.getItems().get(rowIndex));
-        selectedDishesTable.getItems().remove(rowIndex);
+        if (dish != null) {
+            availableDishes.add(dish);
+            selectedDishes.remove(dish);
+        }
     }
 
     @FXML
     protected void saveButtonAction(ActionEvent event){
         Set<DishDTO> dishes = new HashSet<>(selectedDishesTable.getItems());
-        MenuDTO menuDTO = new MenuDTO(0, currentMealDTO, 0, dishes);
-        currentMealDTO.setMenu(menuDTO);
-        menuDTO.setDishes(dishes);
+        MenuDTO menuDTO = currentMealDTO.getMenu();
 
         try{
-            Client.getSessionService().getSession().createMenu(currentMealDTO);
+            for(DishDTO d : menuDTO.getDishes())
+                Client.getSessionService().getSession().removeDishFromMenu(menuDTO, d);
+
+            for(DishDTO d : dishes)
+                Client.getSessionService().getSession().addDishToMenu(menuDTO, d);
+
             accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException e){

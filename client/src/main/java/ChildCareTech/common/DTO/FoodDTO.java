@@ -69,4 +69,11 @@ public class FoodDTO implements Serializable {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof FoodDTO)) return false;
+        return this.name.equals(((FoodDTO) o).name);
+    }
 }
