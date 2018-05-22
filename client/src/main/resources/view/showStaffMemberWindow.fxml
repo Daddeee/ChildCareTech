@@ -1,66 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.ShowStaffMemberController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.ShowStaffMemberController">
    <children>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
+      <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Nome:" />
-            <Label />
-            <Label fx:id="firstNameLabel" text="" />
-            <Label />
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nome:" />
+                  <Label />
+                  <Label fx:id="firstNameLabel" text="" />
+                  <Label />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Cognome:" />
+                  <Label />
+                  <Label fx:id="lastNameLabel" text="" />
+                  <Label />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="35.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="CF:" />
+                  <Label />
+                  <Label fx:id="cfLabel" text="" />
+                  <Label />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Data di nascita:" />
+                  <Label />
+                  <Label fx:id="bDateLabel" text="" />
+                  <Label />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="85.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Sesso:" />
+                  <Label />
+                  <Label fx:id="sexLabel" text="" />
+                  <Label />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="110.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Indirizzo:" />
+                  <Label />
+                  <Label fx:id="addressLabel" text="" />
+                  <Label />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="135.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Telefono:" />
+                  <Label />
+                  <Label fx:id="phoneNumberLabel" text="" />
+                  <Label />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label text="Cognome:" />
-            <Label />
-            <Label fx:id="lastNameLabel" text="" />
-            <Label />
-         </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label text="CF:" />
-            <Label />
-            <Label fx:id="cfLabel" text="" />
-            <Label />
-         </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label text="Data di nascita:" />
-            <Label />
-            <Label fx:id="bDateLabel" text="" />
-            <Label />
-         </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label text="Sesso:" />
-            <Label />
-            <Label fx:id="sexLabel" text="" />
-            <Label />
-         </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label text="Indirizzo:" />
-            <Label />
-            <Label fx:id="addressLabel" text="" />
-            <Label />
-         </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label text="Telefono:" />
-            <Label />
-            <Label fx:id="phoneNumberLabel" text="" />
-            <Label />
-         </children>
-      </HBox>
+         <padding>
+            <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>

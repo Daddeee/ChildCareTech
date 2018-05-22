@@ -63,7 +63,6 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
     @FXML
     public void addButtonAction(javafx.event.ActionEvent event) {
         try {
-            //AccessorSceneManager.loadSelectAdultKind();
             accessorWindowService.loadAddAdultWindow();
         } catch (IOException ex) {
             System.err.println("Can't load selectAdultKind window");
@@ -81,10 +80,10 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
                 accessorWindowService.loadShowPediatristWindow((ObservablePediatrist) selectedItem);
             }
             else if(selectedItem instanceof ObservableStaff) {
-                //AccessorSceneManager.loadShowStaffMember((ObservableStaff) selectedItem);
+                accessorWindowService.loadShowStaffMember((ObservableStaff) selectedItem);
             }
             else if(selectedItem instanceof ObservableSupplier) {
-                //AccessorSceneManager.loadShowSupplier((ObservableSupplier) selectedItem);
+                accessorWindowService.loadShowSupplierWindow((ObservableSupplier) selectedItem);
             }
         } catch (IOException ex) {
             System.err.println("Can't load show window");
@@ -182,5 +181,10 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
                 deleteButton.setDisable(true);
             }
         });
+    }
+
+    public void clearChildInstances() { accessorWindowService.close(); }
+    public void notifyUpdate() {
+
     }
 }

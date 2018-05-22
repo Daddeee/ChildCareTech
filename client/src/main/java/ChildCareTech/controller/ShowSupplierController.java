@@ -28,10 +28,10 @@ public class ShowSupplierController extends ShowAdultController{
         sexLabel.setText(observableSupplier.getSex().toString());
         addressLabel.setText(observableSupplier.getAddress());
         phoneNumberLabel.setText(observableSupplier.getPhoneNumber());
-        initPatientsList(observableSupplier.getSupplies());
+        initSuppliesList(observableSupplier.getSupplies());
     }
 
-    private void initPatientsList(Set<SupplyDTO> supplies) {
+    private void initSuppliesList(Set<SupplyDTO> supplies) {
         for(SupplyDTO supplyDTO : supplies) {
             String supplyText = supplyDTO.getFood()+" "+supplyDTO.getQuantity()+" "+supplyDTO.getDate();
             orders.add(supplyText);

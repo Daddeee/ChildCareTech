@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.Client;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertMethodService;
 import ChildCareTech.services.ObservableDTOs.ObservableKid;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,11 +50,14 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
     @FXML
     private TableColumn<ObservableKid, String> pediatristFCColumn;
 
-    private AccessorWindowService accessorWindowService = new AccessorWindowService(this);
+    private AccessorWindowService accessorWindowService;
+    private AccessorWindowService alertWindowService;
     private ObservableList<ObservableKid> items = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
+        accessorWindowService = new AccessorWindowService(this);
+        alertWindowService = new AccessorWindowService(this);
         initTable();
         initMenu();
     }
@@ -61,7 +65,6 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
     @FXML
     public void addButtonAction(ActionEvent event) {
         try {
-            //AccessorSceneManager.loadAddKid();
             accessorWindowService.loadAddKidWindow();
         } catch (IOException ex) {
             System.err.println("Can't load addKid window");
@@ -171,5 +174,6 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
             }
         });
     }
-
+    public void notifyUpdate() {
+    }
 }
