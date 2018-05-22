@@ -17,9 +17,9 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 public class AccessorWindowService {
-    private TableWindowControllerInterface tableWindowControllerInterface;
-    private Stage stage;
-    private FXMLLoader loader;
+    protected TableWindowControllerInterface tableWindowControllerInterface;
+    protected Stage stage;
+    protected FXMLLoader loader;
 
     public AccessorWindowService(TableWindowControllerInterface tableWindowControllerInterface) {
         this.tableWindowControllerInterface = tableWindowControllerInterface;
@@ -63,6 +63,10 @@ public class AccessorWindowService {
     public void loadRegisterUserWindow() throws IOException{
         loadWindow(ResourcesPaths.getRegisterUserFXMLPath(), ResourcesPaths.getRegisterUserCSSPath());
         ((AccessorWindowController)loader.getController()).setAccessorWindowService(this);
+    }
+    public void loadAlertWindow(AlertMethodService alertMethodService) throws IOException {
+        loadWindow(ResourcesPaths.getAlertWindowFXMLPath(), ResourcesPaths.getAlertWindowCSSPath());
+        ((AlertController)loader.getController()).initData(alertMethodService);
     }
     public void loadAddKidWindow() throws IOException{
         loadWindow(ResourcesPaths.getAddKidFXMLPath(), ResourcesPaths.getAddKidCSSPath());
@@ -110,15 +114,19 @@ public class AccessorWindowService {
     }
     public void loadShowStaffMember(ObservableStaff observableStaff) throws IOException{
         loadWindow(ResourcesPaths.getShowStaffMemberFXMLPath(), ResourcesPaths.getShowStaffMemberCSSPath());
+        ((ShowStaffMemberController)loader.getController()).initData(observableStaff);
     }
     public void loadShowSupplierWindow(ObservableSupplier observableSupplier) throws IOException{
         loadWindow(ResourcesPaths.getShowSupplierFXMLPath(), ResourcesPaths.getShowSupplierCSSPath());
+        ((ShowSupplierController)loader.getController()).initData(observableSupplier);
     }
     public void loadBusListWindow() throws IOException{
         loadWindow(ResourcesPaths.getBusListFXMLPath(), ResourcesPaths.getBusListCSSPath());
+        ActiveControllersList.addBusController(loader.getController());
     }
     public void loadCanteenListWindow() throws IOException{
         loadWindow(ResourcesPaths.getCanteenesListFXMLPath(), ResourcesPaths.getCanteenesListCSSPath());
+        ActiveControllersList.addCanteenControllerList(loader.getController());
     }
     public void loadAddMealsWindow(String canteenName) throws IOException{
         loadWindow(ResourcesPaths.getAddMealFXMLPath(), ResourcesPaths.getAddMealCSSPath());
@@ -126,6 +134,7 @@ public class AccessorWindowService {
     }
     public void loadFoodsListWindow() throws IOException{
         loadWindow(ResourcesPaths.getFoodsListFXMLPath(), ResourcesPaths.getFoodsListCSSPath());
+        ActiveControllersList.addFoodController(loader.getController());
     }
     public void loadUserAccountWindow() throws IOException{
         loadWindow(ResourcesPaths.getUserAccountFXMLPath(), ResourcesPaths.getUserAccountCSSPath());
@@ -153,6 +162,7 @@ public class AccessorWindowService {
     public void loadEventReportWindow(EventDTO eventDTO) throws IOException{
         loadWindow(ResourcesPaths.getEventReportFXMLPath(), ResourcesPaths.getEventReportCSSPath());
         ((EventReportController)loader.getController()).initData(eventDTO);
+        ActiveControllersList.addEventReportController(loader.getController());
     }
     public void loadCodeInputWindow(EventDTO eventDTO) throws IOException{
         loadWindow(ResourcesPaths.getCodeInputFXMLPath(), ResourcesPaths.getCodeInputCSSPath());
@@ -160,6 +170,7 @@ public class AccessorWindowService {
     }
     public void loadKitchenWindow() throws IOException{
         loadWindow(ResourcesPaths.getKitchenFXMLPath(), ResourcesPaths.getKitchenCSSPath());
+        ActiveControllersList.addDishController(loader.getController());
     }
     public void loadShowDishWindow(DishDTO dishDTO) throws IOException{
         loadWindow(ResourcesPaths.getShowDishFXMLPath(), ResourcesPaths.getShowDishCSSPath());
@@ -176,8 +187,7 @@ public class AccessorWindowService {
         loadWindow(ResourcesPaths.getAddMenuFXMLPath(), ResourcesPaths.getAddMenuCSSPath());
         ((AddMenuController)loader.getController()).initData(mealDTO);
     }
-
-    private void loadWindow(String fxmlPath, String cssPath) throws IOException{
+    protected void loadWindow(String fxmlPath, String cssPath) throws IOException{
         loader = new FXMLLoader(AccessorWindowService.class.getResource(fxmlPath));
         try {
             Scene scene = new Scene(loader.load());

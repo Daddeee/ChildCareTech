@@ -145,7 +145,7 @@ public class AddAdultController implements AccessorWindowController{
     }
 
     protected void refreshAdultAnagraphics() {
-        List<NewAdultAnagraphicsController> list = ContainedWindowService.getAdultAnagraphicsList();
+        List<NewAdultAnagraphicsController> list = ActiveControllersList.getAdultAnagraphicControllersList();
         for( NewAdultAnagraphicsController naac : list) {
             naac.refreshTable();
         }

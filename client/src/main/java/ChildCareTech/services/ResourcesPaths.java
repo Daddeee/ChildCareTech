@@ -74,8 +74,10 @@ public class ResourcesPaths {
     private final static String workDayManagerCSSPath = "/style/newWorkDayWindow.css";
     private final static String eventReportFXMLPath = "/view/eventReportWindow.fxml";
     private final static String eventReportCSSPath = "/style/eventReportWindow.css";
-    private final static String codeInputFXMLPath = "/view/codeInputWindow.fxml";
-    private final static String codeInputCSSPath = "/style/codeInputWindow.css";
+    private final static String codeInputFXMLPath = "/view/QRCodeWindow.fxml";
+    private final static String codeInputCSSPath = "/style/QRCodeWindow.css";
+    private final static String alertWindowFXMLPath = "/view/alertWindow.fxml";
+    private final static String alertWindowCSSPath = "/style/alertWindow.css";
 
     public static String getLoginFXMLPath() { return loginFXMLPath; }
     public static String getLoginCSSPath() { return loginCSSPath; }
@@ -153,6 +155,8 @@ public class ResourcesPaths {
     public static String getEventReportCSSPath() { return eventReportCSSPath; }
     public static String getCodeInputFXMLPath() { return codeInputFXMLPath; }
     public static String getCodeInputCSSPath() { return codeInputCSSPath; }
+    public static String getAlertWindowFXMLPath() { return alertWindowFXMLPath; }
+    public static String getAlertWindowCSSPath() { return alertWindowCSSPath; }
 
     //potevo fare delle macro ma sono un babbo
 }

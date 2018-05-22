@@ -5,19 +5,22 @@ import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.ActiveControllersList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.WindowEvent;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NewBusController implements AccessorWindowController {
+public class NewBusController implements AccessorWindowController, TableWindowControllerInterface {
     @FXML
     private TableView<BusDTO> busesTable;
     @FXML
@@ -122,6 +125,12 @@ public class NewBusController implements AccessorWindowController {
 
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
         this.accessorWindowService = accessorWindowService;
+        this.accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                cleanInstance();
+            }
+        });
     }
 
     public void initMenu() {
@@ -161,7 +170,7 @@ public class NewBusController implements AccessorWindowController {
         busesTable.setDisable(true);
     }
 
-    private void refreshTable(){
+    public void refreshTable(){
         List<BusDTO> busesDTOList = new ArrayList<>();
 
         try {
@@ -173,5 +182,10 @@ public class NewBusController implements AccessorWindowController {
         items.clear();
         items.addAll(busesDTOList);
         busesTable.setItems(items);
+    }
+    public void clearChildInstances() { }
+    public void notifyUpdate() { }
+    public void cleanInstance() {
+        ActiveControllersList.removeBusController(this);
     }
 }

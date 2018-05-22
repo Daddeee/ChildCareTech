@@ -6,6 +6,8 @@ import ChildCareTech.network.RMI.RMISessionService;
 import ChildCareTech.network.socket.SocketRegistrationService;
 import ChildCareTech.network.socket.SocketSessionService;
 import ChildCareTech.services.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,16 +17,12 @@ import java.io.IOException;
 public class LoginController implements MainWindowControllerInterface {
     @FXML
     private TextField userNameField;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private Label alertBox;
-
     @FXML
     private Button loginButton;
-
     @FXML
     private ComboBox<String> connectivity;
 
@@ -36,6 +34,8 @@ public class LoginController implements MainWindowControllerInterface {
         accessorWindowService = new AccessorWindowService(new TableWindowControllerInterface() {
             @Override
             public void refreshTable() { }
+            @Override
+            public void notifyUpdate() { }
         });
 
         connectivity.getSelectionModel().selectFirst();

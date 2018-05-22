@@ -17,7 +17,9 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class NewWorkDayController implements TableWindowControllerInterface {
@@ -38,16 +40,24 @@ public class NewWorkDayController implements TableWindowControllerInterface {
     @FXML
     protected Button logButton;
 
-    WorkDayDTO selectedWorkDay;
-    Set<EventDTO> events = new HashSet<>();
-    AccessorWindowService accessorWindowService;
-    AccessorWindowService codeInputService;
-    boolean codeInputActive = false;
+    private WorkDayDTO selectedWorkDay;
+    private Set<EventDTO> events = new HashSet<>();
+    private AccessorWindowService accessorWindowService;
+    private AccessorWindowService codeInputService;
+    private AccessorWindowService alertWindowService;
+    private boolean codeInputActive = false;
+    private boolean accessorLogActive = false;
+    private EventDTO selectedEventLog;
 
     @FXML
     public void initialize() {
         initMenu();
         accessorWindowService = new AccessorWindowService(this);
+        alertWindowService = new AccessorWindowService(this);
+        accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) { accessorLogActive = false; }
+        });
         codeInputService = new AccessorWindowService(this);
         codeInputService.setNonLockingModality();
         codeInputService.setOnCloseAction(new EventHandler<WindowEvent>() {
@@ -60,10 +70,11 @@ public class NewWorkDayController implements TableWindowControllerInterface {
 
     @FXML
     public void logButtonAction(ActionEvent event) {
-        EventDTO selected = eventsTable.getSelectionModel().getSelectedItem();
-        if(selected == null) return;
+        selectedEventLog = eventsTable.getSelectionModel().getSelectedItem();
+        if(selectedEventLog == null) return;
         try {
-            accessorWindowService.loadEventReportWindow(selected);
+            accessorWindowService.loadEventReportWindow(selectedEventLog);
+            accessorLogActive = true;
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
@@ -132,6 +143,24 @@ public class NewWorkDayController implements TableWindowControllerInterface {
     public void refreshTable() {
         eventsTable.getItems().clear();
         eventsTable.getItems().addAll(events);
+        if(accessorLogActive) {
+            List<EventDTO> eventsList = new ArrayList<>();
+            eventsList.addAll(events);
+            if(eventsList.contains(selectedEventLog)) {
+                try {
+                    accessorWindowService.loadEventReportWindow(eventsList.get(eventsList.indexOf(selectedEventLog)));
+                } catch(IOException ex) {
+                    //gestione
+                }
+            }
+            else {
+                accessorWindowService.close();
+                accessorLogActive = false;
+            }
+        }
+    }
+    public void notifyUpdate() {
+
     }
 
 }

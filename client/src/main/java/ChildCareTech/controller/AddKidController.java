@@ -185,7 +185,7 @@ public class AddKidController implements AccessorWindowController{
 
 
     protected void refreshKidAnagraphics() {
-        List<NewKidAnagraphicsController> list = ContainedWindowService.getKidAnagraphicsList();
+        List<NewKidAnagraphicsController> list = ActiveControllersList.getKidAnagraphicControllersList();
         for( NewKidAnagraphicsController nkac : list) {
             nkac.refreshTable();
         }

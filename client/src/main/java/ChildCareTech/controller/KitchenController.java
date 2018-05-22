@@ -3,14 +3,17 @@ package ChildCareTech.controller;
 import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.ActiveControllersList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,6 +99,13 @@ public class KitchenController implements AccessorWindowController, TableWindowC
 
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
         this.accessorWindowService = accessorWindowService;
+        this.accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                refreshParentTable();
+                clearInstance();
+            }
+        });
     }
     public void initMenu() {
         deleteButton.setDisable(true);
@@ -124,5 +134,12 @@ public class KitchenController implements AccessorWindowController, TableWindowC
         }
         dishes.clear();
         dishes.addAll(dishesList);
+    }
+    public void refreshParentTable() {
+        accessorWindowService.refreshTable();
+    }
+    public void notifyUpdate() { }
+    public void clearInstance() {
+        ActiveControllersList.removeDishController(this);
     }
 }

@@ -33,8 +33,6 @@ public class AddTripController implements AccessorWindowController{
     @FXML
     private RestrictedDatePicker arrDateField;
     @FXML
-    private Label alertLabel;
-    @FXML
     private TextField departureLocationField;
     @FXML
     private TextField arrivalLocationField;
@@ -102,7 +100,7 @@ public class AddTripController implements AccessorWindowController{
             System.err.println("error remote");
             ex.printStackTrace();
         } catch (AddFailedException ex) {
-            alertLabel.setText("Salvataggio non riuscito: " + ex.getMessage());
+            //gestion errore
             return;
         }
 
@@ -130,7 +128,7 @@ public class AddTripController implements AccessorWindowController{
     }
 
     private void refreshTripList() {
-        List<NewTripListController> list = ContainedWindowService.getTripsListList();
+        List<NewTripListController> list = ActiveControllersList.getTripsListControllersList();
         for(NewTripListController ntlc : list ) {
             ntlc.refreshTable();
         }

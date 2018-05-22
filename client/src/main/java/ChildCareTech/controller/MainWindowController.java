@@ -46,7 +46,11 @@ public class MainWindowController implements MainWindowControllerInterface {
                     System.err.println("error loading login");
                     ex.printStackTrace();
                 }
-            } });
+            }
+            @Override
+            public void notifyUpdate() { }
+        });
+
         //clock, next event ecc
     }
 
@@ -83,6 +87,7 @@ public class MainWindowController implements MainWindowControllerInterface {
     public void clearInstance() {
         containedWindowService.clearInstance();
     }
+    public void clearChildInstaces() { }
     public void setMainWindowService(MainWindowService mainWindowService) {
         this.mainWindowService = mainWindowService;
     }

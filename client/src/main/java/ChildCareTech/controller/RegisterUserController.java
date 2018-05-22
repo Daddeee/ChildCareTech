@@ -2,6 +2,8 @@ package ChildCareTech.controller;
 
 import ChildCareTech.Client;
 import ChildCareTech.services.AccessorWindowService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,8 +24,24 @@ public class RegisterUserController implements AccessorWindowController {
     private Button cancelButton;
     @FXML
     private Button registerButton;
+    @FXML
+    private Label confirmationLabel;
 
     private AccessorWindowService accessorWindowService;
+
+    @FXML
+    public void initialize() {
+        confirmationLabel.setText("X");
+        confirmPasswordField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(confirmPasswordField.getText().equals(addPasswordField.getText()))
+                    confirmationLabel.setText("V");
+                else
+                    confirmationLabel.setText("X");
+            }
+        });
+    }
 
     @FXML
     private void registerButtonAction(ActionEvent event) {

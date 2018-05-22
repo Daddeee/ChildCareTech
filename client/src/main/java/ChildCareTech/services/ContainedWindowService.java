@@ -10,22 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContainedWindowService {
+
     private AnchorPane anchorPane;
     private FXMLLoader kidAnagraphicsLoader;
     private FXMLLoader adultAnagraphicsLoader;
     private FXMLLoader tripListLoader;
     private FXMLLoader canteenManagerLoader;
     private FXMLLoader workDayManagerLoader;
-    private static List<NewKidAnagraphicsController> kidAnagraphicsList = new ArrayList<>();
-    private static List<NewAdultAnagraphicsController> adultAnagraphicsList = new ArrayList<>();
-    private static List<NewTripListController> tripsListList = new ArrayList<>();
-    private static List<NewCanteenManagerController> canteenManagersList = new ArrayList<>();
-    private static List<NewWorkDayController> workDayManagersList = new ArrayList<>();
+
+    private static List<TableWindowControllerInterface> actives = new ArrayList<>();
+
     private Node kidAnagraphicsNode;
     private Node adultAnagraphicsNode;
     private Node tripListNode;
     private Node canteenManagerNode;
     private Node workDayManagerNode;
+
+    private TableWindowControllerInterface active;
 
     public ContainedWindowService(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
@@ -34,34 +35,54 @@ public class ContainedWindowService {
     }
 
     public void loadKidAnagraphics() {
+        if(active != null)
+            actives.remove(active);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(kidAnagraphicsNode);
         anchorChild(anchorPane, kidAnagraphicsNode);
-        ((TableWindowControllerInterface)kidAnagraphicsLoader.getController()).refreshTable();
+        active = ((TableWindowControllerInterface)kidAnagraphicsLoader.getController());
+        active.refreshTable();
+        actives.add(active);
     }
     public void loadAdultAnagraphics() {
+        if(active != null)
+            actives.remove(active);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(adultAnagraphicsNode);
         anchorChild(anchorPane, adultAnagraphicsNode);
-        ((TableWindowControllerInterface)adultAnagraphicsLoader.getController()).refreshTable();
+        active = ((TableWindowControllerInterface)adultAnagraphicsLoader.getController());
+        active.refreshTable();
+        actives.add(active);
     }
     public void loadTripList() {
+        if(active != null)
+            actives.remove(active);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(tripListNode);
         anchorChild(anchorPane, tripListNode);
-        ((TableWindowControllerInterface)tripListLoader.getController()).refreshTable();
+        active = ((TableWindowControllerInterface)tripListLoader.getController());
+        active.refreshTable();
+        actives.add(active);
     }
     public void loadCanteenManager() {
+        if(active != null)
+            actives.remove(active);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(canteenManagerNode);
         anchorChild(anchorPane, canteenManagerNode);
-        ((TableWindowControllerInterface)canteenManagerLoader.getController()).refreshTable();
+        active = ((TableWindowControllerInterface)canteenManagerLoader.getController());
+        active.refreshTable();
+        actives.add(active);
     }
     public void loadWorkDayManager() {
+        if(active != null)
+            actives.remove(active);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(workDayManagerNode);
         anchorChild(anchorPane, workDayManagerNode);
-        ((TableWindowControllerInterface)workDayManagerLoader.getController()).refreshTable();
+        active = ((TableWindowControllerInterface)workDayManagerLoader.getController());
+        active.refreshTable();
+        actives.add(active);
     }
 
     public void anchorChild(AnchorPane anchorPane, Node node) {
@@ -77,11 +98,7 @@ public class ContainedWindowService {
     public NewAdultAnagraphicsController getAdultAnagraphicsController() { return adultAnagraphicsLoader.getController(); }
     public NewTripListController getTripListController() { return tripListLoader.getController(); }
     public NewCanteenManagerController getCanteenManagerController() { return canteenManagerLoader.getController(); }
-    public static List<NewKidAnagraphicsController> getKidAnagraphicsList() { return new ArrayList<>(kidAnagraphicsList); }
-    public static List<NewAdultAnagraphicsController> getAdultAnagraphicsList() { return new ArrayList<>(adultAnagraphicsList); }
-    public static List<NewTripListController> getTripsListList() { return new ArrayList<>(tripsListList); }
-    public static List<NewCanteenManagerController> getCanteenManagersList() { return new ArrayList<>(canteenManagersList); }
-    public static List<NewWorkDayController> getWorkDayManagersList() { return new ArrayList<>(workDayManagersList); }
+    public NewWorkDayController getWorkDayController() { return workDayManagerLoader.getController(); }
 
     private void loadFXMLLoaders() {
         this.kidAnagraphicsLoader = new FXMLLoader(ContainedWindowService.class.getResource(ResourcesPaths.getKidAnagraphicsFXMLPath()));
@@ -98,11 +115,11 @@ public class ContainedWindowService {
             canteenManagerNode = canteenManagerLoader.load();
             workDayManagerNode = workDayManagerLoader.load();
 
-            kidAnagraphicsList.add(kidAnagraphicsLoader.getController());
-            adultAnagraphicsList.add(adultAnagraphicsLoader.getController());
-            tripsListList.add(tripListLoader.getController());
-            canteenManagersList.add(canteenManagerLoader.getController());
-            workDayManagersList.add(workDayManagerLoader.getController());
+            ActiveControllersList.addKidAnagraphicsController(kidAnagraphicsLoader.getController());
+            ActiveControllersList.addAdultAnagraphicsController(adultAnagraphicsLoader.getController());
+            ActiveControllersList.addTripListController(tripListLoader.getController());
+            ActiveControllersList.addCanteenManagerController(canteenManagerLoader.getController());
+            ActiveControllersList.addWorkDayManagerController(workDayManagerLoader.getController());
 
         } catch(IOException ex) {
             System.err.println(ex.getMessage());
@@ -111,22 +128,60 @@ public class ContainedWindowService {
     }
 
     public void clearInstance() {
-        kidAnagraphicsList.remove(this.kidAnagraphicsLoader.getController());
-        adultAnagraphicsList.remove(this.adultAnagraphicsLoader.getController());
-        tripsListList.remove(this.tripListLoader.getController());
-        canteenManagersList.remove(this.canteenManagerLoader.getController());
-        workDayManagersList.remove(this.workDayManagerLoader.getController());
+
+        ActiveControllersList.removeKidAnagraphicsController(this.kidAnagraphicsLoader.getController());
+        ActiveControllersList.removeAdultAnagraphicsController(this.adultAnagraphicsLoader.getController());
+        ActiveControllersList.removeTripListController(this.tripListLoader.getController());
+        ActiveControllersList.removeCanteenManagerController(this.canteenManagerLoader.getController());
+        ActiveControllersList.removeWorkDayManagerController(this.workDayManagerLoader.getController());
+
+        if(active != null)
+            actives.remove(active);
     }
 
-    public static void refreshTables() {
+    public static void refreshAllTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
-        tables.addAll(kidAnagraphicsList);
-        tables.addAll(adultAnagraphicsList);
-        tables.addAll(tripsListList);
-        tables.addAll(canteenManagersList);
-        tables.addAll(workDayManagersList);
+        tables.addAll(ActiveControllersList.getKidAnagraphicControllersList());
+        tables.addAll(ActiveControllersList.getAdultAnagraphicControllersList());
+        tables.addAll(ActiveControllersList.getTripsListControllersList());
+        tables.addAll(ActiveControllersList.getCanteenManagerControllersList());
+        tables.addAll(ActiveControllersList.getWorkDayManagerControllersList());
+        refreshTables(tables);
+
+    }
+    private static void refreshTables(List<TableWindowControllerInterface> tables) {
+        tables.removeAll(actives);  //chiedo all'utente se vuole aggiornare
         for(TableWindowControllerInterface tableWindowControllerInterface : tables) {
             tableWindowControllerInterface.refreshTable();
         }
+        for(TableWindowControllerInterface tableWindowControllerInterface : actives) {
+            tableWindowControllerInterface.notifyUpdate();
+        }
     }
+    public static void refreshKidTables() {
+        List<TableWindowControllerInterface> tables = new ArrayList<>();
+        tables.addAll(ActiveControllersList.getKidAnagraphicControllersList());
+        refreshTables(tables);
+    }
+    public static void refreshAdultTables() {
+        List<TableWindowControllerInterface> tables = new ArrayList<>();
+        tables.addAll(ActiveControllersList.getAdultAnagraphicControllersList());
+        refreshTables(tables);
+    }
+    public static void refreshTripsTables() {
+        List<TableWindowControllerInterface> tables = new ArrayList<>();
+        tables.addAll(ActiveControllersList.getTripsListControllersList());
+        refreshTables(tables);
+    }
+    public static void refreshCanteenTables() {
+        List<TableWindowControllerInterface> tables = new ArrayList<>();
+        tables.addAll(ActiveControllersList.getCanteenManagerControllersList());
+        refreshTables(tables);
+    }
+    public static void refreshWorkDayTables() {
+        List<TableWindowControllerInterface> tables = new ArrayList<>();
+        tables.addAll(ActiveControllersList.getWorkDayManagerControllersList());
+        refreshTables(tables);
+    }
+
 }

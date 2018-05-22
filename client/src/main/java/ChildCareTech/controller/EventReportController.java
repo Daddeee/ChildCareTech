@@ -56,5 +56,7 @@ public class EventReportController implements AccessorWindowController{
         reportTable.getItems().clear();
         reportTable.getItems().addAll(elems);
     }
-    public void setAccessorWindowService(AccessorWindowService accessorWindowService) { }
+    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
+
+    }
 }

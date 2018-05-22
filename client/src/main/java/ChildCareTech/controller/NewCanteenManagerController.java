@@ -36,6 +36,8 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
     private ObservableList<TempMealData> items = FXCollections.observableArrayList();
     private CanteenDTO canteenDTO;
     private AccessorWindowService accessorWindowService;
+    private AccessorWindowService canteenListWindow;
+    private AccessorWindowService kitchenWindow;
 
     @FXML
     public void initialize() {
@@ -48,6 +50,8 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
                 refreshTable();
             }
         });
+        canteenListWindow = new AccessorWindowService(this);
+        kitchenWindow = new AccessorWindowService(this);
     }
     @FXML
     public void menuManagerButtonAction(ActionEvent event) {
@@ -63,7 +67,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
     @FXML
     public void canteenManagerButtonAction(ActionEvent event) {
         try {
-            accessorWindowService.loadCanteenListWindow();
+            canteenListWindow.loadCanteenListWindow();
         } catch(IOException ex) {
             System.err.println("can't load canteenList window");
             ex.printStackTrace();
@@ -72,7 +76,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
     @FXML
     public void foodManagerButtonAction(ActionEvent event) {
         try {
-            accessorWindowService.loadKitchenWindow();
+            kitchenWindow.loadKitchenWindow();
         } catch(IOException ex) {
             System.err.println("can't load kitchen window");
             ex.printStackTrace();
@@ -140,4 +144,6 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         }
         refreshMealsTable();
     }
+    public void clearChildInstances() { accessorWindowService.close(); }
+    public void notifyUpdate() { }
 }

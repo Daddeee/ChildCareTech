@@ -32,12 +32,9 @@ public class UpdateTripController implements AccessorWindowController{
     @FXML
     private RestrictedDatePicker arrDateField;
     @FXML
-    private Label alertLabel;
-    @FXML
     private TextField departureLocationField;
     @FXML
     private TextField arrivalLocationField;
-
     @FXML
     private TableView<TempRouteData> routesTable;
 
@@ -115,7 +112,7 @@ public class UpdateTripController implements AccessorWindowController{
             System.err.println("error remote");
             ex.printStackTrace();
         } catch (UpdateFailedException ex) {
-            alertLabel.setText("Aggiornamento non riuscito: " + ex.getMessage());
+            //gestione errore
             return;
         }
 
@@ -151,7 +148,7 @@ public class UpdateTripController implements AccessorWindowController{
     }
 
     private void refreshTripList() {
-        List<NewTripListController> list = ContainedWindowService.getTripsListList();
+        List<NewTripListController> list = ActiveControllersList.getTripsListControllersList();
         for(NewTripListController ntlc : list ) {
             ntlc.refreshTable();
         }

@@ -8,4 +8,5 @@ public interface TableWindowControllerInterface {
     //void detailsButtonAction(ActionEvent event);
     //void deleteButtonAction(ActionEvent event);
     void refreshTable();
+    void notifyUpdate();
 }

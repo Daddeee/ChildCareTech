@@ -32,28 +32,30 @@ public class RemoteUpdateService {
 
     private void updateKid(){
         Platform.runLater(() -> {
-            for(NewKidAnagraphicsController controller : ContainedWindowService.getKidAnagraphicsList())
+            for(NewKidAnagraphicsController controller : ActiveControllersList.getKidAnagraphicControllersList())
                 controller.refreshTable();
         });
     }
 
     private void updateAdult(){
         Platform.runLater(() -> {
-            for(NewAdultAnagraphicsController controller : ContainedWindowService.getAdultAnagraphicsList())
+            for(NewAdultAnagraphicsController controller : ActiveControllersList.getAdultAnagraphicControllersList())
                 controller.refreshTable();
         });
     }
 
     private void updateCanteen(){
         Platform.runLater(() -> {
-            for(NewCanteenManagerController controller : ContainedWindowService.getCanteenManagersList())
+            for(NewCanteenManagerController controller : ActiveControllersList.getCanteenManagerControllersList())
+                controller.refreshTable();
+            for(NewCanteenesListController controller : ActiveControllersList.getCanteenControllersList())
                 controller.refreshTable();
         });
     }
 
     private void updateTrip(){
         Platform.runLater(() -> {
-            for(NewTripListController controller : ContainedWindowService.getTripsListList())
+            for(NewTripListController controller : ActiveControllersList.getTripsListControllersList())
                 controller.refreshTable();
         });
     }
@@ -64,43 +66,48 @@ public class RemoteUpdateService {
 
     private void updateToday(){
         Platform.runLater(() -> {
-            for(NewWorkDayController controller : ContainedWindowService.getWorkDayManagersList())
+            for(NewWorkDayController controller : ActiveControllersList.getWorkDayManagerControllersList())
                 controller.remoteUpdate();
         });
     }
 
     private void updateDish(){
-        //TODO
-        System.out.println("Dish update");
+        Platform.runLater(() -> {
+            for(KitchenController controller : ActiveControllersList.getDishControllersList())
+                controller.refreshTable();
+        });
     }
 
     private void updateFood(){
-        //TODO
-        System.out.println("Food update");
+        Platform.runLater(() -> {
+            for(FoodsListController controller : ActiveControllersList.getFoodControllersList())
+                controller.refreshTable();
+        });
     }
 
     private void updateBus(){
-        //TODO
-        System.out.println("Bus update");
+        Platform.runLater(() -> {
+            for(NewBusController controller : ActiveControllersList.getBusControllersList())
+                controller.refreshTable();
+        });
     }
 
     private void updateCheckpoint(){
-        //TODO
-        System.out.println("Checkpoint update");
+        Platform.runLater(() -> {
+            for(NewWorkDayController controller : ActiveControllersList.getWorkDayManagerControllersList())
+                controller.refreshTable();
+        });
     }
 
     private void updateMenu(){
-        //TODO
         System.out.println("Menu update");
     }
 
     private void updateAllergy(){
-        //TODO
         System.out.println("Allergy update");
     }
 
     private void updateTripPartecipation(){
-        //TODO
         System.out.println("TripPartecipation update");
     }
 }
