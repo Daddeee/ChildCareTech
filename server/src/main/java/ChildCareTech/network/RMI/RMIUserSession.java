@@ -408,8 +408,23 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     }
 
     @Override
+    public void addContactToKid(KidDTO kidDTO, AdultDTO adultDTO) {
+        kidController.doAddContactToKid(kidDTO, adultDTO);
+    }
+
+    @Override
+    public void removeContactFromKid(KidDTO kidDTO, AdultDTO adultDTO) {
+        kidController.doRemoveContactFromKid(kidDTO, adultDTO);
+    }
+
+    @Override
     public void removeRemoteEventObserver(RemoteEventObserver observer) {
         RemoteEventObservable.getInstance().removeObserver(observer);
+    }
+
+    @Override
+    public void validateMenu(MenuDTO menuDTO) throws UpdateFailedException {
+        menuController.doValidateMenu(menuDTO);
     }
 
     @Override

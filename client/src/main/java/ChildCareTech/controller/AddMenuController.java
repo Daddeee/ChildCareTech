@@ -4,11 +4,13 @@ import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
 import java.rmi.RemoteException;
@@ -20,6 +22,8 @@ public class AddMenuController implements AccessorWindowController {
     protected TableView<DishDTO> availableDishesTable;
     @FXML
     protected TableView<DishDTO> selectedDishesTable;
+    @FXML
+    protected Label alertLabel;
 
     private MealDTO currentMealDTO;
     private AccessorWindowService accessorWindowService;
@@ -44,12 +48,25 @@ public class AddMenuController implements AccessorWindowController {
     }
 
     @FXML
+    protected void validateMenuAction(ActionEvent event){
+        try{
+            Client.getSessionService().getSession().validateMenu(currentMealDTO.getMenu());
+            alertLabel.setText("OK!");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (UpdateFailedException e){
+            alertLabel.setText(e.getMessage());
+        }
+    }
+
+    @FXML
     protected void addDishButtonAction(ActionEvent event) {
         DishDTO dish = availableDishesTable.getSelectionModel().getSelectedItem();
 
         if (dish != null) {
             selectedDishes.add(dish);
             availableDishes.remove(dish);
+            alertLabel.setText("");
         }
     }
 
@@ -60,6 +77,7 @@ public class AddMenuController implements AccessorWindowController {
         if (dish != null) {
             availableDishes.add(dish);
             selectedDishes.remove(dish);
+            alertLabel.setText("");
         }
     }
 
@@ -75,7 +93,6 @@ public class AddMenuController implements AccessorWindowController {
             for(DishDTO d : dishes)
                 Client.getSessionService().getSession().addDishToMenu(menuDTO, d);
 
-            accessorWindowService.close();
             accessorWindowService.refreshTable();
         } catch (RemoteException e){
             e.printStackTrace();

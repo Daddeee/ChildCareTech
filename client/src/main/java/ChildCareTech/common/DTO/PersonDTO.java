@@ -94,4 +94,11 @@ public class PersonDTO implements Serializable {
     public Set<FoodDTO> getAllergies() { return allergies; }
 
     public void setAllergies(Set<FoodDTO> allergies) { this.allergies = allergies; }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof PersonDTO)) return false;
+        return ((PersonDTO) o).fiscalCode.equals(this.fiscalCode);
+    }
 }

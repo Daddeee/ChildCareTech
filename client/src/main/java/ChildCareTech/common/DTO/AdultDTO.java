@@ -34,4 +34,11 @@ public class AdultDTO implements Serializable {
     public void setContacts(Set<KidDTO> contacts) {
         this.contacts = contacts;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof AdultDTO)) return false;
+        return ((AdultDTO) o).person.equals(this.person);
+    }
 }

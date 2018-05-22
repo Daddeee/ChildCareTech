@@ -17,7 +17,6 @@ public class KidDTOFactory implements AbstractDTOFactory<Kid, KidDTO> {
         if (entity == null) return null;
         KidDTO dto = getKidDTO(entity, PediatristDTOFactory.getKidOneSide(entity.getPediatrist()));
 
-
         loadContactRelationship(entity, dto);
 
         return dto;

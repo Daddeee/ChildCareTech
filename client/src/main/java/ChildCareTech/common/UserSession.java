@@ -9,7 +9,10 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 public interface UserSession extends Remote {
 
@@ -33,6 +36,9 @@ public interface UserSession extends Remote {
     void updatePediatrist(PediatristDTO pediatristDTO) throws RemoteException, UpdateFailedException;
     void updateStaffMember(StaffDTO staffDTO) throws RemoteException, UpdateFailedException;
     void updateSupplier(SupplierDTO supplierDTO) throws RemoteException, UpdateFailedException;
+
+    void addContactToKid(KidDTO kidDTO, AdultDTO adultDTO) throws RemoteException;
+    void removeContactFromKid(KidDTO kidDTO, AdultDTO adultDTO) throws RemoteException;
 
     void removeTrip(TripDTO trip) throws RemoteException;
     void removeRoute(RouteDTO route) throws RemoteException;
@@ -88,6 +94,7 @@ public interface UserSession extends Remote {
 
     void createMenu(MealDTO mealDTO) throws RemoteException;
     void updateMenu(MealDTO mealDTO) throws RemoteException;
+    void validateMenu(MenuDTO menuDTO) throws RemoteException, UpdateFailedException;
     void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
     void addDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
 

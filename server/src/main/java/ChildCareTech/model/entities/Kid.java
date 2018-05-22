@@ -27,7 +27,9 @@ public class Kid implements iEntity<Kid, Integer> {
     @ManyToOne
     private Pediatrist pediatrist;
 
-    @ManyToMany(mappedBy = "contacts")
+    @ManyToMany
+    @JoinTable(joinColumns = {@JoinColumn(name = "kid_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "adult_id", nullable = false, updatable = false)})
     private Set<Adult> contacts;
 
     public Kid() {

@@ -33,6 +33,40 @@ public class SocketUserSession implements UserSession {
     }
 
     @Override
+    public void addContactToKid(KidDTO arg0, AdultDTO arg1) throws RemoteException{
+        SocketRequest request = new SocketRequest(SocketRequestType.ADD_CONTACT_TO_KID, arg0, arg1);
+        SocketResponse response;
+
+        try{
+            out.writeObject(request);
+            response = (SocketResponse)in.readObject();
+        } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RemoteException(e.getMessage());
+        }
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (RemoteException) response.returnValue;
+    }
+
+    @Override
+    public void removeContactFromKid(KidDTO arg0, AdultDTO arg1) throws RemoteException{
+        SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_CONTACT_FROM_KID, arg0, arg1);
+        SocketResponse response;
+
+        try{
+            out.writeObject(request);
+            response = (SocketResponse)in.readObject();
+        } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RemoteException(e.getMessage());
+        }
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (RemoteException) response.returnValue;
+    }
+
+    @Override
     public void updateStaffMember(StaffDTO arg0) throws RemoteException, UpdateFailedException {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_STAFF_MEMBER, arg0);
         SocketResponse response;
@@ -1101,6 +1135,23 @@ public class SocketUserSession implements UserSession {
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
+    }
+
+    @Override
+    public void validateMenu(MenuDTO arg0) throws RemoteException, UpdateFailedException {
+        SocketRequest request = new SocketRequest(SocketRequestType.VALIDATE_MENU, arg0);
+        SocketResponse response;
+
+        try{
+            out.writeObject(request);
+            response = (SocketResponse)in.readObject();
+        } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RemoteException(e.getMessage());
+        }
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (UpdateFailedException) response.returnValue;
     }
 
     @Override

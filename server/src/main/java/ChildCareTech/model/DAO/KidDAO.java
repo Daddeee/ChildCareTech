@@ -36,5 +36,7 @@ public class KidDAO extends AbstractGenericDAO<Kid, Integer> {
     public void initializeContactsRelation(Kid obj) {
         Hibernate.initialize(obj.getContacts());
     }
-    public void initializeAllergiesRelation(Kid obj) { Hibernate.initialize(obj.getPerson().getAllergies());}
+    public void initializeAllergiesRelation(Kid obj) {
+        Hibernate.initialize(obj.getPerson().getAllergies());
+    }
 }

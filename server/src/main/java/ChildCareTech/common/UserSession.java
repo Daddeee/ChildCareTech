@@ -34,6 +34,9 @@ public interface UserSession extends Remote {
     void updateStaffMember(StaffDTO staffDTO) throws RemoteException, UpdateFailedException;
     void updateSupplier(SupplierDTO supplierDTO) throws RemoteException, UpdateFailedException;
 
+    void addContactToKid(KidDTO kidDTO, AdultDTO adultDTO) throws RemoteException;
+    void removeContactFromKid(KidDTO kidDTO, AdultDTO adultDTO) throws RemoteException;
+
     void removeTrip(TripDTO trip) throws RemoteException;
     void removeRoute(RouteDTO route) throws RemoteException;
     void updateRouteEvent(RouteDTO routeDTO) throws RemoteException, UpdateFailedException;
@@ -88,6 +91,7 @@ public interface UserSession extends Remote {
 
     void createMenu(MealDTO mealDTO) throws RemoteException;
     void updateMenu(MealDTO mealDTO) throws RemoteException;
+    void validateMenu(MenuDTO menuDTO) throws RemoteException, UpdateFailedException;
     void removeDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
     void addDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) throws RemoteException;
 

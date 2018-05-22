@@ -23,8 +23,7 @@ public class Adult implements iEntity<Adult, Integer> {
     @JoinColumn(nullable = false, unique = true)
     private Person person;
 
-    @ManyToMany
-    @JoinTable(joinColumns = { @JoinColumn(name ="kid_id") }, inverseJoinColumns = { @JoinColumn(name = "adult_id") })
+    @ManyToMany(mappedBy = "contacts")
     private Set<Kid> contacts;
 
     @Column(insertable = false, updatable = false)
