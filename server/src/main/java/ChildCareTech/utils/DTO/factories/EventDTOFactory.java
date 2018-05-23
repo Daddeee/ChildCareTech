@@ -51,6 +51,7 @@ public class EventDTOFactory implements AbstractDTOFactory<Event, EventDTO> {
                 workDayDTO,
                 entity.getBeginTime(),
                 entity.getEndTime(),
+                entity.getEventType(),
                 entity.getEventStatus(),
                 null
         );

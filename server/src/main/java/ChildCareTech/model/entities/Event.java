@@ -1,6 +1,7 @@
 package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
@@ -25,6 +26,8 @@ public class Event implements iEntity<Event, Integer> {
 
     private LocalTime endTime;
 
+    private EventType eventType;
+
     private EventStatus eventStatus;
 
     @OneToMany(mappedBy = "event")
@@ -32,20 +35,22 @@ public class Event implements iEntity<Event, Integer> {
 
     public Event(){}
 
-    public Event(int id, String name, WorkDay workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus){
+    public Event(int id, String name, WorkDay workDay, LocalTime beginTime, LocalTime endTime, EventType eventType, EventStatus eventStatus){
         this.id = id;
         this.name = name;
         this.workDay = workDay;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.eventType = eventType;
         this.eventStatus = eventStatus;
     }
 
-    public Event(String name, WorkDay workDay, LocalTime beginTime, LocalTime endTime, EventStatus eventStatus){
+    public Event(String name, WorkDay workDay, LocalTime beginTime, LocalTime endTime, EventType eventType, EventStatus eventStatus){
         this.name = name;
         this.workDay = workDay;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.eventType = eventType;
         this.eventStatus = eventStatus;
     }
 
@@ -76,6 +81,10 @@ public class Event implements iEntity<Event, Integer> {
 
     public EventStatus getEventStatus() {
         return eventStatus;
+    }
+
+    public EventType getEventType() {
+        return eventType;
     }
 
     public void setEventStatus(EventStatus eventStatus) {

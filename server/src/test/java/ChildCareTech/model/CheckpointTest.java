@@ -1,6 +1,7 @@
 package ChildCareTech.model;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.DAO.CheckpointDAO;
 import ChildCareTech.model.entities.Event;
@@ -24,7 +25,7 @@ public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
     @Override
     public void testCRUD() {
         WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
-        Event event = new Event("nome", w, LocalTime.now(), LocalTime.now().plusMinutes(10), EventStatus.WAIT);
+        Event event = new Event("nome", w, LocalTime.now(), LocalTime.now().plusMinutes(10), EventType.DAILY, EventStatus.WAIT);
         Person p = new Person("fisccode",
                 "nome",
                 "cognome",

@@ -1,6 +1,7 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.MealDAO;
@@ -45,8 +46,8 @@ public class MealsGenerationUtil {
                     String entryEventName = canteen.getName() + " " + w.getDate().toString() + " - Entrata " + (i+1);
                     String exitEventName = canteen.getName() + " " + w.getDate().toString() + " - Uscita " + (i+1);
 
-                    Event entryEvent = new Event(entryEventName, w, entryTimes.get(i), entryTimes.get(i).plusMinutes(10), status);
-                    Event exitEvent = new Event(exitEventName, w, exitTimes.get(i), exitTimes.get(i).plusMinutes(10), status);
+                    Event entryEvent = new Event(entryEventName, w, entryTimes.get(i), entryTimes.get(i).plusMinutes(10), EventType.MEAL, status);
+                    Event exitEvent = new Event(exitEventName, w, exitTimes.get(i), exitTimes.get(i).plusMinutes(10), EventType.MEAL, status);
 
                     Meal meal = new Meal(canteen, i + 1, w, entryEvent, exitEvent, status, null);
 

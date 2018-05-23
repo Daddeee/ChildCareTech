@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
 import javafx.collections.FXCollections;
@@ -102,6 +103,7 @@ public class TripRoutesController implements AccessorWindowController{
                 currentWorkDay,
                 LocalTime.now(),
                 null,
+                EventType.TRIP,
                 EventStatus.OPEN,
                 Collections.emptySet()
         );

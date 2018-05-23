@@ -60,6 +60,7 @@ public class EventDTOEntityAssembler implements AbstractDTOEntityAssembler<Event
                 workDay,
                 dto.getBeginTime(),
                 dto.getEndTime(),
+                dto.getEventType(),
                 dto.getEventStatus()
         );
     }

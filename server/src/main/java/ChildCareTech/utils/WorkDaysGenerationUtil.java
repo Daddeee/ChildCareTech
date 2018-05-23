@@ -2,6 +2,7 @@ package ChildCareTech.utils;
 
 import ChildCareTech.common.DTO.DayGenerationSettingsDTO;
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
@@ -58,6 +59,7 @@ public class WorkDaysGenerationUtil {
                                     temp,
                                     settings.getEntryTime(),
                                     settings.getEntryTime().plusMinutes(10),
+                                    EventType.DAILY,
                                     EventStatus.WAIT
                             )
                     );
@@ -67,6 +69,7 @@ public class WorkDaysGenerationUtil {
                                     temp,
                                     settings.getExitTime(),
                                     settings.getExitTime().plusMinutes(10),
+                                    EventType.DAILY,
                                     EventStatus.WAIT
                             )
                     );

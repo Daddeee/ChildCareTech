@@ -4,6 +4,7 @@ import ChildCareTech.Client;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.utils.RestrictedDatePicker;
 import javafx.event.ActionEvent;
@@ -103,6 +104,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         try{
             selectedWorkDay = Client.getSessionService().getSession().getCurrentWorkDay();
             events = selectedWorkDay.getEvents();
+            events.removeIf(eventDTO -> eventDTO.getEventType().equals(EventType.TRIP));
             workDayDatePicker.setValue(selectedWorkDay.getDate());
             refreshTable();
         } catch(RemoteException e){
@@ -115,6 +117,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         try{
             selectedWorkDay = Client.getSessionService().getSession().getWorkDay(workDayDatePicker.getValue());
             events = selectedWorkDay.getEvents();
+            events.removeIf(eventDTO -> eventDTO.getEventType().equals(EventType.TRIP));
             refreshTable();
         } catch(RemoteException e){
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package ChildCareTech.model;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
@@ -43,8 +44,8 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
                 ChildCareTech.common.Sex.MALE,
                 "",
                 "");
-        Event e1 = new Event("nome1", wd, LocalTime.now(), LocalTime.now().plusMinutes(10), EventStatus.WAIT);
-        Event e2 = new Event("nome2", wd, LocalTime.now(), LocalTime.now().plusMinutes(10), EventStatus.WAIT);
+        Event e1 = new Event("nome1", wd, LocalTime.now(), LocalTime.now().plusMinutes(10), EventType.DAILY, EventStatus.WAIT);
+        Event e2 = new Event("nome2", wd, LocalTime.now(), LocalTime.now().plusMinutes(10), EventType.DAILY, EventStatus.WAIT);
 
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();
