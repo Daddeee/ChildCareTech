@@ -5,15 +5,14 @@ import ChildCareTech.common.EventType;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.MealDAO;
+import ChildCareTech.model.DAO.MenuDAO;
 import ChildCareTech.model.DAO.WorkDayDAO;
-import ChildCareTech.model.entities.Canteen;
-import ChildCareTech.model.entities.Event;
-import ChildCareTech.model.entities.Meal;
-import ChildCareTech.model.entities.WorkDay;
+import ChildCareTech.model.entities.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -24,6 +23,7 @@ public class MealsGenerationUtil {
         MealDAO mealDAO = new MealDAO();
         EventDAO eventDAO = new EventDAO();
         WorkDayDAO workDayDAO = new WorkDayDAO();
+        MenuDAO menuDAO = new MenuDAO();
 
         validateTimes(entryTimes, exitTimes);
 
@@ -31,6 +31,7 @@ public class MealsGenerationUtil {
         mealDAO.setSession(session);
         eventDAO.setSession(session);
         workDayDAO.setSession(session);
+        menuDAO.setSession(session);
         try{
             tx = session.beginTransaction();
 
@@ -48,12 +49,17 @@ public class MealsGenerationUtil {
 
                     Event entryEvent = new Event(entryEventName, w, entryTimes.get(i), entryTimes.get(i).plusMinutes(10), EventType.MEAL, status);
                     Event exitEvent = new Event(exitEventName, w, exitTimes.get(i), exitTimes.get(i).plusMinutes(10), EventType.MEAL, status);
-
                     Meal meal = new Meal(canteen, i + 1, w, entryEvent, exitEvent, status, null);
 
                     eventDAO.create(entryEvent);
                     eventDAO.create(exitEvent);
                     mealDAO.create(meal);
+
+                    Menu menu = new Menu(meal, 0, new HashSet<>());
+                    menuDAO.create(menu);
+
+                    meal.setMenu(menu);
+                    mealDAO.update(meal);
                 }
             }
 
