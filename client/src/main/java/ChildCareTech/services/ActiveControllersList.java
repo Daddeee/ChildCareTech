@@ -17,6 +17,7 @@ public class ActiveControllersList {
     private static List<NewCanteenesListController> canteenControllersList = new ArrayList<>();
     private static List<KitchenController> dishControllersList = new ArrayList<>();
     private static List<EventReportController> eventReportControllersList = new ArrayList<>();
+    private static List<TripPresenceRegistrationController> presenceRegistrationControllersList = new ArrayList<>();
 
     private ActiveControllersList() { }
 
@@ -100,4 +101,13 @@ public class ActiveControllersList {
     }
     public static List<EventReportController> getEventReportControllersList() { return new ArrayList<>(eventReportControllersList); }
 
+    public static void addPresenceRegistrationControllersList(TripPresenceRegistrationController presenceRegistrationController) {
+        presenceRegistrationControllersList.add(presenceRegistrationController);
+    }
+    public  static void removePresenceRegistrationControllersList(TripPresenceRegistrationController presenceRegistrationController) {
+        presenceRegistrationControllersList.remove(presenceRegistrationController);
+    }
+    public static List<TripPresenceRegistrationController> getPresenceRegistrationControllersList() {
+        return presenceRegistrationControllersList;
+    }
 }

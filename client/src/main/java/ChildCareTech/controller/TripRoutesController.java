@@ -14,21 +14,29 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Comparator;
 
 
-public class TripRoutesController implements AccessorWindowController{
+public class TripRoutesController implements AccessorWindowController, TableWindowControllerInterface{
     @FXML
     protected TableView<RouteDTO> routesTable;
     @FXML
     protected Button startEvent;
     @FXML
     protected Button stopEvent;
+    @FXML
+    protected Label luogoPartenza;
+    @FXML
+    protected Label luogoArrivo;
+    @FXML
+    protected Button logButton;
 
     private ObservableList<RouteDTO> data = FXCollections.observableArrayList();
     private TripDTO tripDTO;
@@ -36,6 +44,12 @@ public class TripRoutesController implements AccessorWindowController{
     private boolean isStarting;
     private boolean isEventOpening;
     private AccessorWindowService accessorWindowService;
+    private AccessorWindowService logWindow;
+
+    @FXML
+    public void initialize() {
+        logWindow = new AccessorWindowService(this);
+    }
 
     public void initData(TripDTO tripDTO) {
         this.tripDTO = tripDTO;
@@ -70,12 +84,25 @@ public class TripRoutesController implements AccessorWindowController{
             stopEvent.setText("Chiudi arrivo a " + currentRoute.getArrivalLocation());
         }
 
+        luogoPartenza.setText(currentRoute.getDepartureLocation());
+        luogoArrivo.setText(currentRoute.getArrivalLocation());
+
         if (isEventOpening) {
             startEvent.setDisable(false);
             stopEvent.setDisable(true);
         } else {
             startEvent.setDisable(true);
             stopEvent.setDisable(false);
+        }
+    }
+
+    @FXML
+    protected void logButtonAction(ActionEvent event) {
+        try {
+            logWindow.loadTripPresenceRegistrationWindow(tripDTO, currentRoute);
+        } catch(IOException ex) {
+            //gestione
+            ex.printStackTrace();
         }
     }
 
@@ -155,4 +182,8 @@ public class TripRoutesController implements AccessorWindowController{
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
         this.accessorWindowService = accessorWindowService;
     }
+    public void refreshTable() {
+        refresh();
+    }
+    public void notifyUpdate() { }
 }

@@ -78,6 +78,10 @@ public class ResourcesPaths {
     private final static String codeInputCSSPath = "/style/QRCodeWindow.css";
     private final static String alertWindowFXMLPath = "/view/alertWindow.fxml";
     private final static String alertWindowCSSPath = "/style/alertWindow.css";
+    private final static String tripPresenceRegistrationFXMLPath = "/view/tripPresenceRegistrationWindow.fxml";
+    private final static String tripPresenceRegistrationCSSPath = "/style/tripPresenceRegistrationWindow.css";
+    private final static String QRCodeFXMLPath = "/view/QRCodeWindow.fxml";
+    private final static String QRCodeCSSPath = "/style/QRCodeWindow.css";
 
     public static String getLoginFXMLPath() { return loginFXMLPath; }
     public static String getLoginCSSPath() { return loginCSSPath; }
@@ -157,6 +161,10 @@ public class ResourcesPaths {
     public static String getCodeInputCSSPath() { return codeInputCSSPath; }
     public static String getAlertWindowFXMLPath() { return alertWindowFXMLPath; }
     public static String getAlertWindowCSSPath() { return alertWindowCSSPath; }
+    public static String getTripPresenceRegistrationFXMLPath() { return tripPresenceRegistrationFXMLPath; }
+    public static String getTripPresenceRegistrationCSSPath() { return tripPresenceRegistrationCSSPath; }
+    public static String getQRCodeFXMLPath() { return QRCodeFXMLPath; }
+    public static String getQRCodeCSSPath() { return QRCodeCSSPath; }
 
     //potevo fare delle macro ma sono un babbo
 }

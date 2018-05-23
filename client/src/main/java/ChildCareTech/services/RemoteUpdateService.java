@@ -57,6 +57,8 @@ public class RemoteUpdateService {
         Platform.runLater(() -> {
             for(NewTripListController controller : ActiveControllersList.getTripsListControllersList())
                 controller.refreshTable();
+            for(TripPresenceRegistrationController controller : ActiveControllersList.getPresenceRegistrationControllersList())
+                controller.refreshTable();
         });
     }
 

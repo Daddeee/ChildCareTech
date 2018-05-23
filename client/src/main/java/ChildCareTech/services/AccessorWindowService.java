@@ -1,9 +1,6 @@
 package ChildCareTech.services;
 
-import ChildCareTech.common.DTO.DishDTO;
-import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.common.DTO.MealDTO;
-import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.DTO.*;
 import ChildCareTech.controller.*;
 import ChildCareTech.services.ObservableDTOs.*;
 import javafx.event.EventHandler;
@@ -186,6 +183,10 @@ public class AccessorWindowService {
     public void loadAddMenuWindow(MealDTO mealDTO) throws IOException{
         loadWindow(ResourcesPaths.getAddMenuFXMLPath(), ResourcesPaths.getAddMenuCSSPath());
         ((AddMenuController)loader.getController()).initData(mealDTO);
+    }
+    public void loadTripPresenceRegistrationWindow(TripDTO tripDTO, RouteDTO routeDTO) throws IOException{
+        loadWindow(ResourcesPaths.getTripPresenceRegistrationFXMLPath(), ResourcesPaths.getTripPresenceRegistrationCSSPath());
+        ((TripPresenceRegistrationController)loader.getController()).initData(tripDTO, routeDTO);
     }
     protected void loadWindow(String fxmlPath, String cssPath) throws IOException{
         loader = new FXMLLoader(AccessorWindowService.class.getResource(fxmlPath));

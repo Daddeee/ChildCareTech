@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.TripPresenceRegistrationController">
+   <children>
+      <HBox layoutX="131.0" layoutY="75.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <TableView fx:id="reportTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn fx:id="fiscalCodeColumn" prefWidth="250.0" text="Codice Fiscale">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="fiscalCode" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="firstNameColumn" prefWidth="250.0" text="Nome">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="firstName" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="lastNameColumn" prefWidth="250.0" text="Cognome">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="lastName" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="recordTimeColumn" prefWidth="250.0" text="Orario registrato">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="recordTime" />
+                           </cellValueFactory>
+                        </TableColumn>
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label text="Select bus:" />
+                              <ComboBox fx:id="busComboBox" onAction="#busSelectionAction">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <AnchorPane fx:id="QRPane" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="-8.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <image>
+                                    <Image url="@../image/frame.png" />
+                                 </image>
+                              </ImageView>
+                           </children></AnchorPane>
+                        <ToggleButton fx:id="QRStatus" mnemonicParsing="false" onAction="#QRStatusAction" text="Turn On">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <TextArea fx:id="logArea" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin></TextArea>
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

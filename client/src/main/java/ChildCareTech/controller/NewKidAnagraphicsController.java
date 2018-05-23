@@ -74,7 +74,6 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
     @FXML
     public void editButtonAction(ActionEvent event) {
         try {
-            //AccessorSceneManager.loadEditKid(personTable.getSelectionModel().getSelectedItem());
             accessorWindowService.loadEditKidWindow(personTable.getSelectionModel().getSelectedItem());
         } catch (IOException ex) {
             System.err.println("can't load editKid window");
