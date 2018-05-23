@@ -147,10 +147,12 @@ public class ManualEventScheduler implements Runnable{
 
         workDayDAO.setSession(session);
         try {
+            if(toPlan == null)
+                toPlan = CurrentWorkDayService.getCurrent();
+
             tx = session.beginTransaction();
 
             planned = toPlan;
-
             CurrentWorkDayService.setCurrent(planned);
             RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.TODAY);
 
