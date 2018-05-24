@@ -364,7 +364,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<AdultDTO> getAllAdultsEx() throws RemoteException {
+    public List<AdultDTO> getAllAdultsExclusive() throws RemoteException {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_ADULTS_EX);
         SocketResponse response;
 

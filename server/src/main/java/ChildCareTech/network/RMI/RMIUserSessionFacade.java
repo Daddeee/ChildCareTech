@@ -242,8 +242,8 @@ public class RMIUserSessionFacade extends UnicastRemoteObject implements UserSes
     }
 
     @Override
-    public List<AdultDTO> getAllAdultsEx() throws RemoteException {
-        return adultController.doGetAllAdultsEx();
+    public List<AdultDTO> getAllAdultsExclusive() throws RemoteException {
+        return adultController.doGetAllAdultsExclusive();
     }
 
     @Override

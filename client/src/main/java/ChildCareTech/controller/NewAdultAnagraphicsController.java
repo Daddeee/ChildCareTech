@@ -129,7 +129,7 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
         List<StaffDTO> staffDTOList = new ArrayList<>();
         List<SupplierDTO> supplierDTOList = new ArrayList<>();
         try {
-            adultDTOList = session.getAllAdultsEx();
+            adultDTOList = session.getAllAdultsExclusive();
             pediatristDTOList = session.getAllPediatrists();
             staffDTOList = session.getAllStaff();
             supplierDTOList = session.getAllSuppliers();

@@ -45,7 +45,7 @@ public interface UserSessionFacade extends Remote {
     Collection<KidDTO> getAvailableKids(TripDTO tripDTO) throws RemoteException;
 
     List<AdultDTO> getAllAdults() throws RemoteException;
-    List<AdultDTO> getAllAdultsEx() throws RemoteException;
+    List<AdultDTO> getAllAdultsExclusive() throws RemoteException;
     List<PediatristDTO> getAllPediatrists() throws RemoteException;
     List<StaffDTO> getAllStaff() throws RemoteException;
     List<SupplierDTO> getAllSuppliers() throws RemoteException;

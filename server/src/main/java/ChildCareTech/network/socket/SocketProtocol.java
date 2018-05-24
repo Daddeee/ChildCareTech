@@ -375,7 +375,7 @@ public class SocketProtocol {
 
         try{
 
-            returnValue = adultController.doGetAllAdultsEx();
+            returnValue = adultController.doGetAllAdultsExclusive();
             response = new SocketResponse(SocketResponseType.SUCCESS, (Serializable) returnValue);
         } catch(Exception e) {
             response = new SocketResponse(SocketResponseType.FAIL, e);

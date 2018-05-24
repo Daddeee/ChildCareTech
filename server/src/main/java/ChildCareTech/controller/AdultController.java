@@ -127,7 +127,7 @@ public class AdultController {
         }
     }
 
-    public List<AdultDTO> doGetAllAdultsEx() {
+    public List<AdultDTO> doGetAllAdultsExclusive() {
         AdultDAO adultDAO = new AdultDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         List<AdultDTO> adultDTOList = new ArrayList<>();
