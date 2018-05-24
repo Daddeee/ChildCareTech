@@ -5,7 +5,7 @@ import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.common.DTO.SupplierDTO;
-import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ObservableDTOs.*;
 import javafx.collections.FXCollections;
@@ -123,7 +123,7 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
     }
 
     public void refreshTable() {
-        UserSession session = Client.getSessionService().getSession();
+        UserSessionFacade session = Client.getSessionService().getSession();
         List<AdultDTO> adultDTOList = new ArrayList<>();
         List<PediatristDTO> pediatristDTOList = new ArrayList<>();
         List<StaffDTO> staffDTOList = new ArrayList<>();

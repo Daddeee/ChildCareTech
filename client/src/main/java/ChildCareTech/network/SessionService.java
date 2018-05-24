@@ -1,14 +1,14 @@
 package ChildCareTech.network;
 
 import ChildCareTech.common.RemoteEventObserver;
-import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFacade;
 
 public interface SessionService {
     void loginAttempt(String userName, String password);
 
     void logoutAttempt();
 
-    UserSession getSession();
+    UserSessionFacade getSession();
 
     RemoteEventObserver getObserver();
 

@@ -2,7 +2,6 @@ package ChildCareTech.network.socket;
 
 import ChildCareTech.Client;
 import ChildCareTech.common.*;
-import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.network.SessionService;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class SocketSessionService implements SessionService {
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private String loginErrorMessage;
-    private SocketUserSession socketUserSession;
+    private SocketUserSessionFacade socketUserSessionFacade;
     private RemoteEventObserver socketRemoteEventObserver;
 
     public SocketSessionService() throws IOException {
@@ -23,7 +22,7 @@ public class SocketSessionService implements SessionService {
         this.in = new ObjectInputStream(socket.getInputStream());
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.loginErrorMessage = "";
-        this.socketUserSession = null;
+        this.socketUserSessionFacade = null;
     }
 
     @Override
@@ -37,11 +36,11 @@ public class SocketSessionService implements SessionService {
             if(response.responseType.equals(SocketResponseType.FAIL)){
                 loginErrorMessage = ((Exception) response.returnValue).getMessage();
             } else {
-                socketUserSession = new SocketUserSession(socket, out, in, userName);
+                socketUserSessionFacade = new SocketUserSessionFacade(socket, out, in, userName);
 
                 socketRemoteEventObserver = new SocketRemoteEventObserver(1337);
                 ((SocketRemoteEventObserver) socketRemoteEventObserver).start();
-                socketUserSession.addRemoteEventObserver(socketRemoteEventObserver);
+                socketUserSessionFacade.addRemoteEventObserver(socketRemoteEventObserver);
             }
         } catch (IOException | ClassNotFoundException e){
             loginErrorMessage = e.getMessage();
@@ -55,7 +54,7 @@ public class SocketSessionService implements SessionService {
         SocketResponse response;
 
         try{
-            socketUserSession.removeRemoteEventObserver(socketRemoteEventObserver);
+            socketUserSessionFacade.removeRemoteEventObserver(socketRemoteEventObserver);
 
             out.writeObject(request);
 
@@ -69,7 +68,7 @@ public class SocketSessionService implements SessionService {
             e.printStackTrace();
         } catch (IOException e) {}
 
-        socketUserSession = null;
+        socketUserSessionFacade = null;
         Client.setSessionService(null);
 
         try {
@@ -82,8 +81,8 @@ public class SocketSessionService implements SessionService {
     }
 
     @Override
-    public UserSession getSession() {
-        return socketUserSession;
+    public UserSessionFacade getSession() {
+        return socketUserSessionFacade;
     }
 
     @Override
@@ -93,7 +92,7 @@ public class SocketSessionService implements SessionService {
 
     @Override
     public boolean isNull() {
-        return socketUserSession == null;
+        return socketUserSessionFacade == null;
     }
 
     @Override

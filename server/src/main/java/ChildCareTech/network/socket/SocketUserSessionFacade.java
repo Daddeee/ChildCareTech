@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 
-public class SocketUserSession implements Runnable {
+public class SocketUserSessionFacade implements Runnable {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
@@ -18,7 +18,7 @@ public class SocketUserSession implements Runnable {
     private User user;
     private volatile boolean running;
 
-    public SocketUserSession(Socket socket) throws IOException {
+    public SocketUserSessionFacade(Socket socket) throws IOException {
         this.socket = socket;
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.in = new ObjectInputStream(socket.getInputStream());

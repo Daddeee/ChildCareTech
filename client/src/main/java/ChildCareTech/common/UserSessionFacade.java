@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public interface UserSession extends Remote {
+public interface UserSessionFacade extends Remote {
 
     void saveKid(KidDTO kid) throws RemoteException, AddFailedException;
     void saveAdult(AdultDTO adult) throws  RemoteException, AddFailedException;

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public interface UserSession extends Remote {
+public interface UserSessionFacade extends Remote {
 
     void saveKid(KidDTO kid) throws RemoteException, AddFailedException;
     void saveAdult(AdultDTO adult) throws  RemoteException, AddFailedException;

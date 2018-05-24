@@ -2,7 +2,7 @@ package ChildCareTech.network.RMI;
 
 
 import ChildCareTech.common.RemoteEventObserver;
-import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.network.SessionService;
@@ -14,7 +14,7 @@ import java.rmi.RemoteException;
 
 public class RMISessionService implements SessionService {
     private UserSessionFactory sessionFactory = null;
-    private UserSession session = null;
+    private UserSessionFacade session = null;
     private String loginErrorMessage = null;
     private RemoteEventObserver observer = null;
 
@@ -57,7 +57,7 @@ public class RMISessionService implements SessionService {
     }
 
     @Override
-    public UserSession getSession() {
+    public UserSessionFacade getSession() {
         return session;
     }
 

@@ -9,7 +9,7 @@ import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.User;
 import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.network.RMI.RMIUserSession;
+import ChildCareTech.network.RMI.RMIUserSessionFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,7 +59,7 @@ public class GetCanteenByNameTest {
         }
 
         try {
-            RMIUserSession userSession = new RMIUserSession(new User("nome", "pw"));
+            RMIUserSessionFacade userSession = new RMIUserSessionFacade(new User("nome", "pw"));
             CanteenDTO c = userSession.getCanteenByName("nome");
             assert(c.getMeals().size() == 2);
         } catch (RemoteException e){

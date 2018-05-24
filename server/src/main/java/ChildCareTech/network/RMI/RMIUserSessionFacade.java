@@ -2,14 +2,13 @@ package ChildCareTech.network.RMI;
 
 import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.RemoteEventObserver;
-import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.*;
-import ChildCareTech.utils.DTO.DTOFactory;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -17,7 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class RMIUserSession extends UnicastRemoteObject implements UserSession {
+public class RMIUserSessionFacade extends UnicastRemoteObject implements UserSessionFacade {
     private User user;
     private MenuController menuController;
     private DishController dishController;
@@ -37,7 +36,7 @@ public class RMIUserSession extends UnicastRemoteObject implements UserSession {
     private TripPartecipationController tripPartecipationController;
     private WorkDayGenerationController workDayGenerationController;
 
-    public RMIUserSession(User user) throws RemoteException {
+    public RMIUserSessionFacade(User user) throws RemoteException {
         this.user = user;
         this.menuController = new MenuController();
         this.dishController = new DishController();

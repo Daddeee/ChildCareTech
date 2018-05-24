@@ -33,7 +33,7 @@ public class SocketServer implements Runnable{
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
-                executor.submit(new SocketUserSession(socket));
+                executor.submit(new SocketUserSessionFacade(socket));
             } catch (IOException e) {
                 break;
             }

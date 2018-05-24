@@ -1,6 +1,5 @@
 package ChildCareTech.controller;
 
-import ChildCareTech.common.UserSession;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.model.entities.User;

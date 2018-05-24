@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class SocketUserSession implements UserSession {
+public class SocketUserSessionFacade implements UserSessionFacade {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private String userName;
 
-    public SocketUserSession(Socket socket, ObjectOutputStream out, ObjectInputStream in, String userName) {
+    public SocketUserSessionFacade(Socket socket, ObjectOutputStream out, ObjectInputStream in, String userName) {
         this.socket = socket;
         this.in = in;
         this.out = out;

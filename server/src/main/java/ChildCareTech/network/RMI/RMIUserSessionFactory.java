@@ -1,12 +1,10 @@
 package ChildCareTech.network.RMI;
 
-import ChildCareTech.common.RemoteEventObserver;
 import ChildCareTech.common.UserSessionFactory;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.controller.UserController;
 import ChildCareTech.model.entities.User;
-import ChildCareTech.utils.RemoteEventObservable;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -23,9 +21,9 @@ public class RMIUserSessionFactory extends UnicastRemoteObject implements UserSe
     }
 
     @Override
-    public RMIUserSession login(String userName, String password) throws LoginFailedException, RemoteException {
+    public RMIUserSessionFacade login(String userName, String password) throws LoginFailedException, RemoteException {
         User u = UserController.getUser(userName, password);
-        RMIUserSession session = new RMIUserSession(u);
+        RMIUserSessionFacade session = new RMIUserSessionFacade(u);
         UserController.storeSession(u, session);
         return session;
     }

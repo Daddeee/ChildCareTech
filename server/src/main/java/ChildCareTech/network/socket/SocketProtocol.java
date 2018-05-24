@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SocketProtocol {
     private HashMap<SocketRequestType, SocketRequestHandler> methodMap;
-    private SocketUserSession socketUserSession;
+    private SocketUserSessionFacade socketUserSessionFacade;
 
     private AdultController adultController;
     private BusController busController;
@@ -36,9 +36,9 @@ public class SocketProtocol {
     private WorkDayController workDayController;
     private WorkDayGenerationController workDayGenerationController;
 
-    public SocketProtocol(SocketUserSession socketUserSession) {
+    public SocketProtocol(SocketUserSessionFacade socketUserSessionFacade) {
         this.methodMap = new HashMap<>();
-        this.socketUserSession = socketUserSession;
+        this.socketUserSessionFacade = socketUserSessionFacade;
 
         this.adultController = new AdultController();
         this.busController = new BusController();
@@ -72,8 +72,8 @@ public class SocketProtocol {
             String userName = (String) request.params[0];
             String password = (String) request.params[1];
 
-            socketUserSession.setUser(UserController.getUser(userName, password));
-            UserController.storeSession(socketUserSession.getUser(), new Object());
+            socketUserSessionFacade.setUser(UserController.getUser(userName, password));
+            UserController.storeSession(socketUserSessionFacade.getUser(), new Object());
 
             response = new SocketResponse(SocketResponseType.SUCCESS, null);
         } catch (Exception e){
@@ -87,8 +87,8 @@ public class SocketProtocol {
         SocketResponse response;
 
         try {
-            UserController.removeSession(socketUserSession.getUser());
-            socketUserSession.close();
+            UserController.removeSession(socketUserSessionFacade.getUser());
+            socketUserSessionFacade.close();
             response = new SocketResponse(SocketResponseType.SUCCESS, null);
         } catch (Exception e){
             response = new SocketResponse(SocketResponseType.FAIL, e);

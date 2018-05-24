@@ -1,20 +1,17 @@
 package ChildCareTech.utils.generation;
 
-import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.controller.*;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GenerateSocket {
     public static void main(String [] args) throws Exception{
-        Method[] methods = UserSession.class.getDeclaredMethods();
+        Method[] methods = UserSessionFacade.class.getDeclaredMethods();
         HashMap<String, String> methodMap = new HashMap<>();
         String regex = "([a-z])([A-Z]+)";
         String replacement = "$1_$2";

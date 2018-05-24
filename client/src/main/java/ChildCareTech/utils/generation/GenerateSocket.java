@@ -1,6 +1,6 @@
 package ChildCareTech.utils.generation;
 
-import ChildCareTech.common.UserSession;
+import ChildCareTech.common.UserSessionFacade;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import java.lang.reflect.Parameter;
 public class GenerateSocket {
     public static void main(String [] args) throws IOException {
         String simpleNameRegexp = "(?<=\\.)(?=[^.]*$).*";
-        Method[] methods = UserSession.class.getDeclaredMethods();
+        Method[] methods = UserSessionFacade.class.getDeclaredMethods();
         PrintWriter metodi = new PrintWriter("src/main/java/ChildCareTech/utils/generation/metodi", "UTF-8");
 
         for(Method m : methods){
