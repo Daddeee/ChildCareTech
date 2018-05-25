@@ -9,7 +9,7 @@ import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PediatristEntityFactoryFacade implements AbstractEntityFactoryFacade<Pediatrist, PediatristDTO> {
+public class PediatristEntityFactory implements AbstractEntityFactory<Pediatrist, PediatristDTO> {
     @Override
     public Pediatrist assemble(PediatristDTO dto) {
         Pediatrist entity = getPediatrist(dto);
@@ -17,12 +17,12 @@ public class PediatristEntityFactoryFacade implements AbstractEntityFactoryFacad
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO k : dto.getContacts())
-            contacts.add(KidEntityFactoryFacade.assembleAdultManySide(k));
+            contacts.add(KidEntityFactory.assembleAdultManySide(k));
         entity.setContacts(contacts);
 
         Set<Kid> kids = new HashSet<>();
         for(KidDTO e : dto.getKids())
-            kids.add(KidEntityFactoryFacade.assemblePediatristManySide(e, entity));
+            kids.add(KidEntityFactory.assemblePediatristManySide(e, entity));
         entity.setKids(kids);
 
         return entity;

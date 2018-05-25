@@ -5,14 +5,14 @@ import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Supplier;
 import ChildCareTech.model.entities.Supply;
 
-public class SupplyEntityFactoryFacade implements AbstractEntityFactoryFacade<Supply, SupplyDTO> {
+public class SupplyEntityFactory implements AbstractEntityFactory<Supply, SupplyDTO> {
     @Override
     public Supply assemble(SupplyDTO dto) {
         if(dto == null) return null;
         return getSupply(
                 dto,
-                SupplierEntityFactoryFacade.assembleSupplyOneSide(dto.getSupplier()),
-                FoodEntityFactoryFacade.assembleSupplyOneSide(dto.getFood())
+                SupplierEntityFactory.assembleSupplyOneSide(dto.getSupplier()),
+                FoodEntityFactory.assembleSupplyOneSide(dto.getFood())
         );
     }
 
@@ -20,7 +20,7 @@ public class SupplyEntityFactoryFacade implements AbstractEntityFactoryFacade<Su
         if(dto == null) return null;
         return getSupply(
                 dto,
-                SupplierEntityFactoryFacade.assembleSupplyOneSide(dto.getSupplier()),
+                SupplierEntityFactory.assembleSupplyOneSide(dto.getSupplier()),
                 food
         );
     }
@@ -30,7 +30,7 @@ public class SupplyEntityFactoryFacade implements AbstractEntityFactoryFacade<Su
         return getSupply(
                 dto,
                 supplier,
-                FoodEntityFactoryFacade.assembleSupplyOneSide(dto.getFood())
+                FoodEntityFactory.assembleSupplyOneSide(dto.getFood())
         );
     }
 

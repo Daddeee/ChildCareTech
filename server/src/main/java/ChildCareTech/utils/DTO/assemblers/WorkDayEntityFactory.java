@@ -11,7 +11,7 @@ import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WorkDayEntityFactoryFacade implements AbstractEntityFactoryFacade<WorkDay, WorkDayDTO> {
+public class WorkDayEntityFactory implements AbstractEntityFactory<WorkDay, WorkDayDTO> {
     @Override
     public WorkDay assemble(WorkDayDTO dto) {
         WorkDay entity = getWorkDay(dto);
@@ -19,12 +19,12 @@ public class WorkDayEntityFactoryFacade implements AbstractEntityFactoryFacade<W
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
-            meals.add(MealEntityFactoryFacade.assembleWorkDayManySide(m, entity));
+            meals.add(MealEntityFactory.assembleWorkDayManySide(m, entity));
         entity.setMeals(meals);
 
         Set<Event> events = new HashSet<>();
         for(EventDTO e : dto.getEvents())
-            events.add(EventEntityFactoryFacade.assembleWorkDayManySide(e, entity));
+            events.add(EventEntityFactory.assembleWorkDayManySide(e, entity));
         entity.setEvents(events);
 
         return entity;
@@ -48,7 +48,7 @@ public class WorkDayEntityFactoryFacade implements AbstractEntityFactoryFacade<W
 
         Set<Event> events = new HashSet<>();
         for(EventDTO e : dto.getEvents())
-            events.add(EventEntityFactoryFacade.assembleWorkDayManySide(e, entity));
+            events.add(EventEntityFactory.assembleWorkDayManySide(e, entity));
         entity.setEvents(events);
 
         return entity;

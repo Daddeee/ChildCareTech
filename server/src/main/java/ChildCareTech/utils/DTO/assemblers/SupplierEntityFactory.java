@@ -9,7 +9,7 @@ import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SupplierEntityFactoryFacade implements AbstractEntityFactoryFacade<Supplier, SupplierDTO> {
+public class SupplierEntityFactory implements AbstractEntityFactory<Supplier, SupplierDTO> {
     @Override
     public Supplier assemble(SupplierDTO dto) {
         Supplier entity = getSupplier(dto);

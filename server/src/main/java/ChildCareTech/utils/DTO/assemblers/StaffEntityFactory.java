@@ -4,7 +4,7 @@ import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.model.entities.Staff;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class StaffEntityFactoryFacade implements AbstractEntityFactoryFacade<Staff, StaffDTO> {
+public class StaffEntityFactory implements AbstractEntityFactory<Staff, StaffDTO> {
     @Override
     public Staff assemble(StaffDTO dto) {
         if(dto == null)

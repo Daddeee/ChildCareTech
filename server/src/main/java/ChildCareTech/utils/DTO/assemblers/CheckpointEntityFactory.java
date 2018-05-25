@@ -5,11 +5,11 @@ import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class CheckpointEntityFactoryFacade implements AbstractEntityFactoryFacade<Checkpoint, CheckpointDTO> {
+public class CheckpointEntityFactory implements AbstractEntityFactory<Checkpoint, CheckpointDTO> {
     @Override
     public Checkpoint assemble(CheckpointDTO dto) {
         if(dto == null) return null;
-        return getEvent(dto, EventEntityFactoryFacade.assembleCheckpointOneSide(dto.getEvent()));
+        return getEvent(dto, EventEntityFactory.assembleCheckpointOneSide(dto.getEvent()));
     }
 
     public static Checkpoint assembleEventManySide(CheckpointDTO dto, Event event) {

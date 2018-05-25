@@ -5,10 +5,10 @@ import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class RouteEntityFactoryFacade implements AbstractEntityFactoryFacade<Route, RouteDTO> {
+public class RouteEntityFactory implements AbstractEntityFactory<Route, RouteDTO> {
     @Override
     public Route assemble(RouteDTO dto) {
-        return getRoute(dto, TripEntityFactoryFacade.assembleRouteOneSide(dto.getTrip()));
+        return getRoute(dto, TripEntityFactory.assembleRouteOneSide(dto.getTrip()));
     }
 
     public static Route assembleTripManySide(RouteDTO dto, Trip trip){

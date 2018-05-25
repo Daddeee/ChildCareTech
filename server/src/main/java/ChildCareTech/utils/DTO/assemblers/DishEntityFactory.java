@@ -11,7 +11,7 @@ import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DishEntityFactoryFacade implements AbstractEntityFactoryFacade<Dish, DishDTO> {
+public class DishEntityFactory implements AbstractEntityFactory<Dish, DishDTO> {
     @Override
     public Dish assemble(DishDTO dto) {
         if (dto == null) return null;
@@ -35,7 +35,7 @@ public class DishEntityFactoryFacade implements AbstractEntityFactoryFacade<Dish
     private static void loadMenusRelationship(DishDTO dto, Dish entity) {
         Set<Menu> menus = new HashSet<>();
         for(MenuDTO m : dto.getMenus())
-            menus.add(MenuEntityFactoryFacade.assembleDishManySide(m));
+            menus.add(MenuEntityFactory.assembleDishManySide(m));
         entity.setMenus(menus);
     }
 

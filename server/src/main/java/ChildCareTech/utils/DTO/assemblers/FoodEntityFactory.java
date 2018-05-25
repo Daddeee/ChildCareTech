@@ -10,7 +10,7 @@ import ChildCareTech.model.entities.Supply;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FoodEntityFactoryFacade implements AbstractEntityFactoryFacade<Food, FoodDTO> {
+public class FoodEntityFactory implements AbstractEntityFactory<Food, FoodDTO> {
     @Override
     public Food assemble(FoodDTO dto) {
         if(dto == null) return null;
@@ -32,7 +32,7 @@ public class FoodEntityFactoryFacade implements AbstractEntityFactoryFacade<Food
     private static void assembleSupplyRelationship(FoodDTO dto, Food entity) {
         Set<Supply> supplies = new HashSet<>();
         for(SupplyDTO e : dto.getSupplies())
-            supplies.add(SupplyEntityFactoryFacade.assembleFoodManySide(e, entity));
+            supplies.add(SupplyEntityFactory.assembleFoodManySide(e, entity));
         entity.setSupplies(supplies);
     }
 
@@ -40,7 +40,7 @@ public class FoodEntityFactoryFacade implements AbstractEntityFactoryFacade<Food
         Set<Person> allergies = new HashSet<>();
 
         for(PersonDTO p : dto.getAllergies())
-            allergies.add(PersonEntityFactoryFacade.assembleAllergiesManySide(p));
+            allergies.add(PersonEntityFactory.assembleAllergiesManySide(p));
 
         entity.setAllergies(allergies);
     }
