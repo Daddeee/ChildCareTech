@@ -85,7 +85,8 @@ public class AddMenuController implements AccessorWindowController {
     protected void saveButtonAction(ActionEvent event){
         Set<DishDTO> dishes = new HashSet<>(selectedDishesTable.getItems());
         MenuDTO menuDTO = currentMealDTO.getMenu();
-
+        if(menuDTO == null)
+            menuDTO = new MenuDTO(0, currentMealDTO, 0, null);
         try{
             for(DishDTO d : menuDTO.getDishes())
                 Client.getSessionService().getSession().removeDishFromMenu(menuDTO, d);

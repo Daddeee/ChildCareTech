@@ -32,12 +32,6 @@ public class Client extends Application {
     public void start(Stage primaryStage) throws IOException {
         MainWindowService mainWindowService = new MainWindowService(primaryStage);
         mainWindowService.setTitle("ChildCareTech");
-        try {
-            QRCodeReaderSingleton.init();
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }
-        //posso settare una onClose in modo che quando si chiude dalla X rossa si rilasciano i collegamenti rmi
 
         try {
             mainWindowService.loadLoginWindow();

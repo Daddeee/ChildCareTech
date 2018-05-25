@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.TripPresenceRegistrationController">
    <children>
       <HBox layoutX="131.0" layoutY="75.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -65,17 +66,17 @@
                         </HBox>
                         <AnchorPane fx:id="QRPane" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="-8.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ImageView fx:id="imageBox" fitHeight="200.0" fitWidth="200.0" layoutX="-8.0" layoutY="13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <image>
                                     <Image url="@../image/frame.png" />
                                  </image>
                               </ImageView>
                            </children></AnchorPane>
-                        <ToggleButton fx:id="QRStatus" mnemonicParsing="false" onAction="#QRStatusAction" text="Turn On">
+                        <Button fx:id="QRStatus" mnemonicParsing="false" onAction="#QRStatusAction" text="Turn On">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
-                        </ToggleButton>
+                        </Button>
                         <TextArea fx:id="logArea" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                            <VBox.margin>
                               <Insets top="10.0" />

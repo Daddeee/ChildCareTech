@@ -105,6 +105,7 @@ public interface UserSessionFacade extends Remote {
 
     Set<CheckpointDTO> getEventCheckpoints(EventDTO eventDTO) throws RemoteException;
     void saveCheckpoint(String fiscalCode, EventDTO event, LocalTime time) throws CheckpointFailedException, RemoteException;
+    /////////void saveCheckpoint(String fiscalCode, EventDTO event, LocalTime time, String busPlate, TripDTO trip) throws CheckpointFailedException, RemoteException;
 
     void addRemoteEventObserver(RemoteEventObserver observer) throws RemoteException;
     void removeRemoteEventObserver(RemoteEventObserver observer) throws RemoteException;
