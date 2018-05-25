@@ -5,7 +5,7 @@ import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.TripPartecipationDAO;
 import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
@@ -15,7 +15,7 @@ public class TripPartecipationController {
     public TripPartecipationController() {}
 
     public void doSaveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) throws AddFailedException {
-        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
+        TripPartecipation tripPartecipation = EntityFactoryFacade.getEntity(tripPartecipationDTO);
         TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
 
         Transaction tx = null;
@@ -40,7 +40,7 @@ public class TripPartecipationController {
     public void doRemoveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) {
         TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
 
-        TripPartecipation tripPartecipation = DTOEntityAssembler.getEntity(tripPartecipationDTO);
+        TripPartecipation tripPartecipation = EntityFactoryFacade.getEntity(tripPartecipationDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;

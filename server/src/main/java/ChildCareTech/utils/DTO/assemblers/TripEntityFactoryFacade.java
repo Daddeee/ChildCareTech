@@ -8,12 +8,12 @@ import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, TripDTO> {
+public class TripEntityFactoryFacade implements AbstractEntityFactoryFacade<Trip, TripDTO> {
     @Override
     public Trip assemble(TripDTO dto) {
         Trip entity = getTrip(dto);
@@ -21,17 +21,17 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
 
         Set<Route> routes = new HashSet<>();
         for(RouteDTO r : dto.getRoutes())
-            routes.add(RouteDTOEntityAssembler.assembleTripManySide(r, entity));
+            routes.add(RouteEntityFactoryFacade.assembleTripManySide(r, entity));
         entity.setRoutes(routes);
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
         for(TripPartecipationDTO t : dto.getTripPartecipations())
-            tripPartecipations.add(TripPartecipationDTOEntityAssembler.assembleTripManySide(t, entity));
+            tripPartecipations.add(TripPartecipationEntityFactoryFacade.assembleTripManySide(t, entity));
         entity.setTripPartecipations(tripPartecipations);
 
         Set<Bus> buses = new HashSet<>();
         for(BusDTO b : dto.getBuses())
-            buses.add(BusDTOEntityAssembler.assembleTripManySide(b));
+            buses.add(BusEntityFactoryFacade.assembleTripManySide(b));
         entity.setBuses(buses);
 
         return entity;
@@ -43,7 +43,7 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
         for(TripPartecipationDTO t : dto.getTripPartecipations())
-            tripPartecipations.add(DTOEntityAssembler.getEntity(t));
+            tripPartecipations.add(EntityFactoryFacade.getEntity(t));
         entity.setTripPartecipations(tripPartecipations);
 
         return entity;
@@ -55,7 +55,7 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
 
         Set<Route> routes = new HashSet<>();
         for(RouteDTO r : dto.getRoutes())
-            routes.add(RouteDTOEntityAssembler.assembleTripManySide(r, entity));
+            routes.add(RouteEntityFactoryFacade.assembleTripManySide(r, entity));
         entity.setRoutes(routes);
 
         return entity;
@@ -67,12 +67,12 @@ public class TripDTOEntityAssembler implements AbstractDTOEntityAssembler<Trip, 
 
         Set<Route> routes = new HashSet<>();
         for(RouteDTO r : dto.getRoutes())
-            routes.add(RouteDTOEntityAssembler.assembleTripManySide(r, entity));
+            routes.add(RouteEntityFactoryFacade.assembleTripManySide(r, entity));
         entity.setRoutes(routes);
 
         Set<TripPartecipation> tripPartecipations = new HashSet<>();
         for(TripPartecipationDTO t : dto.getTripPartecipations())
-            tripPartecipations.add(TripPartecipationDTOEntityAssembler.assembleTripManySide(t, entity));
+            tripPartecipations.add(TripPartecipationEntityFactoryFacade.assembleTripManySide(t, entity));
         entity.setTripPartecipations(tripPartecipations);
 
         return entity;

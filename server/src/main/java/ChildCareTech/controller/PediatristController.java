@@ -7,8 +7,8 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PediatristDAO;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -25,7 +25,7 @@ public class PediatristController {
     public void doSavePediatrist(PediatristDTO pediatristDTO) throws AddFailedException {
         PediatristDAO pediatristDAO = new PediatristDAO();
         PersonDAO personDAO = new PersonDAO();
-        Pediatrist pediatrist = DTOEntityAssembler.getEntity(pediatristDTO);
+        Pediatrist pediatrist = EntityFactoryFacade.getEntity(pediatristDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         HashMap<String, String> paramMap = new HashMap<>();
@@ -78,14 +78,14 @@ public class PediatristController {
         }
 
         for(Pediatrist pediatrist : pediatristList) {
-            pediatristDTOList.add(DTOFactory.getDTO(pediatrist));
+            pediatristDTOList.add(DTOFactoryFacade.getDTO(pediatrist));
         }
         return pediatristDTOList;
     }
 
     public void doRemovePediatrist(PediatristDTO pediatristDTO) {
         PediatristDAO pediatristDAO = new PediatristDAO();
-        Pediatrist pediatrist = DTOEntityAssembler.getEntity(pediatristDTO);
+        Pediatrist pediatrist = EntityFactoryFacade.getEntity(pediatristDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -107,7 +107,7 @@ public class PediatristController {
 
     public void doUpdatePediatrist(PediatristDTO pediatristDTO) throws UpdateFailedException{
         PediatristDAO pediatristDAO = new PediatristDAO();
-        Pediatrist pediatrist = DTOEntityAssembler.getEntity(pediatristDTO);
+        Pediatrist pediatrist = EntityFactoryFacade.getEntity(pediatristDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;

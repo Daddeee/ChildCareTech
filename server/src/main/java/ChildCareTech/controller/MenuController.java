@@ -7,7 +7,7 @@ import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ public class MenuController {
         MealDAO mealDAO = new MealDAO();
         MenuDAO menuDAO = new MenuDAO();
 
-        Meal meal = DTOEntityAssembler.getEntity(mealDTO);
+        Meal meal = EntityFactoryFacade.getEntity(mealDTO);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -50,7 +50,7 @@ public class MenuController {
         MenuDAO menuDAO = new MenuDAO();
         MealDAO mealDAO = new MealDAO();
 
-        Meal meal = DTOEntityAssembler.getEntity(mealDTO);
+        Meal meal = EntityFactoryFacade.getEntity(mealDTO);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();

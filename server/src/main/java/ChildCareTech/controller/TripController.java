@@ -10,8 +10,8 @@ import ChildCareTech.model.DAO.TripDAO;
 import ChildCareTech.model.DAO.TripPartecipationDAO;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -50,14 +50,14 @@ public class TripController {
         }
 
         for(Trip t : tripsCollection)
-            tripsDTOCollection.add(DTOFactory.getDTO(t));
+            tripsDTOCollection.add(DTOFactoryFacade.getDTO(t));
 
         return tripsDTOCollection;
     }
 
     public void doUpdateTrip(TripDTO newTripDTO) throws UpdateFailedException {
         TripDAO tripDAO = new TripDAO();
-        Trip newTrip = DTOEntityAssembler.getEntity(newTripDTO);
+        Trip newTrip = EntityFactoryFacade.getEntity(newTripDTO);
         Trip oldTrip;
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -91,7 +91,7 @@ public class TripController {
 
     public void doSaveTrip(TripDTO tripDTO) throws AddFailedException {
         TripDAO tripDAO = new TripDAO();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+        Trip trip = EntityFactoryFacade.getEntity(tripDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         HashMap<String, String> paramMap = new HashMap<>();
@@ -124,7 +124,7 @@ public class TripController {
 
     public void doRemoveTrip(TripDTO tripDTO) {
         TripDAO tripDAO = new TripDAO();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+        Trip trip = EntityFactoryFacade.getEntity(tripDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -167,7 +167,7 @@ public class TripController {
             session.close();
         }
 
-        resultDTO = DTOFactory.getDTO(result);
+        resultDTO = DTOFactoryFacade.getDTO(result);
 
         return resultDTO;
     }

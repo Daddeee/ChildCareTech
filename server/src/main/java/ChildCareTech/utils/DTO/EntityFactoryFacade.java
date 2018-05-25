@@ -4,99 +4,99 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.assemblers.*;
 
-public class DTOEntityAssembler {
+public class EntityFactoryFacade {
     public static Event getEntity(EventDTO dto){
-        EventDTOEntityAssembler eventDTOEntityAssembler = new EventDTOEntityAssembler();
+        EventEntityFactoryFacade eventDTOEntityAssembler = new EventEntityFactoryFacade();
         return eventDTOEntityAssembler.assemble(dto);
     }
 
     public static Meal getEntity(MealDTO dto) {
-        MealDTOEntityAssembler mealDTOEntityAssembler = new MealDTOEntityAssembler();
+        MealEntityFactoryFacade mealDTOEntityAssembler = new MealEntityFactoryFacade();
         return mealDTOEntityAssembler.assemble(dto);
     }
 
     public static Trip getEntity(TripDTO dto) {
-        TripDTOEntityAssembler tripDTOEntityAssembler = new TripDTOEntityAssembler();
+        TripEntityFactoryFacade tripDTOEntityAssembler = new TripEntityFactoryFacade();
         return tripDTOEntityAssembler.assemble(dto);
     }
 
     public static Kid getEntity(KidDTO dto) {
-        KidDTOEntityAssembler kidDTOEntityAssembler = new KidDTOEntityAssembler();
+        KidEntityFactoryFacade kidDTOEntityAssembler = new KidEntityFactoryFacade();
         return kidDTOEntityAssembler.assemble(dto);
     }
 
     public static Food getEntity(FoodDTO dto) {
-        FoodDTOEntityAssembler foodDTOEntityAssembler = new FoodDTOEntityAssembler();
+        FoodEntityFactoryFacade foodDTOEntityAssembler = new FoodEntityFactoryFacade();
         return foodDTOEntityAssembler.assemble(dto);
     }
 
     public static Canteen getEntity(CanteenDTO dto) {
-        CanteenDTOEntityAssembler canteenDTOEntityAssembler = new CanteenDTOEntityAssembler();
+        CanteenEntityFactoryFacade canteenDTOEntityAssembler = new CanteenEntityFactoryFacade();
         return canteenDTOEntityAssembler.assemble(dto);
     }
 
     public static Checkpoint getEntity(CheckpointDTO dto) {
-        CheckpointDTOEntityAssembler checkpointDTOEntityAssembler = new CheckpointDTOEntityAssembler();
+        CheckpointEntityFactoryFacade checkpointDTOEntityAssembler = new CheckpointEntityFactoryFacade();
         return checkpointDTOEntityAssembler.assemble(dto);
     }
 
     public static Adult getEntity(AdultDTO dto) {
-        AdultDTOEntityAssembler adultDTOEntityAssembler = new AdultDTOEntityAssembler();
+        AdultEntityFactoryFacade adultDTOEntityAssembler = new AdultEntityFactoryFacade();
         return adultDTOEntityAssembler.assemble(dto);
     }
 
     public static TripPartecipation getEntity(TripPartecipationDTO dto) {
-        TripPartecipationDTOEntityAssembler trippartecipationDTOEntityAssembler = new TripPartecipationDTOEntityAssembler();
+        TripPartecipationEntityFactoryFacade trippartecipationDTOEntityAssembler = new TripPartecipationEntityFactoryFacade();
         return trippartecipationDTOEntityAssembler.assemble(dto);
     }
 
     public static WorkDay getEntity(WorkDayDTO dto) {
-        WorkDayDTOEntityAssembler workdayDTOEntityAssembler = new WorkDayDTOEntityAssembler();
+        WorkDayEntityFactoryFacade workdayDTOEntityAssembler = new WorkDayEntityFactoryFacade();
         return workdayDTOEntityAssembler.assemble(dto);
     }
 
     public static Route getEntity(RouteDTO dto) {
-        RouteDTOEntityAssembler routeDTOEntityAssembler = new RouteDTOEntityAssembler();
+        RouteEntityFactoryFacade routeDTOEntityAssembler = new RouteEntityFactoryFacade();
         return routeDTOEntityAssembler.assemble(dto);
     }
 
     public static Person getEntity(PersonDTO dto) {
-        PersonDTOEntityAssembler personDTOEntityAssembler = new PersonDTOEntityAssembler();
+        PersonEntityFactoryFacade personDTOEntityAssembler = new PersonEntityFactoryFacade();
         return personDTOEntityAssembler.assemble(dto);
     }
 
     public static Menu getEntity(MenuDTO dto) {
-        MenuDTOEntityAssembler menuDTOEntityAssembler = new MenuDTOEntityAssembler();
+        MenuEntityFactoryFacade menuDTOEntityAssembler = new MenuEntityFactoryFacade();
         return menuDTOEntityAssembler.assemble(dto);
     }
 
     public static Pediatrist getEntity(PediatristDTO dto) {
-        PediatristDTOEntityAssembler pediatristDTOEntityAssembler = new PediatristDTOEntityAssembler();
+        PediatristEntityFactoryFacade pediatristDTOEntityAssembler = new PediatristEntityFactoryFacade();
         return pediatristDTOEntityAssembler.assemble(dto);
     }
 
     public static Bus getEntity(BusDTO dto) {
-        BusDTOEntityAssembler busDTOEntityAssembler = new BusDTOEntityAssembler();
+        BusEntityFactoryFacade busDTOEntityAssembler = new BusEntityFactoryFacade();
         return busDTOEntityAssembler.assemble(dto);
     }
 
     public static Supply getEntity(SupplyDTO dto) {
-        SupplyDTOEntityAssembler supplyDTOEntityAssembler = new SupplyDTOEntityAssembler();
+        SupplyEntityFactoryFacade supplyDTOEntityAssembler = new SupplyEntityFactoryFacade();
         return supplyDTOEntityAssembler.assemble(dto);
     }
 
     public static Supplier getEntity(SupplierDTO dto) {
-        SupplierDTOEntityAssembler supplierDTOEntityAssembler = new SupplierDTOEntityAssembler();
+        SupplierEntityFactoryFacade supplierDTOEntityAssembler = new SupplierEntityFactoryFacade();
         return supplierDTOEntityAssembler.assemble(dto);
     }
 
     public static Dish getEntity(DishDTO dto) {
-        DishDTOEntityAssembler dishDTOEntityAssembler = new DishDTOEntityAssembler();
+        DishEntityFactoryFacade dishDTOEntityAssembler = new DishEntityFactoryFacade();
         return dishDTOEntityAssembler.assemble(dto);
     }
 
     public static Staff getEntity(StaffDTO dto) {
-        StaffDTOEntityAssembler staffDTOEntityAssembler = new StaffDTOEntityAssembler();
+        StaffEntityFactoryFacade staffDTOEntityAssembler = new StaffEntityFactoryFacade();
         return staffDTOEntityAssembler.assemble(dto);
     }
 

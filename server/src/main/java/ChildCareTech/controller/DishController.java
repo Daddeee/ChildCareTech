@@ -4,8 +4,8 @@ import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.DAO.DishDAO;
 import ChildCareTech.model.entities.Dish;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
@@ -20,7 +20,7 @@ public class DishController {
 
     public void doDeleteDish(DishDTO dishDTO) {
         DishDAO dishDAO = new DishDAO();
-        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
+        Dish dish = EntityFactoryFacade.getEntity(dishDTO);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -41,7 +41,7 @@ public class DishController {
 
     public void doUpdateDish(DishDTO dishDTO) {
         DishDAO dishDAO = new DishDAO();
-        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
+        Dish dish = EntityFactoryFacade.getEntity(dishDTO);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -62,7 +62,7 @@ public class DishController {
 
     public void doCreateDish(DishDTO dishDTO) {
         DishDAO dishDAO = new DishDAO();
-        Dish dish = DTOEntityAssembler.getEntity(dishDTO);
+        Dish dish = EntityFactoryFacade.getEntity(dishDTO);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -103,7 +103,7 @@ public class DishController {
         }
 
         for(Dish d : queryResult)
-            result.add(DTOFactory.getDTO(d));
+            result.add(DTOFactoryFacade.getDTO(d));
 
         return result;
     }

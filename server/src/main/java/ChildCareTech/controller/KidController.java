@@ -10,11 +10,10 @@ import ChildCareTech.model.DAO.KidDAO;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
-import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -50,14 +49,14 @@ public class KidController {
         }
 
         for(Kid kid : kidList) {
-            kidDTOList.add(DTOFactory.getDTO(kid));
+            kidDTOList.add(DTOFactoryFacade.getDTO(kid));
         }
         return kidDTOList;
     }
 
     public Collection<KidDTO> doGetAvailableKids(TripDTO tripDTO) {
         KidDAO kidDAO = new KidDAO();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+        Trip trip = EntityFactoryFacade.getEntity(tripDTO);
         List<Kid> kidCollection = new ArrayList<>();
         List<KidDTO> kidDTOCollection = new ArrayList<>();
 
@@ -80,13 +79,13 @@ public class KidController {
         }
 
         for(Kid k : kidCollection)
-            kidDTOCollection.add(DTOFactory.getDTO(k));
+            kidDTOCollection.add(DTOFactoryFacade.getDTO(k));
 
         return kidDTOCollection;
     }
 
     public void doSaveKid(KidDTO kidDTO) throws AddFailedException {
-        Kid kid = DTOEntityAssembler.getEntity(kidDTO);
+        Kid kid = EntityFactoryFacade.getEntity(kidDTO);
         KidDAO kidDAO = new KidDAO();
 
         Transaction tx = null;
@@ -109,7 +108,7 @@ public class KidController {
 
     public void doRemoveKid(KidDTO kidDTO) {
         KidDAO kidDAO = new KidDAO();
-        Kid kid = DTOEntityAssembler.getEntity(kidDTO);
+        Kid kid = EntityFactoryFacade.getEntity(kidDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -131,7 +130,7 @@ public class KidController {
 
     public void doUpdateKid(KidDTO newKidDTO) {
         KidDAO kidDAO = new KidDAO();
-        Kid kid = DTOEntityAssembler.getEntity(newKidDTO);
+        Kid kid = EntityFactoryFacade.getEntity(newKidDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;

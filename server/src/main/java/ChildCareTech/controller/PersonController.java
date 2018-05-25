@@ -8,7 +8,7 @@ import ChildCareTech.model.DAO.FoodDAO;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
@@ -96,7 +96,7 @@ public class PersonController {
             session.close();
         }
 
-        resultDTO = DTOFactory.getDTO(result);
+        resultDTO = DTOFactoryFacade.getDTO(result);
 
         return resultDTO;
     }

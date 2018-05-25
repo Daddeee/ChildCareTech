@@ -2,9 +2,8 @@ package ChildCareTech.utils.DTO.factories;
 
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Checkpoint;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 
 public class CheckpointDTOFactory implements AbstractDTOFactory<Checkpoint, CheckpointDTO> {
     @Override
@@ -23,7 +22,7 @@ public class CheckpointDTOFactory implements AbstractDTOFactory<Checkpoint, Chec
         return new CheckpointDTO(
                 entity.getId(),
                 eventDTO,
-                DTOFactory.getDTO(entity.getPerson()),
+                DTOFactoryFacade.getDTO(entity.getPerson()),
                 entity.getTime(),
                 entity.isIn()
         );

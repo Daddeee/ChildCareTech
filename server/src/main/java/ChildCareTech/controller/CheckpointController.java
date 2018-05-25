@@ -11,7 +11,7 @@ import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Person;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
@@ -80,7 +80,7 @@ public class CheckpointController {
 
             result = eventDAO.read(eventDTO.getId());
             eventDAO.initializeLazyRelations(result);
-            resultDTO = DTOFactory.getDTO(result);
+            resultDTO = DTOFactoryFacade.getDTO(result);
 
             tx.commit();
         } catch(Exception e){

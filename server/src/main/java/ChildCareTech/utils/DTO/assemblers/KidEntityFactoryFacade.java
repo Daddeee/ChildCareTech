@@ -5,20 +5,20 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, KidDTO> {
+public class KidEntityFactoryFacade implements AbstractEntityFactoryFacade<Kid, KidDTO> {
     @Override
     public Kid assemble(KidDTO dto) {
         if(dto == null) return null;
-        Kid entity = getKid(dto, PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist()));
+        Kid entity = getKid(dto, PediatristEntityFactoryFacade.assembleKidOneSide(dto.getPediatrist()));
 
         Set<Adult> contacts = new HashSet<>();
         for(AdultDTO a : dto.getContacts())
-            contacts.add(AdultDTOEntityAssembler.assembleKidManySide(a));
+            contacts.add(AdultEntityFactoryFacade.assembleKidManySide(a));
         entity.setContacts(contacts);
 
         return entity;
@@ -26,7 +26,7 @@ public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, Ki
 
     public static Kid assembleAdultManySide(KidDTO dto){
         if(dto == null) return null;
-        return getKid(dto, PediatristDTOEntityAssembler.assembleKidOneSide(dto.getPediatrist()));
+        return getKid(dto, PediatristEntityFactoryFacade.assembleKidOneSide(dto.getPediatrist()));
     }
 
     public static Kid assemblePediatristManySide(KidDTO dto, Pediatrist pediatrist){
@@ -39,9 +39,9 @@ public class KidDTOEntityAssembler implements AbstractDTOEntityAssembler<Kid, Ki
 
         return new Kid(
                 dto.getId(),
-                DTOEntityAssembler.getEntity(dto.getPerson()),
-                DTOEntityAssembler.getEntity(dto.getFirstTutor()),
-                DTOEntityAssembler.getEntity(dto.getSecondTutor()),
+                EntityFactoryFacade.getEntity(dto.getPerson()),
+                EntityFactoryFacade.getEntity(dto.getFirstTutor()),
+                EntityFactoryFacade.getEntity(dto.getSecondTutor()),
                 pediatrist
         );
     }

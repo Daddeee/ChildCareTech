@@ -6,7 +6,7 @@ import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Supplier;
 import ChildCareTech.model.entities.Supply;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -39,7 +39,7 @@ public class SupplierDTOFactory implements AbstractDTOFactory<Supplier, Supplier
 
         SupplierDTO dto = new SupplierDTO(
                 entity.getId(),
-                DTOFactory.getDTO(entity.getPerson()),
+                DTOFactoryFacade.getDTO(entity.getPerson()),
                 null,
                 null
         );

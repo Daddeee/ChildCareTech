@@ -1,14 +1,11 @@
 package ChildCareTech.utils.DTO.factories;
 
-import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
-import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.utils.DTO.DTOFactory;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;

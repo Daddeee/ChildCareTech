@@ -4,7 +4,7 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -43,7 +43,7 @@ public class PediatristDTOFactory implements AbstractDTOFactory<Pediatrist, Pedi
 
         return new PediatristDTO(
                 entity.getId(),
-                DTOFactory.getDTO(entity.getPerson()),
+                DTOFactoryFacade.getDTO(entity.getPerson()),
                 null,
                 null
         );

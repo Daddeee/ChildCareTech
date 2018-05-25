@@ -8,7 +8,6 @@ import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOFactory;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;

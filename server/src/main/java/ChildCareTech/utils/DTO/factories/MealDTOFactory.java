@@ -5,7 +5,6 @@ import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.model.entities.Meal;
-import ChildCareTech.utils.DTO.DTOFactory;
 
 public class MealDTOFactory implements AbstractDTOFactory<Meal, MealDTO> {
     @Override

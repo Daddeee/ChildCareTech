@@ -4,7 +4,7 @@ import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 
 public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripPartecipation, TripPartecipationDTO> {
     @Override
@@ -41,7 +41,7 @@ public class TripPartecipationDTOFactory implements AbstractDTOFactory<TripParte
 
         return new TripPartecipationDTO(
                 entity.getId(),
-                DTOFactory.getDTO(entity.getPerson()),
+                DTOFactoryFacade.getDTO(entity.getPerson()),
                 tripDTO,
                 busDTO
         );

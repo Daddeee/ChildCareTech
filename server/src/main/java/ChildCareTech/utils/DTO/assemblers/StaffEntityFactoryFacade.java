@@ -2,9 +2,9 @@ package ChildCareTech.utils.DTO.assemblers;
 
 import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.model.entities.Staff;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class StaffDTOEntityAssembler implements AbstractDTOEntityAssembler<Staff, StaffDTO> {
+public class StaffEntityFactoryFacade implements AbstractEntityFactoryFacade<Staff, StaffDTO> {
     @Override
     public Staff assemble(StaffDTO dto) {
         if(dto == null)
@@ -12,7 +12,7 @@ public class StaffDTOEntityAssembler implements AbstractDTOEntityAssembler<Staff
 
         return new Staff(
                 dto.getId(),
-                DTOEntityAssembler.getEntity(dto.getPerson())
+                EntityFactoryFacade.getEntity(dto.getPerson())
         );
     }
 }

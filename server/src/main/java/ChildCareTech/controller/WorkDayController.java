@@ -5,7 +5,7 @@ import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.CurrentWorkDayService;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
@@ -38,7 +38,7 @@ public class WorkDayController {
             session.close();
         }
 
-        return DTOFactory.getDTO(result);
+        return DTOFactoryFacade.getDTO(result);
     }
 
     public LocalDate doGetMaxSavedDate() {
@@ -82,7 +82,7 @@ public class WorkDayController {
     }
 
     public WorkDayDTO doGetCurrentWorkDay() {
-        return DTOFactory.getDTO(CurrentWorkDayService.getCurrent());
+        return DTOFactoryFacade.getDTO(CurrentWorkDayService.getCurrent());
     }
 
     public void doTriggerDailyScheduling() throws RemoteException {

@@ -7,8 +7,8 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.DAO.SupplierDAO;
 import ChildCareTech.model.entities.Supplier;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -25,7 +25,7 @@ public class SupplierController {
     public void doSaveSupplier(SupplierDTO supplierDTO) throws AddFailedException {
         SupplierDAO supplierDAO = new SupplierDAO();
         PersonDAO personDAO = new PersonDAO();
-        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
+        Supplier supplier = EntityFactoryFacade.getEntity(supplierDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         HashMap<String, String> paramMap = new HashMap<>();
@@ -78,14 +78,14 @@ public class SupplierController {
         }
 
         for(Supplier supplier : supplierList) {
-            supplierDTOList.add(DTOFactory.getDTO(supplier));
+            supplierDTOList.add(DTOFactoryFacade.getDTO(supplier));
         }
         return supplierDTOList;
     }
 
     public void doRemoveSupplier(SupplierDTO supplierDTO) {
         SupplierDAO supplierDAO = new SupplierDAO();
-        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
+        Supplier supplier = EntityFactoryFacade.getEntity(supplierDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -106,7 +106,7 @@ public class SupplierController {
 
     public void doUpdateSupplier(SupplierDTO supplierDTO) throws UpdateFailedException {
         SupplierDAO supplierDAO = new SupplierDAO();
-        Supplier supplier = DTOEntityAssembler.getEntity(supplierDTO);
+        Supplier supplier = EntityFactoryFacade.getEntity(supplierDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;

@@ -9,8 +9,8 @@ import ChildCareTech.model.DAO.FoodDAO;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -29,7 +29,7 @@ public class FoodController {
         PersonDAO personDAO = new PersonDAO();
         List<FoodDTO> foodsDTOCollection = new ArrayList<>();
         List<Food> foodsCollection = new ArrayList<>();
-        Person person = DTOEntityAssembler.getEntity(personDTO);
+        Person person = EntityFactoryFacade.getEntity(personDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -49,14 +49,14 @@ public class FoodController {
         }
 
         for(Food f : foodsCollection)
-            foodsDTOCollection.add(DTOFactory.getDTO(f));
+            foodsDTOCollection.add(DTOFactoryFacade.getDTO(f));
 
         return foodsDTOCollection;
     }
 
     public void doUpdateFood(FoodDTO newFoodDTO) throws UpdateFailedException {
         FoodDAO foodDAO = new FoodDAO();
-        Food newFood = DTOEntityAssembler.getEntity(newFoodDTO);
+        Food newFood = EntityFactoryFacade.getEntity(newFoodDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -82,7 +82,7 @@ public class FoodController {
 
     public void doRemoveFood(FoodDTO foodDTO) {
         FoodDAO foodDAO = new FoodDAO();
-        Food food = DTOEntityAssembler.getEntity(foodDTO);
+        Food food = EntityFactoryFacade.getEntity(foodDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -102,7 +102,7 @@ public class FoodController {
     }
 
     public void doSaveFood(FoodDTO foodDTO) throws AddFailedException {
-        Food food = DTOEntityAssembler.getEntity(foodDTO);
+        Food food = EntityFactoryFacade.getEntity(foodDTO);
         FoodDAO foodDAO = new FoodDAO();
 
         Transaction tx = null;
@@ -146,7 +146,7 @@ public class FoodController {
         }
 
         for(Food f : foodsCollection)
-            foodsDTOCollection.add(DTOFactory.getDTO(f));
+            foodsDTOCollection.add(DTOFactoryFacade.getDTO(f));
 
         return foodsDTOCollection;
     }

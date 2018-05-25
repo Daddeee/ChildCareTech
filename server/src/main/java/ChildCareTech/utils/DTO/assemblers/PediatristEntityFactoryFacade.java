@@ -4,12 +4,12 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<Pediatrist, PediatristDTO> {
+public class PediatristEntityFactoryFacade implements AbstractEntityFactoryFacade<Pediatrist, PediatristDTO> {
     @Override
     public Pediatrist assemble(PediatristDTO dto) {
         Pediatrist entity = getPediatrist(dto);
@@ -17,12 +17,12 @@ public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO k : dto.getContacts())
-            contacts.add(KidDTOEntityAssembler.assembleAdultManySide(k));
+            contacts.add(KidEntityFactoryFacade.assembleAdultManySide(k));
         entity.setContacts(contacts);
 
         Set<Kid> kids = new HashSet<>();
         for(KidDTO e : dto.getKids())
-            kids.add(KidDTOEntityAssembler.assemblePediatristManySide(e, entity));
+            kids.add(KidEntityFactoryFacade.assemblePediatristManySide(e, entity));
         entity.setKids(kids);
 
         return entity;
@@ -34,7 +34,7 @@ public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO e : dto.getContacts())
-            contacts.add(DTOEntityAssembler.getEntity(e));
+            contacts.add(EntityFactoryFacade.getEntity(e));
         entity.setContacts(contacts);
 
         return entity;
@@ -46,7 +46,7 @@ public class PediatristDTOEntityAssembler implements AbstractDTOEntityAssembler<
 
         Pediatrist entity = new Pediatrist(
                 dto.getId(),
-                DTOEntityAssembler.getEntity(dto.getPerson()),
+                EntityFactoryFacade.getEntity(dto.getPerson()),
                 null
         );
         return entity;

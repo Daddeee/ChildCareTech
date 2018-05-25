@@ -7,8 +7,8 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Adult;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -25,7 +25,7 @@ public class AdultController {
     public void doSaveAdult(AdultDTO adultDTO) throws AddFailedException {
         AdultDAO adultDAO = new AdultDAO();
         PersonDAO personDAO = new PersonDAO();
-        Adult adult = DTOEntityAssembler.getEntity(adultDTO);
+        Adult adult = EntityFactoryFacade.getEntity(adultDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         HashMap<String, String> paramMap = new HashMap<>();
@@ -79,14 +79,14 @@ public class AdultController {
         }
 
         for(Adult adult : adultList) {
-            adultDTOList.add(DTOFactory.getDTO(adult));
+            adultDTOList.add(DTOFactoryFacade.getDTO(adult));
         }
         return adultDTOList;
     }
 
     public void doRemoveAdult(AdultDTO adultDTO) {
         AdultDAO adultDAO = new AdultDAO();
-        Adult adult = DTOEntityAssembler.getEntity(adultDTO);
+        Adult adult = EntityFactoryFacade.getEntity(adultDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -107,7 +107,7 @@ public class AdultController {
 
     public void doUpdateAdult(AdultDTO adultDTO) throws UpdateFailedException{
         AdultDAO adultDAO = new AdultDAO();
-        Adult adult = DTOEntityAssembler.getEntity(adultDTO);
+        Adult adult = EntityFactoryFacade.getEntity(adultDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -151,7 +151,7 @@ public class AdultController {
         }
 
         for(Adult adult : adultList) {
-            adultDTOList.add(DTOFactory.getDTO(adult));
+            adultDTOList.add(DTOFactoryFacade.getDTO(adult));
         }
         return adultDTOList;
     }

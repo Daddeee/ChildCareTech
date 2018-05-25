@@ -4,16 +4,16 @@ import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAssembler<TripPartecipation, TripPartecipationDTO> {
+public class TripPartecipationEntityFactoryFacade implements AbstractEntityFactoryFacade<TripPartecipation, TripPartecipationDTO> {
     @Override
     public TripPartecipation assemble(TripPartecipationDTO dto) {
         if(dto == null) return null;
         return getTripPartecipation(
                 dto,
-                TripDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getTrip()),
-                BusDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getBus())
+                TripEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getTrip()),
+                BusEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getBus())
         );
     }
 
@@ -21,7 +21,7 @@ public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAss
         if(dto == null) return null;
         return getTripPartecipation(
                 dto,
-                TripDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getTrip()),
+                TripEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getTrip()),
                 bus
         );
     }
@@ -31,7 +31,7 @@ public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAss
         return getTripPartecipation(
                 dto,
                 trip,
-                BusDTOEntityAssembler.assembleTripPartecipationOneSide(dto.getBus())
+                BusEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getBus())
         );
     }
 
@@ -41,7 +41,7 @@ public class TripPartecipationDTOEntityAssembler implements AbstractDTOEntityAss
 
         return new TripPartecipation(
                 dto.getId(),
-                DTOEntityAssembler.getEntity(dto.getPerson()),
+                EntityFactoryFacade.getEntity(dto.getPerson()),
                 trip,
                 bus
         );

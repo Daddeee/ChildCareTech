@@ -6,7 +6,7 @@ import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Menu;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -59,7 +59,7 @@ public class DishDTOFactory implements AbstractDTOFactory<Dish, DishDTO> {
 
         if(Hibernate.isInitialized(entity.getFoods()))
             for (Food f : entity.getFoods())
-                foods.add(DTOFactory.getDTO(f));
+                foods.add(DTOFactoryFacade.getDTO(f));
 
         dto.setFoods(foods);
     }

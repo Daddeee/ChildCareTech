@@ -3,7 +3,7 @@ package ChildCareTech.utils.DTO.factories;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.model.entities.Route;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 
 public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
     @Override
@@ -27,8 +27,8 @@ public class RouteDTOFactory implements AbstractDTOFactory<Route, RouteDTO> {
                 entity.getDepartureLocation(),
                 entity.getArrivalLocation(),
                 entity.getStatus(),
-                DTOFactory.getDTO(entity.getDepartureEvent()),
-                DTOFactory.getDTO(entity.getArrivalEvent())
+                DTOFactoryFacade.getDTO(entity.getDepartureEvent()),
+                DTOFactoryFacade.getDTO(entity.getArrivalEvent())
         );
     }
 }

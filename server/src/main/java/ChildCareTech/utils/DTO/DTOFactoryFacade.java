@@ -4,7 +4,7 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.factories.*;
 
-public class DTOFactory {
+public class DTOFactoryFacade {
     public static EventDTO getDTO(Event event){
         EventDTOFactory factory = new EventDTOFactory();
         return factory.getDTO(event);

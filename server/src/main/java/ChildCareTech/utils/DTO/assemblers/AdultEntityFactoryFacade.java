@@ -4,12 +4,12 @@ import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult, AdultDTO> {
+public class AdultEntityFactoryFacade implements AbstractEntityFactoryFacade<Adult, AdultDTO> {
     @Override
     public Adult assemble(AdultDTO dto) {
         Adult entity = getAdult(dto);
@@ -18,7 +18,7 @@ public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult
 
         Set<Kid> contacts = new HashSet<>();
         for(KidDTO k : dto.getContacts())
-            contacts.add(KidDTOEntityAssembler.assembleAdultManySide(k));
+            contacts.add(KidEntityFactoryFacade.assembleAdultManySide(k));
         entity.setContacts(contacts);
 
         return entity;
@@ -34,7 +34,7 @@ public class AdultDTOEntityAssembler implements AbstractDTOEntityAssembler<Adult
 
         return new Adult(
                 dto.getId(),
-                DTOEntityAssembler.getEntity(dto.getPerson())
+                EntityFactoryFacade.getEntity(dto.getPerson())
         );
     }
 }

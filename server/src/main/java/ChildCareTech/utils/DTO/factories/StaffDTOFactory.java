@@ -4,7 +4,7 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Staff;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class StaffDTOFactory implements AbstractDTOFactory<Staff, StaffDTO> {
 
         StaffDTO dto = new StaffDTO(
                 entity.getId(),
-                DTOFactory.getDTO(entity.getPerson()),
+                DTOFactoryFacade.getDTO(entity.getPerson()),
                 null
         );
 

@@ -8,7 +8,7 @@ import ChildCareTech.model.entities.Person;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PersonDTOEntityAssembler implements AbstractDTOEntityAssembler<Person, PersonDTO> {
+public class PersonEntityFactoryFacade implements AbstractEntityFactoryFacade<Person, PersonDTO> {
     @Override
     public Person assemble(PersonDTO dto) {
         Person entity = getPerson(dto);
@@ -27,7 +27,7 @@ public class PersonDTOEntityAssembler implements AbstractDTOEntityAssembler<Pers
         Set<Food> allergies = new HashSet<>();
 
         for(FoodDTO f : dto.getAllergies())
-            allergies.add(FoodDTOEntityAssembler.assembleAllergiesManySide(f));
+            allergies.add(FoodEntityFactoryFacade.assembleAllergiesManySide(f));
 
         entity.setAllergies(allergies);
     }

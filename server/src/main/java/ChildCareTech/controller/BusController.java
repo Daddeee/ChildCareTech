@@ -9,8 +9,8 @@ import ChildCareTech.model.DAO.BusDAO;
 import ChildCareTech.model.DAO.TripDAO;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -29,7 +29,7 @@ public class BusController {
         TripDAO tripDAO = new TripDAO();
         List<BusDTO> busesDTOCollection = new ArrayList<>();
         List<Bus> busesCollection = new ArrayList<>();
-        Trip trip = DTOEntityAssembler.getEntity(tripDTO);
+        Trip trip = EntityFactoryFacade.getEntity(tripDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -47,7 +47,7 @@ public class BusController {
         }
 
         for(Bus b : busesCollection)
-            busesDTOCollection.add(DTOFactory.getDTO(b));
+            busesDTOCollection.add(DTOFactoryFacade.getDTO(b));
 
         return busesDTOCollection;
     }
@@ -78,14 +78,14 @@ public class BusController {
         }
 
         for(Bus b : busesCollection)
-            busesDTOCollection.add(DTOFactory.getDTO(b));
+            busesDTOCollection.add(DTOFactoryFacade.getDTO(b));
 
         return busesDTOCollection;
     }
 
     public void doUpdateBus(BusDTO newBusDTO) throws UpdateFailedException {
         BusDAO busDAO = new BusDAO();
-        Bus newBus = DTOEntityAssembler.getEntity(newBusDTO);
+        Bus newBus = EntityFactoryFacade.getEntity(newBusDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -111,7 +111,7 @@ public class BusController {
 
     public void doRemoveBus(BusDTO busDTO) {
         BusDAO busDAO = new BusDAO();
-        Bus bus = DTOEntityAssembler.getEntity(busDTO);
+        Bus bus = EntityFactoryFacade.getEntity(busDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -131,7 +131,7 @@ public class BusController {
     }
 
     public void doSaveBus(BusDTO busDTO) throws AddFailedException {
-        Bus bus = DTOEntityAssembler.getEntity(busDTO);
+        Bus bus = EntityFactoryFacade.getEntity(busDTO);
         BusDAO busDAO = new BusDAO();
 
         Transaction tx = null;

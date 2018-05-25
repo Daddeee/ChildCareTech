@@ -7,8 +7,8 @@ import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.DAO.StaffDAO;
 import ChildCareTech.model.entities.Staff;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.HibernateException;
@@ -24,7 +24,7 @@ public class StaffController {
 
     public void doRemoveStaff(StaffDTO staffDTO) {
         StaffDAO staffDAO = new StaffDAO();
-        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
+        Staff staff = EntityFactoryFacade.getEntity(staffDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
@@ -67,7 +67,7 @@ public class StaffController {
         }
 
         for(Staff staff : staffList) {
-            staffDTOList.add(DTOFactory.getDTO(staff));
+            staffDTOList.add(DTOFactoryFacade.getDTO(staff));
         }
         return staffDTOList;
     }
@@ -75,7 +75,7 @@ public class StaffController {
     public void doSaveStaff(StaffDTO staffDTO) throws AddFailedException {
         StaffDAO staffDAO = new StaffDAO();
         PersonDAO personDAO = new PersonDAO();
-        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
+        Staff staff = EntityFactoryFacade.getEntity(staffDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         HashMap<String, String> paramMap = new HashMap<>();
@@ -106,7 +106,7 @@ public class StaffController {
 
     public void doUpdateStaffMember(StaffDTO staffDTO) throws UpdateFailedException {
         StaffDAO staffDAO = new StaffDAO();
-        Staff staff = DTOEntityAssembler.getEntity(staffDTO);
+        Staff staff = EntityFactoryFacade.getEntity(staffDTO);
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;

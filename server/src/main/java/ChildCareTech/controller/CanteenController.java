@@ -8,8 +8,8 @@ import ChildCareTech.model.DAO.MealDAO;
 import ChildCareTech.model.DAO.MenuDAO;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Meal;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
-import ChildCareTech.utils.DTO.DTOFactory;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
+import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.DTO.factories.CanteenDTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.MealsGenerationUtil;
@@ -57,7 +57,7 @@ public class CanteenController {
             session.close();
         }
 
-        return DTOFactory.getDTO(result.get(0));
+        return DTOFactoryFacade.getDTO(result.get(0));
     }
 
     public List<String> doGetAllCanteenNames() {
@@ -90,7 +90,7 @@ public class CanteenController {
         Canteen canteen;
         try{
             tx = session.beginTransaction();
-            canteen = DTOEntityAssembler.getEntity(canteenDTO);
+            canteen = EntityFactoryFacade.getEntity(canteenDTO);
             canteenDAO.create(canteen);
             tx.commit();
 
@@ -132,7 +132,7 @@ public class CanteenController {
 
     public void doRemoveCanteen(CanteenDTO canteenDTO) {
         CanteenDAO canteenDAO = new CanteenDAO();
-        Canteen canteen = DTOEntityAssembler.getEntity(canteenDTO);
+        Canteen canteen = EntityFactoryFacade.getEntity(canteenDTO);
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();

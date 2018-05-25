@@ -5,18 +5,18 @@ import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.Menu;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, MenuDTO> {
+public class MenuEntityFactoryFacade implements AbstractEntityFactoryFacade<Menu, MenuDTO> {
     @Override
     public Menu assemble(MenuDTO dto) {
         if(dto == null) return null;
         Menu entity = getMenu(dto, null);
 
-        entity.setMeal(MealDTOEntityAssembler.assembleMenuOneSide(dto.getMeal(), entity));
+        entity.setMeal(MealEntityFactoryFacade.assembleMenuOneSide(dto.getMeal(), entity));
         loadDishesRelationship(dto, entity);
 
         return entity;
@@ -24,7 +24,7 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
 
     public static Menu assembleDishManySide(MenuDTO dto) {
         if(dto == null) return null;
-        Menu entity = getMenu(dto, DTOEntityAssembler.getEntity(dto.getMeal()));
+        Menu entity = getMenu(dto, EntityFactoryFacade.getEntity(dto.getMeal()));
 
         return entity;
     }
@@ -41,7 +41,7 @@ public class MenuDTOEntityAssembler implements AbstractDTOEntityAssembler<Menu, 
     private static void loadDishesRelationship(MenuDTO dto, Menu entity) {
         Set<Dish> dishes = new HashSet<>();
         for(DishDTO d : dto.getDishes())
-            dishes.add(DishDTOEntityAssembler.assembleMenuManySide(d));
+            dishes.add(DishEntityFactoryFacade.assembleMenuManySide(d));
         entity.setDishes(dishes);
     }
 

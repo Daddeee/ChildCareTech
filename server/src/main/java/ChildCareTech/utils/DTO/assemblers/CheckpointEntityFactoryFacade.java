@@ -3,14 +3,13 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Event;
-import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class CheckpointDTOEntityAssembler implements AbstractDTOEntityAssembler<Checkpoint, CheckpointDTO> {
+public class CheckpointEntityFactoryFacade implements AbstractEntityFactoryFacade<Checkpoint, CheckpointDTO> {
     @Override
     public Checkpoint assemble(CheckpointDTO dto) {
         if(dto == null) return null;
-        return getEvent(dto, EventDTOEntityAssembler.assembleCheckpointOneSide(dto.getEvent()));
+        return getEvent(dto, EventEntityFactoryFacade.assembleCheckpointOneSide(dto.getEvent()));
     }
 
     public static Checkpoint assembleEventManySide(CheckpointDTO dto, Event event) {
@@ -24,7 +23,7 @@ public class CheckpointDTOEntityAssembler implements AbstractDTOEntityAssembler<
         return new Checkpoint(
                 dto.getId(),
                 event,
-                DTOEntityAssembler.getEntity(dto.getPerson()),
+                EntityFactoryFacade.getEntity(dto.getPerson()),
                 dto.getTime(),
                 dto.isIn()
         );

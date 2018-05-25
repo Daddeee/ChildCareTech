@@ -4,12 +4,12 @@ import ChildCareTech.common.DTO.SupplierDTO;
 import ChildCareTech.common.DTO.SupplyDTO;
 import ChildCareTech.model.entities.Supplier;
 import ChildCareTech.model.entities.Supply;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class SupplierDTOEntityAssembler implements AbstractDTOEntityAssembler<Supplier, SupplierDTO> {
+public class SupplierEntityFactoryFacade implements AbstractEntityFactoryFacade<Supplier, SupplierDTO> {
     @Override
     public Supplier assemble(SupplierDTO dto) {
         Supplier entity = getSupplier(dto);
@@ -17,7 +17,7 @@ public class SupplierDTOEntityAssembler implements AbstractDTOEntityAssembler<Su
 
         Set<Supply> supplies = new HashSet<>();
         for(SupplyDTO s : dto.getSupplies())
-            supplies.add(DTOEntityAssembler.getEntity(s));
+            supplies.add(EntityFactoryFacade.getEntity(s));
         entity.setSupplies(supplies);
 
         return entity;
@@ -33,7 +33,7 @@ public class SupplierDTOEntityAssembler implements AbstractDTOEntityAssembler<Su
 
         Supplier entity = new Supplier(
                 dto.getId(),
-                DTOEntityAssembler.getEntity(dto.getPerson())
+                EntityFactoryFacade.getEntity(dto.getPerson())
         );
 
         return entity;

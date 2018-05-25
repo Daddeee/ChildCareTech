@@ -3,12 +3,12 @@ package ChildCareTech.utils.DTO.assemblers;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.DTO.DTOEntityAssembler;
+import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route, RouteDTO> {
+public class RouteEntityFactoryFacade implements AbstractEntityFactoryFacade<Route, RouteDTO> {
     @Override
     public Route assemble(RouteDTO dto) {
-        return getRoute(dto, TripDTOEntityAssembler.assembleRouteOneSide(dto.getTrip()));
+        return getRoute(dto, TripEntityFactoryFacade.assembleRouteOneSide(dto.getTrip()));
     }
 
     public static Route assembleTripManySide(RouteDTO dto, Trip trip){
@@ -26,8 +26,8 @@ public class RouteDTOEntityAssembler implements AbstractDTOEntityAssembler<Route
                 dto.getDepartureLocation(),
                 dto.getArrivalLocation(),
                 dto.getStatus(),
-                DTOEntityAssembler.getEntity(dto.getDepartureEvent()),
-                DTOEntityAssembler.getEntity(dto.getArrivalEvent())
+                EntityFactoryFacade.getEntity(dto.getDepartureEvent()),
+                EntityFactoryFacade.getEntity(dto.getArrivalEvent())
         );
     }
 }
