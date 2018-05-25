@@ -8,7 +8,7 @@ import ChildCareTech.model.entities.Meal;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CanteenEntityFactoryFacade implements AbstractEntityFactoryFacade<Canteen, CanteenDTO> {
+public class CanteenEntityFactory implements AbstractEntityFactory<Canteen, CanteenDTO> {
     @Override
     public Canteen assemble(CanteenDTO dto) {
         Canteen entity = getCanteen(dto);
@@ -16,7 +16,7 @@ public class CanteenEntityFactoryFacade implements AbstractEntityFactoryFacade<C
 
         Set<Meal> meals = new HashSet<>();
         for(MealDTO m : dto.getMeals())
-            meals.add(MealEntityFactoryFacade.assembleCanteenManySide(m, entity));
+            meals.add(MealEntityFactory.assembleCanteenManySide(m, entity));
         entity.setMeals(meals);
 
         return entity;

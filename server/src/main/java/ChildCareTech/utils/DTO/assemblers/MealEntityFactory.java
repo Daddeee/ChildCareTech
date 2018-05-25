@@ -6,17 +6,17 @@ import ChildCareTech.model.entities.Meal;
 import ChildCareTech.model.entities.Menu;
 import ChildCareTech.model.entities.WorkDay;
 
-public class MealEntityFactoryFacade implements AbstractEntityFactoryFacade<Meal, MealDTO> {
+public class MealEntityFactory implements AbstractEntityFactory<Meal, MealDTO> {
     @Override
     public Meal assemble(MealDTO dto) {
         if(dto == null) return null;
         Meal entity = getMeal(
                 dto,
-                CanteenEntityFactoryFacade.assembleMealOneSide(dto.getCanteen()),
-                WorkDayEntityFactoryFacade.assembleMealOneSide(dto.getWorkDay())
+                CanteenEntityFactory.assembleMealOneSide(dto.getCanteen()),
+                WorkDayEntityFactory.assembleMealOneSide(dto.getWorkDay())
         );
 
-        entity.setMenu(MenuEntityFactoryFacade.assembleMealOneSide(dto.getMenu(), entity));
+        entity.setMenu(MenuEntityFactory.assembleMealOneSide(dto.getMenu(), entity));
 
         return entity;
     }
@@ -25,8 +25,8 @@ public class MealEntityFactoryFacade implements AbstractEntityFactoryFacade<Meal
         if(dto == null) return null;
         Meal entity = getMeal(
                 dto,
-                CanteenEntityFactoryFacade.assembleMealOneSide(dto.getCanteen()),
-                WorkDayEntityFactoryFacade.assembleMealOneSide(dto.getWorkDay())
+                CanteenEntityFactory.assembleMealOneSide(dto.getCanteen()),
+                WorkDayEntityFactory.assembleMealOneSide(dto.getWorkDay())
         );
 
         entity.setMenu(menu);
@@ -40,10 +40,10 @@ public class MealEntityFactoryFacade implements AbstractEntityFactoryFacade<Meal
         Meal entity = getMeal(
                 dto,
                 canteen,
-                WorkDayEntityFactoryFacade.assembleMealOneSide(dto.getWorkDay())
+                WorkDayEntityFactory.assembleMealOneSide(dto.getWorkDay())
         );
 
-        entity.setMenu(MenuEntityFactoryFacade.assembleMealOneSide(dto.getMenu(), entity));
+        entity.setMenu(MenuEntityFactory.assembleMealOneSide(dto.getMenu(), entity));
 
         return entity;
     }
@@ -53,11 +53,11 @@ public class MealEntityFactoryFacade implements AbstractEntityFactoryFacade<Meal
 
         Meal entity = getMeal(
                 dto,
-                CanteenEntityFactoryFacade.assembleMealOneSide(dto.getCanteen()),
+                CanteenEntityFactory.assembleMealOneSide(dto.getCanteen()),
                 workDay
         );
 
-        entity.setMenu(MenuEntityFactoryFacade.assembleMealOneSide(dto.getMenu(), entity));
+        entity.setMenu(MenuEntityFactory.assembleMealOneSide(dto.getMenu(), entity));
 
         return entity;
     }
@@ -71,8 +71,8 @@ public class MealEntityFactoryFacade implements AbstractEntityFactoryFacade<Meal
                 canteen,
                 dto.getMealNum(),
                 workDay,
-                EventEntityFactoryFacade.assembleMealOneSide(dto.getEntryEvent(), workDay),
-                EventEntityFactoryFacade.assembleMealOneSide(dto.getExitEvent(), workDay),
+                EventEntityFactory.assembleMealOneSide(dto.getEntryEvent(), workDay),
+                EventEntityFactory.assembleMealOneSide(dto.getExitEvent(), workDay),
                 dto.getStatus(),
                 null
         );

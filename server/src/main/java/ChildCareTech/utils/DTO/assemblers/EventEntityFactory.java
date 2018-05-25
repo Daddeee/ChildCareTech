@@ -9,11 +9,11 @@ import ChildCareTech.model.entities.WorkDay;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EventEntityFactoryFacade implements AbstractEntityFactoryFacade<Event, EventDTO> {
+public class EventEntityFactory implements AbstractEntityFactory<Event, EventDTO> {
     @Override
     public Event assemble(EventDTO dto) {
         if(dto == null) return null;
-        Event entity = getEvent(dto, WorkDayEntityFactoryFacade.assembleEventOneSide(dto.getWorkDay()));
+        Event entity = getEvent(dto, WorkDayEntityFactory.assembleEventOneSide(dto.getWorkDay()));
 
         assembleCheckpointRelationship(dto, entity);
 
@@ -31,7 +31,7 @@ public class EventEntityFactoryFacade implements AbstractEntityFactoryFacade<Eve
 
     public static Event assembleCheckpointOneSide(EventDTO dto){
         if(dto == null) return null;
-        return getEvent(dto, WorkDayEntityFactoryFacade.assembleEventOneSide(dto.getWorkDay()));
+        return getEvent(dto, WorkDayEntityFactory.assembleEventOneSide(dto.getWorkDay()));
     }
 
     public static Event assembleMealOneSide(EventDTO dto, WorkDay workDay){
@@ -46,7 +46,7 @@ public class EventEntityFactoryFacade implements AbstractEntityFactoryFacade<Eve
     private static void assembleCheckpointRelationship(EventDTO dto, Event entity) {
         Set<Checkpoint> checkpoints = new HashSet<>();
         for(CheckpointDTO c : dto.getCheckpoints())
-            checkpoints.add(CheckpointEntityFactoryFacade.assembleEventManySide(c, entity));
+            checkpoints.add(CheckpointEntityFactory.assembleEventManySide(c, entity));
         entity.setCheckpoints(checkpoints);
     }
 

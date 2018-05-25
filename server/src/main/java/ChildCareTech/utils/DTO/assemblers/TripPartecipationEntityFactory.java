@@ -6,14 +6,14 @@ import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.TripPartecipation;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 
-public class TripPartecipationEntityFactoryFacade implements AbstractEntityFactoryFacade<TripPartecipation, TripPartecipationDTO> {
+public class TripPartecipationEntityFactory implements AbstractEntityFactory<TripPartecipation, TripPartecipationDTO> {
     @Override
     public TripPartecipation assemble(TripPartecipationDTO dto) {
         if(dto == null) return null;
         return getTripPartecipation(
                 dto,
-                TripEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getTrip()),
-                BusEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getBus())
+                TripEntityFactory.assembleTripPartecipationOneSide(dto.getTrip()),
+                BusEntityFactory.assembleTripPartecipationOneSide(dto.getBus())
         );
     }
 
@@ -21,7 +21,7 @@ public class TripPartecipationEntityFactoryFacade implements AbstractEntityFacto
         if(dto == null) return null;
         return getTripPartecipation(
                 dto,
-                TripEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getTrip()),
+                TripEntityFactory.assembleTripPartecipationOneSide(dto.getTrip()),
                 bus
         );
     }
@@ -31,7 +31,7 @@ public class TripPartecipationEntityFactoryFacade implements AbstractEntityFacto
         return getTripPartecipation(
                 dto,
                 trip,
-                BusEntityFactoryFacade.assembleTripPartecipationOneSide(dto.getBus())
+                BusEntityFactory.assembleTripPartecipationOneSide(dto.getBus())
         );
     }
 
