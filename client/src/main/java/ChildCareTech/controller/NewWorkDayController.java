@@ -46,7 +46,6 @@ public class NewWorkDayController implements TableWindowControllerInterface {
     private AccessorWindowService accessorWindowService;
     private AccessorWindowService codeInputService;
     private AccessorWindowService alertWindowService;
-    private boolean codeInputActive = false;
     private boolean accessorLogActive = false;
     private EventDTO selectedEventLog;
 
@@ -61,12 +60,6 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         });
         codeInputService = new AccessorWindowService(this);
         codeInputService.setNonLockingModality();
-        codeInputService.setOnCloseAction(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                codeInputActive = false;
-            }
-        });
     }
 
     @FXML
@@ -92,7 +85,6 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         else {
             try {
                 codeInputService.loadCodeInputWindow(selected);
-                codeInputActive = true;
             } catch (IOException ex) {
                 System.err.println("Can't load showTrip window");
                 ex.printStackTrace();
@@ -131,10 +123,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         eventsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 logButton.setDisable(false);
-                if(!codeInputActive)
-                    codeAcquisitionButton.setDisable(false);
-                else
-                    codeAcquisitionButton.setDisable(true);
+                codeAcquisitionButton.setDisable(false);
             }
             else {
                 logButton.setDisable(true);

@@ -74,8 +74,8 @@ public class ResourcesPaths {
     private final static String workDayManagerCSSPath = "/style/newWorkDayWindow.css";
     private final static String eventReportFXMLPath = "/view/eventReportWindow.fxml";
     private final static String eventReportCSSPath = "/style/eventReportWindow.css";
-    private final static String codeInputFXMLPath = "/view/QRCodeWindow.fxml";
-    private final static String codeInputCSSPath = "/style/QRCodeWindow.css";
+    private final static String codeInputFXMLPath = "/view/codeInputWindow.fxml";
+    private final static String codeInputCSSPath = "/view/codeInputWindow.css";
     private final static String alertWindowFXMLPath = "/view/alertWindow.fxml";
     private final static String alertWindowCSSPath = "/style/alertWindow.css";
     private final static String tripPresenceRegistrationFXMLPath = "/view/tripPresenceRegistrationWindow.fxml";
