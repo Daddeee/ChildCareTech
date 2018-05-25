@@ -28,7 +28,7 @@ public class AdultController {
         Adult adult = EntityFactoryFacade.getEntity(adultDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
+        HashMap<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("fiscalCode", adultDTO.getPerson().getFiscalCode());
 

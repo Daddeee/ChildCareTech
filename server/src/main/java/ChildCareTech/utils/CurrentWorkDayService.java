@@ -106,13 +106,13 @@ public class CurrentWorkDayService {
         try{
             tx = session.beginTransaction();
 
-            List<Trip> tripStartingToday = tripDAO.read("depDate", today.toString());
+            List<Trip> tripStartingToday = tripDAO.read("depDate", today);
             for(Trip t : tripStartingToday) {
                 t.setStatus(EventStatus.OPEN);
                 tripDAO.update(t);
             }
 
-            List<Trip> tripEndedYesterday = tripDAO.read("arrDate", today.minusDays(1).toString());
+            List<Trip> tripEndedYesterday = tripDAO.read("arrDate", today.minusDays(1));
             for(Trip t : tripEndedYesterday) {
                 t.setStatus(EventStatus.CLOSED);
                 tripDAO.update(t);
@@ -142,7 +142,7 @@ public class CurrentWorkDayService {
         try{
             tx = session.beginTransaction();
 
-            result = workDayDAO.read("date", today.toString());
+            result = workDayDAO.read("date", today);
             for(WorkDay w : result) {
                 workDayDAO.initializeLazyRelations(w);
                 for(Event e : w.getEvents())

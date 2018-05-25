@@ -28,7 +28,7 @@ public class PediatristController {
         Pediatrist pediatrist = EntityFactoryFacade.getEntity(pediatristDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
+        HashMap<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("fiscalCode", pediatristDTO.getPerson().getFiscalCode());
 

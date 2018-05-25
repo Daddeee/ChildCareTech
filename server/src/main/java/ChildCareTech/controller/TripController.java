@@ -94,12 +94,12 @@ public class TripController {
         Trip trip = EntityFactoryFacade.getEntity(tripDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
+        HashMap<String, Object> paramMap = new HashMap<>();
         StringBuilder fetchErrorMessage = new StringBuilder();
 
         paramMap.put("meta", tripDTO.getMeta());
-        paramMap.put("depDate", tripDTO.getDepDate() == null ? LocalDate.MIN.toString() : tripDTO.getDepDate().toString());
-        paramMap.put("arrDate", tripDTO.getArrDate() == null ? LocalDate.MIN.toString() : tripDTO.getArrDate().toString());
+        paramMap.put("depDate", tripDTO.getDepDate() == null ? LocalDate.MIN : tripDTO.getDepDate());
+        paramMap.put("arrDate", tripDTO.getArrDate() == null ? LocalDate.MIN : tripDTO.getArrDate());
 
         tripDAO.setSession(session);
         try{

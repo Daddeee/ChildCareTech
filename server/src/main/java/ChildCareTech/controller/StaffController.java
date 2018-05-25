@@ -78,7 +78,7 @@ public class StaffController {
         Staff staff = EntityFactoryFacade.getEntity(staffDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
+        HashMap<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("fiscalCode", staffDTO.getPerson().getFiscalCode());
 

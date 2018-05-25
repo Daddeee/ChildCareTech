@@ -3,6 +3,7 @@ package ChildCareTech.utils;
 import ChildCareTech.model.iEntity;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -53,19 +54,25 @@ public abstract class AbstractGenericDAO<T extends iEntity, K extends Serializab
     }
 
     @SuppressWarnings("unchecked")
-    public List<T> read(Map<String, String> params) {
+    public List<T> read(Map<String, Object> params) {
         StringBuilder query = new StringBuilder("from " + persistentClass.getName() + " where ");
+        List<Map.Entry<String, Object>> pairList = new ArrayList<>(params.entrySet());
 
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            query.append(entry.getKey() + " = '" + entry.getValue() + "' and ");
+        for (int i = 0; i < pairList.size(); i++) {
+            query.append(pairList.get(i).getKey() + " = :" + pairList.get(i).getKey() + " and ");
+        }
+        query.append("1=1");
+
+        Query queryToFill = session.createQuery(query.toString());
+        for (int i = 0; i < pairList.size(); i++) {
+            queryToFill.setParameter(pairList.get(i).getKey(), pairList.get(i).getValue());
         }
 
-        query.append("1=1");
-        return session.createQuery(query.toString()).list();
+        return queryToFill.list();
     }
 
-    public List<T> read(String paramName, String paramValue) {
-        HashMap<String, String> map = new HashMap<>();
+    public List<T> read(String paramName, Object paramValue) {
+        HashMap<String, Object> map = new HashMap<>();
         map.put(paramName, paramValue);
         return read(map);
     }
