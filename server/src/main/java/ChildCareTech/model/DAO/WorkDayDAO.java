@@ -13,7 +13,7 @@ public class WorkDayDAO extends AbstractGenericDAO<WorkDay, Integer> {
     }
 
     public WorkDay tomorrow(WorkDay today){
-        List<WorkDay> result = read("date", today.getDate().plusDays(1).toString());
+        List<WorkDay> result = read("date", today.getDate().plusDays(1));
         return result.isEmpty() ? null : result.get(0);
     }
 

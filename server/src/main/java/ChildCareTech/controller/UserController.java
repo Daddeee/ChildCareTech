@@ -22,7 +22,7 @@ public class UserController {
         Session session;
         UserDAO dao;
         Transaction tx = null;
-        HashMap<String, String> queryMap = new HashMap<>();
+        HashMap<String, Object> queryMap = new HashMap<>();
 
 
         session = HibernateSessionFactoryUtil.getInstance().openSession();

@@ -28,7 +28,7 @@ public class SupplierController {
         Supplier supplier = EntityFactoryFacade.getEntity(supplierDTO);
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
-        HashMap<String, String> paramMap = new HashMap<>();
+        HashMap<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("fiscalCode", supplierDTO.getPerson().getFiscalCode());
 

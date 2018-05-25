@@ -27,7 +27,7 @@ public class WorkDayController {
         try{
             tx = session.beginTransaction();
 
-            result = workDayDAO.read("date", date.toString()).get(0);
+            result = workDayDAO.read("date", date).get(0);
             workDayDAO.initializeLazyRelations(result);
 
             tx.commit();
