@@ -37,13 +37,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.ADD_CONTACT_TO_KID, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -54,13 +48,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_CONTACT_FROM_KID, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -71,13 +59,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_STAFF_MEMBER, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -88,13 +70,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_PEDIATRIST, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -105,13 +81,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_STAFF, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -122,13 +92,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_SUPPLIER, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -139,13 +103,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_TRIP, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -156,13 +114,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_TRIP, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -173,13 +125,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_TRIP, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (NoSuchElementException) response.returnValue;
@@ -191,13 +137,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_KID, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -208,13 +148,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_ADULT, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -225,13 +159,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_PEDIATRIST, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -242,13 +170,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_SUPPLIER, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -259,13 +181,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_TRIP, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -276,13 +192,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_ROUTE, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -293,13 +203,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_ROUTE_EVENT, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -311,13 +215,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_KIDS);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -330,13 +228,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_AVAILABLE_KIDS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -349,13 +241,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_ADULTS);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -368,13 +254,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_ADULTS_EX);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -387,13 +267,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_PEDIATRISTS);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -406,13 +280,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_STAFF);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -425,13 +293,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_SUPPLIERS);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -444,13 +306,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_TRIPS);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -462,13 +318,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_TRIP_PARTECIPATION, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -479,13 +329,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_TRIP_PARTECIPATION, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -496,13 +340,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_TRIP_BUS_RELATION, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -513,13 +351,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_TRIP_BUS_RELATION, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -530,13 +362,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_BUS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -547,13 +373,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_BUS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -564,13 +384,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_BUS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -582,13 +396,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_BUSES);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -601,13 +409,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_AVAILABLE_BUSES, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -619,13 +421,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_FOOD, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -636,13 +432,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_FOOD, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -653,13 +443,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_FOOD, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -671,13 +455,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_FOODS);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -690,13 +468,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_AVAILABLE_FOODS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -708,13 +480,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.ADD_ALLERGY, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -725,13 +491,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_ALLERGY, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -742,13 +502,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_PERSON, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -760,13 +514,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_ADULT, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -777,13 +525,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_SUPPLIER, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -794,13 +536,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_ADULT, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -811,13 +547,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_PEDIATRIST, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -828,13 +558,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_STAFF, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -845,13 +569,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_KID, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -862,13 +580,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_KID, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -879,13 +591,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.IS_FIRST_EVER_STARTUP);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -897,13 +603,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SET_FIRST_EVER_STARTUP, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -914,13 +614,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GENERATE_DAYS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -931,13 +625,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.TRIGGER_DAILY_SCHEDULING);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -948,13 +636,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_CANTEEN, arg0, (Serializable) arg1, (Serializable) arg2);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (AddFailedException) response.returnValue;
@@ -966,13 +648,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_CANTEEN_NAMES);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -985,13 +661,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_CANTEENES);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1003,13 +673,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_CANTEEN_BY_NAME, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (NoSuchElementException) response.returnValue;
@@ -1021,13 +685,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_CANTEEN, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1039,13 +697,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_ALL_DISHES);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1057,13 +709,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.CREATE_DISH, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1074,13 +720,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_DISH, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1091,13 +731,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.DELETE_DISH, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1108,13 +742,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.CREATE_MENU, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1125,13 +753,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_MENU, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1142,13 +764,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.VALIDATE_MENU, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (UpdateFailedException) response.returnValue;
@@ -1159,13 +775,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_DISH_FROM_MENU, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1176,13 +786,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.ADD_DISH_TO_MENU, arg0, arg1);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1193,13 +797,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_CURRENT_WORK_DAY);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1211,13 +809,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_WORK_DAY, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1229,13 +821,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_MIN_SAVED_DATE);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1247,13 +833,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_MAX_SAVED_DATE);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1266,13 +846,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.GET_EVENT_CHECKPOINTS, arg0);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1284,13 +858,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.SAVE_CHECKPOINT, arg0, arg1, arg2);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (CheckpointFailedException) response.returnValue;
@@ -1301,13 +869,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.LOGOUT);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1318,13 +880,7 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.ADD_OBSERVER, observer.getPort(), this.userName);
         SocketResponse response;
 
-        try{
-            out.writeObject(request);
-            response = (SocketResponse)in.readObject();
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RemoteException(e.getMessage());
-        }
+        response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
             throw (RemoteException) response.returnValue;
@@ -1335,6 +891,24 @@ public class SocketUserSessionFacade implements UserSessionFacade {
         SocketRequest request = new SocketRequest(SocketRequestType.REMOVE_OBSERVER, this.userName);
         SocketResponse response;
 
+        response = getSocketResponse(request);
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (RemoteException) response.returnValue;
+    }
+    @Override
+    public void saveTripCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time, String busPlate, TripDTO trip) throws RemoteException, CheckpointFailedException {
+        SocketRequest request = new SocketRequest(SocketRequestType.SAVE_TRIP_CHECKPOINT, fiscalCode, eventDTO, time, busPlate, trip);
+        SocketResponse response;
+
+        response = getSocketResponse(request);
+
+        if(response.responseType.equals(SocketResponseType.FAIL))
+            throw (CheckpointFailedException) response.returnValue;
+    }
+
+    private SocketResponse getSocketResponse(SocketRequest request) throws RemoteException {
+        SocketResponse response;
         try{
             out.writeObject(request);
             response = (SocketResponse)in.readObject();
@@ -1342,8 +916,6 @@ public class SocketUserSessionFacade implements UserSessionFacade {
             e.printStackTrace();
             throw new RemoteException(e.getMessage());
         }
-
-        if(response.responseType.equals(SocketResponseType.FAIL))
-            throw (RemoteException) response.returnValue;
+        return response;
     }
 }

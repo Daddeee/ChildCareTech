@@ -2,23 +2,27 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
+import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.common.EventType;
 import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.model.DAO.CheckpointDAO;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.PersonDAO;
-import ChildCareTech.model.entities.Checkpoint;
-import ChildCareTech.model.entities.Event;
-import ChildCareTech.model.entities.Person;
+import ChildCareTech.model.DAO.TripDAO;
+import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.RemoteEventObservable;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class CheckpointController {
@@ -31,6 +35,9 @@ public class CheckpointController {
         Event event;
         Checkpoint record;
         CheckpointDAO checkpointDAO = new CheckpointDAO();
+
+        if(eventDTO.getEventType().equals(EventType.TRIP))
+            throw new CheckpointFailedException("Evento di tipo gita non supportato");
 
         if(fiscalCode == null || eventDTO == null || time == null)
             throw new CheckpointFailedException("Uno o più parametri mancanti");
@@ -58,6 +65,63 @@ public class CheckpointController {
             tx.commit();
 
             RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.CHECKPOINT);
+        } catch(Exception e){
+            if(tx!=null) tx.rollback();
+            e.printStackTrace();
+            throw new CheckpointFailedException(e.getMessage());
+        } finally {
+            session.close();
+        }
+    }
+
+    public void doSaveTripCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time, String busPlate, TripDTO tripDTO) throws CheckpointFailedException {
+        PersonDAO personDAO = new PersonDAO();
+        EventDAO eventDAO = new EventDAO();
+        TripDAO tripDAO = new TripDAO();
+        CheckpointDAO checkpointDAO = new CheckpointDAO();
+        Person person;
+        Event event;
+        Checkpoint record;
+
+        if(fiscalCode == null || eventDTO == null || time == null || busPlate == null || tripDTO == null)
+            throw new CheckpointFailedException("Uno o più parametri mancanti");
+
+        if(!eventDTO.getEventType().equals(EventType.TRIP))
+            throw new CheckpointFailedException("Evento di tipo diverso da gita non supportato");
+
+        Session session = HibernateSessionFactoryUtil.getInstance().openSession();
+        Transaction tx = null;
+        personDAO.setSession(session);
+        eventDAO.setSession(session);
+        checkpointDAO.setSession(session);
+        tripDAO.setSession(session);
+        try{
+            tx = session.beginTransaction();
+
+            person = personDAO.read("fiscalCode", fiscalCode).get(0);
+            if(person == null)
+                throw new CheckpointFailedException("Persona non trovata");
+
+            for(TripPartecipation tripPartecipation : person.getTripPartecipations()){
+                if(tripPartecipation.getTrip().getId() == tripDTO.getId()){
+                    if(tripPartecipation.getBus().getLicensePlate().equals(busPlate)){
+                        event = eventDAO.read(eventDTO.getId());
+                        eventDAO.initializeLazyRelations(event);
+                        if(event == null || !event.getEventStatus().equals(EventStatus.OPEN))
+                            throw new CheckpointFailedException("Evento non disponibile");
+
+                        record = new Checkpoint(event, person, time, false);
+                        checkpointDAO.create(record);
+                        tx.commit();
+                        RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.CHECKPOINT);
+                        return;
+                    } else {
+                        throw new CheckpointFailedException("Bus sbagliato");
+                    }
+                }
+            }
+
+            throw new CheckpointFailedException("Gita non trovata");
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();

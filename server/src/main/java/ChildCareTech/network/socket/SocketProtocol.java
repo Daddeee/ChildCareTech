@@ -1299,6 +1299,27 @@ public class SocketProtocol {
         return response;
     }
 
+    private SocketResponse handleSaveTripCheckpoint(SocketRequest request) {
+        SocketResponse response;
+
+        try{
+            String arg0 = (String) request.params[0];
+            EventDTO arg1 = (EventDTO) request.params[1];
+            LocalTime arg2 = (LocalTime) request.params[2];
+            String arg3 = (String) request.params[3];
+            TripDTO arg4 = (TripDTO) request.params[4];
+
+            checkpointController.doSaveTripCheckpoint(arg0, arg1, arg2, arg3, arg4);
+
+
+            response = new SocketResponse(SocketResponseType.SUCCESS, null);
+        } catch (Exception e) {
+            response = new SocketResponse(SocketResponseType.FAIL, e);
+        }
+
+        return response;
+    }
+
     private void loadProtocol(){
         this.methodMap.put(SocketRequestType.LOGIN, this::handleLogin);
         this.methodMap.put(SocketRequestType.LOGOUT, this::handleLogout);

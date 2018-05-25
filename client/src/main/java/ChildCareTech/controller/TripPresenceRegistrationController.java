@@ -1,10 +1,7 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.Client;
-import ChildCareTech.common.DTO.BusDTO;
-import ChildCareTech.common.DTO.EventDTO;
-import ChildCareTech.common.DTO.RouteDTO;
-import ChildCareTech.common.DTO.TripDTO;
+import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.CameraBusyException;
 import ChildCareTech.services.AccessorWindowService;
@@ -27,8 +24,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.WindowEvent;
 
+import java.rmi.RemoteException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class TripPresenceRegistrationController implements AccessorWindowController, TableWindowControllerInterface, CheckPointControllerInterface {
     @FXML
@@ -55,7 +55,7 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
     private NewWebcamQRCodeReader webcamQRCodeReader;
     private boolean on;
     private SwingNode node;
-    private HashSet<String> scannedCodes = new HashSet<>();
+    private HashSet<String> codesToScan = new HashSet<>();
 
     @FXML
     public void initialize() {
@@ -103,9 +103,27 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
         buses.clear();
         buses.addAll(tripDTO.getBuses());
         initEvent(routeDTO);
+        refreshTable();
+
     }
     public void refreshTable() {
-
+        List<CheckpointDTO> checkpointDTOList = new ArrayList<>();
+        try {
+            checkpointDTOList.addAll(Client.getSessionService().getSession().getEventCheckpoints(currentEvent));
+        } catch(RemoteException ex) {
+            //gestione
+            ex.printStackTrace();
+        }
+        reports.clear();
+        for(CheckpointDTO checkpointDTO : checkpointDTOList) {
+            reports.add(new ReportTableData(checkpointDTO.getPerson().getFiscalCode(), checkpointDTO.getPerson().getFirstName(), checkpointDTO.getPerson().getLastName(), checkpointDTO.getTime().toString()));
+        }
+        for(TripPartecipationDTO tripPartecipationDTO : currentTrip.getTripPartecipations()) {
+            codesToScan.add(tripPartecipationDTO.getPerson().getFiscalCode());
+        }
+        for(ReportTableData reportTableData : reports) {
+            if(codesToScan.remove(reportTableData.getFiscalCode()));
+        }
     }
     private void loadQRreader() {
         try {
@@ -124,10 +142,11 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
     public void saveCheckPoint(String code) {
         try{
             LocalTime time = LocalTime.now();
-            if(!scannedCodes.contains(code)) {
-                scannedCodes.add(code);
-                Client.getSessionService().getSession().saveCheckpoint(code, currentEvent, time);
+            if(codesToScan.contains(code)) {
+                codesToScan.remove(code);
+                Client.getSessionService().getSession().saveTripCheckpoint(code, currentEvent, time, selectedBus.getLicensePlate(), currentTrip);
                 logArea.appendText(code + " Registrato correttamente alle " + time + "\n");
+                refreshTable();
             }
         } catch (Exception e){
             e.printStackTrace();

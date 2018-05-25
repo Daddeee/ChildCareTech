@@ -202,6 +202,10 @@ public class RMIUserSessionFacade extends UnicastRemoteObject implements UserSes
     }
 
     @Override
+    public void saveTripCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time, String busPlate, TripDTO trip) throws CheckpointFailedException {
+        checkpointController.doSaveTripCheckpoint(fiscalCode, eventDTO, time, busPlate, trip);
+    }
+    @Override
     public LocalDate getMinSavedDate() {
         return workDayController.doGetMinSavedDate();
     }
