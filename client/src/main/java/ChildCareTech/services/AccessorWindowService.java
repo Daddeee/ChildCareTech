@@ -61,21 +61,12 @@ public class AccessorWindowService {
         loadWindow(ResourcesPaths.getRegisterUserFXMLPath(), ResourcesPaths.getRegisterUserCSSPath());
         ((AccessorWindowController)loader.getController()).setAccessorWindowService(this);
     }
-    public void loadAlertWindow(AlertMethodService alertMethodService) throws IOException {
-        loadWindow(ResourcesPaths.getAlertWindowFXMLPath(), ResourcesPaths.getAlertWindowCSSPath());
-        ((AlertController)loader.getController()).initData(alertMethodService);
-    }
     public void loadAddKidWindow() throws IOException{
         loadWindow(ResourcesPaths.getAddKidFXMLPath(), ResourcesPaths.getAddKidCSSPath());
     }
     public void loadEditKidWindow(ObservableKid observableKid) throws IOException{
         loadWindow(ResourcesPaths.getEditKidFXMLPath(), ResourcesPaths.getEditKidCSSPath());
-        try {
-            ((EditKidController) loader.getController()).initData(observableKid);
-        } catch (ClassCastException ex) {
-            System.err.println("fatal, loading wrong controller");
-            ex.printStackTrace();
-        }
+        ((EditKidController) loader.getController()).initData(observableKid);
     }
     public void loadEditKidContactsWindow(ObservableKid observableKid) throws IOException{
         loadWindow(ResourcesPaths.getEditKidContactsFXMLPath(), ResourcesPaths.getEditKidContactsCSSPath());
@@ -94,12 +85,7 @@ public class AccessorWindowService {
     }
     public void loadEditAdultWindow(ObservablePersonInterface observablePersonInterface) throws IOException {
         loadWindow(ResourcesPaths.getEditAdultFXMLPath(), ResourcesPaths.getEditAdultCSSPath());
-        try {
-            ((EditAdultController) loader.getController()).initData(observablePersonInterface);
-        } catch (ClassCastException ex) {
-            System.err.println("fatal, loading wrong controller");
-            ex.printStackTrace();
-        }
+        ((EditAdultController) loader.getController()).initData(observablePersonInterface);
     }
     public void loadShowAdultWindow(ObservableAdult observableAdult) throws IOException{
         loadWindow(ResourcesPaths.getShowAdultFXMLPath(), ResourcesPaths.getShowAdultCSSPath());
@@ -164,6 +150,7 @@ public class AccessorWindowService {
     public void loadCodeInputWindow(EventDTO eventDTO) throws IOException{
         loadWindow(ResourcesPaths.getCodeInputFXMLPath(), ResourcesPaths.getCodeInputCSSPath());
         ((CodeInputWindowController)loader.getController()).initData(eventDTO);
+        ActiveControllersList.addCodeInputWindowController(loader.getController());
     }
     public void loadKitchenWindow() throws IOException{
         loadWindow(ResourcesPaths.getKitchenFXMLPath(), ResourcesPaths.getKitchenCSSPath());
@@ -187,6 +174,7 @@ public class AccessorWindowService {
     public void loadTripPresenceRegistrationWindow(TripDTO tripDTO, RouteDTO routeDTO) throws IOException{
         loadWindow(ResourcesPaths.getTripPresenceRegistrationFXMLPath(), ResourcesPaths.getTripPresenceRegistrationCSSPath());
         ((TripPresenceRegistrationController)loader.getController()).initData(tripDTO, routeDTO);
+        ActiveControllersList.addPresenceRegistrationControllersList(loader.getController());
     }
     protected void loadWindow(String fxmlPath, String cssPath) throws IOException{
         loader = new FXMLLoader(AccessorWindowService.class.getResource(fxmlPath));

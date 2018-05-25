@@ -1,40 +1,37 @@
 package ChildCareTech.controller;
 
 import ChildCareTech.services.AccessorWindowService;
-import ChildCareTech.services.AlertMethodService;
+import ChildCareTech.services.AlertWindowService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 
-public class AlertController implements AccessorWindowController {
+public class AlertController {
     @FXML
-    private Label message;
+    private TextArea message;
     @FXML
-    private Button button1;
-    @FXML
-    private Button button2;
+    private Button button;
 
-    private AccessorWindowService accessorWindowService;
-    private AlertMethodService alertMethodService;
+    private AlertWindowService alertWindowService;
 
     @FXML
-    public void button1ButtonAction(ActionEvent event) {
-        alertMethodService.firstButtonAction(accessorWindowService);
+    public void initialize() {
+        message.setWrapText(true);
+        message.setEditable(false);
     }
     @FXML
-    public void button2ButtonAction(ActionEvent event) {
-        alertMethodService.secondButtonAction(accessorWindowService);
+    public void buttonButtonAction(ActionEvent event) {
+        if(alertWindowService != null)
+            alertWindowService.close();
+    }
+    public void setMessage(String message) {
+        this.message.setText(message);
+    }
+    public void setAlertWindowService(AlertWindowService alertWindowService) {
+        this.alertWindowService = alertWindowService;
     }
 
-    public void initData(AlertMethodService alertMethodService) {
-        this.alertMethodService = alertMethodService;
-        button1.setText(alertMethodService.setFirstButtonLabel());
-        button2.setText(alertMethodService.setSecondButtonLabel());
-    }
-
-    public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
-        this.accessorWindowService = accessorWindowService;
-    }
 }

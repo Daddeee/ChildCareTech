@@ -47,8 +47,6 @@ public class AddKidController implements AccessorWindowController{
     protected Button cancelButton;
     @FXML
     protected Button saveButton;
-    @FXML
-    protected Label alertLabel;
 
     protected ToggleGroup group = new ToggleGroup();
     protected PersonDTO person;
@@ -56,6 +54,7 @@ public class AddKidController implements AccessorWindowController{
     protected ObservableList<ObservableAdult> adults = FXCollections.observableArrayList();
     protected ObservableList<ObservablePediatrist> pediatrists = FXCollections.observableArrayList();
     protected AccessorWindowService accessorWindowService;
+    protected AlertWindowService alertWindowService;
 
     protected final AdultDTO nullAdult = new AdultDTO(
             0,
@@ -86,6 +85,7 @@ public class AddKidController implements AccessorWindowController{
         firstTutorComboBox.setItems(adults);
         secondTutorComboBox.setItems(adults);
         pediatristComboBox.setItems(pediatrists);
+        alertWindowService = new AlertWindowService();
     }
 
     @FXML
@@ -118,7 +118,7 @@ public class AddKidController implements AccessorWindowController{
         } catch (RemoteException ex) {
             ex.printStackTrace();
         } catch(AddFailedException ex) {
-            alertLabel.setText(ex.getMessage());
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
         }
         refreshKidAnagraphics();
@@ -173,7 +173,7 @@ public class AddKidController implements AccessorWindowController{
 
             pediatristDTOList =  Client.getSessionService().getSession().getAllPediatrists();
         } catch(RemoteException ex) {
-            alertLabel.setText(ex.getMessage());
+            alertWindowService.loadWindow(ex.getMessage());
         }
         for(AdultDTO adult : adultDTOList) {
             adults.add(new ObservableAdult(adult));
