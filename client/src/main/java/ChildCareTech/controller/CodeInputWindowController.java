@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.exceptions.CameraBusyException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.ActiveControllersList;
 import ChildCareTech.utils.NewWebcamQRCodeReader;
 import ChildCareTech.utils.ReportTableData;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class CodeInputWindowController implements AccessorWindowController, CheckPointControllerInterface{
+public class CodeInputWindowController implements AccessorWindowController, CheckPointControllerInterface, TableWindowControllerInterface{
     @FXML
     private AnchorPane QRPane;
     @FXML
@@ -52,6 +53,7 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
 
     @FXML
     public void initialize() {
+        logArea.setEditable(false);
         reportTable.setItems(reports);
         on = false;
     }
@@ -110,7 +112,7 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
         accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                shutDownWebcam();
+                clearInstance();
             }
         });
     }
@@ -148,4 +150,9 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
             thread.start();
         }
     }
+    public void clearInstance() {
+        shutDownWebcam();
+        ActiveControllersList.removeCodeInputWindowController(this);
+    }
+    public void notifyUpdate() { }
 }

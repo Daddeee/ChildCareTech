@@ -18,6 +18,7 @@ public class ActiveControllersList {
     private static List<KitchenController> dishControllersList = new ArrayList<>();
     private static List<EventReportController> eventReportControllersList = new ArrayList<>();
     private static List<TripPresenceRegistrationController> presenceRegistrationControllersList = new ArrayList<>();
+    private static List<CodeInputWindowController> codeInputWindowControllerList = new ArrayList<>();
 
     private ActiveControllersList() { }
 
@@ -109,5 +110,14 @@ public class ActiveControllersList {
     }
     public static List<TripPresenceRegistrationController> getPresenceRegistrationControllersList() {
         return presenceRegistrationControllersList;
+    }
+    public static void addCodeInputWindowController(CodeInputWindowController codeInputWindowController) {
+        codeInputWindowControllerList.add(codeInputWindowController);
+    }
+    public static void removeCodeInputWindowController(CodeInputWindowController codeInputWindowController) {
+        codeInputWindowControllerList.remove(codeInputWindowController);
+    }
+    public static List<CodeInputWindowController> getCodeInputWindowControllerList() {
+        return new ArrayList<>(codeInputWindowControllerList);
     }
 }

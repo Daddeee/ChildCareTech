@@ -89,9 +89,11 @@ public class TripRoutesController implements AccessorWindowController, TableWind
 
         if (isEventOpening) {
             startEvent.setDisable(false);
+            logButton.setDisable(true);
             stopEvent.setDisable(true);
         } else {
             startEvent.setDisable(true);
+            logButton.setDisable(false);
             stopEvent.setDisable(false);
         }
     }

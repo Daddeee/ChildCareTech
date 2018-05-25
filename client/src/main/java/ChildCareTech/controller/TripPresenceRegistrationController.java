@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.CameraBusyException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.ActiveControllersList;
 import ChildCareTech.utils.NewWebcamQRCodeReader;
 import ChildCareTech.utils.ReportTableData;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -59,6 +60,7 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
 
     @FXML
     public void initialize() {
+        logArea.setEditable(false);
         reportTable.setItems(reports);
         busComboBox.setItems(buses);
         on = false;
@@ -93,7 +95,7 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
         accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                shutDownWebcam();
+                clearInstance();
             }
         });
     }
@@ -183,6 +185,9 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
             currentEvent = routeDTO.getArrivalEvent();
         }
     }
-
+    public void clearInstance() {
+        shutDownWebcam();
+        ActiveControllersList.removePresenceRegistrationControllersList(this);
+    }
     public void notifyUpdate() { }
 }

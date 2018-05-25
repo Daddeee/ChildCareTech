@@ -59,7 +59,13 @@ public class NewWorkDayController implements TableWindowControllerInterface {
             public void handle(WindowEvent event) { accessorLogActive = false; }
         });
         codeInputService = new AccessorWindowService(this);
-        codeInputService.setNonLockingModality();
+        try {
+            workDayDatePicker.setValue(Client.getSessionService().getSession().getCurrentWorkDay().getDate());
+            updateTable(null);
+        } catch(RemoteException ex) {
+            //gestione
+            ex.printStackTrace();
+        }
     }
 
     @FXML

@@ -5,36 +5,47 @@ import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.ActiveControllersList;
 import ChildCareTech.utils.ReportTableData;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.stage.WindowEvent;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class EventReportController implements AccessorWindowController{
+public class EventReportController implements AccessorWindowController, TableWindowControllerInterface{
     @FXML
     protected TableView<ReportTableData> reportTable;
+
+    private AccessorWindowService accessorWindowService;
+    private EventDTO currentEvent;
 
     @FXML
     public void initialize() {
     }
 
     public void initData(EventDTO eventDTO){
+        currentEvent = eventDTO;
+        refreshTable();
+    }
+
+    public void refreshTable(){
         List<KidDTO> allKids;
         List<CheckpointDTO> allAssociatedCheckpoints;
 
+        reportTable.getItems().clear();
         try{
             allKids = Client.getSessionService().getSession().getAllKids();
-            allAssociatedCheckpoints = new ArrayList<>(Client.getSessionService().getSession().getEventCheckpoints(eventDTO));
+            allAssociatedCheckpoints = new ArrayList<>(Client.getSessionService().getSession().getEventCheckpoints(currentEvent));
         } catch(RemoteException e){
             e.printStackTrace();
             return;
         }
 
-        List<ReportTableData> retrievedData = new ArrayList<>();
         CheckpointDTO tmp;
         for(KidDTO k : allKids) {
             tmp = null;
@@ -46,17 +57,20 @@ public class EventReportController implements AccessorWindowController{
                 }
             }
 
-            retrievedData.add(ReportTableData.buildFromDTOs(k, tmp));
+            reportTable.getItems().add(ReportTableData.buildFromDTOs(k, tmp));
         }
-
-        refreshTable(retrievedData);
-    }
-
-    private void refreshTable(Collection<ReportTableData> elems){
-        reportTable.getItems().clear();
-        reportTable.getItems().addAll(elems);
     }
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
-
+        this.accessorWindowService = accessorWindowService;
+        this.accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                clearInstance();
+            }
+        });
     }
+    public void clearInstance() {
+        ActiveControllersList.removeEventReportController(this);
+    }
+    public void notifyUpdate() { }
 }

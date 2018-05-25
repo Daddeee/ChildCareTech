@@ -100,6 +100,12 @@ public class RemoteUpdateService {
         Platform.runLater(() -> {
             for(NewWorkDayController controller : ActiveControllersList.getWorkDayManagerControllersList())
                 controller.refreshTable();
+            for(EventReportController controller : ActiveControllersList.getEventReportControllersList())
+                controller.refreshTable();
+            for(CodeInputWindowController controller : ActiveControllersList.getCodeInputWindowControllerList())
+                controller.refreshTable();
+            for(TripPresenceRegistrationController controller : ActiveControllersList.getPresenceRegistrationControllersList())
+                controller.refreshTable();
         });
     }
 
