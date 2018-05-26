@@ -28,14 +28,18 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <HBox alignment="CENTER" maxHeight="50.0" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
+            <AnchorPane>
                <children>
-                  <Button fx:id="editButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="50.0" prefWidth="50.0" text="Edit" />
-                  <Button fx:id="detailsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#detailsButtonAction" prefHeight="50.0" prefWidth="50.0" text="Details" />
-                  <Button fx:id="deleteButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="50.0" prefWidth="50.0" text="Delete" />
-                  <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="50.0" prefWidth="50.0" text="Add" />
+                  <HBox alignment="CENTER" maxHeight="50.0" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button fx:id="editButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="50.0" prefWidth="50.0" text="Edit" />
+                        <Button fx:id="detailsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#detailsButtonAction" prefHeight="50.0" prefWidth="50.0" text="Details" />
+                        <Button fx:id="deleteButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="50.0" prefWidth="50.0" text="Delete" />
+                        <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="50.0" prefWidth="50.0" text="Add" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

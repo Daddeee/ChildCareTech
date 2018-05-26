@@ -9,6 +9,7 @@ import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.EventType;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,10 +46,12 @@ public class TripRoutesController implements AccessorWindowController, TableWind
     private boolean isEventOpening;
     private AccessorWindowService accessorWindowService;
     private AccessorWindowService logWindow;
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
         logWindow = new AccessorWindowService(this);
+        alertWindowService = new AlertWindowService();
     }
 
     public void initData(TripDTO tripDTO) {
@@ -147,9 +150,12 @@ public class TripRoutesController implements AccessorWindowController, TableWind
         try{
             Client.getSessionService().getSession().updateRouteEvent(currentRoute);
             tripDTO = Client.getSessionService().getSession().getTrip(tripDTO.getId());
-        } catch(RemoteException | UpdateFailedException e){
+        } catch(RemoteException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
+        } catch(UpdateFailedException ex) {
+            alertWindowService.loadWindow(ex.getMessage());
+            ex.printStackTrace();
         }
 
         refresh();
@@ -174,9 +180,12 @@ public class TripRoutesController implements AccessorWindowController, TableWind
         try{
             Client.getSessionService().getSession().updateRouteEvent(currentRoute);
             tripDTO = Client.getSessionService().getSession().getTrip(tripDTO.getId());
-        } catch(RemoteException | UpdateFailedException e){
+        } catch(RemoteException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
+        } catch(UpdateFailedException ex) {
+            alertWindowService.loadWindow(ex.getMessage());
+            ex.printStackTrace();
         }
 
         refresh();

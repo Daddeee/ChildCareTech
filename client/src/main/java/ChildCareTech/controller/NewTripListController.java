@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ActiveControllersList;
+import ChildCareTech.services.AlertWindowService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,9 +41,11 @@ public class NewTripListController implements TableWindowControllerInterface {
     private ObservableList<TripDTO> items = FXCollections.observableArrayList();
     private AccessorWindowService accessorWindowService;
     private AccessorWindowService busAccessorWindow;
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
+        alertWindowService = new AlertWindowService();
         accessorWindowService = new AccessorWindowService(this);
         busAccessorWindow = new AccessorWindowService(this);
         tripsTable.setItems(items);
@@ -109,7 +112,7 @@ public class NewTripListController implements TableWindowControllerInterface {
     @FXML
     public void subscriptionsButtonAction(ActionEvent event) {
         if(!tripsTable.getSelectionModel().getSelectedItem().getStatus().equals(EventStatus.WAIT)){
-            //stampa errore: impossibile gestire le iscrizioni di una gita già avviata/terminata
+            alertWindowService.loadWindow("Impossibile gestire le iscrizioni di una gita già avviata/terminata.");
             return;
         }
 
@@ -124,7 +127,7 @@ public class NewTripListController implements TableWindowControllerInterface {
     @FXML
     public void journeyManagerButtonAction(ActionEvent event) {
         if(!tripsTable.getSelectionModel().getSelectedItem().getStatus().equals(EventStatus.OPEN)){
-            //stampa errore: impossibile gestire il tragitto di una gita non avviata
+            alertWindowService.loadWindow("Impossibile gestire il tragitto di una gita non ancora avviata.");
             return;
         }
 

@@ -43,6 +43,7 @@ public class AddTripController implements AccessorWindowController{
     private ObservableList<TempRouteData> routes = FXCollections.observableArrayList();
     private int routeCounter = 0;
     protected AccessorWindowService accessorWindowService;
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize(){
@@ -66,6 +67,7 @@ public class AddTripController implements AccessorWindowController{
 
             return row;
         });
+        alertWindowService = new AlertWindowService();
     }
 
     @FXML
@@ -104,7 +106,7 @@ public class AddTripController implements AccessorWindowController{
             System.err.println("error remote");
             ex.printStackTrace();
         } catch (AddFailedException ex) {
-            //gestion errore
+            alertWindowService.loadWindow(ex.getMessage());
             return;
         }
 

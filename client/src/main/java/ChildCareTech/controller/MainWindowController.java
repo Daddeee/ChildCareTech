@@ -57,7 +57,7 @@ public class MainWindowController implements MainWindowControllerInterface {
     @FXML
     public void userAccountButtonAction(ActionEvent event) {
         try {
-            logOutWindowService.loadUserAccountWindow();
+            logOutWindowService.loadUserAccountWindow(mainWindowService.getUserName());
         } catch(IOException ex) {
             System.err.println("error loading user account window");
             ex.printStackTrace();

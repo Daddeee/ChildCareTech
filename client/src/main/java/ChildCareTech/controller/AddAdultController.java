@@ -42,12 +42,11 @@ public class AddAdultController implements AccessorWindowController{
     protected Button cancelButton;
     @FXML
     protected Button saveButton;
-    @FXML
-    protected Label alertLabel;
 
     protected ToggleGroup sexGroup = new ToggleGroup();
     protected ToggleGroup roleGroup = new ToggleGroup();
     protected AccessorWindowService accessorWindowService;
+    protected AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
@@ -60,6 +59,7 @@ public class AddAdultController implements AccessorWindowController{
         supplierSelecter.setToggleGroup(roleGroup);
         pediatristSelecter.setToggleGroup(roleGroup);
         noneSelecter.fire();
+        alertWindowService = new AlertWindowService();
     }
 
     @FXML
@@ -70,12 +70,15 @@ public class AddAdultController implements AccessorWindowController{
         PediatristDTO pediatrist;
         StaffDTO staff;
 
-        alertLabel.setText("");
-        if (fiscalCodeField.getText().length() != 16 ||
+        if(fiscalCodeField.getText().equals("") ||
                 firstNameField.getText().equals("") ||
                 lastNameField.getText().equals("") ||
                 addressField.getText().equals("")) {
-            alertLabel.setText("invalid input");
+            alertWindowService.loadWindow("Non tutti i campi obbligatori sono stati compilati.");
+            return;
+        }
+        if(fiscalCodeField.getText().length() != 16) {
+            alertWindowService.loadWindow("Codice fiscale non valido.");
             return;
         }
         Sex sex;
@@ -93,7 +96,7 @@ public class AddAdultController implements AccessorWindowController{
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch (AddFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -106,7 +109,7 @@ public class AddAdultController implements AccessorWindowController{
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch(AddFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -119,7 +122,7 @@ public class AddAdultController implements AccessorWindowController{
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch(AddFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -132,7 +135,7 @@ public class AddAdultController implements AccessorWindowController{
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch(AddFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }

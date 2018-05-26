@@ -68,6 +68,7 @@ public class LoginController implements MainWindowControllerInterface {
 
         try {
             if (!Client.getSessionService().isNull()){
+                mainWindowService.setUserName(userNameField.getText());
                 if(Client.getSessionService().getSession().isFirstEverStartup())
                     mainWindowService.loadDayGenerationWindow();
                 else

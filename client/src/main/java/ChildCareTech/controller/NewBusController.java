@@ -6,6 +6,7 @@ import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ActiveControllersList;
+import ChildCareTech.services.AlertWindowService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,10 +53,12 @@ public class NewBusController implements AccessorWindowController, TableWindowCo
     private AccessorWindowService accessorWindowService;
     private ObservableList<Integer> sits = FXCollections.observableArrayList();
     private boolean editFlag = false;
-    int oldId;
+    private int oldId;
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
+        alertWindowService = new AlertWindowService();
         busesTable.setItems(items);
         initMenu();
         refreshTable();
@@ -85,11 +88,14 @@ public class NewBusController implements AccessorWindowController, TableWindowCo
                 sitsSelection.getSelectionModel().clearSelection();
                 plateText.clear();
             } catch (NumberFormatException ex){
-                System.out.println(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
+                ex.printStackTrace();
             } catch(RemoteException | AddFailedException ex) {
-                System.out.println(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
+                ex.printStackTrace();
             } catch (UpdateFailedException ex) {
-                System.out.println(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
+                ex.printStackTrace();
             }
         }
     }

@@ -14,6 +14,7 @@ import java.io.IOException;
 public class MainWindowService {
     private Stage stage;
     private FXMLLoader loader;
+    private String userName;
 
     public MainWindowService() {
         stage = new Stage();
@@ -50,6 +51,8 @@ public class MainWindowService {
     public void setOnCloseAction(EventHandler<WindowEvent> eventEventHandler) {
         stage.setOnCloseRequest(eventEventHandler);
     }
+    public void setUserName(String userName) { this.userName = userName; }
+    public String getUserName() { return userName; }
     public Stage getStage() {
         return this.stage;
     }

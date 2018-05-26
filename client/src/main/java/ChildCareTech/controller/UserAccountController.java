@@ -5,6 +5,8 @@ import ChildCareTech.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
@@ -12,8 +14,17 @@ public class UserAccountController implements AccessorWindowController{
 
     @FXML
     private Button logOutButton;
+    @FXML
+    private Label userName;
+    @FXML
+    private AnchorPane userImagePane;
 
     private AccessorWindowService accessorWindowService;
+
+    @FXML
+    public void initialize() {
+
+    }
 
     @FXML
     private void logOutButtonAction(ActionEvent event) {
@@ -23,5 +34,8 @@ public class UserAccountController implements AccessorWindowController{
     }
     public void setAccessorWindowService(AccessorWindowService accessorWindowService) {
         this.accessorWindowService = accessorWindowService;
+    }
+    public void setUserName(String userName) {
+        this.userName.setText(userName);
     }
 }

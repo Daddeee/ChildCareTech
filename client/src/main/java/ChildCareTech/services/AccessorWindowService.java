@@ -119,9 +119,10 @@ public class AccessorWindowService {
         loadWindow(ResourcesPaths.getFoodsListFXMLPath(), ResourcesPaths.getFoodsListCSSPath());
         ActiveControllersList.addFoodController(loader.getController());
     }
-    public void loadUserAccountWindow() throws IOException{
+    public void loadUserAccountWindow(String userName) throws IOException{
         loadWindow(ResourcesPaths.getUserAccountFXMLPath(), ResourcesPaths.getUserAccountCSSPath());
         ((AccessorWindowController)loader.getController()).setAccessorWindowService(this);
+        ((UserAccountController)loader.getController()).setUserName(userName);
     }
     public void loadAddTripWindow() throws IOException {
         loadWindow(ResourcesPaths.getAddTripFXMLPath(), ResourcesPaths.getAddTripCSSPath());

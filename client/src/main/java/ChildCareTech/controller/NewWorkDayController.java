@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.EventType;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import ChildCareTech.utils.RestrictedDatePicker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,7 +46,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
     private Set<EventDTO> events = new HashSet<>();
     private AccessorWindowService accessorWindowService;
     private AccessorWindowService codeInputService;
-    private AccessorWindowService alertWindowService;
+    private AlertWindowService alertWindowService;
     private boolean accessorLogActive = false;
     private EventDTO selectedEventLog;
 
@@ -53,7 +54,6 @@ public class NewWorkDayController implements TableWindowControllerInterface {
     public void initialize() {
         initMenu();
         accessorWindowService = new AccessorWindowService(this);
-        alertWindowService = new AccessorWindowService(this);
         accessorWindowService.setOnCloseAction(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) { accessorLogActive = false; }
@@ -66,6 +66,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
             //gestione
             ex.printStackTrace();
         }
+        alertWindowService = new AlertWindowService();
     }
 
     @FXML
@@ -85,9 +86,9 @@ public class NewWorkDayController implements TableWindowControllerInterface {
         EventDTO selected = eventsTable.getSelectionModel().getSelectedItem();
         if(selected == null) return;
         if(selected.getEventStatus().equals(EventStatus.CLOSED))
-            System.out.println("This event is now closed.");  //gestione errore
+            alertWindowService.loadWindow("Impossibile acquisire codici di accesso su un evento chiuso.");
         else if(selected.getEventStatus().equals(EventStatus.WAIT))
-            System.out.println("This event has not yet been opened.");
+            alertWindowService.loadWindow("Impossibile acquisire codici di accesso su un evento in attesa di apertura.");
         else {
             try {
                 codeInputService.loadCodeInputWindow(selected);

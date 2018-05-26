@@ -3,7 +3,9 @@ package ChildCareTech.controller;
 import ChildCareTech.Client;
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.MealDTO;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import ChildCareTech.utils.TempMealData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +31,8 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
     @FXML
     private Button foodManagerButton;
     @FXML
+    private Button validateMenuButton;
+    @FXML
     protected ComboBox<String> selectCanteen;
     @FXML
     protected TableView<TempMealData> mealsDataTable;
@@ -38,6 +42,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
     private AccessorWindowService accessorWindowService;
     private AccessorWindowService canteenListWindow;
     private AccessorWindowService kitchenWindow;
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
@@ -53,6 +58,24 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         });
         canteenListWindow = new AccessorWindowService(this);
         kitchenWindow = new AccessorWindowService(this);
+        alertWindowService = new AlertWindowService();
+    }
+    @FXML
+    protected void validateMenuAction(ActionEvent event){
+        TempMealData selected = mealsDataTable.getSelectionModel().getSelectedItem();
+        if(selected == null || selected.getMealDTO() == null) return;
+        if(selected.getMealDTO().getMenu() == null) {
+            alertWindowService.loadWindow("Il pasto selezionato non ha menù registrati.");
+            return;
+        }
+        try{
+            Client.getSessionService().getSession().validateMenu(selected.getMealDTO().getMenu());
+            alertWindowService.loadWindow("OK!");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (UpdateFailedException e){
+            alertWindowService.loadWindow(e.getMessage());
+        }
     }
     @FXML
     public void menuManagerButtonAction(ActionEvent event) {
@@ -100,13 +123,16 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
 
     public void initMenu() {
         menuManagerButton.setDisable(true);
+        validateMenuButton.setDisable(true);
 
         mealsDataTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 menuManagerButton.setDisable(false);
+                validateMenuButton.setDisable(false);
             }
             else {
                 menuManagerButton.setDisable(true);
+                validateMenuButton.setDisable(true);
             }
         });
 
@@ -140,11 +166,14 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         try{
             if(selectCanteen.getValue() != null)
                 canteenDTO = Client.getSessionService().getSession().getCanteenByName(selectCanteen.getValue());
-        } catch (RemoteException | NoSuchElementException ex){
+        } catch (RemoteException ex){
+            ex.printStackTrace();
+        } catch(NoSuchElementException ex) {
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
         }
+
         refreshMealsTable();
     }
-    public void clearChildInstances() { accessorWindowService.close(); }
     public void notifyUpdate() { }
 }

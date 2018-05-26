@@ -5,6 +5,7 @@ import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,6 +43,7 @@ public class NewAddMealsController implements AccessorWindowController {
     private ObservableList<String> hour = FXCollections.observableArrayList();
     private ObservableList<MealData> meals = FXCollections.observableArrayList();
     private AccessorWindowService accessorWindowService;
+    private AlertWindowService alertWindowService;
     private String canteenName;
 
     @FXML
@@ -49,6 +51,7 @@ public class NewAddMealsController implements AccessorWindowController {
         initComboBoxes();
         initMenu();
         mealsTable.setItems(meals);
+        alertWindowService = new AlertWindowService();
     }
     @FXML
     private void addButtonAction(ActionEvent event) {
@@ -93,8 +96,12 @@ public class NewAddMealsController implements AccessorWindowController {
 
         try{
             Client.getSessionService().getSession().saveCanteen(canteenDTO, entryTimeList, exitTimeList);
-        } catch(RemoteException | AddFailedException ex){
+        } catch(RemoteException ex){
             System.err.println(ex.getMessage());
+            ex.printStackTrace();
+            return;
+        } catch(AddFailedException ex){
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
             return;
         }

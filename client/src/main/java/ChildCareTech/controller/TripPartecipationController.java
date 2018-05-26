@@ -7,6 +7,7 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import ChildCareTech.utils.BusDTOWithResidualCapacity;
 import ChildCareTech.utils.TripPartecipationData;
 import javafx.beans.binding.Bindings;
@@ -35,6 +36,7 @@ public class TripPartecipationController implements AccessorWindowController{
 
     private TripDTO currentTripDTO;
     private AccessorWindowService accessorWindowService;
+    private AlertWindowService alertWindowService;
 
     public void initData(TripDTO tripDTO){
         currentTripDTO = tripDTO;
@@ -43,6 +45,7 @@ public class TripPartecipationController implements AccessorWindowController{
 
     public void initialize(){
         initMenu();
+        alertWindowService = new AlertWindowService();
     }
 
     @FXML
@@ -70,8 +73,10 @@ public class TripPartecipationController implements AccessorWindowController{
 
         try{
             Client.getSessionService().getSession().saveTripPartecipation(tripPartecipationDTO);
-        } catch(RemoteException | AddFailedException e){
+        } catch(RemoteException e){
             e.printStackTrace();
+        } catch(AddFailedException e) {
+            alertWindowService.loadWindow(e.getMessage());
         }
 
         refresh();
@@ -101,8 +106,10 @@ public class TripPartecipationController implements AccessorWindowController{
 
         try{
             Client.getSessionService().getSession().saveTripBusRelation(currentTripDTO, addedBus);
-        } catch(RemoteException | AddFailedException e){
+        } catch(RemoteException  e){
             e.printStackTrace();
+        } catch(AddFailedException e) {
+            alertWindowService.loadWindow(e.getMessage());
         }
 
         refresh();
@@ -111,8 +118,10 @@ public class TripPartecipationController implements AccessorWindowController{
     private void refresh(){
         try{
             currentTripDTO = Client.getSessionService().getSession().getTrip(currentTripDTO.getId());
-        } catch(RemoteException | NoSuchElementException e){
+        } catch(RemoteException e){
             e.printStackTrace();
+        } catch(NoSuchElementException e) {
+            alertWindowService.loadWindow(e.getMessage());
         }
 
         refreshGUI();

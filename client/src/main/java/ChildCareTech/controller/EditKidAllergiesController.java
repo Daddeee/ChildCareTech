@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,6 +40,7 @@ public class EditKidAllergiesController implements AccessorWindowController {
 
     private KidDTO kidDTO;
     private AccessorWindowService accessorWindowService;
+    private AlertWindowService alertWindowService;
     private ObservableList<FoodDTO> allergies = FXCollections.observableArrayList();
     private ObservableList<FoodDTO> foods = FXCollections.observableArrayList();
 
@@ -46,6 +48,7 @@ public class EditKidAllergiesController implements AccessorWindowController {
     public void initialize() {
         initMenu();
         initTable();
+        alertWindowService = new AlertWindowService();
     }
 
     @FXML
@@ -70,7 +73,7 @@ public class EditKidAllergiesController implements AccessorWindowController {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
         } catch (AddFailedException ex) {
-            System.err.println(ex.getMessage());
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
         }
     }

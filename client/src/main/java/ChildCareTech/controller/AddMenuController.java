@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
+import ChildCareTech.services.AlertWindowService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,19 +23,19 @@ public class AddMenuController implements AccessorWindowController {
     protected TableView<DishDTO> availableDishesTable;
     @FXML
     protected TableView<DishDTO> selectedDishesTable;
-    @FXML
-    protected Label alertLabel;
 
     private MealDTO currentMealDTO;
     private AccessorWindowService accessorWindowService;
     private ObservableList<DishDTO> selectedDishes = FXCollections.observableArrayList();
     private ObservableList<DishDTO> availableDishes = FXCollections.observableArrayList();
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
         availableDishesTable.setItems(availableDishes);
         selectedDishesTable.setItems(selectedDishes);
         initTable();
+        alertWindowService = new AlertWindowService();
     }
 
     public void initData(MealDTO mealDTO){
@@ -48,25 +49,12 @@ public class AddMenuController implements AccessorWindowController {
     }
 
     @FXML
-    protected void validateMenuAction(ActionEvent event){
-        try{
-            Client.getSessionService().getSession().validateMenu(currentMealDTO.getMenu());
-            alertLabel.setText("OK!");
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (UpdateFailedException e){
-            alertLabel.setText(e.getMessage());
-        }
-    }
-
-    @FXML
     protected void addDishButtonAction(ActionEvent event) {
         DishDTO dish = availableDishesTable.getSelectionModel().getSelectedItem();
 
         if (dish != null) {
             selectedDishes.add(dish);
             availableDishes.remove(dish);
-            alertLabel.setText("");
         }
     }
 
@@ -77,7 +65,6 @@ public class AddMenuController implements AccessorWindowController {
         if (dish != null) {
             availableDishes.add(dish);
             selectedDishes.remove(dish);
-            alertLabel.setText("");
         }
     }
 
@@ -98,6 +85,7 @@ public class AddMenuController implements AccessorWindowController {
         } catch (RemoteException e){
             e.printStackTrace();
         }
+        accessorWindowService.close();
     }
     private void initTable() {
         availableDishes.clear();

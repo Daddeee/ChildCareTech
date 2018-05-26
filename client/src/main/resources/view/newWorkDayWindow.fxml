@@ -12,20 +12,24 @@
 <?import javafx.scene.text.Font?>
 
 <?import ChildCareTech.utils.RestrictedDatePicker?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="660.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.NewWorkDayController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="660.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.NewWorkDayController">
    <children>
       <VBox layoutX="281.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" minHeight="40.0" minWidth="0.0" prefHeight="40.0" prefWidth="940.0">
+            <AnchorPane>
                <children>
-                  <Label minHeight="50.0" prefHeight="50.0" text="Giorno:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <RestrictedDatePicker fx:id="workDayDatePicker" onAction="#updateTable"/>
+                  <HBox alignment="CENTER" minHeight="40.0" minWidth="0.0" prefHeight="40.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label minHeight="50.0" prefHeight="50.0" text="Giorno:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <RestrictedDatePicker fx:id="workDayDatePicker" onAction="#updateTable" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </AnchorPane>
             <AnchorPane prefHeight="570.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
                <children>
                   <TableView fx:id="eventsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -57,24 +61,28 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <HBox alignment="CENTER_LEFT" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="940.0">
+            <AnchorPane>
                <children>
-                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="890.0" HBox.hgrow="SOMETIMES">
+                  <HBox alignment="CENTER_LEFT" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="codeAcquisitionButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" mnemonicParsing="false" onAction="#codeAcquisitionButtonAction" prefHeight="50.0" prefWidth="50.0" text="Acquisisci codici">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="logButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" mnemonicParsing="false" onAction="#logButtonAction" prefHeight="50.0" prefWidth="50.0" text="Consulta Log">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </Button>
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="890.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="codeAcquisitionButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" mnemonicParsing="false" onAction="#codeAcquisitionButtonAction" prefHeight="50.0" prefWidth="50.0" text="Acquisisci codici">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="logButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" mnemonicParsing="false" onAction="#logButtonAction" prefHeight="50.0" prefWidth="50.0" text="Consulta Log">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
-            </HBox>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

@@ -63,12 +63,15 @@ public class EditAdultController extends AddAdultController {
         PediatristDTO pediatrist;
         StaffDTO staff;
 
-        alertLabel.setText("");
-        if (fiscalCodeField.getText().length() != 16 ||
+        if(fiscalCodeField.getText().equals("") ||
                 firstNameField.getText().equals("") ||
                 lastNameField.getText().equals("") ||
                 addressField.getText().equals("")) {
-            alertLabel.setText("invalid input");
+            alertWindowService.loadWindow("Non tutti i campi obbligatori sono stati compilati.");
+            return;
+        }
+        if(fiscalCodeField.getText().length() != 16) {
+            alertWindowService.loadWindow("Codice fiscale non valido.");
             return;
         }
         Sex sex;
@@ -87,7 +90,7 @@ public class EditAdultController extends AddAdultController {
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch (UpdateFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -101,7 +104,7 @@ public class EditAdultController extends AddAdultController {
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch(UpdateFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -115,7 +118,7 @@ public class EditAdultController extends AddAdultController {
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch(UpdateFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -129,7 +132,7 @@ public class EditAdultController extends AddAdultController {
                 System.err.println("error remote");
                 ex.printStackTrace();
             } catch(UpdateFailedException ex) {
-                alertLabel.setText(ex.getMessage());
+                alertWindowService.loadWindow(ex.getMessage());
                 ex.printStackTrace();
             }
         }

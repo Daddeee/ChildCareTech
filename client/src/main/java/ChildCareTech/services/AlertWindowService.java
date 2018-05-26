@@ -1,10 +1,8 @@
 package ChildCareTech.services;
 
-import ChildCareTech.controller.AccessorWindowController;
 import ChildCareTech.controller.AlertController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,12 +14,21 @@ public class AlertWindowService {
     private Stage stage;
     private AlertController controller;
     private FXMLLoader loader;
+    private Scene scene;
+    private boolean ready = false;
 
     public AlertWindowService() {
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         loader = new FXMLLoader(AccessorWindowService.class.getResource(ResourcesPaths.getAlertWindowFXMLPath()));
+        try {
+            scene = new Scene(loader.load());
+            ready = true;
+        } catch(IOException ex) {
+            System.err.println("error loading alert window");
+            ex.printStackTrace();
+        }
     }
 
     public void close() {
@@ -37,17 +44,16 @@ public class AlertWindowService {
         stage.setOnCloseRequest(eventEventHandler);
     }
     public void loadWindow(String message) {
-        try {
-            Scene scene = new Scene(loader.load());
+        if(ready) {
             scene.getStylesheets().add(ResourcesPaths.getAlertWindowCSSPath());
             stage.setScene(scene);
             controller = loader.getController();
             controller.setAlertWindowService(this);
             controller.setMessage(message);
             stage.show();
-        } catch(IOException ex) {
-            System.err.println("error loading alert window");
-            ex.printStackTrace();
+        }
+        else {
+            System.err.println("AlertWindowService non disponibile");
         }
     }
 

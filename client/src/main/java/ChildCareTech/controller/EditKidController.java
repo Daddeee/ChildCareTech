@@ -40,7 +40,7 @@ public class EditKidController extends AddKidController {
             Client.getSessionService().getSession().updateKid(kid);
             accessorWindowService.close();
         } catch(UpdateFailedException ex) {
-            //alertLabel.setText(ex.getMessage());
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
         } catch (RemoteException ex) {
             System.out.println(ex.getMessage());

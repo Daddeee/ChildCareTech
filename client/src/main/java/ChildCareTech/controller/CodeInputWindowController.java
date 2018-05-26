@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.exceptions.CameraBusyException;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ActiveControllersList;
+import ChildCareTech.services.AlertWindowService;
 import ChildCareTech.utils.NewWebcamQRCodeReader;
 import ChildCareTech.utils.ReportTableData;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -44,6 +45,7 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
 
     protected ObservableList<ReportTableData> reports = FXCollections.observableArrayList();
     private AccessorWindowService accessorWindowService;
+    private AlertWindowService alertWindowService;
     private boolean on;
     private HashSet<String> scannedCodes = new HashSet<>();
     private EventDTO currentEvent;
@@ -53,6 +55,7 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
 
     @FXML
     public void initialize() {
+        alertWindowService = new AlertWindowService();
         logArea.setEditable(false);
         reportTable.setItems(reports);
         on = false;
@@ -85,14 +88,14 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
             }
         } catch (Exception e){
             e.printStackTrace();
-            //gestione
+            alertWindowService.loadWindow(e.getMessage());
         }
     }
     private void loadQRreader() {
         try {
             webcamQRCodeReader = new NewWebcamQRCodeReader(this);
         } catch(CameraBusyException ex) {
-            //gestione
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
         }
     }

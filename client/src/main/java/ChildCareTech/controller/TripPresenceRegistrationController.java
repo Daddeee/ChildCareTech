@@ -6,6 +6,7 @@ import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.exceptions.CameraBusyException;
 import ChildCareTech.services.AccessorWindowService;
 import ChildCareTech.services.ActiveControllersList;
+import ChildCareTech.services.AlertWindowService;
 import ChildCareTech.utils.NewWebcamQRCodeReader;
 import ChildCareTech.utils.ReportTableData;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -57,9 +58,11 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
     private boolean on;
     private SwingNode node;
     private HashSet<String> codesToScan = new HashSet<>();
+    private AlertWindowService alertWindowService;
 
     @FXML
     public void initialize() {
+        alertWindowService = new AlertWindowService();
         logArea.setEditable(false);
         reportTable.setItems(reports);
         busComboBox.setItems(buses);
@@ -131,7 +134,7 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
         try {
             webcamQRCodeReader = new NewWebcamQRCodeReader(this);
         } catch(CameraBusyException ex) {
-            //gestione
+            alertWindowService.loadWindow(ex.getMessage());
             ex.printStackTrace();
         }
     }
@@ -152,7 +155,7 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
             }
         } catch (Exception e){
             e.printStackTrace();
-            //gestione
+            alertWindowService.loadWindow(e.getMessage());
         }
     }
     public void setPane(WebcamPanel webcamPanel) {
