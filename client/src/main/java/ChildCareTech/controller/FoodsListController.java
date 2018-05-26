@@ -52,7 +52,7 @@ public class FoodsListController implements TableWindowControllerInterface, Acce
         String name = insertField.getText();
         if(name == null || name.equals("")) return;
         try {
-            Client.getSessionService().getSession().saveFood(new FoodDTO(0, name, false, 0, new HashSet<SupplyDTO>(), new HashSet<PersonDTO>()));
+            Client.getSessionService().getSession().saveFood(new FoodDTO(0, name, false, new HashSet<SupplyDTO>(), new HashSet<PersonDTO>()));
             refreshTable();
         } catch (RemoteException ex) {
             System.err.println(ex.getMessage());
