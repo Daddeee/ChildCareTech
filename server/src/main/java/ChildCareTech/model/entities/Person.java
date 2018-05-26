@@ -9,7 +9,11 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * Represents a row of the Person table saved in the database.
+ * <p>
+ * This class is mapped by Hibernate (basing on JPA annotations) on the Person table in the database.
+ */
 @javax.persistence.Entity
 public class Person implements iEntity<Person, Integer> {
     @Id
@@ -49,9 +53,24 @@ public class Person implements iEntity<Person, Integer> {
                 inverseJoinColumns = {@JoinColumn(name = "food_id", nullable = false, updatable = false)})
     private Set<Food> allergies = new HashSet<>();
 
-    public Person() {
-    }
+    /**
+     * This constructor is used by Hibernate to build the entities, it should not be used elsewhere.
+     */
+    public Person() {}
 
+    /**
+     * Create a Person entity with the provided parameters and id=0.
+     * <p>
+     * Should be used to create a new entity to be saved in the database.
+     *
+     * @param fiscalCode the Person's fiscalcode.
+     * @param firstName the Person's first name.
+     * @param lastName the Person's last name.
+     * @param birthDate the Person's birth date.
+     * @param sex the Person's gender.
+     * @param address the Person's address.
+     * @param phoneNumber the Person's phone number.
+     */
     public Person(String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
         this.fiscalCode = fiscalCode;
         this.firstName = firstName;
@@ -62,6 +81,20 @@ public class Person implements iEntity<Person, Integer> {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Create a Person entity with the provided id and parameters.
+     * <p>
+     * Should be used to create an entity that is already saved in the database.
+     *
+     * @param id the id of the row in the database.
+     * @param fiscalCode the Person's fiscalcode.
+     * @param firstName the Person's first name.
+     * @param lastName the Person's last name.
+     * @param birthDate the Person's birth date.
+     * @param sex the Person's gender.
+     * @param address the Person's address.
+     * @param phoneNumber the Person's phone number.
+     */
     public Person(int id, String fiscalCode, String firstName, String lastName, LocalDate birthDate, Sex sex, String address, String phoneNumber) {
         this.id = id;
         this.fiscalCode = fiscalCode;
@@ -73,12 +106,11 @@ public class Person implements iEntity<Person, Integer> {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * @return the entity's id.
+     */
     public int getId() {
         return id;
-    }
-
-    private void setId(int id) {
-        this.id = id;
     }
 
     @Override
@@ -86,80 +118,92 @@ public class Person implements iEntity<Person, Integer> {
         return id;
     }
 
+    /**
+     * @return the person's fiscalcode.
+     */
     public String getFiscalCode() {
         return fiscalCode;
     }
 
-    private void setFiscalCode(String fiscalCode) {
-        this.fiscalCode = fiscalCode;
-    }
-
+    /**
+     * @return the person's first name.
+     */
     public String getFirstName() {
         return firstName;
     }
 
-    private void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
+    /**
+     *
+     * @return the person's last name.
+     */
     public String getLastName() {
         return lastName;
     }
 
-    private void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
+    /**
+     * @return the person's birth date.
+     */
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    private void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
+    /**
+     * @return the person's gender.
+     */
     public Sex getSex() {
         return sex;
     }
 
-    private void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
+    /**
+     * @return the person's address.
+     */
     public String getAddress() {
         return address;
     }
 
-    private void setAddress(String address) {
-        this.address = address;
-    }
-
+    /**
+     * @return the person's phone number.
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    private void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
+    /**
+     * @return a Set containing all the {@link Checkpoint Checkpoint(s)} associated to this Person.
+     */
     public Set<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
 
+    /**
+     * @param checkpoints a Set containing the {@link Checkpoint Checkpoint(s)} associated to this Person.
+     */
     public void setCheckpoints(Set<Checkpoint> checkpoints) {
         this.checkpoints = checkpoints;
     }
 
+    /**
+     * @return a Set containing all the {@link TripPartecipation TripPartecipation(s)} associated to this Person.
+     */
     public Set<TripPartecipation> getTripPartecipations() {
         return tripPartecipations;
     }
 
+    /**
+     * @param tripPartecipations a Set containing the {@link TripPartecipation TripPartecipation(s)} associated to this Person.
+     */
     public void setTripPartecipations(Set<TripPartecipation> tripPartecipations) {
         this.tripPartecipations = tripPartecipations;
     }
 
+    /**
+     * @return a Set containing all the {@link Food Food(s)} that this Person is allergic to.
+     */
     public Set<Food> getAllergies() { return allergies; }
 
+    /**
+     * @param allergies a Set containing the {@link Food Food(s)} that this Person is allergic to.
+     */
     public void setAllergies(Set<Food> allergies) { this.allergies = allergies; }
 
     @Override
@@ -172,5 +216,37 @@ public class Person implements iEntity<Person, Integer> {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         return this.fiscalCode.equals(((Person) o).fiscalCode);
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    private void setFiscalCode(String fiscalCode) {
+        this.fiscalCode = fiscalCode;
+    }
+
+    private void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    private void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    private void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    private void setAddress(String address) {
+        this.address = address;
+    }
+
+    private void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

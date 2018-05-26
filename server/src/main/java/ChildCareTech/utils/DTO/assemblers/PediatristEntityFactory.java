@@ -46,8 +46,7 @@ public class PediatristEntityFactory implements AbstractEntityFactory<Pediatrist
 
         Pediatrist entity = new Pediatrist(
                 dto.getId(),
-                EntityFactoryFacade.getEntity(dto.getPerson()),
-                null
+                EntityFactoryFacade.getEntity(dto.getPerson())
         );
         return entity;
     }

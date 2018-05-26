@@ -3,7 +3,7 @@ package ChildCareTech.model.DAO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 import org.hibernate.query.Query;
 
@@ -12,12 +12,6 @@ import java.util.List;
 public class FoodDAO extends AbstractGenericDAO<Food, Integer> {
     public FoodDAO() {
         super(Food.class);
-    }
-
-    @Override
-    public void initializeLazyRelations(Food obj) {
-        initializeDishRelation(obj);
-        initializeSupplyRelation(obj);
     }
 
     public List<Food> getAvailableFoods(Person person){
@@ -43,9 +37,15 @@ public class FoodDAO extends AbstractGenericDAO<Food, Integer> {
         return query.getResultList();
     }
 
-    public void initializeDishRelation(Food obj) {}
+    @Override
+    public void initializeLazyRelations(Food obj) {
+        initializeDishRelation(obj);
+        initializeSupplyRelation(obj);
+    }
 
-    public void initializeSupplyRelation(Food obj){
+    private void initializeDishRelation(Food obj) {}
+
+    private void initializeSupplyRelation(Food obj){
         Hibernate.initialize(obj.getSupplies());
     }
 }

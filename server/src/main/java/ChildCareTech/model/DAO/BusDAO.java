@@ -2,11 +2,10 @@ package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 import org.hibernate.query.Query;
 
-import java.util.Collections;
 import java.util.List;
 
 public class BusDAO extends AbstractGenericDAO<Bus, Integer> {
@@ -34,11 +33,11 @@ public class BusDAO extends AbstractGenericDAO<Bus, Integer> {
         initializeTripRelation(obj);
     }
 
-    public void initializeTripPartecipationRelation(Bus obj) {
+    private void initializeTripPartecipationRelation(Bus obj) {
         Hibernate.initialize(obj.getTripPartecipations());
     }
 
-    public void initializeTripRelation(Bus obj) {
+    private void initializeTripRelation(Bus obj) {
         Hibernate.initialize(obj.getTrips());
     }
 }

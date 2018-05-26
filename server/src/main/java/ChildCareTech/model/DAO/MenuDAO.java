@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Menu;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 public class MenuDAO extends AbstractGenericDAO<Menu, Integer> {
@@ -14,7 +14,7 @@ public class MenuDAO extends AbstractGenericDAO<Menu, Integer> {
         initializeDishRelation(obj);
     }
 
-    public void initializeDishRelation(Menu obj) {
+    private void initializeDishRelation(Menu obj) {
         Hibernate.initialize(obj.getDishes());
     }
 }

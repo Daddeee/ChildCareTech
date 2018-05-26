@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 public class TripDAO extends AbstractGenericDAO<Trip, Integer> {
@@ -16,13 +16,13 @@ public class TripDAO extends AbstractGenericDAO<Trip, Integer> {
         initializeBusRelation(trip);
     }
 
-    public void initializeRouteRelation(Trip trip){
+    private void initializeRouteRelation(Trip trip){
         Hibernate.initialize(trip.getRoutes());
     }
 
-    public void initializeTripPartecipationRelation(Trip trip){
+    private void initializeTripPartecipationRelation(Trip trip){
         Hibernate.initialize(trip.getTripPartecipations());
     }
 
-    public void initializeBusRelation(Trip trip) { Hibernate.initialize(trip.getBuses()); }
+    private void initializeBusRelation(Trip trip) { Hibernate.initialize(trip.getBuses()); }
 }

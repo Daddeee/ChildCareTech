@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Event;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 public class EventDAO extends AbstractGenericDAO<Event, Integer> {
@@ -12,7 +12,7 @@ public class EventDAO extends AbstractGenericDAO<Event, Integer> {
         initializeCheckpointRelation(obj);
     }
 
-    public void initializeCheckpointRelation(Event obj) {
+    private void initializeCheckpointRelation(Event obj) {
         Hibernate.initialize(obj.getCheckpoints());
     }
 }

@@ -1,0 +1,17 @@
+ChildCareTech
+ChildCareTech.common
+ChildCareTech.common.DTO
+ChildCareTech.common.exceptions
+ChildCareTech.controller
+ChildCareTech.model
+ChildCareTech.model.DAO
+ChildCareTech.model.entities
+ChildCareTech.model.validators
+ChildCareTech.network.RMI
+ChildCareTech.network.socket
+ChildCareTech.utils
+ChildCareTech.utils.DTO
+ChildCareTech.utils.DTO.assemblers
+ChildCareTech.utils.DTO.factories
+ChildCareTech.utils.exceptions
+ChildCareTech.utils.generation

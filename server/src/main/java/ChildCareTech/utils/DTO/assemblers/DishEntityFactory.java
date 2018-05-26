@@ -52,9 +52,7 @@ public class DishEntityFactory implements AbstractEntityFactory<Dish, DishDTO> {
 
         Dish entity = new Dish(
                 dto.getId(),
-                dto.getName(),
-                null,
-                null
+                dto.getName()
         );
         return entity;
     }

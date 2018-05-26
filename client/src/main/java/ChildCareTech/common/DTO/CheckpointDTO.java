@@ -8,14 +8,12 @@ public class CheckpointDTO implements Serializable {
     private EventDTO event;
     private PersonDTO person;
     private LocalTime time;
-    private boolean isIn;
 
-    public CheckpointDTO(int id, EventDTO event, PersonDTO person, LocalTime time, boolean isIn) {
+    public CheckpointDTO(int id, EventDTO event, PersonDTO person, LocalTime time) {
         this.id = id;
         this.event = event;
         this.person = person;
         this.time = time;
-        this.isIn = isIn;
     }
 
     public int getId() {
@@ -44,13 +42,5 @@ public class CheckpointDTO implements Serializable {
 
     public void setTime(LocalTime time) {
         this.time = time;
-    }
-
-    public boolean isIn() {
-        return isIn;
-    }
-
-    public void setIn(boolean in) {
-        isIn = in;
     }
 }

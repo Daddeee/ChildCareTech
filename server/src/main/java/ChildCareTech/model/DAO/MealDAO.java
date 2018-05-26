@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Meal;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 public class MealDAO extends AbstractGenericDAO<Meal, Integer> {

@@ -52,8 +52,7 @@ public class MenuEntityFactory implements AbstractEntityFactory<Menu, MenuDTO> {
         Menu entity = new Menu(
                 dto.getId(),
                 meal,
-                dto.getNumMenu(),
-                null
+                dto.getNumMenu()
         );
         return entity;
     }

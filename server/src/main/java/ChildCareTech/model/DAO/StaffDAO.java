@@ -1,8 +1,7 @@
 package ChildCareTech.model.DAO;
 
-import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.entities.Staff;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 
 public class StaffDAO extends AbstractGenericDAO<Staff, Integer> {
     public StaffDAO() {

@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Canteen;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 import org.hibernate.query.Query;
 
@@ -22,7 +22,7 @@ public class CanteenDAO extends AbstractGenericDAO<Canteen, Integer> {
         initializeMealRelation(obj);
     }
 
-    public void initializeMealRelation(Canteen obj) {
+    private void initializeMealRelation(Canteen obj) {
         Hibernate.initialize(obj.getMeals());
     }
 }

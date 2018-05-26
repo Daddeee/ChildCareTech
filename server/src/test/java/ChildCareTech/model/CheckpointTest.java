@@ -53,8 +53,8 @@ public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
             session.close();
         }
 
-        Checkpoint e = new Checkpoint(event, p, LocalTime.now(), true);
-        Checkpoint eu = new Checkpoint(event, p, LocalTime.now(), false);
+        Checkpoint e = new Checkpoint(event, p, LocalTime.now());
+        Checkpoint eu = new Checkpoint(event, p, LocalTime.now());
 
         testCRUDImpl(e, eu);
     }

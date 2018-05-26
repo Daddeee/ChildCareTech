@@ -1,9 +1,8 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Kid;
-import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Trip;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 import org.hibernate.query.Query;
 
@@ -33,10 +32,10 @@ public class KidDAO extends AbstractGenericDAO<Kid, Integer> {
         initializeAllergiesRelation(obj);
     }
 
-    public void initializeContactsRelation(Kid obj) {
+    private void initializeContactsRelation(Kid obj) {
         Hibernate.initialize(obj.getContacts());
     }
-    public void initializeAllergiesRelation(Kid obj) {
+    private void initializeAllergiesRelation(Kid obj) {
         Hibernate.initialize(obj.getPerson().getAllergies());
     }
 }

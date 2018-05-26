@@ -95,8 +95,8 @@ public class MenuTest extends AbstractEntityTest<Menu, Integer> {
             session.close();
         }
 
-        Menu m = new Menu(ml, 0, null);
-        Menu mu = new Menu(ml, 1, null);
+        Menu m = new Menu(ml, 0);
+        Menu mu = new Menu(ml, 1);
 
         testCRUDImpl(m, mu);
     }

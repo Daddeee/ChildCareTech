@@ -1,6 +1,5 @@
 package ChildCareTech.model;
 
-import ChildCareTech.utils.AbstractGenericDAO;
 import ChildCareTech.utils.exceptions.ValidationFailedException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

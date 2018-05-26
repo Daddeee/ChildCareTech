@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Supply;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 
 public class SupplyDAO extends AbstractGenericDAO<Supply, Integer> {
     public SupplyDAO() {

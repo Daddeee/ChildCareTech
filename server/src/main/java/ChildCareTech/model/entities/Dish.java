@@ -6,6 +6,11 @@ import javax.persistence.*;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * Represents a row of the Dish table saved in the database.
+ * <p>
+ * This class is mapped by Hibernate (basing on JPA annotations) on the Dish table in the database.
+ */
 @javax.persistence.Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Dish implements iEntity<Dish, Integer> {
@@ -23,24 +28,33 @@ public class Dish implements iEntity<Dish, Integer> {
     @ManyToMany(targetEntity = Food.class)
     private Set<Food> foods;
 
-    public Dish() {
-    }
+    /**
+     * This constructor is used by Hibernate to build the entities, it should not be used elsewhere.
+     */
+    public Dish() {}
 
+    /**
+     * Create a Dish entity with the provided parameters and id=0.
+     * <p>
+     * Should be used to create a new entity to be saved in the database.
+     *
+     * @param name the name of this dish.
+     */
     public Dish(String name) {
         this.name = name;
     }
 
-    public Dish(String name, Set<Menu> menus, Set<Food> foods) {
-        this.name = name;
-        this.menus = menus;
-        this.foods = foods;
-    }
-
-    public Dish(int id, String name, Set<Menu> menus, Set<Food> foods) {
+    /**
+     * Create a Dish entity with the provided id and parameters.
+     * <p>
+     * Should be used to create an entity that is already saved in the database.
+     *
+     * @param id the id of the row in the database.
+     * @param name the name of this dish.
+     */
+    public Dish(int id, String name) {
         this.id = id;
         this.name = name;
-        this.menus = menus;
-        this.foods = foods;
     }
 
     @Override
@@ -48,32 +62,46 @@ public class Dish implements iEntity<Dish, Integer> {
         return id;
     }
 
+    /**
+     * @return the entity's id.
+     */
     public int getId() {
         return id;
     }
 
-    public Set<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(Set<Menu> menus) {
-        this.menus = menus;
-    }
-
-    public Set<Food> getFoods() {
-        return foods == null ? Collections.EMPTY_SET : foods;
-    }
-
-    public void setFoods(Set<Food> foods) {
-        this.foods = foods;
-    }
-
+    /**
+     * @return the name of this dish.
+     */
     public String getName() {
         return name;
     }
 
-    private void setName(String name) {
-        this.name = name;
+    /**
+     * @return a Set containing all the {@link Menu Menu(s)} associated to this dish.
+     */
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    /**
+     * @param menus a Set containing the {@link Menu Menu(s)} associated to this dish.
+     */
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
+    }
+
+    /**
+     * @return a Set containing all the {@link Food Food(s)} associated to this dish.
+     */
+    public Set<Food> getFoods() {
+        return foods == null ? Collections.EMPTY_SET : foods;
+    }
+
+    /**
+     * @param foods a Set containing the {@link Food Food(s)} associated to this dish.
+     */
+    public void setFoods(Set<Food> foods) {
+        this.foods = foods;
     }
 
     @Override
@@ -86,6 +114,10 @@ public class Dish implements iEntity<Dish, Integer> {
         if (this == o) return true;
         if (!(o instanceof Dish)) return false;
         return this.name.equals(((Dish) o).name);
+    }
+
+    private void setName(String name) {
+        this.name = name;
     }
 
 }

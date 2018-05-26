@@ -23,8 +23,7 @@ public class CheckpointDTOFactory implements AbstractDTOFactory<Checkpoint, Chec
                 entity.getId(),
                 eventDTO,
                 DTOFactoryFacade.getDTO(entity.getPerson()),
-                entity.getTime(),
-                entity.isIn()
+                entity.getTime()
         );
     }
 }

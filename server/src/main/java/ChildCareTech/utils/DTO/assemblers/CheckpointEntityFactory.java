@@ -24,8 +24,7 @@ public class CheckpointEntityFactory implements AbstractEntityFactory<Checkpoint
                 dto.getId(),
                 event,
                 EntityFactoryFacade.getEntity(dto.getPerson()),
-                dto.getTime(),
-                dto.isIn()
+                dto.getTime()
         );
     }
 }

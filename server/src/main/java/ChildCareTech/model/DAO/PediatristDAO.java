@@ -1,8 +1,7 @@
 package ChildCareTech.model.DAO;
 
-import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.entities.Pediatrist;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 public class PediatristDAO extends AbstractGenericDAO<Pediatrist, Integer> {
@@ -17,7 +16,7 @@ public class PediatristDAO extends AbstractGenericDAO<Pediatrist, Integer> {
         initializeKidRelation(obj);
     }
 
-    public void initializeKidRelation(Pediatrist obj){
+    private void initializeKidRelation(Pediatrist obj){
         Hibernate.initialize(obj.getKids());
     }
 }

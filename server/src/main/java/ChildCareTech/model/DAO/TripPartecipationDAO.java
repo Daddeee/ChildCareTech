@@ -3,7 +3,7 @@ package ChildCareTech.model.DAO;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.entities.TripPartecipation;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.query.Query;
 
 public class TripPartecipationDAO extends AbstractGenericDAO<TripPartecipation, Integer> {

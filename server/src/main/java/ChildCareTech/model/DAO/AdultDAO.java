@@ -1,10 +1,8 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Adult;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,7 +28,7 @@ public class AdultDAO extends AbstractGenericDAO<Adult, Integer> {
         initializeContactsRelation(obj);
     }
 
-    public void initializeContactsRelation(Adult obj){
+    private void initializeContactsRelation(Adult obj){
         Hibernate.initialize(obj.getContacts());
     }
 }

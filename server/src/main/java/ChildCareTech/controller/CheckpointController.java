@@ -59,7 +59,7 @@ public class CheckpointController {
             if(event == null || !event.getEventStatus().equals(EventStatus.OPEN))
                 throw new CheckpointFailedException("Evento non disponibile");
 
-            record = new Checkpoint(event, person, time, false);
+            record = new Checkpoint(event, person, time);
             checkpointDAO.create(record);
 
             tx.commit();
@@ -110,7 +110,7 @@ public class CheckpointController {
                         if(event == null || !event.getEventStatus().equals(EventStatus.OPEN))
                             throw new CheckpointFailedException("Evento non disponibile");
 
-                        record = new Checkpoint(event, person, time, false);
+                        record = new Checkpoint(event, person, time);
                         checkpointDAO.create(record);
                         tx.commit();
                         RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.CHECKPOINT);

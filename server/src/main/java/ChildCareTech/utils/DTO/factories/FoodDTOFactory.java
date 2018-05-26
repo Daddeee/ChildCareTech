@@ -48,7 +48,6 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
                 entity.getId(),
                 entity.getName(),
                 entity.isDrink(),
-                entity.getResidualQuantity(),
                 null,
                 null
         );

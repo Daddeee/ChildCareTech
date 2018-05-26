@@ -106,7 +106,7 @@ public class FoodTest extends AbstractEntityTest<Food, Integer> {
     @Override
     public void testCRUD() {
         Food o = new Food("test", false);
-        Food ou = new Food("test", false, 1);
+        Food ou = new Food("test", true);
 
         testCRUDImpl(o, ou);
     }

@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.Person;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 public class PersonDAO extends AbstractGenericDAO<Person, Integer> {
@@ -18,11 +18,11 @@ public class PersonDAO extends AbstractGenericDAO<Person, Integer> {
 
     public void initializellergiesRelation(Person obj) { Hibernate.initialize(obj.getAllergies()); }
 
-    public void initializeEventRelation(Person obj){
+    private void initializeEventRelation(Person obj){
         Hibernate.initialize(obj.getCheckpoints());
     }
 
-    public void initializeTripPartecipationRelation(Person obj){
+    private void initializeTripPartecipationRelation(Person obj){
         Hibernate.initialize(obj.getTripPartecipations());
     }
 }

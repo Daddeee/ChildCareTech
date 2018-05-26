@@ -1,4 +1,4 @@
-package ChildCareTech.utils;
+package ChildCareTech.model;
 
 import ChildCareTech.model.iEntity;
 import ChildCareTech.utils.exceptions.ValidationFailedException;

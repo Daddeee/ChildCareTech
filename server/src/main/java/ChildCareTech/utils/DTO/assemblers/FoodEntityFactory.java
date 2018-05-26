@@ -52,10 +52,7 @@ public class FoodEntityFactory implements AbstractEntityFactory<Food, FoodDTO> {
         return new Food(
                 dto.getId(),
                 dto.getName(),
-                dto.isDrink(),
-                dto.getResidualQuantity(),
-                null,
-                null
+                dto.isDrink()
         );
     }
 }

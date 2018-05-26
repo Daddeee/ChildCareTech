@@ -55,7 +55,7 @@ public class MealsGenerationUtil {
                     eventDAO.create(exitEvent);
                     mealDAO.create(meal);
 
-                    Menu menu = new Menu(meal, 0, new HashSet<>());
+                    Menu menu = new Menu(meal, 0);
                     menuDAO.create(menu);
 
                     meal.setMenu(menu);

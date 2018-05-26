@@ -1,7 +1,7 @@
 package ChildCareTech.model.DAO;
 
 import ChildCareTech.model.entities.WorkDay;
-import ChildCareTech.utils.AbstractGenericDAO;
+import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
@@ -31,11 +31,11 @@ public class WorkDayDAO extends AbstractGenericDAO<WorkDay, Integer> {
         initializeEventRelation(workDay);
     }
 
-    public void initializeMealRelation(WorkDay workDay){
+    private void initializeMealRelation(WorkDay workDay){
         Hibernate.initialize(workDay.getMeals());
     }
 
-    public void initializeEventRelation(WorkDay workDay){
+    private void initializeEventRelation(WorkDay workDay){
         Hibernate.initialize(workDay.getEvents());
     }
 }
