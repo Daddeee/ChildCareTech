@@ -7,6 +7,7 @@ import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.DAO.KidDAO;
+import ChildCareTech.model.DAO.PersonDAO;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.entities.Trip;
@@ -20,6 +21,7 @@ import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class KidController {
@@ -87,13 +89,21 @@ public class KidController {
     public void doSaveKid(KidDTO kidDTO) throws AddFailedException {
         Kid kid = EntityFactoryFacade.getEntity(kidDTO);
         KidDAO kidDAO = new KidDAO();
+        HashMap<String, Object> paramMap = new HashMap<>();
+        PersonDAO personDAO = new PersonDAO();
 
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         kidDAO.setSession(session);
+
+        paramMap.put("fiscalCode", kidDTO.getPerson().getFiscalCode());
         try{
             tx = session.beginTransaction();
-            kidDAO.create(kid);
+            if(personDAO.read(paramMap).isEmpty())
+                kidDAO.create(kid);
+            else
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente.");
+
             tx.commit();
 
             RemoteEventObservable.getInstance().notifyObservers(RemoteUpdatable.KID);

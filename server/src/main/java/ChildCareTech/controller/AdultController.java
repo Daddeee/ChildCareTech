@@ -40,7 +40,7 @@ public class AdultController {
             if(personDAO.read(paramMap).isEmpty())
                 adultDAO.create(adult);
             else
-                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente");
+                throw new AddFailedException("Una persona con lo stesso codice fiscale è già presente.");
 
             tx.commit();
 
