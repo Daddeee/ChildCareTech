@@ -4,6 +4,12 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.assemblers.*;
 
+/**
+ * A facade to access all entity factories.
+ * <p>
+ * Every method in this class takes as input a DTO and returns the corresponding entity. Relationships are
+ * also loaded as long as they are initialized (not null).
+ */
 public class EntityFactoryFacade {
     public static Event getEntity(EventDTO dto){
         EventEntityFactory eventDTOEntityAssembler = new EventEntityFactory();
