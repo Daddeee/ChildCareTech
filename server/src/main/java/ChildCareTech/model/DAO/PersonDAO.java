@@ -4,6 +4,9 @@ import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
+/**
+ * A Data Access Object that operates with Person entities.
+ */
 public class PersonDAO extends AbstractGenericDAO<Person, Integer> {
     public PersonDAO() {
         super(Person.class);

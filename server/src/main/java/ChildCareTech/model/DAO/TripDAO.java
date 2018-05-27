@@ -4,6 +4,9 @@ import ChildCareTech.model.entities.Trip;
 import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
+/**
+ * A Data Access Object that operates with Trip entities.
+ */
 public class TripDAO extends AbstractGenericDAO<Trip, Integer> {
     public TripDAO() {
         super(Trip.class);

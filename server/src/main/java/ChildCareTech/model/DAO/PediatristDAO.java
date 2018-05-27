@@ -4,6 +4,9 @@ import ChildCareTech.model.entities.Pediatrist;
 import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
+/**
+ * A Data Access Object that operates with Pediatrist entities.
+ */
 public class PediatristDAO extends AbstractGenericDAO<Pediatrist, Integer> {
     public PediatristDAO() {
         super(Pediatrist.class);

@@ -8,11 +8,22 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * A Data Access Object that operates with Bus entities.
+ */
 public class BusDAO extends AbstractGenericDAO<Bus, Integer> {
     public BusDAO() {
         super(Bus.class);
     }
 
+    /**
+     * Get all buses that are available for use in the provided trip.
+     * For a bus to be available, it must not be already associated to a trip that
+     * overlaps temporally with the provided trip.
+     *
+     * @param trip the trip for which buses are searched.
+     * @return a List containing all available bus entities.
+     */
     public List<Bus> getAvailableBuses(Trip trip){
         Query<Bus> query = session.createQuery(
                 "from Bus " +

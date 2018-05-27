@@ -9,11 +9,20 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * A Data Access Object that operates with Food entities.
+ */
 public class FoodDAO extends AbstractGenericDAO<Food, Integer> {
     public FoodDAO() {
         super(Food.class);
     }
 
+    /**
+     * Get all foods to which a person is not yet allergic.
+     *
+     * @param person the person for which foods are searched.
+     * @return a List containing all foods entities except the ones to which the person is already allergic.
+     */
     public List<Food> getAvailableFoods(Person person){
         Query<Food> query = session.createQuery(
                 "from Food " +
@@ -25,6 +34,12 @@ public class FoodDAO extends AbstractGenericDAO<Food, Integer> {
         return query.getResultList();
     }
 
+    /**
+     * Get all foods that are not yet used as ingredients for the provided dish.
+     *
+     * @param dish the dish for which foods are searched.
+     * @return a List containing all available food entities.
+     */
     public List<Food> getAvailableFoods(Dish dish){
         Query<Food> query = session.createQuery(
                 "from Food " +

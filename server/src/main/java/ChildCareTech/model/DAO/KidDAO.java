@@ -8,11 +8,22 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * A Data Access Object that operates with Kid entities.
+ */
 public class KidDAO extends AbstractGenericDAO<Kid, Integer> {
     public KidDAO() {
         super(Kid.class);
     }
 
+    /**
+     * Get all kids that can partecipate in the provided trip.
+     * For a kid to be available, it must not be already associated to a trip that
+     * overlaps temporally with the provided trip.
+     *
+     * @param trip the trip for which kids are searched.
+     * @return a List containing all available kid entities.
+     */
     public List<Kid> getAvailableKids(Trip trip){
         Query<Kid> query = session.createQuery(
                 "from Kid " +

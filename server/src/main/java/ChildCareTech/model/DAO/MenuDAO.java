@@ -4,6 +4,9 @@ import ChildCareTech.model.entities.Menu;
 import ChildCareTech.model.AbstractGenericDAO;
 import org.hibernate.Hibernate;
 
+/**
+ * A Data Access Object that operates with Menu entities.
+ */
 public class MenuDAO extends AbstractGenericDAO<Menu, Integer> {
     public MenuDAO() {
         super(Menu.class);
