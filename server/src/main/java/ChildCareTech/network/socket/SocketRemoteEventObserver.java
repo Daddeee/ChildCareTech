@@ -65,4 +65,9 @@ public class SocketRemoteEventObserver implements RemoteEventObserver {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public int getPort() {
+        return socket.getPort();
+    }
 }

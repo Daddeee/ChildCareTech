@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Trip Trip} entity.
+ */
 public class TripDTO implements Serializable {
     private int id;
     private String meta;

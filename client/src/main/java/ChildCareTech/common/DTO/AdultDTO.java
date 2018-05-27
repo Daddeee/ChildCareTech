@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Adult Adult} entity.
+ */
 public class AdultDTO implements Serializable {
     private int id;
     private PersonDTO person;

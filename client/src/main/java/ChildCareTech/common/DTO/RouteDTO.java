@@ -4,6 +4,9 @@ import ChildCareTech.common.EventStatus;
 
 import java.io.Serializable;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Route Route} entity.
+ */
 public class RouteDTO implements Serializable {
     private int id;
     private TripDTO trip;

@@ -1,5 +1,8 @@
 package ChildCareTech.common;
 
+/**
+ * Defines different updatable sections.
+ */
 public enum RemoteUpdatable {
     KID,
     ADULT,
