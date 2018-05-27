@@ -6,6 +6,9 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class provides a Data Transfer Object encapsulation of the workday generation request utility.
+ */
 public class DayGenerationSettingsDTO implements Serializable {
     private int weekNumber;
     private LocalTime entryTime;

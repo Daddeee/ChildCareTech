@@ -3,7 +3,9 @@ package ChildCareTech.common.DTO;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
-
+/**
+ * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Food Food} entity.
+ */
 public class FoodDTO implements Serializable {
     private int id;
     private String name;

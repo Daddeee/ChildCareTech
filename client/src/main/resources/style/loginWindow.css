@@ -1,19 +1,42 @@
 .root {
-    -fx-background-color:   transparent;
-            /*linear-gradient(#F1F1F1 50%, #DEDEDE 100%);*/
+    -fx-background-color:   linear-gradient(#ffffff, #e6e9ed);
+
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-text-fill: #FFFFFF;
 }
 
 #loginButton {
-    -fx-border-radius: 10 10 10 10;
-    -fx-background-radius: 10 10 10 10;
+    -fx-background-color: linear-gradient(#4FC1E9, #3BAFDA);
+}
+#loginButton:pressed {
+    -fx-background-color: linear-gradient(#3BAFDA, #4FC1E9);
 }
 
-#userNameField {
+#registerButton {
+    -fx-background-color: linear-gradient(#48CFAD, #37BC98);
+}
+#registerButton:pressed {
+    -fx-background-color: linear-gradient(#37BC98, #48CFAD);
+}
+
+.combo-box {
+    -fx-background-color: linear-gradient(#CCD1D9, #C5CBD3);
+}
+
+.combo-box .list-view .list-cell{
+    -fx-background-color: linear-gradient(#E6E9ED, #D3D8DF);
+}
+
+TextField {
     -fx-border-radius: 3 10 10 3;
     -fx-background-radius: 3 10 10 3;
 }
 
-#passwordField {
+PasswordField {
     -fx-border-radius: 3 10 10 3;
     -fx-background-radius: 3 10 10 3;
 }

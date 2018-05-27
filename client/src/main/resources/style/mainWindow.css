@@ -1,0 +1,52 @@
+.root {
+    -fx-background-color:   linear-gradient(#ffffff, #e6e9ed);
+
+}
+
+.button {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40px 40px;
+}
+
+#userAccountButton {
+    -fx-background-color: linear-gradient(#FFCE54, #FFC533);
+    -fx-background-image: url("../image/ic_account_circle_white_24dp.png");
+    -fx-border-color: linear-gradient(#FFCE54, #FFC533);
+}
+#userAccountButton:pressed {
+    -fx-background-color: linear-gradient(#FFC533, #FFCE54);
+    -fx-border-color: linear-gradient(#FFC533, #FFCE54);
+}
+
+#kidAnagraphicsButton {
+   -fx-background-color: linear-gradient(#A0D468, #8ECD4C);
+   -fx-background-image: url("../image/ic_child_care_white_24dp.png");
+   -fx-border-color: linear-gradient(#A0D468, #A0D468);
+}
+#kidAnagraphicsButton:pressed {
+    -fx-background-color: linear-gradient(#8ECD4C, #A0D468);
+    -fx-border-color: linear-gradient(#8ECD4C, #A0D468);
+}
+
+#adultAnagraphicsButton {
+     -fx-background-color: linear-gradient(#4FC1E9, #32F0E7);
+     -fx-background-image: url("../image/ic_people_white_24dp.png");
+     -fx-border-color: linear-gradient(#4FC1E9, #32F0E7);
+}
+#adultAnagraphicsButton:pressed {
+     -fx-background-color: linear-gradient(#2BEEE4, #32F0E7);
+     -fx-border-color: linear-gradient(#2BEEE4, #32F0E7);
+}
+
+#canteenButton {
+    -fx-background-color: linear-gradient(#FC6E51, #FC421D);
+    -fx-background-image: url("../image/ic_local_dining_white_24dp.png");
+    -fx-border-color: linear-gradient(#FC6E51, #FC421D);
+}
+#canteenButton:pressed {
+    -fx-background-color: linear-gradient(#FC421D, #FC6E51);
+    -fx-border-color: linear-gradient(#FC421D, #FC6E51);
+}

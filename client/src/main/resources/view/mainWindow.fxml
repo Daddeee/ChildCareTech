@@ -22,12 +22,12 @@
          <children>
             <VBox prefHeight="700.0" prefWidth="60.0" GridPane.hgrow="SOMETIMES" GridPane.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="userAccountButton" mnemonicParsing="false" onAction="#userAccountButtonAction" prefHeight="60.0" prefWidth="60.0" text="user" />
+                  <Button fx:id="userAccountButton" mnemonicParsing="false" onAction="#userAccountButtonAction" prefHeight="60.0" prefWidth="60.0" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="kidAnagraphicsButton" mnemonicParsing="false" onAction="#kidAnagraphicsButtonAction" prefHeight="60.0" prefWidth="60.0" text="kids" />
-                        <Button fx:id="adultAnagraphicsButton" mnemonicParsing="false" onAction="#adultAnagraphicsButtonAction" prefHeight="60.0" prefWidth="60.0" text="adults" />
-                        <Button fx:id="canteenButton" mnemonicParsing="false" onAction="#canteenButtonAction" prefHeight="60.0" prefWidth="60.0" text="canteen" />
+                        <Button fx:id="kidAnagraphicsButton" mnemonicParsing="false" onAction="#kidAnagraphicsButtonAction" prefHeight="60.0" prefWidth="60.0" />
+                        <Button fx:id="adultAnagraphicsButton" mnemonicParsing="false" onAction="#adultAnagraphicsButtonAction" prefHeight="60.0" prefWidth="60.0" />
+                        <Button fx:id="canteenButton" mnemonicParsing="false" onAction="#canteenButtonAction" prefHeight="60.0" prefWidth="60.0" />
                         <Button fx:id="tripsButton" mnemonicParsing="false" onAction="#tripsButtonAction" prefHeight="60.0" prefWidth="60.0" text="trips" />
                         <Button fx:id="eventsButton" mnemonicParsing="false" onAction="#eventsButtonAction" prefHeight="60.0" prefWidth="60.0" text="events" />
                      </children>

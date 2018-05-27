@@ -13,23 +13,43 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
+/**
+ * This class provides a window management service for pop-up or value input oriented windows.
+ */
 public class AccessorWindowService {
+
     protected TableWindowControllerInterface tableWindowControllerInterface;
     protected Stage stage;
     protected FXMLLoader loader;
 
+    /**
+     * This constructor creates a new stage,  initialize its modality to APPLICATION_MODAL and locks its dimensions.
+     * @param tableWindowControllerInterface Should be the controller of a window that need to show pop-ups or value
+     *                                       window with the instance of this class.
+     */
     public AccessorWindowService(TableWindowControllerInterface tableWindowControllerInterface) {
         this.tableWindowControllerInterface = tableWindowControllerInterface;
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
     }
+
+    /**
+     * Sets the modality of the window to non blocking for the others application's windows.
+     */
     public void setNonLockingModality() {
         stage.initModality(Modality.NONE);
     }
+    /**
+     *Calls the refreshTable method of the TableWindowControllerInterface controller passed as parameter in the constructor.
+     */
     public void refreshTable() {
         tableWindowControllerInterface.refreshTable();
     }
+
+    /**
+     * Closes the accessor window service instance's stage.
+     */
     public void close() {
         stage.close();
     }
@@ -47,9 +67,11 @@ public class AccessorWindowService {
     public double getWidth() {
         return stage.getWidth();
     }
-    private void setScene(Scene scene) {
-        stage.setScene(scene);
-    }
+
+    /**
+     * Sets a method that will be called by the closing of the stage.
+     * @param eventEventHandler the eventHandler that contains the method.
+     */
     public void setOnCloseAction(EventHandler<WindowEvent> eventEventHandler) {
         stage.setOnCloseRequest(eventEventHandler);
     }
@@ -177,6 +199,13 @@ public class AccessorWindowService {
         ((TripPresenceRegistrationController)loader.getController()).initData(tripDTO, routeDTO);
         ActiveControllersList.addPresenceRegistrationControllersList(loader.getController());
     }
+
+    /**
+     * Loads the scene from relatives fxml's and css' file paths, stores it in the stage and shows the stage.
+     * @param fxmlPath is the fxml's file path.
+     * @param cssPath is the css' file path.
+     * @throws IOException in case of incorrect fxml's or css' file path.
+     */
     protected void loadWindow(String fxmlPath, String cssPath) throws IOException{
         loader = new FXMLLoader(AccessorWindowService.class.getResource(fxmlPath));
         try {

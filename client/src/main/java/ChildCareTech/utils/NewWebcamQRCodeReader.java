@@ -12,6 +12,9 @@ import javafx.application.Platform;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * This class provides a simple QR code reader (data stream and pane) using WebcamThread and implementing a workaround for MacOS iSight camera compatibility.
+ */
 public class NewWebcamQRCodeReader extends Thread {
 
     private Result result;
@@ -21,6 +24,13 @@ public class NewWebcamQRCodeReader extends Thread {
     private static boolean running;
     private CheckPointControllerInterface controller;
 
+    /**
+     * This controller creates a new webcamThread and tried to get the default device's camera access.
+     * (Default resolution is set to QVGA)
+     * @param controller should be the controller that needs the access to the camera and manages the pane
+     *                  that contains the camera.
+     * @throws CameraBusyException in case the camera is already in use.
+     */
     public NewWebcamQRCodeReader(CheckPointControllerInterface controller) throws CameraBusyException {
         if(running)
             throw new CameraBusyException("camera already in use");
@@ -31,6 +41,11 @@ public class NewWebcamQRCodeReader extends Thread {
         webcamThread.start();
     }
 
+    /**
+     * If a valid QR code is read call the controller's saveCheckPoint method with the read string code
+     * as parameter.
+     * Should never be called from outside the class.
+     */
     @Override
     public void run() {
 
@@ -67,6 +82,13 @@ public class NewWebcamQRCodeReader extends Thread {
         } while (running);
         System.out.print("exiting");
     }
+
+    /**
+     *Store the webcam instance, creates a pane to contain it, calls the controller's setPane method with the pane as
+     * parameter and starts the class' thread.
+     * Should never be called except from WebcamThread.
+     * @param webcam the webcam instance.
+     */
     public void setWebcam(Webcam webcam) {
         this.webcam = webcam;
         panel = new WebcamPanel(webcam);
@@ -74,6 +96,11 @@ public class NewWebcamQRCodeReader extends Thread {
 
         this.start();
     }
+
+    /**
+     * Tries to shut the webcam thread down and stop the class' thread from run.
+     * Should be called before closing the checkPoint controller to free the camera usage.
+     */
     public void shutDown() {
         if(webcam.isOpen()) webcam.close();
         running = false;

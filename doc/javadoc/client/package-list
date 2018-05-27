@@ -1,0 +1,12 @@
+ChildCareTech
+ChildCareTech.common
+ChildCareTech.common.DTO
+ChildCareTech.common.exceptions
+ChildCareTech.controller
+ChildCareTech.network
+ChildCareTech.network.RMI
+ChildCareTech.network.socket
+ChildCareTech.services
+ChildCareTech.services.ObservableDTOs
+ChildCareTech.utils
+ChildCareTech.utils.generation

@@ -87,7 +87,7 @@ public class MainWindowController implements MainWindowControllerInterface {
     public void clearInstance() {
         containedWindowService.clearInstance();
     }
-    public void clearChildInstaces() { }
+
     public void setMainWindowService(MainWindowService mainWindowService) {
         this.mainWindowService = mainWindowService;
     }

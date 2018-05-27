@@ -5,7 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Set;
-
+/**
+ * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.WorkDay WorkDay} entity.
+ */
 public class WorkDayDTO implements Serializable {
     private int id;
     private LocalDate date;

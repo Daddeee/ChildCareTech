@@ -5,6 +5,25 @@ import ChildCareTech.controller.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides a service for maintenance lists of currently used or active application's windows.
+ * The purpose is to simplify the remote request for window refresh in case of multiple clients scenario.
+ * For every one of this windows controller class are provided the add, the remove and the get method for add and remove a
+ * controller to the relative list and for get the entire list:
+ * <p>
+ *     NewKidAnagraphicsController
+ *     NewAdultAnagraphicsController
+ *     NewTripListController
+ *     NewCanteenManagerController
+ *     NewWorkDayController
+ *     NewBusController
+ *     FoodsListController
+ *     NewCanteenesListController
+ *     KitchenController
+ *     EventReportController
+ *     TripPresenceRegistrationController
+ *     CodeInputWindowController
+ */
 public class ActiveControllersList {
 
     private static List<NewKidAnagraphicsController> kidAnagraphicControllersList = new ArrayList<>();

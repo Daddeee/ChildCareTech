@@ -80,6 +80,7 @@ public class ResourcesPaths {
     private final static String alertWindowCSSPath = "/style/alertWindow.css";
     private final static String tripPresenceRegistrationFXMLPath = "/view/tripPresenceRegistrationWindow.fxml";
     private final static String tripPresenceRegistrationCSSPath = "/style/tripPresenceRegistrationWindow.css";
+    private final static String commonStyleCSSPath = "/style/commonStyle.css";
 
     public static String getLoginFXMLPath() { return loginFXMLPath; }
     public static String getLoginCSSPath() { return loginCSSPath; }
@@ -161,6 +162,7 @@ public class ResourcesPaths {
     public static String getAlertWindowCSSPath() { return alertWindowCSSPath; }
     public static String getTripPresenceRegistrationFXMLPath() { return tripPresenceRegistrationFXMLPath; }
     public static String getTripPresenceRegistrationCSSPath() { return tripPresenceRegistrationCSSPath; }
+    public static String getCommonStyleCSSPath() { return commonStyleCSSPath; }
 
     //potevo fare delle macro ma sono un babbo
 }

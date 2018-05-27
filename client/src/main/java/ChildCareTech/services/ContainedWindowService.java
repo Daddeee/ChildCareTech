@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides a window management service for the panes that will be loaded in other container windows.
+ */
+
 public class ContainedWindowService {
 
     private AnchorPane anchorPane;
@@ -28,12 +32,20 @@ public class ContainedWindowService {
 
     private TableWindowControllerInterface active;
 
+    /**
+     * This constructor sets the pane passed as parameter as the container and call methods for loading.
+     * @param anchorPane the pane that will be used as container.
+     */
     public ContainedWindowService(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
         loadFXMLLoaders();
         loadNodes();
     }
 
+    /**
+     * Loads the kids anagraphic node into the container node and sets its controller as the active window.
+     * Refreshes the kids anagraphic table.
+     */
     public void loadKidAnagraphics() {
         if(active != null)
             actives.remove(active);
@@ -44,6 +56,10 @@ public class ContainedWindowService {
         active.refreshTable();
         actives.add(active);
     }
+    /**
+     * Loads the adults anagraphic node into the container node and sets its controller as the active window.
+     * Refreshes the adults anagraphic table.
+     */
     public void loadAdultAnagraphics() {
         if(active != null)
             actives.remove(active);
@@ -54,6 +70,10 @@ public class ContainedWindowService {
         active.refreshTable();
         actives.add(active);
     }
+    /**
+     * Loads the trips list node into the container node and sets its controller as the active window.
+     * Refreshes the trips list table.
+     */
     public void loadTripList() {
         if(active != null)
             actives.remove(active);
@@ -64,6 +84,10 @@ public class ContainedWindowService {
         active.refreshTable();
         actives.add(active);
     }
+    /**
+     * Loads the canteen manager node into the container node and sets its controller as the active window.
+     * Refreshes the canteen manager table.
+     */
     public void loadCanteenManager() {
         if(active != null)
             actives.remove(active);
@@ -74,6 +98,10 @@ public class ContainedWindowService {
         active.refreshTable();
         actives.add(active);
     }
+    /**
+     * Loads the workday manager node into the container node and sets its controller as the active window.
+     * Refreshes the workday manager table.
+     */
     public void loadWorkDayManager() {
         if(active != null)
             actives.remove(active);
@@ -84,22 +112,48 @@ public class ContainedWindowService {
         active.refreshTable();
         actives.add(active);
     }
-
-    public void anchorChild(AnchorPane anchorPane, Node node) {
+    private void anchorChild(AnchorPane anchorPane, Node node) {
         anchorPane.setBottomAnchor(node, 0.0);
         anchorPane.setLeftAnchor(node, 0.0);
         anchorPane.setTopAnchor(node, 0.0);
         anchorPane.setRightAnchor(node, 0.0);
     }
 
+    /**
+     * @return the controller for the kids anagraphic window
+     */
     public NewKidAnagraphicsController getKidAnagraphicsController() {
         return kidAnagraphicsLoader.getController();
     }
+    /**
+     * @return the controller for the adults anagraphic window
+     */
     public NewAdultAnagraphicsController getAdultAnagraphicsController() { return adultAnagraphicsLoader.getController(); }
+    /**
+     * @return the controller for the trips list window
+     */
     public NewTripListController getTripListController() { return tripListLoader.getController(); }
+    /**
+     * @return the controller for the canteen manager window
+     */
     public NewCanteenManagerController getCanteenManagerController() { return canteenManagerLoader.getController(); }
+    /**
+     * @return the controller for the workday manager window
+     */
     public NewWorkDayController getWorkDayController() { return workDayManagerLoader.getController(); }
 
+    /**
+     * Creates the loaders from relative fxml's and css' file paths for:
+     * <p>
+     *     kid's anagraphics
+     *     adult's anagraphics
+     *     trips list
+     *     canteens manager
+     *     workday manager
+     * </p>
+     *
+     * Should be called once from the constructor.
+     */
     private void loadFXMLLoaders() {
         this.kidAnagraphicsLoader = new FXMLLoader(ContainedWindowService.class.getResource(ResourcesPaths.getKidAnagraphicsFXMLPath()));
         this.adultAnagraphicsLoader = new FXMLLoader(ContainedWindowService.class.getResource(ResourcesPaths.getAdultAnagraphicsFXMLPath()));
@@ -107,6 +161,11 @@ public class ContainedWindowService {
         this.canteenManagerLoader = new FXMLLoader(ContainedWindowService.class.getResource(ResourcesPaths.getCanteenManagerFXMLPath()));
         this.workDayManagerLoader = new FXMLLoader(ContainedWindowService.class.getResource(ResourcesPaths.getWorkDayManagerFXMLPath()));
     }
+
+    /**
+     * Stores the result of the loaders' load into relative Node variables.
+     * Should be called once from the constructor.
+     */
     private void loadNodes() {
         try {
             kidAnagraphicsNode = kidAnagraphicsLoader.load();
@@ -127,6 +186,10 @@ public class ContainedWindowService {
         }
     }
 
+    /**
+     * Removes the controllers' instances from controller lists used for remote refresh purposes.
+     * Should be called before deleting the instance of ContainedWindowService.
+     */
     public void clearInstance() {
 
         ActiveControllersList.removeKidAnagraphicsController(this.kidAnagraphicsLoader.getController());
@@ -139,6 +202,9 @@ public class ContainedWindowService {
             actives.remove(active);
     }
 
+    /**
+     * Calls the refreshTable method for all controllers saved.
+     */
     public static void refreshAllTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
         tables.addAll(ActiveControllersList.getKidAnagraphicControllersList());
@@ -158,26 +224,42 @@ public class ContainedWindowService {
             tableWindowControllerInterface.notifyUpdate();
         }
     }
+
+    /**
+     * Calls the refreshTable method for all kids anagraphics windows except for the ones active in the foreground.
+     */
     public static void refreshKidTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
         tables.addAll(ActiveControllersList.getKidAnagraphicControllersList());
         refreshTables(tables);
     }
+    /**
+     * Calls the refreshTable method for all adults anagraphics windows except for the ones active in the foreground.
+     */
     public static void refreshAdultTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
         tables.addAll(ActiveControllersList.getAdultAnagraphicControllersList());
         refreshTables(tables);
     }
+    /**
+     * Calls the refreshTable method for all trips lists windows except for the ones active in the foreground.
+     */
     public static void refreshTripsTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
         tables.addAll(ActiveControllersList.getTripsListControllersList());
         refreshTables(tables);
     }
+    /**
+     * Calls the refreshTable method for all canteen managers windows except for the ones active in the foreground.
+     */
     public static void refreshCanteenTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
         tables.addAll(ActiveControllersList.getCanteenManagerControllersList());
         refreshTables(tables);
     }
+    /**
+     * Calls the refreshTable method for all workday managers windows except for the ones active in the foreground.
+     */
     public static void refreshWorkDayTables() {
         List<TableWindowControllerInterface> tables = new ArrayList<>();
         tables.addAll(ActiveControllersList.getWorkDayManagerControllersList());
