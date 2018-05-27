@@ -3,7 +3,9 @@ package ChildCareTech.utils;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.EventStatus;
-
+/**
+ * This class is used for simplify the {@link MealDTO MealDTO} instance's display in tables.
+ */
 public class TempMealData {
     private String day;
     private String entryTime;

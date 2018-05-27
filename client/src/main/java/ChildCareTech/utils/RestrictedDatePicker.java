@@ -7,6 +7,10 @@ import javafx.util.Callback;
 
 import java.time.LocalDate;
 
+/**
+ * This class provides an extension of the {@link DatePicker DatePicker} class for restrict selectable
+ * days to the days following the current day (current day included).
+ */
 public class RestrictedDatePicker extends DatePicker {
     private LocalDate minDate = LocalDate.MIN;
     private LocalDate maxDate = LocalDate.MAX;

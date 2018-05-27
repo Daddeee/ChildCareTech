@@ -7,7 +7,10 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * This class provides a wrapper for the {@link StaffDTO StaffDTO} class.
+ * The purpose is to simplify StaffDTO instances' display in tables.
+ */
 public class ObservableStaff extends StaffDTO implements ObservablePersonInterface<StaffDTO>{
     public ObservableStaff(StaffDTO staffDTO) {
         super(staffDTO.getId(), staffDTO.getPerson(), staffDTO.getContacts());

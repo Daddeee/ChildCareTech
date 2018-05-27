@@ -5,7 +5,9 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 
 import java.util.Set;
-
+/**
+ * This class is used for simplify the {@link BusDTO BusDTO} instance's capacity management in tables.
+ */
 public class BusDTOWithResidualCapacity extends BusDTO {
     private int residualCapacity;
 

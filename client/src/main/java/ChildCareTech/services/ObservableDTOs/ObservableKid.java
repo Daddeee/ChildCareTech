@@ -8,7 +8,10 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * This class provides a wrapper for the {@link KidDTO KidDTO} class.
+ * The purpose is to simplify KidDTO instances' display in tables.
+ */
 public class ObservableKid extends KidDTO {
     private static final StringProperty EMPTY_FISCAL_CODE = new SimpleStringProperty("-");
 

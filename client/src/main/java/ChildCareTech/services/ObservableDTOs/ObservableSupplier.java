@@ -7,7 +7,10 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * This class provides a wrapper for the {@link SupplierDTO SupplierDTO} class.
+ * The purpose is to simplify SupplierDTO instances' display in tables.
+ */
 public class ObservableSupplier extends SupplierDTO implements ObservablePersonInterface<SupplierDTO>{
     public ObservableSupplier(SupplierDTO supplierDTO) {
         super(supplierDTO.getId(), supplierDTO.getPerson(), supplierDTO.getContacts(), supplierDTO.getSupplies());

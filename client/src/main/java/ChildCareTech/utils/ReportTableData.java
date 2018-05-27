@@ -3,6 +3,9 @@ package ChildCareTech.utils;
 import ChildCareTech.common.DTO.CheckpointDTO;
 import ChildCareTech.common.DTO.KidDTO;
 
+/**
+ * This class is used for simplify the {@link CheckpointDTO CheckPointDTO} instance's display in tables.
+ */
 public class ReportTableData {
     private String fiscalCode;
     private String firstName;

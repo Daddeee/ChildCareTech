@@ -4,7 +4,9 @@ import ChildCareTech.common.DTO.EventDTO;
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
-
+/**
+ * This class is used for simplify the {@link RouteDTO RouteDTO} instance's display in tables.
+ */
 public class TempRouteData{
     private int id;
     public int routeNumber;

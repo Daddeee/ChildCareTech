@@ -3,7 +3,7 @@ package ChildCareTech.controller;
 import javafx.event.ActionEvent;
 
 /**
- * This interface should be implemented by those classes that contain a refreshable node such as tableViews, listViews etc
+ * This interface should be implemented by those controllers that contain a refreshable node such as tableViews, listViews etc
  * and need to have accessors windows.
  * Provides refresh and update notification requests to accessors window controllers.
  */

@@ -7,7 +7,10 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * This class provides a wrapper for the {@link PediatristDTO PediatristDTO} class.
+ * The purpose is to simplify PediatristDTO instances' display in tables.
+ */
 public class ObservablePediatrist extends PediatristDTO implements ObservablePersonInterface<PediatristDTO>{
     public ObservablePediatrist(PediatristDTO pediatristDTO) {
         super(pediatristDTO.getId(), pediatristDTO.getPerson(), pediatristDTO.getContacts(), pediatristDTO.getKids());

@@ -1,7 +1,9 @@
 package ChildCareTech.utils;
 
 import ChildCareTech.common.DTO.TripPartecipationDTO;
-
+/**
+ * This class is used for simplify the {@link TripPartecipationDTO TripPartecipationDTO} instance's display in tables.
+ */
 public class TripPartecipationData {
     private TripPartecipationDTO tripPartecipationDTO;
     private String fiscalCode;

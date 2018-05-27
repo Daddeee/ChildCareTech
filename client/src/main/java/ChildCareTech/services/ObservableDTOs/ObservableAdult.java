@@ -9,6 +9,10 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class provides a wrapper for the {@link AdultDTO AdultDTO} class.
+ * The purpose is to simplify AdultDTO instances' display in tables.
+ */
 public class ObservableAdult extends AdultDTO implements ObservablePersonInterface<AdultDTO>{
     public ObservableAdult(AdultDTO adultDTO) {
         super(adultDTO.getId(), adultDTO.getPerson(), adultDTO.getContacts());
