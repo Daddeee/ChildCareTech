@@ -16,6 +16,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
+/**
+ * Encapsulates all the "RMI call" logic and calls the controllers to handle the business logic.
+ * Since RMI resolves remote invocations automatically, the methods in this class are simply a call to the corresponding controller.
+ */
 public class RMIUserSessionFacade extends UnicastRemoteObject implements UserSessionFacade {
     private User user;
     private MenuController menuController;
@@ -36,6 +40,10 @@ public class RMIUserSessionFacade extends UnicastRemoteObject implements UserSes
     private TripPartecipationController tripPartecipationController;
     private WorkDayGenerationController workDayGenerationController;
 
+    /**
+     * @param user the user holding this session.
+     * @throws RemoteException
+     */
     public RMIUserSessionFacade(User user) throws RemoteException {
         this.user = user;
         this.menuController = new MenuController();

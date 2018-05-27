@@ -14,6 +14,10 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class is used to parse socket requests and call the right controller to handle business logic.
+ * This class should handle every method specified in the {@link ChildCareTech.common.UserSessionFacade UserSessionFacade} interface.
+ */
 public class SocketProtocol {
     private HashMap<SocketRequestType, SocketRequestHandler> methodMap;
     private SocketUserSessionFacade socketUserSessionFacade;
@@ -36,6 +40,9 @@ public class SocketProtocol {
     private WorkDayController workDayController;
     private WorkDayGenerationController workDayGenerationController;
 
+    /**
+     * @param socketUserSessionFacade the session holding this protocol instance.
+     */
     public SocketProtocol(SocketUserSessionFacade socketUserSessionFacade) {
         this.methodMap = new HashMap<>();
         this.socketUserSessionFacade = socketUserSessionFacade;
@@ -61,6 +68,20 @@ public class SocketProtocol {
         loadProtocol();
     }
 
+    /**
+     * Handle a particular socket request.
+     * The handle process goes on by steps:
+     * <ul>
+     *   <li>the request type is parsed</li>
+     *   <li>the request parameters are parsed in sequence</li>
+     *   <li>the right controller is invoked with provided parameters</li>
+     *   <li>get response from the controller</li>
+     *   <li>the response is encapsulated and returned</li>
+     * </ul>
+     *
+     * @param socketRequest the request to handle
+     * @return the corresponding socket response
+     */
     public SocketResponse handleRequest(SocketRequest socketRequest){
         return methodMap.get(socketRequest.requestType).handle(socketRequest);
     }
@@ -1401,7 +1422,7 @@ public class SocketProtocol {
         this.methodMap.put(SocketRequestType.SAVE_TRIP_CHECKPOINT, this::handleSaveTripCheckpoint);
     }
 
-    public interface SocketRequestHandler {
+    private interface SocketRequestHandler {
         SocketResponse handle(SocketRequest request);
     }
 }

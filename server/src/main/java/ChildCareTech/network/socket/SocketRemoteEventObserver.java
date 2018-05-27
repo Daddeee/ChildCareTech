@@ -9,15 +9,25 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
+/**
+ * Server side of a socket remote event observer.
+ */
 public class SocketRemoteEventObserver implements RemoteEventObserver {
+    /**
+     * This map holds all the socket remote event observers currently active.
+     */
     public static HashMap<String, SocketRemoteEventObserver> socketRemoteEventObserversMap = new HashMap<>();
 
-    private int socketPort;
     private Socket socket;
     private ObjectOutputStream out;
 
+    /**
+     * Connects to the client side of the remote event observer on the provided port.
+     * <p>
+     * TODO: In real usages, both port and ip address must be provided to create a connection.
+     * @param socketPort the provided port.
+     */
     public SocketRemoteEventObserver(int socketPort){
-        this.socketPort = socketPort;
         try{
             this.socket = new Socket("localhost", socketPort);
             this.out = new ObjectOutputStream(socket.getOutputStream());
@@ -26,6 +36,12 @@ public class SocketRemoteEventObserver implements RemoteEventObserver {
         }
     }
 
+    /**
+     * Sends an update request to the client side.
+     *
+     * @param updatable specify which part must be updated.
+     * @throws RemoteException
+     */
     @Override
     public void update(RemoteUpdatable updatable) throws RemoteException {
         try {
@@ -36,6 +52,10 @@ public class SocketRemoteEventObserver implements RemoteEventObserver {
         }
     }
 
+    /**
+     * Shut down this observer.
+     * @throws RemoteException
+     */
     @Override
     public void unexport() throws RemoteException {
         try {

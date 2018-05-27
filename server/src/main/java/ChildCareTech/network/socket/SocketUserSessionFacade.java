@@ -9,7 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
+/**
+ * This class is used to encapsulate network logic necessary to handle socket requests from a specific client and send back response messages.
+ * The class uses a {@link SocketProtocol} instance to map the requests on the correct controller.
+ */
 public class SocketUserSessionFacade implements Runnable {
     private Socket socket;
     private ObjectOutputStream out;
@@ -18,6 +21,12 @@ public class SocketUserSessionFacade implements Runnable {
     private User user;
     private volatile boolean running;
 
+    /**
+     * Initialize all stream and protocols necessary to receive requests and send responses.
+     *
+     * @param socket the socket on which to communicate.
+     * @throws IOException
+     */
     public SocketUserSessionFacade(Socket socket) throws IOException {
         this.socket = socket;
         this.out = new ObjectOutputStream(socket.getOutputStream());
@@ -26,6 +35,11 @@ public class SocketUserSessionFacade implements Runnable {
         this.user = null;
         this.running = true;
     }
+
+    /**
+     * The session continuously waits for socket requests, parse them and handle them using the {@link SocketProtocol protocol},
+     * then send back responses.
+     */
     public void run() {
         while (running) {
             try {
@@ -38,6 +52,9 @@ public class SocketUserSessionFacade implements Runnable {
         }
     }
 
+    /**
+     * Shut down the session.
+     */
     public void close() {
         try {
             this.running = false;
@@ -50,10 +67,16 @@ public class SocketUserSessionFacade implements Runnable {
         }
     }
 
+    /**
+     * @return the user associated to the session.
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * @param user the user that will be associated to the session
+     */
     public void setUser(User user) {
         this.user = user;
     }
