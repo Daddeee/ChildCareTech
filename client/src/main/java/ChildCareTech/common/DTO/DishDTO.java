@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Dish Dish} entity.
+ * This class provides a Data Transfer Object encapsulation for Dish entity.
  */
 public class DishDTO implements Serializable {
     private int id;

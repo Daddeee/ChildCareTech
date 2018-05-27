@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Person Person} entity.
+ * This class provides a Data Transfer Object encapsulation for Person entity.
  */
 public class PersonDTO implements Serializable {
     private int id;

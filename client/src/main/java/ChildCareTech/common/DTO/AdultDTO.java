@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Adult Adult} entity.
+ * This class provides a Data Transfer Object encapsulation for Adult entity.
  */
 public class AdultDTO implements Serializable {
     private int id;

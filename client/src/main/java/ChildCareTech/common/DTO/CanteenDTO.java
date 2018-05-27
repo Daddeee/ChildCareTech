@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Canteen Canteen} entity.
+ * This class provides a Data Transfer Object encapsulation for Canteen entity.
  */
 public class CanteenDTO implements Serializable {
     private int id;

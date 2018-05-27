@@ -5,7 +5,7 @@ import ChildCareTech.common.EventStatus;
 import java.io.Serializable;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Meal Meal} entity.
+ * This class provides a Data Transfer Object encapsulation for Meal entity.
  */
 public class MealDTO implements Serializable {
     private int id;

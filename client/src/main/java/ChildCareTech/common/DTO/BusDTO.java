@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Bus Bus} entity.
+ * This class provides a Data Transfer Object encapsulation for Bus entity.
  */
 public class BusDTO implements Serializable {
     private int id;

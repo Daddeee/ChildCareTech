@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * This class provides a Data Transfer Object encapsulation for {@link ChildCareTech.model.entities.Menu Menu} entity.
+ * This class provides a Data Transfer Object encapsulation for Menu entity.
  */
 public class MenuDTO implements Serializable {
     private int id;

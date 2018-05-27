@@ -487,7 +487,6 @@ public interface UserSessionFacade extends Remote {
      * Save the provided dish in the database.
      *
      * @param dish the Data Transfer Object holding the new trip's data.
-     * @throws AddFailedException if entity saving goes wrong.
      * @throws RemoteException
      */
     void createDish(DishDTO dish) throws RemoteException;
@@ -496,7 +495,6 @@ public interface UserSessionFacade extends Remote {
      * Update the dish matching the identifier with the new data provided in the DTO.
      *
      * @param newDish the Data Transfer Object holding the new dish data and the identifier.
-     * @throws UpdateFailedException if entity updating goes wrong.
      * @throws RemoteException
      */
     void updateDish(DishDTO newDish) throws RemoteException;
@@ -527,7 +525,6 @@ public interface UserSessionFacade extends Remote {
      * Update the menu associated to the given meal with the data contained in the given DTO.
      *
      * @param meal the Data Transfer Object holding the meal's and the new menu's data.
-     * @throws UpdateFailedException if entity updating goes wrong.
      * @throws RemoteException
      */
     void updateMenu(MealDTO meal) throws RemoteException;

@@ -1,7 +1,7 @@
 package ChildCareTech.common;
 
 /**
- * Possible status for an event or anything that has a life cycle (eg: {@link ChildCareTech.model.entities.Meal Meal}, {@link ChildCareTech.model.entities.Trip Trip}, ...).
+ * Possible status for an event or anything that has a life cycle (eg: Meal, Trip, ...).
  */
 public enum EventStatus {
     /**
