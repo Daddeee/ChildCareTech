@@ -1398,6 +1398,7 @@ public class SocketProtocol {
         this.methodMap.put(SocketRequestType.ADD_CONTACT_TO_KID, this::handleAddContactToKid);
         this.methodMap.put(SocketRequestType.REMOVE_CONTACT_FROM_KID, this::handleRemoveContactFromKid);
         this.methodMap.put(SocketRequestType.VALIDATE_MENU, this::handleValidateMenu);
+        this.methodMap.put(SocketRequestType.SAVE_TRIP_CHECKPOINT, this::handleSaveTripCheckpoint);
     }
 
     public interface SocketRequestHandler {
