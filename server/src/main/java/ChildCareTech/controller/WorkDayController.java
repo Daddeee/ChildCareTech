@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.WorkDayDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.model.entities.WorkDay;
 import ChildCareTech.utils.CurrentWorkDayService;
@@ -14,9 +15,18 @@ import org.hibernate.Transaction;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with WorkDay entities.
+ */
 public class WorkDayController {
     public WorkDayController() {}
 
+    /**
+     * See {@link UserSessionFacade#getWorkDay(LocalDate)}
+     * @param date
+     * @return
+     */
     public WorkDayDTO doGetWorkDay(LocalDate date) {
         WorkDayDAO workDayDAO = new WorkDayDAO();
         WorkDay result = null;
@@ -41,6 +51,11 @@ public class WorkDayController {
         return DTOFactoryFacade.getDTO(result);
     }
 
+    /**
+     * See {@link UserSessionFacade#getMaxSavedDate()}
+     *
+     * @return
+     */
     public LocalDate doGetMaxSavedDate() {
         LocalDate result = null;
         Transaction tx = null;
@@ -61,6 +76,11 @@ public class WorkDayController {
         return result;
     }
 
+    /**
+     * See {@link UserSessionFacade#getMinSavedDate()}
+     *
+     * @return
+     */
     public LocalDate doGetMinSavedDate() {
         LocalDate result = null;
         Transaction tx = null;
@@ -81,10 +101,18 @@ public class WorkDayController {
         return result;
     }
 
+    /**
+     * See {@link UserSessionFacade#getCurrentWorkDay()}
+     *
+     * @return
+     */
     public WorkDayDTO doGetCurrentWorkDay() {
         return DTOFactoryFacade.getDTO(CurrentWorkDayService.getCurrent());
     }
 
+    /**
+     * See {@link UserSessionFacade#triggerDailyScheduling()}
+     */
     public void doTriggerDailyScheduling() throws RemoteException {
         WorkDayDAO workDayDAO = new WorkDayDAO();
         WorkDay reloadedToday = null;

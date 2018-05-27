@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.EventType;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.model.DAO.CheckpointDAO;
 import ChildCareTech.model.DAO.EventDAO;
@@ -25,9 +26,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Checkpoint entities.
+ */
 public class CheckpointController {
     public CheckpointController() {}
 
+    /**
+     * See {@link UserSessionFacade#saveCheckpoint(String, EventDTO, LocalTime)}
+     *
+     * @param fiscalCode
+     * @param eventDTO
+     * @param time
+     * @throws CheckpointFailedException
+     */
     public void doSaveCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time) throws CheckpointFailedException {
         PersonDAO personDAO = new PersonDAO();
         Person person;
@@ -74,6 +87,16 @@ public class CheckpointController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#saveTripCheckpoint(String, EventDTO, LocalTime, String, TripDTO)}
+     *
+     * @param fiscalCode
+     * @param eventDTO
+     * @param time
+     * @param busPlate
+     * @param tripDTO
+     * @throws CheckpointFailedException
+     */
     public void doSaveTripCheckpoint(String fiscalCode, EventDTO eventDTO, LocalTime time, String busPlate, TripDTO tripDTO) throws CheckpointFailedException {
         PersonDAO personDAO = new PersonDAO();
         EventDAO eventDAO = new EventDAO();
@@ -131,6 +154,12 @@ public class CheckpointController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getEventCheckpoints(EventDTO)}
+     *
+     * @param eventDTO
+     * @return
+     */
     public Set<CheckpointDTO> doGetEventCheckpoints(EventDTO eventDTO) {
         Event result;
         EventDTO resultDTO = null;

@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.FoodDAO;
@@ -21,9 +22,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade} interface
+ * that operate with Food entities.
+ */
 public class FoodController {
     public FoodController() {}
 
+    /**
+     * See {@link UserSessionFacade#getAvailableFoods(PersonDTO)}
+     *
+     * @param personDTO
+     * @return
+     */
     public Collection<FoodDTO> doGetAvailableFoods(PersonDTO personDTO) {
         FoodDAO foodDAO = new FoodDAO();
         PersonDAO personDAO = new PersonDAO();
@@ -54,6 +65,11 @@ public class FoodController {
         return foodsDTOCollection;
     }
 
+    /**
+     * See {@link UserSessionFacade#updateFood(FoodDTO)}
+     * @param newFoodDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdateFood(FoodDTO newFoodDTO) throws UpdateFailedException {
         FoodDAO foodDAO = new FoodDAO();
         Food newFood = EntityFactoryFacade.getEntity(newFoodDTO);
@@ -80,6 +96,11 @@ public class FoodController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeFood(FoodDTO)}
+     *
+     * @param foodDTO
+     */
     public void doRemoveFood(FoodDTO foodDTO) {
         FoodDAO foodDAO = new FoodDAO();
         Food food = EntityFactoryFacade.getEntity(foodDTO);
@@ -101,6 +122,12 @@ public class FoodController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#saveFood(FoodDTO)}
+     *
+     * @param foodDTO
+     * @throws AddFailedException
+     */
     public void doSaveFood(FoodDTO foodDTO) throws AddFailedException {
         Food food = EntityFactoryFacade.getEntity(foodDTO);
         FoodDAO foodDAO = new FoodDAO();
@@ -123,6 +150,11 @@ public class FoodController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllFoods()}
+     *
+     * @return
+     */
     public List<FoodDTO> doGetAllFoods() {
         FoodDAO foodDAO = new FoodDAO();
         List<Food> foodsCollection = new ArrayList<>();

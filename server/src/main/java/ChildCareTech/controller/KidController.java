@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.DTO.KidDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.DAO.KidDAO;
@@ -24,9 +25,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade} interface
+ * that operate with Kid entities.
+ */
 public class KidController {
     public KidController() {}
 
+    /**
+     * See {@link UserSessionFacade#getAllKids()}
+     *
+     * @return
+     */
     public List<KidDTO> doGetAllKids() {
         KidDAO kidDAO = new KidDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -56,6 +66,12 @@ public class KidController {
         return kidDTOList;
     }
 
+    /**
+     * See {@link UserSessionFacade#getAvailableKids(TripDTO)}
+     *
+     * @param tripDTO
+     * @return
+     */
     public Collection<KidDTO> doGetAvailableKids(TripDTO tripDTO) {
         KidDAO kidDAO = new KidDAO();
         Trip trip = EntityFactoryFacade.getEntity(tripDTO);
@@ -86,6 +102,12 @@ public class KidController {
         return kidDTOCollection;
     }
 
+    /**
+     * See {@link UserSessionFacade#saveKid(KidDTO)}
+     *
+     * @param kidDTO
+     * @throws AddFailedException
+     */
     public void doSaveKid(KidDTO kidDTO) throws AddFailedException {
         Kid kid = EntityFactoryFacade.getEntity(kidDTO);
         KidDAO kidDAO = new KidDAO();
@@ -116,6 +138,11 @@ public class KidController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeKid(KidDTO)}
+     *
+     * @param kidDTO
+     */
     public void doRemoveKid(KidDTO kidDTO) {
         KidDAO kidDAO = new KidDAO();
         Kid kid = EntityFactoryFacade.getEntity(kidDTO);
@@ -138,6 +165,11 @@ public class KidController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updateKid(KidDTO)}
+     *
+     * @param newKidDTO
+     */
     public void doUpdateKid(KidDTO newKidDTO) {
         KidDAO kidDAO = new KidDAO();
         Kid kid = EntityFactoryFacade.getEntity(newKidDTO);
@@ -160,6 +192,12 @@ public class KidController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#addContactToKid(KidDTO, AdultDTO)}
+     *
+     * @param kidDTO
+     * @param adultDTO
+     */
     public void doAddContactToKid(KidDTO kidDTO, AdultDTO adultDTO){
         KidDAO kidDAO = new KidDAO();
         AdultDAO adultDAO = new AdultDAO();
@@ -184,6 +222,12 @@ public class KidController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeContactFromKid(KidDTO, AdultDTO)}
+     *
+     * @param kidDTO
+     * @param adultDTO
+     */
     public void doRemoveContactFromKid(KidDTO kidDTO, AdultDTO adultDTO){
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();

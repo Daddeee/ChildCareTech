@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.AdultDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
@@ -19,9 +20,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Adult entities.
+ */
 public class AdultController {
     public AdultController() {}
 
+    /**
+     * See {@link UserSessionFacade#saveAdult(AdultDTO)}
+     *
+     * @param adultDTO
+     * @throws AddFailedException
+     */
     public void doSaveAdult(AdultDTO adultDTO) throws AddFailedException {
         AdultDAO adultDAO = new AdultDAO();
         PersonDAO personDAO = new PersonDAO();
@@ -55,6 +66,11 @@ public class AdultController {
 
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllAdults()}
+     *
+     * @return
+     */
     public List<AdultDTO> doGetAllAdults() {
         AdultDAO adultDAO = new AdultDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -84,6 +100,11 @@ public class AdultController {
         return adultDTOList;
     }
 
+    /**
+     * See {@link UserSessionFacade#removeAdult(AdultDTO)}
+     *
+     * @param adultDTO
+     */
     public void doRemoveAdult(AdultDTO adultDTO) {
         AdultDAO adultDAO = new AdultDAO();
         Adult adult = EntityFactoryFacade.getEntity(adultDTO);
@@ -105,6 +126,12 @@ public class AdultController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updateAdult(AdultDTO)}
+     *
+     * @param adultDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdateAdult(AdultDTO adultDTO) throws UpdateFailedException{
         AdultDAO adultDAO = new AdultDAO();
         Adult adult = EntityFactoryFacade.getEntity(adultDTO);
@@ -127,6 +154,11 @@ public class AdultController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllAdults()}
+     *
+     * @return
+     */
     public List<AdultDTO> doGetAllAdultsExclusive() {
         AdultDAO adultDAO = new AdultDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();

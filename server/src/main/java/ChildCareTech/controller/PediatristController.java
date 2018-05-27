@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.PediatristDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PediatristDAO;
@@ -19,9 +20,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Pediatrist entities.
+ */
 public class PediatristController {
     public PediatristController() {}
 
+    /**
+     * See {@link UserSessionFacade#savePediatrist(PediatristDTO)}
+     *
+     * @param pediatristDTO
+     * @throws AddFailedException
+     */
     public void doSavePediatrist(PediatristDTO pediatristDTO) throws AddFailedException {
         PediatristDAO pediatristDAO = new PediatristDAO();
         PersonDAO personDAO = new PersonDAO();
@@ -54,6 +65,11 @@ public class PediatristController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllPediatrists()}
+     *
+     * @return
+     */
     public List<PediatristDTO> doGetAllPediatrists() {
         PediatristDAO pediatristDAO = new PediatristDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -83,6 +99,11 @@ public class PediatristController {
         return pediatristDTOList;
     }
 
+    /**
+     * See {@link UserSessionFacade#removePediatrist(PediatristDTO)}
+     *
+     * @param pediatristDTO
+     */
     public void doRemovePediatrist(PediatristDTO pediatristDTO) {
         PediatristDAO pediatristDAO = new PediatristDAO();
         Pediatrist pediatrist = EntityFactoryFacade.getEntity(pediatristDTO);
@@ -105,6 +126,12 @@ public class PediatristController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updatePediatrist(PediatristDTO)}
+     *
+     * @param pediatristDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdatePediatrist(PediatristDTO pediatristDTO) throws UpdateFailedException{
         PediatristDAO pediatristDAO = new PediatristDAO();
         Pediatrist pediatrist = EntityFactoryFacade.getEntity(pediatristDTO);

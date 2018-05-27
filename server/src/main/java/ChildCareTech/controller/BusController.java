@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.BusDAO;
@@ -21,9 +22,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Bus entities.
+ */
 public class BusController {
     public BusController() {}
 
+    /**
+     * See {@link UserSessionFacade#getAvailableBuses(TripDTO)}
+     *
+     * @param tripDTO
+     * @return
+     */
     public Collection<BusDTO> doGetAvailableBuses(TripDTO tripDTO) {
         BusDAO busDAO = new BusDAO();
         TripDAO tripDAO = new TripDAO();
@@ -52,6 +63,11 @@ public class BusController {
         return busesDTOCollection;
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllBuses()}
+     *
+     * @return
+     */
     public List<BusDTO> doGetAllBuses() {
         BusDAO busDAO = new BusDAO();
         TripDAO tripDAO = new TripDAO();
@@ -83,6 +99,12 @@ public class BusController {
         return busesDTOCollection;
     }
 
+    /**
+     * See {@link UserSessionFacade#updateBus(BusDTO)}
+     *
+     * @param newBusDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdateBus(BusDTO newBusDTO) throws UpdateFailedException {
         BusDAO busDAO = new BusDAO();
         Bus newBus = EntityFactoryFacade.getEntity(newBusDTO);
@@ -109,6 +131,11 @@ public class BusController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeBus(BusDTO)}
+     *
+     * @param busDTO
+     */
     public void doRemoveBus(BusDTO busDTO) {
         BusDAO busDAO = new BusDAO();
         Bus bus = EntityFactoryFacade.getEntity(busDTO);
@@ -130,6 +157,12 @@ public class BusController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#saveBus(BusDTO)}
+     *
+     * @param busDTO
+     * @throws AddFailedException
+     */
     public void doSaveBus(BusDTO busDTO) throws AddFailedException {
         Bus bus = EntityFactoryFacade.getEntity(busDTO);
         BusDAO busDAO = new BusDAO();

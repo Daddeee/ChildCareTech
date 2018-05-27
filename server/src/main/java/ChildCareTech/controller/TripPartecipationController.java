@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.TripPartecipationDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.TripPartecipationDAO;
 import ChildCareTech.model.entities.TripPartecipation;
@@ -11,9 +12,19 @@ import ChildCareTech.utils.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with TripPartecipation entities.
+ */
 public class TripPartecipationController {
     public TripPartecipationController() {}
 
+    /**
+     * See {@link UserSessionFacade#saveTripPartecipation(TripPartecipationDTO)}
+     *
+     * @param tripPartecipationDTO
+     * @throws AddFailedException
+     */
     public void doSaveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) throws AddFailedException {
         TripPartecipation tripPartecipation = EntityFactoryFacade.getEntity(tripPartecipationDTO);
         TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
@@ -37,6 +48,11 @@ public class TripPartecipationController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeTripPartecipation(TripPartecipationDTO)}
+     *
+     * @param tripPartecipationDTO
+     */
     public void doRemoveTripPartecipation(TripPartecipationDTO tripPartecipationDTO) {
         TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
 

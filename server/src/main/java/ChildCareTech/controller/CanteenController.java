@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.CanteenDAO;
 import ChildCareTech.model.DAO.MealDAO;
@@ -24,9 +25,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Canteen entities.
+ */
 public class CanteenController {
     public CanteenController() {}
 
+    /**
+     * See {@link UserSessionFacade#getCanteenByName(String)}
+     *
+     * @param name
+     * @return
+     */
     public CanteenDTO doGetCanteenByName(String name) {
         CanteenDAO canteenDAO = new CanteenDAO();
         MealDAO mealDAO = new MealDAO();
@@ -60,6 +71,11 @@ public class CanteenController {
         return DTOFactoryFacade.getDTO(result.get(0));
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllCanteenNames()}
+     *
+     * @return
+     */
     public List<String> doGetAllCanteenNames() {
         CanteenDAO canteenDAO = new CanteenDAO();
         Transaction tx = null;
@@ -82,6 +98,14 @@ public class CanteenController {
         return names;
     }
 
+    /**
+     * See {@link UserSessionFacade#saveCanteen(CanteenDTO, List, List)}
+     *
+     * @param canteenDTO
+     * @param entryTimeList
+     * @param exitTimeList
+     * @throws AddFailedException
+     */
     public void doSaveCanteen(CanteenDTO canteenDTO, List<LocalTime> entryTimeList, List<LocalTime> exitTimeList) throws AddFailedException {
         CanteenDAO canteenDAO = new CanteenDAO();
         Transaction tx = null;
@@ -105,6 +129,11 @@ public class CanteenController {
 
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllCanteenes()}
+     *
+     * @return
+     */
     public List<CanteenDTO> doGetAllCanteenes() {
         List<Canteen> list = new ArrayList<>();
         List<CanteenDTO> DTOList = new ArrayList<>();
@@ -130,6 +159,11 @@ public class CanteenController {
         return DTOList;
     }
 
+    /**
+     * See {@link UserSessionFacade#removeCanteen(CanteenDTO)}
+     *
+     * @param canteenDTO
+     */
     public void doRemoveCanteen(CanteenDTO canteenDTO) {
         CanteenDAO canteenDAO = new CanteenDAO();
         Canteen canteen = EntityFactoryFacade.getEntity(canteenDTO);

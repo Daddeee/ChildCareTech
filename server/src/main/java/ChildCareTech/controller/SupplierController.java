@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.SupplierDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PersonDAO;
@@ -19,9 +20,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Supplier entities.
+ */
 public class SupplierController {
     public SupplierController() {}
 
+    /**
+     * See {@link UserSessionFacade#saveSupplier(SupplierDTO)}
+     *
+     * @param supplierDTO
+     * @throws AddFailedException
+     */
     public void doSaveSupplier(SupplierDTO supplierDTO) throws AddFailedException {
         SupplierDAO supplierDAO = new SupplierDAO();
         PersonDAO personDAO = new PersonDAO();
@@ -54,6 +65,11 @@ public class SupplierController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllSuppliers()}
+     *
+     * @return
+     */
     public List<SupplierDTO> doGetAllSuppliers() {
         SupplierDAO supplierDAO = new SupplierDAO();
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -83,6 +99,11 @@ public class SupplierController {
         return supplierDTOList;
     }
 
+    /**
+     * See {@link UserSessionFacade#removeSupplier(SupplierDTO)}
+     *
+     * @param supplierDTO
+     */
     public void doRemoveSupplier(SupplierDTO supplierDTO) {
         SupplierDAO supplierDAO = new SupplierDAO();
         Supplier supplier = EntityFactoryFacade.getEntity(supplierDTO);
@@ -104,6 +125,12 @@ public class SupplierController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updateSupplier(SupplierDTO)}
+     *
+     * @param supplierDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdateSupplier(SupplierDTO supplierDTO) throws UpdateFailedException {
         SupplierDAO supplierDAO = new SupplierDAO();
         Supplier supplier = EntityFactoryFacade.getEntity(supplierDTO);

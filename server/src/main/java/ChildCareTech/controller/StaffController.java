@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.StaffDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.PersonDAO;
@@ -19,9 +20,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Staff entities.
+ */
 public class StaffController {
     public StaffController() {}
 
+    /**
+     * See {@link UserSessionFacade#removeStaff(StaffDTO)}
+     *
+     * @param staffDTO
+     */
     public void doRemoveStaff(StaffDTO staffDTO) {
         StaffDAO staffDAO = new StaffDAO();
         Staff staff = EntityFactoryFacade.getEntity(staffDTO);
@@ -43,6 +53,11 @@ public class StaffController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getAllStaff()}
+     *
+     * @return
+     */
     public List<StaffDTO> doGetAllStaff() {
         StaffDAO staffDAO = new StaffDAO();
         List<StaffDTO> staffDTOList = new ArrayList<>();
@@ -72,6 +87,12 @@ public class StaffController {
         return staffDTOList;
     }
 
+    /**
+     * See {@link UserSessionFacade#saveStaff(StaffDTO)}
+     *
+     * @param staffDTO
+     * @throws AddFailedException
+     */
     public void doSaveStaff(StaffDTO staffDTO) throws AddFailedException {
         StaffDAO staffDAO = new StaffDAO();
         PersonDAO personDAO = new PersonDAO();
@@ -104,6 +125,12 @@ public class StaffController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updateStaffMember(StaffDTO)}
+     *
+     * @param staffDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdateStaffMember(StaffDTO staffDTO) throws UpdateFailedException {
         StaffDAO staffDAO = new StaffDAO();
         Staff staff = EntityFactoryFacade.getEntity(staffDTO);

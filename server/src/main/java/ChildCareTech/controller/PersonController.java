@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.FoodDTO;
 import ChildCareTech.common.DTO.PersonDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.model.DAO.FoodDAO;
 import ChildCareTech.model.DAO.PersonDAO;
@@ -16,9 +17,19 @@ import org.hibernate.Transaction;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Person entities.
+ */
 public class PersonController {
     public PersonController() {}
 
+    /**
+     * See {@link UserSessionFacade#removeAllergy(PersonDTO, FoodDTO)}
+     *
+     * @param personDTO
+     * @param foodDTO
+     */
     public void doRemoveAllergy(PersonDTO personDTO, FoodDTO foodDTO) {
         PersonDAO personDAO = new PersonDAO();
         FoodDAO foodDAO = new FoodDAO();
@@ -44,6 +55,13 @@ public class PersonController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#addAllergy(PersonDTO, FoodDTO)}
+     *
+     * @param personDTO
+     * @param foodDTO
+     * @throws AddFailedException
+     */
     public void doAddAllergy(PersonDTO personDTO, FoodDTO foodDTO) throws AddFailedException {
         PersonDAO personDAO = new PersonDAO();
         FoodDAO foodDAO = new FoodDAO();
@@ -72,6 +90,12 @@ public class PersonController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getPerson(String)}
+     *
+     * @param fiscalCode
+     * @return
+     */
     public PersonDTO doGetPerson(String fiscalCode) {
         PersonDAO personDAO = new PersonDAO();
 

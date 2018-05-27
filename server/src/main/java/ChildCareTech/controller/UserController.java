@@ -1,5 +1,6 @@
 package ChildCareTech.controller;
 
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.LoginFailedException;
 import ChildCareTech.common.exceptions.RegistrationFailedException;
 import ChildCareTech.model.entities.User;
@@ -14,9 +15,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with User entities.
+ */
 public class UserController {
     private static final ConcurrentHashMap<User, Object> currentSessions = new ConcurrentHashMap<>();
 
+    /**
+     * Get the saved user with username and password corresponding ith the provided parameters.
+     *
+     * @param username the searched user name
+     * @param password the corresponding password
+     * @return The founded user
+     * @throws LoginFailedException if no user is found.
+     */
     public static User getUser(String username, String password) throws LoginFailedException {
         List<User> user;
         Session session;
@@ -44,6 +57,14 @@ public class UserController {
         return user.get(0);
     }
 
+    /**
+     * Register a new user with provided username and password.
+     *
+     * @param userName the new username
+     * @param password the corresponding password
+     * @return true if the registration terminates succesfully, false otherwise.
+     * @throws RegistrationFailedException if the provided username is already taken.
+     */
     public static boolean registerUser(String userName, String password) throws RegistrationFailedException {
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         UserDAO dao = new UserDAO();
@@ -71,6 +92,13 @@ public class UserController {
         return true;
     }
 
+    /**
+     * Stores the User holding an active session.
+     *
+     * @param user the User holding the session.
+     * @param session can be the session itself (RMI) or some dummy object (Socket).
+     * @throws LoginFailedException
+     */
     public static synchronized void storeSession(User user, Object session) throws LoginFailedException {
         if (currentSessions.get(user) != null) {
             throw new LoginFailedException("Another session associated with the same user is already present");
@@ -78,6 +106,11 @@ public class UserController {
         currentSessions.put(user, session);
     }
 
+    /**
+     * Removes the User when the session expires.
+     *
+     * @param user the user holding the session.
+     */
     public static synchronized void removeSession(User user) {
         currentSessions.remove(user);
     }

@@ -2,6 +2,7 @@ package ChildCareTech.controller;
 
 import ChildCareTech.common.DTO.RouteDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.EventDAO;
 import ChildCareTech.model.DAO.RouteDAO;
@@ -14,9 +15,18 @@ import org.hibernate.Transaction;
 
 import java.rmi.RemoteException;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Route entities.
+ */
 public class RouteController {
     public RouteController() {}
 
+    /**
+     * See {@link UserSessionFacade#removeRoute(RouteDTO)}
+     *
+     * @param routeDTO
+     */
     public void doRemoveRoute(RouteDTO routeDTO) {
         RouteDAO routeDAO = new RouteDAO();
         Route route = EntityFactoryFacade.getEntity(routeDTO);
@@ -38,6 +48,13 @@ public class RouteController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updateRouteEvent(RouteDTO)}
+     *
+     * @param routeDTO
+     * @throws UpdateFailedException
+     * @throws RemoteException
+     */
     public void doUpdateRouteEvent(RouteDTO routeDTO) throws UpdateFailedException, RemoteException {
         RouteDAO routeDAO = new RouteDAO();
         EventDAO eventDAO = new EventDAO();

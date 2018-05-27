@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.BusDTO;
 import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.BusDAO;
@@ -21,9 +22,18 @@ import org.hibernate.Transaction;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Trip entities.
+ */
 public class TripController {
     public TripController() {}
 
+    /**
+     * See {@link UserSessionFacade#getAllTrips()}
+     *
+     * @return
+     */
     public List<TripDTO> doGetAllTrips() {
         TripDAO dao = new TripDAO();
         BusDAO busDao = new BusDAO();
@@ -55,6 +65,12 @@ public class TripController {
         return tripsDTOCollection;
     }
 
+    /**
+     * See {@link UserSessionFacade#updateTrip(TripDTO)}
+     *
+     * @param newTripDTO
+     * @throws UpdateFailedException
+     */
     public void doUpdateTrip(TripDTO newTripDTO) throws UpdateFailedException {
         TripDAO tripDAO = new TripDAO();
         Trip newTrip = EntityFactoryFacade.getEntity(newTripDTO);
@@ -89,6 +105,11 @@ public class TripController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#saveTrip(TripDTO)}
+     * @param tripDTO
+     * @throws AddFailedException
+     */
     public void doSaveTrip(TripDTO tripDTO) throws AddFailedException {
         TripDAO tripDAO = new TripDAO();
         Trip trip = EntityFactoryFacade.getEntity(tripDTO);
@@ -122,6 +143,11 @@ public class TripController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeTrip(TripDTO)}
+     *
+     * @param tripDTO
+     */
     public void doRemoveTrip(TripDTO tripDTO) {
         TripDAO tripDAO = new TripDAO();
         Trip trip = EntityFactoryFacade.getEntity(tripDTO);
@@ -143,6 +169,12 @@ public class TripController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#getTrip(int)}
+     *
+     * @param id
+     * @return
+     */
     public TripDTO doGetTrip(int id) {
         TripDAO tripDAO = new TripDAO();
 
@@ -172,6 +204,13 @@ public class TripController {
         return resultDTO;
     }
 
+    /**
+     * See {@link UserSessionFacade#saveTripBusRelation(TripDTO, BusDTO)}
+     *
+     * @param tripDTO
+     * @param busDTO
+     * @throws AddFailedException
+     */
     public void doSaveTripBusRelation(TripDTO tripDTO, BusDTO busDTO) throws AddFailedException {
         TripDAO tripDAO = new TripDAO();
         BusDAO busDAO = new BusDAO();
@@ -209,6 +248,12 @@ public class TripController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeTripBusRelation(TripDTO, BusDTO)}
+     *
+     * @param tripDTO
+     * @param busDTO
+     */
     public void doRemoveTripBusRelation(TripDTO tripDTO, BusDTO busDTO) {
         TripDAO tripDAO = new TripDAO();
         BusDAO busDAO = new BusDAO();

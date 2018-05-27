@@ -4,6 +4,7 @@ import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.MealDTO;
 import ChildCareTech.common.DTO.MenuDTO;
 import ChildCareTech.common.RemoteUpdatable;
+import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
@@ -16,15 +17,23 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides implementation for methods in the {@link UserSessionFacade UserSessionFacade} interface
+ * that operate with Menu entities.
+ */
 public class MenuController {
     public MenuController() {}
 
+    /**
+     * See {@link UserSessionFacade#createMenu(MealDTO)}
+     *
+     * @param mealDTO
+     */
     public void doCreateMenu(MealDTO mealDTO) {
         MealDAO mealDAO = new MealDAO();
         MenuDAO menuDAO = new MenuDAO();
 
         Meal meal = EntityFactoryFacade.getEntity(mealDTO);
-
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         mealDAO.setSession(session);
@@ -46,6 +55,11 @@ public class MenuController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#updateMenu(MealDTO)}
+     *
+     * @param mealDTO
+     */
     public void doUpdateMenu(MealDTO mealDTO) {
         MenuDAO menuDAO = new MenuDAO();
         MealDAO mealDAO = new MealDAO();
@@ -72,6 +86,12 @@ public class MenuController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#removeDishFromMenu(MenuDTO, DishDTO)}
+     *
+     * @param menuDTO
+     * @param dishDTO
+     */
     public void doRemoveDishFromMenu(MenuDTO menuDTO, DishDTO dishDTO) {
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
@@ -94,6 +114,12 @@ public class MenuController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#addDishToMenu(MenuDTO, DishDTO)}
+     *
+     * @param menuDTO
+     * @param dishDTO
+     */
     public void doAddDishToMenu(MenuDTO menuDTO, DishDTO dishDTO) {
         MenuDAO menuDAO = new MenuDAO();
         DishDAO dishDAO = new DishDAO();
@@ -119,6 +145,12 @@ public class MenuController {
         }
     }
 
+    /**
+     * See {@link UserSessionFacade#validateMenu(MenuDTO)}
+     *
+     * @param menuDTO
+     * @throws UpdateFailedException
+     */
     public void doValidateMenu(MenuDTO menuDTO) throws UpdateFailedException {
         MenuDAO menuDAO = new MenuDAO();
         KidDAO kidDAO = new KidDAO();
