@@ -7,6 +7,7 @@ ChildCareTech.model
 ChildCareTech.model.DAO
 ChildCareTech.model.entities
 ChildCareTech.model.validators
+ChildCareTech.network
 ChildCareTech.network.RMI
 ChildCareTech.network.socket
 ChildCareTech.utils
@@ -15,3 +16,9 @@ ChildCareTech.utils.DTO.assemblers
 ChildCareTech.utils.DTO.factories
 ChildCareTech.utils.exceptions
 ChildCareTech.utils.generation
+ChildCareTechTest
+ChildCareTechTest.controller
+ChildCareTechTest.model
+ChildCareTechTest.model.DAO
+ChildCareTechTest.model.entities
+ChildCareTechTest.utils

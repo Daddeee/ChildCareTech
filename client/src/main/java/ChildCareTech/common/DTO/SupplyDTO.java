@@ -3,6 +3,9 @@ package ChildCareTech.common.DTO;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for Supply entity.
+ */
 public class SupplyDTO implements Serializable {
     private int id;
     private SupplierDTO supplier;

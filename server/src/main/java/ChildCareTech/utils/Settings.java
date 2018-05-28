@@ -3,6 +3,10 @@ package ChildCareTech.utils;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * This class encapsulate {@link Properties} management.
+ * This class cannot be instantiated.
+ */
 public class Settings {
     private static final String confPath = "./src/resources/config.xml";
     private static final Properties properties;
@@ -25,13 +29,22 @@ public class Settings {
         }
     }
 
-    private Settings() {
-    }
+    private Settings() {}
 
+    /**
+     * @param property the searched property.
+     * @return the string value of the given property saved in config file.
+     */
     public static String getProperty(String property) {
         return properties.getProperty(property);
     }
 
+    /**
+     * Save the pair (name, value) as a property in the config file.
+     *
+     * @param name the property name.
+     * @param value the property value.
+     */
     public static void storeProperty(String name, String value) {
         FileOutputStream out;
         try {

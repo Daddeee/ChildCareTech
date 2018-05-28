@@ -8,6 +8,9 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for Event entity.
+ */
 public class EventDTO implements Serializable {
     private int id;
     private String name;

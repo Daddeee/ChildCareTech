@@ -17,7 +17,7 @@
         </property>
 
         <property name="hibernate.hbm2ddl.auto">
-            update
+            create-drop
         </property>
 
         <property name="hibernate.connection.username">

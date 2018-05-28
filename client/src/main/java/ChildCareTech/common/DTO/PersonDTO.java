@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for Person entity.
+ */
 public class PersonDTO implements Serializable {
     private int id;
     private String fiscalCode;
@@ -31,9 +34,7 @@ public class PersonDTO implements Serializable {
         this.allergies = allergies == null ? Collections.EMPTY_SET : allergies;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public String getFirstName() {
         return firstName;

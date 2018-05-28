@@ -8,7 +8,7 @@ import ChildCareTech.common.exceptions.CheckpointFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.controller.*;
 import ChildCareTech.model.entities.*;
-import ChildCareTech.utils.*;
+import ChildCareTech.network.RemoteEventObservable;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

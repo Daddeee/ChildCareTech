@@ -17,7 +17,7 @@
         </property>
 
         <property name="hibernate.hbm2ddl.auto">
-            update
+            create
         </property>
 
         <property name="hibernate.connection.username">
@@ -40,7 +40,7 @@
             false
         </property>
 
-        <property name="connection.pool_size">50</property>
+        <property name="connection.pool_size">10</property>
 
         <!-- List of mapped entities -->
         <mapping class="ChildCareTech.model.entities.Person"/>

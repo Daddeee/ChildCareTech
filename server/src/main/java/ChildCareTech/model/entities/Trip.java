@@ -30,7 +30,7 @@ public class Trip implements iEntity<Trip, Integer> {
 
     @NotNull(message = "E' necessario specificare la meta.")
     @Size(min = 1, message = "E' necessario specificare la meta.")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String meta;
 
     @ColumnDefault("''")

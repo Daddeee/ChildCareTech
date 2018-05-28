@@ -21,4 +21,10 @@ public interface RemoteEventObserver extends Remote {
      * @throws RemoteException
      */
     void unexport() throws RemoteException;
+
+    /**
+     * @return the port on which the observer is running.
+     * @throws RemoteException
+     */
+    int getPort() throws RemoteException;
 }

@@ -10,7 +10,7 @@ import ChildCareTech.model.DAO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
-import ChildCareTech.utils.RemoteEventObservable;
+import ChildCareTech.network.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

@@ -14,7 +14,7 @@ import ChildCareTech.model.entities.Trip;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
-import ChildCareTech.utils.RemoteEventObservable;
+import ChildCareTech.network.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -4,19 +4,27 @@ import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.model.entities.Event;
 import ChildCareTech.model.entities.WorkDay;
+import ChildCareTech.network.RemoteEventObservable;
 
 import java.rmi.RemoteException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class encapsulate a ScheduledExecutorService that is used to update clients on the flow of events.
+ * Every day at 00:30 the {@link CurrentWorkDayService current WorkDay} is updated and all the next day'a events
+ * are scheduled to change status at the given time. In particular:
+ * <ul>
+ *     <li>at first every event is in {@link EventStatus#WAIT WAIT} status</li>
+ *     <li>when the {@link Event#beginTime begin time} comes, the event status is set to {@link EventStatus#OPEN OPEN}</li>
+ *     <li>after the {@link Event#endTime end time} is passed, the event status is set to {@link EventStatus#CLOSED CLOSED}</li>
+ * </ul>
+ */
 public class EventScheduler {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final ScheduledFuture<?> firstTimeJobScheduled;

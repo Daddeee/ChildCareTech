@@ -4,6 +4,13 @@ import ChildCareTech.common.DTO.*;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.factories.*;
 
+/**
+ * A facade to access all dto factories.
+ * <p>
+ * Every method in this class takes as input an entity and returns the corresponding data transfer object. Relationships are
+ * also loaded in DTOs as long as they are fetched from the database (some relationships are lazy fetched and may not be
+ * loaded when calling this class).
+ */
 public class DTOFactoryFacade {
     public static EventDTO getDTO(Event event){
         EventDTOFactory factory = new EventDTOFactory();

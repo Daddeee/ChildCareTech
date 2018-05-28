@@ -15,15 +15,12 @@ import ChildCareTech.model.DAO.TripDAO;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
-import ChildCareTech.utils.RemoteEventObservable;
-import org.hibernate.HibernateException;
+import ChildCareTech.network.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 /**

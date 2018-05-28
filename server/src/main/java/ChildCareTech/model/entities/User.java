@@ -15,7 +15,7 @@ public class User implements iEntity<User, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 30)
     private String userName;
 
     @Column(nullable = false)

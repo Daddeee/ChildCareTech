@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for Supplier entity.
+ */
 public class SupplierDTO extends AdultDTO implements Serializable {
     private Set<SupplyDTO> supplies;
 

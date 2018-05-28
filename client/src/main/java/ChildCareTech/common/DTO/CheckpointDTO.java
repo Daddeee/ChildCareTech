@@ -3,6 +3,9 @@ package ChildCareTech.common.DTO;
 import java.io.Serializable;
 import java.time.LocalTime;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for Checkpoint entity.
+ */
 public class CheckpointDTO implements Serializable {
     private int id;
     private EventDTO event;

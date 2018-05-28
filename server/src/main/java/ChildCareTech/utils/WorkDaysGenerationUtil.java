@@ -17,6 +17,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This class hold the logic needed to generate WorkDays on the first server startup.
+ */
 public class WorkDaysGenerationUtil {
     private DayGenerationSettingsDTO settings;
     private WorkDayDAO workDayDAO;
@@ -27,10 +30,23 @@ public class WorkDaysGenerationUtil {
         this.workDayDAO = new WorkDayDAO();
     }
 
+    /**
+     * All threads that need to access WorkDays possibly before they are generated will wait on this lock until
+     * notifications when the generation process will be finished.
+     *
+     * @return an Object instance representing the lock.
+     */
     public static Object getLock(){
         return lock;
     }
 
+    /**
+     * Generate WorkDays based on the given {@link #settings}.
+     * <p>
+     * Starting from this week's monday, a number of weeks {@link DayGenerationSettingsDTO#getWeekNumber()}  specified in the settings} is generated.
+     * For each generated day, an entry event and an exit event are created, both starting at times specified in settings and ending 10 minutes after.
+     * After the generation is completed, all threads waiting on the {@link #lock} are notified.
+     */
     public void generateDays(){
         LocalDate start = LocalDate.now().with(DayOfWeek.MONDAY);
         LocalDate end = start.plusDays(settings.getWeekNumber() * 7);

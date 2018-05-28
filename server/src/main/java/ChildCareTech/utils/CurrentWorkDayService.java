@@ -15,12 +15,24 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class holds the current server WorkDay.
+ */
 public class CurrentWorkDayService {
     private final static WorkDayDAO workDayDAO = new WorkDayDAO();
     private final static EventDAO eventDAO = new EventDAO();
     private static LocalDate today = LocalDate.now();
     private static WorkDay current = null;
 
+    /**
+     * Return the current WorkDay. If no workday is present or the present WorkDay is old, it is retrieved from the
+     * database according to the current real world date and then it is returned.
+     * <p>
+     * An update on the trip status must be perfomed every time the current workday changes. This is fired "lazily" after
+     * retrieving the current workday from the database.
+     *
+     * @return the current WorkDay.
+     */
     public static WorkDay getCurrent() {
         if(LocalDate.now().isAfter(today) || current == null){
             today = LocalDate.now();
@@ -30,12 +42,24 @@ public class CurrentWorkDayService {
         return  current;
     }
 
+    /**
+     * Set the current workday to the given value. An update on the trip status is triggered after setting the new current
+     * WorkDay.
+     *
+     * @param newCurrent the new current WorkDay.
+     */
     public static void setCurrent(WorkDay newCurrent){
         current = newCurrent;
         today = newCurrent.getDate();
         updateTripStatus();
     }
 
+    /**
+     * Set the event status to the given value. Every time this happens the status of meals is updated if needed.
+     *
+     * @param event the given event.
+     * @param eventStatus the new event status.
+     */
     public static void changeEventStatus(Event event, EventStatus eventStatus) {
         Transaction tx = null;
         Session session;

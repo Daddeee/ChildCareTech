@@ -2,6 +2,7 @@ package ChildCareTech.model.entities;
 
 import ChildCareTech.model.iEntity;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -14,6 +15,7 @@ import java.util.Set;
  * This class is mapped by Hibernate (basing on JPA annotations) on the Bus table in the database.
  */
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"licensePlate"}))
 public class Bus implements iEntity<Bus, Integer> {
     private static final String LICENSE_PLATE_REGEX = "[a-zA-Z]{2}\\d{3}[a-zA-Z]{2}$";
 
@@ -22,7 +24,7 @@ public class Bus implements iEntity<Bus, Integer> {
     private int id;
 
     @Pattern(regexp = LICENSE_PLATE_REGEX, message = "Formato della targa non valido")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 30)
     private String licensePlate;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "bus")

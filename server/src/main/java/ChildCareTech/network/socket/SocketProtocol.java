@@ -6,7 +6,7 @@ import ChildCareTech.common.SocketRequestType;
 import ChildCareTech.common.SocketResponse;
 import ChildCareTech.common.SocketResponseType;
 import ChildCareTech.controller.*;
-import ChildCareTech.utils.RemoteEventObservable;
+import ChildCareTech.network.RemoteEventObservable;
 
 import java.io.Serializable;
 import java.time.LocalDate;

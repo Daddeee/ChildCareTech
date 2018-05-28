@@ -2,6 +2,9 @@ package ChildCareTech.common.DTO;
 
 import java.io.Serializable;
 
+/**
+ * This class provides a Data Transfer Object encapsulation for TripPartecipation entity.
+ */
 public class TripPartecipationDTO implements Serializable {
     private int id;
     private PersonDTO person;
