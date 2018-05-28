@@ -16,3 +16,9 @@ ChildCareTech.utils.DTO.assemblers
 ChildCareTech.utils.DTO.factories
 ChildCareTech.utils.exceptions
 ChildCareTech.utils.generation
+ChildCareTechTest
+ChildCareTechTest.controller
+ChildCareTechTest.model
+ChildCareTechTest.model.DAO
+ChildCareTechTest.model.entities
+ChildCareTechTest.utils
