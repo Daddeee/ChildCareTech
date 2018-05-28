@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="660.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.NewKidAnagraphicsController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="660.0" prefWidth="940.0" stylesheets="@../style/newKidAnagraphicsWindow.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.NewKidAnagraphicsController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,15 +35,33 @@
                <children>
                   <HBox alignment="CENTER" maxHeight="50.0" minHeight="50.0" minWidth="0.0" prefHeight="50.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="editButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="50.0" prefWidth="50.0" text="Edit" />
-                        <Button fx:id="contactsButton" layoutX="380.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#contactsButtonAction" prefHeight="50.0" prefWidth="50.0" text="Contacts" />
-                        <Button fx:id="allergiesButton" layoutX="405.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#allergiesButtonAction" prefHeight="50.0" prefWidth="50.0" text="Allergies" />
-                        <Button fx:id="detailsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#detailsButtonAction" prefHeight="50.0" prefWidth="50.0" text="Details" />
-                        <Button fx:id="deleteButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="50.0" prefWidth="50.0" text="Delete" />
-                        <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="50.0" prefWidth="50.0" text="Add" />
+                        <Button fx:id="editButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="50.0" prefWidth="50.0" />
+                        <Button fx:id="contactsButton" layoutX="380.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#contactsButtonAction" prefHeight="50.0" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="allergiesButton" layoutX="405.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#allergiesButtonAction" prefHeight="50.0" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="detailsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#detailsButtonAction" prefHeight="50.0" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="deleteButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="50.0" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="50.0" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </AnchorPane>
          </children>
       </VBox>

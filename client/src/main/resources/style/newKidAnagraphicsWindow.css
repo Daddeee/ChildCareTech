@@ -1,0 +1,43 @@
+.root {
+    -fx-background-color: linear-gradient(#ffffff, #f0e0a2);
+}
+
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30px 30px;
+    -fx-background-color: linear-gradient(#f0e0a2, #eddb91);
+    -fx-border-color: linear-gradient(#f0e0a2, #e2c550);
+}
+.button:pressed {
+    -fx-background-color: linear-gradient(#eddb91, #f0e0a2);
+    -fx-border-color: linear-gradient(#e2c550, #f0e0a2);
+}
+
+#addButton {
+    -fx-background-image: url("../image/baseline_note_add_white_24dp.png");
+}
+
+#deleteButton {
+    -fx-background-image: url("../image/baseline_delete_white_24dp.png");
+}
+
+#detailsButton {
+    -fx-background-image: url("../image/baseline_perm_contact_calendar_white_24dp.png");
+}
+
+#allergiesButton {
+    -fx-background-image: url("../image/baseline_local_hospital_white_24dp.png");
+}
+
+#contactsButton {
+    -fx-background-image: url("../image/baseline_phone_white_24dp.png");
+}
+
+#editButton {
+    -fx-background-image: url("../image/baseline_edit_white_24dp.png");
+}
+

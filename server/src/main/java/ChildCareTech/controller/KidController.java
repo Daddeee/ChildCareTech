@@ -117,7 +117,7 @@ public class KidController {
         Transaction tx = null;
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         kidDAO.setSession(session);
-
+        personDAO.setSession(session);
         paramMap.put("fiscalCode", kidDTO.getPerson().getFiscalCode());
         try{
             tx = session.beginTransaction();

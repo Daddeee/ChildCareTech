@@ -1,0 +1,33 @@
+.root {
+    -fx-background-color: linear-gradient(#ffffff, #abe1fd);
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30px 30px;
+    -fx-background-color: linear-gradient(#abe1fd, #9cdcfc);
+    -fx-border-color: linear-gradient(#abe1fd, #51c2fb);
+}
+.button:pressed {
+    -fx-background-color: linear-gradient(#9cdcfc, #abe1fd);
+    -fx-border-color: linear-gradient(#51c2fb, #abe1fd);
+}
+
+#validateMenuButton {
+    -fx-background-image: url("../image/baseline_verified_user_white_18dp.png");
+}
+
+#menuManagerButton {
+    -fx-background-image: url("../image/baseline_fastfood_white_24dp.png");
+}
+
+#canteenManagerButton {
+    -fx-background-image: url("../image/baseline_meeting_room_white_24dp.png");
+}
+
+#foodManagerButton {
+    -fx-background-image: url("../image/baseline_kitchen_white_24dp.png");
+}
