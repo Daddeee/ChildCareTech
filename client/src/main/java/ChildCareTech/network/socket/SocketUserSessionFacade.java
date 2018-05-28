@@ -19,6 +19,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+/**
+ * Client side of the socket user session facade.
+ * <p>
+ * Mimics RMI using low level Socket. On each request, a {@link SocketRequest} object is built with the given
+ * parameters and sent to the server. When a {@link SocketResponse} comes back, the status and return values
+ * are parsed and returned to the client.
+ */
 public class SocketUserSessionFacade implements UserSessionFacade {
     private Socket socket;
     private ObjectOutputStream out;

@@ -29,8 +29,8 @@ public class MealsGenerationUtil {
      * For the generation to complete successfully, entry and exit time lists must meet the following requirements:
      * <ul>
      *     <li>both lists must have the same size</li>
-     *     <li>entryTimes[i] < exitTimes[i] for each 0<=i<entryTimes.size()</li>
-     *     <li>exitTimes[i] - entryTimes[i] > 10 minutes for each 0<=i<entryTimes.size()</li>
+     *     <li>entryTimes[i] &lt; exitTimes[i] for each 0&lt;=i&lt;entryTimes.size()</li>
+     *     <li>exitTimes[i] - entryTimes[i] &gt; 10 minutes for each 0&lt;=i&lt;entryTimes.size()</li>
      *     <li>specified time slots cannot overlap</li>
      * </ul>
      * @param canteen the canteen entity to be saved.
