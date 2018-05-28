@@ -6,7 +6,7 @@ Seguono brevi commenti ai diagrammi contenuti in questa cartella.
 
 ### Database
 
-(DB_Server_UML_Component_Diagram.pdf)
+([Link](DB_Server_UML_Component_Diagram.pdf))
 <p>
 E' il component diagram che mostra in che modo sono stati utilizzati i framework e le interfacce necessari a comunicare
  con il db. 
@@ -16,15 +16,15 @@ E' il component diagram che mostra in che modo sono stati utilizzati i framework
 
 ## Diagramma ER
 
-(ER_Diagram.pdf)
+([Link](ER_Diagram.pdf))
 <p>
 E' il diagramma entità-relazioni relativo al database utilizzato. Gli attributi in rosso rappresentano le chiavi
 primarie mentre quelli in verde sono colonne con una "unique constraints" associata.
 
 ## Diagrammi di sequenza
 
-(RMI_Save_Dish_UML_Sequence_Diagram.pdf)<p>
-(Socket_Save_Dish_UML_Sequence_Diagram.pdf)<p>
+([Link RMI](RMI_Save_Dish_UML_Sequence_Diagram.pdf))<p/>
+([Link Socket](RMI_Save_Dish_UML_Sequence_Diagram.pdf)<p/>
 Sono due sequence diagram che rappresentano la serie completa di metodi chiamati durante un'operazione tipo.
 In questo caso l'operazione selezionata è la creazione di un piatto per la mensa.
 Nel diagramma relativo ad RMI è presente anche la parte relativa all'aggiornamento delle tabelle successivo
@@ -35,7 +35,7 @@ del diagramma stesso.
 
 ### RMI
 
-(RMI_UML_Class_Diagram.pdf)<p>
+([Link](RMI_UML_Class_Diagram.pdf))<p>
 Class diagram che rappresenta le classi coinvolte nella connettività tramite RMI.
 Il diagramma è diviso in 3 aree: a sinistra le classi relative al server, a destra quelle relative al client e in mezzo
 le classi in comune ad entrambi.
@@ -45,13 +45,13 @@ In questo caso sono stati utilizzati due pattern in combinazione:
 
 ### Socket
 
-(Socket_UML_Class_Diagram.pdf)<p>
+([Link](Socket_UML_Class_Diagram.pdf))<p>
 Class diagram che rappresenta le classi coinvolte nella connettività tramite Socket.
 A livello di pattern l'architettura è la stessa utilizzata per RMI, tuttavia sono state aggiunte delle classi per encapsulare chiamate e risposte remote, in modo da "mimare" il funzionamento di RMI mediante Socket. 
 
 ### Observable
 
-(Remote_Observable_UML_Class_Diagram.pdf)<p>
+([Link](Remote_Observable_UML_Class_Diagram.pdf))<p>
 Class diagram che rappresenta le classi coinvolte nel meccanismo di aggiornamento "push".
 E' stato utilizzato il pattern observable (https://it.wikipedia.org/wiki/Observer_pattern) per notificare a tutti i
  client la necessità di aggiornare determinati contenuti. Ciò è stato fatto per evitare stati non consistenti tra client
