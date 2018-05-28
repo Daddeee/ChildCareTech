@@ -7,6 +7,7 @@ import ChildCareTech.model.iEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -153,7 +154,7 @@ public class Event implements iEntity<Event, Integer> {
      * @return a Set containing all the {@link Checkpoint Checkpoint(s)} associated to this event.
      */
     public Set<Checkpoint> getCheckpoints() {
-        return checkpoints;
+        return checkpoints == null ? Collections.emptySet() : checkpoints;
     }
 
     /**

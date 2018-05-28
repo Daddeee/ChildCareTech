@@ -76,7 +76,7 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
     private static void loadTripPartecipationRelationship(Trip entity, TripDTO dto) {
         Set<TripPartecipationDTO> tripPartecipations = new HashSet<>();
 
-        if(Hibernate.isInitialized(entity.getTripPartecipations()))
+        if(Hibernate.isInitialized(entity.getTripPartecipations()) && entity.getTripPartecipations() != null)
             for (TripPartecipation t : entity.getTripPartecipations())
                 tripPartecipations.add(TripPartecipationDTOFactory.getTripManySide(t, dto));
 

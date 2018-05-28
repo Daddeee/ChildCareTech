@@ -587,6 +587,13 @@ public interface UserSessionFacade extends Remote {
 
     /**
      * Save in the database a checkpoint for the given person, on a generic event and at the time provided as attribute.
+     * <p>
+     * For the saving to be successfully completed:
+     * <ul>
+     *     <li>it must be the first checkpoint saved for the pair person-event</li>
+     *     <li>the person must exist in the database</li>
+     *     <li>the event must exist in the database with state {@link EventStatus#OPEN OPEN} and type not {@link EventType#TRIP TRIP}.</li>
+     * </ul>
      *
      * @param fiscalCode fiscal code of the person that recorded on the event.
      * @param event the event on which the person recorded his presence.
@@ -599,9 +606,13 @@ public interface UserSessionFacade extends Remote {
     /**
      * Save in the database a checkpoint for the given person, on a trip event and at the time provided as attribute.
      * <p>
-     * Unlike {@link #saveCheckpoint(String, EventDTO, LocalTime) normal checkpoint saving}, this one performs a control making
-     * sure that exists a trip partecipation for the given person, on the given bus and for the provided trip before saving the
-     * checkpoint.
+     * For the saving to be successfully completed:
+     * <ul>
+     *     <li>it must be the first checkpoint saved for the pair person-event</li>
+     *     <li>the person must exist in the database</li>
+     *     <li>the event must exist in the database with state {@link EventStatus#OPEN OPEN} and type {@link EventType#TRIP TRIP}.</li>
+     *     <li>a TripPartecipation for the given person, on the given trip and bus must exists in the database.</li>
+     * </ul>
      *
      * @param fiscalCode fiscal code of the person that recorded on the event.
      * @param event the event on which the person recorded his presence.

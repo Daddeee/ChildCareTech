@@ -141,7 +141,7 @@ public class CheckpointController {
                 }
             }
 
-            throw new CheckpointFailedException("Gita non trovata");
+            throw new CheckpointFailedException("La persona registrata non è iscritta alla gita selezionata");
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
