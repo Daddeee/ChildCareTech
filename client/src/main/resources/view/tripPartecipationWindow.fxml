@@ -19,7 +19,7 @@
             <children>
                <Label text="Gestione autobus">
                   <font>
-                     <Font size="18.0" />
+                     <Font size="16.0" />
                   </font>
                </Label>
             </children>
@@ -88,7 +88,7 @@
             <children>
                <Label text="Gestione partecipazioni">
                   <font>
-                     <Font size="18.0" />
+                     <Font size="16.0" />
                   </font>
                </Label>
             </children>

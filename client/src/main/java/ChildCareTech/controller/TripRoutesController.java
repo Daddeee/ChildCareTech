@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -197,4 +198,7 @@ public class TripRoutesController implements AccessorWindowController, TableWind
         refresh();
     }
     public void notifyUpdate() { }
+    private void initButtonToolTips() {
+        logButton.setTooltip(new Tooltip("Mostra lo storico degli accessi"));
+    }
 }

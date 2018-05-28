@@ -1,0 +1,42 @@
+.root {
+    -fx-background-color: linear-gradient(#ffffff, #e6e6e6);
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30px 30px;
+    -fx-background-color: linear-gradient(#51c2fb, #37bafb);
+    -fx-border-color: linear-gradient(#51c2fb, #05a8fa);
+}
+.button:pressed {
+    -fx-background-color: linear-gradient(#37bafb, #51c2fb);
+    -fx-border-color: linear-gradient(#05a8fa, #51c2fb);
+}
+
+.tooltip {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+
+#editButton {
+    -fx-background-image: url("../image/baseline_edit_white_24dp.png");
+}
+
+#detailsButton {
+    -fx-background-image: url("../image/baseline_list_alt_white_24dp.png");
+}
+
+#deleteButton {
+    -fx-background-image: url("../image/baseline_delete_white_24dp.png");
+}
+
+#addButton {
+    -fx-background-image: url("../image/baseline_add_white_24dp.png");
+}
+
+#foodsButton {
+    -fx-background-image: url("../image/ic_local_pizza_white_24dp.png");
+}

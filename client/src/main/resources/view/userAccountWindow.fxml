@@ -20,7 +20,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="logOutButton" onAction="#logOutButtonAction" text="Log Out">
+            <Button fx:id="logOutButton" onAction="#logOutButtonAction" text="Esci">
                <VBox.margin>
                   <Insets bottom="30.0" top="30.0" />
                </VBox.margin>

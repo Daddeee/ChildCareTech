@@ -57,6 +57,7 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
         accessorWindowService = new AccessorWindowService(this);
         initTable();
         initMenu();
+        initButtonsToolTips();
     }
 
     @FXML
@@ -171,5 +172,13 @@ public class NewKidAnagraphicsController implements TableWindowControllerInterfa
         });
     }
     public void notifyUpdate() {
+    }
+    public void initButtonsToolTips() {
+        addButton.setTooltip(new Tooltip("Aggiungi bambino"));
+        deleteButton.setTooltip(new Tooltip("Rimuovi bambino"));
+        editButton.setTooltip(new Tooltip("Modifica bambino"));
+        allergiesButton.setTooltip(new Tooltip("Gestione delle allergie"));
+        contactsButton.setTooltip(new Tooltip("Gestione dei contatti"));
+        detailsButton.setTooltip(new Tooltip("Mostra i dettagli"));
     }
 }

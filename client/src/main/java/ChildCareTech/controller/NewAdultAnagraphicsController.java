@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
     public void initialize() {
         initTable();
         initMenu();
+        initButtonsToolTips();
     }
 
     @FXML
@@ -182,9 +184,11 @@ public class NewAdultAnagraphicsController implements TableWindowControllerInter
             }
         });
     }
-
-    public void clearChildInstances() { accessorWindowService.close(); }
-    public void notifyUpdate() {
-
+    public void notifyUpdate() { }
+    private void initButtonsToolTips() {
+        addButton.setTooltip(new Tooltip("Aggiungi persona"));
+        deleteButton.setTooltip(new Tooltip("Rimuovi persona"));
+        editButton.setTooltip(new Tooltip("Modifica persona"));
+        detailsButton.setTooltip(new Tooltip("Mostra i dettagli"));
     }
 }

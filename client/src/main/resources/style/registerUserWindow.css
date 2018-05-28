@@ -1,0 +1,27 @@
+.root {
+    -fx-background-color: linear-gradient(#ffffff, #e6e6e6);
+
+}
+
+.text-field {
+    -fx-border-radius: 3 10 10 3;
+    -fx-background-radius: 3 10 10 3;
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#registerButton {
+     -fx-background-color: linear-gradient(#ff6600, #e65c00);
+     -fx-text-fill: #FFFFFF;
+}
+#registerButton:pressed {
+     -fx-background-color: linear-gradient(#e65c00, #ff6600);
+     -fx-text-fill: #FFFFFF;
+}
+
+#cancelButton {
+    -fx-text-fill: #000000;
+}

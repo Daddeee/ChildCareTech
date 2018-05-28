@@ -8,12 +8,16 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30px 30px;
-    -fx-background-color: linear-gradient(#adddcf, #a5d9ca);
-    -fx-border-color: linear-gradient(#adddcf, #6fc3aa);
+    -fx-background-color: linear-gradient(#6fc3aa, #5dbb9f);
+    -fx-border-color: linear-gradient(#6fc3aa, #44a286);
 }
 .button:pressed {
-    -fx-background-color: linear-gradient(#a5d9ca, #adddcf);
-    -fx-border-color: linear-gradient(#6fc3aa, #adddcf);
+    -fx-background-color: linear-gradient(#5dbb9f, #6fc3aa);
+    -fx-border-color: linear-gradient(#44a286, #6fc3aa);
+}
+.tooltip {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
 }
 
 #journeyManagerButton {

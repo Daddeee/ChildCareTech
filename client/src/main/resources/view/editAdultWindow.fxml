@@ -139,12 +139,12 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </RadioButton>
-            <RadioButton fx:id="supplierSelecter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" text="Supplier">
+            <RadioButton fx:id="supplierSelecter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" text="Fornitore">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </RadioButton>
-            <RadioButton fx:id="pediatristSelecter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" text="Pediatrist">
+            <RadioButton fx:id="pediatristSelecter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" text="Pediatra">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -156,12 +156,15 @@
       </HBox>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
          <children>
-            <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Cancel">
+            <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Annulla">
                <HBox.margin>
                   <Insets left="100.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0" prefWidth="120.0" text="Save" />
+            <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0" prefWidth="120.0" text="Salva">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin></Button>
          </children>
          <VBox.margin>
             <Insets top="20.0" />

@@ -43,7 +43,7 @@
                         </TableView>
                      </children>
                   </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefWidth="100">
+                  <VBox alignment="BOTTOM_CENTER" minWidth="130.0" prefWidth="100">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="SOMETIMES">
                            <children>
@@ -59,7 +59,7 @@
                               </Button>
                            </children>
                         </VBox>
-                        <Button maxWidth="70.0" minWidth="70.0" onAction="#updateButtonAction" prefWidth="70.0" text="Aggiorna" />
+                        <Button maxWidth="70.0" minWidth="100.0" onAction="#updateButtonAction" prefWidth="70.0" text="Aggiorna" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">

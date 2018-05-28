@@ -16,12 +16,12 @@
                <children>
                   <TableView fx:id="personTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" prefHeight="640.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="lastNameColumn" prefWidth="110.0" text="Last Name" />
-                        <TableColumn fx:id="firstNameColumn" prefWidth="110.0" text="First Name" />
-                        <TableColumn fx:id="fiscalCodeColumn" prefWidth="110.0" text="Fiscal Code" />
-                        <TableColumn fx:id="bDateColumn" prefWidth="110.0" text="Birth Date" />
-                        <TableColumn fx:id="addressColumn" prefWidth="110.0" text="Address" />
-                        <TableColumn fx:id="roleColumn" prefWidth="110.0" text="Role" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="110.0" text="Cognome" />
+                        <TableColumn fx:id="firstNameColumn" prefWidth="110.0" text="Nome" />
+                        <TableColumn fx:id="fiscalCodeColumn" prefWidth="110.0" text="Codice fiscale" />
+                        <TableColumn fx:id="bDateColumn" prefWidth="110.0" text="Data di nascita" />
+                        <TableColumn fx:id="addressColumn" prefWidth="110.0" text="Indirizzo" />
+                        <TableColumn fx:id="roleColumn" prefWidth="110.0" text="Ruolo" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -8,12 +8,16 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 30px 30px;
-    -fx-background-color: linear-gradient(#bfb1d5, #bbacd2);
-    -fx-border-color: linear-gradient(#bfb1d5, #927ab8);
+    -fx-background-color: linear-gradient(#e16bb0, #dc56a4);
+    -fx-border-color: linear-gradient(#e16bb0, #d42b8e);
 }
 .button:pressed {
-    -fx-background-color: linear-gradient(#bbacd2, #bfb1d5);
-    -fx-border-color: linear-gradient(#927ab8, #bfb1d5);
+    -fx-background-color: linear-gradient(#dc56a4, #e16bb0);
+    -fx-border-color: linear-gradient(#d42b8e, #e16bb0);
+}
+.tooltip {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
 }
 
 #codeAcquisitionButton {

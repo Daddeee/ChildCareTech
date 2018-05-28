@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="ChildCareTech.controller.RegisterUserController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.RegisterUserController">
    <children>
-      <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
                <children>
@@ -50,7 +50,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
                <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Conferma password:">
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Conferma:">
                      <HBox.margin>
                         <Insets left="30.0" />
                      </HBox.margin>
@@ -75,18 +75,21 @@
             </HBox>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
                <children>
-                  <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Cancel">
+                  <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Annulla">
                      <HBox.margin>
                         <Insets left="100.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="registerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="25.0" prefWidth="120.0" text="Registra utente" />
+                  <Button fx:id="registerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="25.0" prefWidth="120.0" text="Registra utente">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></Button>
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label fx:id="registrationAlertBox" textFill="#ff1a1a" />
                </children>

@@ -1,6 +1,10 @@
 .root {
-    -fx-background-color:   linear-gradient(#ffffff, #e6e9ed);
+    -fx-background-color: linear-gradient(#ffffff, #e6e6e6);
+}
 
+.text-field {
+    -fx-border-radius: 3 10 10 3;
+    -fx-background-radius: 3 10 10 3;
 }
 
 .button {
@@ -31,12 +35,4 @@
     -fx-background-color: linear-gradient(#E6E9ED, #D3D8DF);
 }
 
-TextField {
-    -fx-border-radius: 3 10 10 3;
-    -fx-background-radius: 3 10 10 3;
-}
 
-PasswordField {
-    -fx-border-radius: 3 10 10 3;
-    -fx-background-radius: 3 10 10 3;
-}

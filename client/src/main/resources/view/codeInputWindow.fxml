@@ -60,7 +60,7 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="QRStatus" mnemonicParsing="false" onAction="#QRStatusAction" text="Turn On">
+                        <Button fx:id="QRStatus" mnemonicParsing="false" onAction="#QRStatusAction" text="Accendi">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>

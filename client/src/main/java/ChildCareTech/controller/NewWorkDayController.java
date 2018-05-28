@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
@@ -67,6 +68,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
             ex.printStackTrace();
         }
         alertWindowService = new AlertWindowService();
+        initButtonsToolTips();
     }
 
     @FXML
@@ -150,6 +152,7 @@ public class NewWorkDayController implements TableWindowControllerInterface {
                     accessorWindowService.loadEventReportWindow(eventsList.get(eventsList.indexOf(selectedEventLog)));
                 } catch(IOException ex) {
                     //gestione
+                    ex.printStackTrace();
                 }
             }
             else {
@@ -158,8 +161,9 @@ public class NewWorkDayController implements TableWindowControllerInterface {
             }
         }
     }
-    public void notifyUpdate() {
-
+    public void notifyUpdate() { }
+    private void initButtonsToolTips() {
+        codeAcquisitionButton.setTooltip(new Tooltip("Acquisizione dei codici di accesso"));
+        logButton.setTooltip(new Tooltip("Consulta storico degli accessi"));
     }
-
 }

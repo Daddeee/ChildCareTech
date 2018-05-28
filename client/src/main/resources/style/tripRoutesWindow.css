@@ -1,0 +1,25 @@
+.root {
+    -fx-background-color: linear-gradient(#ffffff, #e6e6e6);
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30px 30px;
+
+    -fx-background-color: linear-gradient(#6fc3aa, #5dbb9f);
+    -fx-border-color: linear-gradient(#6fc3aa, #44a286);
+}
+.button:pressed {
+    -fx-background-color: linear-gradient(#5dbb9f, #6fc3aa);
+    -fx-border-color: linear-gradient(#44a286, #6fc3aa);
+}
+.tooltip {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+#logButton {
+    -fx-background-image: url("../image/ic_payment_white_24dp.png");
+}

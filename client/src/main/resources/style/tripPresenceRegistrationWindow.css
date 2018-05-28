@@ -1,0 +1,22 @@
+.root {
+    -fx-background-color:   linear-gradient(#ffffff, #e6e9ed);
+}
+
+.text-field {
+    -fx-border-radius: 3 10 10 3;
+    -fx-background-radius: 3 10 10 3;
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#QRStatus {
+    -fx-background-color: linear-gradient(#0066ff, #005ce6);
+    -fx-text-fill: #FFFFFF;
+}
+#QRStatus:pressed {
+    -fx-background-color: linear-gradient(#005ce6, #0066ff);
+    -fx-text-fill: #FFFFFF;
+}

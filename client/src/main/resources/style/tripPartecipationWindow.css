@@ -1,0 +1,30 @@
+.root {
+    -fx-background-color:   linear-gradient(#ffffff, #e6e9ed);
+}
+
+.text-field {
+    -fx-border-radius: 3 10 10 3;
+    -fx-background-radius: 3 10 10 3;
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#addTripPartecipation {
+    -fx-background-color: linear-gradient(#48CFAD, #37BC98);
+    -fx-text-fill: #FFFFFF;
+}
+#addTripPartecipation:pressed {
+    -fx-background-color: linear-gradient(#37BC98, #48CFAD);
+    -fx-text-fill: #FFFFFF;
+}
+#addBusButton {
+    -fx-background-color: linear-gradient(#48CFAD, #37BC98);
+    -fx-text-fill: #FFFFFF;
+}
+#addBusButton:pressed {
+    -fx-background-color: linear-gradient(#48CFAD, #37BC98);
+    -fx-text-fill: #FFFFFF;
+}

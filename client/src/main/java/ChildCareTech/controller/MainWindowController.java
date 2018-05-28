@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -24,8 +25,6 @@ public class MainWindowController implements MainWindowControllerInterface {
     private Button eventsButton;
     @FXML
     private AnchorPane container;
-    @FXML
-    private Label clock;
 
     private ContainedWindowService containedWindowService;
     private MainWindowService mainWindowService;
@@ -50,8 +49,8 @@ public class MainWindowController implements MainWindowControllerInterface {
             @Override
             public void notifyUpdate() { }
         });
-
-        //clock, next event ecc
+        eventsButtonAction(null);
+        initButtonsToolTips();
     }
 
     @FXML
@@ -90,5 +89,14 @@ public class MainWindowController implements MainWindowControllerInterface {
 
     public void setMainWindowService(MainWindowService mainWindowService) {
         this.mainWindowService = mainWindowService;
+    }
+
+    private void initButtonsToolTips() {
+        userAccountButton.setTooltip(new Tooltip("Account utente"));
+        kidAnagraphicsButton.setTooltip(new Tooltip("Anagrafica bambini"));
+        adultAnagraphicsButton.setTooltip(new Tooltip("Anagrafica persone"));
+        canteenButton.setTooltip(new Tooltip("Gestione pasti"));
+        tripsButton.setTooltip(new Tooltip("Gestione gite"));
+        eventsButton.setTooltip(new Tooltip("Gestione eventi"));
     }
 }

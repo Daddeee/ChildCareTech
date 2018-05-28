@@ -73,12 +73,12 @@
                            <children>
                               <Button fx:id="codeAcquisitionButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" mnemonicParsing="false" onAction="#codeAcquisitionButtonAction" prefHeight="50.0" prefWidth="50.0">
                                  <font>
-                                    <Font size="10.0" />
+                                    <Font size="13.0" />
                                  </font>
                               </Button>
                               <Button fx:id="logButton" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="0.0" mnemonicParsing="false" onAction="#logButtonAction" prefHeight="50.0" prefWidth="50.0">
                                  <font>
-                                    <Font size="10.0" />
+                                    <Font size="13.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="5.0" />

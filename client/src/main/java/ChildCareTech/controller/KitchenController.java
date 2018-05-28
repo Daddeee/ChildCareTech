@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class KitchenController implements AccessorWindowController, TableWindowC
         dishesTable.setItems(dishes);
         refreshTable();
         nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
+        initButtonsToolTips();
     }
     @FXML
     public void addButtonAction(ActionEvent event) {
@@ -141,5 +143,12 @@ public class KitchenController implements AccessorWindowController, TableWindowC
     public void notifyUpdate() { }
     public void clearInstance() {
         ActiveControllersList.removeDishController(this);
+    }
+    private void initButtonsToolTips() {
+        addButton.setTooltip(new Tooltip("Registrazione nuovo piatto"));
+        deleteButton.setTooltip(new Tooltip("Cancellazione piatto"));
+        detailsButton.setTooltip(new Tooltip("Mostra dettagli del piatto"));
+        editButton.setTooltip(new Tooltip("Modifica piatto"));
+        foodsButton.setTooltip(new Tooltip("Gestione della dispensa"));
     }
 }

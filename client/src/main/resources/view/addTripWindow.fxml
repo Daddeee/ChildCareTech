@@ -98,7 +98,7 @@
                               <PropertyValueFactory property="arrivalLocation" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="routeNumberColumn" prefWidth="100.0" text="numero tratta">
+                        <TableColumn fx:id="routeNumberColumn" prefWidth="100.0" text="Numero tratta">
                            <cellValueFactory>
                               <PropertyValueFactory property="routeNumber" />
                            </cellValueFactory>
@@ -142,7 +142,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="25.0">
                <children>
-                  <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Cancella">
+                  <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Annulla">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

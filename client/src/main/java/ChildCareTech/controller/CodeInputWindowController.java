@@ -64,12 +64,12 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
     public void QRStatusAction(ActionEvent event) {
         if(!on){
             loadQRreader();
-            QRStatus.setText("Turn OFF");
+            QRStatus.setText("Spegni");
             on = true;
         }
         else {
             shutDownWebcam();
-            QRStatus.setText("Turn ON");
+            QRStatus.setText("Accendi");
             QRPane.getChildren().clear();
             QRPane.getChildren().add(imageBox);
             imageBox.setImage(new Image("/image/frame.png"));

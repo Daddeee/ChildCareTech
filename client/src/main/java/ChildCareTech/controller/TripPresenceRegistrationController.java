@@ -72,16 +72,16 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
     public void QRStatusAction(ActionEvent event) {
          if(!on){
              if(selectedBus == null) {
-                 //gestione errore
+                 alertWindowService.loadWindow("Impossibile avviare la registrazione delle presenze senza avere selezionato un bus.");
                  return;
              }
              loadQRreader();
-             QRStatus.setText("Turn OFF");
+             QRStatus.setText("Spegni");
              on = true;
          }
          else {
              shutDownWebcam();
-             QRStatus.setText("Turn ON");
+             QRStatus.setText("Accendi");
              QRPane.getChildren().clear();
              QRPane.getChildren().add(imageBox);
              imageBox.setImage(new Image("/image/frame.png"));

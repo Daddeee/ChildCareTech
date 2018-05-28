@@ -11,6 +11,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -25,6 +29,8 @@ public class LoginController implements MainWindowControllerInterface {
     private Button loginButton;
     @FXML
     private ComboBox<String> connectivity;
+    @FXML
+    private VBox root;
 
     private MainWindowService mainWindowService;
     private AccessorWindowService accessorWindowService;
@@ -37,7 +43,12 @@ public class LoginController implements MainWindowControllerInterface {
             @Override
             public void notifyUpdate() { }
         });
-
+        root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+            if (ev.getCode() == KeyCode.ENTER) {
+                loginButtonAction(null);
+                ev.consume();
+            }
+        });
         connectivity.getSelectionModel().selectFirst();
     }
 

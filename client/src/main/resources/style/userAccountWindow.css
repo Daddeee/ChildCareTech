@@ -1,0 +1,23 @@
+.root {
+    -fx-background-color: linear-gradient(#ffffff, #e6e6e6);
+}
+
+.button {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+.label {
+    -fx-font-size: 18;
+}
+
+#logOutButton {
+    -fx-background-color: linear-gradient(#ff6600, #e65c00);
+    -fx-text-fill: #FFFFFF;
+}
+
+#userImagePane {
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100px 100px;
+    -fx-background-image: url("../image/ic_account_circle_white_24dp.png");
+}

@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color: linear-gradient(#ffffff, #e6e9ed);
+    -fx-background-color: linear-gradient(#ffffff, #e6e6e6);
 }
 
 .button {
@@ -10,62 +10,67 @@
     -fx-background-size: 40px 40px;
 }
 
+.tooltip {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+
 #userAccountButton {
-    -fx-background-color: linear-gradient(#e8e7e5, #dbdad6);
+    -fx-background-color: linear-gradient(#b7b4ae, #aba8a0);
     -fx-background-image: url("../image/ic_account_circle_white_24dp.png");
-    -fx-border-color: linear-gradient(#e8e7e5, #b7b4ae);
+    -fx-border-color: linear-gradient(#b7b4ae, #938f85);
 }
 #userAccountButton:pressed {
-    -fx-background-color: linear-gradient(#dbdad6, #e8e7e5);
-    -fx-border-color: linear-gradient(#b7b4ae, #e8e7e5);
+    -fx-background-color: linear-gradient(#aba8a0, #b7b4ae);
+    -fx-border-color: linear-gradient(#938f85, #b7b4ae);
 }
 
 #kidAnagraphicsButton {
-   -fx-background-color: linear-gradient(#f0e0a2, #eddb91);
+   -fx-background-color: linear-gradient(#ffd11a, #ffcc00);
    -fx-background-image: url("../image/ic_child_care_white_24dp.png");
-   -fx-border-color: linear-gradient(#f0e0a2, #e2c550);
+   -fx-border-color: linear-gradient(#ffd11a, #e6b800);
 }
 #kidAnagraphicsButton:pressed {
-    -fx-background-color: linear-gradient(#eddb91, #f0e0a2);
-    -fx-border-color: linear-gradient(#e2c550, #f0e0a2);
+    -fx-background-color: linear-gradient(#ffcc00, #ffd11a);
+    -fx-border-color: linear-gradient(#e6b800, #ffd11a);
 }
 
 #adultAnagraphicsButton {
-     -fx-background-color: linear-gradient(#fed1be, #fecab4);
+     -fx-background-color: linear-gradient(#fc7136, #fc601d);
      -fx-background-image: url("../image/ic_people_white_24dp.png");
-     -fx-border-color: linear-gradient(#fed1be, #fd9568);
+     -fx-border-color: linear-gradient(#fc7136, #e24603);
 }
 #adultAnagraphicsButton:pressed {
-     -fx-background-color: linear-gradient(#fecab4, #fed1be);
-     -fx-border-color: linear-gradient(#fd9568, #fed1be);
+     -fx-background-color: linear-gradient(#fc601d, #fc7136);
+     -fx-border-color: linear-gradient(#e24603, #fc7136);
 }
 
 #canteenButton {
-    -fx-background-color: linear-gradient(#abe1fd, #9cdcfc);
-    -fx-background-image: url("../image/ic_local_dining_white_24dp.png");
-    -fx-border-color: linear-gradient(#abe1fd, #51c2fb);
+    -fx-background-color: linear-gradient(#51c2fb, #37bafb);
+    -fx-background-image: url("../image/baseline_restaurant_white_24dp.png");
+    -fx-border-color: linear-gradient(#51c2fb, #05a8fa);
 }
 #canteenButton:pressed {
-    -fx-background-color: linear-gradient(#9cdcfc, #abe1fd);
-    -fx-border-color: linear-gradient(#51c2fb, #abe1fd);
+    -fx-background-color: linear-gradient(#37bafb, #51c2fb);
+    -fx-border-color: linear-gradient(#05a8fa, #51c2fb);
 }
 
 #tripsButton {
-    -fx-background-color: linear-gradient(#adddcf, #a5d9ca);
+    -fx-background-color: linear-gradient(#6fc3aa, #5dbb9f);
     -fx-background-image: url("../image/ic_directions_bus_white_24dp.png");
-    -fx-border-color: linear-gradient(#adddcf, #6fc3aa);
+    -fx-border-color: linear-gradient(#6fc3aa, #44a286);
 }
 #tripsButton:pressed {
-    -fx-background-color: linear-gradient(#a5d9ca, #adddcf);
-    -fx-border-color: linear-gradient(#6fc3aa, #adddcf);
+    -fx-background-color: linear-gradient(#5dbb9f, #6fc3aa);
+    -fx-border-color: linear-gradient(#44a286, #6fc3aa);
 }
 
 #eventsButton {
-    -fx-background-color: linear-gradient(#bfb1d5, #bbacd2);
+    -fx-background-color: linear-gradient(#e16bb0, #dc56a4);
     -fx-background-image: url("../image/ic_today_white_24dp.png");
-    -fx-border-color: linear-gradient(#bfb1d5, #927ab8);
+    -fx-border-color: linear-gradient(#e16bb0, #d42b8e);
 }
 #eventsButton:pressed {
-    -fx-background-color: linear-gradient(#bbacd2, #bfb1d5);
-    -fx-border-color: linear-gradient(#927ab8, #bfb1d5);
+    -fx-background-color: linear-gradient(#dc56a4, #e16bb0);
+    -fx-border-color: linear-gradient(#d42b8e, #e16bb0);
 }

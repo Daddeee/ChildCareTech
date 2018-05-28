@@ -62,6 +62,7 @@ public class NewBusController implements AccessorWindowController, TableWindowCo
         busesTable.setItems(items);
         initMenu();
         refreshTable();
+        initButtonsToolTips();
     }
 
     @FXML
@@ -189,9 +190,17 @@ public class NewBusController implements AccessorWindowController, TableWindowCo
         items.addAll(busesDTOList);
         busesTable.setItems(items);
     }
-    public void clearChildInstances() { }
     public void notifyUpdate() { }
     public void cleanInstance() {
         ActiveControllersList.removeBusController(this);
     }
+    private void initButtonsToolTips() {
+        addButton.setTooltip(new Tooltip("Registrazione nuovo bus"));
+        deleteButton.setTooltip(new Tooltip("Rimozione bus"));
+        editButton.setTooltip(new Tooltip("Modifica bus"));
+        detailsButton.setTooltip(new Tooltip("Mostra dettagli del bus"));
+        vButton.setTooltip(new Tooltip("Conferma dati"));
+        xButton.setTooltip(new Tooltip("Annulla inserimento"));
+    }
+
 }

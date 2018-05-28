@@ -16,8 +16,8 @@
          <children>
             <HBox alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="0.0" prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <Label text="Nome piatto: "/>
-                  <TextField fx:id="nameField"/>
+                  <Label text="Nome piatto: " />
+                  <TextField fx:id="nameField" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
@@ -26,7 +26,7 @@
                      <children>
                         <TableView fx:id="selectedIngredientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                            <columns>
-                              <TableColumn fx:id="selectedName" prefWidth="75.0" text="Dish's ingredients" />
+                              <TableColumn fx:id="selectedName" prefWidth="75.0" text="Ingredienti del piatto" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -50,7 +50,7 @@
                         </VBox>
                         <VBox alignment="CENTER">
                            <children>
-                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" prefWidth="70.0" text="Save" />
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" prefWidth="70.0" text="Salva" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" />
@@ -65,7 +65,7 @@
                      <children>
                         <TableView fx:id="availableIngredientsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                            <columns>
-                              <TableColumn fx:id="availableName" prefWidth="75.0" text="Food" />
+                              <TableColumn fx:id="availableName" prefWidth="75.0" text="Alimenti" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

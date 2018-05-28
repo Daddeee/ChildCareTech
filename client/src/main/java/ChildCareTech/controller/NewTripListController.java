@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class NewTripListController implements TableWindowControllerInterface {
         tripsTable.setItems(items);
         refreshTable();
         initMenu();
+        initButtonsToolTips();
     }
 
     @FXML
@@ -177,7 +179,14 @@ public class NewTripListController implements TableWindowControllerInterface {
             }
         });
     }
-    public void notifyUpdate() {
-
+    public void notifyUpdate() { }
+    private void initButtonsToolTips() {
+        addButton.setTooltip(new Tooltip("Registrazione nuova gita"));
+        deleteButton.setTooltip(new Tooltip("Cancellazione gita"));
+        editButton.setTooltip(new Tooltip("Modifica gita"));
+        detailsButton.setTooltip(new Tooltip("Mostra i dettagli"));
+        busButton.setTooltip(new Tooltip("Gestione dei bus"));
+        subscriptionsButton.setTooltip(new Tooltip("Gestione delle partecipazioni"));
+        journeyManagerButton.setTooltip(new Tooltip("Gestione del tragitto"));
     }
 }

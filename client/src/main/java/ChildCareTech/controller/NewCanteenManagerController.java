@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         canteenListWindow = new AccessorWindowService(this);
         kitchenWindow = new AccessorWindowService(this);
         alertWindowService = new AlertWindowService();
+        initButtonsToolTips();
     }
     @FXML
     protected void validateMenuAction(ActionEvent event){
@@ -176,4 +178,10 @@ public class NewCanteenManagerController implements TableWindowControllerInterfa
         refreshMealsTable();
     }
     public void notifyUpdate() { }
+    private void initButtonsToolTips() {
+        menuManagerButton.setTooltip(new Tooltip("Gestione del menù"));
+        canteenManagerButton.setTooltip(new Tooltip("Gestione delle mense"));
+        validateMenuButton.setTooltip(new Tooltip("Verifica allergie al menù"));
+        foodManagerButton.setTooltip(new Tooltip("Gestione della cucina"));
+    }
 }

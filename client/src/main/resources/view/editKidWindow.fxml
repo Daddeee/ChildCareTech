@@ -168,12 +168,15 @@
       </HBox>
         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0">
             <children>
-                <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Cancel">
+                <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="80.0" text="Annulla">
                     <HBox.margin>
                         <Insets left="100.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0" prefWidth="120.0" text="SAVE" />
+                <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0" prefWidth="120.0" text="Salva">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin></Button>
             </children>
             <VBox.margin>
                 <Insets top="20.0" />

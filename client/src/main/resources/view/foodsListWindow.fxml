@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,7 +17,7 @@
                <children>
                   <TableView fx:id="foodsTable" layoutX="-14.0" prefHeight="370.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Foods" />
+                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Alimenti" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -33,13 +34,25 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="0.0" prefHeight="30.0" HBox.hgrow="SOMETIMES">
                      <children>
-                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonAction" text="Add" />
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonAction" text="Rimuovi">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonAction" text="Aggiungi">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

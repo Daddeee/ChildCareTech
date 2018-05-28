@@ -31,14 +31,14 @@ public class RegisterUserController implements AccessorWindowController {
 
     @FXML
     public void initialize() {
-        confirmationLabel.setText("X");
+        confirmationLabel.setText("");
         confirmPasswordField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(confirmPasswordField.getText().equals(addPasswordField.getText()))
-                    confirmationLabel.setText("V");
+                    confirmationLabel.setText("√");
                 else
-                    confirmationLabel.setText("X");
+                    confirmationLabel.setText("");
             }
         });
     }
@@ -48,12 +48,12 @@ public class RegisterUserController implements AccessorWindowController {
         boolean status;
 
         if (addUserNameField.getText().equals("") || addPasswordField.getText().equals("")) {
-            registrationAlertBox.setText("Empty fields!");
+            registrationAlertBox.setText("Dati mancanti!");
             return;
         }
 
         if (!addPasswordField.getText().equals(confirmPasswordField.getText())) {
-            registrationAlertBox.setText("Password not matching!");
+            registrationAlertBox.setText("Le password non corrispondono!");
             return;
         }
 
