@@ -11,7 +11,7 @@ import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
-import ChildCareTech.utils.RemoteEventObservable;
+import ChildCareTech.network.RemoteEventObservable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

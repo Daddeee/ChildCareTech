@@ -16,7 +16,28 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * This class hold the logic needed to generate meals when creating canteens.
+ */
 public class MealsGenerationUtil {
+    /**
+     * For each WorkDay present in the database, K meals (and related menus) are generated, where K is the size
+     * of entryTimes (or exitTimes) list. Each meal will have an entry event starting at the time specified in the entryTimes list
+     * and an exit event starting at the correspondent time specified in the exitTimes list. The name of the events will be
+     * conventionally setted to "{Canteen name} {day} - {Entrata|Uscita} {#}".
+     * <p>
+     * For the generation to complete successfully, entry and exit time lists must meet the following requirements:
+     * <ul>
+     *     <li>both lists must have the same size</li>
+     *     <li>entryTimes[i] < exitTimes[i] for each 0<=i<entryTimes.size()</li>
+     *     <li>exitTimes[i] - entryTimes[i] > 10 minutes for each 0<=i<entryTimes.size()</li>
+     *     <li>specified time slots cannot overlap</li>
+     * </ul>
+     * @param canteen the canteen entity to be saved.
+     * @param entryTimes a list containing all the beginning times of the meals to be generated.
+     * @param exitTimes a list containing all the ending times of the meals to be generated.
+     * @throws AddFailedException if some of the requirements specified above are not met.
+     */
     public static void generateMeals(Canteen canteen, List<LocalTime> entryTimes, List<LocalTime> exitTimes) throws AddFailedException {
         Session session;
         Transaction tx = null;

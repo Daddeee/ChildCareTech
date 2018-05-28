@@ -14,7 +14,7 @@ import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.DTO.factories.CanteenDTOFactory;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
 import ChildCareTech.utils.MealsGenerationUtil;
-import ChildCareTech.utils.RemoteEventObservable;
+import ChildCareTech.network.RemoteEventObservable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
