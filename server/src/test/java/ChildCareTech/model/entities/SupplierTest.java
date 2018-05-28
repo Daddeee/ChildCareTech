@@ -1,5 +1,6 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Supplier;
@@ -14,6 +15,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Supplier entities.
+ */
 public class SupplierTest extends AbstractEntityTest<Supplier, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -25,13 +29,13 @@ public class SupplierTest extends AbstractEntityTest<Supplier, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        Person o1 = new Person("generic3",
+        Person o1 = new Person("generic300000000",
                 "generic1",
                 "generic1",
                 LocalDate.now(),
                 ChildCareTech.common.Sex.MALE,
                 "",
-                "");
+                "00");
 
         Supplier s = new Supplier(o1);
         Food f1 = new Food("food", false);
@@ -67,21 +71,21 @@ public class SupplierTest extends AbstractEntityTest<Supplier, Integer> {
 
     @Override
     public void testCRUD() {
-        Person o1 = new Person("generic1",
+        Person o1 = new Person("generic100000000",
                 "generic1",
                 "generic1",
                 LocalDate.now(),
                 ChildCareTech.common.Sex.MALE,
                 "",
-                "");
+                "11");
 
-        Person o2 = new Person("generic2",
+        Person o2 = new Person("generic200000000",
                 "generic2",
                 "generic2",
                 LocalDate.now(),
                 ChildCareTech.common.Sex.MALE,
                 "",
-                "");
+                "11");
 
         Supplier p = new Supplier(o1);
         Supplier pu = new Supplier(o2);

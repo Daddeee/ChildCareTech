@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.entities.Meal;
@@ -17,6 +18,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Menu entities.
+ */
 public class MenuTest extends AbstractEntityTest<Menu, Integer> {
     @Override
     public void setUp() throws Exception {

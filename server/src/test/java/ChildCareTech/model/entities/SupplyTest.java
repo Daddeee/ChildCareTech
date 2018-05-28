@@ -1,5 +1,6 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Supplier;
@@ -12,6 +13,9 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Supply entities.
+ */
 public class SupplyTest extends AbstractEntityTest<Supply, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -21,7 +25,7 @@ public class SupplyTest extends AbstractEntityTest<Supply, Integer> {
 
     @Override
     public void testCRUD() {
-        Person p = new Person("supplcode",
+        Person p = new Person("supplcode0000000",
                 "name",
                 "lastname",
                 LocalDate.now(),

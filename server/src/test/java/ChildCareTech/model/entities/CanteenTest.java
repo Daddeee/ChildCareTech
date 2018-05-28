@@ -1,7 +1,8 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.DAO.CanteenDAO;
 import ChildCareTech.model.entities.Meal;
@@ -16,6 +17,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Canteen entities.
+ */
 public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
     @Override
     public void setUp() throws Exception {

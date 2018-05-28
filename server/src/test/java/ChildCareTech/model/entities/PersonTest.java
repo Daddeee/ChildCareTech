@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.entities.Person;
@@ -18,6 +19,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Person entities.
+ */
 public class PersonTest extends AbstractEntityTest<Person, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -29,7 +33,7 @@ public class PersonTest extends AbstractEntityTest<Person, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        Person p = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
+        Person p = new Person("cf00000000000000", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "11");
         Trip t1 = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
         Trip t2 = new Trip("meta1", LocalDate.now().plusDays(2), LocalDate.now().plusDays(3), EventStatus.OPEN);
         Bus b = new Bus("AA111AA", 10);
@@ -62,7 +66,7 @@ public class PersonTest extends AbstractEntityTest<Person, Integer> {
 
     @Override
     public void testCRUD() {
-        Person o = new Person("fisccodetest",
+        Person o = new Person("fisccodetest0000",
                 "name",
                 "surname",
                 LocalDate.now(),
@@ -70,7 +74,7 @@ public class PersonTest extends AbstractEntityTest<Person, Integer> {
                 "addr",
                 "numb");
 
-        Person ou = new Person("fisccodetest",
+        Person ou = new Person("fisccodetest0000",
                 "name_updated",
                 "surname",
                 LocalDate.now(),

@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Canteen;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.model.DAO.DishDAO;
@@ -15,6 +16,9 @@ import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Dish entities.
+ */
 public class DishTest extends AbstractEntityTest<Dish, Integer> {
     @Override
     public void setUp() throws Exception {

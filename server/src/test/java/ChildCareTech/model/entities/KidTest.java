@@ -1,5 +1,6 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Adult;
 import ChildCareTech.model.entities.Kid;
 import ChildCareTech.model.DAO.KidDAO;
@@ -11,6 +12,9 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Kid entities.
+ */
 public class KidTest extends AbstractEntityTest<Kid, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -20,14 +24,14 @@ public class KidTest extends AbstractEntityTest<Kid, Integer> {
 
     @Override
     public void testCRUD() {
-        Person o = new Person("kidtest",
+        Person o = new Person("kidtest000000000",
                 "kid",
                 "kid",
                 LocalDate.now(),
                 ChildCareTech.common.Sex.MALE,
                 "addr",
                 "numb");
-        Person p = new Person("parenttest",
+        Person p = new Person("parenttest000000",
                 "parent",
                 "parent",
                 LocalDate.now(),

@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.Sex;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Food;
 import ChildCareTech.model.DAO.FoodDAO;
 import ChildCareTech.model.entities.Person;
@@ -16,6 +17,9 @@ import java.util.Set;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Food entities.
+ */
 public class FoodTest extends AbstractEntityTest<Food, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -27,8 +31,8 @@ public class FoodTest extends AbstractEntityTest<Food, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        Person p = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
-        Person p2 = new Person("cf2", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
+        Person p = new Person("cf00000000000000", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "11");
+        Person p2 = new Person("cf00000000000001", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "11");
         Food f = new Food("food", false);
         Supplier s = new Supplier(p);
         Supplier ss = new Supplier(p2);
@@ -59,8 +63,8 @@ public class FoodTest extends AbstractEntityTest<Food, Integer> {
 
         testOneToMany(f, set, Food::getSupplies);
 
-        Person allergy1 = new Person("all1", "all", "all", LocalDate.now(), Sex.MALE, "", "");
-        Person allergy2 = new Person("all2", "all", "all", LocalDate.now(), Sex.MALE, "", "");
+        Person allergy1 = new Person("all1000000000000", "all", "all", LocalDate.now(), Sex.MALE, "", "1");
+        Person allergy2 = new Person("all2000000000000", "all", "all", LocalDate.now(), Sex.MALE, "", "2");
 
         Food allergic1 = new Food("allergico 1", false);
         Food allergic2 = new Food("allergico 2" ,true);

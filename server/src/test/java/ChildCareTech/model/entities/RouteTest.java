@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Route;
 import ChildCareTech.model.DAO.RouteDAO;
 import ChildCareTech.model.entities.Trip;
@@ -11,6 +12,9 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Route entities.
+ */
 public class RouteTest extends AbstractEntityTest<Route, Integer> {
     @Override
     public void setUp() throws Exception {

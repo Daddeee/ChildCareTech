@@ -1,7 +1,8 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.EventType;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Checkpoint;
 import ChildCareTech.model.DAO.CheckpointDAO;
 import ChildCareTech.model.entities.Event;
@@ -15,6 +16,9 @@ import java.time.LocalTime;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Checkpoint entities.
+ */
 public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -26,7 +30,7 @@ public class CheckpointTest extends AbstractEntityTest<Checkpoint, Integer> {
     public void testCRUD() {
         WorkDay w = new WorkDay(LocalDate.now(), LocalTime.MIN, LocalTime.MAX, false);
         Event event = new Event("nome", w, LocalTime.now(), LocalTime.now().plusMinutes(10), EventType.DAILY, EventStatus.WAIT);
-        Person p = new Person("fisccode",
+        Person p = new Person("fisccode00000000",
                 "nome",
                 "cognome",
                 LocalDate.now(),

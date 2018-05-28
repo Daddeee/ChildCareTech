@@ -20,6 +20,9 @@ import java.util.Set;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Testing {@link BusDAO#getAvailableBuses(Trip)} method. See method's doc for further specifications.
+ */
 public class AvailableBusTest {
     private SessionFactory sessionFactory;
     private Session session = null;

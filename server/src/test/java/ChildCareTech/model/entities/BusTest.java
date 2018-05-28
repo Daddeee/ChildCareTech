@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.DAO.BusDAO;
 import ChildCareTech.model.entities.Person;
@@ -15,6 +16,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Bus entities.
+ */
 public class BusTest extends AbstractEntityTest<Bus, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -28,8 +32,8 @@ public class BusTest extends AbstractEntityTest<Bus, Integer> {
 
         Bus b = new Bus("AA111AA", 10);
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
-        Person p1 = new Person("fisc1", "fn1", "ln1", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
-        Person p2 = new Person("fisc2", "fn2", "ln2", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
+        Person p1 = new Person("fisc100000000000", "fn1", "ln1", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "111");
+        Person p2 = new Person("fisc200000000000", "fn2", "ln2", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "111");
         TripPartecipation tp1 = new TripPartecipation(p1, t, b);
         TripPartecipation tp2 = new TripPartecipation(p2, t, b);
 

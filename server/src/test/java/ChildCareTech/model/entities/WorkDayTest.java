@@ -1,7 +1,8 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
 import ChildCareTech.common.EventType;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.*;
 import ChildCareTech.model.DAO.WorkDayDAO;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
@@ -14,6 +15,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for WorkDay entities.
+ */
 public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -30,14 +34,14 @@ public class WorkDayTest extends AbstractEntityTest<WorkDay, Integer> {
         Canteen c2 = new Canteen("canteen2");
         Meal m1 = new Meal(c1, 1, wd, null, null, EventStatus.CLOSED, null);
         Meal m2 = new Meal(c2, 2, wd, null, null, EventStatus.CLOSED, null);
-        Person p1 = new Person("generic1",
-                "generic1",
+        Person p1 = new Person("generic100000000",
+                "generic100000000",
                 "generic1",
                 LocalDate.now(),
                 ChildCareTech.common.Sex.MALE,
                 "",
-                "");
-        Person p2 = new Person("generic2",
+                "1");
+        Person p2 = new Person("generic200000000",
                 "generic2",
                 "generic2",
                 LocalDate.now(),

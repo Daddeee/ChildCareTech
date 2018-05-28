@@ -16,21 +16,104 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Function;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations and relationships for an entity.
+ * This tests were used to set correct annotations on every entity and provide a correct mapping.
+ *
+ * @param <T> the type of entity being tested.
+ * @param <K> the type of his primary key.
+ */
 public abstract class AbstractEntityTest<T extends iEntity, K extends Serializable> {
     protected SessionFactory sessionFactory;
     protected Session session = null;
     protected AbstractGenericDAO<T, K> dao = null;
 
-    @Test
-    public void testRelations() {
-    }
 
+    /**
+     * This method must be implemented to pass entities to methods that test relationships.
+     */
+    @Test
+    public void testRelations() {}
+
+    /**
+     * This method must be implemented to pass entities to {@link #testCRUDImpl(iEntity, iEntity)}
+     */
     @Test
     public abstract void testCRUD();
 
+    /**
+     * Test correct settings for OneToMany relationships.
+     * At first every entity of the many side is saved in the database, then they are read back and
+     * confronted with the initial Set.
+     *
+     * @param ent1 the one side of the relationship.
+     * @param ent2 a Set containing the many side of the relationship.
+     * @param getRelationSet a function called on ent1 to get the relation set from the database
+     * @param <T2> the type of the many side.
+     * @throws IllegalArgumentException
+     */
+    protected <T2> void testOneToMany(T ent1, Set<T2> ent2, Function<T, Set<T2>> getRelationSet) throws IllegalArgumentException {
+        session = sessionFactory.openSession();
+        dao.setSession(session);
+        Transaction tx = null;
+        Iterator<T2> ent2Iter = ent2.iterator();
+        try {
+            tx = session.beginTransaction();
+
+            dao.create(ent1);
+            while (ent2Iter.hasNext()) {
+                session.save(ent2Iter.next());
+            }
+
+            session.flush();
+            tx.commit();
+        } catch (HibernateException | ValidationFailedException e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+
+        T read = null;
+        Set<T2> set = new HashSet<>();
+        session = sessionFactory.openSession();
+        dao.setSession(session);
+        tx = null;
+        try {
+            tx = session.beginTransaction();
+            read = dao.read(ent1);
+            getRelationSet.apply(read).size();
+            set = getRelationSet.apply(read);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            fail(e.getMessage());
+        } finally {
+            session.close();
+        }
+
+        assertTrue(ent2.equals(set));
+    }
+
+    /**
+     * Test correct settings for ManyToMany relationships.
+     * At first every entity is saved in the database, then they are read back and
+     * confronted with the initial Sets.
+     *
+     * @param ents1 a Set containing the owning side entities.
+     * @param ents2 a Set containing the non-owning side entities.
+     * @param getRelationSet a function that, called on an entity of the owning side, returns the associated entities.
+     * @param <T2>
+     * @throws IllegalArgumentException
+     */
     protected <T2> void testManyToMany(Set<T> ents1, Set<T2> ents2, Function<T, Set<T2>> getRelationSet) throws IllegalArgumentException {
         session = sessionFactory.openSession();
         dao.setSession(session);
@@ -83,53 +166,19 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
         }
     }
 
-    protected <T2> void testOneToMany(T ent1, Set<T2> ent2, Function<T, Set<T2>> getRelationSet) throws IllegalArgumentException {
-        session = sessionFactory.openSession();
-        dao.setSession(session);
-        Transaction tx = null;
-        Iterator<T2> ent2Iter = ent2.iterator();
-        try {
-            tx = session.beginTransaction();
-
-            dao.create(ent1);
-            while (ent2Iter.hasNext()) {
-                session.save(ent2Iter.next());
-            }
-
-            session.flush();
-            tx.commit();
-        } catch (HibernateException | ValidationFailedException e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            fail(e.getMessage());
-        } finally {
-            session.close();
-        }
-
-
-        T read = null;
-        Set<T2> set = new HashSet<>();
-        session = sessionFactory.openSession();
-        dao.setSession(session);
-        tx = null;
-        try {
-            tx = session.beginTransaction();
-            read = dao.read(ent1);
-            getRelationSet.apply(read).size();
-            set = getRelationSet.apply(read);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-            fail(e.getMessage());
-        } finally {
-            session.close();
-        }
-
-        assertTrue(ent2.equals(set));
-    }
-
+    /**
+     * Test basic CRUD operations for the given entity.
+     * <ul>
+     *     <li>at first we create the entity</li>
+     *     <li>then we read it from the database</li>
+     *     <li>then we update it with the new entity and read it back</li>
+     *     <li>then we delete it.</li>
+     * </ul>
+     *
+     * @param o the entity to be tested
+     * @param ou an updated version of the same entity
+     * @throws IllegalArgumentException
+     */
     @SuppressWarnings("unchecked")
     protected void testCRUDImpl(T o, T ou) throws IllegalArgumentException {
         session = sessionFactory.openSession();
@@ -169,7 +218,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
             /* reading */
             t = dao.read((K) o.getPrimaryKey());
 
-            assertTrue(t == null);
+            assertNull(t);
         } catch (HibernateException | ValidationFailedException e) {
             if (tx != null)
                 tx.rollback();
@@ -180,6 +229,10 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
         }
     }
 
+    /**
+     * Configure and start the testing database.
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         // setup the session factory
@@ -187,6 +240,10 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
         sessionFactory = config.buildSessionFactory();
     }
 
+    /**
+     * After every test, the tables are dropped.
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
         session = sessionFactory.openSession();

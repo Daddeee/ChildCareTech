@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Route;
@@ -16,6 +17,9 @@ import java.util.HashSet;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for Trip entities.
+ */
 public class TripTest extends AbstractEntityTest<Trip, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -27,8 +31,8 @@ public class TripTest extends AbstractEntityTest<Trip, Integer> {
     public void testRelations() {
         Transaction tx = null;
 
-        Person p1 = new Person("cf", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "");
-        Person p2 = new Person("cf2", "fn2", "ln2", LocalDate.now().plusDays(1), ChildCareTech.common.Sex.MALE, "", "");
+        Person p1 = new Person("cf00000000000000", "fn", "ln", LocalDate.now(), ChildCareTech.common.Sex.MALE, "", "1");
+        Person p2 = new Person("cf00000000000001", "fn2", "ln2", LocalDate.now().plusDays(1), ChildCareTech.common.Sex.MALE, "", "2");
         Trip t = new Trip("meta", LocalDate.now(), LocalDate.now().plusDays(1), EventStatus.OPEN);
         Bus b1 = new Bus("AA111AA", 10);
         Bus b2 = new Bus("AA111AB", 11);

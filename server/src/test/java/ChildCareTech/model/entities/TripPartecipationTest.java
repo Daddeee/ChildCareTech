@@ -1,6 +1,7 @@
-package ChildCareTech.model;
+package ChildCareTech.model.entities;
 
 import ChildCareTech.common.EventStatus;
+import ChildCareTech.model.AbstractEntityTest;
 import ChildCareTech.model.entities.Bus;
 import ChildCareTech.model.entities.Person;
 import ChildCareTech.model.entities.Trip;
@@ -13,6 +14,9 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Test basic CRUD operations for TripPartecipation entities.
+ */
 public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation, Integer> {
     @Override
     public void setUp() throws Exception {
@@ -23,7 +27,7 @@ public class TripPartecipationTest extends AbstractEntityTest<TripPartecipation,
     @Override
     public void testCRUD() {
         Person p = new Person(
-                "fisccode",
+                "fisccode00000000",
                 "nome",
                 "cognome",
                 LocalDate.now(),
