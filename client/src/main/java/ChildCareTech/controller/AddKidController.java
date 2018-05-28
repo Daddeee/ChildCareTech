@@ -90,6 +90,18 @@ public class AddKidController implements AccessorWindowController{
 
     @FXML
     public void saveButtonAction(ActionEvent event) {
+        if(fiscalCodeField.getText().equals("") ||
+                firstNameField.getText().equals("") ||
+                lastNameField.getText().equals("") ||
+                addressField.getText().equals("") ||
+                pediatristComboBox.getValue() == null) {
+            alertWindowService.loadWindow("Non tutti i campi obbligatori sono stati compilati.");
+            return;
+        }
+        if(fiscalCodeField.getText().length() != 16) {
+            alertWindowService.loadWindow("Codice fiscale non valido.");
+            return;
+        }
         Sex sex;
         if (maleButton.isSelected())
             sex = Sex.MALE;
