@@ -36,4 +36,11 @@ public class CanteenDTO implements Serializable {
     public void setMeals(Set<MealDTO> meals) {
         this.meals = meals;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof CanteenDTO)) return false;
+        return this.name.equals(((CanteenDTO) o).name);
+    }
 }

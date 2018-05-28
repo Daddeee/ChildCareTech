@@ -86,7 +86,7 @@ public class TripDTOFactory implements AbstractDTOFactory<Trip, TripDTO> {
     private void loadBusRelationship(Trip entity, TripDTO dto) {
         Set<BusDTO> buses = new HashSet<>();
 
-        if(Hibernate.isInitialized(entity.getBuses()))
+        if(Hibernate.isInitialized(entity.getBuses()) && entity.getBuses() != null)
             for(Bus b : entity.getBuses())
                 buses.add(BusDTOFactory.getTripManySide(b));
 

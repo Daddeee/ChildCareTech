@@ -48,7 +48,7 @@ public class DishDTOFactory implements AbstractDTOFactory<Dish, DishDTO> {
 
     private static void loadMenuRelationship(Dish entity, DishDTO dto) {
         Set<MenuDTO> menus = new HashSet<>();
-        if(Hibernate.isInitialized(entity.getMenus()))
+        if(Hibernate.isInitialized(entity.getMenus()) && entity.getMenus() != null)
             for (Menu m : entity.getMenus())
                 menus.add(MenuDTOFactory.getDishManySide(m));
         dto.setMenus(menus);

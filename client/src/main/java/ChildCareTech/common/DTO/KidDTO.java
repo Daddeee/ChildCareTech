@@ -72,4 +72,11 @@ public class KidDTO implements Serializable {
     public String toString() {
         return getPerson().getLastName() + " " + getPerson().getFirstName();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof KidDTO)) return false;
+        return this.person.equals(((KidDTO) o).person);
+    }
 }
