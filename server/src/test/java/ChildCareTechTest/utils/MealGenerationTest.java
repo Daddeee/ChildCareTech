@@ -141,7 +141,7 @@ public class MealGenerationTest {
      * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp()   {
         // setup the session factory
         Configuration config = new Configuration().configure();
         sessionFactory = config.buildSessionFactory();

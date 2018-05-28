@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class StaffTest extends AbstractEntityTest<Staff, Integer> {
     @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    public void setUp()   {
+        super.setUp() ;
         dao = new StaffDAO();
     }
 

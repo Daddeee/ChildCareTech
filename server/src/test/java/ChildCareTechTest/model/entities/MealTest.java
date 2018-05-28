@@ -19,8 +19,8 @@ import static org.junit.Assert.fail;
  */
 public class MealTest extends AbstractEntityTest<Meal, Integer> {
     @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    public void setUp()   {
+        super.setUp() ;
         dao = new MealDAO();
     }
 

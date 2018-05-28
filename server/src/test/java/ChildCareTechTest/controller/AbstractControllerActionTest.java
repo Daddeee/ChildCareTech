@@ -23,7 +23,7 @@ public abstract class AbstractControllerActionTest {
      * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp()   {
         // setup the session factory
         HibernateSessionFactoryUtil.startHibernate();
     }

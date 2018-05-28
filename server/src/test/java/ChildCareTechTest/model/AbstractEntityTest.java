@@ -236,7 +236,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
      * @throws Exception
      */
     @Before
-    public void setUp(){
+    public void setUp() {
         // setup the session factory
         Configuration config = new Configuration().configure();
         sessionFactory = config.buildSessionFactory();

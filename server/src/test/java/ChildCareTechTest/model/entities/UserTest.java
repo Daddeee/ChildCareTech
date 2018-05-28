@@ -9,8 +9,8 @@ import ChildCareTech.model.DAO.UserDAO;
  */
 public class UserTest extends AbstractEntityTest<User, Integer> {
     @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    public void setUp()   {
+        super.setUp() ;
         dao = new UserDAO();
     }
 

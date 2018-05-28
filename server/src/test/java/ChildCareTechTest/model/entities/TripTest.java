@@ -22,8 +22,8 @@ import static org.junit.Assert.fail;
  */
 public class TripTest extends AbstractEntityTest<Trip, Integer> {
     @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    public void setUp()  {
+        super.setUp() ;
         dao = new TripDAO();
     }
 

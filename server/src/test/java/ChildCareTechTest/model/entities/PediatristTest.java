@@ -14,8 +14,8 @@ import java.util.HashSet;
  */
 public class PediatristTest extends AbstractEntityTest<Pediatrist, Integer> {
     @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    public void setUp()   {
+        super.setUp() ;
         dao = new PediatristDAO();
     }
 

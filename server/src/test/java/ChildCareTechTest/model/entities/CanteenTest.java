@@ -22,8 +22,8 @@ import static org.junit.Assert.fail;
  */
 public class CanteenTest extends AbstractEntityTest<Canteen, Integer> {
     @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    public void setUp()   {
+        super.setUp() ;
         dao = new CanteenDAO();
     }
 
