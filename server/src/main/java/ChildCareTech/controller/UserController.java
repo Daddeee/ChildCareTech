@@ -59,6 +59,8 @@ public class UserController {
 
     /**
      * Register a new user with provided username and password.
+     * For the registration to complete successfully, there must not be an User with the same username already saved in the database
+     * and the given username must have at least 3 characters.
      *
      * @param userName the new username
      * @param password the corresponding password

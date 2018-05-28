@@ -212,6 +212,13 @@ public interface UserSessionFacade extends Remote {
     /**
      * Save the provided trip in the database.
      *
+     * For the saving to complete successfully:
+     * <ul>
+     *     <li>the dates must pass their {@link ChildCareTech.model.validators.ValidTripDatesValidator validation}</li>
+     *     <li>there must be at least 2 routes</li>
+     *     <li>routes must pass the {@link ChildCareTech.model.validators.ValidRoutesValidator sequence validation}</li>
+     * </ul>
+     *
      * @param trip the Data Transfer Object holding the new trip's data.
      * @throws AddFailedException if entity saving goes wrong.
      * @throws RemoteException

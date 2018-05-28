@@ -3,6 +3,7 @@ package ChildCareTech.model.entities;
 import ChildCareTech.model.iEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 /**
  * Represents a row of the User table saved in the database.
@@ -15,6 +16,7 @@ public class User implements iEntity<User, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Size(min = 3, message = "Il nome utente deve avere almeno 3 caratteri")
     @Column(unique = true, nullable = false, length = 30)
     private String userName;
 
