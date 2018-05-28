@@ -236,7 +236,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
      * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         // setup the session factory
         Configuration config = new Configuration().configure();
         sessionFactory = config.buildSessionFactory();
@@ -247,13 +247,7 @@ public abstract class AbstractEntityTest<T extends iEntity, K extends Serializab
      * @throws Exception
      */
     @After
-    public void tearDown() throws Exception {
-        session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.createSQLQuery("drop database test").executeUpdate();
-        tx.commit();
-        session.close();
-
+    public void tearDown(){
         sessionFactory.close();
     }
 }

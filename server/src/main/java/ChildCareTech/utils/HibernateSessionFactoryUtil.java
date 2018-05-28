@@ -24,5 +24,13 @@ public class HibernateSessionFactoryUtil {
         return ourInstance;
     }
 
+    /**
+     * Close the Hibernate SessionFactory if present.
+     */
+    public static void close() {
+        if(ourInstance != null)
+            ourInstance.close();
+    }
+
     private HibernateSessionFactoryUtil() {}
 }

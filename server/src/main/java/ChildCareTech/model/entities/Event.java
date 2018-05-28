@@ -22,6 +22,7 @@ public class Event implements iEntity<Event, Integer> {
     private int id;
 
     @NotNull
+    @Column(length = 40)
     private String name;
 
     @ManyToOne

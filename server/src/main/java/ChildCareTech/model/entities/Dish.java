@@ -19,7 +19,7 @@ public class Dish implements iEntity<Dish, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String name;
 
     @ManyToMany(mappedBy = "dishes")

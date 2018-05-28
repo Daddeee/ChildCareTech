@@ -1,4 +1,4 @@
-package ChildCareTechTest.controller;
+package ChildCareTechTest.controller.CanteenController;
 
 import ChildCareTech.common.DTO.CanteenDTO;
 import ChildCareTech.common.EventStatus;

@@ -17,7 +17,7 @@ public class Canteen implements iEntity<Canteen, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 40)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "canteen")

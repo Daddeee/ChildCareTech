@@ -21,7 +21,7 @@ public class Person implements iEntity<Person, Integer> {
     private int id;
 
     @Length(max = 16, min = 16, message = "Il codice fiscale deve avere 16 caratteri.")
-    @Column(unique = true)
+    @Column(unique = true, length = 16)
     private String fiscalCode;
 
     @Column(nullable = false)

@@ -22,7 +22,7 @@ public class Food implements iEntity<Food, Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false)
+    @Column(unique = true, length = 40)
     private String name;
 
     @ColumnDefault("0")

@@ -1,6 +1,6 @@
 package ChildCareTechTest;
 
-import ChildCareTechTest.controller.GetCanteenByNameTest;
+import ChildCareTechTest.controller.CanteenController.GetCanteenByNameTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
