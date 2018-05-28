@@ -48,12 +48,14 @@ In questo caso sono stati utilizzati due pattern in combinazione:
 ### Socket
 
 ([Link](Socket_UML_Class_Diagram.pdf))
+
 Class diagram che rappresenta le classi coinvolte nella connettività tramite Socket.
 A livello di pattern l'architettura è la stessa utilizzata per RMI, tuttavia sono state aggiunte delle classi per encapsulare chiamate e risposte remote, in modo da "mimare" il funzionamento di RMI mediante Socket. 
 
 ### Observable
 
 ([Link](Remote_Observable_UML_Class_Diagram.pdf))
+
 Class diagram che rappresenta le classi coinvolte nel meccanismo di aggiornamento "push".
 E' stato utilizzato il pattern observable (https://it.wikipedia.org/wiki/Observer_pattern) per notificare a tutti i
  client la necessità di aggiornare determinati contenuti. Ciò è stato fatto per evitare stati non consistenti tra client
