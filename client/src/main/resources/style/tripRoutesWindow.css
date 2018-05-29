@@ -23,3 +23,6 @@
 #logButton {
     -fx-background-image: url("../image/ic_payment_white_24dp.png");
 }
+#reportButton {
+    -fx-background-image: url("../image/baseline_list_white_24dp.png");
+}
