@@ -100,4 +100,12 @@ public class TripDTO implements Serializable {
     public void setBuses(Set<BusDTO> buses) {
         this.buses = buses;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof TripDTO)) return false;
+        TripDTO a = (TripDTO) o;
+        return this.meta.equals(a.meta) && this.depDate.equals(a.depDate) && this.arrDate.equals(a.arrDate);
+    }
 }

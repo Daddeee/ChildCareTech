@@ -56,7 +56,7 @@ public class FoodDTOFactory implements AbstractDTOFactory<Food, FoodDTO> {
     private static void loadAllergiesRelationship(Food entity, FoodDTO dto){
         Set<PersonDTO> allergies = new HashSet<>();
 
-        if(Hibernate.isInitialized(entity.getAllergies()))
+        if(Hibernate.isInitialized(entity.getAllergies()) && entity.getAllergies() != null)
             for(Person p : entity.getAllergies())
                 allergies.add(PersonDTOFactory.getAllergiesManySide(p));
 

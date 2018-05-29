@@ -62,4 +62,11 @@ public class BusDTO implements Serializable {
     public String toString() {
         return licensePlate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(!(o instanceof BusDTO)) return false;
+        return this.licensePlate.equals(((BusDTO) o).licensePlate);
+    }
 }

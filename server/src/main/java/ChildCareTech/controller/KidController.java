@@ -6,6 +6,7 @@ import ChildCareTech.common.DTO.TripDTO;
 import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.AdultDAO;
 import ChildCareTech.model.DAO.KidDAO;
 import ChildCareTech.model.DAO.PersonDAO;
@@ -170,7 +171,7 @@ public class KidController {
      *
      * @param newKidDTO
      */
-    public void doUpdateKid(KidDTO newKidDTO) {
+    public void doUpdateKid(KidDTO newKidDTO) throws UpdateFailedException {
         KidDAO kidDAO = new KidDAO();
         Kid kid = EntityFactoryFacade.getEntity(newKidDTO);
 
@@ -186,6 +187,7 @@ public class KidController {
         } catch(Exception e){
             if(tx!=null) tx.rollback();
             e.printStackTrace();
+            throw new UpdateFailedException(e.getMessage());
         }
         finally {
             session.close();

@@ -228,6 +228,9 @@ public interface UserSessionFacade extends Remote {
     /**
      * Update the trip matching the identifier with the new data provided in the DTO.
      *
+     * For a bus to be updated correctly, it must not modify dates while having associated buses
+     * and the new values must respect the validations specified in the saveTrip method.
+     *
      * @param newTrip the Data Transfer Object holding the new trip's data and the identifier.
      * @throws UpdateFailedException if entity updating goes wrong.
      * @throws RemoteException
@@ -499,9 +502,10 @@ public interface UserSessionFacade extends Remote {
      * Update the dish matching the identifier with the new data provided in the DTO.
      *
      * @param newDish the Data Transfer Object holding the new dish data and the identifier.
+     * @throws UpdateFailedException if entity updating goes wrong.
      * @throws RemoteException
      */
-    void updateDish(DishDTO newDish) throws RemoteException;
+    void updateDish(DishDTO newDish) throws RemoteException, UpdateFailedException;
 
     /**
      * @return a list of DTO containing the data of all dishes saved in the database.

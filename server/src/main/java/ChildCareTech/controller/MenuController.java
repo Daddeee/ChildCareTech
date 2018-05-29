@@ -27,7 +27,7 @@ public class MenuController {
     /**
      * See {@link UserSessionFacade#createMenu(MealDTO)}
      *
-     * @deprecated Now menus are created automatically when generating meals
+     * @deprecated Now menus are created automatically when generating meals.
      * @param mealDTO
      */
     public void doCreateMenu(MealDTO mealDTO) {
@@ -59,6 +59,7 @@ public class MenuController {
     /**
      * See {@link UserSessionFacade#updateMenu(MealDTO)}
      *
+     * @deprecated Now menus are created automatically when generating meals.
      * @param mealDTO
      */
     public void doUpdateMenu(MealDTO mealDTO) {

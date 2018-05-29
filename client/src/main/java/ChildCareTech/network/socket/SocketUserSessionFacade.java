@@ -723,14 +723,14 @@ public class SocketUserSessionFacade implements UserSessionFacade {
     }
 
     @Override
-    public void updateDish(DishDTO arg0) throws RemoteException {
+    public void updateDish(DishDTO arg0) throws RemoteException, UpdateFailedException {
         SocketRequest request = new SocketRequest(SocketRequestType.UPDATE_DISH, arg0);
         SocketResponse response;
 
         response = getSocketResponse(request);
 
         if(response.responseType.equals(SocketResponseType.FAIL))
-            throw (RemoteException) response.returnValue;
+            throw (UpdateFailedException) response.returnValue;
     }
 
     @Override

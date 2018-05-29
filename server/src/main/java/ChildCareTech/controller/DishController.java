@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.UserSessionFacade;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.model.DAO.DishDAO;
 import ChildCareTech.model.entities.Dish;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
@@ -54,7 +55,7 @@ public class DishController {
      *
      * @param dishDTO
      */
-    public void doUpdateDish(DishDTO dishDTO) {
+    public void doUpdateDish(DishDTO dishDTO) throws UpdateFailedException {
         DishDAO dishDAO = new DishDAO();
         Dish dish = EntityFactoryFacade.getEntity(dishDTO);
 
@@ -70,6 +71,7 @@ public class DishController {
         } catch (Exception e){
             if(tx != null) tx.rollback();
             e.printStackTrace();
+            throw new UpdateFailedException(e.getMessage());
         } finally {
             session.close();
         }
