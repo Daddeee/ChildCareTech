@@ -117,7 +117,7 @@ public class RMIUserSessionFacade extends UnicastRemoteObject implements UserSes
     }
 
     @Override
-    public void updateDish(DishDTO dishDTO) {
+    public void updateDish(DishDTO dishDTO) throws UpdateFailedException {
         dishController.doUpdateDish(dishDTO);
     }
 

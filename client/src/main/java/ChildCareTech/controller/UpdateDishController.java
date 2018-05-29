@@ -3,6 +3,7 @@ package ChildCareTech.controller;
 import ChildCareTech.Client;
 import ChildCareTech.common.DTO.DishDTO;
 import ChildCareTech.common.DTO.FoodDTO;
+import ChildCareTech.common.exceptions.UpdateFailedException;
 import ChildCareTech.services.AccessorWindowService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +59,7 @@ public class UpdateDishController implements AccessorWindowController{
             Client.getSessionService().getSession().updateDish(currentDishDTO);
             accessorWindowService.close();
             accessorWindowService.refreshTable();
-        } catch (RemoteException e) {
+        } catch (RemoteException | UpdateFailedException e) {
             e.printStackTrace();
         }
     }

@@ -495,9 +495,10 @@ public interface UserSessionFacade extends Remote {
      * Update the dish matching the identifier with the new data provided in the DTO.
      *
      * @param newDish the Data Transfer Object holding the new dish data and the identifier.
+     * @throws UpdateFailedException if entity updating goes wrong.
      * @throws RemoteException
      */
-    void updateDish(DishDTO newDish) throws RemoteException;
+    void updateDish(DishDTO newDish) throws RemoteException, UpdateFailedException;
 
     /**
      * @return a list of DTO containing the data of all dishes saved in the database.
