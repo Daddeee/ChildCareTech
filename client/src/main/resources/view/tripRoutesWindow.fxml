@@ -45,7 +45,10 @@
             <VBox maxWidth="200.0" minWidth="200.0">
                <children>
                   <Button fx:id="startEvent" onAction="#startEventButtonAction" textFill="WHITE" />
-                  <Button fx:id="stopEvent" onAction="#stopEventButtonAction" textFill="WHITE" />
+                  <Button fx:id="stopEvent" onAction="#stopEventButtonAction" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></Button>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="SOMETIMES">
                      <children>
                         <Label text="Tratta attuale:">

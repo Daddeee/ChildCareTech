@@ -81,8 +81,8 @@ public class CodeInputWindowController implements AccessorWindowController, Chec
         try{
             LocalTime time = LocalTime.now();
             if(!scannedCodes.contains(code)) {
-                scannedCodes.add(code);
                 Client.getSessionService().getSession().saveCheckpoint(code, currentEvent, time);
+                scannedCodes.add(code);
                 logArea.appendText(code + " Registrato correttamente alle " + time + "\n");
                 refreshTable();
             }

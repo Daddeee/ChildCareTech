@@ -107,7 +107,6 @@ public class TripRoutesController implements AccessorWindowController, TableWind
         try {
             logWindow.loadTripPresenceRegistrationWindow(tripDTO, currentRoute);
         } catch(IOException ex) {
-            //gestione
             ex.printStackTrace();
         }
     }
@@ -121,7 +120,6 @@ public class TripRoutesController implements AccessorWindowController, TableWind
         try {
             currentWorkDay = Client.getSessionService().getSession().getCurrentWorkDay();
         } catch(RemoteException ex) {
-            //gestione
             return;
         }
 
