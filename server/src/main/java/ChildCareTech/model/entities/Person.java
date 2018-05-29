@@ -2,6 +2,7 @@ package ChildCareTech.model.entities;
 
 import ChildCareTech.common.Sex;
 import ChildCareTech.model.iEntity;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -42,9 +43,11 @@ public class Person implements iEntity<Person, Integer> {
 
     private String phoneNumber;
 
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
     private Set<Checkpoint> checkpoints = new HashSet<>();
 
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
     private Set<TripPartecipation> tripPartecipations = new HashSet<>();
 

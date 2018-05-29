@@ -7,12 +7,8 @@ import ChildCareTech.common.RemoteUpdatable;
 import ChildCareTech.common.UserSessionFacade;
 import ChildCareTech.common.exceptions.AddFailedException;
 import ChildCareTech.common.exceptions.UpdateFailedException;
-import ChildCareTech.model.DAO.AdultDAO;
-import ChildCareTech.model.DAO.KidDAO;
-import ChildCareTech.model.DAO.PersonDAO;
-import ChildCareTech.model.entities.Adult;
-import ChildCareTech.model.entities.Kid;
-import ChildCareTech.model.entities.Trip;
+import ChildCareTech.model.DAO.*;
+import ChildCareTech.model.entities.*;
 import ChildCareTech.utils.DTO.EntityFactoryFacade;
 import ChildCareTech.utils.DTO.DTOFactoryFacade;
 import ChildCareTech.utils.HibernateSessionFactoryUtil;
@@ -146,13 +142,27 @@ public class KidController {
      */
     public void doRemoveKid(KidDTO kidDTO) {
         KidDAO kidDAO = new KidDAO();
-        Kid kid = EntityFactoryFacade.getEntity(kidDTO);
+        CheckpointDAO checkpointDAO = new CheckpointDAO();
+        TripPartecipationDAO tripPartecipationDAO = new TripPartecipationDAO();
 
         Session session = HibernateSessionFactoryUtil.getInstance().openSession();
         Transaction tx = null;
         kidDAO.setSession(session);
+        checkpointDAO.setSession(session);
+        tripPartecipationDAO.setSession(session);
         try{
             tx = session.beginTransaction();
+            Kid kid = kidDAO.read(kidDTO.getId());
+            kidDAO.initializeLazyRelations(kid);
+
+            if(kid.getPerson().getCheckpoints() != null)
+                for(Checkpoint c : kid.getPerson().getCheckpoints())
+                    checkpointDAO.delete(c);
+
+            if(kid.getPerson().getTripPartecipations() != null)
+                for(TripPartecipation t: kid.getPerson().getTripPartecipations())
+                    tripPartecipationDAO.delete(t);
+
             kidDAO.delete(kid);
             tx.commit();
 
