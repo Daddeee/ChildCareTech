@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This class provides a window management service for pop-up or value input oriented windows.
@@ -79,6 +80,11 @@ public class AccessorWindowService {
         return this.stage;
     }
 
+    public void loadTripPresenceReportWindow(EventDTO event) throws IOException {
+        loadWindow(ResourcesPaths.getTripPresenceReportFXMLPath(), ResourcesPaths.getTripPresenceReportCSSPath());
+        ((TripPresenceReportController)loader.getController()).initData(event);
+        ActiveControllersList.addTripPresenceReportController(loader.getController());
+    }
     public void loadRegisterUserWindow() throws IOException{
         loadWindow(ResourcesPaths.getRegisterUserFXMLPath(), ResourcesPaths.getRegisterUserCSSPath());
         ((AccessorWindowController)loader.getController()).setAccessorWindowService(this);

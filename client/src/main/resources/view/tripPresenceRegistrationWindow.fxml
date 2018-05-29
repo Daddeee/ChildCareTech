@@ -80,11 +80,6 @@
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin></TextArea>
-                        <Button fx:id="missingButton" onAction="#missingButtonAction" mnemonicParsing="false" text="Visualizza mancanti">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                   </VBox>
                </children>

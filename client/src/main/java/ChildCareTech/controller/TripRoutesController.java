@@ -39,6 +39,8 @@ public class TripRoutesController implements AccessorWindowController, TableWind
     protected Label luogoArrivo;
     @FXML
     protected Button logButton;
+    @FXML
+    protected Button reportButton;
 
     private ObservableList<RouteDTO> data = FXCollections.observableArrayList();
     private TripDTO tripDTO;
@@ -99,6 +101,24 @@ public class TripRoutesController implements AccessorWindowController, TableWind
             startEvent.setDisable(true);
             logButton.setDisable(false);
             stopEvent.setDisable(false);
+        }
+    }
+
+    @FXML
+    protected void reportButtonAction(ActionEvent event) {
+        EventDTO currentEvent = null;
+        if(currentRoute.getDepartureEvent() != null && currentRoute.getDepartureEvent().getEventStatus().equals(EventStatus.OPEN)) {
+            currentEvent = currentRoute.getDepartureEvent();
+        }
+        else if(currentRoute.getArrivalEvent() != null && currentRoute.getArrivalEvent().getEventStatus().equals(EventStatus.OPEN)) {
+            currentEvent = currentRoute.getArrivalEvent();
+        }
+        if(currentEvent == null)
+            return;
+        try {
+            logWindow.loadTripPresenceReportWindow(currentEvent);
+        } catch(IOException ex) {
+            ex.printStackTrace();
         }
     }
 

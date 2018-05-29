@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChildCareTech.controller.TripPresenceReportController">
+   <children>
+      <TableView fx:id="reportTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="fiscalCodeColumn" prefWidth="250.0" text="Codice Fiscale">
+               <cellValueFactory>
+                  <PropertyValueFactory property="fiscalCode" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="firstNameColumn" prefWidth="250.0" text="Nome">
+               <cellValueFactory>
+                  <PropertyValueFactory property="firstName" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="lastNameColumn" prefWidth="250.0" text="Cognome">
+               <cellValueFactory>
+                  <PropertyValueFactory property="lastName" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="recordTimeColumn" prefWidth="250.0" text="Orario registrato">
+               <cellValueFactory>
+                  <PropertyValueFactory property="recordTime" />
+               </cellValueFactory>
+            </TableColumn>
+         </columns>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TableView>
+   </children>
+</AnchorPane>

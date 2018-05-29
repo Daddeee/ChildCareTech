@@ -106,6 +106,8 @@ public class RemoteUpdateService {
                 controller.refreshTable();
             for(TripPresenceRegistrationController controller : ActiveControllersList.getPresenceRegistrationControllersList())
                 controller.refreshTable();
+            for(TripPresenceReportController controller : ActiveControllersList.getTripPresenceReportControllerList())
+                controller.refreshTable();
         });
     }
 

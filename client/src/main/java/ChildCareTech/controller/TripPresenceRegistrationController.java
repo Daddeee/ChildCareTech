@@ -45,8 +45,6 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
     protected Button QRStatus;
     @FXML
     protected ImageView imageBox;
-    @FXML
-    protected Button missingButton;
 
     protected ObservableList<ReportTableData> reports = FXCollections.observableArrayList();
     protected ObservableList<BusDTO> buses = FXCollections.observableArrayList();
@@ -69,15 +67,6 @@ public class TripPresenceRegistrationController implements AccessorWindowControl
         reportTable.setItems(reports);
         busComboBox.setItems(buses);
         on = false;
-    }
-    @FXML
-    public void missingButtonAction(ActionEvent event) {
-        String message = new String("Mancanti all'appello:");
-        for(String code : codesToScan) {
-            message = message.concat("\n");
-            message = message.concat(code);
-        }
-        alertWindowService.loadWindow(message);
     }
     @FXML
     public void QRStatusAction(ActionEvent event) {

@@ -75,6 +75,11 @@
                   <HBox alignment="CENTER">
                      <children>
                         <Button fx:id="logButton" mnemonicParsing="false" onAction="#logButtonAction" prefHeight="50.0" prefWidth="50.0" />
+                        <Button fx:id="reportButton" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" onAction="#reportButtonAction" prefHeight="50.0" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />

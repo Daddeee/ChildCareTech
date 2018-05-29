@@ -81,6 +81,8 @@ public class ResourcesPaths {
     private final static String tripPresenceRegistrationFXMLPath = "/view/tripPresenceRegistrationWindow.fxml";
     private final static String tripPresenceRegistrationCSSPath = "/style/tripPresenceRegistrationWindow.css";
     private final static String commonStyleCSSPath = "/style/commonStyle.css";
+    private final static String tripPresenceReportFXMLPath = "/view/tripPresenceReport.fxml";
+    private final static String tripPresenceReportCSSPath = "/style/tripPresenceReport.css";
 
     public static String getLoginFXMLPath() { return loginFXMLPath; }
     public static String getLoginCSSPath() { return loginCSSPath; }
@@ -163,6 +165,8 @@ public class ResourcesPaths {
     public static String getTripPresenceRegistrationFXMLPath() { return tripPresenceRegistrationFXMLPath; }
     public static String getTripPresenceRegistrationCSSPath() { return tripPresenceRegistrationCSSPath; }
     public static String getCommonStyleCSSPath() { return commonStyleCSSPath; }
+    public static String getTripPresenceReportFXMLPath() { return tripPresenceReportFXMLPath; }
+    public static String getTripPresenceReportCSSPath() { return tripPresenceReportCSSPath; }
 
     //potevo fare delle macro ma sono un babbo
 }

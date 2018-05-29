@@ -38,6 +38,7 @@ public class ActiveControllersList {
     private static List<EventReportController> eventReportControllersList = new ArrayList<>();
     private static List<TripPresenceRegistrationController> presenceRegistrationControllersList = new ArrayList<>();
     private static List<CodeInputWindowController> codeInputWindowControllerList = new ArrayList<>();
+    private static List<TripPresenceReportController> tripPresenceReportControllerList = new ArrayList<>();
 
     private ActiveControllersList() { }
 
@@ -138,5 +139,14 @@ public class ActiveControllersList {
     }
     public static List<CodeInputWindowController> getCodeInputWindowControllerList() {
         return new ArrayList<>(codeInputWindowControllerList);
+    }
+    public static void addTripPresenceReportController(TripPresenceReportController tripPresenceReportController) {
+        tripPresenceReportControllerList.add(tripPresenceReportController);
+    }
+    public static void removeTripPresenceReportController(TripPresenceReportController tripPresenceReportController) {
+        tripPresenceReportControllerList.remove(tripPresenceReportController);
+    }
+    public static List<TripPresenceReportController> getTripPresenceReportControllerList() {
+        return new ArrayList<>(tripPresenceReportControllerList);
     }
 }
